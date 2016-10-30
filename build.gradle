@@ -7,7 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath "com.android.tools.build:gradle:2.2.2"
+        classpath "com.google.gms:google-services:3.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -18,10 +19,14 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://clojars.org/repo/"
+        }
     }
 }
 
 ext {
+    icePickVersion = "3.2.+"
     playServicesVersion = "9.8.0"
     supportLibraryVersion = "25.0.0"
     threetenabpVersion = "1.0.+"
