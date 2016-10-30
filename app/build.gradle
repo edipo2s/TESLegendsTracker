@@ -12,8 +12,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
     }
     buildTypes {
+        debug {
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -40,6 +44,10 @@ dependencies {
     compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
+
+    //Others
+    compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
+    compile "com.jakewharton.timber:timber:4.3.1"
 
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
