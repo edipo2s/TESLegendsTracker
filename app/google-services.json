@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "597127048287",
+    "firebase_url": "https://tes-legends-assistant.firebaseio.com",
+    "project_id": "tes-legends-assistant",
+    "storage_bucket": "tes-legends-assistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597127048287:android:93cfae46152ad9be",
+        "android_client_info": {
+          "package_name": "com.ediposouza.teslesgendstracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597127048287-7pk80oahfpscpii5tlqiqg8ekbnemes9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjk6GqaHWlffjHjEibAK_UDPHvDk5S22M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
