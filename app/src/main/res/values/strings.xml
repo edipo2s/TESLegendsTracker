@@ -12,4 +12,8 @@
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
+    <string name="menu_search">Search</string>
+
+    <string name="tab_cards">Cards</string>
+    <string name="tab_favorites">Favorites</string>
 </resources>
