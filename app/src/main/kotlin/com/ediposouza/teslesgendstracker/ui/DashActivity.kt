@@ -18,7 +18,6 @@ class DashActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash)
-        dash_toolbar_title.setText(R.string.app_name)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

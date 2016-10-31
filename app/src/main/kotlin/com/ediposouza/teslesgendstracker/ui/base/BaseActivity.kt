@@ -16,7 +16,7 @@ open class BaseActivity : AppCompatActivity(){
 
     protected val mEventBus by lazy { EventBus.getDefault() }
 
-    private var snackbar: Snackbar? = null;
+    private var snackbar: Snackbar? = null
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
