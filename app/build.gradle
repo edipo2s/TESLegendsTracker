@@ -34,6 +34,7 @@ apply plugin: 'com.google.gms.google-services'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.anko:anko-common:$anko_version"
 
     //Support
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
@@ -47,6 +48,7 @@ dependencies {
     compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
+    compile "com.google.firebase:firebase-database:$playServicesVersion"
 
     //Others
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
@@ -56,7 +58,12 @@ dependencies {
     kapt "frankiesardo:icepick-processor:$icePickVersion"
     compile "frankiesardo:icepick:$icePickVersion"
 
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
+    testCompile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
+    testCompile "org.mockito:mockito-core:$testMockitoVersion"
+    testCompile "org.robolectric:robolectric:$testRoboletricVersion"
+    testCompile "org.robolectric:shadows-multidex:$testRoboletricVersion"
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
