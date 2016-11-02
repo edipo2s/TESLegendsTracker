@@ -51,7 +51,7 @@ class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAd
     }
 
     override fun getItem(position: Int): Fragment {
-        return if (position == 0) CardsCardsFragment() else CardsFavoritesFragment()
+        return if (position == 0) CardsAllFragment() else CardsFavoritesFragment()
     }
 
     override fun getCount(): Int {

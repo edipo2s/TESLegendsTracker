@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_dash.*
 class CardsFavoritesFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_cards_cards, container, false)
+        return inflater?.inflate(R.layout.fragment_cards_all, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

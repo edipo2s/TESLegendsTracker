@@ -13,5 +13,6 @@
 
     <dimen name="small_margin">4dp</dimen>
     <dimen name="default_margin">8dp</dimen>
+    <dimen name="card_margin">@dimen/default_margin</dimen>
 
 </resources>

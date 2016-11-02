@@ -169,4 +169,10 @@ data class Card(
         val keywords: ArrayList<CardKeyword>,
         val arenaTier: CardArenaTier
 
-)
+) {
+
+    fun shortName(): String {
+        return name.replace(" ", "").replace("'", "").replace(",", "").toLowerCase()
+    }
+
+}
