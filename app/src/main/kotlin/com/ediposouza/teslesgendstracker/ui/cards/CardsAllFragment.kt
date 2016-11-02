@@ -11,7 +11,6 @@ import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
-import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.jetbrains.anko.toast
@@ -30,19 +29,22 @@ class CardsAllFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity.dash_toolbar_title.setText(R.string.app_name)
         cards_recycler_view.adapter = CardsAllAdapter(cards, {
             context.toast(it.name)
         })
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
+        cards_attr_filter.filterClick = { loadCardsByAttr(it) }
+        loadCardsByAttr(Attribute.STRENGTH)
+    }
 
-        //FirebaseDatabase
-
-        CardInteractor().getCards(Attribute.STRENGTH, {
+    private fun loadCardsByAttr(attr: Attribute) {
+        CardInteractor().getCards(attr, {
+            cards.clear()
             cards.addAll(it)
             cards_recycler_view.adapter.notifyDataSetChanged()
+            cards_recycler_view.scrollToPosition(0)
         })
     }
 
@@ -67,9 +69,7 @@ class CardsAllViewHolder(val view: View, val itemClick: (Card) -> Unit) : Recycl
 
     fun bind(card: Card) {
         itemView.setOnClickListener { itemClick(card) }
-        val cardAttr = card.cls.name.toLowerCase().capitalize()
-        val cardPath = "Cards/$cardAttr/${card.shortName()}.png"
-        val cardImage = BitmapFactory.decodeStream(itemView.resources.assets.open(cardPath))
+        val cardImage = BitmapFactory.decodeStream(itemView.resources.assets.open(card.imagePath()))
         itemView.card_imageview.setImageBitmap(cardImage)
     }
 

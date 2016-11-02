@@ -17,8 +17,8 @@ class FirebaseCard() {
     val keyword: String = ""
     val arenaTier: String = ""
 
-    fun toCard(cls: Attribute): Card {
-        return Card(name, cls,
+    fun toCard(shortName: String, cls: Attribute): Card {
+        return Card(name, shortName, cls,
                 CardRarity.of(rarity.trim().toUpperCase()),
                 cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
                 CardType.valueOf(type.trim().toUpperCase()),

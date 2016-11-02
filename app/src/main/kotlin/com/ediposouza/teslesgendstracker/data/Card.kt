@@ -99,9 +99,11 @@ enum class CardRace(val desc: String) {
     KWAMA(""),
     LURCHER(""),
     LYCANTHROPE(""),
+    MAMMOTH(""),
     MANTIKORA(""),
     MINOTAUR(""),
     MUDCRAB(""),
+    MUMMY(""),
     NEREID(""),
     OGRE(""),
     REPTILE(""),
@@ -110,6 +112,8 @@ enum class CardRace(val desc: String) {
     SPIRIT(""),
     SPIDER(""),
     SPRIGGAN(""),
+    TROLL(""),
+    VAMPIRE(""),
     WOLF(""),
     WAMASU(""),
     WRAITH(""),
@@ -159,6 +163,7 @@ enum class CardArenaTier() {
 data class Card(
 
         val name: String,
+        val shortName: String,
         val cls: Attribute,
         val rarity: CardRarity,
         val cost: Int,
@@ -171,8 +176,11 @@ data class Card(
 
 ) {
 
-    fun shortName(): String {
-        return name.replace(" ", "").replace("'", "").replace(",", "").toLowerCase()
+    private val CARD_PATH = "Cards"
+
+    fun imagePath(): String {
+        val cardAttr = cls.name.toLowerCase().capitalize()
+        return "$CARD_PATH/$cardAttr/$shortName.png"
     }
 
 }
