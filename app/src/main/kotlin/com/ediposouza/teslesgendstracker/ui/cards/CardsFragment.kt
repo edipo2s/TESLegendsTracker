@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
@@ -25,11 +26,17 @@ class CardsFragment : BaseFragment() {
         setHasOptionsMenu(true)
         activity.dash_toolbar_title.setText(R.string.app_name)
         cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
+        cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                val title = if (position == 0) R.string.app_name else R.string.tab_favorites
+                activity.dash_toolbar_title.setText(title)
+            }
+        })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.search, menu)
+        inflater?.inflate(R.menu.menu_search, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

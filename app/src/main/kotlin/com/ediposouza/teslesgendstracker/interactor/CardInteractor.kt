@@ -27,7 +27,7 @@ class CardInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.mapTo(arrayListOf<Card>()) {
-                            it.getValue(FirebaseCard::class.java).toCard(cls)
+                            it.getValue(FirebaseCard::class.java).toCard(it.key, cls)
                         }
                         Timber.d(cards.toString())
                         onSuccess.invoke(cards)

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dash_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/attributes_filter_height"
+    android:orientation="horizontal"
+    android:padding="@dimen/default_margin"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/attr_filter_strength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_strength" />
+
+    <ImageView
+        android:id="@+id/attr_filter_intelligence"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_intelligence" />
+
+    <ImageView
+        android:id="@+id/attr_filter_willpower"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_willpower" />
+
+    <ImageView
+        android:id="@+id/attr_filter_agility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_agility" />
+
+    <ImageView
+        android:id="@+id/attr_filter_endurance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_endurance" />
+
+    <ImageView
+        android:id="@+id/attr_filter_dual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_dual" />
+
+    <ImageView
+        android:id="@+id/attr_filter_neutral"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:src="@drawable/attr_neutral" />
+
+</LinearLayout>

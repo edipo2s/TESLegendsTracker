@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/dash_toolbar"
@@ -83,6 +83,6 @@
         app:itemIconTint="@color/selector_menu_item"
         app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:itemTextColor="@color/selector_menu_item"
-        app:menu="@menu/nav_drawer" />
+        app:menu="@menu/menu_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
