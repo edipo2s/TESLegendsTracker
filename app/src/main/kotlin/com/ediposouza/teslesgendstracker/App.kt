@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker
 
 import android.app.Application
 import android.support.v7.app.AppCompatDelegate
+import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
 
@@ -14,6 +15,7 @@ class App : Application() {
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         AndroidThreeTen.init(this)
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         Timber.plant(LoggerManager())
     }
 

@@ -41,8 +41,7 @@
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/dash_coordinatorLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/navigation_bar_height">
+            android:layout_height="match_parent">
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/dash_app_bar_bayout"
