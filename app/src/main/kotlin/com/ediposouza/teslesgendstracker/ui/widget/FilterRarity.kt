@@ -20,7 +20,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     val rarityBGMinWidth by lazy { resources.getDimensionPixelSize(R.dimen.rarity_width) }
     val rarityBGMaxWidth by lazy { resources.getDimensionPixelSize(R.dimen.rarity_bg_max_width) }
 
-    var filterClick: ((CardRarity) -> Unit)? = null
+    var filterClick: ((CardRarity?) -> Unit)? = null
 
     init {
         inflate(context, R.layout.widget_rarity_filter, this)
@@ -36,6 +36,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                         expand()
                     } else {
                         collapse()
+                        rarityClick(null)
                     }
                 }
             }
@@ -96,9 +97,11 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    private fun rarityClick(rarity: CardRarity) {
+    private fun rarityClick(rarity: CardRarity?) {
         filterClick?.invoke(rarity)
         collapse()
+        val icon = if (rarity == null) R.drawable.ic_rarity else R.drawable.ic_rarity_clear
+        rootView.rarity_filter.setImageResource(icon)
     }
 
 }

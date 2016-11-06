@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
 import com.ediposouza.teslesgendstracker.ui.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.CmdFilterRarity
@@ -24,7 +25,12 @@ import java.util.*
  */
 class CardsAllFragment : BaseFragment() {
 
-    val cards: ArrayList<Card> = ArrayList()
+    var cardsLoaded: List<Card> = ArrayList()
+    var magikaFilter: Int = -1
+    var rarityFilter: CardRarity? = null
+    val cardsAdapter: CardsAllAdapter = CardsAllAdapter {
+        context.toast(it.name)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_cards_all, container, false)
@@ -32,9 +38,7 @@ class CardsAllFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cards_recycler_view.adapter = CardsAllAdapter(cards, {
-            context.toast(it.name)
-        })
+        cards_recycler_view.adapter = cardsAdapter
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
@@ -44,26 +48,43 @@ class CardsAllFragment : BaseFragment() {
 
     private fun loadCardsByAttr(attr: Attribute) {
         CardInteractor().getCards(attr, {
-            cards.clear()
-            cards.addAll(it)
-            cards_recycler_view.adapter.notifyDataSetChanged()
+            cardsLoaded = it
+            cardsAdapter.showCards(cardsLoaded)
             cards_recycler_view.scrollToPosition(0)
         })
     }
 
     @Subscribe
     fun onFilterRarity(filterRarity: CmdFilterRarity) {
-        context.toast(filterRarity.rarity.toString())
+        rarityFilter = filterRarity.rarity
+        showCards()
     }
 
     @Subscribe
     fun onFilterMagika(filterMagika: CmdFilterMagika) {
-        context.toast(filterMagika.magika.toString())
+        magikaFilter = filterMagika.magika
+        showCards()
+    }
+
+    fun showCards() {
+        var cardsToShow = if (rarityFilter == null) cardsLoaded else
+            cardsLoaded.filter { it.rarity == rarityFilter }
+        cardsToShow = cardsToShow.filter {
+            when {
+                magikaFilter == -1 -> it.cost > -1
+                magikaFilter < 7 -> it.cost == magikaFilter
+                else -> it.cost >= magikaFilter
+            }
+        }
+        cardsAdapter.showCards(cardsToShow)
+        cards_recycler_view.scrollToPosition(0)
     }
 
 }
 
-class CardsAllAdapter(val cards: List<Card>, val itemClick: (Card) -> Unit) : RecyclerView.Adapter<CardsAllViewHolder>() {
+class CardsAllAdapter(val itemClick: (Card) -> Unit) : RecyclerView.Adapter<CardsAllViewHolder>() {
+
+    val items: ArrayList<Card> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsAllViewHolder {
         return CardsAllViewHolder(LayoutInflater.from(parent?.context)
@@ -71,11 +92,16 @@ class CardsAllAdapter(val cards: List<Card>, val itemClick: (Card) -> Unit) : Re
     }
 
     override fun onBindViewHolder(holder: CardsAllViewHolder?, position: Int) {
-        holder?.bind(cards.get(position))
+        holder?.bind(items.get(position))
     }
 
-    override fun getItemCount(): Int = cards.size
+    override fun getItemCount(): Int = items.size
 
+    fun showCards(cards: List<Card>) {
+        items.clear()
+        items.addAll(cards)
+        notifyDataSetChanged()
+    }
 }
 
 class CardsAllViewHolder(val view: View, val itemClick: (Card) -> Unit) : RecyclerView.ViewHolder(view) {
