@@ -17,4 +17,8 @@
     <string name="tab_favorites">Favorites</string>
     <string name="tab_collection">Collection</string>
 
+    <string name="card_arena_tier_label">Arena Tier:</string>
+    <string name="card_race_label">Race:</string>
+    <string name="card_transition_name">card_transition</string>
+
 </resources>

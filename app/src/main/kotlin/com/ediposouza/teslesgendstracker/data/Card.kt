@@ -1,6 +1,11 @@
 package com.ediposouza.teslesgendstracker.data
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.Parcel
+import android.os.Parcelable
 import java.util.*
 
 /**
@@ -173,13 +178,48 @@ data class Card(
         val keywords: ArrayList<CardKeyword>,
         val arenaTier: CardArenaTier
 
-) {
-
+) : Parcelable {
     private val CARD_PATH = "Cards"
 
-    fun imagePath(): String {
+    fun imageBitmap(context: Context): Bitmap {
         val cardAttr = cls.name.toLowerCase().capitalize()
-        return "$CARD_PATH/$cardAttr/$shortName.png"
+        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
+        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
     }
 
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<Card> = object : Parcelable.Creator<Card> {
+            override fun createFromParcel(source: Parcel): Card = Card(source)
+            override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
+        }
+    }
+
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            Attribute.valueOf(source.readString()),
+            CardRarity.valueOf(source.readString()),
+            source.readInt(),
+            source.readInt(),
+            source.readInt(),
+            CardType.valueOf(source.readString()),
+            CardRace.valueOf(source.readString()),
+            ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
+            CardArenaTier.valueOf(source.readString()))
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(name)
+        dest?.writeString(shortName)
+        dest?.writeString(cls.name)
+        dest?.writeString(rarity.name)
+        dest?.writeInt(cost)
+        dest?.writeInt(attack)
+        dest?.writeInt(health)
+        dest?.writeString(type.name)
+        dest?.writeString(race.name)
+        dest?.writeList(keywords)
+        dest?.writeString(arenaTier.name)
+    }
 }
