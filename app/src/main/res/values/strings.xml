@@ -2,7 +2,6 @@
     <string name="app_name">TES Lesgends Tracker</string>
 
     <string name="menu_cards">Cards</string>
-    <string name="menu_collection">Collection</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
     <string name="menu_season">Season</string>
@@ -16,4 +15,6 @@
 
     <string name="tab_cards">Cards</string>
     <string name="tab_favorites">Favorites</string>
+    <string name="tab_collection">Collection</string>
+
 </resources>

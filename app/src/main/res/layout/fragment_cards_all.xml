@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ediposouza.teslesgendstracker.ui.widget.AttrFilter
+    <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
         android:id="@+id/cards_attr_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,11 +16,12 @@
         android:id="@+id/cards_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/cards_attr_filter"
         android:paddingBottom="@dimen/card_margin"
-        android:scrollbars="vertical"
         android:scrollbarFadeDuration="0"
+        android:scrollbars="vertical"
         app:layoutManager="GridLayoutManager"
         app:spanCount="3"
         tools:listitem="@layout/itemlist_card" />
 
-</LinearLayout>
+</RelativeLayout>

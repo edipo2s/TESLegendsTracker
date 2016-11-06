@@ -1,6 +1,7 @@
 <resources>
     <array name="cards_tabs">
         <item name="tab_cards">@string/tab_cards</item>
+        <item name="tab_collection">@string/tab_collection</item>
         <item name="tab_favorites">@string/tab_favorites</item>
     </array>
 </resources>

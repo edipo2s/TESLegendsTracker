@@ -67,6 +67,20 @@
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+            <com.ediposouza.teslesgendstracker.ui.widget.FilterRarity
+                android:id="@+id/dash_filter_rarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="@dimen/default_margin" />
+
+            <com.ediposouza.teslesgendstracker.ui.widget.FilterMagika
+                android:id="@+id/dash_filter_magika"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/default_margin" />
+
         </android.support.design.widget.CoordinatorLayout>
 
     </LinearLayout>

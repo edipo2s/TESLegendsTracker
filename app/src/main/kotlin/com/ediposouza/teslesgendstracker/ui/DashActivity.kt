@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.MenuItem
-import android.widget.Toast
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
@@ -18,6 +17,8 @@ class DashActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash)
+        dash_filter_rarity.filterClick = { mEventBus.post(CmdFilterRarity(it)) }
+        dash_filter_magika.filterClick = { mEventBus.post(CmdFilterMagika(it)) }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -38,10 +39,6 @@ class DashActivity : BaseActivity(),
         dash_drawer_layout.closeDrawer(Gravity.START)
         return when (item.itemId) {
             R.id.menu_cards -> showFragment(CardsFragment())
-            R.id.menu_collection -> {
-                Toast.makeText(this, "collection", Toast.LENGTH_SHORT).show()
-                true
-            }
             else -> false
         }
     }
