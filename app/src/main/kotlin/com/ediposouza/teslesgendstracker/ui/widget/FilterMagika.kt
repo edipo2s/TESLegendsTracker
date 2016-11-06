@@ -27,6 +27,14 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 magika_filter_6?.setOnClickListener { magikaClick(6) }
                 magika_filter_7plus?.setOnClickListener { magikaClick(7) }
             }
+            magika_filter.setOnMenuButtonClickListener {
+                if (magika_filter.isOpened) {
+                    magika_filter.close(true)
+                    magikaClick(-1)
+                } else {
+                    magika_filter.open(true)
+                }
+            }
         }
     }
 
@@ -38,7 +46,9 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     private fun magikaClick(magika: Int) {
         filterClick?.invoke(magika)
+        val icon = if (magika == -1) R.drawable.ic_magika else R.drawable.ic_magika_clear
         rootView.magika_filter.close(true)
+        rootView.magika_filter.menuIconView.setImageResource(icon)
     }
 
 }
