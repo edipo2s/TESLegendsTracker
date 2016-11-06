@@ -44,13 +44,12 @@ enum class CardRarity(val color: Int) {
     COMMON(Color.WHITE),
     RARE(Color.BLUE),
     EPIC(Color.parseColor("purple")),
-    LEGENDARY(Color.YELLOW),
-    UNIQUE(Color.parseColor("maroon"));
+    LEGENDARY(Color.YELLOW);
 
     companion object {
 
         fun of(value: String): CardRarity {
-            return if (value.contains(UNIQUE.name)) UNIQUE else valueOf(value)
+            return if (value.contains(LEGENDARY.name)) LEGENDARY else valueOf(value)
         }
 
     }

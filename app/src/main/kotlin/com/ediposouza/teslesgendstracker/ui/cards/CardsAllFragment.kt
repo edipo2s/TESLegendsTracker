@@ -49,8 +49,7 @@ class CardsAllFragment : BaseFragment() {
     private fun loadCardsByAttr(attr: Attribute) {
         CardInteractor().getCards(attr, {
             cardsLoaded = it
-            cardsAdapter.showCards(cardsLoaded)
-            cards_recycler_view.scrollToPosition(0)
+            showCards()
         })
     }
 
