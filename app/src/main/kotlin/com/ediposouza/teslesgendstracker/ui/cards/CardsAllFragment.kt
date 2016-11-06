@@ -10,9 +10,12 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
+import com.ediposouza.teslesgendstracker.ui.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
 import java.util.*
 
@@ -46,6 +49,16 @@ class CardsAllFragment : BaseFragment() {
             cards_recycler_view.adapter.notifyDataSetChanged()
             cards_recycler_view.scrollToPosition(0)
         })
+    }
+
+    @Subscribe
+    fun onFilterRarity(filterRarity: CmdFilterRarity) {
+        context.toast(filterRarity.rarity.toString())
+    }
+
+    @Subscribe
+    fun onFilterMagika(filterMagika: CmdFilterMagika) {
+        context.toast(filterMagika.magika.toString())
     }
 
 }

@@ -36,6 +36,7 @@ class CardsFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -58,7 +59,11 @@ class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAd
     }
 
     override fun getItem(position: Int): Fragment {
-        return if (position == 0) CardsAllFragment() else CardsFavoritesFragment()
+        return when (position) {
+            1 -> CardsFavoritesFragment()
+            2 -> CardsCollectionFragment()
+            else -> CardsAllFragment()
+        }
     }
 
     override fun getCount(): Int {
