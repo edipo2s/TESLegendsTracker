@@ -30,13 +30,14 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 rarity_filter_rare.setOnClickListener { rarityClick(CardRarity.RARE) }
                 rarity_filter_epic.setOnClickListener { rarityClick(CardRarity.EPIC) }
                 rarity_filter_legendary.setOnClickListener { rarityClick(CardRarity.LEGENDARY) }
-                rarity_filter_unique.setOnClickListener { rarityClick(CardRarity.UNIQUE) }
                 rarity_filter.setOnClickListener {
-                    if (rootView.rarity_filter_common?.visibility == View.GONE) {
-                        expand()
-                    } else {
-                        collapse()
-                        rarityClick(null)
+                    when (rootView.rarity_filter_common.visibility) {
+                        View.VISIBLE -> collapse()
+                        View.GONE ->
+                            if (rarity_filter.tag == true)
+                                rarityClick(null)
+                            else
+                                expand()
                     }
                 }
             }
@@ -68,7 +69,6 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                         rarity_filter_rare?.visibility = View.VISIBLE
                         rarity_filter_epic?.visibility = View.VISIBLE
                         rarity_filter_legendary?.visibility = View.VISIBLE
-                        rarity_filter_unique?.visibility = View.VISIBLE
                     }
 
                     override fun onAnimationCancel(p0: Animator?) {
@@ -85,7 +85,6 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             rarity_filter_rare?.visibility = View.GONE
             rarity_filter_epic?.visibility = View.GONE
             rarity_filter_legendary?.visibility = View.GONE
-            rarity_filter_unique?.visibility = View.GONE
             with(ValueAnimator.ofInt(rarityBGMinWidth, rarityBGMaxWidth)) {
                 reverse()
                 duration = ANIM_DURATION
@@ -101,7 +100,10 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         filterClick?.invoke(rarity)
         collapse()
         val icon = if (rarity == null) R.drawable.ic_rarity else R.drawable.ic_rarity_clear
-        rootView.rarity_filter.setImageResource(icon)
+        rootView.rarity_filter.apply {
+            tag = rarity != null
+            setImageResource(icon)
+        }
     }
 
 }

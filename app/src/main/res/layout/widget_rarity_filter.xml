@@ -75,18 +75,5 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <ImageView
-        android:id="@+id/rarity_filter_unique"
-        android:layout_width="@dimen/rarity_width"
-        android:layout_height="@dimen/rarity_width"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_toEndOf="@id/rarity_filter_legendary"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="center"
-        android:src="@drawable/ic_rarity_unique"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
 </RelativeLayout>
     

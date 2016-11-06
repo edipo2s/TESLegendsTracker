@@ -18,6 +18,6 @@
     <dimen name="default_margin">8dp</dimen>
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <dimen name="rarity_bg_max_width">300dp</dimen>
+    <dimen name="rarity_bg_max_width">250dp</dimen>
 
 </resources>
