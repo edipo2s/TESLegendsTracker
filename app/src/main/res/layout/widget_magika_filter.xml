@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/magika_filter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:menu_buttonSpacing="-4dp"
+    app:menu_colorNormal="@android:color/transparent"
+    app:menu_fab_size="mini"
+    app:menu_icon="@drawable/ic_magika">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_7plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_7plus"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_6"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_5"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_4"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_3"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_2"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_1"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/magika_filter_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magika_0"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_size="mini" />
+
+</com.github.clans.fab.FloatingActionMenu>

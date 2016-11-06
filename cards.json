@@ -351,7 +351,7 @@
           "attack": "2",
           "health": "2",
           "rarity": "Common",
-          "keyword": "Guard, Summon",
+          "keyword": "Prophecy, Guard, Summon",
           "arenaTier": "Average"
         },
         "raidingparty": {
@@ -897,7 +897,7 @@
         },
         "brilliantexperiment": {
           "name": "Brilliant Experiment",
-          "cost": "02",
+          "cost": "03",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -1263,7 +1263,7 @@
           "cost": "04",
           "type": "Creature",
           "race": "Dark Elf",
-          "attack": "4",
+          "attack": "3",
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon, Last Gasp",
@@ -1568,7 +1568,7 @@
         },
         "nahkriindragonpriest": {
           "name": "Nahkriin, Dragon Priest",
-          "cost": "10",
+          "cost": "09",
           "type": "Creature",
           "race": "Skeleton",
           "attack": "5",
@@ -1625,7 +1625,7 @@
         },
         "apprenticespotion": {
           "name": "Apprentices Potion",
-          "cost": "01",
+          "cost": "02",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -1691,7 +1691,7 @@
         },
         "healingpotion": {
           "name": "Healing Potion",
-          "cost": "01",
+          "cost": "02",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -2065,7 +2065,7 @@
         },
         "divineconviction": {
           "name": "Divine Conviction",
-          "cost": "04",
+          "cost": "05",
           "type": "Support",
           "race": "",
           "attack": "",
@@ -2076,7 +2076,7 @@
         },
         "divinefervor": {
           "name": "Divine Fervor",
-          "cost": "04",
+          "cost": "05",
           "type": "Support",
           "race": "",
           "attack": "",
@@ -2676,7 +2676,7 @@
           "type": "Creature",
           "race": "Dark Elf",
           "attack": "3",
-          "health": "3",
+          "health": "2",
           "rarity": "Epic",
           "keyword": "Last Gasp",
           "arenaTier": "Excellent"
@@ -2830,7 +2830,7 @@
           "type": "Creature",
           "race": "Lycanthrope",
           "attack": "4",
-          "health": "3",
+          "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy, Drain",
           "arenaTier": "Insane"
@@ -2907,7 +2907,7 @@
           "type": "Creature",
           "race": "Wood Elf",
           "attack": "4",
-          "health": "3",
+          "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy",
           "arenaTier": "Unknown"
@@ -3134,7 +3134,7 @@
         },
         "tazkadthepackmaster": {
           "name": "Tazkad the Packmaster",
-          "cost": "08",
+          "cost": "09",
           "type": "Creature",
           "race": "Goblin",
           "attack": "6",
@@ -3503,7 +3503,7 @@
           "type": "Creature",
           "race": "Orc",
           "attack": "2",
-          "health": "2",
+          "health": "3",
           "rarity": "Common",
           "keyword": "Summon",
           "arenaTier": "Poor"
@@ -4580,6 +4580,316 @@
           "arenaTier": "Excellent"
         }
       }
+    }
+  },
+  "season": {
+    "03": {
+      "reward": "mechanicalally",
+      "month": "2016_10"
+    },
+    "02": {
+      "reward": "histgrove",
+      "month": "2016_09"
+    },
+    "01": {
+      "reward": "smugglershaul",
+      "month": "2016_08"
+    },
+    "00": {
+      "reward": "dagirahtmystic",
+      "month": "2016_07"
+    },
+    "2016_06": {
+      "reward": "plunder",
+      "month": "2016_06"
+    },
+    "2016_05": {
+      "reward": "staffofsparks",
+      "month": "2016_05"
+    },
+    "2016_04": {
+      "reward": "witheredhandcultist",
+      "month": "2016_04"
+    },
+    "2016_03": {
+      "reward": "magesguildretreat",
+      "month": "2016_03"
+    }
+  },
+  "patches": {
+    "2016_11_03": {
+      "core": {
+        "strength": {
+          "morkulgatekeeper": {
+            "keyword": {
+              "after": "Prophecy, Guard, Summon",
+              "before": "Guard, Summon"
+            }
+          },
+          "volendrung": {
+            "text": {
+              "after": "Uses: 2. Activate: Give a creature +4/+4.",
+              "before": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough."
+            }
+          }
+        },
+        "agility": {
+          "housekinsman": {
+            "health": {
+              "after": 2,
+              "before": 3
+            }
+          },
+          "moonlightwerebat": {
+            "health": {
+              "after": 2,
+              "before": 3
+            }
+          },
+          "tazkadthepackmaster": {
+            "cost": {
+              "after": "09",
+              "before": "08"
+            }
+          },
+          "twilightwerebat": {
+            "health": {
+              "after": 2,
+              "before": 3
+            }
+          }
+        },
+        "intelligence": {
+          "brilliantexperiment": {
+            "cost": {
+              "after": "03",
+              "before": "02"
+            }
+          },
+          "dunmernightblade": {
+            "text": {
+              "after": "Last Gasp: Put a Iron Sword into your hand.",
+              "before": "Last Gasp: Put a Steel Sword into your hand."
+            }
+          },
+          "elusiveschemer": {
+            "attack": {
+              "after": 3,
+              "before": 4
+            }
+          },
+          "nahkriindragonpriest": {
+            "cost": {
+              "after": "09",
+              "before": "10"
+            },
+            "text": {
+              "after": "Summon: Draw a card and reduce its cost to 0.",
+              "before": "Summon: Draw a card. The next card you play this turn is free."
+            }
+          }
+        },
+        "willpower": {
+          "divineconviction": {
+            "cost": {
+              "after": "05",
+              "before": "04"
+            }
+          },
+          "divinefervor": {
+            "cost": {
+              "after": "05",
+              "before": "04"
+            }
+          },
+          "apprenticespotion": {
+            "cost": {
+              "after": "02",
+              "before": "01"
+            }
+          },
+          "healingpotion": {
+            "cost": {
+              "after": "02",
+              "before": "01"
+            }
+          }
+        },
+        "endurance": {
+          "wrothgarartisan": {
+            "health": {
+              "after": 3,
+              "before": 2
+            }
+          }
+        },
+        "dual": {
+          "allenabenoch": {
+            "text": {
+              "after": "Lethal. Summon: Deal 1 damage to an enemy.",
+              "before": "Lethal. Summon: Deal 1 damage to an enemy creature."
+            }
+          }
+        }
+      }
+    },
+    "2016_09_28": {
+      "core": {
+        "strength": {
+          "intimidate": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "fieryimp": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "valenwoodhuntsman": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "valenwoodtrapper": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "fortresswatchman": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          }
+        },
+        "intelligence": {
+          "evermoresteward": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "shriekingharpy": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "nibenbaycutthroat": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "farsightnereid": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "shockingwamasu": {
+            "text": {
+              "after": "Summon: Deal 4 damage to a creature.",
+              "before": "Summon: Deal 4 damage."
+            }
+          }
+        },
+        "agility": {
+          "blacksapprotector": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "voraciousspriggan": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          }
+        },
+        "willpower": {
+          "mantikora": {
+            "text": {
+              "after": "Guard. Summon: Destroy an enemy creature in this lane.",
+              "before": "Guard. Summon: Destroy an enemy creature."
+            }
+          }
+        }
+      }
+    },
+    "2016_09_20": {
+      "core": {
+        "endurance": {
+          "bonecolossus": {
+            "text": {
+              "after": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Skeleton have +1/+1.",
+              "before": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1."
+            }
+          }
+        }
+      }
+    },
+    "2016_08_25": {
+      "core": {
+        "agility": {
+          "soulrestmarshal": {
+            "text": {
+              "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less.",
+              "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less."
+            }
+          },
+          "murkwatersavage": {
+            "cost": {
+              "after": "3",
+              "before": "2"
+            }
+          }
+        }
+      }
+    }
+  },
+  "users": {
+    "09890-09890-09890-09890-09890": {
+      "name": "Édipo Souza",
+      "photoUrl": "http://server.google.com/users/23415453/photo.jpg"
+    }
+  },
+  "decks": {
+    "archerMidrange": {
+      "cards": {
+        "ungolimthelistener": 1,
+        "murkwaterwitch": 3,
+        "rapidshot": 3,
+        "finishoff": 3,
+        "moonlightwerebat": 3,
+        "tazkadthepackmaster": 1,
+        "skavenpyromancer": 2,
+        "soulrestmarshal": 3,
+        "leaflurker": 1,
+        "triumphantjarl": 2
+      },
+      "updates": {
+        "10-30-2016": {
+          "rapidshot": -1,
+          "skavenpyromancer": 1,
+          "leaflurker": 2
+        }
+      },
+      "class": "Archer",
+      "type": "Midrange",
+      "cost": 13500,
+      "owner": "09890-09890-09890-09890-09890",
+      "private": false,
+      "createdAt": "10-28-2016",
+      "patch": "2016_09_28",
+      "views": 123,
+      "likes": 12
     }
   }
 }
