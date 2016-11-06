@@ -13,6 +13,7 @@ import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
 import com.ediposouza.teslesgendstracker.ui.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.CmdFilterRarity
+import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
@@ -28,6 +29,8 @@ class CardsAllFragment : BaseFragment() {
     var cardsLoaded: List<Card> = ArrayList()
     var magikaFilter: Int = -1
     var rarityFilter: CardRarity? = null
+    var searchFilter: String? = null
+
     val cardsAdapter: CardsAllAdapter = CardsAllAdapter {
         context.toast(it.name)
     }
@@ -54,6 +57,12 @@ class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    fun onFilterSearch(filterSearch: CmdFilterSearch) {
+        searchFilter = filterSearch.search
+        showCards()
+    }
+
+    @Subscribe
     fun onFilterRarity(filterRarity: CmdFilterRarity) {
         rarityFilter = filterRarity.rarity
         showCards()
@@ -66,16 +75,32 @@ class CardsAllFragment : BaseFragment() {
     }
 
     fun showCards() {
-        var cardsToShow = if (rarityFilter == null) cardsLoaded else
-            cardsLoaded.filter { it.rarity == rarityFilter }
-        cardsToShow = cardsToShow.filter {
-            when {
-                magikaFilter == -1 -> it.cost > -1
-                magikaFilter < 7 -> it.cost == magikaFilter
-                else -> it.cost >= magikaFilter
-            }
-        }
-        cardsAdapter.showCards(cardsToShow)
+        cardsAdapter.showCards(cardsLoaded
+                .filter {
+                    when (searchFilter) {
+                        null -> it is Card
+                        else -> {
+                            val search = searchFilter!!.toLowerCase().trim()
+                            it.name.toLowerCase().contains(search) ||
+                                    it.race.name.toLowerCase().contains(search) ||
+                                    it.type.name.toLowerCase().contains(search) ||
+                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.size > 0
+                        }
+                    }
+                }
+                .filter {
+                    when (rarityFilter) {
+                        null -> it.rarity is CardRarity
+                        else -> it.rarity == rarityFilter
+                    }
+                }
+                .filter {
+                    when {
+                        magikaFilter == -1 -> it.cost is Int
+                        magikaFilter < 7 -> it.cost == magikaFilter
+                        else -> it.cost >= magikaFilter
+                    }
+                })
         cards_recycler_view.scrollToPosition(0)
     }
 

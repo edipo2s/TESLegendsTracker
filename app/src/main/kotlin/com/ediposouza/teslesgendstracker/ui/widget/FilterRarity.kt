@@ -91,6 +91,20 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 addUpdateListener {
                     rarity_filter_bg.layoutParams.width = it.animatedValue as Int
                 }
+                addListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(p0: Animator?) {
+                    }
+
+                    override fun onAnimationRepeat(p0: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                        rarity_filter_bg.layoutParams.width = rarityBGMinWidth
+                    }
+
+                    override fun onAnimationCancel(p0: Animator?) {
+                    }
+                })
                 start()
             }
         }

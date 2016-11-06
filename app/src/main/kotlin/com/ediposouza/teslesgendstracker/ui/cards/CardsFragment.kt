@@ -5,17 +5,20 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.MenuItemCompat
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.SearchView
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
  */
-class CardsFragment : BaseFragment() {
+class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_cards, container, false)
@@ -38,14 +41,21 @@ class CardsFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
+        (MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView)
+                .setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_search -> mEventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_INFO, "Test"))
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onQueryTextChange(newText: String?): Boolean {
+        mEventBus.post(CmdFilterSearch(newText))
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        mEventBus.post(CmdFilterSearch(query))
+        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
+        return true
     }
 
 }
