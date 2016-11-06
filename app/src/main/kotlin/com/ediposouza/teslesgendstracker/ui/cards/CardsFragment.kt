@@ -12,6 +12,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
+import com.ediposouza.teslesgendstracker.ui.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -31,11 +32,16 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
         cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                val title = if (position == 0) R.string.app_name else R.string.tab_favorites
+                val title = when (position) {
+                    1 -> R.string.tab_collection
+                    2 -> R.string.tab_favorites
+                    else -> R.string.app_name
+                }
                 activity.dash_toolbar_title.setText(title)
             }
         })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+        attr_filter.filterClick = { mEventBus.post(CmdShowCardsByAttr(it)) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
