@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cards_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
-        android:id="@+id/cards_attr_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cards_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/cards_attr_filter"
-        android:paddingBottom="@dimen/card_margin"
-        android:scrollbarFadeDuration="0"
-        android:scrollbars="vertical"
-        app:layoutManager="GridLayoutManager"
-        app:spanCount="3"
-        tools:listitem="@layout/itemlist_card" />
-
-</RelativeLayout>
+    android:paddingBottom="@dimen/card_margin"
+    android:scrollbarFadeDuration="0"
+    android:scrollbars="vertical"
+    app:layoutManager="GridLayoutManager"
+    app:spanCount="3"
+    tools:listitem="@layout/itemlist_card" />

@@ -14,6 +14,7 @@ import com.ediposouza.teslesgendstracker.interactor.CardInteractor
 import com.ediposouza.teslesgendstracker.ui.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
+import com.ediposouza.teslesgendstracker.ui.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
@@ -45,12 +46,12 @@ class CardsAllFragment : BaseFragment() {
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
-        cards_attr_filter.filterClick = { loadCardsByAttr(it) }
-        loadCardsByAttr(Attribute.STRENGTH)
+        loadCardsByAttr(CmdShowCardsByAttr(Attribute.STRENGTH))
     }
 
-    private fun loadCardsByAttr(attr: Attribute) {
-        CardInteractor().getCards(attr, {
+    @Subscribe
+    fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
+        CardInteractor().getCards(showCardsByAttr.attr, {
             cardsLoaded = it
             showCards()
         })
