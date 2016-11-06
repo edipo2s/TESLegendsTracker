@@ -1,7 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +12,11 @@ import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
-import com.ediposouza.teslesgendstracker.ui.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.CmdFilterRarity
-import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.toast
 import java.util.*
 
 /**
@@ -32,8 +29,10 @@ class CardsAllFragment : BaseFragment() {
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
 
-    val cardsAdapter: CardsAllAdapter = CardsAllAdapter {
-        context.toast(it.name)
+    val transitionName: String by lazy { getString(R.string.card_transition_name) }
+    val cardsAdapter: CardsAllAdapter = CardsAllAdapter { view: View, card: Card ->
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -107,7 +106,7 @@ class CardsAllFragment : BaseFragment() {
 
 }
 
-class CardsAllAdapter(val itemClick: (Card) -> Unit) : RecyclerView.Adapter<CardsAllViewHolder>() {
+class CardsAllAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<CardsAllViewHolder>() {
 
     val items: ArrayList<Card> = ArrayList()
 
@@ -129,12 +128,11 @@ class CardsAllAdapter(val itemClick: (Card) -> Unit) : RecyclerView.Adapter<Card
     }
 }
 
-class CardsAllViewHolder(val view: View, val itemClick: (Card) -> Unit) : RecyclerView.ViewHolder(view) {
+class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
 
     fun bind(card: Card) {
-        itemView.setOnClickListener { itemClick(card) }
-        val cardImage = BitmapFactory.decodeStream(itemView.resources.assets.open(card.imagePath()))
-        itemView.card_imageview.setImageBitmap(cardImage)
+        itemView.setOnClickListener { itemClick(itemView.card_imageview, card) }
+        itemView.card_imageview.setImageBitmap(card.imageBitmap(itemView.context))
     }
 
 }
