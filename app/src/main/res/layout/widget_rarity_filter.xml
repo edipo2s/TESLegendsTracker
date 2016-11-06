@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    tools:layout_marginBottom="@dimen/navigation_bar_height"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <LinearLayout
+        android:id="@+id/rarity_filter_bg"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:background="@drawable/rarity_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <ImageView
+        android:id="@+id/rarity_filter"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:src="@drawable/ic_rarity" />
+
+    <ImageView
+        android:id="@+id/rarity_filter_common"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/rarity_filter"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_rarity_common"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/rarity_filter_rare"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/rarity_filter_common"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_rarity_rare"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/rarity_filter_epic"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/rarity_filter_rare"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_rarity_epic"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/rarity_filter_legendary"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/rarity_filter_epic"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_rarity_legendary"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/rarity_filter_unique"
+        android:layout_width="@dimen/rarity_width"
+        android:layout_height="@dimen/rarity_width"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/rarity_filter_legendary"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_rarity_unique"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</RelativeLayout>
+    
