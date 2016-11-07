@@ -10,6 +10,9 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRace
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
+import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
@@ -33,7 +36,12 @@ class CardActivity : BaseActivity() {
         loadCardInfo(intent.getParcelableExtra<Card>(EXTRA_CARD))
         card_imageview.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
         card_favorite_btn.setOnClickListener {
-            toast("Favorite")
+            if (FirebaseAuth.getInstance().currentUser != null) {
+                toast("Favorite")
+            } else {
+                eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
+                        .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+            }
         }
         configureBottomSheet()
     }

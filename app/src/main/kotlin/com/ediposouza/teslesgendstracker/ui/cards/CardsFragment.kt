@@ -11,8 +11,8 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
+import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -41,7 +41,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
         })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
-        attr_filter.filterClick = { mEventBus.post(CmdShowCardsByAttr(it)) }
+        attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -53,12 +53,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        mEventBus.post(CmdFilterSearch(newText))
+        eventBus.post(CmdFilterSearch(newText))
         return true
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        mEventBus.post(CmdFilterSearch(query))
+        eventBus.post(CmdFilterSearch(query))
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true

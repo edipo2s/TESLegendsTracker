@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "597127048287-qtdilnvcu3stahivdf4u2vmhisljsj9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ediposouza.teslesgendstracker",
+            "certificate_hash": "526FBF43D861CECEE3474C1F8547DBD0DFAB60C7"
+          }
+        },
+        {
           "client_id": "597127048287-7pk80oahfpscpii5tlqiqg8ekbnemes9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597127048287-7pk80oahfpscpii5tlqiqg8ekbnemes9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

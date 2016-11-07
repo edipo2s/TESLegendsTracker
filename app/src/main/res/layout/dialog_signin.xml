@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/large_margin"
+    android:paddingTop="@dimen/large_margin">
+
+    <Button
+        android:id="@+id/login_signin_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/login_signin_twitter"
+        android:layout_alignStart="@+id/login_signin_twitter"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector_btn_google_signin_light"
+        android:text="@string/sign_in_with_google"
+        android:textColor="@color/secondary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/login_signin_twitter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_signin_google"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="@dimen/large_margin"
+        android:drawableStart="@drawable/ic_twitter"
+        android:text="@string/sign_in_with_twitter"
+        android:textColor="@color/secondary_text"
+        android:textStyle="bold" />
+
+</RelativeLayout>

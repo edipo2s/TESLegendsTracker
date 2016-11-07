@@ -21,4 +21,10 @@
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name">card_transition</string>
 
+    <string name="action_login">Do Login</string>
+
+    <string name="error_auth">Favorite a card require user login.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_twitter">Sign in with Twitter</string>
+
 </resources>

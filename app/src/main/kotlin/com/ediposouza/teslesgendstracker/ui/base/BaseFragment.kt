@@ -12,7 +12,7 @@ import timber.log.Timber
 
 open class BaseFragment : Fragment() {
 
-    protected val mEventBus by lazy { EventBus.getDefault() }
+    protected val eventBus by lazy { EventBus.getDefault() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ open class BaseFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         try {
-            mEventBus.register(this)
+            eventBus.register(this)
         } catch (e: Exception) {
             Timber.i(e.message)
         }
@@ -36,7 +36,7 @@ open class BaseFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         try {
-            mEventBus.unregister(this)
+            eventBus.unregister(this)
         } catch (e: Exception) {
             Timber.i(e.message)
         }

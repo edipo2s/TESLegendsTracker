@@ -29,13 +29,11 @@ android {
     }
 }
 
-apply plugin: 'com.google.gms.google-services'
-
 ext {
     anko_version = "0.9"
     icePickVersion = "3.2.+"
     playServicesVersion = "9.8.0"
-    supportLibraryVersion = "24.2.1"//"25.0.0"//
+    supportLibraryVersion = "25.0.0"//"24.2.1"//
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.1.+"
@@ -56,11 +54,12 @@ dependencies {
     compile "com.android.support:multidex:1.0.1"
 
     //Google
+    compile "com.google.android.gms:play-services-auth:$playServicesVersion"
     compile "com.google.firebase:firebase-auth:$playServicesVersion"
     compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.google.firebase:firebase-config:$playServicesVersion"
-    releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
+    releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
 
     //Others
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
@@ -82,3 +81,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
+
+apply plugin: 'com.google.gms.google-services'

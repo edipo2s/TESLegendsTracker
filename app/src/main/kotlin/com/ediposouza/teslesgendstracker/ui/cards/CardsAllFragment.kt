@@ -12,8 +12,12 @@ import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
-import com.ediposouza.teslesgendstracker.ui.*
+import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
+import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
