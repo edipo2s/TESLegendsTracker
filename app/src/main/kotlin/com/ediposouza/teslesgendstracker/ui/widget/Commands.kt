@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui
+package com.ediposouza.teslesgendstracker.ui.widget
 
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.CardRarity

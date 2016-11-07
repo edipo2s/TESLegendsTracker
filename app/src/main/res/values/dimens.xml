@@ -21,6 +21,7 @@
 
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
+    <dimen name="card_full_margin">24dp</dimen>
     <dimen name="rarity_bg_max_width">250dp</dimen>
 
     <dimen name="card_card_margin_top">@dimen/status_bar_height</dimen>

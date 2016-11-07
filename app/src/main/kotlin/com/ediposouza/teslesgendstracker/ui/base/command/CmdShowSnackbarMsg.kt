@@ -9,7 +9,6 @@ package com.ediposouza.teslesgendstracker.ui.base.command
 import android.support.annotation.IntDef
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
-import android.view.View
 
 /**
  * Created by ediposouza on 3/3/16.
@@ -42,14 +41,14 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
     var actionTextRes: Int = 0
         private set
 
-    var action: View.OnClickListener? = null
+    var action: (() -> Unit)? = null
         private set
 
     init {
         duration = if (type == TYPE_INFO) Snackbar.LENGTH_LONG else Snackbar.LENGTH_INDEFINITE
         if (type == TYPE_ERROR) {
             actionTextRes = android.R.string.ok
-            action = View.OnClickListener {  }
+            action = { }
         }
     }
 
@@ -66,13 +65,13 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
         return this
     }
 
-    fun withAction(@StringRes actionTextRes: Int, action: View.OnClickListener): CmdShowSnackbarMsg {
+    fun withAction(@StringRes actionTextRes: Int, action: () -> Unit): CmdShowSnackbarMsg {
         this.actionTextRes = actionTextRes
         this.action = action
         return this
     }
 
-    fun withAction(actionText: String, action: View.OnClickListener): CmdShowSnackbarMsg {
+    fun withAction(actionText: String, action: () -> Unit): CmdShowSnackbarMsg {
         this.actionText = actionText
         this.action = action
         return this

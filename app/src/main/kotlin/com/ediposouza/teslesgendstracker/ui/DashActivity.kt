@@ -9,6 +9,8 @@ import android.view.MenuItem
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
 import kotlinx.android.synthetic.main.activity_dash.*
 
 class DashActivity : BaseActivity(),
@@ -17,8 +19,8 @@ class DashActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash)
-        dash_filter_rarity.filterClick = { mEventBus.post(CmdFilterRarity(it)) }
-        dash_filter_magika.filterClick = { mEventBus.post(CmdFilterMagika(it)) }
+        dash_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        dash_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
