@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
@@ -33,6 +34,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     private val RC_SIGN_IN: Int = 235
 
+    private var loading: AlertDialog? = null
     private var snackbar: Snackbar? = null
     private var googleApiClient: GoogleApiClient? = null
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -93,7 +95,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 val account = result.signInAccount
                 firebaseAuthWithGoogle(account)
             } else {
-                // Google Sign In failed, update UI appropriately
+                loading?.dismiss()
             }
         }
     }
@@ -109,15 +111,27 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         Timber.d("firebaseAuthWithGoogle:" + acct?.id)
+        showLoading()
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     Timber.d("signInWithCredential:onComplete:" + task.isSuccessful)
-                    if (!task.isSuccessful) {
+                    if (task.isSuccessful) {
+                        toast("Logged with " + firebaseAuth.currentUser?.displayName)
+                    } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast("Authentication failed.")
                     }
+                    loading?.dismiss()
                 }
+    }
+
+    private fun showLoading() {
+        val progressBar = ProgressBar(this)
+        progressBar.isIndeterminate = true
+        loading = AlertDialog.Builder(this)
+                .setView(progressBar)
+                .show()
     }
 
     @SuppressWarnings("ResourceType")

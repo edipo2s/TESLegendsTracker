@@ -7,7 +7,6 @@
     <string name="menu_season">Season</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_about">About</string>
-    <string name="menu_logout">Logout</string>
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
@@ -22,6 +21,7 @@
     <string name="card_transition_name">card_transition</string>
 
     <string name="action_login">Do Login</string>
+    <string name="profile_collection">Collection</string>
 
     <string name="error_auth">Favorite a card require user login.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
