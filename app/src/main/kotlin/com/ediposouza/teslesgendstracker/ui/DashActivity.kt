@@ -11,7 +11,9 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*
+import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 
 class DashActivity : BaseActivity(),
         NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +39,13 @@ class DashActivity : BaseActivity(),
                 .commit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val user = FirebaseAuth.getInstance().currentUser
+        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
+        dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         dash_drawer_layout.closeDrawer(Gravity.START)
         return when (item.itemId) {
@@ -45,7 +54,7 @@ class DashActivity : BaseActivity(),
         }
     }
 
-    fun showFragment(frag: Fragment) : Boolean {
+    fun showFragment(frag: Fragment): Boolean {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.dash_content, frag)
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
