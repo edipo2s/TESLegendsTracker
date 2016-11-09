@@ -34,7 +34,7 @@ class CardActivity : BaseActivity() {
         setContentView(R.layout.activity_card)
 
         loadCardInfo(intent.getParcelableExtra<Card>(EXTRA_CARD))
-        card_imageview.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
+        card_all_image.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
         card_favorite_btn.setOnClickListener {
             if (FirebaseAuth.getInstance().currentUser != null) {
                 toast("Favorite")
@@ -51,7 +51,7 @@ class CardActivity : BaseActivity() {
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = if (card.race == CardRace.NONE) View.GONE else View.VISIBLE
         card_arena_tier.text = card.arenaTier.name
-        card_imageview.setImageBitmap(card.imageBitmap(this))
+        card_all_image.setImageBitmap(card.imageBitmap(this))
     }
 
     private fun configureBottomSheet() {

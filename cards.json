@@ -4855,9 +4855,22 @@
     }
   },
   "users": {
-    "09890-09890-09890-09890-09890": {
-      "name": "Édipo Souza",
-      "photoUrl": "http://server.google.com/users/23415453/photo.jpg"
+    "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
+      "name": "Édipo da Silva Souza",
+      "photoUrl": "https://lh6.googleusercontent.com/-QVzUl1KSjiE/AAAAAAAAAAI/AAAAAAAAOSk/kMFAQSTtvcw/s96-c/photo.jpg",
+      "collection": {
+        "core": {
+          "strength": {
+            "rapidshot": 3,
+            "triumphantjarl": 1
+          },
+          "agility": {
+            "ungolimthelistener": 1,
+            "murkwaterwitch": 3,
+            "finishoff": 3
+          }
+        }
+      }
     }
   },
   "decks": {

@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/bottom_sheet_height">
 
         <ImageView
-            android:id="@+id/card_imageview"
+            android:id="@+id/card_all_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/card_full_margin"

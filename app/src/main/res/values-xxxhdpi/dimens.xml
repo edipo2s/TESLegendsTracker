@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="medium_margin">12dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+
+    <dimen name="card_height">200dp</dimen>
+    <dimen name="card_margin">@dimen/default_margin</dimen>
+    <dimen name="card_full_margin">24dp</dimen>
+    <dimen name="rarity_bg_max_width">250dp</dimen>
+
+</resources>

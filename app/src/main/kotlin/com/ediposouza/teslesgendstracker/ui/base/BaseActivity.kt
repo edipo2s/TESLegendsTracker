@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.interactor.UserInteractor
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
 import com.google.android.gms.auth.api.Auth
@@ -118,6 +119,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     Timber.d("signInWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
                         toast("Logged with " + firebaseAuth.currentUser?.displayName)
+                        UserInteractor().setUserInfo()
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast("Authentication failed.")
@@ -152,12 +154,18 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     @Subscribe
     fun showLogin(showLogin: CmdShowLogin) {
         val loginView = View.inflate(this, R.layout.dialog_signin, null)
-        loginView.login_signin_google.setOnClickListener { initGoogleLogin() }
-        loginView.login_signin_twitter.setOnClickListener { initTwitterLogin() }
-        AlertDialog.Builder(this)
+        val alertDialog = AlertDialog.Builder(this)
                 .setView(loginView)
                 .setCancelable(true)
                 .show()
+        loginView.login_signin_google.setOnClickListener {
+            initGoogleLogin()
+            alertDialog.dismiss()
+        }
+        loginView.login_signin_twitter.setOnClickListener {
+            initTwitterLogin()
+            alertDialog.dismiss()
+        }
     }
 
     private fun initGoogleLogin() {
