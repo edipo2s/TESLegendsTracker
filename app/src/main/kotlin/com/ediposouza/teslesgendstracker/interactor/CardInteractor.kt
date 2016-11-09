@@ -5,24 +5,17 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.FirebaseCard
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 
 /**
  * Created by ediposouza on 01/11/16.
  */
-class CardInteractor() {
-
-    val NODE_CARDS = "cards"
-    val NODE_CORE = "core"
-    val CHILD_COST = "cost"
-
-    val mDatabase by lazy { FirebaseDatabase.getInstance().reference }
+class CardInteractor() : BaseInteractor() {
 
     fun getCards(cls: Attribute, onSuccess: (List<Card>) -> Unit) {
         val node_cls = cls.name.toLowerCase()
-        mDatabase.child(NODE_CARDS).child(NODE_CORE).child(node_cls).orderByChild(CHILD_COST)
+        database.child(NODE_CARDS).child(NODE_CORE).child(node_cls).orderByChild(CHILD_COST)
                 .addValueEventListener(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {

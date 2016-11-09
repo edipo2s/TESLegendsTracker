@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.cards
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ import java.util.*
 /**
  * Created by EdipoSouza on 10/30/16.
  */
-class CardsAllFragment : BaseFragment() {
+open class CardsAllFragment : BaseFragment() {
 
     var cardsLoaded: List<Card> = ArrayList()
     var magikaFilter: Int = -1
@@ -34,9 +35,9 @@ class CardsAllFragment : BaseFragment() {
     var searchFilter: String? = null
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
-    val cardsAdapter: CardsAllAdapter = CardsAllAdapter { view: View, card: Card ->
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+
+    open val cardsAdapter = CardsAllAdapter { view: View, card: Card ->
+        showCardExpanded(card, view)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,19 +46,16 @@ class CardsAllFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.setHasFixedSize(true)
-        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
-                resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
+        configRecycleView()
         loadCardsByAttr(CmdShowCardsByAttr(Attribute.STRENGTH))
     }
 
-    @Subscribe
-    fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
-        CardInteractor().getCards(showCardsByAttr.attr, {
-            cardsLoaded = it
-            showCards()
-        })
+    open fun configRecycleView() {
+        cards_recycler_view.adapter = cardsAdapter
+        cards_recycler_view.layoutManager = GridLayoutManager(context, 3)
+        cards_recycler_view.setHasFixedSize(true)
+        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
+                resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
     }
 
     @Subscribe
@@ -78,8 +76,21 @@ class CardsAllFragment : BaseFragment() {
         showCards()
     }
 
-    fun showCards() {
-        cardsAdapter.showCards(cardsLoaded
+    @Subscribe
+    open fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
+        CardInteractor().getCards(showCardsByAttr.attr, {
+            cardsLoaded = it
+            showCards()
+        })
+    }
+
+    open fun showCards() {
+        cardsAdapter.showCards(filteredCards())
+        cards_recycler_view.scrollToPosition(0)
+    }
+
+    protected fun filteredCards(): List<Card> {
+        return cardsLoaded
                 .filter {
                     when (searchFilter) {
                         null -> it is Card
@@ -88,7 +99,7 @@ class CardsAllFragment : BaseFragment() {
                             it.name.toLowerCase().contains(search) ||
                                     it.race.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
-                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.size > 0
+                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty()
                         }
                     }
                 }
@@ -104,8 +115,12 @@ class CardsAllFragment : BaseFragment() {
                         magikaFilter < 7 -> it.cost == magikaFilter
                         else -> it.cost >= magikaFilter
                     }
-                })
-        cards_recycler_view.scrollToPosition(0)
+                }
+    }
+
+    protected fun showCardExpanded(card: Card, view: View) {
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
 }
@@ -120,7 +135,7 @@ class CardsAllAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: CardsAllViewHolder?, position: Int) {
-        holder?.bind(items.get(position))
+        holder?.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size
@@ -135,8 +150,8 @@ class CardsAllAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapte
 class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
 
     fun bind(card: Card) {
-        itemView.setOnClickListener { itemClick(itemView.card_imageview, card) }
-        itemView.card_imageview.setImageBitmap(card.imageBitmap(itemView.context))
+        itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
+        itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
     }
 
 }
