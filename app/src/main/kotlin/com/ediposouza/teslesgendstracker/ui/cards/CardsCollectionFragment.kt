@@ -26,6 +26,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view: View, card: Card ->
         showCardExpanded(card, view)
+        true
     }
 
     override fun configRecycleView() {
@@ -52,14 +53,14 @@ class CardsCollectionFragment : CardsAllFragment() {
     private fun changeUserCardQtd(slot: Slot) {
         val newQtd = slot.qtd.inc()
         userInteractor.setUserCardQtd(currentAttr, slot.card, if (newQtd <= 3) newQtd else 0) {
-            cardsCollectionAdapter.notifyDataSetChanged()
+            cardsCollectionAdapter.updateSlot(slot, newQtd)
         }
     }
 
 }
 
 class CardsCollectionAdapter(val itemClick: (Slot) -> Unit,
-                             val itemLongClick: (View, Card) -> Unit) : RecyclerView.Adapter<CardsCollectionViewHolder>() {
+                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsCollectionViewHolder>() {
 
     val items: ArrayList<Slot> = ArrayList()
 
@@ -80,16 +81,21 @@ class CardsCollectionAdapter(val itemClick: (Slot) -> Unit,
         notifyDataSetChanged()
     }
 
+    fun updateSlot(slot: Slot, newQtd: Long) {
+        val slotIndex = items.indexOf(slot)
+        items[slotIndex] = Slot(slot.card, newQtd)
+        notifyItemChanged(slotIndex)
+    }
+
 }
 
 class CardsCollectionViewHolder(val view: View, val itemClick: (Slot) -> Unit,
-                                val itemLongClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
+                                val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
     fun bind(slot: Slot) {
         itemView.setOnClickListener { itemClick(slot) }
         itemView.setOnLongClickListener {
             itemLongClick(itemView.card_collection_image, slot.card)
-            true
         }
         itemView.card_collection_image.setImageBitmap(slot.card.imageBitmap(itemView.context))
         if (slot.qtd == 0L) {

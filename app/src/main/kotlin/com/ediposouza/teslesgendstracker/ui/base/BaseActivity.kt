@@ -96,7 +96,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 val account = result.signInAccount
                 firebaseAuthWithGoogle(account)
             } else {
-                loading?.dismiss()
+                hideLoading()
             }
         }
     }
@@ -124,16 +124,22 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                         Timber.w("signInWithCredential", task.exception)
                         toast("Authentication failed.")
                     }
-                    loading?.dismiss()
+                    hideLoading()
                 }
     }
 
     private fun showLoading() {
         val progressBar = ProgressBar(this)
         progressBar.isIndeterminate = true
+        val largeMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
+        progressBar.setPadding(0, largeMargin, 0, largeMargin)
         loading = AlertDialog.Builder(this)
                 .setView(progressBar)
                 .show()
+    }
+
+    private fun hideLoading() {
+        loading?.dismiss()
     }
 
     @SuppressWarnings("ResourceType")

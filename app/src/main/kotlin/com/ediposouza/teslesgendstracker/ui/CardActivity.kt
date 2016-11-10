@@ -8,7 +8,6 @@ import android.support.v4.app.ActivityCompat
 import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.data.CardRace
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
@@ -49,7 +48,7 @@ class CardActivity : BaseActivity() {
     private fun loadCardInfo(card: Card) {
         card_race.text = card.race.name
         card_race_desc.text = card.race.desc
-        card_race_desc.visibility = if (card.race == CardRace.NONE) View.GONE else View.VISIBLE
+        card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE
         card_arena_tier.text = card.arenaTier.name
         card_all_image.setImageBitmap(card.imageBitmap(this))
     }

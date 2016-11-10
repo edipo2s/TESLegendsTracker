@@ -20,6 +20,7 @@
     <group
         android:id="@+id/group_tools"
         android:checkableBehavior="single">
+
         <item
             android:id="@+id/menu_arena"
             android:title="@string/menu_arena" />
@@ -27,6 +28,9 @@
         <item
             android:id="@+id/menu_season"
             android:title="@string/menu_season" />
+    </group>
+
+    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/menu_about"
