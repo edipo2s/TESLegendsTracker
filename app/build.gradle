@@ -16,10 +16,21 @@ android {
         buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
         vectorDrawables.useSupportLibrary true
     }
+    def props = new Properties()
+    props.load(file(propsFile).newInputStream())
+    signingConfigs {
+        release {
+            storeFile file(props.keystore_file)
+            storePassword props.keystore_pass
+            keyAlias "tes_legends_tracker"
+            keyPassword props.tes_legends_tracker_pass
+        }
+    }
     buildTypes {
         debug {
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -33,7 +44,7 @@ ext {
     anko_version = "0.9"
     icePickVersion = "3.2.+"
     playServicesVersion = "9.8.0"
-    supportLibraryVersion = "25.0.0"//"24.2.1"//
+    supportLibraryVersion = "25.0.0"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.1.+"
