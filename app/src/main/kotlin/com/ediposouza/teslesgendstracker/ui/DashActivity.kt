@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
@@ -27,8 +28,17 @@ class DashActivity : BaseActivity(),
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        val drawerToggle = ActionBarDrawerToggle(this, dash_drawer_layout, dash_toolbar,
-                R.string.drawer_open, R.string.drawer_close)
+        val drawerToggle = object : ActionBarDrawerToggle(this, dash_drawer_layout, dash_toolbar,
+                R.string.drawer_open, R.string.drawer_close) {
+
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                val user = FirebaseAuth.getInstance().currentUser
+                dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
+                dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
+            }
+
+        }
         dash_drawer_layout.addDrawerListener(drawerToggle)
         dash_navigation_view.setNavigationItemSelectedListener(this)
         dash_navigation_view.menu.findItem(R.id.menu_cards)?.isChecked = true
@@ -37,13 +47,6 @@ class DashActivity : BaseActivity(),
                 .add(R.id.dash_content, CardsFragment())
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val user = FirebaseAuth.getInstance().currentUser
-        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
-        dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
