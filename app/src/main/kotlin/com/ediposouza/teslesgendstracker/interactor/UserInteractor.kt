@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
-import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -18,11 +17,16 @@ class UserInteractor() : BaseInteractor() {
     val NODE_USERS = "users"
     val CHILD_NAME: String = "name"
     val CHILD_PHOTO: String = "photoUrl"
-    val CHILD_COLLECTION = "collection"
+    val CHILD_FAVORITE = "favorite"
+    val CHILD_QTD = "qtd"
 
     private fun userDBReference(): DatabaseReference? {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         return if (uid != null) database.child(NODE_USERS).child(uid) else null
+    }
+
+    private fun userDBCardsReference(cls: Attribute): DatabaseReference? {
+        return userDBReference()?.child(NODE_CARDS)?.child(NODE_CORE)?.child(cls.name.toLowerCase())
     }
 
     fun setUserInfo() {
@@ -33,25 +37,36 @@ class UserInteractor() : BaseInteractor() {
         }
     }
 
-    fun setUserCardQtd(cls: Attribute, card: Card, qtd: Long, onComplete: () -> Unit) {
-        val node_cls = cls.name.toLowerCase()
-        userDBReference()?.apply {
-            child(CHILD_COLLECTION).child(NODE_CORE).child(node_cls)
-                    .child(card.shortName).setValue(qtd).addOnCompleteListener { onComplete.invoke() }
+    fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
+        userDBCardsReference(card.cls)?.apply {
+            child(card.shortName).child(CHILD_QTD).setValue(qtd).addOnCompleteListener {
+                onComplete.invoke()
+            }
         }
     }
 
-    fun getUserCollection(cls: Attribute, onSuccess: (HashMap<String, Long>) -> Unit) {
-        val node_cls = cls.name.toLowerCase()
-        userDBReference()?.child(CHILD_COLLECTION)?.child(NODE_CORE)?.child(node_cls)
-                ?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
+        userDBCardsReference(card.cls)?.apply {
+            child(card.shortName).child(CHILD_FAVORITE).apply {
+                if (favorite) {
+                    setValue(true).addOnCompleteListener { onComplete.invoke() }
+                } else {
+                    removeValue().addOnCompleteListener { onComplete.invoke() }
+                }
+            }
+        }
+    }
+
+    fun getUserCollection(cls: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+        userDBCardsReference(cls)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
                     @Suppress("UNCHECKED_CAST")
                     override fun onDataChange(ds: DataSnapshot) {
-                        val collection = ds.value
-                        val cards = if (collection != null) collection as HashMap<String, Long> else null
-                        Timber.d(cards.toString())
-                        onSuccess.invoke(cards ?: HashMap<String, Long>())
+                        val collection = ds.children.filter { it.hasChild(CHILD_QTD) }.map({
+                            it.key to it.child(CHILD_QTD).value as Long
+                        }).toMap()
+                        Timber.d(collection.toString())
+                        onSuccess.invoke(collection)
                     }
 
                     override fun onCancelled(de: DatabaseError) {
@@ -59,6 +74,24 @@ class UserInteractor() : BaseInteractor() {
                     }
 
                 })
+    }
+
+    fun getUserFavorites(cls: Attribute, onSuccess: (List<String>) -> Unit) {
+        userDBCardsReference(cls)?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            @Suppress("UNCHECKED_CAST")
+            override fun onDataChange(ds: DataSnapshot) {
+                val favorites = ds.children.filter { (it.child(CHILD_FAVORITE)?.value ?: false) as Boolean }
+                        .map({ it.key })
+                Timber.d(favorites.toString())
+                onSuccess.invoke(favorites)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+            }
+
+        })
     }
 
 }

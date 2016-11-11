@@ -94,9 +94,9 @@
         android:fitsSystemWindows="true"
         app:elevation="@dimen/cardview_default_elevation"
         app:headerLayout="@layout/navigation_drawer_header"
-        app:itemIconTint="@color/selector_menu_item"
+        app:itemIconTint="@drawable/selector_menu_item"
         app:itemTextAppearance="?android:attr/textAppearanceMedium"
-        app:itemTextColor="@color/selector_menu_item"
+        app:itemTextColor="@drawable/selector_menu_item"
         app:menu="@menu/menu_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

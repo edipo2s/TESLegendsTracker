@@ -19,6 +19,8 @@
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name">card_transition</string>
+    <string name="card_favorited">%1$s favorited</string>
+    <string name="card_unfavorited">%1$s unfavorited</string>
 
     <string name="action_login">Do Login</string>
     <string name="profile_collection">Collection</string>

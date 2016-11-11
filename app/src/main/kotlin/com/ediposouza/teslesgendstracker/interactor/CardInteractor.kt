@@ -16,7 +16,7 @@ class CardInteractor() : BaseInteractor() {
     fun getCards(cls: Attribute, onSuccess: (List<Card>) -> Unit) {
         val node_cls = cls.name.toLowerCase()
         database.child(NODE_CARDS).child(NODE_CORE).child(node_cls).orderByChild(CHILD_COST)
-                .addValueEventListener(object : ValueEventListener {
+                .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.mapTo(arrayListOf<Card>()) {

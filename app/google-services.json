@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "597127048287-gogof22hdgr27lcfr2qpaosqr582lgpk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ediposouza.teslesgendstracker",
+            "certificate_hash": "C865EF4DDC66596DC689FE10DB8C90EAFCF7E847"
+          }
+        },
+        {
+          "client_id": "597127048287-vb8k774ogqb4vuu3qbopajbffenai4v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ediposouza.teslesgendstracker",
+            "certificate_hash": "40D7431B8BC3EB70551F4D873003E131DDA9297E"
+          }
+        },
+        {
           "client_id": "597127048287-qtdilnvcu3stahivdf4u2vmhisljsj9s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

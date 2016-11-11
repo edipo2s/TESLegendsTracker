@@ -2,7 +2,6 @@ package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
@@ -39,6 +38,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 }
                 activity.dash_toolbar_title.setText(title)
             }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            }
         })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
@@ -69,16 +72,19 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     var titles: Array<String>
+    val cardsCollectionFragment by lazy { CardsCollectionFragment() }
+    val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
+    val cardsAllFragment by lazy { CardsAllFragment() }
 
     init {
         titles = ctx.resources.getStringArray(R.array.cards_tabs)
     }
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): CardsAllFragment {
         return when (position) {
-            1 -> CardsCollectionFragment()
-            2 -> CardsFavoritesFragment()
-            else -> CardsAllFragment()
+            1 -> cardsCollectionFragment
+            2 -> cardsFavoritesFragment
+            else -> cardsAllFragment
         }
     }
 
