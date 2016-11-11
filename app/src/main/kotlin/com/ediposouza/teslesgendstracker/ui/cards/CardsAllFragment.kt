@@ -13,6 +13,7 @@ import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.CardInteractor
+import com.ediposouza.teslesgendstracker.interactor.UserInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
@@ -29,15 +30,20 @@ import java.util.*
  */
 open class CardsAllFragment : BaseFragment() {
 
+    var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
+    var userFavorites: List<String> = ArrayList()
     var magikaFilter: Int = -1
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
 
+    val userInteractor: UserInteractor by lazy { UserInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
-    open val cardsAdapter = CardsAllAdapter { view: View, card: Card ->
+    open val cardsAdapter = CardsAllAdapter({ view: View, card: Card -> showCardExpanded(card, view) }) {
+        view: View, card: Card ->
         showCardExpanded(card, view)
+        true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,7 +53,7 @@ open class CardsAllFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configRecycleView()
-        loadCardsByAttr(CmdShowCardsByAttr(Attribute.STRENGTH))
+        loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
     }
 
     open fun configRecycleView() {
@@ -78,10 +84,14 @@ open class CardsAllFragment : BaseFragment() {
 
     @Subscribe
     open fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
+        currentAttr = showCardsByAttr.attr
         CardInteractor().getCards(showCardsByAttr.attr, {
             cardsLoaded = it
             showCards()
         })
+        userInteractor.getUserFavorites(currentAttr) {
+            userFavorites = it
+        }
     }
 
     open fun showCards() {
@@ -89,7 +99,13 @@ open class CardsAllFragment : BaseFragment() {
         cards_recycler_view.scrollToPosition(0)
     }
 
-    protected fun filteredCards(): List<Card> {
+    open fun updateCardsList() {
+        if (cards_recycler_view != null) {
+            loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
+        }
+    }
+
+    open fun filteredCards(): List<Card> {
         return cardsLoaded
                 .filter {
                     when (searchFilter) {
@@ -118,20 +134,22 @@ open class CardsAllFragment : BaseFragment() {
                 }
     }
 
-    protected fun showCardExpanded(card: Card, view: View) {
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
+    open fun showCardExpanded(card: Card, view: View) {
+        val favorite = userFavorites.contains(card.shortName)
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, favorite),
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
 }
 
-class CardsAllAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<CardsAllViewHolder>() {
+class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsAllViewHolder>() {
 
     val items: ArrayList<Card> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsAllViewHolder {
         return CardsAllViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_card, parent, false), itemClick)
+                .inflate(R.layout.itemlist_card, parent, false), itemClick, itemLongClick)
     }
 
     override fun onBindViewHolder(holder: CardsAllViewHolder?, position: Int) {
@@ -147,10 +165,14 @@ class CardsAllAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapte
     }
 }
 
-class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
+class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
+                         val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
     fun bind(card: Card) {
         itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
+        itemView.setOnLongClickListener {
+            itemLongClick(itemView.card_all_image, card)
+        }
         itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
     }
 

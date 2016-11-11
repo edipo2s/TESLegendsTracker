@@ -6,23 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.Slot
-import com.ediposouza.teslesgendstracker.interactor.UserInteractor
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
-import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
  */
 class CardsCollectionFragment : CardsAllFragment() {
-
-    var currentAttr: Attribute = Attribute.STRENGTH
-    val userInteractor: UserInteractor by lazy { UserInteractor() }
 
     val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view: View, card: Card ->
         showCardExpanded(card, view)
@@ -32,12 +25,6 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.adapter = cardsCollectionAdapter
-    }
-
-    @Subscribe
-    override fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
-        currentAttr = showCardsByAttr.attr
-        super.loadCardsByAttr(showCardsByAttr)
     }
 
     override fun showCards() {
@@ -52,8 +39,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     private fun changeUserCardQtd(slot: Slot) {
         val newQtd = slot.qtd.inc()
-        userInteractor.setUserCardQtd(currentAttr, slot.card, if (newQtd <= 3) newQtd else 0) {
-            cardsCollectionAdapter.updateSlot(slot, newQtd)
+        val finalQtd = if (newQtd <= 3) newQtd else 0
+        userInteractor.setUserCardQtd(slot.card, finalQtd) {
+            cardsCollectionAdapter.updateSlot(slot, finalQtd)
         }
     }
 
@@ -83,8 +71,10 @@ class CardsCollectionAdapter(val itemClick: (Slot) -> Unit,
 
     fun updateSlot(slot: Slot, newQtd: Long) {
         val slotIndex = items.indexOf(slot)
-        items[slotIndex] = Slot(slot.card, newQtd)
-        notifyItemChanged(slotIndex)
+        if (slotIndex > -1) {
+            items[slotIndex] = Slot(slot.card, newQtd)
+            notifyItemChanged(slotIndex)
+        }
     }
 
 }
