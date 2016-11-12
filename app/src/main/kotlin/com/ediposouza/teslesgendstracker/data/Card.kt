@@ -175,7 +175,7 @@ data class Card(
         val health: Int,
         val type: CardType,
         val race: CardRace,
-        val keywords: ArrayList<CardKeyword>,
+        val keywords: List<CardKeyword>,
         val arenaTier: CardArenaTier
 
 ) : Parcelable {

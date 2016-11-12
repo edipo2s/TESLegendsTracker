@@ -1,14 +1,40 @@
 package com.ediposouza.teslesgendstracker.data
 
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
-/**
- * Created by EdipoSouza on 10/31/16.
- */
-data class Slot(
+data class Deck(
 
-        val card: Card,
-        val qtd: Long
+        val id: String,
+        val name: String,
+        val owner: String,
+        val type: DeckType,
+        val cls: Class,
+        val cost: Int,
+        val createdAt: LocalDate,
+        val updatedAt: LocalDateTime,
+        val patch: String,
+        val likes: List<String>,
+        val views: Int,
+        val cards: Map<String, Int>,
+        val updates: List<DeckUpdate>,
+        val comments: List<DeckComment>
+
+)
+
+data class DeckUpdate(
+
+        val date: LocalDateTime,
+        val changes: Map<String, Int>
+
+)
+
+data class DeckComment(
+
+        val id: String,
+        val owner: String,
+        val comment: String,
+        val date: LocalDateTime
 
 )
 
@@ -22,25 +48,3 @@ enum class DeckType() {
     OTHER
 
 }
-
-data class DeckComment(
-
-        val user: User,
-        val comment: String,
-        val rating: Int,
-        val date: LocalDateTime
-
-)
-
-data class Deck(
-
-        val name: String,
-        val type: DeckType,
-        val cls: Class,
-        val cards: Array<Slot>,
-        val cost: Int,
-        val season: Int,
-        val rating: Int,
-        val comments: Array<DeckComment>
-
-)

@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.activity_dash.*

@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.cards
+package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -16,13 +16,14 @@ import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
-import kotlinx.android.synthetic.main.fragment_cards_all.*
+import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
@@ -49,7 +50,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_cards_all, container, false)
+        return inflater?.inflate(R.layout.fragment_cards_list, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

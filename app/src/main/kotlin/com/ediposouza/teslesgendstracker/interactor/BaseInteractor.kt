@@ -9,7 +9,7 @@ open class BaseInteractor() {
 
     val NODE_CARDS = "cards"
     val NODE_CORE = "core"
-    val CHILD_COST = "cost"
+    val CARD_COST_KEY = "cost"
 
     val database by lazy { FirebaseDatabase.getInstance().reference }
 
