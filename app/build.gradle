@@ -76,6 +76,7 @@ dependencies {
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
     compile "com.jakewharton.timber:timber:4.3.1"
     compile "org.greenrobot:eventbus:3.0.0"
+    compile "jp.wasabeef:recyclerview-animators:2.2.4"
 
     kapt "frankiesardo:icepick-processor:$icePickVersion"
     compile "frankiesardo:icepick:$icePickVersion"

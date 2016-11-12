@@ -11,7 +11,7 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class CardInteractor() : BaseInteractor() {
+class PublicInteractor() : BaseInteractor() {
 
     fun getCards(cls: Attribute, onSuccess: (List<Card>) -> Unit) {
         val node_cls = cls.name.toLowerCase()

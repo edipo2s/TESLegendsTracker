@@ -12,7 +12,7 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class UserInteractor() : BaseInteractor() {
+class PrivateInteractor() : BaseInteractor() {
 
     val NODE_USERS = "users"
     val CHILD_NAME: String = "name"

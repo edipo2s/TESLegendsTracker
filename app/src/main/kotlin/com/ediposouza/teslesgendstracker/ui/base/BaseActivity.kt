@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.interactor.UserInteractor
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
 import com.google.android.gms.auth.api.Auth
@@ -119,7 +119,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     Timber.d("signInWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
                         toast("Logged with " + firebaseAuth.currentUser?.displayName)
-                        UserInteractor().setUserInfo()
+                        PrivateInteractor().setUserInfo()
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast("Authentication failed.")
