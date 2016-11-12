@@ -10,6 +10,7 @@ import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
+import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
 import com.google.firebase.auth.FirebaseAuth
@@ -53,6 +54,7 @@ class DashActivity : BaseActivity(),
         dash_drawer_layout.closeDrawer(Gravity.START)
         return when (item.itemId) {
             R.id.menu_cards -> showFragment(CardsFragment())
+            R.id.menu_decks -> showFragment(DecksFragment())
             else -> false
         }
     }

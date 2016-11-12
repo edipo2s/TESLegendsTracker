@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.cards
+package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.ui.CardActivity
-import kotlinx.android.synthetic.main.fragment_cards_all.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
