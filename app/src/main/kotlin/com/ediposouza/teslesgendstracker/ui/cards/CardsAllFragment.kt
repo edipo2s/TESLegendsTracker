@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.cards
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,14 +13,15 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
-import com.ediposouza.teslesgendstracker.interactor.CardInteractor
-import com.ediposouza.teslesgendstracker.interactor.UserInteractor
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_all.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
@@ -37,7 +39,7 @@ open class CardsAllFragment : BaseFragment() {
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
 
-    val userInteractor: UserInteractor by lazy { UserInteractor() }
+    val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
     open val cardsAdapter = CardsAllAdapter({ view: View, card: Card -> showCardExpanded(card, view) }) {
@@ -53,12 +55,12 @@ open class CardsAllFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configRecycleView()
-        loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
     }
 
     open fun configRecycleView() {
         cards_recycler_view.adapter = cardsAdapter
         cards_recycler_view.layoutManager = GridLayoutManager(context, 3)
+        cards_recycler_view.itemAnimator = ScaleInAnimator()
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
@@ -85,11 +87,11 @@ open class CardsAllFragment : BaseFragment() {
     @Subscribe
     open fun loadCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         currentAttr = showCardsByAttr.attr
-        CardInteractor().getCards(showCardsByAttr.attr, {
+        PublicInteractor().getCards(showCardsByAttr.attr, {
             cardsLoaded = it
             showCards()
         })
-        userInteractor.getUserFavorites(currentAttr) {
+        privateInteractor.getUserFavorites(currentAttr) {
             userFavorites = it
         }
     }
@@ -145,7 +147,7 @@ open class CardsAllFragment : BaseFragment() {
 class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
                       val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsAllViewHolder>() {
 
-    val items: ArrayList<Card> = ArrayList()
+    var items: List<Card> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsAllViewHolder {
         return CardsAllViewHolder(LayoutInflater.from(parent?.context)
@@ -159,9 +161,22 @@ class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
     override fun getItemCount(): Int = items.size
 
     fun showCards(cards: List<Card>) {
-        items.clear()
-        items.addAll(cards)
-        notifyDataSetChanged()
+        val oldItems = items
+        items = cards
+        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldItems[oldItemPosition] == items[newItemPosition]
+            }
+
+            override fun getOldListSize(): Int = oldItems.size
+
+            override fun getNewListSize(): Int = items.size
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
+            }
+
+        }, false).dispatchUpdatesTo(this)
     }
 }
 

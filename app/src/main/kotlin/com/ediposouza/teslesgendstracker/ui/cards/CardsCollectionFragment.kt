@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.support.v4.content.ContextCompat
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -29,10 +30,10 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        userInteractor.getUserCollection(currentAttr) {
+        privateInteractor.getUserCollection(currentAttr) {
             val userCards = it
             val slots = cards.map { Slot(it, userCards[it.shortName] ?: 0L) }
-            cardsCollectionAdapter.showCards(slots)
+            cardsCollectionAdapter.showCards(slots as ArrayList)
             cards_recycler_view.scrollToPosition(0)
         }
     }
@@ -40,7 +41,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     private fun changeUserCardQtd(slot: Slot) {
         val newQtd = slot.qtd.inc()
         val finalQtd = if (newQtd <= 3) newQtd else 0
-        userInteractor.setUserCardQtd(slot.card, finalQtd) {
+        privateInteractor.setUserCardQtd(slot.card, finalQtd) {
             cardsCollectionAdapter.updateSlot(slot, finalQtd)
         }
     }
@@ -50,7 +51,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 class CardsCollectionAdapter(val itemClick: (Slot) -> Unit,
                              val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsCollectionViewHolder>() {
 
-    val items: ArrayList<Slot> = ArrayList()
+    var items: ArrayList<Slot> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsCollectionViewHolder {
         return CardsCollectionViewHolder(LayoutInflater.from(parent?.context)
@@ -63,10 +64,23 @@ class CardsCollectionAdapter(val itemClick: (Slot) -> Unit,
 
     override fun getItemCount(): Int = items.size
 
-    fun showCards(slots: List<Slot>) {
-        items.clear()
-        items.addAll(slots)
-        notifyDataSetChanged()
+    fun showCards(slots: ArrayList<Slot>) {
+        val oldItems = items
+        items = slots
+        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldItems[oldItemPosition] == items[newItemPosition]
+            }
+
+            override fun getOldListSize(): Int = oldItems.size
+
+            override fun getNewListSize(): Int = items.size
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
+            }
+
+        }, false).dispatchUpdatesTo(this)
     }
 
     fun updateSlot(slot: Slot, newQtd: Long) {

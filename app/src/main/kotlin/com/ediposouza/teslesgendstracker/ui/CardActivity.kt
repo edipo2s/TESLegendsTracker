@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat
 import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.interactor.UserInteractor
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
@@ -69,7 +69,7 @@ class CardActivity : BaseActivity() {
 
     private fun onFavoriteClick() {
         if (FirebaseAuth.getInstance().currentUser != null) {
-            UserInteractor().setUserCardFavorite(card, !favorite) {
+            PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
                 val stringRes = if (favorite) R.string.card_favorited else R.string.card_unfavorited
                 toast(getString(stringRes, card.name))
