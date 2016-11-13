@@ -10,6 +10,7 @@ import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
@@ -48,13 +49,7 @@ class CardActivity : BaseActivity() {
 
     private fun configureBottomSheet() {
         val sheetBehavior = BottomSheetBehavior.from(card_bottom_sheet)
-        card_bottom_sheet.setOnClickListener {
-            if (sheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            } else {
-                sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
+        card_bottom_sheet.setOnClickListener { sheetBehavior.toogleExpanded() }
     }
 
     private fun loadCardInfo() {

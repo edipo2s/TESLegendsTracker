@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import timber.log.Timber
@@ -16,7 +17,7 @@ import timber.log.Timber
 class DecksFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_decks, container, false)
+        return container?.inflate(R.layout.fragment_decks)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
