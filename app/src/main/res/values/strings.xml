@@ -23,6 +23,7 @@
     <string name="card_unfavorited">%1$s unfavorited</string>
 
     <string name="action_login">Do Login</string>
+    <string name="statistics">Statistics</string>
     <string name="profile_collection">Collection</string>
 
     <string name="error_auth">Favorite a card require user login.</string>
