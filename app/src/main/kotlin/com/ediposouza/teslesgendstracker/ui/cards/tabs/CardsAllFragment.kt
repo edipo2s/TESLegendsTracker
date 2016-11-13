@@ -13,6 +13,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
+import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
@@ -50,7 +51,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_cards_list, container, false)
+        return container?.inflate(R.layout.fragment_cards_list)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
