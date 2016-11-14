@@ -25,21 +25,11 @@
         app:behavior_peekHeight="@dimen/statistics_sheet_peek_height"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
-        <RelativeLayout
+        <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/large_margin"
-            android:layout_marginEnd="@dimen/large_margin"
-            android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginTop="@dimen/filter_collection_margin_bottom"
-            android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Teste" />
-
-        </RelativeLayout>
+            android:layout_marginTop="@dimen/large_margin"
+            android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom" />
 
         <TextView
             android:id="@+id/collection_statistics_title"

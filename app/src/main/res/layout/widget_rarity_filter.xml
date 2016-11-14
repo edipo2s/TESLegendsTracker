@@ -24,54 +24,38 @@
 
     <ImageView
         android:id="@+id/rarity_filter_common"
+        style="@style/RarityItem"
         android:layout_width="@dimen/size_medium"
         android:layout_height="@dimen/size_medium"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/rarity_filter"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="center"
         android:src="@drawable/ic_rarity_common"
-        android:visibility="gone"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/rarity_filter_rare"
+        style="@style/RarityItem"
         android:layout_width="@dimen/size_medium"
         android:layout_height="@dimen/size_medium"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/rarity_filter_common"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="center"
         android:src="@drawable/ic_rarity_rare"
-        android:visibility="gone"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/rarity_filter_epic"
+        style="@style/RarityItem"
         android:layout_width="@dimen/size_medium"
         android:layout_height="@dimen/size_medium"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/rarity_filter_rare"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="center"
         android:src="@drawable/ic_rarity_epic"
-        android:visibility="gone"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/rarity_filter_legendary"
+        style="@style/RarityItem"
         android:layout_width="@dimen/size_medium"
         android:layout_height="@dimen/size_medium"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/rarity_filter_epic"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="center"
         android:src="@drawable/ic_rarity_legendary"
-        android:visibility="gone"
         tools:visibility="visible" />
 
 </RelativeLayout>

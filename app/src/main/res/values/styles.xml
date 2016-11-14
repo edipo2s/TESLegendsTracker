@@ -21,4 +21,17 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="RarityItem">
+        <item name="android:layout_marginStart">@dimen/small_margin</item>
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="StatisticsItem">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
 </resources>

@@ -13,13 +13,13 @@ import java.util.*
  */
 enum class Attribute(val color: Int) {
 
-    AGILITY(Color.GREEN),
-    DUAL(Color.LTGRAY),
-    ENDURANCE(Color.parseColor("purple")),
-    INTELLIGENCE(Color.BLUE),
-    NEUTRAL(Color.GRAY),
     STRENGTH(Color.RED),
-    WILLPOWER(Color.YELLOW)
+    INTELLIGENCE(Color.BLUE),
+    AGILITY(Color.GREEN),
+    WILLPOWER(Color.YELLOW),
+    ENDURANCE(Color.parseColor("purple")),
+    NEUTRAL(Color.GRAY),
+    DUAL(Color.LTGRAY)
 
 }
 
