@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollectionStatisticsAttr">
+        <attr name="attr">
+            <flag name="strength" value="0" />
+            <flag name="intelligence" value="1" />
+            <flag name="agility" value="2" />
+            <flag name="willpower" value="3" />
+            <flag name="endurance" value="4" />
+            <flag name="neutral" value="5" />
+            <flag name="dual" value="6" />
+        </attr>
+    </declare-styleable>
+</resources>

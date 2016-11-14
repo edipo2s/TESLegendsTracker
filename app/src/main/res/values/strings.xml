@@ -30,4 +30,7 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
 
+    <string name="statistics_rarity" formatted="false">%2f/%2f</string>
+    <string name="statistics_total" formatted="false">%3f/%3f</string>
+
 </resources>

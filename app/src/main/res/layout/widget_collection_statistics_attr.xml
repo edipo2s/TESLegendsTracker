@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/attributes_filter_height"
+    android:padding="@dimen/default_margin"
+    tools:background="@android:color/white"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/attr_statistics_attr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="12%"
+        tools:src="@drawable/attr_strength" />
+
+    <TextView
+        android:id="@+id/attr_statistics_common"
+        style="@style/StatisticsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/attr_statistics_attr"
+        app:layout_widthPercent="17%"
+        tools:text="58/66" />
+
+    <TextView
+        android:id="@+id/attr_statistics_rare"
+        style="@style/StatisticsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/attr_statistics_common"
+        app:layout_widthPercent="17%"
+        tools:text="58/66" />
+
+    <TextView
+        android:id="@+id/attr_statistics_epic"
+        style="@style/StatisticsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/attr_statistics_rare"
+        app:layout_widthPercent="17%"
+        tools:text="58/66" />
+
+    <TextView
+        android:id="@+id/attr_statistics_legendary"
+        style="@style/StatisticsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/attr_statistics_epic"
+        app:layout_widthPercent="17%"
+        tools:text="58/66" />
+
+    <TextView
+        android:id="@+id/attr_statistics_total"
+        style="@style/StatisticsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/attr_statistics_legendary"
+        app:layout_widthPercent="20%"
+        tools:text="58/66" />
+
+</android.support.percent.PercentRelativeLayout>
