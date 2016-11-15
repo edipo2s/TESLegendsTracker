@@ -24,8 +24,10 @@
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <dimen name="attributes_filter_height">48dp</dimen>
+    <dimen name="card_collection_padding_bottom">56dp
+    </dimen> <!-- navigation_bar_height + default_margin-->
     <dimen name="filter_collection_margin_bottom">42dp</dimen>
+    <dimen name="attributes_filter_height">48dp</dimen>
     <dimen name="rarity_bg_max_width">260dp</dimen>
     <dimen name="rarity_background_radius">48dp</dimen>
     <dimen name="statistics_attributes_attr_padding">2dp</dimen>
