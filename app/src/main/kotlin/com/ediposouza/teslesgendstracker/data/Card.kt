@@ -15,8 +15,8 @@ enum class Attribute(val color: Int) {
 
     STRENGTH(Color.RED),
     INTELLIGENCE(Color.BLUE),
-    AGILITY(Color.GREEN),
     WILLPOWER(Color.YELLOW),
+    AGILITY(Color.GREEN),
     ENDURANCE(Color.parseColor("purple")),
     NEUTRAL(Color.GRAY),
     DUAL(Color.LTGRAY)
@@ -119,7 +119,7 @@ enum class CardRace(val desc: String) {
     companion object {
 
         fun of(value: String): CardRace {
-            return if (value.trim().length == 0) CardRace.NONE else CardRace.valueOf(value)
+            return if (value.trim().isEmpty()) CardRace.NONE else CardRace.valueOf(value)
         }
 
     }
@@ -153,9 +153,18 @@ enum class CardArenaTier() {
     GOOD,
     EXCELLENT,
     INSANE,
-    UNKNOWN
+    UNKNOWN,
+    NONE
 
 }
+
+data class CardStatistic(
+
+        val shortName: String,
+        val rarity: CardRarity,
+        val unique: Boolean
+
+)
 
 data class Card(
 
@@ -170,7 +179,8 @@ data class Card(
         val type: CardType,
         val race: CardRace,
         val keywords: List<CardKeyword>,
-        val arenaTier: CardArenaTier
+        val arenaTier: CardArenaTier,
+        val evolves: Boolean
 
 ) : Parcelable {
 
@@ -183,7 +193,12 @@ data class Card(
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()], 1.equals(source.readInt()), source.readInt(), source.readInt(), source.readInt(), CardType.values()[source.readInt()], CardRace.values()[source.readInt()], ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) }, CardArenaTier.values()[source.readInt()])
+    constructor(source: Parcel) : this(source.readString(), source.readString(),
+            Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
+            1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
+            CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
+            ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
+            CardArenaTier.values()[source.readInt()], 1 == source.readInt())
 
     override fun describeContents() = 0
 
@@ -206,5 +221,6 @@ data class Card(
         dest?.writeInt(race.ordinal)
         dest?.writeList(keywords)
         dest?.writeInt(arenaTier.ordinal)
+        dest?.writeInt((if (evolves) 1 else 0))
     }
 }

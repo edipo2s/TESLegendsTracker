@@ -26,6 +26,7 @@
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
+            android:id="@+id/collection_statistics"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/large_margin"

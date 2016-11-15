@@ -19,6 +19,7 @@ import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.cards.CmdHideStatistics
 import com.ediposouza.teslesgendstracker.ui.cards.CmdShowStatistics
 import com.ediposouza.teslesgendstracker.ui.cards.CmdUpdateFiltersBottomMargin
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.fragment_cards_list_collection.*
@@ -61,6 +62,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.adapter = cardsCollectionAdapter
+        collection_statistics.updateStatistics()
     }
 
     override fun showCards() {
@@ -68,6 +70,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         privateInteractor.getUserCollection(currentAttr) {
             val userCards = it
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0L) }
+            cards_recycler_view.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
             cards_recycler_view.scrollToPosition(0)
         }
@@ -77,8 +80,15 @@ class CardsCollectionFragment : CardsAllFragment() {
         val newQtd = cardSlot.qtd.inc()
         val finalQtd = if (newQtd <= 3) newQtd else 0
         privateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
+            cards_recycler_view.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
+            collection_statistics.updateStatistics(currentAttr)
         }
+    }
+
+    override fun updateCardsList() {
+        super.updateCardsList()
+        collection_statistics?.updateStatistics()
     }
 
     @Subscribe

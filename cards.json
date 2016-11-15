@@ -220,7 +220,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "plunder": {
           "name": "Plunder",
@@ -253,7 +253,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "silvenartracker": {
           "name": "Silvenar Tracker",
@@ -429,7 +429,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "witheredhandcultist": {
           "name": "Withered Hand Cultist",
@@ -451,7 +451,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "alikrsurvivalist": {
           "name": "Alik'r Survivalist",
@@ -595,7 +595,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "whiteruntrooper": {
           "name": "Whiterun Trooper",
@@ -705,7 +705,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "triumphantjarl": {
           "name": "Triumphant Jarl",
@@ -771,7 +771,7 @@
           "health": "8",
           "rarity": "Legendary",
           "keyword": "Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "vigilantgiant": {
           "name": "Vigilant Giant",
@@ -1082,7 +1082,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Guard",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "camlornhero": {
           "name": "Camlorn Hero",
@@ -1236,7 +1236,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "dresrenegade": {
           "name": "Dres Renegade",
@@ -1401,7 +1401,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Shackle",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "fateweaver": {
           "name": "Fate Weaver",
@@ -1423,7 +1423,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Prophecy, Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "heirloomgreatsword": {
           "name": "Heirloom Greatsword",
@@ -1478,7 +1478,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "studiumheadmaster": {
           "name": "Studium Headmaster",
@@ -1555,7 +1555,7 @@
           "health": "3",
           "rarity": "Legendary",
           "keyword": "Summon, Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "supremeatromancer": {
           "name": "Supreme Atromancer",
@@ -1636,7 +1636,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "blackmail": {
           "name": "Blackmail",
@@ -1680,7 +1680,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Shackle",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "execute": {
           "name": "Execute",
@@ -1867,7 +1867,7 @@
           "health": "1",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "summersetshieldmage": {
           "name": "Summerset Shieldmage",
@@ -2077,7 +2077,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "divinefervor": {
           "name": "Divine Fervor",
@@ -2121,7 +2121,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "imperialreinforcements": {
           "name": "Imperial Reinforcements",
@@ -2319,7 +2319,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "auroransentry": {
           "name": "Auroran Sentry",
@@ -2466,7 +2466,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Prophecy",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "dunestalker": {
           "name": "Dune Stalker",
@@ -2532,7 +2532,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Lethal",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "helstromfootpad": {
           "name": "Helstrom Footpad",
@@ -2807,7 +2807,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "greenpactstalker": {
           "name": "Green Pact Stalker",
@@ -2917,7 +2917,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "camoranscoutleader": {
           "name": "Camoran Scout Leader",
@@ -3060,7 +3060,7 @@
           "health": "4",
           "rarity": "Legendary",
           "keyword": "Pilfer",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "ransack": {
           "name": "Ransack",
@@ -3104,7 +3104,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "chaurusreaper": {
           "name": "Chaurus Reaper",
@@ -3228,7 +3228,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "daedricdagger": {
           "name": "Daedric Dagger",
@@ -3558,7 +3558,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Lethal",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "archeinvenomtongue": {
           "name": "Archein Venomtongue",
@@ -3591,7 +3591,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Regenerate",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "cursedspectre": {
           "name": "Cursed Spectre",
@@ -3691,7 +3691,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "preserveroftheroot": {
           "name": "Preserver of the Root",
@@ -3834,7 +3834,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "nightpredator": {
           "name": "Night Predator",
@@ -3934,7 +3934,7 @@
           "health": "7",
           "rarity": "Legendary",
           "keyword": "Drain",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "ironatronach": {
           "name": "Iron Atronach",
@@ -4267,7 +4267,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "adoringfan": {
           "name": "Adoring Fan",
@@ -4367,7 +4367,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "slaughterfishspawning": {
           "name": "Slaughterfish Spawning",
@@ -4434,7 +4434,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "sparkingspider": {
           "name": "Sparking Spider",
@@ -4500,7 +4500,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Last Gasp",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "wabbajack": {
           "name": "Wabbajack",
