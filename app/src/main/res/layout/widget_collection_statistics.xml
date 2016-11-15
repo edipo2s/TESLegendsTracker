@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/large_margin"
-    android:layout_marginBottom="@dimen/large_margin"
+    android:layout_marginBottom="@dimen/default_margin"
+    android:layout_marginTop="@dimen/default_margin"
+    android:paddingTop="@dimen/large_margin"
+    tools:background="@android:color/white"
     tools:paddingTop="@dimen/status_bar_height">
 
     <Space
@@ -19,100 +21,152 @@
         android:id="@+id/rarity_statistics_common"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_small"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_alignTop="@id/rarity_statistics_space"
         android:layout_toEndOf="@id/rarity_statistics_space"
-        app:layout_widthPercent="17%"
-        tools:src="@drawable/ic_rarity_common" />
+        android:src="@drawable/ic_rarity_common"
+        app:layout_widthPercent="17%" />
 
     <ImageView
         android:id="@+id/rarity_statistics_rare"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_small"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_alignTop="@id/rarity_statistics_space"
         android:layout_toEndOf="@id/rarity_statistics_common"
-        app:layout_widthPercent="17%"
-        tools:src="@drawable/ic_rarity_rare" />
+        android:src="@drawable/ic_rarity_rare"
+        app:layout_widthPercent="17%" />
 
     <ImageView
         android:id="@+id/rarity_statistics_epic"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_small"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_alignTop="@id/rarity_statistics_space"
         android:layout_toEndOf="@id/rarity_statistics_rare"
-        app:layout_widthPercent="17%"
-        tools:src="@drawable/ic_rarity_epic" />
+        android:src="@drawable/ic_rarity_epic"
+        app:layout_widthPercent="17%" />
 
     <ImageView
         android:id="@+id/rarity_statistics_legendary"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_small"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_alignTop="@id/rarity_statistics_space"
         android:layout_toEndOf="@id/rarity_statistics_epic"
-        app:layout_widthPercent="17%"
-        tools:src="@drawable/ic_rarity_legendary" />
+        android:src="@drawable/ic_rarity_legendary"
+        app:layout_widthPercent="17%" />
 
     <ImageView
         android:id="@+id/rarity_statistics_all"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_normal"
         android:layout_toEndOf="@id/rarity_statistics_legendary"
-        app:layout_widthPercent="20%"
-        tools:src="@drawable/ic_rarity" />
+        android:src="@drawable/ic_rarity"
+        app:layout_widthPercent="20%" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_strength"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rarity_statistics_all"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="strength" />
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="strength" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_intelligence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rarity_statistics_strength"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="intelligence" />
-
-    <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
-        android:id="@+id/rarity_statistics_agility"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rarity_statistics_intelligence"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="agility" />
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="intelligence" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_willpower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rarity_statistics_agility"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="willpower" />
+        android:layout_below="@id/rarity_statistics_intelligence"
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="willpower" />
+
+    <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+        android:id="@+id/rarity_statistics_agility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rarity_statistics_willpower"
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="agility" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_endurance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rarity_statistics_willpower"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="endurance" />
+        android:layout_below="@id/rarity_statistics_agility"
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="endurance" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_dual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rarity_statistics_endurance"
-        android:layout_marginTop="@dimen/default_margin"
-        app:attr="dual" />
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="dual" />
 
     <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
         android:id="@+id/rarity_statistics_neutral"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rarity_statistics_dual"
+        android:layout_marginTop="@dimen/statistics_attributes_margin_top"
+        app:attribute="neutral" />
+
+    <ImageView
+        android:id="@+id/collection_statistics_pack"
+        android:layout_width="@dimen/size_medium"
+        android:layout_height="@dimen/size_medium"
+        android:layout_below="@id/rarity_statistics_neutral"
         android:layout_marginTop="@dimen/default_margin"
-        app:attr="neutral" />
+        android:src="@drawable/ic_pack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_medium"
+        android:layout_alignTop="@id/collection_statistics_pack"
+        android:layout_toEndOf="@id/collection_statistics_pack"
+        android:gravity="center_vertical"
+        android:text="@string/statistics_total_cards"
+        android:textSize="@dimen/font_medium" />
+
+    <TextView
+        android:id="@+id/collection_statistics_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_medium"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/collection_statistics_pack"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/font_huge"
+        tools:text="63,58%" />
+
+    <TextView
+        android:id="@+id/collection_statistics_total"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_small"
+        android:layout_alignTop="@id/collection_statistics_pack"
+        android:layout_toStartOf="@id/collection_statistics_percent"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:gravity="center_vertical"
+        tools:text="687/1136"
+        android:textSize="@dimen/font_medium" />
+
+    <TextView
+        android:id="@+id/collection_statistics_soul"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_small"
+        android:layout_below="@id/collection_statistics_total"
+        android:layout_toStartOf="@id/collection_statistics_percent"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:drawableStart="@drawable/ic_soul"
+        android:drawablePadding="@dimen/default_margin"
+        android:gravity="center_vertical"
+        tools:text="68.136"
+        android:textSize="@dimen/font_medium" />
 
 </android.support.percent.PercentRelativeLayout>

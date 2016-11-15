@@ -9,6 +9,7 @@
     <!-- General -->
     <dimen name="font_medium">16sp</dimen>
     <dimen name="font_large">22sp</dimen>
+    <dimen name="font_huge">26sp</dimen>
 
     <dimen name="small_margin">4dp</dimen>
     <dimen name="default_margin">8dp</dimen>
@@ -25,8 +26,11 @@
     <dimen name="card_margin">@dimen/default_margin</dimen>
     <dimen name="attributes_filter_height">48dp</dimen>
     <dimen name="filter_collection_margin_bottom">42dp</dimen>
-    <dimen name="rarity_bg_max_width">250dp</dimen>
+    <dimen name="rarity_bg_max_width">260dp</dimen>
     <dimen name="rarity_background_radius">48dp</dimen>
+    <dimen name="statistics_attributes_attr_padding">2dp</dimen>
+    <dimen name="statistics_attributes_height">42dp</dimen>
+    <dimen name="statistics_attributes_margin_top">@dimen/small_margin</dimen>
     <dimen name="statistics_sheet_peek_height">80dp</dimen>
     <dimen name="statistics_elevation">4dp</dimen>
 

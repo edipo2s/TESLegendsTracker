@@ -14,9 +14,10 @@ class CardParser() {
     val attack: String = ""
     val health: String = ""
     val type: String = ""
-    val race: String = ""
+    val race: String = CardRace.NONE.name
     val keyword: String = ""
-    val arenaTier: String = ""
+    val arenaTier: String = CardArenaTier.NONE.name
+    val evolves: Boolean = false
 
     fun toCard(shortName: String, cls: Attribute): Card {
         return Card(name, shortName, cls,
@@ -29,7 +30,12 @@ class CardParser() {
                         .mapTo(arrayListOf<CardKeyword>()) {
                             CardKeyword.valueOf(it.trim().toUpperCase().replace(" ", "_"))
                         },
-                CardArenaTier.valueOf(arenaTier.trim().toUpperCase()))
+                CardArenaTier.valueOf(arenaTier.trim().toUpperCase()),
+                evolves)
+    }
+
+    fun toCardStatistic(shortName: String): CardStatistic {
+        return CardStatistic(shortName, CardRarity.valueOf(rarity.trim().toUpperCase()), unique)
     }
 
 }
