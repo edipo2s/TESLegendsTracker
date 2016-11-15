@@ -34,7 +34,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     private val ANIM_DURATION = 500L
     private var bottomSheetBehaviorHiding: Boolean = false
-    private var bottomSheetBehaviorExpanded: Boolean = false
+    private var bottomSheetBehaviorExpanded: Boolean? = null
 
     val statisticsSheetBehavior: BottomSheetBehavior<CardView> by lazy {
         BottomSheetBehavior.from(collection_statistics_bottom_sheet)
@@ -119,8 +119,13 @@ class CardsCollectionFragment : CardsAllFragment() {
             }
             val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
                     newState == BottomSheetBehavior.STATE_SETTLING
-            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            if (bottomSheetBehaviorExpanded == null && newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetBehaviorExpanded = false
+            }
+            if (bottomSheetBehaviorExpanded != null) {
+                activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+                activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            }
             animBackButton(newState)
         }
 
@@ -134,7 +139,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                 }
                 showStatisticsBack()
             }
-            if (newState == BottomSheetBehavior.STATE_COLLAPSED && bottomSheetBehaviorExpanded) {
+            if (newState == BottomSheetBehavior.STATE_COLLAPSED && bottomSheetBehaviorExpanded ?: false) {
                 bottomSheetBehaviorExpanded = false
                 with(ValueAnimator.ofFloat(0f, 1f)) {
                     duration = ANIM_DURATION

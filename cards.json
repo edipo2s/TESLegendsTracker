@@ -559,7 +559,8 @@
           "race": "Daedra",
           "attack": "2",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Good"
         },
@@ -790,7 +791,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Good"
         },
@@ -1573,7 +1575,8 @@
           "race": "Skeleton",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         },
@@ -1584,7 +1587,8 @@
           "race": "Dark Elf",
           "attack": "6",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         }
@@ -2059,7 +2063,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -2356,7 +2361,8 @@
           "race": "Nord",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         }
@@ -2424,7 +2430,8 @@
           "race": "Wood Elf",
           "attack": "2",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Insane"
         },
@@ -3139,7 +3146,8 @@
           "race": "Goblin",
           "attack": "6",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Breakthrough, Charge, Last Gasp",
           "arenaTier": "Excellent"
         },
@@ -3647,7 +3655,8 @@
           "race": "Imperial",
           "attack": "1",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Lethal",
           "arenaTier": "Excellent"
         },
@@ -3878,7 +3887,8 @@
           "race": "Dragon",
           "attack": "7",
           "health": "7",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Guard",
           "arenaTier": "Excellent"
         },
@@ -3979,7 +3989,8 @@
           "race": "Dark Elf",
           "attack": "6",
           "health": "3",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Drain, Summon, Guard",
           "arenaTier": "Excellent"
         },
@@ -4012,7 +4023,8 @@
           "race": "Nord",
           "attack": "5",
           "health": "4",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Prophecy, Breakthrough, Guard",
           "arenaTier": "Good"
         },
@@ -4023,7 +4035,8 @@
           "race": "Khajiit",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -4034,7 +4047,8 @@
           "race": "High Elf",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Insane"
         },
@@ -4078,7 +4092,8 @@
           "race": "Wood Elf",
           "attack": "1",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Lethal, Summon",
           "arenaTier": "Excellent"
         },
@@ -4089,7 +4104,8 @@
           "race": "Imperial",
           "attack": "2",
           "health": "2",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -4100,7 +4116,8 @@
           "race": "Orc",
           "attack": "4",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Good"
         },
@@ -4111,7 +4128,8 @@
           "race": "Breton",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Ward, Summon",
           "arenaTier": "Insane"
         },
@@ -4133,7 +4151,8 @@
           "race": "Redguard",
           "attack": "2",
           "health": "2",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Average"
         },
@@ -4155,7 +4174,8 @@
           "race": "Argonian",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon, Silence, Shackle",
           "arenaTier": "Excellent"
         }
@@ -4256,7 +4276,8 @@
           "race": "Wood Elf",
           "attack": "1",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Guard, Last Gasp, Prophecy",
           "arenaTier": "Unknown"
         },
@@ -4399,7 +4420,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Insane"
         },
@@ -4487,7 +4509,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Average"
         },
@@ -4531,7 +4554,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Average"
         },
@@ -4564,7 +4588,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Good"
         },
@@ -4575,7 +4600,8 @@
           "race": "Dragon",
           "attack": "10",
           "health": "10",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         }
@@ -4857,27 +4883,50 @@
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
       "name": "Édipo da Silva Souza",
-      "photoUrl": "https://lh6.googleusercontent.com/-QVzUl1KSjiE/AAAAAAAAAAI/AAAAAAAAOSk/kMFAQSTtvcw/s96-c/photo.jpg",
       "cards": {
         "core": {
-          "strength": {
-            "rapidshot": {
-              "favorite": true,
-              "qtd": 3
-            },
-            "triumphantjarl": {
-              "qtd": 1
-            }
-          },
           "agility": {
-            "ungolimthelistener": {
-              "favorite": true
+            "finishoff": {
+              "qtd": 2
             },
             "murkwaterwitch": {
               "qtd": 3
             },
-            "finishoff": {
-              "qtd": 2
+            "ungolimthelistener": {
+              "favorite": true
+            }
+          },
+          "strength": {
+            "fearlessnorthlander": {
+              "qtd": 1
+            },
+            "fieryimp": {
+              "qtd": 1
+            },
+            "morthalwatchman": {
+              "qtd": 1
+            },
+            "rampagingminotaur": {
+              "qtd": 1
+            },
+            "rapidshot": {
+              "favorite": true,
+              "qtd": 3
+            },
+            "reiveblademaster": {
+              "qtd": 1
+            },
+            "relentlessraider": {
+              "qtd": 1
+            },
+            "rihadbattlemage": {
+              "qtd": 3
+            },
+            "steelscimitar": {
+              "qtd": 1
+            },
+            "triumphantjarl": {
+              "qtd": 1
             }
           }
         }
