@@ -5,7 +5,7 @@
     android:id="@+id/cards_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/navigation_bar_height"
+    android:paddingBottom="@dimen/card_margin"
     android:scrollbarFadeDuration="0"
     android:scrollbars="vertical"
     app:layoutManager="GridLayoutManager"
