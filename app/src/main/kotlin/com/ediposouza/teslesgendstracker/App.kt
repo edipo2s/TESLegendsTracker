@@ -11,11 +11,16 @@ import timber.log.Timber
  */
 class App : Application() {
 
+    val NODE_CARDS = "cards"
+
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         AndroidThreeTen.init(this)
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        FirebaseDatabase.getInstance().apply {
+            setPersistenceEnabled(true)
+            reference.child(NODE_CARDS).keepSynced(true)
+        }
         Timber.plant(LoggerManager())
     }
 

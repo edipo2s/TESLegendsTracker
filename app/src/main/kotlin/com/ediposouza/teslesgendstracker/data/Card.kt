@@ -51,13 +51,6 @@ enum class CardRarity(val color: Int) {
     EPIC(Color.parseColor("purple")),
     LEGENDARY(Color.YELLOW);
 
-    companion object {
-
-        fun of(value: String): CardRarity {
-            return if (value.contains(LEGENDARY.name)) LEGENDARY else valueOf(value)
-        }
-
-    }
 }
 
 enum class CardType() {
@@ -170,6 +163,7 @@ data class Card(
         val shortName: String,
         val cls: Attribute,
         val rarity: CardRarity,
+        val unique: Boolean,
         val cost: Int,
         val attack: Int,
         val health: Int,
@@ -179,13 +173,8 @@ data class Card(
         val arenaTier: CardArenaTier
 
 ) : Parcelable {
-    private val CARD_PATH = "Cards"
 
-    fun imageBitmap(context: Context): Bitmap {
-        val cardAttr = cls.name.toLowerCase().capitalize()
-        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
-        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-    }
+    private val CARD_PATH = "Cards"
 
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Card> = object : Parcelable.Creator<Card> {
@@ -194,32 +183,28 @@ data class Card(
         }
     }
 
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            Attribute.valueOf(source.readString()),
-            CardRarity.valueOf(source.readString()),
-            source.readInt(),
-            source.readInt(),
-            source.readInt(),
-            CardType.valueOf(source.readString()),
-            CardRace.valueOf(source.readString()),
-            ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
-            CardArenaTier.valueOf(source.readString()))
+    constructor(source: Parcel) : this(source.readString(), source.readString(), Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()], 1.equals(source.readInt()), source.readInt(), source.readInt(), source.readInt(), CardType.values()[source.readInt()], CardRace.values()[source.readInt()], ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) }, CardArenaTier.values()[source.readInt()])
 
     override fun describeContents() = 0
+
+    fun imageBitmap(context: Context): Bitmap {
+        val cardAttr = cls.name.toLowerCase().capitalize()
+        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
+        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+    }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
-        dest?.writeString(cls.name)
-        dest?.writeString(rarity.name)
+        dest?.writeInt(cls.ordinal)
+        dest?.writeInt(rarity.ordinal)
+        dest?.writeInt((if (unique) 1 else 0))
         dest?.writeInt(cost)
         dest?.writeInt(attack)
         dest?.writeInt(health)
-        dest?.writeString(type.name)
-        dest?.writeString(race.name)
+        dest?.writeInt(type.ordinal)
+        dest?.writeInt(race.ordinal)
         dest?.writeList(keywords)
-        dest?.writeString(arenaTier.name)
+        dest?.writeInt(arenaTier.ordinal)
     }
 }

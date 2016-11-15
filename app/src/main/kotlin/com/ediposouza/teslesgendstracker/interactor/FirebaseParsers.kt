@@ -9,6 +9,7 @@ class CardParser() {
 
     val name: String = ""
     val rarity: String = ""
+    val unique: Boolean = false
     val cost: String = ""
     val attack: String = ""
     val health: String = ""
@@ -19,7 +20,7 @@ class CardParser() {
 
     fun toCard(shortName: String, cls: Attribute): Card {
         return Card(name, shortName, cls,
-                CardRarity.of(rarity.trim().toUpperCase()),
+                CardRarity.valueOf(rarity.trim().toUpperCase()), unique,
                 cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
                 CardType.valueOf(type.trim().toUpperCase()),
                 CardRace.of(race.trim().toUpperCase().replace(" ", "_")),
