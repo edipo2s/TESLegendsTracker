@@ -14,11 +14,11 @@ import timber.log.Timber
  */
 class PrivateInteractor() : BaseInteractor() {
 
-    val NODE_USERS = "users"
-    val CHILD_NAME: String = "name"
-    val CHILD_PHOTO: String = "photoUrl"
-    val CHILD_FAVORITE = "favorite"
-    val CHILD_QTD = "qtd"
+    private val NODE_USERS = "users"
+    private val CARD_NAME_KEY: String = "name"
+    private val CARD_PHOTO_KEY: String = "photoUrl"
+    private val CARD_FAVORITE_KEY = "favorite"
+    private val CARD_QTD_KEY = "qtd"
 
     private fun userDBReference(): DatabaseReference? {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -32,14 +32,14 @@ class PrivateInteractor() : BaseInteractor() {
     fun setUserInfo() {
         val user = FirebaseAuth.getInstance().currentUser
         userDBReference()?.apply {
-            child(CHILD_NAME).setValue(user?.displayName ?: "")
-            child(CHILD_PHOTO).setValue(user?.photoUrl.toString())
+            child(CARD_NAME_KEY).setValue(user?.displayName ?: "")
+            child(CARD_PHOTO_KEY).setValue(user?.photoUrl.toString())
         }
     }
 
     fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
         userDBCardsReference(card.cls)?.apply {
-            child(card.shortName).child(CHILD_QTD).setValue(qtd).addOnCompleteListener {
+            child(card.shortName).child(CARD_QTD_KEY).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
             }
         }
@@ -47,7 +47,7 @@ class PrivateInteractor() : BaseInteractor() {
 
     fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
         userDBCardsReference(card.cls)?.apply {
-            child(card.shortName).child(CHILD_FAVORITE).apply {
+            child(card.shortName).child(CARD_FAVORITE_KEY).apply {
                 if (favorite) {
                     setValue(true).addOnCompleteListener { onComplete.invoke() }
                 } else {
@@ -57,13 +57,13 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(cls: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
-        userDBCardsReference(cls)?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getUserCollection(attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+        userDBCardsReference(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
                     @Suppress("UNCHECKED_CAST")
                     override fun onDataChange(ds: DataSnapshot) {
-                        val collection = ds.children.filter { it.hasChild(CHILD_QTD) }.map({
-                            it.key to it.child(CHILD_QTD).value as Long
+                        val collection = ds.children.filter { it.hasChild(CARD_QTD_KEY) }.map({
+                            it.key to it.child(CARD_QTD_KEY).value as Long
                         }).toMap()
                         Timber.d(collection.toString())
                         onSuccess.invoke(collection)
@@ -76,12 +76,12 @@ class PrivateInteractor() : BaseInteractor() {
                 })
     }
 
-    fun getUserFavorites(cls: Attribute, onSuccess: (List<String>) -> Unit) {
-        userDBCardsReference(cls)?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getUserFavorites(attr: Attribute, onSuccess: (List<String>) -> Unit) {
+        userDBCardsReference(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             @Suppress("UNCHECKED_CAST")
             override fun onDataChange(ds: DataSnapshot) {
-                val favorites = ds.children.filter { (it.child(CHILD_FAVORITE)?.value ?: false) as Boolean }
+                val favorites = ds.children.filter { (it.child(CARD_FAVORITE_KEY)?.value ?: false) as Boolean }
                         .map({ it.key })
                 Timber.d(favorites.toString())
                 onSuccess.invoke(favorites)
