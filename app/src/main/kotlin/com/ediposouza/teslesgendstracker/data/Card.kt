@@ -13,13 +13,13 @@ import java.util.*
  */
 enum class Attribute(val color: Int) {
 
-    AGILITY(Color.GREEN),
-    DUAL(Color.LTGRAY),
-    ENDURANCE(Color.parseColor("purple")),
-    INTELLIGENCE(Color.BLUE),
-    NEUTRAL(Color.GRAY),
     STRENGTH(Color.RED),
-    WILLPOWER(Color.YELLOW)
+    INTELLIGENCE(Color.BLUE),
+    WILLPOWER(Color.YELLOW),
+    AGILITY(Color.GREEN),
+    ENDURANCE(Color.parseColor("purple")),
+    NEUTRAL(Color.GRAY),
+    DUAL(Color.LTGRAY)
 
 }
 
@@ -51,13 +51,6 @@ enum class CardRarity(val color: Int) {
     EPIC(Color.parseColor("purple")),
     LEGENDARY(Color.YELLOW);
 
-    companion object {
-
-        fun of(value: String): CardRarity {
-            return if (value.contains(LEGENDARY.name)) LEGENDARY else valueOf(value)
-        }
-
-    }
 }
 
 enum class CardType() {
@@ -126,7 +119,7 @@ enum class CardRace(val desc: String) {
     companion object {
 
         fun of(value: String): CardRace {
-            return if (value.trim().length == 0) CardRace.NONE else CardRace.valueOf(value)
+            return if (value.trim().isEmpty()) CardRace.NONE else CardRace.valueOf(value)
         }
 
     }
@@ -160,9 +153,18 @@ enum class CardArenaTier() {
     GOOD,
     EXCELLENT,
     INSANE,
-    UNKNOWN
+    UNKNOWN,
+    NONE
 
 }
+
+data class CardStatistic(
+
+        val shortName: String,
+        val rarity: CardRarity,
+        val unique: Boolean
+
+)
 
 data class Card(
 
@@ -170,22 +172,19 @@ data class Card(
         val shortName: String,
         val cls: Attribute,
         val rarity: CardRarity,
+        val unique: Boolean,
         val cost: Int,
         val attack: Int,
         val health: Int,
         val type: CardType,
         val race: CardRace,
-        val keywords: ArrayList<CardKeyword>,
-        val arenaTier: CardArenaTier
+        val keywords: List<CardKeyword>,
+        val arenaTier: CardArenaTier,
+        val evolves: Boolean
 
 ) : Parcelable {
-    private val CARD_PATH = "Cards"
 
-    fun imageBitmap(context: Context): Bitmap {
-        val cardAttr = cls.name.toLowerCase().capitalize()
-        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
-        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-    }
+    private val CARD_PATH = "Cards"
 
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Card> = object : Parcelable.Creator<Card> {
@@ -194,32 +193,34 @@ data class Card(
         }
     }
 
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            Attribute.valueOf(source.readString()),
-            CardRarity.valueOf(source.readString()),
-            source.readInt(),
-            source.readInt(),
-            source.readInt(),
-            CardType.valueOf(source.readString()),
-            CardRace.valueOf(source.readString()),
+    constructor(source: Parcel) : this(source.readString(), source.readString(),
+            Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
+            1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
+            CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
-            CardArenaTier.valueOf(source.readString()))
+            CardArenaTier.values()[source.readInt()], 1 == source.readInt())
 
     override fun describeContents() = 0
+
+    fun imageBitmap(context: Context): Bitmap {
+        val cardAttr = cls.name.toLowerCase().capitalize()
+        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
+        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+    }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
-        dest?.writeString(cls.name)
-        dest?.writeString(rarity.name)
+        dest?.writeInt(cls.ordinal)
+        dest?.writeInt(rarity.ordinal)
+        dest?.writeInt((if (unique) 1 else 0))
         dest?.writeInt(cost)
         dest?.writeInt(attack)
         dest?.writeInt(health)
-        dest?.writeString(type.name)
-        dest?.writeString(race.name)
+        dest?.writeInt(type.ordinal)
+        dest?.writeInt(race.ordinal)
         dest?.writeList(keywords)
-        dest?.writeString(arenaTier.name)
+        dest?.writeInt(arenaTier.ordinal)
+        dest?.writeInt((if (evolves) 1 else 0))
     }
 }

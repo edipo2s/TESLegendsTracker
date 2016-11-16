@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
@@ -10,6 +11,10 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
 import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -21,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_cards.*
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_cards, container, false)
+        return container?.inflate(R.layout.fragment_cards)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -37,11 +42,16 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     else -> R.string.app_name
                 }
                 activity.dash_toolbar_title.setText(title)
+                eventBus.post(CmdUpdateFiltersBottomMargin(position == 1))
+                Handler().postDelayed({
+                    eventBus.post(if (position == 1) CmdShowStatistics() else CmdHideStatistics())
+                }, 500)
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             }
+
         })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
@@ -50,8 +60,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
-        (MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView)
-                .setOnQueryTextListener(this)
+        with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
+            queryHint = getString(R.string.menu_search_hint)
+            setOnQueryTextListener(this@CardsFragment)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -93,7 +105,7 @@ class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAd
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return titles.get(position)
+        return titles[position]
     }
 
 }
