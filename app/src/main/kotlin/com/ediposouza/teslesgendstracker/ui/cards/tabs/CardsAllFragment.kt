@@ -103,7 +103,7 @@ open class CardsAllFragment : BaseFragment() {
         cards_recycler_view.scrollToPosition(0)
     }
 
-    open fun updateCardsList() {
+    fun updateCardsList() {
         if (cards_recycler_view != null) {
             loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
         }

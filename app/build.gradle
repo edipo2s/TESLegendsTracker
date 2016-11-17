@@ -44,7 +44,7 @@ ext {
     anko_version = "0.9"
     icePickVersion = "3.2.+"
     playServicesVersion = "9.8.0"
-    supportLibraryVersion = "25.0.0"
+    supportLibraryVersion = "25.0.1"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.1.+"
