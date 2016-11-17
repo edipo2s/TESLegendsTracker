@@ -2,7 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.CardRarity
@@ -16,7 +16,7 @@ import java.text.NumberFormat
  * Created by EdipoSouza on 11/2/16.
  */
 class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
-        LinearLayout(ctx, attrs, defStyleAttr) {
+        FrameLayout(ctx, attrs, defStyleAttr) {
 
     val privateInteractor by lazy { PrivateInteractor() }
     val publicInteractor by lazy { PublicInteractor() }

@@ -24,17 +24,16 @@
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <dimen name="card_collection_padding_bottom">56dp
-    </dimen> <!-- navigation_bar_height + default_margin-->
-    <dimen name="filter_collection_margin_bottom">42dp</dimen>
+    <!-- navigation_bar_height + default_margin-->
+    <dimen name="card_list_padding_bottom">56dp</dimen>
     <dimen name="attributes_filter_height">48dp</dimen>
     <dimen name="rarity_bg_max_width">260dp</dimen>
     <dimen name="rarity_background_radius">48dp</dimen>
-    <dimen name="statistics_attributes_attr_padding">2dp</dimen>
-    <dimen name="statistics_attributes_height">42dp</dimen>
-    <dimen name="statistics_attributes_margin_top">@dimen/small_margin</dimen>
-    <dimen name="statistics_sheet_peek_height">80dp</dimen>
+    <dimen name="statistics_attributes_attr_padding">@dimen/small_margin</dimen>
+    <dimen name="statistics_attributes_height">48dp</dimen>
+    <dimen name="statistics_attributes_margin_top">@dimen/default_margin</dimen>
     <dimen name="statistics_elevation">4dp</dimen>
+    <dimen name="statistics_bottom_sheet_margin">@dimen/default_margin</dimen>
 
     <!-- Card View -->
     <dimen name="card_full_margin">24dp</dimen>

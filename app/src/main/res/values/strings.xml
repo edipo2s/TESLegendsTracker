@@ -10,8 +10,9 @@
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
+    <string name="search_hint">Name, race, type or keyword</string>
     <string name="menu_search">Search</string>
-    <string name="menu_search_hint">Name, race, type or keyword</string>
+    <string name="menu_statistics">Statistics</string>
 
     <string name="tab_cards">Cards</string>
     <string name="tab_favorites">Favorites</string>
@@ -24,16 +25,16 @@
     <string name="card_unfavorited">%1$s unfavorited</string>
 
     <string name="action_login">Do Login</string>
-    <string name="statistics">Statistics</string>
     <string name="profile_collection">Collection</string>
 
     <string name="error_auth">Favorite a card require user login.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
 
-    <string name="statistics_rarity">%1$02d/%2$02d</string>
-    <string name="statistics_total">%1$03d/%2$03d</string>
-    <string name="statistics_percent">%1$.2f%%</string>
+    <string name="zero_of_zero" translatable="false">0/0</string>
+    <string name="statistics_rarity" translatable="false">%1$02d/%2$02d</string>
+    <string name="statistics_total" translatable="false">%1$03d/%2$03d</string>
+    <string name="statistics_percent" translatable="false">%1$.2f%%</string>
     <string name="statistics_total_cards">Total Cards\nSoul to complete</string>
 
 </resources>
