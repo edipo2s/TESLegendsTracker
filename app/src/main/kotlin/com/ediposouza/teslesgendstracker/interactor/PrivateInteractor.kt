@@ -15,39 +15,38 @@ import timber.log.Timber
 class PrivateInteractor() : BaseInteractor() {
 
     private val NODE_USERS = "users"
-    private val CARD_NAME_KEY: String = "name"
-    private val CARD_PHOTO_KEY: String = "photoUrl"
-    private val CARD_FAVORITE_KEY = "favorite"
-    private val CARD_QTD_KEY = "qtd"
+    private val KEY_CARD_NAME: String = "name"
+    private val KEY_CARD_PHOTO: String = "photoUrl"
+    private val KEY_CARD_FAVORITE = "favorite"
+    private val KEY_CARD_QTD = "qtd"
 
-    private fun userDBReference(): DatabaseReference? {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        return if (uid != null) database.child(NODE_USERS).child(uid) else null
+    private fun dbUser(): DatabaseReference? {
+        return if (userID.isNotEmpty()) database.child(NODE_USERS).child(userID) else null
     }
 
-    private fun userDBCardsReference(cls: Attribute): DatabaseReference? {
-        return userDBReference()?.child(NODE_CARDS)?.child(NODE_CORE)?.child(cls.name.toLowerCase())
+    private fun dbUserCards(cls: Attribute): DatabaseReference? {
+        return dbUser()?.child(NODE_CARDS)?.child(NODE_CORE)?.child(cls.name.toLowerCase())
     }
 
     fun setUserInfo() {
         val user = FirebaseAuth.getInstance().currentUser
-        userDBReference()?.apply {
-            child(CARD_NAME_KEY).setValue(user?.displayName ?: "")
-            child(CARD_PHOTO_KEY).setValue(user?.photoUrl.toString())
+        dbUser()?.apply {
+            child(KEY_CARD_NAME).setValue(user?.displayName ?: "")
+            child(KEY_CARD_PHOTO).setValue(user?.photoUrl.toString())
         }
     }
 
     fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
-        userDBCardsReference(card.cls)?.apply {
-            child(card.shortName).child(CARD_QTD_KEY).setValue(qtd).addOnCompleteListener {
+        dbUserCards(card.cls)?.apply {
+            child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
             }
         }
     }
 
     fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
-        userDBCardsReference(card.cls)?.apply {
-            child(card.shortName).child(CARD_FAVORITE_KEY).apply {
+        dbUserCards(card.cls)?.apply {
+            child(card.shortName).child(KEY_CARD_FAVORITE).apply {
                 if (favorite) {
                     setValue(true).addOnCompleteListener { onComplete.invoke() }
                 } else {
@@ -58,12 +57,12 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun getUserCollection(attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
-        userDBCardsReference(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
+        dbUserCards(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
                     @Suppress("UNCHECKED_CAST")
                     override fun onDataChange(ds: DataSnapshot) {
-                        val collection = ds.children.filter { it.hasChild(CARD_QTD_KEY) }.map({
-                            it.key to it.child(CARD_QTD_KEY).value as Long
+                        val collection = ds.children.filter { it.hasChild(KEY_CARD_QTD) }.map({
+                            it.key to it.child(KEY_CARD_QTD).value as Long
                         }).toMap()
                         Timber.d(collection.toString())
                         onSuccess.invoke(collection)
@@ -77,11 +76,11 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun getUserFavorites(attr: Attribute, onSuccess: (List<String>) -> Unit) {
-        userDBCardsReference(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
+        dbUserCards(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             @Suppress("UNCHECKED_CAST")
             override fun onDataChange(ds: DataSnapshot) {
-                val favorites = ds.children.filter { (it.child(CARD_FAVORITE_KEY)?.value ?: false) as Boolean }
+                val favorites = ds.children.filter { (it.child(KEY_CARD_FAVORITE)?.value ?: false) as Boolean }
                         .map({ it.key })
                 Timber.d(favorites.toString())
                 onSuccess.invoke(favorites)

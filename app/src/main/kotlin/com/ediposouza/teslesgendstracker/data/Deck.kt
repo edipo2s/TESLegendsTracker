@@ -8,6 +8,7 @@ data class Deck(
         val id: String,
         val name: String,
         val owner: String,
+        val private: Boolean,
         val type: DeckType,
         val cls: Class,
         val cost: Int,
