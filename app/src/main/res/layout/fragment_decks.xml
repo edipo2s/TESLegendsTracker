@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
-        android:id="@+id/attr_filter"
+        android:id="@+id/decks_attr_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin" />
@@ -13,7 +13,6 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/decks_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/card_zero_qtd" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

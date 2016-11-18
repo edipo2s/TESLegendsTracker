@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/deck_height"
+    android:layout_marginTop="@dimen/default_margin"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/deck_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.3"
+        android:padding="@dimen/nano_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/deck_attr_agility" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_margin">
+
+        <View
+            android:id="@+id/deck_center"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/deck_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/deck_center"
+            android:drawableStart="@drawable/ic_updated_at"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/font_small"
+            tools:text="18/10/2016" />
+
+        <ImageView
+            android:id="@+id/deck_private"
+            android:layout_width="@dimen/deck_private_icon_height"
+            android:layout_height="@dimen/deck_private_icon_height"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:src="@drawable/ic_private" />
+
+        <TextView
+            android:id="@+id/deck_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_toEndOf="@id/deck_private"
+            android:layout_toStartOf="@id/deck_date"
+            android:lines="1"
+            android:textSize="@dimen/font_large"
+            tools:text="Cycle Archer" />
+
+        <ImageView
+            android:id="@+id/deck_attr1"
+            android:layout_width="@dimen/deck_icon_height"
+            android:layout_height="@dimen/deck_icon_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/attr_strength" />
+
+        <ImageView
+            android:id="@+id/deck_attr2"
+            android:layout_width="@dimen/deck_icon_height"
+            android:layout_height="@dimen/deck_icon_height"
+            android:layout_alignTop="@id/deck_attr1"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_toEndOf="@id/deck_attr1"
+            android:src="@drawable/attr_intelligence" />
+
+        <TextView
+            android:id="@+id/deck_type"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/deck_icon_height"
+            android:layout_alignTop="@id/deck_attr2"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_toEndOf="@id/deck_attr2"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/font_medium"
+            tools:text="Midrange" />
+
+        <TextView
+            android:id="@+id/deck_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_views"
+            android:drawablePadding="@dimen/default_margin"
+            android:gravity="center_vertical"
+            tools:text="120" />
+
+        <TextView
+            android:id="@+id/deck_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/deck_views"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_favorite_checked"
+            android:drawablePadding="@dimen/default_margin"
+            android:gravity="center_vertical"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/deck_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/deck_likes"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_comment"
+            android:drawablePadding="@dimen/default_margin"
+            android:gravity="center_vertical"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/deck_soul_missing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/deck_likes"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_alignStart="@id/deck_date"
+            android:layout_toEndOf="@id/deck_date"
+            android:drawablePadding="@dimen/default_margin"
+            android:drawableStart="@drawable/ic_soul"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/red_800"
+            tools:text="13.705" />
+
+        <TextView
+            android:id="@+id/deck_soul_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/deck_views"
+            android:layout_alignEnd="@id/deck_soul_missing"
+            android:layout_alignStart="@id/deck_soul_missing"
+            android:drawablePadding="@dimen/default_margin"
+            android:drawableStart="@drawable/ic_soul"
+            android:gravity="center_vertical|end"
+            tools:text="13.700" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
