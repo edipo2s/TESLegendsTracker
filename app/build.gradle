@@ -16,14 +16,18 @@ android {
         buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
         vectorDrawables.useSupportLibrary true
     }
-    def props = new Properties()
-    props.load(file(propsFile).newInputStream())
     signingConfigs {
         release {
-            storeFile file(props.keystore_file)
-            storePassword props.keystore_pass
-            keyAlias "tes_legends_tracker"
-            keyPassword props.tes_legends_tracker_pass
+            try {
+                def props = new Properties()
+                props.load(file(propsFile).newInputStream())
+                storeFile file(props.keystore_file)
+                storePassword props.keystore_pass
+                keyAlias "tes_legends_tracker"
+                keyPassword props.tes_legends_tracker_pass
+            } catch (e) {
+                println(e.message)
+            }
         }
     }
     buildTypes {

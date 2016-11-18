@@ -4934,10 +4934,11 @@
     }
   },
   "decks": {
-    "archer": {
+    "public": {
       "Iu45y3i5UY345uhVi3u5h3Huf5h": {
         "name": "Cycle Archer",
         "type": 4,
+        "cls": "archer",
         "cost": 13500,
         "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
         "private": false,
