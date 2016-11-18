@@ -187,9 +187,7 @@ class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
 
     fun bind(card: Card) {
         itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
-        itemView.setOnLongClickListener {
-            itemLongClick(itemView.card_all_image, card)
-        }
+        itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
         itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
     }
 

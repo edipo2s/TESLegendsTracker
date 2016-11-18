@@ -37,8 +37,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 val title = when (position) {
-                    1 -> R.string.tab_collection
-                    2 -> R.string.tab_favorites
+                    1 -> R.string.tab_cards_collection
+                    2 -> R.string.tab_cards_favorites
                     else -> R.string.app_name
                 }
                 activity.dash_toolbar_title.setText(title)

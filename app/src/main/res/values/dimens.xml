@@ -7,10 +7,12 @@
     <dimen name="navigation_drawer_header_height">150dp</dimen>
 
     <!-- General -->
+    <dimen name="font_small">12sp</dimen>
     <dimen name="font_medium">16sp</dimen>
     <dimen name="font_large">22sp</dimen>
     <dimen name="font_huge">26sp</dimen>
 
+    <dimen name="nano_margin">2dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="default_margin">8dp</dimen>
     <dimen name="medium_margin">12dp</dimen>
@@ -24,8 +26,8 @@
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <!-- navigation_bar_height + default_margin-->
-    <dimen name="card_list_padding_bottom">56dp</dimen>
+    <dimen name="card_list_padding_bottom">
+        56dp<!-- navigation_bar_height + default_margin--></dimen>
     <dimen name="attributes_filter_height">48dp</dimen>
     <dimen name="rarity_bg_max_width">260dp</dimen>
     <dimen name="rarity_background_radius">48dp</dimen>
@@ -38,7 +40,12 @@
     <!-- Card View -->
     <dimen name="card_full_margin">24dp</dimen>
     <dimen name="card_card_margin_top">@dimen/status_bar_height</dimen>
-    <dimen name="card_bottom_sheet_peek_heigth">96dp</dimen>
+    <dimen name="card_bottom_sheet_peek_heigth">88dp</dimen>
     <dimen name="card_bottom_sheet_margin_bottom">@dimen/navigation_bar_height</dimen>
+
+    <!-- Deck -->
+    <dimen name="deck_height">96dp</dimen>
+    <dimen name="deck_icon_height">24dp</dimen>
+    <dimen name="deck_private_icon_height">16dp</dimen>
 
 </resources>

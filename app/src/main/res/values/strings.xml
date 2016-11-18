@@ -14,9 +14,12 @@
     <string name="menu_search">Search</string>
     <string name="menu_statistics">Statistics</string>
 
-    <string name="tab_cards">Cards</string>
-    <string name="tab_favorites">Favorites</string>
-    <string name="tab_collection">Collection</string>
+    <string name="tab_cards_all">Cards</string>
+    <string name="tab_cards_collection">Collection</string>
+    <string name="tab_cards_favorites">Favorites</string>
+    <string name="tab_decks_public">Public</string>
+    <string name="tab_decks_owned">Owned</string>
+    <string name="tab_decks_saved">Saved</string>
 
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_race_label">Race:</string>

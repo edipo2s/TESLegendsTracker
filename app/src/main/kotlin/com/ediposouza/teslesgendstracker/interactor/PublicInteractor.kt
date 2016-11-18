@@ -51,7 +51,7 @@ class PublicInteractor() : BaseInteractor() {
 
     fun getCardsForStatistics(attr: Attribute, onSuccess: (List<CardStatistic>) -> Unit) {
         val node_attr = attr.name.toLowerCase()
-        database.child(NODE_CARDS).child(NODE_CORE).child(node_attr).orderByChild(CARD_COST_KEY)
+        database.child(NODE_CARDS).child(NODE_CORE).child(node_attr).orderByChild(KEY_CARD_COST)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
