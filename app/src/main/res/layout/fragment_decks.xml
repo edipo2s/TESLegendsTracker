@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
+    <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
         android:id="@+id/decks_attr_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

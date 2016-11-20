@@ -6,50 +6,52 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.annotation.IntegerRes
+import com.ediposouza.teslesgendstracker.R
 import java.util.*
 
 /**
  * Created by ediposouza on 10/31/16.
  */
-enum class Attribute(val color: Int) {
+enum class Attribute(val color: Int, @IntegerRes val imageRes: Int) {
 
-    STRENGTH(Color.RED),
-    INTELLIGENCE(Color.BLUE),
-    WILLPOWER(Color.YELLOW),
-    AGILITY(Color.GREEN),
-    ENDURANCE(Color.parseColor("purple")),
-    NEUTRAL(Color.GRAY),
-    DUAL(Color.LTGRAY)
-
-}
-
-enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL) {
-
-    ARCHER(Attribute.STRENGTH, Attribute.AGILITY),
-    ASSASSIN(Attribute.INTELLIGENCE, Attribute.AGILITY),
-    BATTLEMAGE(Attribute.STRENGTH, Attribute.INTELLIGENCE),
-    CRUSADER(Attribute.STRENGTH, Attribute.WILLPOWER),
-    MAGE(Attribute.INTELLIGENCE, Attribute.WILLPOWER),
-    MONK(Attribute.WILLPOWER, Attribute.AGILITY),
-    SCOUT(Attribute.AGILITY, Attribute.ENDURANCE),
-    SORCERER(Attribute.INTELLIGENCE, Attribute.ENDURANCE),
-    SPELLSWORD(Attribute.WILLPOWER, Attribute.ENDURANCE),
-    WARRIOR(Attribute.STRENGTH, Attribute.ENDURANCE),
-    STRENGTH(Attribute.STRENGTH),
-    INTELLIGENCE(Attribute.INTELLIGENCE),
-    AGILITY(Attribute.AGILITY),
-    WILLPOWER(Attribute.WILLPOWER),
-    ENDURANCE(Attribute.ENDURANCE),
-    NEUTRAL(Attribute.NEUTRAL)
+    STRENGTH(Color.RED, R.drawable.attr_strength),
+    INTELLIGENCE(Color.BLUE, R.drawable.attr_intelligence),
+    WILLPOWER(Color.YELLOW, R.drawable.attr_willpower),
+    AGILITY(Color.GREEN, R.drawable.attr_agility),
+    ENDURANCE(Color.parseColor("purple"), R.drawable.attr_endurance),
+    NEUTRAL(Color.GRAY, R.drawable.attr_neutral),
+    DUAL(Color.LTGRAY, R.drawable.attr_dual)
 
 }
 
-enum class CardRarity(val color: Int) {
+enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL, @IntegerRes val imageRes: Int) {
 
-    COMMON(Color.WHITE),
-    RARE(Color.BLUE),
-    EPIC(Color.parseColor("purple")),
-    LEGENDARY(Color.YELLOW);
+    ARCHER(Attribute.STRENGTH, Attribute.AGILITY, R.drawable.deck_class_archer),
+    ASSASSIN(Attribute.INTELLIGENCE, Attribute.AGILITY, R.drawable.deck_class_assassin),
+    BATTLEMAGE(Attribute.STRENGTH, Attribute.INTELLIGENCE, R.drawable.deck_class_battlemage),
+    CRUSADER(Attribute.STRENGTH, Attribute.WILLPOWER, R.drawable.deck_class_crusader),
+    MAGE(Attribute.INTELLIGENCE, Attribute.WILLPOWER, R.drawable.deck_class_mage),
+    MONK(Attribute.WILLPOWER, Attribute.AGILITY, R.drawable.deck_class_monk),
+    SCOUT(Attribute.AGILITY, Attribute.ENDURANCE, R.drawable.deck_class_scout),
+    SORCERER(Attribute.INTELLIGENCE, Attribute.ENDURANCE, R.drawable.deck_class_sorcerer),
+    SPELLSWORD(Attribute.WILLPOWER, Attribute.ENDURANCE, R.drawable.deck_class_spellsword),
+    WARRIOR(Attribute.STRENGTH, Attribute.ENDURANCE, R.drawable.deck_class_warrior),
+    STRENGTH(Attribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
+    INTELLIGENCE(Attribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
+    AGILITY(Attribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
+    WILLPOWER(Attribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
+    ENDURANCE(Attribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
+    NEUTRAL(Attribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral)
+
+}
+
+enum class CardRarity(val color: Int, val soulCost: Int) {
+
+    COMMON(Color.WHITE, 50),
+    RARE(Color.BLUE, 100),
+    EPIC(Color.parseColor("purple"), 400),
+    LEGENDARY(Color.YELLOW, 1200);
 
 }
 
@@ -157,6 +159,14 @@ enum class CardArenaTier() {
     NONE
 
 }
+
+data class CardMissing(
+
+        val shortName: String,
+        val rarity: CardRarity,
+        val qtd: Long
+
+)
 
 data class CardStatistic(
 

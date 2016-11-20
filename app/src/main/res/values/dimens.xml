@@ -26,9 +26,11 @@
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <dimen name="card_list_padding_bottom">
-        56dp<!-- navigation_bar_height + default_margin--></dimen>
+    <!-- navigation_bar_height + default_margin-->
+    <dimen name="card_list_padding_bottom">56dp</dimen>
     <dimen name="attributes_filter_height">48dp</dimen>
+    <!-- navigation_bar_height + default_margin-->
+    <dimen name="filter_hide_height">56dp</dimen>
     <dimen name="rarity_bg_max_width">260dp</dimen>
     <dimen name="rarity_background_radius">48dp</dimen>
     <dimen name="statistics_attributes_attr_padding">@dimen/small_margin</dimen>
@@ -44,7 +46,7 @@
     <dimen name="card_bottom_sheet_margin_bottom">@dimen/navigation_bar_height</dimen>
 
     <!-- Deck -->
-    <dimen name="deck_height">96dp</dimen>
+    <dimen name="deck_height">88dp</dimen>
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
 

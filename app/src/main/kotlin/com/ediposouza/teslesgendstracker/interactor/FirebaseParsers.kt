@@ -2,7 +2,6 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.toIntSafely
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 class CardParser() {
@@ -75,7 +74,7 @@ class DeckParser(
 
     fun toDeck(id: String, private: Boolean): Deck {
         return Deck(id, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
-                LocalDate.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
+                LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
                 updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                 comments.map {
                     DeckComment(it.key, it.value[KEY_DECK_COMMENT_OWNER] as String,

@@ -12,11 +12,12 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -55,6 +56,11 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         })
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

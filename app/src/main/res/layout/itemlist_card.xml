@@ -4,4 +4,4 @@
     android:id="@+id/card_all_image"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/card_height"
-    tools:src="@drawable/improvisedweapon" />
+    tools:src="@drawable/card" />

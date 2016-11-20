@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
@@ -22,11 +22,11 @@ import java.util.*
 /**
  * Created by EdipoSouza on 11/18/16.
  */
-class DecksPublicFragment : BaseFragment() {
+open class DecksPublicFragment : BaseFragment() {
 
-    private val publicInteractor = PublicInteractor()
+    protected val publicInteractor = PublicInteractor()
 
-    private val decksAdapter = DecksAllAdapter({ view: View, deck: Deck -> activity.toast(deck.name) }) {
+    protected val decksAdapter = DecksAllAdapter({ view: View, deck: Deck -> activity.toast(deck.name) }) {
         view: View, deck: Deck ->
         true
     }
@@ -39,29 +39,21 @@ class DecksPublicFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         decks_recycler_view.adapter = decksAdapter
         decks_recycler_view.itemAnimator = SlideInLeftAnimator()
-        publicInteractor.getPublicDecks(Class.ASSASSIN, {
+    }
+
+    open fun getDecks() {
+        publicInteractor.getPublicDecks(null, {
             it.forEach { Timber.d("Public: %s", it.toString()) }
             decksAdapter.showDecks(it)
         })
-//        var cards = mapOf("dunmernightblade" to 3, "tazkadthepackmaster" to 1, "elusiveschemer" to 2)
-//        publicInteractor.saveDeck("DeckTest", Class.ASSASSIN, DeckType.MIDRANGE, 8750, "2016_11_03", cards, false){
-//            Timber.d("Saved")
-//        }
-//        cards = mapOf("dunmernightblade" to 3, "rapidshot" to 1, "elusiveschemer" to 2)
-//        publicInteractor.saveDeck("DeckPrivate", Class.BATTLEMAGE, DeckType.AGGRO, 7750, "2016_11_03", cards, true){
-//            Timber.d("Saved")
-//        }
-        publicInteractor.getMyPrivateDecks {
-            it.forEach {
-                Timber.d("Private: %s", it.toString())
-            }
-        }
     }
 
 }
 
 class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
                       val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.Adapter<DecksAllViewHolder>() {
+
+    val privateInteractor = PrivateInteractor()
 
     var items: List<Deck> = ArrayList()
 
@@ -71,7 +63,8 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
     }
 
     override fun onBindViewHolder(holder: DecksAllViewHolder?, position: Int) {
-        holder?.bind(items[position])
+        val deck = items[position]
+        holder?.bind(deck, privateInteractor)
     }
 
     override fun getItemCount(): Int = items.size
@@ -96,21 +89,44 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
 //
 //        }, false).dispatchUpdatesTo(this)
     }
+
 }
 
 class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
                          val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-    fun bind(deck: Deck) {
+    fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
         itemView.setOnClickListener { itemClick(itemView.deck_bg, deck) }
         itemView.setOnLongClickListener { itemLongClick(itemView.deck_bg, deck) }
+        itemView.deck_bg.setImageResource(deck.cls.imageRes)
+        itemView.deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
         itemView.deck_name.text = deck.name
-        itemView.deck_type.text = deck.type.name.toUpperCase()
-        itemView.deck_date.text = deck.createdAt.toString()
+        itemView.deck_attr1.setImageResource(deck.cls.attr1.imageRes)
+        itemView.deck_attr2.setImageResource(deck.cls.attr2.imageRes)
+        itemView.deck_type.text = deck.type.name.toLowerCase().capitalize()
+        itemView.deck_date.setCompoundDrawablesWithIntrinsicBounds(if (deck.updates.isEmpty())
+            R.drawable.ic_create_at else R.drawable.ic_updated_at, 0, 0, 0)
+        itemView.deck_date.text = deck.updatedAt.toLocalDate().toString()
+        Timber.d("Total %s", NumberFormat.getNumberInstance().format(deck.cost))
         itemView.deck_soul_cost.text = NumberFormat.getNumberInstance().format(deck.cost)
         itemView.deck_comments.text = NumberFormat.getNumberInstance().format(deck.comments.size)
         itemView.deck_likes.text = NumberFormat.getNumberInstance().format(deck.likes.size)
         itemView.deck_views.text = NumberFormat.getNumberInstance().format(deck.views)
+        calculateMissingSoul(deck, privateInteractor)
+    }
+
+    fun calculateMissingSoul(deck: Deck, interactor: PrivateInteractor) {
+        with(itemView.deck_soul_missing) {
+            visibility = View.INVISIBLE
+            itemView.deck_soul_missing_loading.visibility = View.VISIBLE
+            interactor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                itemView.deck_soul_missing_loading.visibility = View.GONE
+                val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
+                Timber.d("Missing %d", missingSoul)
+                text = NumberFormat.getNumberInstance().format(missingSoul)
+                visibility = View.VISIBLE
+            }
+        }
     }
 
 }
