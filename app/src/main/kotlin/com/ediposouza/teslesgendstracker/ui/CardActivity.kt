@@ -12,8 +12,8 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
-import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
-import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor

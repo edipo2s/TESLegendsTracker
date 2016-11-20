@@ -1,18 +1,20 @@
-/*
- * Beauty Date - http://www.beautydate.com
- * Created by ediposouza on 4/12/2016
- * Copyright (c) 2016 Beauty Date. All rights reserved.
- */
+package com.ediposouza.teslesgendstracker.ui.base
 
-package com.ediposouza.teslesgendstracker.ui.base.command
-
+import android.R
 import android.support.annotation.IntDef
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import com.ediposouza.teslesgendstracker.data.Attribute
 
 /**
- * Created by ediposouza on 3/3/16.
+ * Created by EdipoSouza on 11/6/16.
  */
+class CmdShowLogin
+
+data class CmdShowCardsByAttr(val attr: Attribute)
+
+data class CmdUpdateRarityMagikaFiltersVisibility(val show: Boolean)
+
 class CmdShowSnackbarMsg private constructor(type: Long) {
 
     companion object {
@@ -47,7 +49,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
     init {
         duration = if (type == TYPE_INFO) Snackbar.LENGTH_LONG else Snackbar.LENGTH_INDEFINITE
         if (type == TYPE_ERROR) {
-            actionTextRes = android.R.string.ok
+            actionTextRes = R.string.ok
             action = { }
         }
     }

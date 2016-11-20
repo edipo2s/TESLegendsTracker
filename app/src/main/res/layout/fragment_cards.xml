@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
+        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
             android:id="@+id/attr_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

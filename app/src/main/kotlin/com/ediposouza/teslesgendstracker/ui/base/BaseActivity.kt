@@ -9,8 +9,6 @@ import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowLogin
-import com.ediposouza.teslesgendstracker.ui.base.command.CmdShowSnackbarMsg
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

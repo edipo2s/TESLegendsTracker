@@ -17,12 +17,12 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*

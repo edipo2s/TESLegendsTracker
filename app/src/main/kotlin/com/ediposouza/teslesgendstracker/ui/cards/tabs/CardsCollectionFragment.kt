@@ -41,7 +41,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_collection, menu)
+        inflater?.inflate(R.menu.menu_cards_collection, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -79,9 +79,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         val newQtd = cardSlot.qtd.inc()
         val finalQtd = if (newQtd <= 3) newQtd else 0
         privateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
-            cards_recycler_view.itemAnimator = null
+            cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
-            view_statistics.updateStatistics(currentAttr)
+            view_statistics?.updateStatistics(currentAttr)
         }
     }
 

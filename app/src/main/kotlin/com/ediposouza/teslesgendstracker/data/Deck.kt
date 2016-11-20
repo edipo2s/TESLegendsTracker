@@ -1,6 +1,5 @@
 package com.ediposouza.teslesgendstracker.data
 
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 data class Deck(
@@ -12,7 +11,7 @@ data class Deck(
         val type: DeckType,
         val cls: Class,
         val cost: Int,
-        val createdAt: LocalDate,
+        val createdAt: LocalDateTime,
         val updatedAt: LocalDateTime,
         val patch: String,
         val likes: List<String>,
@@ -21,7 +20,10 @@ data class Deck(
         val updates: List<DeckUpdate>,
         val comments: List<DeckComment>
 
-)
+) {
+    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now(),
+            LocalDateTime.now(), "", listOf(), 0, mapOf(), listOf(), listOf())
+}
 
 data class DeckUpdate(
 
