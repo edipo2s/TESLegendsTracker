@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import org.threeten.bp.LocalDateTime
 import timber.log.Timber
 import java.util.*
 
@@ -107,37 +108,33 @@ class PrivateInteractor() : BaseInteractor() {
 
     fun getOwnedDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         getOwnedPublicDecks(cls) {
+            val decks = it
             getOwnedPrivateDecks(cls) {
-                onSuccess.invoke(it)
+                onSuccess.invoke(decks.plus(it))
             }
         }
     }
 
     fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        val dbPublicDecks = dbDecks.child(NODE_PUBLIC)
-        dbPublicDecks.setPriority(KEY_DECK_OWNER)
-        val dbPrivatePublicDecks = dbPublicDecks.equalTo(userID)
-        dbPrivatePublicDecks.keepSynced(true)
-        var query = dbPrivatePublicDecks.orderByChild(KEY_DECK_UPDATE_AT)
-        if (cls != null) {
-            query = dbPrivatePublicDecks.orderByChild(KEY_DECK_CLASS).equalTo(cls.ordinal.toDouble())
-        }
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
+        with(dbDecks.child(NODE_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(userID)){
+            keepSynced(true)
+            addListenerForSingleValueEvent(object : ValueEventListener {
 
-            override fun onDataChange(ds: DataSnapshot) {
-                Timber.d(ds.value?.toString())
-                val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                    it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                override fun onDataChange(ds: DataSnapshot) {
+                    Timber.d(ds.value?.toString())
+                    val decks = ds.children.mapTo(arrayListOf<Deck>()) {
+                        it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                    }.filter { cls == null || it.cls == cls }.sortedBy(Deck::updatedAt)
+                    Timber.d(decks.toString())
+                    onSuccess.invoke(decks)
                 }
-                Timber.d(decks.toString())
-                onSuccess.invoke(decks)
-            }
 
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-            }
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
 
-        })
+            })
+        }
     }
 
     fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
@@ -229,6 +226,111 @@ class PrivateInteractor() : BaseInteractor() {
             }
 
         })
+    }
+
+    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String,
+                 cards: Map<String, Int>, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                val deck = Deck(push().key, name, userID, private,
+                        type, cls, cost, LocalDateTime.now(), LocalDateTime.now(), patch, ArrayList(), 0,
+                        cards, ArrayList(), ArrayList())
+                child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
+            }
+        }
+    }
+
+    /**
+     * Name, Type, Class, Patch, Private
+     */
+    fun updateDeck(deck: Deck, oldPrivate: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                if (deck.private == oldPrivate)
+                    child(deck.id).updateChildren(DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
+                        Timber.d(it.toString())
+                        if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                    })
+                else
+                    child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                        Timber.d(it.toString())
+                        if (it.isSuccessful) {
+                            dbUser()?.apply {
+                                with(if (oldPrivate) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                                    child(deck.id).removeValue()
+                                }
+                                onSuccess.invoke()
+                            }
+                        } else onError?.invoke(it.exception)
+                    })
+            }
+        }
+    }
+
+    fun updateDeckCards(deck: Deck, oldCards: Map<String, Int>, cost: Int, onSuccess: () -> Unit,
+                        onError: ((e: Exception?) -> Unit)? = null) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                val updateKey = org.threeten.bp.LocalDateTime.now().toString()
+                val cardsRem = oldCards.filter { !deck.cards.keys.contains(it.key) }.mapValues { it.key to it.value * -1 }
+                val cardsDiff = deck.cards.mapValues { it.key to it.value.minus(oldCards[it.key] ?: 0) }.plus(cardsRem)
+                child(deck.id).child(KEY_DECK_UPDATES).child(updateKey).setValue(cardsDiff).addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
+                child(deck.id).child(KEY_DECK_COST).setValue(cost)
+            }
+        }
+    }
+
+    fun addDeckLike(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                child(deck.id).updateChildren(mapOf(KEY_DECK_LIKES to deck.likes.plus(userID))).addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
+            }
+        }
+    }
+
+    fun remDeckLike(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                child(deck.id).updateChildren(mapOf(KEY_DECK_LIKES to deck.likes.minus(userID))).addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
+            }
+        }
+    }
+
+    fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                val comment = DeckParser.toNewCommentMap(userID, msg)
+                with(child(deck.id).child(KEY_DECK_COMMENTS)) {
+                    child(push().key).setValue(comment).addOnCompleteListener({
+                        Timber.d(it.toString())
+                        if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                    })
+                }
+            }
+        }
+    }
+
+    fun remDeckComment(deck: Deck, commentId: String, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (deck.private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
+                child(deck.id).child(KEY_DECK_COMMENTS).child(commentId).removeValue().addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
+            }
+        }
     }
 
 }

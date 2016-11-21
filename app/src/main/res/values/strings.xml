@@ -13,6 +13,7 @@
     <string name="search_hint">Name, race, type or keyword</string>
     <string name="menu_search">Search</string>
     <string name="menu_statistics">Statistics</string>
+    <string name="menu_only_private">Only Private</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>

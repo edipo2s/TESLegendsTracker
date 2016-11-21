@@ -27,7 +27,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         BottomSheetBehavior.from(view_statistics)
     }
 
-    val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view: View, card: Card ->
+    val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view, card ->
         showCardExpanded(card, view)
         true
     }

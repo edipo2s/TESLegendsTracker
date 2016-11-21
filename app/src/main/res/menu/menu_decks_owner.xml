@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_statistics"
-        android:icon="@drawable/ic_statistics"
-        android:title="@string/menu_statistics"
+        android:id="@+id/menu_only_private"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/menu_only_private"
+        app:actionLayout="@layout/widget_switch_private"
         app:showAsAction="always" />
 
     <item
