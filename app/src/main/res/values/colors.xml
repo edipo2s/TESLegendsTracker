@@ -12,6 +12,7 @@
 
     <color name="filter_background">#88000000</color>
     <color name="card_zero_qtd">#889e9e9e</color>
+    <color name="grey_900_with_alpha">#88212121</color>
 
     <color name="indigo_500">#3f51b5</color>
     <color name="indigo_700">#303f9f</color>

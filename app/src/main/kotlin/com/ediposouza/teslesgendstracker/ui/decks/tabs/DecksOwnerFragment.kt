@@ -2,7 +2,9 @@ package com.ediposouza.teslesgendstracker.ui.decks.tabs
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import timber.log.Timber
@@ -13,6 +15,7 @@ import timber.log.Timber
 class DecksOwnerFragment : DecksPublicFragment() {
 
     private val privateInteractor = PrivateInteractor()
+    private var onlyPrivate: Switch? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list_owner)
@@ -25,21 +28,17 @@ class DecksOwnerFragment : DecksPublicFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_cards_collection, menu)
+        inflater?.inflate(R.menu.menu_decks_owner, menu)
+        onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
+        onlyPrivate?.setOnCheckedChangeListener { button, checked -> getDecks() }
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when (item?.itemId) {
-//            R.id.menu_statistics
-//        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun getDecks() {
         privateInteractor.getOwnedDecks(null, {
-            it.forEach { Timber.d("Public: %s", it.toString()) }
-            decksAdapter.showDecks(it)
+            val decksToShow = if (onlyPrivate?.isChecked ?: false) it.filter(Deck::private) else it
+            decksToShow.forEach { Timber.d("Decks: %s", it.toString()) }
+            decksAdapter.showDecks(decksToShow)
         })
     }
 

@@ -49,5 +49,7 @@
     <dimen name="deck_height">88dp</dimen>
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
+    <dimen name="deck_private_switch_size">20dp</dimen>
+    <dimen name="deck_private_switch_icon_size">12dp</dimen>
 
 </resources>

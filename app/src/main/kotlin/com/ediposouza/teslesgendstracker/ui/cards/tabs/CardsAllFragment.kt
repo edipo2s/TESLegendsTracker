@@ -44,7 +44,7 @@ open class CardsAllFragment : BaseFragment() {
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
-    open val cardsAdapter = CardsAllAdapter({ view: View, card: Card -> showCardExpanded(card, view) }) {
+    open val cardsAdapter = CardsAllAdapter({ view, card -> showCardExpanded(card, view) }) {
         view: View, card: Card ->
         showCardExpanded(card, view)
         true
