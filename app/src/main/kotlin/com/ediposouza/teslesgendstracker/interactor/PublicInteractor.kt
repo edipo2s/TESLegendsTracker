@@ -3,8 +3,10 @@ package com.ediposouza.teslesgendstracker.interactor
 import com.ediposouza.teslesgendstracker.data.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
+import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -86,6 +88,40 @@ class PublicInteractor() : BaseInteractor() {
                 if (it.isSuccessful) onSuccess.invoke() else onError.invoke(it.exception)
             })
         }
+    }
+
+    fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
+        with(database.child(NODE_CARDS).child(NODE_CORE)) {
+            getAttrCards(deck.cls.attr1, onError) {
+                val cards = it
+                getAttrCards(deck.cls.attr2, onError) {
+                    cards.addAll(it)
+                    Timber.d(cards.toString())
+                    onSuccess.invoke(cards.map { CardSlot(it, deck.cards[it.shortName] ?: 0) })
+                }
+            }
+        }
+    }
+
+    private fun DatabaseReference.getAttrCards(attr: Attribute, onError: ((e: Exception?) -> Unit)? = null,
+                                               onSuccess: (ArrayList<Card>) -> Unit) {
+        val nodeAttr = attr.name.toLowerCase()
+        child(nodeAttr).orderByChild(KEY_CARD_COST).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val cards = ds.children.mapTo(arrayListOf()) {
+                    it.getValue(CardParser::class.java).toCard(it.key, attr)
+                }
+                Timber.d(cards.toString())
+                onSuccess.invoke(cards)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
     }
 
 }

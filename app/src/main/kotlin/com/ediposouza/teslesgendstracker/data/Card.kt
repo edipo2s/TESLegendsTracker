@@ -46,12 +46,12 @@ enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL,
 
 }
 
-enum class CardRarity(val color: Int, val soulCost: Int) {
+enum class CardRarity(val color: Int, val soulCost: Int, @IntegerRes val imageRes: Int) {
 
-    COMMON(Color.WHITE, 50),
-    RARE(Color.BLUE, 100),
-    EPIC(Color.parseColor("purple"), 400),
-    LEGENDARY(Color.YELLOW, 1200);
+    COMMON(Color.WHITE, 50, R.drawable.ic_rarity_common),
+    RARE(Color.BLUE, 100, R.drawable.ic_rarity_rare),
+    EPIC(Color.parseColor("purple"), 400, R.drawable.ic_rarity_epic),
+    LEGENDARY(Color.YELLOW, 1200, R.drawable.ic_rarity_legendary);
 
 }
 

@@ -16,7 +16,7 @@ data class Deck(
         val patch: String,
         val likes: List<String>,
         val views: Int,
-        val cards: Map<String, Int>,
+        val cards: Map<String, Long>,
         val updates: List<DeckUpdate>,
         val comments: List<DeckComment>
 
