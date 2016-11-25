@@ -116,7 +116,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        with(dbDecks.child(NODE_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(userID)){
+        with(dbDecks.child(NODE_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(userID)) {
             keepSynced(true)
             addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -189,9 +189,9 @@ class PrivateInteractor() : BaseInteractor() {
 
     fun getMissingCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardMissing>) -> Unit) {
         with(database.child(NODE_CARDS).child(NODE_CORE)) {
-            getAttrCards(deck.cls.attr1.name.toLowerCase(), onError) {
+            getAttrCardsRarity(deck.cls.attr1.name.toLowerCase(), onError) {
                 val cards = HashMap(it)
-                getAttrCards(deck.cls.attr2.name.toLowerCase(), onError) {
+                getAttrCardsRarity(deck.cls.attr2.name.toLowerCase(), onError) {
                     cards.putAll(it)
                     getUserCollection(deck.cls.attr1) {
                         val userCards = HashMap(it)
@@ -208,8 +208,8 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    private fun DatabaseReference.getAttrCards(nodeAttr: String, onError: ((e: Exception?) -> Unit)? = null,
-                                               onSuccess: (Map<String, CardRarity>) -> Unit) {
+    private fun DatabaseReference.getAttrCardsRarity(nodeAttr: String, onError: ((e: Exception?) -> Unit)? = null,
+                                                     onSuccess: (Map<String, CardRarity>) -> Unit) {
         child(nodeAttr).orderByChild(KEY_CARD_COST).addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
@@ -229,7 +229,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String,
-                 cards: Map<String, Int>, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+                 cards: Map<String, Long>, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_PRIVATE) else dbDecks.child(NODE_PUBLIC)) {
                 val deck = Deck(push().key, name, userID, private,
