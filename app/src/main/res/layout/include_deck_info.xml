@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/medium_margin"
+    android:orientation="horizontal"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/deck_details_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:text="@string/deck_details"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/deck_details_type"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_label"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_deck_type"
+                tools:text="Midrange" />
+
+            <TextView
+                android:id="@+id/deck_details_views"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_type"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_views"
+                tools:text="76" />
+
+            <TextView
+                android:id="@+id/deck_details_likes"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_views"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_like_checked"
+                tools:text="11" />
+
+            <TextView
+                android:id="@+id/deck_details_soul_cost"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_likes"
+                android:drawablePadding="@dimen/large_margin"
+                android:drawableStart="@drawable/ic_soul"
+                tools:text="7800" />
+
+            <TextView
+                android:id="@+id/deck_details_soul_missing"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_soul_cost"
+                android:drawablePadding="@dimen/large_margin"
+                android:drawableStart="@drawable/ic_soul_missing"
+                tools:text="2650" />
+
+            <ProgressBar
+                android:id="@+id/deck_details_soul_missing_loading"
+                android:layout_width="@dimen/deck_icon_height"
+                android:layout_height="@dimen/deck_icon_height"
+                android:layout_alignEnd="@id/deck_details_soul_cost"
+                android:layout_below="@id/deck_details_soul_cost"
+                android:layout_marginTop="@dimen/default_margin"
+                android:indeterminate="true"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/deck_details_patch"
+                style="@style/DeckInfoItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_soul_missing"
+                android:layout_marginBottom="@dimen/large_margin"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_deck_patch"
+                tools:text="Mechanical Ally" />
+
+            <TextView
+                android:id="@+id/deck_details_create_by_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_patch"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:text="@string/deck_details_create_by"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/deck_details_create_by"
+                style="@style/DeckInfoItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_create_by_label"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_user"
+                tools:text="Édipo Souza" />
+
+            <TextView
+                android:id="@+id/deck_details_create_at_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_create_by"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/deck_details_create_at"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/deck_details_create_at"
+                style="@style/DeckInfoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_create_at_label"
+                android:drawablePadding="@dimen/default_margin"
+                android:drawableStart="@drawable/ic_create_at"
+                tools:text="28/11/2016" />
+
+            <TextView
+                android:id="@+id/deck_details_last_update_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_create_at"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/deck_details_last_update"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/deck_details_update_at"
+                style="@style/DeckInfoItemTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_last_update_label"
+                android:drawableStart="@drawable/ic_updated_at"
+                tools:text="28/11/2016 13:55" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.ediposouza.teslesgendstracker.ui.widget.DeckList
+        android:id="@+id/deck_details_cardlist"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_weight="1" />
+
+</LinearLayout>

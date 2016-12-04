@@ -93,7 +93,7 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         })
-        privateInteractor.getUserFavorites(currentAttr) {
+        privateInteractor.getFavoriteCards(currentAttr) {
             userFavorites = it
         }
     }
