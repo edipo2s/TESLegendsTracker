@@ -2,7 +2,6 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.toIntSafely
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 class CardParser() {
@@ -40,34 +39,74 @@ class CardParser() {
 
 }
 
-class DeckParser() {
+class DeckParser(
+        val name: String = "",
+        val type: Int = 0,
+        val cls: Int = 0,
+        val cost: Int = 0,
+        val owner: String = "",
+        val createdAt: String = "",
+        val updatedAt: String = "",
+        val patch: String = "",
+        val views: Int = 0,
+        val likes: List<String> = listOf(),
+        val cards: Map<String, Long> = mapOf(),
+        val updates: Map<String, Map<String, Int>> = mapOf(),
+        val comments: Map<String, Map<String, String>> = mapOf()
+) {
 
-    private val COMMENT_OWNER_KEY = "owner"
-    private val COMMENT_COMMENT_KEY = "comment"
-    private val COMMENT_CREATE_AT_KEY = "createdAt"
+    companion object {
 
-    val name: String = ""
-    val type: Int = 0
-    val cost: Int = 0
-    val owner: String = ""
-    val createdAt: String = ""
-    val updatedAt: String = ""
-    val patch: String = ""
-    val likes: List<String> = listOf()
-    val views: Int = 0
-    val cards: Map<String, Int> = mapOf()
-    val updates: Map<String, Map<String, Int>> = mapOf()
-    val comments: Map<String, Map<String, String>> = mapOf()
+        private val KEY_DECK_NAME = "owner"
+        private val KEY_DECK_TYPE = "type"
+        private val KEY_DECK_CLASS = "cls"
+        private val KEY_DECK_PATCH = "patch"
+        private val KEY_DECK_COMMENT_OWNER = "owner"
+        private val KEY_DECK_COMMENT_MSG = "comment"
+        private val KEY_DECK_COMMENT_CREATE_AT = "createdAt"
 
-    fun toCard(id: String, cls: Class): Deck {
-        return Deck(id, name, owner, DeckType.values()[type], cls, cost, LocalDate.parse(createdAt),
-                LocalDateTime.parse(updatedAt), patch, likes, views, cards,
+        fun toNewCommentMap(owner: String, comment: String): Map<String, String> {
+            return mapOf(KEY_DECK_COMMENT_OWNER to owner, KEY_DECK_COMMENT_MSG to comment,
+                    KEY_DECK_COMMENT_CREATE_AT to LocalDateTime.now().toString())
+        }
+
+    }
+
+    fun toDeck(id: String, private: Boolean): Deck {
+        return Deck(id, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
+                LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
                 updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                 comments.map {
-                    DeckComment(it.key, it.value[COMMENT_OWNER_KEY] as String,
-                            it.value[COMMENT_COMMENT_KEY] as String,
-                            LocalDateTime.parse(it.value[COMMENT_CREATE_AT_KEY] as String))
+                    DeckComment(it.key, it.value[KEY_DECK_COMMENT_OWNER] as String,
+                            it.value[KEY_DECK_COMMENT_MSG] as String,
+                            LocalDateTime.parse(it.value[KEY_DECK_COMMENT_CREATE_AT] as String))
                 })
+    }
+
+    fun fromDeck(deck: Deck): DeckParser {
+        return DeckParser(deck.name, deck.type.ordinal, deck.cls.ordinal, deck.cost, deck.owner,
+                deck.createdAt.toString(), deck.updatedAt.toString(), deck.patch, deck.views,
+                deck.likes, deck.cards, deck.updates.map { it.date.toString() to it.changes }.toMap(),
+                deck.comments.map {
+                    it.id to mapOf(
+                            KEY_DECK_COMMENT_OWNER to it.owner,
+                            KEY_DECK_COMMENT_MSG to it.comment,
+                            KEY_DECK_COMMENT_CREATE_AT to it.date.toString())
+                }.toMap())
+    }
+
+    fun toDeckUpdateMap(): Map<String, Any> {
+        return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls, KEY_DECK_PATCH to patch)
+    }
+
+}
+
+class PatchParser() {
+
+    val desc: String = ""
+
+    fun toPatch(uidDate: String): Patch {
+        return Patch(uidDate, desc)
     }
 
 }

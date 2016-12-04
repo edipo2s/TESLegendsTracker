@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/deck_list_slot_height"
+    android:orientation="horizontal"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <TextView
+        android:id="@+id/deck_comment_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/default_margin"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_small"
+        tools:text="Édipo Souza" />
+
+    <TextView
+        android:id="@+id/deck_comment_msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textColor="@android:color/white"
+        tools:text="Amazing deck" />
+
+    <TextView
+        android:id="@+id/deck_comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:maxLines="3"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_small"
+        tools:text="10/11/2016 18h35" />
+
+</LinearLayout>

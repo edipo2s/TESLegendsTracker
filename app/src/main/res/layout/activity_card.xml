@@ -21,7 +21,7 @@
             android:layout_marginStart="@dimen/card_full_margin"
             android:layout_marginTop="@dimen/card_card_margin_top"
             android:transitionName="@string/card_transition_name"
-            tools:src="@drawable/improvisedweapon" />
+            tools:src="@drawable/card" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_bottom_sheet"

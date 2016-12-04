@@ -39,4 +39,18 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+    <style name="DeckInfoItem">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/large_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="DeckInfoItemTime">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/large_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

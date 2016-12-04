@@ -4643,6 +4643,9 @@
     }
   },
   "patches": {
+    "2016_11_20": {
+      "desc": "Mechanical Ally"
+    },
     "2016_11_03": {
       "core": {
         "strength": {
@@ -4757,7 +4760,11 @@
             }
           }
         }
-      }
+      },
+      "desc": "Nahkriin Nerf"
+    },
+    "2016_10_20": {
+      "desc": "Hist Grove"
     },
     "2016_09_28": {
       "core": {
@@ -4847,7 +4854,8 @@
             }
           }
         }
-      }
+      },
+      "desc": "Mantikora Nerf"
     },
     "2016_09_20": {
       "core": {
@@ -4859,7 +4867,8 @@
             }
           }
         }
-      }
+      },
+      "desc": "Bone Colossus Nerf"
     },
     "2016_08_25": {
       "core": {
@@ -4877,12 +4886,16 @@
             }
           }
         }
-      }
+      },
+      "desc": "Soulrest Marshal Nerf"
     }
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
-      "name": "Édipo da Silva Souza",
+      "info": {
+        "name": "Édipo da Silva Souza",
+        "photoUrl": ""
+      },
       "cards": {
         "core": {
           "agility": {
@@ -4930,18 +4943,106 @@
             }
           }
         }
+      },
+      "decks": {
+        "private": {
+          "-KWYo4K8PDs_zO1q8aqh": {
+            "name": "My Archer",
+            "type": 4,
+            "cls": 0,
+            "cost": 4000,
+            "createdAt": "2016-10-28T10:00:00",
+            "updatedAt": "2016-10-30T12:32:54",
+            "patch": "2016_09_28",
+            "likes": [
+              "Iu45y3i5UY345uhVi3u5h3Huf5h"
+            ],
+            "views": 12,
+            "cards": {
+              "ungolimthelistener": 1,
+              "murkwaterwitch": 3,
+              "rapidshot": 3,
+              "finishoff": 3,
+              "moonlightwerebat": 3,
+              "skavenpyromancer": 2,
+              "soulrestmarshal": 3,
+              "leaflurker": 1,
+              "triumphantjarl": 2
+            },
+            "updates": {
+              "2016-10-30T12:32:54": {
+                "rapidshot": -1,
+                "skavenpyromancer": 1,
+                "leaflurker": 2
+              }
+            }
+          },
+          "-KWYopLfHszRwXRYOL_q": {
+            "name": "My Deck",
+            "type": 4,
+            "cls": 1,
+            "cost": 2850,
+            "createdAt": "2016-10-28T10:00:00",
+            "updatedAt": "2016-10-31T15:30:00",
+            "patch": "2016_09_28",
+            "likes": [
+              "Iu45y3i5UY345uhVi3u5h3Huf5h",
+              "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+            ],
+            "views": 7,
+            "cards": {
+              "ungolimthelistener": 1,
+              "dunmernightblade": 3,
+              "elusiveschemer": 2,
+              "tazkadthepackmaster": 1
+            },
+            "updates": {
+              "2016-10-30T12:32:54": {
+                "dunmernightblade": -1,
+                "elusiveschemer": 1
+              },
+              "2016-10-31T15:30:00": {
+                "dunmernightblade": -1,
+                "elusiveschemer": 1,
+                "tazkadthepackmaster": -1
+              }
+            }
+          }
+        },
+        "favorite": {
+          "-KWYo4Jw4Wd6nc8oaUeh": true
+        }
+      },
+      "matches": {
+        "2016-11-30T08:22:34": {
+          "me": {
+            "deck": "-KWYo4K8PDs_zO1q8aqh",
+            "version": "v1 (2016-10-30)",
+            "name": "My Archer",
+            "type": 4,
+            "cls": 0
+          },
+          "opponent": {
+            "name": "Prophecy Assassin",
+            "type": 0,
+            "cls": 1
+          },
+          "first": false,
+          "win": true,
+          "rank": 4
+        }
       }
     }
   },
   "decks": {
-    "archer": {
-      "Iu45y3i5UY345uhVi3u5h3Huf5h": {
+    "public": {
+      "-KWYo4Jw4Wd6nc8oaUeh": {
         "name": "Cycle Archer",
         "type": 4,
-        "cost": 13500,
+        "cls": 0,
+        "cost": 5200,
         "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
-        "private": false,
-        "createdAt": "2016-10-28",
+        "createdAt": "2016-10-28T10:00:00",
         "updatedAt": "2016-10-30T12:32:54",
         "patch": "2016_09_28",
         "likes": [
@@ -4954,11 +5055,11 @@
           "rapidshot": 3,
           "finishoff": 3,
           "moonlightwerebat": 3,
-          "tazkadthepackmaster": 1,
           "skavenpyromancer": 2,
           "soulrestmarshal": 3,
           "leaflurker": 1,
-          "triumphantjarl": 2
+          "triumphantjarl": 2,
+          "tazkadthepackmaster": 1
         },
         "updates": {
           "2016-10-30T12:32:54": {
@@ -4973,6 +5074,27 @@
             "comment": "Nice deck",
             "createdAt": "2016-10-28T14:17:23"
           }
+        }
+      },
+      "-KWYopKFZVdqz3-YtBh-": {
+        "name": "Deck Test",
+        "type": 4,
+        "cls": 1,
+        "cost": 2850,
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "createdAt": "2016-10-28T10:00:00",
+        "updatedAt": "2016-10-28T10:00:00",
+        "patch": "2016_09_28",
+        "likes": [
+          "Iu45y3i5UY345uhVi3u5h3Huf5h",
+          "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+        ],
+        "views": 7,
+        "cards": {
+          "ungolimthelistener": 1,
+          "dunmernightblade": 3,
+          "elusiveschemer": 3,
+          "tazkadthepackmaster": 1
         }
       }
     }
