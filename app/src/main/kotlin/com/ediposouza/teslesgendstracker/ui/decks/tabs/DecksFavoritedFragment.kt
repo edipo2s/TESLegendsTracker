@@ -12,7 +12,7 @@ import timber.log.Timber
 /**
  * Created by EdipoSouza on 11/18/16.
  */
-class DecksSavedFragment : DecksPublicFragment() {
+class DecksFavoritedFragment : DecksPublicFragment() {
 
     private val privateInteractor = PrivateInteractor()
 
@@ -21,9 +21,9 @@ class DecksSavedFragment : DecksPublicFragment() {
     }
 
     override fun getDecks() {
-        privateInteractor.getSavedDecks(null, {
-            it.forEach { Timber.d("Public: %s", it.toString()) }
-            decksAdapter.showDecks(it.filter { it != null }.map { it!! })
+        privateInteractor.getFavoriteDecks(null, {
+            it?.forEach { Timber.d("Public: %s", it.toString()) }
+            decksAdapter.showDecks(it ?: listOf())
         })
     }
 
