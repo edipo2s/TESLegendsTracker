@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <group
         android:id="@+id/group_public"
@@ -14,7 +15,9 @@
 
         <item
             android:id="@+id/menu_matches"
-            android:title="@string/menu_matches" />
+            android:title="@string/menu_matches"
+            android:visible="false"
+            tools:visible="true" />
     </group>
 
     <group

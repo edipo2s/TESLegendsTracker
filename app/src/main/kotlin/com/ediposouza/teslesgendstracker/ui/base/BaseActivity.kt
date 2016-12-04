@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
@@ -16,8 +17,6 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import icepick.Icepick
-import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_signin.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -40,7 +39,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Icepick.restoreInstanceState(this, savedInstanceState)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -57,13 +55,8 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        setSupportActionBar(dash_toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
-    }
-
-    public override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Icepick.saveInstanceState(this, outState)
     }
 
     override fun onStart() {
