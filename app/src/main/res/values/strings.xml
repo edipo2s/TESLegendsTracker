@@ -28,7 +28,7 @@
 
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_race_label">Race:</string>
-    <string name="card_transition_name">card_transition</string>
+    <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_favorited">%1$s favorited</string>
     <string name="card_unfavorited">%1$s unfavorited</string>
 
@@ -53,7 +53,6 @@
     <string name="deck_cover_transition_name">deck_cover_transition</string>
     <string name="deck_attr1_transition_name">deck_attr1_transition</string>
     <string name="deck_attr2_transition_name">deck_attr2_transition</string>
-
-    <string name="deck_transition_name">deck_transition</string>
+    <string name="deck_transition_name" translatable="false">deck_transition</string>
 
 </resources>

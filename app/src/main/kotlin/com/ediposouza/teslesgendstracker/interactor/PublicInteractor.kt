@@ -13,6 +13,8 @@ import java.util.*
  */
 class PublicInteractor() : BaseInteractor() {
 
+    protected val NODE_PATCHES = "patches"
+
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
@@ -134,6 +136,26 @@ class PublicInteractor() : BaseInteractor() {
                         ds.child(KEY_USER_PHOTO)?.value?.toString() ?: "")
                 Timber.d(userInfo.toString())
                 onSuccess.invoke(userInfo)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
+    fun getPatches(onError: ((e: Exception?) -> Unit)? = null,
+                   onSuccess: (List<Patch>) -> Unit) {
+        database.child(NODE_PATCHES).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val patches = ds.children.mapTo(arrayListOf()) {
+                    it.getValue(PatchParser::class.java).toPatch(it.key)
+                }
+                Timber.d(patches.toString())
+                onSuccess.invoke(patches)
             }
 
             override fun onCancelled(de: DatabaseError) {

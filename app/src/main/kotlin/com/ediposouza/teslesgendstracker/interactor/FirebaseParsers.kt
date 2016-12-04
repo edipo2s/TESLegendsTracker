@@ -100,3 +100,13 @@ class DeckParser(
     }
 
 }
+
+class PatchParser() {
+
+    val desc: String = ""
+
+    fun toPatch(uidDate: String): Patch {
+        return Patch(uidDate, desc)
+    }
+
+}
