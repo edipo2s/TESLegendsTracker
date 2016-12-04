@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
 import com.ediposouza.teslesgendstracker.data.Deck
@@ -19,6 +20,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import org.jetbrains.anko.doAsync
@@ -80,12 +82,15 @@ class DeckActivity : BaseActivity() {
         doAsync {
             calculateMissingSoul(deck, PrivateInteractor())
             PublicInteractor().getUserInfo(deck.owner) {
-                val userName = it.name
+                val ownerUser = it
                 runOnUiThread {
-                    deck_details_create_by.text = userName
+                    deck_details_create_by.text = ownerUser.name
+                    Glide.with(this@DeckActivity)
+                            .load(ownerUser.photoUrl)
+                            .transform(CircleTransform(this@DeckActivity))
+                            .into(deck_details_create_by_photo)
                 }
             }
-            deck_details_cardlist.showDeck(deck)
         }
     }
 
@@ -144,6 +149,7 @@ class DeckActivity : BaseActivity() {
         val updateTime = deck.updatedAt.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
         val updateText = "${deck.updatedAt.toLocalDate()} $updateTime"
         deck_details_update_at.text = updateText
+        deck_details_cardlist.showDeck(deck)
     }
 
     fun calculateMissingSoul(deck: Deck, interactor: PrivateInteractor) {
@@ -156,6 +162,7 @@ class DeckActivity : BaseActivity() {
                 Timber.d("Missing %d", missingSoul)
                 text = NumberFormat.getNumberInstance().format(missingSoul)
                 visibility = View.VISIBLE
+                deck_details_cardlist.showMissingCards(it)
             }
         }
     }

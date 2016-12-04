@@ -76,18 +76,25 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
+    fun showMissingCards(missingCards: List<CardMissing>) {
+        deckListAdapter.showMissingCards(missingCards)
+    }
+
 }
 
 class DeckListAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<DeckListViewHolder>() {
 
     private val items = arrayListOf<CardSlot>()
+    private var missingCards: List<CardMissing> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
         return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick)
     }
 
     override fun onBindViewHolder(holder: DeckListViewHolder?, position: Int) {
-        holder?.bind(items[position])
+        val cardSlot = items[position]
+        val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
+        holder?.bind(cardSlot, cardMissing?.qtd ?: 0)
     }
 
     override fun getItemCount(): Int = items.size
@@ -98,11 +105,16 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapte
         notifyDataSetChanged()
     }
 
+    fun showMissingCards(missingCards: List<CardMissing>) {
+        this.missingCards = missingCards
+        notifyDataSetChanged()
+    }
+
 }
 
 class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
 
-    fun bind(slot: CardSlot) {
+    fun bind(slot: CardSlot, missingQtd: Long) {
         itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
         itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))
         itemView.decl_slot_card_name.text = slot.card.name
@@ -120,6 +132,8 @@ class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit) : Rec
         itemView.deckslot_card_qtd.text = slot.qtd.toString()
         itemView.deckslot_card_qtd.visibility = if (slot.qtd > 0) View.VISIBLE else View.INVISIBLE
         itemView.deckslot_card_qtd_layout.visibility = if (slot.qtd > 0) View.VISIBLE else View.INVISIBLE
+        itemView.deckslot_card_qtd_missing.text = "-$missingQtd"
+        itemView.deckslot_card_qtd_missing.visibility = if (missingQtd > 0) View.VISIBLE else View.INVISIBLE
     }
 
     private fun getCroppedCardImage(slot: CardSlot): Bitmap {

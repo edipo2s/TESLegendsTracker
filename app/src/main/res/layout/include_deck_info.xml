@@ -97,32 +97,12 @@
                 tools:text="Mechanical Ally" />
 
             <TextView
-                android:id="@+id/deck_details_create_by_label"
+                android:id="@+id/deck_details_create_at_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/deck_details_patch"
                 android:layout_marginStart="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/large_margin"
-                android:text="@string/deck_details_create_by"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/deck_details_create_by"
-                style="@style/DeckInfoItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/deck_details_create_by_label"
-                android:drawablePadding="@dimen/default_margin"
-                android:drawableStart="@drawable/ic_user"
-                tools:text="Édipo Souza" />
-
-            <TextView
-                android:id="@+id/deck_details_create_at_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/deck_details_create_by"
-                android:layout_marginStart="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/deck_details_create_at"
                 android:textColor="@android:color/white" />
 
