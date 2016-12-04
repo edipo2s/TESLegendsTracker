@@ -14,9 +14,9 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
-import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksSavedFragment
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
@@ -40,7 +40,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             override fun onPageSelected(position: Int) {
                 val title = when (position) {
                     1 -> R.string.tab_decks_owned
-                    2 -> R.string.tab_decks_saved
+                    2 -> R.string.tab_decks_favorites
                     else -> R.string.tab_decks_public
                 }
                 activity.dash_toolbar_title.setText(title)
@@ -89,7 +89,7 @@ class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAd
     var titles: Array<String>
     val decksPublicFragment by lazy { DecksPublicFragment() }
     val decksMyFragment by lazy { DecksOwnerFragment() }
-    val decksSavedFragment by lazy { DecksSavedFragment() }
+    val decksSavedFragment by lazy { DecksFavoritedFragment() }
 
     init {
         titles = ctx.resources.getStringArray(R.array.decks_tabs)

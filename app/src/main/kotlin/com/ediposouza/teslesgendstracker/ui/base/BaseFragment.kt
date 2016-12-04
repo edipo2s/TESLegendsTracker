@@ -1,8 +1,6 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
-import icepick.Icepick
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
@@ -13,16 +11,6 @@ import timber.log.Timber
 open class BaseFragment : Fragment() {
 
     protected val eventBus by lazy { EventBus.getDefault() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Icepick.restoreInstanceState(this, savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        Icepick.saveInstanceState(this, outState)
-    }
 
     override fun onStart() {
         super.onStart()

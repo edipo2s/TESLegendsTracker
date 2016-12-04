@@ -9,7 +9,7 @@
     <array name="decks_tabs">
         <item name="tab_decks_public">@string/tab_decks_public</item>
         <item name="tab_decks_owned">@string/tab_decks_owned</item>
-        <item name="tab_decks_saved">@string/tab_decks_saved</item>
+        <item name="tab_decks_favorites">@string/tab_decks_favorites</item>
     </array>
 
 </resources>
