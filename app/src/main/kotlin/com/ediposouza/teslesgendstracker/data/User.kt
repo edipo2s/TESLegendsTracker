@@ -17,7 +17,7 @@ data class User(
 data class UserInfo(
 
         val name: String,
-        val photo: String
+        val photoUrl: String
 
 )
 
