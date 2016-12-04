@@ -18,7 +18,7 @@ class PublicInteractor() : BaseInteractor() {
 
     fun getCards(attr: Attribute, onSuccess: (List<Card>) -> Unit) {
         val node_attr = attr.name.toLowerCase()
-        database.child(NODE_CARDS).child(NODE_CORE).child(node_attr).orderByChild(KEY_CARD_COST)
+        database.child(NODE_CARDS).child(NODE_CARDS_CORE).child(node_attr).orderByChild(KEY_CARD_COST)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
@@ -38,7 +38,7 @@ class PublicInteractor() : BaseInteractor() {
 
     fun getCardsForStatistics(attr: Attribute, onSuccess: (List<CardStatistic>) -> Unit) {
         val node_attr = attr.name.toLowerCase()
-        database.child(NODE_CARDS).child(NODE_CORE).child(node_attr).orderByChild(KEY_CARD_COST)
+        database.child(NODE_CARDS).child(NODE_CARDS_CORE).child(node_attr).orderByChild(KEY_CARD_COST)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
@@ -57,7 +57,7 @@ class PublicInteractor() : BaseInteractor() {
     }
 
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        val dbPublicDeck = dbDecks.child(NODE_PUBLIC)
+        val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
         dbPublicDeck.keepSynced(true)
         var query = dbPublicDeck.orderByChild(KEY_DECK_UPDATE_AT)
         if (cls != null) {
@@ -82,7 +82,7 @@ class PublicInteractor() : BaseInteractor() {
     }
 
     fun incDeckView(deck: Deck, onSuccess: () -> Unit, onError: (e: Exception?) -> Unit) {
-        with(dbDecks.child(NODE_PUBLIC)) {
+        with(dbDecks.child(NODE_DECKS_PUBLIC)) {
             child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to deck.views.inc())).addOnCompleteListener({
                 Timber.d(it.toString())
                 if (it.isSuccessful) onSuccess.invoke() else onError.invoke(it.exception)
@@ -91,13 +91,14 @@ class PublicInteractor() : BaseInteractor() {
     }
 
     fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
-        with(database.child(NODE_CARDS).child(NODE_CORE)) {
+        with(database.child(NODE_CARDS).child(NODE_CARDS_CORE)) {
             getAttrCards(deck.cls.attr1, onError) {
                 val cards = it
                 getAttrCards(deck.cls.attr2, onError) {
                     cards.addAll(it)
                     Timber.d(cards.toString())
-                    onSuccess.invoke(cards.map { CardSlot(it, deck.cards[it.shortName] ?: 0) })
+                    onSuccess.invoke(cards.map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
+                            .filter { it.qtd > 0 })
                 }
             }
         }
@@ -114,6 +115,25 @@ class PublicInteractor() : BaseInteractor() {
                 }
                 Timber.d(cards.toString())
                 onSuccess.invoke(cards)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
+    fun getUserInfo(uuid: String, onError: ((e: Exception?) -> Unit)? = null,
+                    onSuccess: (UserInfo) -> Unit) {
+        dbUsers.child(uuid)?.child(NODE_USERS_INFO)?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val userInfo = UserInfo(ds.child(KEY_USER_NAME)?.value?.toString() ?: "",
+                        ds.child(KEY_USER_PHOTO)?.value?.toString() ?: "")
+                Timber.d(userInfo.toString())
+                onSuccess.invoke(userInfo)
             }
 
             override fun onCancelled(de: DatabaseError) {

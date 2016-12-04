@@ -7,13 +7,14 @@
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <ImageView
-        android:id="@+id/deck_bg"
+        android:id="@+id/deck_cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.3"
+        android:alpha="@dimen/deck_cover_bg_alpha"
         android:padding="@dimen/nano_margin"
         android:scaleType="fitXY"
-        android:src="@drawable/deck_attr_agility" />
+        android:src="@drawable/deck_attr_agility"
+        android:transitionName="@string/deck_cover_transition_name" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,8 +31,8 @@
             android:id="@+id/deck_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/deck_center"
             android:layout_marginStart="@dimen/large_margin"
+            android:layout_toEndOf="@id/deck_center"
             android:drawableStart="@drawable/ic_updated_at"
             android:gravity="center_vertical"
             android:textSize="@dimen/font_small"
@@ -49,13 +50,14 @@
             android:id="@+id/deck_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/large_margin"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/large_margin"
             android:layout_toEndOf="@id/deck_private"
             android:layout_toStartOf="@id/deck_date"
             android:lines="1"
             android:textSize="@dimen/font_large"
+            android:transitionName="@string/deck_name_transition_name"
             tools:text="Cycle Archer" />
 
         <ImageView
@@ -65,6 +67,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
+            android:transitionName="@string/deck_attr1_transition_name"
             tools:src="@drawable/attr_strength" />
 
         <ImageView
@@ -74,6 +77,7 @@
             android:layout_alignTop="@id/deck_attr1"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_toEndOf="@id/deck_attr1"
+            android:transitionName="@string/deck_attr2_transition_name"
             tools:src="@drawable/attr_intelligence" />
 
         <TextView
@@ -104,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/deck_views"
             android:layout_alignParentEnd="true"
-            android:drawableEnd="@drawable/ic_favorite_checked"
+            android:drawableEnd="@drawable/ic_like_checked"
             android:drawablePadding="@dimen/default_margin"
             android:gravity="center_vertical"
             tools:text="15" />
@@ -125,8 +129,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/deck_views"
-            android:layout_marginStart="@dimen/large_margin"
             android:layout_alignStart="@id/deck_date"
+            android:layout_marginStart="@dimen/large_margin"
             android:layout_toEndOf="@id/deck_date"
             android:drawablePadding="@dimen/default_margin"
             android:drawableStart="@drawable/ic_soul"
@@ -150,10 +154,10 @@
             android:id="@+id/deck_soul_missing_loading"
             android:layout_width="@dimen/deck_icon_height"
             android:layout_height="@dimen/deck_icon_height"
-            android:indeterminate="true"
             android:layout_alignBottom="@id/deck_likes"
             android:layout_alignEnd="@id/deck_soul_cost"
             android:layout_alignStart="@id/deck_soul_cost"
+            android:indeterminate="true"
             android:visibility="gone"
             tools:visibility="visible" />
 

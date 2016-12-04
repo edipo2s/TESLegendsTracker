@@ -4892,7 +4892,10 @@
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
-      "name": "Édipo da Silva Souza",
+      "info": {
+        "name": "Édipo da Silva Souza",
+        "photoUrl": ""
+      },
       "cards": {
         "core": {
           "agility": {
@@ -5006,9 +5009,9 @@
             }
           }
         },
-        "saved": [
-          "-KWYo4Jw4Wd6nc8oaUeh"
-        ]
+        "favorite": {
+          "-KWYo4Jw4Wd6nc8oaUeh": true
+        }
       },
       "matches": {
         "2016-11-30T08:22:34": {
