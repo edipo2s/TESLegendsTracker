@@ -9,3 +9,10 @@ data class CardSlot(
         val qtd: Long
 
 )
+
+data class Patch(
+
+        val uidDate: String,
+        val desc: String
+
+)

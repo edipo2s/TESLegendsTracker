@@ -81,6 +81,12 @@ class DeckActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         doAsync {
             calculateMissingSoul(deck, PrivateInteractor())
+            PublicInteractor().getPatches {
+                val patch = it.find { it.uidDate == deck.patch }
+                runOnUiThread {
+                    deck_details_patch.text = patch?.desc ?: ""
+                }
+            }
             PublicInteractor().getUserInfo(deck.owner) {
                 val ownerUser = it
                 runOnUiThread {
@@ -144,7 +150,6 @@ class DeckActivity : BaseActivity() {
         deck_details_views.text = numberInstance.format(deck.views)
         deck_details_likes.text = numberInstance.format(deck.likes.size)
         deck_details_soul_cost.text = numberInstance.format(deck.cost)
-        deck_details_patch.text = deck.patch
         deck_details_create_at.text = deck.createdAt.toLocalDate().toString()
         val updateTime = deck.updatedAt.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
         val updateText = "${deck.updatedAt.toLocalDate()} $updateTime"
