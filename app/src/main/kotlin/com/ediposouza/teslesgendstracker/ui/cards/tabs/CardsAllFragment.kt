@@ -17,12 +17,12 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterRarity
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
@@ -44,7 +44,7 @@ open class CardsAllFragment : BaseFragment() {
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
-    open val cardsAdapter = CardsAllAdapter({ view: View, card: Card -> showCardExpanded(card, view) }) {
+    open val cardsAdapter = CardsAllAdapter({ view, card -> showCardExpanded(card, view) }) {
         view: View, card: Card ->
         showCardExpanded(card, view)
         true
@@ -93,7 +93,7 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         })
-        privateInteractor.getUserFavorites(currentAttr) {
+        privateInteractor.getFavoriteCards(currentAttr) {
             userFavorites = it
         }
     }
@@ -187,9 +187,7 @@ class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
 
     fun bind(card: Card) {
         itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
-        itemView.setOnLongClickListener {
-            itemLongClick(itemView.card_all_image, card)
-        }
+        itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
         itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
     }
 

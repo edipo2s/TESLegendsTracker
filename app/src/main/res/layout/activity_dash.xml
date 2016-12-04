@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/dash_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -61,20 +61,20 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <FrameLayout
+            <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
                 android:id="@+id/dash_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.FilterRarity
+            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
                 android:id="@+id/dash_filter_rarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:layout_margin="@dimen/large_margin" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.FilterMagika
+            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
                 android:id="@+id/dash_filter_magika"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

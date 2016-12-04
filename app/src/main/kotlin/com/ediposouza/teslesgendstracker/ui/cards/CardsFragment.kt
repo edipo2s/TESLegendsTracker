@@ -12,11 +12,12 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -32,13 +33,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_toolbar_title.setText(R.string.app_name)
         cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
         cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 val title = when (position) {
-                    1 -> R.string.tab_collection
-                    2 -> R.string.tab_favorites
+                    1 -> R.string.tab_cards_collection
+                    2 -> R.string.tab_cards_favorites
                     else -> R.string.app_name
                 }
                 activity.dash_toolbar_title.setText(title)
@@ -53,8 +53,18 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
 
         })
-        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity.dash_toolbar_title.setText(R.string.app_name)
+        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

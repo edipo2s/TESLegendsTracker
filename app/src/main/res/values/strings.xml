@@ -13,14 +13,22 @@
     <string name="search_hint">Name, race, type or keyword</string>
     <string name="menu_search">Search</string>
     <string name="menu_statistics">Statistics</string>
+    <string name="menu_only_private">Only Private</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_unfavorite">Unfavorite</string>
+    <string name="menu_like">Like</string>
+    <string name="menu_unlike">Unlike</string>
 
-    <string name="tab_cards">Cards</string>
-    <string name="tab_favorites">Favorites</string>
-    <string name="tab_collection">Collection</string>
+    <string name="tab_cards_all">Cards</string>
+    <string name="tab_cards_collection">Collection</string>
+    <string name="tab_cards_favorites">Favorites</string>
+    <string name="tab_decks_public">Public</string>
+    <string name="tab_decks_owned">Owned</string>
+    <string name="tab_decks_favorites">Favorites</string>
 
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_race_label">Race:</string>
-    <string name="card_transition_name">card_transition</string>
+    <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_favorited">%1$s favorited</string>
     <string name="card_unfavorited">%1$s unfavorited</string>
 
@@ -36,5 +44,15 @@
     <string name="statistics_total" translatable="false">%1$03d/%2$03d</string>
     <string name="statistics_percent" translatable="false">%1$.2f%%</string>
     <string name="statistics_total_cards">Total Cards\nSoul to complete</string>
+
+    <string name="deck_details">Details</string>
+    <string name="deck_details_create_by">Create by</string>
+    <string name="deck_details_create_at">Create at</string>
+    <string name="deck_details_last_update">Last update</string>
+    <string name="deck_name_transition_name">deck_name_transition</string>
+    <string name="deck_cover_transition_name">deck_cover_transition</string>
+    <string name="deck_attr1_transition_name">deck_attr1_transition</string>
+    <string name="deck_attr2_transition_name">deck_attr2_transition</string>
+    <string name="deck_transition_name" translatable="false">deck_transition</string>
 
 </resources>

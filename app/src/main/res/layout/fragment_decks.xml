@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
-        android:id="@+id/attr_filter"
+    <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
+        android:id="@+id/decks_attr_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin" />
@@ -13,7 +13,6 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/decks_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/card_zero_qtd" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
