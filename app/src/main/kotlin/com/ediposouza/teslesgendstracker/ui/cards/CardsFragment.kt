@@ -33,7 +33,6 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_toolbar_title.setText(R.string.app_name)
         cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
         cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
@@ -54,8 +53,13 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
 
         })
-        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity.dash_toolbar_title.setText(R.string.app_name)
+        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
     override fun onResume() {

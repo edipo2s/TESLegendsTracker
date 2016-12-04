@@ -12,11 +12,13 @@ import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
+import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +39,7 @@ class DashActivity : BaseActivity(),
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        val drawerToggle = object : ActionBarDrawerToggle(this, dash_drawer_layout, dash_toolbar,
+        val drawerToggle = object : ActionBarDrawerToggle(this, dash_drawer_layout, toolbar,
                 R.string.drawer_open, R.string.drawer_close) {
 
             override fun onDrawerOpened(drawerView: View) {
@@ -45,6 +47,12 @@ class DashActivity : BaseActivity(),
                 val user = FirebaseAuth.getInstance().currentUser
                 dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
                 dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
+                if (user != null) {
+                    Glide.with(this@DashActivity)
+                            .load(user.photoUrl)
+                            .transform(CircleTransform(this@DashActivity))
+                            .into(dash_navigation_view.getHeaderView(0).profile_image)
+                }
                 BottomSheetBehavior.from(collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
