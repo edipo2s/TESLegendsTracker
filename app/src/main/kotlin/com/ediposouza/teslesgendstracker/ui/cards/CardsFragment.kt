@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
@@ -10,8 +11,13 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.widget.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.widget.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -21,37 +27,53 @@ import kotlinx.android.synthetic.main.fragment_cards.*
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_cards, container, false)
+        return container?.inflate(R.layout.fragment_cards)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_toolbar_title.setText(R.string.app_name)
         cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
         cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 val title = when (position) {
-                    1 -> R.string.tab_collection
-                    2 -> R.string.tab_favorites
+                    1 -> R.string.tab_cards_collection
+                    2 -> R.string.tab_cards_favorites
                     else -> R.string.app_name
                 }
                 activity.dash_toolbar_title.setText(title)
+                BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+                if (position == 1) {
+                    collection_statistics.updateStatistics()
+                }
             }
+
         })
-        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity.dash_toolbar_title.setText(R.string.app_name)
+        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
-        (MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView)
-                .setOnQueryTextListener(this)
+        with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
+            queryHint = getString(R.string.search_hint)
+            setOnQueryTextListener(this@CardsFragment)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -93,7 +115,7 @@ class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAd
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return titles.get(position)
+        return titles[position]
     }
 
 }

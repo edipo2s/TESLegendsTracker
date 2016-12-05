@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_drawer_header_height"
-    android:background="@color/colorPrimary"
+    android:background="@color/grey_500"
     android:paddingTop="@dimen/status_bar_height">
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="@dimen/profile_image"
         android:layout_height="@dimen/profile_image"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/large_margin"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/large_margin"
         android:src="@drawable/ic_user" />
 
     <TextView
         android:id="@+id/profile_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/profile_image"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_toEndOf="@id/profile_image"
+        android:lines="1"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_large"
         tools:text="User Name" />
