@@ -24,6 +24,6 @@
         android:layout_margin="@dimen/large_margin"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/colorPrimary"
-        app:fab_size="normal" />
+        app:fabSize="normal" />
 
 </android.support.design.widget.CoordinatorLayout>
