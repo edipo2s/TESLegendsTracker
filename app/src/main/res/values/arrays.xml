@@ -1,7 +1,15 @@
 <resources>
+
     <array name="cards_tabs">
-        <item name="tab_cards">@string/tab_cards</item>
-        <item name="tab_collection">@string/tab_collection</item>
-        <item name="tab_favorites">@string/tab_favorites</item>
+        <item name="tab_cards_all_all">@string/tab_cards_all</item>
+        <item name="tab_cards_collection">@string/tab_cards_collection</item>
+        <item name="tab_cards_favorites">@string/tab_cards_favorites</item>
     </array>
+
+    <array name="decks_tabs">
+        <item name="tab_decks_public">@string/tab_decks_public</item>
+        <item name="tab_decks_owned">@string/tab_decks_owned</item>
+        <item name="tab_decks_favorites">@string/tab_decks_favorites</item>
+    </array>
+
 </resources>

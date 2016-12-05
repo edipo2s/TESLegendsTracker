@@ -6,11 +6,18 @@ package com.ediposouza.teslesgendstracker.data
 data class User(
 
         val name: String,
-        val collection: Array<Slot>,
+        val collection: List<CardSlot>,
         val collectionPercent: Float,
-        val decks: Array<Deck>,
-        val decksFavorites: Array<Deck>,
-        val matches: Array<Match>
+        val decks: List<Deck>,
+        val decksFavorites: List<Deck>,
+        val matches: List<Match>
+
+)
+
+data class UserInfo(
+
+        val name: String,
+        val photoUrl: String
 
 )
 

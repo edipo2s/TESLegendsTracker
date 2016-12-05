@@ -220,7 +220,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "plunder": {
           "name": "Plunder",
@@ -253,7 +253,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "silvenartracker": {
           "name": "Silvenar Tracker",
@@ -429,7 +429,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "witheredhandcultist": {
           "name": "Withered Hand Cultist",
@@ -451,7 +451,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "alikrsurvivalist": {
           "name": "Alik'r Survivalist",
@@ -559,7 +559,8 @@
           "race": "Daedra",
           "attack": "2",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Good"
         },
@@ -594,7 +595,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "whiteruntrooper": {
           "name": "Whiterun Trooper",
@@ -704,7 +705,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "triumphantjarl": {
           "name": "Triumphant Jarl",
@@ -770,7 +771,7 @@
           "health": "8",
           "rarity": "Legendary",
           "keyword": "Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "vigilantgiant": {
           "name": "Vigilant Giant",
@@ -790,7 +791,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Good"
         },
@@ -1080,7 +1082,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Guard",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "camlornhero": {
           "name": "Camlorn Hero",
@@ -1234,7 +1236,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "dresrenegade": {
           "name": "Dres Renegade",
@@ -1399,7 +1401,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Shackle",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "fateweaver": {
           "name": "Fate Weaver",
@@ -1421,7 +1423,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Prophecy, Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "heirloomgreatsword": {
           "name": "Heirloom Greatsword",
@@ -1476,7 +1478,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "studiumheadmaster": {
           "name": "Studium Headmaster",
@@ -1553,7 +1555,7 @@
           "health": "3",
           "rarity": "Legendary",
           "keyword": "Summon, Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "supremeatromancer": {
           "name": "Supreme Atromancer",
@@ -1573,7 +1575,8 @@
           "race": "Skeleton",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         },
@@ -1584,7 +1587,8 @@
           "race": "Dark Elf",
           "attack": "6",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         }
@@ -1632,7 +1636,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "blackmail": {
           "name": "Blackmail",
@@ -1676,7 +1680,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Shackle",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "execute": {
           "name": "Execute",
@@ -1863,7 +1867,7 @@
           "health": "1",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "summersetshieldmage": {
           "name": "Summerset Shieldmage",
@@ -2059,7 +2063,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -2072,7 +2077,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "divinefervor": {
           "name": "Divine Fervor",
@@ -2116,7 +2121,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "imperialreinforcements": {
           "name": "Imperial Reinforcements",
@@ -2314,7 +2319,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "auroransentry": {
           "name": "Auroran Sentry",
@@ -2356,7 +2361,8 @@
           "race": "Nord",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Good"
         }
@@ -2424,7 +2430,8 @@
           "race": "Wood Elf",
           "attack": "2",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Insane"
         },
@@ -2459,7 +2466,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Prophecy",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "dunestalker": {
           "name": "Dune Stalker",
@@ -2525,7 +2532,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Lethal",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "helstromfootpad": {
           "name": "Helstrom Footpad",
@@ -2800,7 +2807,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "greenpactstalker": {
           "name": "Green Pact Stalker",
@@ -2910,7 +2917,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "camoranscoutleader": {
           "name": "Camoran Scout Leader",
@@ -3053,7 +3060,7 @@
           "health": "4",
           "rarity": "Legendary",
           "keyword": "Pilfer",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "ransack": {
           "name": "Ransack",
@@ -3097,7 +3104,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "chaurusreaper": {
           "name": "Chaurus Reaper",
@@ -3139,7 +3146,8 @@
           "race": "Goblin",
           "attack": "6",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Breakthrough, Charge, Last Gasp",
           "arenaTier": "Excellent"
         },
@@ -3220,7 +3228,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "daedricdagger": {
           "name": "Daedric Dagger",
@@ -3550,7 +3558,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Lethal",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "archeinvenomtongue": {
           "name": "Archein Venomtongue",
@@ -3583,7 +3591,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Regenerate",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "cursedspectre": {
           "name": "Cursed Spectre",
@@ -3647,7 +3655,8 @@
           "race": "Imperial",
           "attack": "1",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Lethal",
           "arenaTier": "Excellent"
         },
@@ -3682,7 +3691,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "preserveroftheroot": {
           "name": "Preserver of the Root",
@@ -3825,7 +3834,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Breakthrough",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "nightpredator": {
           "name": "Night Predator",
@@ -3878,7 +3887,8 @@
           "race": "Dragon",
           "attack": "7",
           "health": "7",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Guard",
           "arenaTier": "Excellent"
         },
@@ -3924,7 +3934,7 @@
           "health": "7",
           "rarity": "Legendary",
           "keyword": "Drain",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "ironatronach": {
           "name": "Iron Atronach",
@@ -3979,7 +3989,8 @@
           "race": "Dark Elf",
           "attack": "6",
           "health": "3",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Drain, Summon, Guard",
           "arenaTier": "Excellent"
         },
@@ -4012,7 +4023,8 @@
           "race": "Nord",
           "attack": "5",
           "health": "4",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Prophecy, Breakthrough, Guard",
           "arenaTier": "Good"
         },
@@ -4023,7 +4035,8 @@
           "race": "Khajiit",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -4034,7 +4047,8 @@
           "race": "High Elf",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Insane"
         },
@@ -4078,7 +4092,8 @@
           "race": "Wood Elf",
           "attack": "1",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Lethal, Summon",
           "arenaTier": "Excellent"
         },
@@ -4089,7 +4104,8 @@
           "race": "Imperial",
           "attack": "2",
           "health": "2",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         },
@@ -4100,7 +4116,8 @@
           "race": "Orc",
           "attack": "4",
           "health": "6",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Good"
         },
@@ -4111,7 +4128,8 @@
           "race": "Breton",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Ward, Summon",
           "arenaTier": "Insane"
         },
@@ -4133,7 +4151,8 @@
           "race": "Redguard",
           "attack": "2",
           "health": "2",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Average"
         },
@@ -4155,7 +4174,8 @@
           "race": "Argonian",
           "attack": "5",
           "health": "5",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon, Silence, Shackle",
           "arenaTier": "Excellent"
         }
@@ -4247,7 +4267,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "adoringfan": {
           "name": "Adoring Fan",
@@ -4256,7 +4276,8 @@
           "race": "Wood Elf",
           "attack": "1",
           "health": "1",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Guard, Last Gasp, Prophecy",
           "arenaTier": "Unknown"
         },
@@ -4346,7 +4367,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "slaughterfishspawning": {
           "name": "Slaughterfish Spawning",
@@ -4399,7 +4420,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "",
           "arenaTier": "Insane"
         },
@@ -4412,7 +4434,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "sparkingspider": {
           "name": "Sparking Spider",
@@ -4478,7 +4500,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Last Gasp",
-          "arenaTier": "Unknown"
+          "evolves": true
         },
         "wabbajack": {
           "name": "Wabbajack",
@@ -4487,7 +4509,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Average"
         },
@@ -4531,7 +4554,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Average"
         },
@@ -4564,7 +4588,8 @@
           "race": "",
           "attack": "",
           "health": "",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Activate",
           "arenaTier": "Good"
         },
@@ -4575,7 +4600,8 @@
           "race": "Dragon",
           "attack": "10",
           "health": "10",
-          "rarity": "Legendary - Unique",
+          "rarity": "Legendary",
+          "unique": true,
           "keyword": "Summon",
           "arenaTier": "Excellent"
         }
@@ -4617,6 +4643,9 @@
     }
   },
   "patches": {
+    "2016_11_20": {
+      "desc": "Mechanical Ally"
+    },
     "2016_11_03": {
       "core": {
         "strength": {
@@ -4731,7 +4760,11 @@
             }
           }
         }
-      }
+      },
+      "desc": "Nahkriin Nerf"
+    },
+    "2016_10_20": {
+      "desc": "Hist Grove"
     },
     "2016_09_28": {
       "core": {
@@ -4821,7 +4854,8 @@
             }
           }
         }
-      }
+      },
+      "desc": "Mantikora Nerf"
     },
     "2016_09_20": {
       "core": {
@@ -4833,7 +4867,8 @@
             }
           }
         }
-      }
+      },
+      "desc": "Bone Colossus Nerf"
     },
     "2016_08_25": {
       "core": {
@@ -4851,58 +4886,217 @@
             }
           }
         }
-      }
+      },
+      "desc": "Soulrest Marshal Nerf"
     }
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
-      "name": "Édipo da Silva Souza",
-      "photoUrl": "https://lh6.googleusercontent.com/-QVzUl1KSjiE/AAAAAAAAAAI/AAAAAAAAOSk/kMFAQSTtvcw/s96-c/photo.jpg",
-      "collection": {
+      "info": {
+        "name": "Édipo da Silva Souza",
+        "photoUrl": ""
+      },
+      "cards": {
         "core": {
-          "strength": {
-            "rapidshot": 3,
-            "triumphantjarl": 1
-          },
           "agility": {
-            "ungolimthelistener": 1,
-            "murkwaterwitch": 3,
-            "finishoff": 3
+            "finishoff": {
+              "qtd": 2
+            },
+            "murkwaterwitch": {
+              "qtd": 3
+            },
+            "ungolimthelistener": {
+              "favorite": true
+            }
+          },
+          "strength": {
+            "fearlessnorthlander": {
+              "qtd": 1
+            },
+            "fieryimp": {
+              "qtd": 1
+            },
+            "morthalwatchman": {
+              "qtd": 1
+            },
+            "rampagingminotaur": {
+              "qtd": 1
+            },
+            "rapidshot": {
+              "favorite": true,
+              "qtd": 3
+            },
+            "reiveblademaster": {
+              "qtd": 1
+            },
+            "relentlessraider": {
+              "qtd": 1
+            },
+            "rihadbattlemage": {
+              "qtd": 3
+            },
+            "steelscimitar": {
+              "qtd": 1
+            },
+            "triumphantjarl": {
+              "qtd": 1
+            }
           }
+        }
+      },
+      "decks": {
+        "private": {
+          "-KWYo4K8PDs_zO1q8aqh": {
+            "name": "My Archer",
+            "type": 4,
+            "cls": 0,
+            "cost": 4000,
+            "createdAt": "2016-10-28T10:00:00",
+            "updatedAt": "2016-10-30T12:32:54",
+            "patch": "2016_09_28",
+            "likes": [
+              "Iu45y3i5UY345uhVi3u5h3Huf5h"
+            ],
+            "views": 12,
+            "cards": {
+              "ungolimthelistener": 1,
+              "murkwaterwitch": 3,
+              "rapidshot": 3,
+              "finishoff": 3,
+              "moonlightwerebat": 3,
+              "skavenpyromancer": 2,
+              "soulrestmarshal": 3,
+              "leaflurker": 1,
+              "triumphantjarl": 2
+            },
+            "updates": {
+              "2016-10-30T12:32:54": {
+                "rapidshot": -1,
+                "skavenpyromancer": 1,
+                "leaflurker": 2
+              }
+            }
+          },
+          "-KWYopLfHszRwXRYOL_q": {
+            "name": "My Deck",
+            "type": 4,
+            "cls": 1,
+            "cost": 2850,
+            "createdAt": "2016-10-28T10:00:00",
+            "updatedAt": "2016-10-31T15:30:00",
+            "patch": "2016_09_28",
+            "likes": [
+              "Iu45y3i5UY345uhVi3u5h3Huf5h",
+              "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+            ],
+            "views": 7,
+            "cards": {
+              "ungolimthelistener": 1,
+              "dunmernightblade": 3,
+              "elusiveschemer": 2,
+              "tazkadthepackmaster": 1
+            },
+            "updates": {
+              "2016-10-30T12:32:54": {
+                "dunmernightblade": -1,
+                "elusiveschemer": 1
+              },
+              "2016-10-31T15:30:00": {
+                "dunmernightblade": -1,
+                "elusiveschemer": 1,
+                "tazkadthepackmaster": -1
+              }
+            }
+          }
+        },
+        "favorite": {
+          "-KWYo4Jw4Wd6nc8oaUeh": true
+        }
+      },
+      "matches": {
+        "2016-11-30T08:22:34": {
+          "me": {
+            "deck": "-KWYo4K8PDs_zO1q8aqh",
+            "version": "v1 (2016-10-30)",
+            "name": "My Archer",
+            "type": 4,
+            "cls": 0
+          },
+          "opponent": {
+            "name": "Prophecy Assassin",
+            "type": 0,
+            "cls": 1
+          },
+          "first": false,
+          "win": true,
+          "rank": 4
         }
       }
     }
   },
   "decks": {
-    "archerMidrange": {
-      "cards": {
-        "ungolimthelistener": 1,
-        "murkwaterwitch": 3,
-        "rapidshot": 3,
-        "finishoff": 3,
-        "moonlightwerebat": 3,
-        "tazkadthepackmaster": 1,
-        "skavenpyromancer": 2,
-        "soulrestmarshal": 3,
-        "leaflurker": 1,
-        "triumphantjarl": 2
-      },
-      "updates": {
-        "10-30-2016": {
-          "rapidshot": -1,
-          "skavenpyromancer": 1,
-          "leaflurker": 2
+    "public": {
+      "-KWYo4Jw4Wd6nc8oaUeh": {
+        "name": "Cycle Archer",
+        "type": 4,
+        "cls": 0,
+        "cost": 5200,
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "createdAt": "2016-10-28T10:00:00",
+        "updatedAt": "2016-10-30T12:32:54",
+        "patch": "2016_09_28",
+        "likes": [
+          "Iu45y3i5UY345uhVi3u5h3Huf5h"
+        ],
+        "views": 12,
+        "cards": {
+          "ungolimthelistener": 1,
+          "murkwaterwitch": 3,
+          "rapidshot": 3,
+          "finishoff": 3,
+          "moonlightwerebat": 3,
+          "skavenpyromancer": 2,
+          "soulrestmarshal": 3,
+          "leaflurker": 1,
+          "triumphantjarl": 2,
+          "tazkadthepackmaster": 1
+        },
+        "updates": {
+          "2016-10-30T12:32:54": {
+            "rapidshot": -1,
+            "skavenpyromancer": 1,
+            "leaflurker": 2
+          }
+        },
+        "comments": {
+          "hre8g7er6ger7g6er9gg8e6": {
+            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+            "comment": "Nice deck",
+            "createdAt": "2016-10-28T14:17:23"
+          }
         }
       },
-      "class": "Archer",
-      "type": "Midrange",
-      "cost": 13500,
-      "owner": "09890-09890-09890-09890-09890",
-      "private": false,
-      "createdAt": "10-28-2016",
-      "patch": "2016_09_28",
-      "views": 123,
-      "likes": 12
+      "-KWYopKFZVdqz3-YtBh-": {
+        "name": "Deck Test",
+        "type": 4,
+        "cls": 1,
+        "cost": 2850,
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "createdAt": "2016-10-28T10:00:00",
+        "updatedAt": "2016-10-28T10:00:00",
+        "patch": "2016_09_28",
+        "likes": [
+          "Iu45y3i5UY345uhVi3u5h3Huf5h",
+          "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+        ],
+        "views": 7,
+        "cards": {
+          "ungolimthelistener": 1,
+          "dunmernightblade": 3,
+          "elusiveschemer": 3,
+          "tazkadthepackmaster": 1
+        }
+      }
     }
   }
 }

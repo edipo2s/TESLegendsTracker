@@ -10,7 +10,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/bottom_sheet_height">
+        android:paddingBottom="@dimen/navigation_bar_height">
 
         <ImageView
             android:id="@+id/card_all_image"
@@ -21,14 +21,14 @@
             android:layout_marginStart="@dimen/card_full_margin"
             android:layout_marginTop="@dimen/card_card_margin_top"
             android:transitionName="@string/card_transition_name"
-            tools:src="@drawable/improvisedweapon" />
+            tools:src="@drawable/card" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginStart="@dimen/large_margin"
             android:clickable="true"
             android:elevation="@dimen/cardview_default_elevation"
             android:foreground="?attr/selectableItemBackground"
@@ -39,7 +39,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_margin="@dimen/large_margin"
                 android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
 
                 <ImageView
