@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TESLegendsTracker.iml" filepath="$PROJECT_DIR$/TESLegendsTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fabLibrary/fabLibrary.iml" filepath="$PROJECT_DIR$/fabLibrary/fabLibrary.iml" />
     </modules>
   </component>
 </project>
