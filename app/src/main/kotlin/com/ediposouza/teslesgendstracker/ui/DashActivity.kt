@@ -88,14 +88,14 @@ class DashActivity : BaseActivity(),
 
     @Subscribe
     fun updateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
-        if (update.show && dash_filter_magika.visibility == View.VISIBLE ||
-                !update.show && dash_filter_magika.visibility == View.INVISIBLE) {
-            return
-        }
         val filterMagikaLP = dash_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
         val filterRarityLP = dash_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
         val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
         val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
+        if (update.show && filterMagikaLP.bottomMargin == showBottomMargin ||
+                !update.show && filterMagikaLP.bottomMargin == hideBottomMargin) {
+            return
+        }
         val animFrom = if (update.show) hideBottomMargin else showBottomMargin
         val animTo = if (update.show) showBottomMargin else hideBottomMargin
         with(ValueAnimator.ofInt(animFrom, animTo)) {
@@ -111,9 +111,6 @@ class DashActivity : BaseActivity(),
                 }
 
                 override fun onAnimationEnd(p0: Animator?) {
-                    val newVisibility = if (update.show) View.VISIBLE else View.INVISIBLE
-                    dash_filter_rarity.visibility = newVisibility
-                    dash_filter_magika.visibility = newVisibility
                 }
 
                 override fun onAnimationCancel(p0: Animator?) {
