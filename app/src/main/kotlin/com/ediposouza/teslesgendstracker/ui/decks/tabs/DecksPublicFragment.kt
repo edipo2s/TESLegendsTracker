@@ -62,6 +62,10 @@ open class DecksPublicFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         decks_recycler_view.adapter = decksAdapter
         decks_recycler_view.itemAnimator = SlideInLeftAnimator()
+        decks_refresh_layout.setOnRefreshListener {
+            decks_refresh_layout.isRefreshing = false
+            getDecks()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

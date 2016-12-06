@@ -66,6 +66,10 @@ open class CardsAllFragment : BaseFragment() {
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
+        cards_refresh_layout.setOnRefreshListener {
+            cards_refresh_layout.isRefreshing = false
+            loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
+        }
     }
 
     @Subscribe
