@@ -26,6 +26,26 @@ import kotlinx.android.synthetic.main.fragment_cards.*
  */
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
+    val pageSelecter = object : ViewPager.SimpleOnPageChangeListener() {
+        override fun onPageSelected(position: Int) {
+            val title = when (position) {
+                1 -> R.string.tab_cards_collection
+                2 -> R.string.tab_cards_favorites
+                else -> R.string.app_name
+            }
+            activity.dash_toolbar_title.setText(title)
+            BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            if (position == 1) {
+                collection_statistics.updateStatistics()
+            }
+        }
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards)
     }
@@ -33,26 +53,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
-        cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                val title = when (position) {
-                    1 -> R.string.tab_cards_collection
-                    2 -> R.string.tab_cards_favorites
-                    else -> R.string.app_name
-                }
-                activity.dash_toolbar_title.setText(title)
-                BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
-                if (position == 1) {
-                    collection_statistics.updateStatistics()
-                }
-            }
-
-        })
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
+        cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
+        cards_view_pager.addOnPageChangeListener(pageSelecter)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
     }
 

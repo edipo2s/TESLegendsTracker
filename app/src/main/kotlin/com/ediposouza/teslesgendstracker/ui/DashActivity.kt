@@ -72,9 +72,12 @@ class DashActivity : BaseActivity(),
         if (statisticsBottomSheet.state == BottomSheetBehavior.STATE_EXPANDED) {
             statisticsBottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
             return
-        } else {
-            super.onBackPressed()
         }
+        if (dash_drawer_layout.isDrawerOpen(Gravity.START)) {
+            dash_drawer_layout.closeDrawer(Gravity.START)
+            return
+        }
+        super.onBackPressed()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -84,6 +87,15 @@ class DashActivity : BaseActivity(),
             R.id.menu_decks -> showFragment(DecksFragment())
             else -> false
         }
+    }
+
+    fun showFragment(frag: Fragment): Boolean {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.dash_content, frag)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .addToBackStack(null)
+                .commit()
+        return true
     }
 
     @Subscribe
@@ -122,15 +134,6 @@ class DashActivity : BaseActivity(),
             })
             start()
         }
-    }
-
-    fun showFragment(frag: Fragment): Boolean {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.dash_content, frag)
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .addToBackStack(null)
-                .commit()
-        return true
     }
 
 }

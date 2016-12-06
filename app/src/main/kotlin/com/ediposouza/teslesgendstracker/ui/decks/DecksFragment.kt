@@ -35,6 +35,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_view_pager.adapter = adapter
         decks_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
