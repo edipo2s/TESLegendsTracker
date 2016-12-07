@@ -22,6 +22,11 @@ class CardsFavoritesFragment : CardsAllFragment() {
         }
     }
 
+    override fun configRecycleView() {
+        super.configRecycleView()
+        configLoggedViews()
+    }
+
     override fun showCards() {
         privateInteractor.getFavoriteCards(currentAttr) {
             userFavorites = it

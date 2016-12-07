@@ -58,6 +58,25 @@ class PublicInteractor() : BaseInteractor() {
                 })
     }
 
+    fun getCardsForStatistics(onSuccess: (List<CardStatistic>) -> Unit) {
+        database.child(NODE_CARDS).child(NODE_CARDS_CORE).orderByChild(KEY_CARD_COST)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val cards = ds.children.flatMap { it.children }
+                                .filter { !it.hasChild(KEY_CARD_EVOLVES) }
+                                .mapTo(arrayListOf()) { it.getValue(CardParser::class.java).toCardStatistic(it.key) }
+                        Timber.d(cards.toString())
+                        onSuccess.invoke(cards)
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
         dbPublicDeck.keepSynced(true)

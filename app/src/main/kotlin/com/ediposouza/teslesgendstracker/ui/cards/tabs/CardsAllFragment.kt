@@ -17,15 +17,19 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
+import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
@@ -70,6 +74,19 @@ open class CardsAllFragment : BaseFragment() {
             cards_refresh_layout.isRefreshing = false
             loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
         }
+    }
+
+    fun configLoggedViews() {
+        val hasLoggedUser = FirebaseAuth.getInstance().currentUser != null
+        signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
+        signin_button.visibility = if (hasLoggedUser) View.INVISIBLE else View.VISIBLE
+        cards_recycler_view.visibility = if (hasLoggedUser) View.VISIBLE else View.INVISIBLE
+    }
+
+    @Subscribe
+    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+        configLoggedViews()
+        loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
     }
 
     @Subscribe
