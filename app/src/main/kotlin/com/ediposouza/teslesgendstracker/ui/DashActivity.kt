@@ -14,6 +14,8 @@ import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
@@ -26,9 +28,14 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.doAsync
+import timber.log.Timber
 
 class DashActivity : BaseActivity(),
         NavigationView.OnNavigationItemSelectedListener {
+
+    val publicInteractor = PublicInteractor()
+    val privateInteractor = PrivateInteractor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +53,15 @@ class DashActivity : BaseActivity(),
                 super.onDrawerOpened(drawerView)
                 val user = FirebaseAuth.getInstance().currentUser
                 dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
-                dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
-                if (user != null) {
-                    Glide.with(this@DashActivity)
-                            .load(user.photoUrl)
-                            .transform(CircleTransform(this@DashActivity))
-                            .into(dash_navigation_view.getHeaderView(0).profile_image)
+                with(dash_navigation_view.getHeaderView(0)) {
+                    profile_name.text = user?.displayName ?: getString(R.string.unknown)
+                    if (user != null) {
+                        Glide.with(this@DashActivity)
+                                .load(user.photoUrl)
+                                .transform(CircleTransform(this@DashActivity))
+                                .into(profile_image)
+                        updateCollectionStatistics()
+                    }
                 }
                 BottomSheetBehavior.from(collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             }
@@ -85,6 +95,12 @@ class DashActivity : BaseActivity(),
         return when (item.itemId) {
             R.id.menu_cards -> showFragment(CardsFragment())
             R.id.menu_decks -> showFragment(DecksFragment())
+            R.id.menu_matches,
+            R.id.menu_arena,
+            R.id.menu_season,
+            R.id.menu_about -> {
+                true
+            }
             else -> false
         }
     }
@@ -96,6 +112,37 @@ class DashActivity : BaseActivity(),
                 .addToBackStack(null)
                 .commit()
         return true
+    }
+
+    private fun updateCollectionStatistics() {
+        var allCardsTotal = 0
+        var userCardsTotal = 0
+        with(dash_navigation_view.getHeaderView(0)) {
+            profile_collection.visibility = View.INVISIBLE
+            profile_collection_loading.visibility = View.VISIBLE
+            doAsync {
+                publicInteractor.getCardsForStatistics {
+                    val allAttrCards = it.map { it.shortName to it.unique }
+                    allCardsTotal += allAttrCards.filter { it.second }.size
+                    allCardsTotal += allAttrCards.filter { !it.second }.size * 3
+                    privateInteractor.getUserCollection { collection: Map<String, Long> ->
+                        val userAttrCards = allAttrCards.filter { collection.containsKey(it.first) }
+                        userCardsTotal += userAttrCards.filter { it.second }.size
+                        userCardsTotal += userAttrCards.filter { !it.second }.size * 3
+                        val stringPercent = getString(R.string.statistics_percent,
+                                if (allCardsTotal > 0)
+                                    userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f
+                                else 0f)
+                        runOnUiThread {
+                            profile_collection_loading.visibility = View.GONE
+                            profile_collection.visibility = View.VISIBLE
+                            profile_collection.text = stringPercent
+                            Timber.d("All: %d, User: %d", allCardsTotal, userCardsTotal)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Subscribe

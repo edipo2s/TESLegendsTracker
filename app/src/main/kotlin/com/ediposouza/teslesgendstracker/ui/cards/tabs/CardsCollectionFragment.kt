@@ -32,10 +32,29 @@ class CardsCollectionFragment : CardsAllFragment() {
         true
     }
 
+    val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+        }
+
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
+                    newState == BottomSheetBehavior.STATE_SETTLING
+            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            if (expanded) {
+                activity.collection_statistics.scrollToTop()
+            }
+        }
+
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        view_statistics.setOnClickListener { statisticsSheetBehavior.toogleExpanded() }
+        view_statistics.setOnClickListener {
+            statisticsSheetBehavior.toogleExpanded()
+            view_statistics.updateStatistics()
+        }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
@@ -61,7 +80,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.adapter = cardsCollectionAdapter
-        view_statistics.updateStatistics()
+        configLoggedViews()
     }
 
     override fun showCards() {
@@ -85,18 +104,6 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {
-        }
-
-        override fun onStateChanged(bottomSheet: View, newState: Int) {
-            val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
-                    newState == BottomSheetBehavior.STATE_SETTLING
-            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-        }
-
-    }
 }
 
 class CardsCollectionAdapter(val itemClick: (CardSlot) -> Unit,

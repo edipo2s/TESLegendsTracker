@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -17,7 +16,6 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.dialog_signin.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
@@ -111,6 +109,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     if (task.isSuccessful) {
                         toast("Logged with " + firebaseAuth.currentUser?.displayName)
                         PrivateInteractor().setUserInfo()
+                        EventBus.getDefault().post(CmdLoginSuccess())
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast("Authentication failed.")
@@ -150,28 +149,8 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     @Subscribe
     fun showLogin(showLogin: CmdShowLogin) {
-        val loginView = View.inflate(this, R.layout.dialog_signin, null)
-        val alertDialog = AlertDialog.Builder(this)
-                .setView(loginView)
-                .setCancelable(true)
-                .show()
-        loginView.login_signin_google.setOnClickListener {
-            initGoogleLogin()
-            alertDialog.dismiss()
-        }
-        loginView.login_signin_twitter.setOnClickListener {
-            initTwitterLogin()
-            alertDialog.dismiss()
-        }
-    }
-
-    private fun initGoogleLogin() {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    private fun initTwitterLogin() {
-
     }
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TES Lesgends Tracker</string>
+    <string name="app_name">TES Legends Tracker (Preview)</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
@@ -7,10 +7,6 @@
     <string name="menu_season">Season</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_about">About</string>
-
-    <string name="drawer_open">Open drawer</string>
-    <string name="drawer_close">Close drawer</string>
-    <string name="search_hint">Name, race, type or keyword</string>
     <string name="menu_search">Search</string>
     <string name="menu_statistics">Statistics</string>
     <string name="menu_only_private">Only Private</string>
@@ -18,6 +14,10 @@
     <string name="menu_unfavorite">Unfavorite</string>
     <string name="menu_like">Like</string>
     <string name="menu_unlike">Unlike</string>
+
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="search_hint">Name, race, type or keyword</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -34,6 +34,8 @@
 
     <string name="action_login">Do Login</string>
     <string name="profile_collection">Collection</string>
+    <string name="unknown">Unknown</string>
+    <string name="zero_percent" translatable="false">0%</string>
 
     <string name="error_auth">Favorite a card require user login.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
