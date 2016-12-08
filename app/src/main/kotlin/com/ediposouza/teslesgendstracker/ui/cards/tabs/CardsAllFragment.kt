@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +16,7 @@ import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.load
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
@@ -25,10 +26,13 @@ import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.NativeExpressAdView
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
+import kotlinx.android.synthetic.main.itemlist_card_ads.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
@@ -65,7 +69,7 @@ open class CardsAllFragment : BaseFragment() {
 
     open fun configRecycleView() {
         cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.layoutManager = GridLayoutManager(context, 3)
+        cards_recycler_view.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         cards_recycler_view.itemAnimator = ScaleInAnimator()
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
@@ -168,20 +172,65 @@ open class CardsAllFragment : BaseFragment() {
 }
 
 class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsAllViewHolder>() {
+                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    val ITEM_VIEW_TYPE_CARD = 0
+    val ITEM_VIEW_TYPE_ADS = 1
+
+    val ADS_EACH_ITEMS = 21 //after 7 lines
 
     var items: List<Card> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsAllViewHolder {
-        return CardsAllViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_card, parent, false), itemClick, itemLongClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == ITEM_VIEW_TYPE_CARD) {
+            val cardView = updateViewSpan(parent.inflate(R.layout.itemlist_card), false)
+            return CardsAllViewHolder(cardView, itemClick, itemLongClick)
+        } else {
+            return AdsViewHolder(updateViewSpan(parent.inflate(R.layout.itemlist_card_ads), true))
+        }
     }
 
-    override fun onBindViewHolder(holder: CardsAllViewHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        val qtdAdsBefore = getAdsQtdBefore(position)
+        //        when (position) {
+//            in 0..ADS_EACH_ITEMS -> 0 //0-21
+//            in ADS_EACH_ITEMS + 1..2 * ADS_EACH_ITEMS + 1 -> 1  //22-43
+//            in 2 * ADS_EACH_ITEMS + 2..3 * ADS_EACH_ITEMS + 2 -> 2 //44-65
+//            in 3 * ADS_EACH_ITEMS + 3..4 * ADS_EACH_ITEMS + 3 -> 3 //66-87
+//            else -> 0
+//        }
+        if (getItemViewType(position) == ITEM_VIEW_TYPE_CARD) {
+            (holder as CardsAllViewHolder).bind(items[position - qtdAdsBefore])
+        } else {
+            (holder as AdsViewHolder).bind()
+        }
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = items.size + items.size.div(ADS_EACH_ITEMS)
+
+    override fun getItemViewType(position: Int): Int {
+        val qtdAdsBefore = getAdsQtdBefore(position)
+        val nextEachItems = ADS_EACH_ITEMS * (qtdAdsBefore + 1) + qtdAdsBefore
+        return if (position == nextEachItems) ITEM_VIEW_TYPE_ADS else ITEM_VIEW_TYPE_CARD
+//        return when (position) {
+//            ADS_EACH_ITEMS, //21
+//            2 * ADS_EACH_ITEMS + 1, //43
+//            3 * ADS_EACH_ITEMS + 2 -> ITEM_VIEW_TYPE_ADS //65
+//            else -> ITEM_VIEW_TYPE_CARD
+//        }
+    }
+
+    private fun getAdsQtdBefore(position: Int): Int {
+        val qtdAds = position.div(ADS_EACH_ITEMS)
+        return (position - qtdAds).div(ADS_EACH_ITEMS)
+    }
+
+    private fun updateViewSpan(view: View, fullSpan: Boolean): View {
+        val viewLP = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
+        viewLP.isFullSpan = fullSpan
+        view.layoutParams = viewLP
+        return view
+    }
 
     fun showCards(cards: List<Card>) {
         val oldItems = items
@@ -210,6 +259,20 @@ class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
         itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
         itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
         itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
+    }
+
+}
+
+class AdsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    fun bind() {
+        val context = itemView.context
+        itemView.ads_layout.removeAllViews()
+        val adView = NativeExpressAdView(context)
+        adView.adSize = AdSize(280, 80)
+        adView.adUnitId = context.getString(R.string.app_ads_card_list)
+        adView.load()
+        itemView.ads_layout.addView(adView)
     }
 
 }
