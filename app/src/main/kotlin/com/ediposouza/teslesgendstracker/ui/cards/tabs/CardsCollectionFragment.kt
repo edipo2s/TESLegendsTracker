@@ -5,11 +5,15 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.toogleExpanded
+import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -27,7 +31,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         BottomSheetBehavior.from(view_statistics)
     }
 
-    val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view, card ->
+    val cardsCollectionAdapter = CardsCollectionAdapter(ADS_EACH_ITEMS, { changeUserCardQtd(it) }) { view, card ->
         showCardExpanded(card, view)
         true
     }
@@ -106,21 +110,22 @@ class CardsCollectionFragment : CardsAllFragment() {
 
 }
 
-class CardsCollectionAdapter(val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsCollectionViewHolder>() {
+class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsCollectionViewHolder {
-        return CardsCollectionViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_card_collection, parent, false), itemClick, itemLongClick)
+    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card_collection
+
+    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
+        return CardsCollectionViewHolder(defaultItemView, itemClick, itemLongClick)
     }
 
-    override fun onBindViewHolder(holder: CardsCollectionViewHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        (holder as CardsCollectionViewHolder).bind(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getDefaultItemCount(): Int = items.size
 
     fun showCards(cardSlots: ArrayList<CardSlot>) {
         val oldItems = items
