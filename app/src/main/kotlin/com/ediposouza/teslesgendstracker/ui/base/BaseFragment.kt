@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.support.v4.app.Fragment
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManager
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
@@ -11,6 +12,7 @@ import timber.log.Timber
 open class BaseFragment : Fragment() {
 
     protected val eventBus by lazy { EventBus.getDefault() }
+    protected val metricsManager by lazy { MetricsManager.getInstance() }
 
     override fun onStart() {
         super.onStart()

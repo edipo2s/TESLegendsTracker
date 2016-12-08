@@ -51,7 +51,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
-        dbUserCards(card.cls)?.apply {
+        dbUserCards(card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
             }
@@ -59,7 +59,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
-        dbUserCards(card.cls)?.apply {
+        dbUserCards(card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_FAVORITE).apply {
                 if (favorite) {
                     setValue(true).addOnCompleteListener { onComplete.invoke() }

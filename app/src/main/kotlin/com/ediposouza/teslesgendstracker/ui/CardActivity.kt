@@ -15,6 +15,7 @@ import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
@@ -50,6 +51,8 @@ class CardActivity : BaseActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
+        metricsManager.trackScreen(MetricsManagerConstants.SCREEN_CARD_DETAILS)
+        metricsManager.trackCardView(card)
         ads_view.load()
     }
 

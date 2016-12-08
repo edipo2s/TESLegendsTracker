@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVis
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -42,6 +43,11 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             if (position == 1) {
                 collection_statistics.updateStatistics()
             }
+            metricsManager.trackScreen(when (position) {
+                0 -> MetricsManagerConstants.SCREEN_CARDS_ALL
+                1 -> MetricsManagerConstants.SCREEN_CARDS_COLLECTION
+                else -> MetricsManagerConstants.SCREEN_CARDS_FAVORED
+            })
         }
 
     }
@@ -87,6 +93,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         eventBus.post(CmdFilterSearch(query))
+        metricsManager.trackSearch(query ?: "")
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
