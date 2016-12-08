@@ -108,6 +108,11 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
+    override fun configLoggedViews() {
+        super.configLoggedViews()
+        view_statistics?.updateStatistics()
+    }
+
 }
 
 class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Unit,

@@ -1,0 +1,9 @@
+<resources>
+
+    <dimen name="nano_margin">2dp</dimen>
+    <dimen name="small_margin">3dp</dimen>
+    <dimen name="default_margin">7dp</dimen>
+    <dimen name="medium_margin">11dp</dimen>
+    <dimen name="large_margin">15dp</dimen>
+
+</resources>

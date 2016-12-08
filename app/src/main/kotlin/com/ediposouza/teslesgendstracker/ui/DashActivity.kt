@@ -122,13 +122,11 @@ class DashActivity : BaseActivity(),
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
                 publicInteractor.getCardsForStatistics {
-                    val allAttrCards = it.map { it.shortName to it.unique }
-                    allCardsTotal += allAttrCards.filter { it.second }.size
-                    allCardsTotal += allAttrCards.filter { !it.second }.size * 3
-                    privateInteractor.getUserCollection { collection: Map<String, Long> ->
-                        val userAttrCards = allAttrCards.filter { collection.containsKey(it.first) }
-                        userCardsTotal += userAttrCards.filter { it.second }.size
-                        userCardsTotal += userAttrCards.filter { !it.second }.size * 3
+                    val allAttrCards = it
+                    allCardsTotal += allAttrCards.filter { it.unique }.size
+                    allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
+                    privateInteractor.getUserCollection {
+                        userCardsTotal += it.values.sum().toInt()
                         val stringPercent = getString(R.string.statistics_percent,
                                 if (allCardsTotal > 0)
                                     userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f

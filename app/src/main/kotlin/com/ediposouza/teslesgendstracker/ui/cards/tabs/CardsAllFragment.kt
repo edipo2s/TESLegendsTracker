@@ -67,8 +67,11 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun configRecycleView() {
+        val staggeredGridLM = object : StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL) {
+            override fun supportsPredictiveItemAnimations(): Boolean = false
+        }
         cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        cards_recycler_view.layoutManager = staggeredGridLM
         cards_recycler_view.itemAnimator = ScaleInAnimator()
         cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
@@ -79,7 +82,7 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    fun configLoggedViews() {
+    open fun configLoggedViews() {
         val hasLoggedUser = FirebaseAuth.getInstance().currentUser != null
         signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
         signin_button.visibility = if (hasLoggedUser) View.INVISIBLE else View.VISIBLE
