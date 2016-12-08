@@ -13,12 +13,6 @@
     <dimen name="font_large">22sp</dimen>
     <dimen name="font_huge">26sp</dimen>
 
-    <dimen name="nano_margin">2dp</dimen>
-    <dimen name="small_margin">4dp</dimen>
-    <dimen name="default_margin">8dp</dimen>
-    <dimen name="medium_margin">12dp</dimen>
-    <dimen name="large_margin">16dp</dimen>
-
     <dimen name="size_micro">12dp</dimen>
     <dimen name="size_small">24dp</dimen>
     <dimen name="size_normal">36dp</dimen>

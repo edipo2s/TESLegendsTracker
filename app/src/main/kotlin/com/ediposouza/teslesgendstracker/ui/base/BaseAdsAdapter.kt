@@ -61,5 +61,4 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
         view.layoutParams = viewLP
         return view
     }
-
 }

@@ -40,6 +40,7 @@
     <string name="zero_percent" translatable="false">0%</string>
 
     <string name="error_auth">Favorite a card require user login.</string>
+    <string name="error_login">Authentication failed.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
 
