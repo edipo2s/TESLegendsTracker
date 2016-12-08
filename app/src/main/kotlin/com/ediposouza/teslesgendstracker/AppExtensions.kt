@@ -1,10 +1,14 @@
 package com.ediposouza.teslesgendstracker
 
+import android.content.Context
 import android.support.annotation.IntegerRes
 import android.support.design.widget.BottomSheetBehavior
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.NativeExpressAdView
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -26,4 +30,21 @@ fun ViewGroup.inflate(@IntegerRes resource: Int): View {
 fun BottomSheetBehavior<*>.toogleExpanded() {
     this.state = if (this.state == BottomSheetBehavior.STATE_COLLAPSED)
         BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
+}
+
+fun AdView.load() {
+    this.loadAd(createAdRequest(context))
+}
+
+fun NativeExpressAdView.load() {
+    this.loadAd(createAdRequest(context))
+}
+
+private fun createAdRequest(context: Context): AdRequest {
+    val devicesId = context.resources.getStringArray(R.array.testing_devices)
+    val adRequestBuilder = AdRequest.Builder()
+    for (deviceId in devicesId) {
+        adRequestBuilder.addTestDevice(deviceId)
+    }
+    return adRequestBuilder.build()
 }

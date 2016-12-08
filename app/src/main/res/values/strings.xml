@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TES Legends Tracker (Preview)</string>
+    <string name="app_ads_card_list">***REMOVED***</string>
+    <string name="app_ads_card_full">***REMOVED***</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>

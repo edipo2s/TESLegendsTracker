@@ -12,4 +12,10 @@
         <item name="tab_decks_favorites">@string/tab_decks_favorites</item>
     </array>
 
+    <array name="testing_devices">
+        <item name="device_id_1">00000000000000000000000000000000</item>
+        <item name="device_id_2">0428BD38C7ABE67635C669930454496D</item>
+        <item name="device_id_3">63518A039B56083ED04CC7BF963344A0</item>
+    </array>
+
 </resources>

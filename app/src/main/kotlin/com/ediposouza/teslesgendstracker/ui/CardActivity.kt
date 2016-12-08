@@ -10,6 +10,7 @@ import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.load
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
@@ -45,6 +46,11 @@ class CardActivity : BaseActivity() {
         loadCardInfo()
         configureBottomSheet()
         setResult(Activity.RESULT_CANCELED, Intent())
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        ads_view.load()
     }
 
     private fun configureBottomSheet() {
