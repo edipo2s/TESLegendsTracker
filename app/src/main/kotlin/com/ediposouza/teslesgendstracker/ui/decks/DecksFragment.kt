@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
@@ -49,6 +50,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 (adapter.getItem(position) as DecksPublicFragment).getDecks()
+                metricsManager.trackScreen(when (position) {
+                    0 -> MetricsManagerConstants.SCREEN_DECKS_PUBLIC
+                    1 -> MetricsManagerConstants.SCREEN_DECKS_OWNED
+                    else -> MetricsManagerConstants.SCREEN_DECKS_FAVORED
+                })
             }
 
         })
