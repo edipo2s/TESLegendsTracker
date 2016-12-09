@@ -108,7 +108,8 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
         items = decks
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].id == items[newItemPosition].id
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -116,7 +117,7 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].id == items[newItemPosition].id
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)
