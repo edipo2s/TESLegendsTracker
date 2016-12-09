@@ -73,7 +73,6 @@ open class CardsAllFragment : BaseFragment() {
         cards_recycler_view.adapter = cardsAdapter
         cards_recycler_view.layoutManager = staggeredGridLM
         cards_recycler_view.itemAnimator = ScaleInAnimator()
-        cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
         cards_refresh_layout.setOnRefreshListener {
@@ -193,9 +192,11 @@ class CardsAllAdapter(adsEachItems: Int, val itemClick: (View, Card) -> Unit,
     fun showCards(cards: List<Card>) {
         val oldItems = items
         items = cards
+//        notifyItemRangeChanged(0, itemCount)
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -203,7 +204,7 @@ class CardsAllAdapter(adsEachItems: Int, val itemClick: (View, Card) -> Unit,
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)

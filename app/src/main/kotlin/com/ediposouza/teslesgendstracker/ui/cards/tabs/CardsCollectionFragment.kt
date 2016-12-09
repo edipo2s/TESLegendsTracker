@@ -137,7 +137,8 @@ class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Uni
         items = cardSlots
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -145,7 +146,7 @@ class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Uni
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)
