@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
@@ -31,9 +30,12 @@ class CardsCollectionFragment : CardsAllFragment() {
         BottomSheetBehavior.from(view_statistics)
     }
 
-    val cardsCollectionAdapter = CardsCollectionAdapter(ADS_EACH_ITEMS, { changeUserCardQtd(it) }) { view, card ->
-        showCardExpanded(card, view)
-        true
+    val cardsCollectionAdapter by lazy {
+        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
+        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, { changeUserCardQtd(it) }) { view, card ->
+            showCardExpanded(card, view)
+            true
+        }
     }
 
     val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
@@ -57,7 +59,6 @@ class CardsCollectionFragment : CardsAllFragment() {
         setHasOptionsMenu(true)
         view_statistics.setOnClickListener {
             statisticsSheetBehavior.toogleExpanded()
-            view_statistics.updateStatistics()
         }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
@@ -71,6 +72,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_statistics -> {
+                view_statistics?.updateStatistics()
                 statisticsSheetBehavior.toogleExpanded()
                 return true
             }
@@ -108,22 +110,15 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    override fun configLoggedViews() {
-        super.configLoggedViews()
-        view_statistics?.updateStatistics()
-    }
-
 }
 
-class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
+class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
-    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card_collection
-
-    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
-        return CardsCollectionViewHolder(defaultItemView, itemClick, itemLongClick)
+    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
     }
 
     override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
