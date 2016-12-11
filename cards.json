@@ -2070,7 +2070,7 @@
         },
         "divineconviction": {
           "name": "Divine Conviction",
-          "cost": "05",
+          "cost": "04",
           "type": "Support",
           "race": "",
           "attack": "",
@@ -4719,12 +4719,6 @@
           }
         },
         "willpower": {
-          "divineconviction": {
-            "cost": {
-              "after": "05",
-              "before": "04"
-            }
-          },
           "divinefervor": {
             "cost": {
               "after": "05",
