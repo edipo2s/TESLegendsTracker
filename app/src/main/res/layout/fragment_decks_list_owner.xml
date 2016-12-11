@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/navigation_bar_height">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/decks_recycler_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/decks_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/default_margin"
-        android:scrollbarFadeDuration="0"
-        android:scrollbars="vertical"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/itemlist_deck" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/decks_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/default_margin"
+            android:scrollbarFadeDuration="0"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/itemlist_deck" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/decks_fab_add"

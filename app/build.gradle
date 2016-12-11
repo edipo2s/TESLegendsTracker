@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
@@ -12,8 +13,8 @@ android {
         applicationId "com.ediposouza.teslesgendstracker"
         minSdkVersion 21//16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode appVersionCode
+        versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
@@ -55,7 +56,7 @@ ext {
     icePickVersion = "3.2.+"
     okIOVersion = "1.10.+"
     okHttpVersion = "3.4.+"
-    playServicesVersion = "10.0.1"
+    playServicesVersion = "9.8.0"//"10.0.1"
     supportLibraryVersion = "25.0.1"
     threetenabpVersion = "1.0.+"
 
@@ -85,10 +86,19 @@ dependencies {
     //Google
     compile "com.google.android.gms:play-services-auth:$playServicesVersion"
     compile "com.google.firebase:firebase-auth:$playServicesVersion"
+    compile "com.google.firebase:firebase-ads:$playServicesVersion"
     compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
+
+    //Fabric
+    compile("com.crashlytics.sdk.android:answers:1.3.9") {
+        transitive = true
+    }
+    compile("com.crashlytics.sdk.android:crashlytics:2.6.2") {
+        transitive = true
+    }
 
     //Others
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"

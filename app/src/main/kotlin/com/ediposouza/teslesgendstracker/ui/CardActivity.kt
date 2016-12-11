@@ -10,10 +10,12 @@ import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.load
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
@@ -45,6 +47,13 @@ class CardActivity : BaseActivity() {
         loadCardInfo()
         configureBottomSheet()
         setResult(Activity.RESULT_CANCELED, Intent())
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        metricsManager.trackScreen(MetricsManagerConstants.SCREEN_CARD_DETAILS)
+        metricsManager.trackCardView(card)
+        ads_view.load()
     }
 
     private fun configureBottomSheet() {

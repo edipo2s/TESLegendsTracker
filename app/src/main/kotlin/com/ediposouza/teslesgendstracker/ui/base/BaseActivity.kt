@@ -6,10 +6,11 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,7 +18,6 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.dialog_signin.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.toast
@@ -29,6 +29,7 @@ import timber.log.Timber
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
 
     protected val eventBus by lazy { EventBus.getDefault() }
+    protected val metricsManager by lazy { MetricsManager.getInstance() }
 
     private val RC_SIGN_IN: Int = 235
 
@@ -93,9 +94,10 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
-        val user = firebaseAuth.currentUser
-        if (user != null) {
-            Timber.d("onAuthStateChanged:signed_in:" + user.getUid())
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            Timber.d("onAuthStateChanged:signed_in:" + currentUser.uid)
+            metricsManager.trackSignIn(currentUser, true)
         } else {
             Timber.d("onAuthStateChanged:signed_out")
         }
@@ -109,11 +111,19 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 .addOnCompleteListener(this) { task ->
                     Timber.d("signInWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
-                        toast("Logged with " + firebaseAuth.currentUser?.displayName)
+                        val currentUser = firebaseAuth.currentUser
+                        PublicInteractor().getUserInfo(currentUser?.uid ?: "", {
+                            toast("SignUp with " + currentUser?.displayName)
+                            metricsManager.trackSignUp()
+                        }, {
+                            toast("SignIn with " + currentUser?.displayName)
+                        })
                         PrivateInteractor().setUserInfo()
+                        EventBus.getDefault().post(CmdLoginSuccess())
                     } else {
                         Timber.w("signInWithCredential", task.exception)
-                        toast("Authentication failed.")
+                        toast(getString(R.string.error_login))
+                        metricsManager.trackSignIn(null, false)
                     }
                     hideLoading()
                 }
@@ -150,28 +160,8 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     @Subscribe
     fun showLogin(showLogin: CmdShowLogin) {
-        val loginView = View.inflate(this, R.layout.dialog_signin, null)
-        val alertDialog = AlertDialog.Builder(this)
-                .setView(loginView)
-                .setCancelable(true)
-                .show()
-        loginView.login_signin_google.setOnClickListener {
-            initGoogleLogin()
-            alertDialog.dismiss()
-        }
-        loginView.login_signin_twitter.setOnClickListener {
-            initTwitterLogin()
-            alertDialog.dismiss()
-        }
-    }
-
-    private fun initGoogleLogin() {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    private fun initTwitterLogin() {
-
     }
 
 }

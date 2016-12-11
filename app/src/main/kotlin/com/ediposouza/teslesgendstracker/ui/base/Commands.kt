@@ -11,6 +11,8 @@ import com.ediposouza.teslesgendstracker.data.Attribute
  */
 class CmdShowLogin
 
+class CmdLoginSuccess
+
 data class CmdShowCardsByAttr(val attr: Attribute)
 
 data class CmdUpdateRarityMagikaFiltersVisibility(val show: Boolean)

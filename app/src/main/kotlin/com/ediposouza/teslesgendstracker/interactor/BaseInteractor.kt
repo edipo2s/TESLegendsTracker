@@ -1,6 +1,5 @@
 package com.ediposouza.teslesgendstracker.interactor
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 /**
@@ -26,7 +25,5 @@ open class BaseInteractor() {
     protected val dbDecks by lazy { database.child(NODE_DECKS) }
 
     protected val dbUsers by lazy { database.child(NODE_USERS) }
-
-    protected val userID  by lazy { FirebaseAuth.getInstance().currentUser?.uid ?: "" }
 
 }

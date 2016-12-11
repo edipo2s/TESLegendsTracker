@@ -5,11 +5,15 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.toogleExpanded
+import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -27,15 +31,34 @@ class CardsCollectionFragment : CardsAllFragment() {
         BottomSheetBehavior.from(view_statistics)
     }
 
-    val cardsCollectionAdapter = CardsCollectionAdapter({ changeUserCardQtd(it) }) { view, card ->
+    val cardsCollectionAdapter = CardsCollectionAdapter(ADS_EACH_ITEMS, { changeUserCardQtd(it) }) { view, card ->
         showCardExpanded(card, view)
         true
+    }
+
+    val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+        }
+
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
+                    newState == BottomSheetBehavior.STATE_SETTLING
+            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
+            if (expanded) {
+                activity.collection_statistics.scrollToTop()
+            }
+        }
+
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        view_statistics.setOnClickListener { statisticsSheetBehavior.toogleExpanded() }
+        view_statistics.setOnClickListener {
+            statisticsSheetBehavior.toogleExpanded()
+            view_statistics.updateStatistics()
+        }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
@@ -61,7 +84,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.adapter = cardsCollectionAdapter
-        view_statistics.updateStatistics()
+        configLoggedViews()
     }
 
     override fun showCards() {
@@ -85,42 +108,37 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {
-        }
-
-        override fun onStateChanged(bottomSheet: View, newState: Int) {
-            val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
-                    newState == BottomSheetBehavior.STATE_SETTLING
-            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-        }
-
+    override fun configLoggedViews() {
+        super.configLoggedViews()
+        view_statistics?.updateStatistics()
     }
+
 }
 
-class CardsCollectionAdapter(val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsCollectionViewHolder>() {
+class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsCollectionViewHolder {
-        return CardsCollectionViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_card_collection, parent, false), itemClick, itemLongClick)
+    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card_collection
+
+    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
+        return CardsCollectionViewHolder(defaultItemView, itemClick, itemLongClick)
     }
 
-    override fun onBindViewHolder(holder: CardsCollectionViewHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        (holder as CardsCollectionViewHolder).bind(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getDefaultItemCount(): Int = items.size
 
     fun showCards(cardSlots: ArrayList<CardSlot>) {
         val oldItems = items
         items = cardSlots
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -128,7 +146,7 @@ class CardsCollectionAdapter(val itemClick: (CardSlot) -> Unit,
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)

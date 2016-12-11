@@ -12,16 +12,32 @@
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/navigation_bar_height">
 
-        <ImageView
-            android:id="@+id/card_all_image"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/card_full_margin"
-            android:layout_marginEnd="@dimen/card_full_margin"
-            android:layout_marginStart="@dimen/card_full_margin"
             android:layout_marginTop="@dimen/card_card_margin_top"
-            android:transitionName="@string/card_transition_name"
-            tools:src="@drawable/card" />
+            android:orientation="vertical">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/ads_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                app:adSize="BANNER"
+                app:adUnitId="@string/app_ads_card_full" />
+
+            <ImageView
+                android:id="@+id/card_all_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/card_full_margin"
+                android:layout_marginEnd="@dimen/card_full_margin"
+                android:layout_marginStart="@dimen/card_full_margin"
+                android:transitionName="@string/card_transition_name"
+                tools:src="@drawable/card" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_bottom_sheet"

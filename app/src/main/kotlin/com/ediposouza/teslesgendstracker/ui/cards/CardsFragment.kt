@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVis
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -26,6 +27,31 @@ import kotlinx.android.synthetic.main.fragment_cards.*
  */
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
+    val pageSelecter = object : ViewPager.SimpleOnPageChangeListener() {
+        override fun onPageSelected(position: Int) {
+            val title = when (position) {
+                1 -> R.string.tab_cards_collection
+                2 -> R.string.tab_cards_favorites
+                else -> R.string.app_name
+            }
+            activity.dash_toolbar_title.setText(title)
+            BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            if (position == 1) {
+                collection_statistics.updateStatistics()
+            }
+            metricsManager.trackScreen(when (position) {
+                0 -> MetricsManagerConstants.SCREEN_CARDS_ALL
+                1 -> MetricsManagerConstants.SCREEN_CARDS_COLLECTION
+                else -> MetricsManagerConstants.SCREEN_CARDS_FAVORED
+            })
+        }
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards)
     }
@@ -33,26 +59,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        cards_view_pager.adapter = CardsPageAdapter(context, fragmentManager)
-        cards_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                val title = when (position) {
-                    1 -> R.string.tab_cards_collection
-                    2 -> R.string.tab_cards_favorites
-                    else -> R.string.app_name
-                }
-                activity.dash_toolbar_title.setText(title)
-                BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
-                if (position == 1) {
-                    collection_statistics.updateStatistics()
-                }
-            }
-
-        })
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
+        cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
+        cards_view_pager.addOnPageChangeListener(pageSelecter)
         attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
     }
 
@@ -84,6 +93,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         eventBus.post(CmdFilterSearch(query))
+        metricsManager.trackSearch(query ?: "")
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true

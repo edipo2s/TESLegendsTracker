@@ -62,6 +62,10 @@ open class DecksPublicFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         decks_recycler_view.adapter = decksAdapter
         decks_recycler_view.itemAnimator = SlideInLeftAnimator()
+        decks_refresh_layout.setOnRefreshListener {
+            decks_refresh_layout.isRefreshing = false
+            getDecks()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -104,7 +108,8 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
         items = decks
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].id == items[newItemPosition].id
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -112,7 +117,7 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].id == items[newItemPosition].id
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)
