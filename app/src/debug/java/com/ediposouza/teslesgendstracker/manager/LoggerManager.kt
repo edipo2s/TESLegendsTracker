@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker
+package com.ediposouza.teslesgendstracker.manager
 
 import timber.log.Timber
 

@@ -7,16 +7,12 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.view.View
-import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.load
-import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
@@ -42,7 +38,10 @@ class CardActivity : BaseActivity() {
         setContentView(R.layout.activity_card)
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
-        card_all_image.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
+        card_all_image.setOnClickListener {
+            ActivityCompat.finishAfterTransition(this)
+            metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
+        }
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
         loadCardInfo()
         configureBottomSheet()
@@ -51,13 +50,27 @@ class CardActivity : BaseActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        metricsManager.trackScreen(MetricsManagerConstants.SCREEN_CARD_DETAILS)
+        metricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         metricsManager.trackCardView(card)
         ads_view.load()
     }
 
     private fun configureBottomSheet() {
         val sheetBehavior = BottomSheetBehavior.from(card_bottom_sheet)
+        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED ->
+                        metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_EXPAND())
+                    BottomSheetBehavior.STATE_COLLAPSED ->
+                        metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_COLLAPSE())
+                }
+            }
+
+        })
         card_bottom_sheet.setOnClickListener { sheetBehavior.toogleExpanded() }
     }
 
@@ -72,9 +85,11 @@ class CardActivity : BaseActivity() {
     }
 
     private fun onFavoriteClick() {
-        if (FirebaseAuth.getInstance().currentUser != null) {
+        if (App.hasUserLogged) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
+                metricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()
+                else MetricAction.ACTION_CARD_DETAILS_UNFAVORITE())
                 val stringRes = if (favorite) R.string.card_favorited else R.string.card_unfavorited
                 toast(getString(stringRes, card.name))
                 loadCardInfo()

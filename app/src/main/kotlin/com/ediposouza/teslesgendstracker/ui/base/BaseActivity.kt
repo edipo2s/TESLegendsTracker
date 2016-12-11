@@ -7,10 +7,11 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.ProgressBar
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManager
+import com.ediposouza.teslesgendstracker.manager.MetricManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,7 +30,7 @@ import timber.log.Timber
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
 
     protected val eventBus by lazy { EventBus.getDefault() }
-    protected val metricsManager by lazy { MetricsManager.getInstance() }
+    protected val metricsManager by lazy { MetricManager.getInstance() }
 
     private val RC_SIGN_IN: Int = 235
 
@@ -97,7 +98,10 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             Timber.d("onAuthStateChanged:signed_in:" + currentUser.uid)
-            metricsManager.trackSignIn(currentUser, true)
+            if (!App.hasUserLogged) {
+                metricsManager.trackSignIn(currentUser, true)
+                App.hasUserLogged = true
+            }
         } else {
             Timber.d("onAuthStateChanged:signed_out")
         }

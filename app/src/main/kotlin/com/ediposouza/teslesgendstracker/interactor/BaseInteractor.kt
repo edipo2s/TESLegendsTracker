@@ -7,7 +7,12 @@ import com.google.firebase.database.FirebaseDatabase
  */
 open class BaseInteractor() {
 
-    protected val NODE_CARDS = "cards"
+    companion object {
+
+        val NODE_CARDS = "cards"
+
+    }
+
     protected val NODE_CARDS_CORE = "core"
     protected val NODE_USERS = "users"
     protected val NODE_USERS_INFO = "info"

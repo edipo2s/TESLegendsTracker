@@ -1,9 +1,12 @@
-package com.ediposouza.teslesgendstracker.ui.utils
+package com.ediposouza.teslesgendstracker.manager
 
 import android.content.Context
 import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
+import com.ediposouza.teslesgendstracker.MetricAction
+import com.ediposouza.teslesgendstracker.MetricConstants
+import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
@@ -12,15 +15,15 @@ import io.fabric.sdk.android.Fabric
 /**
  * Created by ediposouza on 08/12/16.
  */
-class MetricsManager() : MetricsManagerConstants() {
+class MetricManager() : MetricConstants() {
 
     companion object {
 
-        private var static: MetricsManager? = null
+        private var static: MetricManager? = null
 
-        fun getInstance(): MetricsManager {
+        fun getInstance(): MetricManager {
             if (static == null) {
-                static = MetricsManager()
+                static = MetricManager()
             }
             return static!!
         }
@@ -36,20 +39,38 @@ class MetricsManager() : MetricsManagerConstants() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)
     }
 
-    fun trackScreen(@ScreenParam screen: String) {
+    fun trackAction(action: MetricAction, vararg params: String) {
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.VALUE, screen)
+            when (action) {
+                is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE ->
+                    putString(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE.PARAM_QTD, params[0])
+                is MetricAction.ACTION_CARD_FILTER_ATTR ->
+                    putString(MetricAction.ACTION_CARD_FILTER_ATTR.PARAM_ATTR, params[0])
+                is MetricAction.ACTION_CARD_FILTER_RARITY ->
+                    putString(MetricAction.ACTION_CARD_FILTER_RARITY.PARAM_RARITY, params[0])
+                is MetricAction.ACTION_CARD_FILTER_MAGIKA ->
+                    putString(MetricAction.ACTION_CARD_FILTER_MAGIKA.PARAM_MAGIKA, params[0])
+            }
         }
-        firebaseAnalytics?.logEvent(EVENT_SCREEN_VIEW, bundle)
-        answers?.logCustom(CustomEvent(EVENT_SCREEN_VIEW).putCustomAttribute(PARAM_SCREEN, screen))
+        firebaseAnalytics?.logEvent(action.name, bundle)
+        answers?.logCustom(CustomEvent(action.name))
+    }
+
+    fun trackScreen(screen: MetricScreen) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.VALUE, screen.name)
+        }
+        firebaseAnalytics?.logEvent(MetricScreen.EVENT_SCREEN_VIEW, bundle)
+        answers?.logCustom(CustomEvent(MetricScreen.EVENT_SCREEN_VIEW)
+                .putCustomAttribute(MetricScreen.PARAM_SCREEN_VIEW_SCREEN, screen.name))
     }
 
     fun trackSignUp() {
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, SIGN_METHOD_GOOGLE)
+            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, PARAM_SIGN_METHOD_VALUE_GOOGLE)
         }
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
-        answers?.logSignUp(SignUpEvent().putMethod(SIGN_METHOD_GOOGLE))
+        answers?.logSignUp(SignUpEvent().putMethod(PARAM_SIGN_METHOD_VALUE_GOOGLE))
     }
 
     fun trackSignIn(user: FirebaseUser?, success: Boolean) {
@@ -59,10 +80,10 @@ class MetricsManager() : MetricsManagerConstants() {
             Crashlytics.setUserEmail(user?.email)
         }
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, SIGN_METHOD_GOOGLE)
+            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, PARAM_SIGN_METHOD_VALUE_GOOGLE)
         }
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
-        answers?.logLogin(LoginEvent().putMethod(SIGN_METHOD_GOOGLE).putSuccess(success))
+        answers?.logLogin(LoginEvent().putMethod(PARAM_SIGN_METHOD_VALUE_GOOGLE).putSuccess(success))
     }
 
     fun trackSearch(searchTerm: String) {
@@ -75,7 +96,7 @@ class MetricsManager() : MetricsManagerConstants() {
 
     fun trackCardView(card: Card) {
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_VIEW_TYPE_CARD)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_CARD)
             putString(FirebaseAnalytics.Param.ITEM_ID, card.shortName)
             putString(FirebaseAnalytics.Param.ITEM_NAME, card.name)
             putString(FirebaseAnalytics.Param.ITEM_CATEGORY, card.attr.name)
