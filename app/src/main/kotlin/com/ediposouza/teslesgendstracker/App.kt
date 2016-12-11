@@ -2,7 +2,9 @@ package com.ediposouza.teslesgendstracker
 
 import android.app.Application
 import android.support.v7.app.AppCompatDelegate
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManager
+import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
+import com.ediposouza.teslesgendstracker.manager.LoggerManager
+import com.ediposouza.teslesgendstracker.manager.MetricManager
 import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
@@ -12,7 +14,11 @@ import timber.log.Timber
  */
 class App : Application() {
 
-    val NODE_CARDS = "cards"
+    companion object {
+
+        var hasUserLogged: Boolean = false
+
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -21,11 +27,11 @@ class App : Application() {
     }
 
     private fun initializeDependencies() {
-        MetricsManager.getInstance().initialize(this)
+        MetricManager.getInstance().initialize(this)
         AndroidThreeTen.init(this)
         FirebaseDatabase.getInstance().apply {
             setPersistenceEnabled(true)
-            reference.child(NODE_CARDS).keepSynced(true)
+            reference.child(BaseInteractor.NODE_CARDS).keepSynced(true)
         }
         Timber.plant(LoggerManager())
     }

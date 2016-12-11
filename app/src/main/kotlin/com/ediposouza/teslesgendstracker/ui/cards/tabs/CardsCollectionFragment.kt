@@ -7,11 +7,9 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
-import com.ediposouza.teslesgendstracker.inflate
-import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -49,6 +47,14 @@ class CardsCollectionFragment : CardsAllFragment() {
             activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
             if (expanded) {
                 activity.collection_statistics.scrollToTop()
+            }
+            when (newState) {
+                BottomSheetBehavior.STATE_EXPANDED -> {
+                    metricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_EXPAND())
+                    metricsManager.trackScreen(MetricScreen.SCREEN_CARDS_STATISTICS())
+                }
+                BottomSheetBehavior.STATE_COLLAPSED ->
+                    metricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_COLLAPSE())
             }
         }
 
@@ -107,6 +113,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics?.updateStatistics(currentAttr)
+            metricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(), finalQtd.toString())
         }
     }
 

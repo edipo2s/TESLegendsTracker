@@ -1,6 +1,7 @@
-package com.ediposouza.teslesgendstracker
+package com.ediposouza.teslesgendstracker.manager
 
 import android.util.Log
+import com.ediposouza.teslesgendstracker.BuildConfig
 import timber.log.Timber
 
 /**

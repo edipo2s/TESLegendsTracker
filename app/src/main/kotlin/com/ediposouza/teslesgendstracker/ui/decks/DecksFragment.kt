@@ -9,15 +9,15 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
-import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
@@ -46,20 +46,21 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     else -> R.string.tab_decks_public
                 }
                 activity.dash_toolbar_title.setText(title)
+                metricsManager.trackScreen(when (position) {
+                    0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
+                    1 -> MetricScreen.SCREEN_DECKS_OWNED()
+                    else -> MetricScreen.SCREEN_DECKS_FAVORED()
+                })
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 (adapter.getItem(position) as DecksPublicFragment).getDecks()
-                metricsManager.trackScreen(when (position) {
-                    0 -> MetricsManagerConstants.SCREEN_DECKS_PUBLIC
-                    1 -> MetricsManagerConstants.SCREEN_DECKS_OWNED
-                    else -> MetricsManagerConstants.SCREEN_DECKS_FAVORED
-                })
             }
 
         })
         activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
         decks_attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+        metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
     override fun onResume() {

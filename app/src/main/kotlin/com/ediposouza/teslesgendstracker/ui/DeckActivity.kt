@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
+import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
 import com.ediposouza.teslesgendstracker.data.Deck
@@ -21,7 +22,6 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManagerConstants
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import org.jetbrains.anko.doAsync
@@ -99,7 +99,7 @@ class DeckActivity : BaseActivity() {
                 }
             }
         }
-        metricsManager.trackScreen(MetricsManagerConstants.SCREEN_DECK_DETAILS)
+        metricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
