@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +40,7 @@ import java.util.*
 open class CardsAllFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 21 //after 7 lines
+    val CARDS_PER_ROW = 3
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
@@ -51,10 +52,13 @@ open class CardsAllFragment : BaseFragment() {
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
-    open val cardsAdapter = CardsAllAdapter(ADS_EACH_ITEMS, { view, card -> showCardExpanded(card, view) }) {
-        view: View, card: Card ->
-        showCardExpanded(card, view)
-        true
+    open val cardsAdapter by lazy {
+        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, { view, card -> showCardExpanded(card, view) }) {
+            view: View, card: Card ->
+            showCardExpanded(card, view)
+            true
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,13 +71,12 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun configRecycleView() {
-        val staggeredGridLM = object : StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL) {
+        cards_recycler_view.layoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }
-        cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.layoutManager = staggeredGridLM
         cards_recycler_view.itemAnimator = ScaleInAnimator()
-        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
+        cards_recycler_view.adapter = cardsAdapter
+        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(CARDS_PER_ROW,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
         cards_refresh_layout.setOnRefreshListener {
             cards_refresh_layout.isRefreshing = false
@@ -172,15 +175,13 @@ open class CardsAllFragment : BaseFragment() {
 
 }
 
-class CardsAllAdapter(adsEachItems: Int, val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
+class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
 
     var items: List<Card> = ArrayList()
 
-    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card
-
-    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
-        return CardsAllViewHolder(defaultItemView, itemClick, itemLongClick)
+    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
     }
 
     override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -192,7 +193,6 @@ class CardsAllAdapter(adsEachItems: Int, val itemClick: (View, Card) -> Unit,
     fun showCards(cards: List<Card>) {
         val oldItems = items
         items = cards
-//        notifyItemRangeChanged(0, itemCount)
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return if (oldItemPosition == 0 || newItemPosition == 0) false

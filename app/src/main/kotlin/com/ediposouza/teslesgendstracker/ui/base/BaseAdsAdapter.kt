@@ -1,9 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
-import android.support.annotation.LayoutRes
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.inflate
@@ -16,22 +14,35 @@ import kotlinx.android.synthetic.main.itemlist_ads.view.*
 abstract class BaseAdsAdapter(val adsEachItems: Int) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val ITEM_VIEW_TYPE_DEFAULT = 0
-    val ITEM_VIEW_TYPE_ADS = 1
+    companion object {
 
-    @LayoutRes abstract fun onDefaultViewLayout(): Int
-    abstract fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder
+        const val ITEM_VIEW_TYPE_DEFAULT = 0
+        const val ITEM_VIEW_TYPE_ADS = 1
+
+    }
+
+    constructor(adsEachItems: Int, layoutManager: GridLayoutManager) : this(adsEachItems) {
+        layoutManager.apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val itemType = getItemViewType(position)
+                    return if (itemType == BaseAdsAdapter.ITEM_VIEW_TYPE_ADS) spanCount else 1
+                }
+            }
+        }
+    }
+
+    abstract fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
     abstract fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int)
     abstract fun getDefaultItemCount(): Int
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == ITEM_VIEW_TYPE_DEFAULT) {
-            val defaultItemView = updateViewSpan(parent.inflate(onDefaultViewLayout()), false)
-            return onCreateDefaultViewHolder(defaultItemView)
+            return onCreateDefaultViewHolder(parent)
         } else {
             val adsItemView = parent.inflate(R.layout.itemlist_ads)
             adsItemView.ads_view.load()
-            return object : RecyclerView.ViewHolder(updateViewSpan(adsItemView, true)) {}
+            return object : RecyclerView.ViewHolder(adsItemView) {}
         }
     }
 
@@ -55,10 +66,4 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
         return (position - qtdAds).div(adsEachItems)
     }
 
-    private fun updateViewSpan(view: View, fullSpan: Boolean): View {
-        val viewLP = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
-        viewLP.isFullSpan = fullSpan
-        view.layoutParams = viewLP
-        return view
-    }
 }
