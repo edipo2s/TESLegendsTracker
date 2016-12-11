@@ -180,7 +180,7 @@ data class Card(
 
         val name: String,
         val shortName: String,
-        val cls: Attribute,
+        val attr: Attribute,
         val rarity: CardRarity,
         val unique: Boolean,
         val cost: Int,
@@ -213,7 +213,7 @@ data class Card(
     override fun describeContents() = 0
 
     fun imageBitmap(context: Context): Bitmap {
-        val cardAttr = cls.name.toLowerCase().capitalize()
+        val cardAttr = attr.name.toLowerCase().capitalize()
         val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
         return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
     }
@@ -221,7 +221,7 @@ data class Card(
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
-        dest?.writeInt(cls.ordinal)
+        dest?.writeInt(attr.ordinal)
         dest?.writeInt(rarity.ordinal)
         dest?.writeInt((if (unique) 1 else 0))
         dest?.writeInt(cost)

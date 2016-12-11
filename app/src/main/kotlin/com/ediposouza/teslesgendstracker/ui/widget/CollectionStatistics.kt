@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.widget
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
@@ -23,12 +24,21 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
 
     init {
         inflate(context, R.layout.widget_collection_statistics, this)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val layoutParams = collection_statistics_container.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.navigation_bar_height)
+            collection_statistics_container.layoutParams = layoutParams
+        }
     }
 
     constructor(ctx: Context?) : this(ctx, null, 0) {
     }
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
+    }
+
+    fun scrollToTop() {
+        collection_statistics_container.smoothScrollTo(0, 0)
     }
 
     fun updateStatistics() {

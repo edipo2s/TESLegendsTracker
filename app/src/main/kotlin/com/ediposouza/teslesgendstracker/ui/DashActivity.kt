@@ -14,6 +14,8 @@ import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
@@ -26,9 +28,14 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.doAsync
+import timber.log.Timber
 
 class DashActivity : BaseActivity(),
         NavigationView.OnNavigationItemSelectedListener {
+
+    val publicInteractor = PublicInteractor()
+    val privateInteractor = PrivateInteractor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +53,15 @@ class DashActivity : BaseActivity(),
                 super.onDrawerOpened(drawerView)
                 val user = FirebaseAuth.getInstance().currentUser
                 dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = user != null
-                dash_navigation_view.getHeaderView(0).profile_name.text = user?.displayName
-                if (user != null) {
-                    Glide.with(this@DashActivity)
-                            .load(user.photoUrl)
-                            .transform(CircleTransform(this@DashActivity))
-                            .into(dash_navigation_view.getHeaderView(0).profile_image)
+                with(dash_navigation_view.getHeaderView(0)) {
+                    profile_name.text = user?.displayName ?: getString(R.string.unknown)
+                    if (user != null) {
+                        Glide.with(this@DashActivity)
+                                .load(user.photoUrl)
+                                .transform(CircleTransform(this@DashActivity))
+                                .into(profile_image)
+                        updateCollectionStatistics()
+                    }
                 }
                 BottomSheetBehavior.from(collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             }
@@ -72,9 +82,12 @@ class DashActivity : BaseActivity(),
         if (statisticsBottomSheet.state == BottomSheetBehavior.STATE_EXPANDED) {
             statisticsBottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
             return
-        } else {
-            super.onBackPressed()
         }
+        if (dash_drawer_layout.isDrawerOpen(Gravity.START)) {
+            dash_drawer_layout.closeDrawer(Gravity.START)
+            return
+        }
+        super.onBackPressed()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -82,20 +95,64 @@ class DashActivity : BaseActivity(),
         return when (item.itemId) {
             R.id.menu_cards -> showFragment(CardsFragment())
             R.id.menu_decks -> showFragment(DecksFragment())
+            R.id.menu_matches,
+            R.id.menu_arena,
+            R.id.menu_season,
+            R.id.menu_about -> {
+                true
+            }
             else -> false
+        }
+    }
+
+    fun showFragment(frag: Fragment): Boolean {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.dash_content, frag)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .addToBackStack(null)
+                .commit()
+        return true
+    }
+
+    private fun updateCollectionStatistics() {
+        var allCardsTotal = 0
+        var userCardsTotal = 0
+        with(dash_navigation_view.getHeaderView(0)) {
+            profile_collection.visibility = View.INVISIBLE
+            profile_collection_loading.visibility = View.VISIBLE
+            doAsync {
+                publicInteractor.getCardsForStatistics {
+                    val allAttrCards = it
+                    allCardsTotal += allAttrCards.filter { it.unique }.size
+                    allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
+                    privateInteractor.getUserCollection {
+                        userCardsTotal += it.values.sum().toInt()
+                        val stringPercent = getString(R.string.statistics_percent,
+                                if (allCardsTotal > 0)
+                                    userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f
+                                else 0f)
+                        runOnUiThread {
+                            profile_collection_loading.visibility = View.GONE
+                            profile_collection.visibility = View.VISIBLE
+                            profile_collection.text = stringPercent
+                            Timber.d("All: %d, User: %d", allCardsTotal, userCardsTotal)
+                        }
+                    }
+                }
+            }
         }
     }
 
     @Subscribe
     fun updateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
-        if (update.show && dash_filter_magika.visibility == View.VISIBLE ||
-                !update.show && dash_filter_magika.visibility == View.INVISIBLE) {
-            return
-        }
         val filterMagikaLP = dash_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
         val filterRarityLP = dash_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
         val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
         val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
+        if (update.show && filterMagikaLP.bottomMargin == showBottomMargin ||
+                !update.show && filterMagikaLP.bottomMargin == hideBottomMargin) {
+            return
+        }
         val animFrom = if (update.show) hideBottomMargin else showBottomMargin
         val animTo = if (update.show) showBottomMargin else hideBottomMargin
         with(ValueAnimator.ofInt(animFrom, animTo)) {
@@ -111,9 +168,6 @@ class DashActivity : BaseActivity(),
                 }
 
                 override fun onAnimationEnd(p0: Animator?) {
-                    val newVisibility = if (update.show) View.VISIBLE else View.INVISIBLE
-                    dash_filter_rarity.visibility = newVisibility
-                    dash_filter_magika.visibility = newVisibility
                 }
 
                 override fun onAnimationCancel(p0: Animator?) {
@@ -125,15 +179,6 @@ class DashActivity : BaseActivity(),
             })
             start()
         }
-    }
-
-    fun showFragment(frag: Fragment): Boolean {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.dash_content, frag)
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .addToBackStack(null)
-                .commit()
-        return true
     }
 
 }

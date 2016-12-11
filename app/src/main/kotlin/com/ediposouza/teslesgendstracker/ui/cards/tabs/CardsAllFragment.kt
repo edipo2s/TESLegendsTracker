@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +17,20 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
+import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.cards.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
+import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
@@ -33,6 +38,8 @@ import java.util.*
  * Created by EdipoSouza on 10/30/16.
  */
 open class CardsAllFragment : BaseFragment() {
+
+    val ADS_EACH_ITEMS = 21 //after 7 lines
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
@@ -44,7 +51,7 @@ open class CardsAllFragment : BaseFragment() {
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
-    open val cardsAdapter = CardsAllAdapter({ view, card -> showCardExpanded(card, view) }) {
+    open val cardsAdapter = CardsAllAdapter(ADS_EACH_ITEMS, { view, card -> showCardExpanded(card, view) }) {
         view: View, card: Card ->
         showCardExpanded(card, view)
         true
@@ -60,12 +67,31 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun configRecycleView() {
+        val staggeredGridLM = object : StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL) {
+            override fun supportsPredictiveItemAnimations(): Boolean = false
+        }
         cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.layoutManager = GridLayoutManager(context, 3)
+        cards_recycler_view.layoutManager = staggeredGridLM
         cards_recycler_view.itemAnimator = ScaleInAnimator()
-        cards_recycler_view.setHasFixedSize(true)
         cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(3,
                 resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
+        cards_refresh_layout.setOnRefreshListener {
+            cards_refresh_layout.isRefreshing = false
+            loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
+        }
+    }
+
+    open fun configLoggedViews() {
+        val hasLoggedUser = FirebaseAuth.getInstance().currentUser != null
+        signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
+        signin_button.visibility = if (hasLoggedUser) View.INVISIBLE else View.VISIBLE
+        cards_recycler_view.visibility = if (hasLoggedUser) View.VISIBLE else View.INVISIBLE
+    }
+
+    @Subscribe
+    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+        configLoggedViews()
+        loadCardsByAttr(CmdShowCardsByAttr(currentAttr))
     }
 
     @Subscribe
@@ -146,28 +172,31 @@ open class CardsAllFragment : BaseFragment() {
 
 }
 
-class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<CardsAllViewHolder>() {
+class CardsAllAdapter(adsEachItems: Int, val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
 
     var items: List<Card> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsAllViewHolder {
-        return CardsAllViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_card, parent, false), itemClick, itemLongClick)
+    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card
+
+    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
+        return CardsAllViewHolder(defaultItemView, itemClick, itemLongClick)
     }
 
-    override fun onBindViewHolder(holder: CardsAllViewHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        (holder as CardsAllViewHolder).bind(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getDefaultItemCount(): Int = items.size
 
     fun showCards(cards: List<Card>) {
         val oldItems = items
         items = cards
+//        notifyItemRangeChanged(0, itemCount)
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == items[newItemPosition]
+                return if (oldItemPosition == 0 || newItemPosition == 0) false
+                else oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
             }
 
             override fun getOldListSize(): Int = oldItems.size
@@ -175,7 +204,7 @@ class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
             override fun getNewListSize(): Int = items.size
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
+                return areItemsTheSame(oldItemPosition, newItemPosition)
             }
 
         }, false).dispatchUpdatesTo(this)

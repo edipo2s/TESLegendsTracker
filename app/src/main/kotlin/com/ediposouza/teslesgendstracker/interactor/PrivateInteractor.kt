@@ -28,8 +28,12 @@ class PrivateInteractor() : BaseInteractor() {
     private val KEY_DECK_UPDATES = "updates"
     private val KEY_DECK_COMMENTS = "comments"
 
+    private fun getUserID(): String {
+        return FirebaseAuth.getInstance().currentUser?.uid ?: ""
+    }
+
     private fun dbUser(): DatabaseReference? {
-        return if (userID.isNotEmpty()) dbUsers.child(userID) else null
+        return if (getUserID().isNotEmpty()) dbUsers.child(getUserID()) else null
     }
 
     private fun dbUserCards(cls: Attribute): DatabaseReference? {
@@ -47,7 +51,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
-        dbUserCards(card.cls)?.apply {
+        dbUserCards(card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
             }
@@ -55,7 +59,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
-        dbUserCards(card.cls)?.apply {
+        dbUserCards(card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_FAVORITE).apply {
                 if (favorite) {
                     setValue(true).addOnCompleteListener { onComplete.invoke() }
@@ -72,6 +76,25 @@ class PrivateInteractor() : BaseInteractor() {
             @Suppress("UNCHECKED_CAST")
             override fun onDataChange(ds: DataSnapshot) {
                 val collection = ds.children.filter { it.hasChild(KEY_CARD_QTD) }.map({
+                    it.key to it.child(KEY_CARD_QTD).value as Long
+                }).toMap()
+                Timber.d(collection.toString())
+                onSuccess.invoke(collection)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+            }
+
+        })
+    }
+
+    fun getUserCollection(onSuccess: (Map<String, Long>) -> Unit) {
+        dbUser()?.child(NODE_CARDS)?.child(NODE_CARDS_CORE)?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            @Suppress("UNCHECKED_CAST")
+            override fun onDataChange(ds: DataSnapshot) {
+                val collection = ds.children.flatMap { it.children }.filter { it.hasChild(KEY_CARD_QTD) }.map({
                     it.key to it.child(KEY_CARD_QTD).value as Long
                 }).toMap()
                 Timber.d(collection.toString())
@@ -113,7 +136,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(userID)) {
+        with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(getUserID())) {
             keepSynced(true)
             addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -226,7 +249,7 @@ class PrivateInteractor() : BaseInteractor() {
                  cards: Map<String, Long>, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deck = Deck(push().key, name, userID, private,
+                val deck = Deck(push().key, name, getUserID(), private,
                         type, cls, cost, LocalDateTime.now(), LocalDateTime.now(), patch, ArrayList(), 0,
                         cards, ArrayList(), ArrayList())
                 child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
@@ -293,7 +316,7 @@ class PrivateInteractor() : BaseInteractor() {
     fun setUserDeckLike(deck: Deck, like: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deckLikesUpdated = if (like) deck.likes.plus(userID) else deck.likes.minus(userID)
+                val deckLikesUpdated = if (like) deck.likes.plus(getUserID()) else deck.likes.minus(getUserID())
                 child(deck.id).updateChildren(mapOf(KEY_DECK_LIKES to deckLikesUpdated)).addOnCompleteListener({
                     Timber.d(it.toString())
                     if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
@@ -305,7 +328,7 @@ class PrivateInteractor() : BaseInteractor() {
     fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val comment = DeckParser.toNewCommentMap(userID, msg)
+                val comment = DeckParser.toNewCommentMap(getUserID(), msg)
                 with(child(deck.id).child(KEY_DECK_COMMENTS)) {
                     child(push().key).setValue(comment).addOnCompleteListener({
                         Timber.d(it.toString())

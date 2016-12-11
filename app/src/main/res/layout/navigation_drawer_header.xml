@@ -49,6 +49,17 @@
         android:layout_toEndOf="@id/profile_collection_label"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_medium"
-        tools:text="64%" />
+        android:text="@string/zero_percent" />
+
+    <ProgressBar
+        android:id="@+id/profile_collection_loading"
+        android:layout_width="@dimen/size_normal"
+        android:layout_height="@dimen/size_normal"
+        android:layout_below="@id/profile_name"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_toEndOf="@id/profile_collection_label"
+        android:indeterminate="true"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </RelativeLayout>
