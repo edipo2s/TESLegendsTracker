@@ -3958,7 +3958,9 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Summon, Breakthrough",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "strength",
+          "attr2": "willpower"
         },
         "edictofazura": {
           "name": "Edict of Azura",
@@ -3969,7 +3971,9 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Insane"
+          "arenaTier": "Insane",
+          "attr1": "willpower",
+          "attr2": "endurance"
         },
         "masterofthieves": {
           "name": "Master of Thieves",
@@ -3980,7 +3984,9 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Pilfer",
-          "arenaTier": "Good"
+          "arenaTier": "Good",
+          "attr1": "willpower",
+          "attr2": "agility"
         },
         "queenbarenziah": {
           "name": "Queen Barenziah",
@@ -3992,7 +3998,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Drain, Summon, Guard",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "intelligence",
+          "attr2": "agility"
         },
         "sadrasagent": {
           "name": "Sadras Agent",
@@ -4003,7 +4011,9 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Guard, Last Gasp",
-          "arenaTier": "Good"
+          "arenaTier": "Good",
+          "attr1": "intelligence",
+          "attr2": "agility"
         },
         "sentinelbattlemace": {
           "name": "Sentinel Battlemace",
@@ -4014,7 +4024,11 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Ward",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "strength",
+          "attr2": "willpower",
+          "attr1": "strength",
+          "attr2": "intelligence"
         },
         "tyr": {
           "name": "Tyr",
@@ -4026,7 +4040,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Prophecy, Breakthrough, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Good",
+          "attr1": "strength",
+          "attr2": "willpower"
         },
         "ahnassi": {
           "name": "Ahnassi",
@@ -4038,7 +4054,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "willpower",
+          "attr2": "agility"
         },
         "ayrenn": {
           "name": "Ayrenn",
@@ -4050,7 +4068,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Insane"
+          "arenaTier": "Insane",
+          "attr1": "intelligence",
+          "attr2": "willpower"
         },
         "militantchieftain": {
           "name": "Militant Chieftain",
@@ -4061,7 +4081,9 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Average",
+          "attr1": "strength",
+          "attr2": "endurance"
         },
         "shornhelmchampion": {
           "name": "Shornhelm Champion",
@@ -4072,7 +4094,9 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Breakthrough, Ward",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "intelligence",
+          "attr2": "endurance"
         },
         "thornhistmage": {
           "name": "Thorn Histmage",
@@ -4083,7 +4107,9 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Guard, Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "agility",
+          "attr2": "endurance"
         },
         "allenabenoch": {
           "name": "Allena Benoch",
@@ -4095,7 +4121,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Lethal, Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "strength",
+          "attr2": "agility"
         },
         "generaltullius": {
           "name": "General Tullius",
@@ -4107,7 +4135,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "willpower",
+          "attr2": "endurance"
         },
         "gortwoggronagorm": {
           "name": "Gortwog gro-Nagorm",
@@ -4119,7 +4149,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Good",
+          "attr1": "strength",
+          "attr2": "endurance"
         },
         "highkingemeric": {
           "name": "High King Emeric",
@@ -4131,7 +4163,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Ward, Summon",
-          "arenaTier": "Insane"
+          "arenaTier": "Insane",
+          "attr1": "intelligence",
+          "attr2": "endurance"
         },
         "skywatchvindicator": {
           "name": "Skywatch Vindicator",
@@ -4142,7 +4176,9 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Good",
+          "attr1": "intelligence",
+          "attr2": "willpower"
         },
         "merricataswala": {
           "name": "Merric-at-Aswala",
@@ -4154,7 +4190,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Average",
+          "attr1": "strength",
+          "attr2": "intelligence"
         },
         "falinestireaver": {
           "name": "Falinesti Reaver",
@@ -4165,7 +4203,9 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "strength",
+          "attr2": "agility"
         },
         "redbramman": {
           "name": "Red Bramman",
@@ -4177,7 +4217,9 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon, Silence, Shackle",
-          "arenaTier": "Excellent"
+          "arenaTier": "Excellent",
+          "attr1": "agility",
+          "attr2": "endurance"
         }
       },
       "neutral": {
@@ -4886,10 +4928,6 @@
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
-      "info": {
-        "name": "Édipo da Silva Souza",
-        "photoUrl": ""
-      },
       "cards": {
         "core": {
           "agility": {
@@ -4908,6 +4946,13 @@
               "qtd": 1
             },
             "fieryimp": {
+              "favorite": true,
+              "qtd": 2
+            },
+            "improvisedweapon": {
+              "favorite": true
+            },
+            "intimidate": {
               "qtd": 1
             },
             "morthalwatchman": {
@@ -4939,57 +4984,59 @@
         }
       },
       "decks": {
+        "favorite": {
+          "-KWYopKFZVdqz3-YtBh-": true
+        },
         "private": {
           "-KWYo4K8PDs_zO1q8aqh": {
-            "name": "My Archer",
-            "type": 4,
+            "cards": {
+              "finishoff": 3,
+              "leaflurker": 1,
+              "moonlightwerebat": 3,
+              "murkwaterwitch": 3,
+              "rapidshot": 3,
+              "skavenpyromancer": 2,
+              "soulrestmarshal": 3,
+              "triumphantjarl": 2,
+              "ungolimthelistener": 1
+            },
             "cls": 0,
             "cost": 4000,
             "createdAt": "2016-10-28T10:00:00",
-            "updatedAt": "2016-10-30T12:32:54",
-            "patch": "2016_09_28",
             "likes": [
               "Iu45y3i5UY345uhVi3u5h3Huf5h"
             ],
-            "views": 12,
-            "cards": {
-              "ungolimthelistener": 1,
-              "murkwaterwitch": 3,
-              "rapidshot": 3,
-              "finishoff": 3,
-              "moonlightwerebat": 3,
-              "skavenpyromancer": 2,
-              "soulrestmarshal": 3,
-              "leaflurker": 1,
-              "triumphantjarl": 2
-            },
+            "name": "My Archer",
+            "patch": "2016_09_28",
+            "type": 4,
+            "updatedAt": "2016-10-30T12:32:54",
             "updates": {
               "2016-10-30T12:32:54": {
+                "leaflurker": 2,
                 "rapidshot": -1,
-                "skavenpyromancer": 1,
-                "leaflurker": 2
+                "skavenpyromancer": 1
               }
-            }
+            },
+            "views": 12
           },
           "-KWYopLfHszRwXRYOL_q": {
-            "name": "My Deck",
-            "type": 4,
+            "cards": {
+              "dunmernightblade": 3,
+              "elusiveschemer": 2,
+              "tazkadthepackmaster": 1,
+              "ungolimthelistener": 1
+            },
             "cls": 1,
             "cost": 2850,
             "createdAt": "2016-10-28T10:00:00",
-            "updatedAt": "2016-10-31T15:30:00",
-            "patch": "2016_09_28",
             "likes": [
               "Iu45y3i5UY345uhVi3u5h3Huf5h",
               "ZYO8GAaZfVYo2evDwPedYIFODcm1"
             ],
-            "views": 7,
-            "cards": {
-              "ungolimthelistener": 1,
-              "dunmernightblade": 3,
-              "elusiveschemer": 2,
-              "tazkadthepackmaster": 1
-            },
+            "name": "My Deck",
+            "patch": "2016_09_28",
+            "type": 4,
+            "updatedAt": "2016-10-31T15:30:00",
             "updates": {
               "2016-10-30T12:32:54": {
                 "dunmernightblade": -1,
@@ -5000,96 +5047,128 @@
                 "elusiveschemer": 1,
                 "tazkadthepackmaster": -1
               }
+            },
+            "views": 7
+          }
+        }
+      },
+      "info": {
+        "name": "Édipo da Silva Souza",
+        "photoUrl": "https://lh6.googleusercontent.com/-QVzUl1KSjiE/AAAAAAAAAAI/AAAAAAAAOSk/kMFAQSTtvcw/s96-c/photo.jpg"
+      },
+      "matches": {
+        "2016-11-30T08:22:34": {
+          "first": false,
+          "me": {
+            "cls": 0,
+            "deck": "-KWYo4K8PDs_zO1q8aqh",
+            "name": "My Archer",
+            "type": 4,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 1,
+            "name": "Prophecy Assassin",
+            "type": 0
+          },
+          "rank": 4,
+          "win": true
+        }
+      }
+    },
+    "h2KTcpHAnxRY0EaIM8KFKXVWz8L2": {
+      "cards": {
+        "core": {
+          "agility": {
+            "finishoff": {
+              "qtd": 1
+            },
+            "ungolimthelistener": {
+              "qtd": 1
+            }
+          },
+          "strength": {
+            "intimidate": {
+              "favorite": true
+            },
+            "rapidshot": {
+              "qtd": 2
             }
           }
-        },
+        }
+      },
+      "decks": {
         "favorite": {
           "-KWYo4Jw4Wd6nc8oaUeh": true
         }
       },
-      "matches": {
-        "2016-11-30T08:22:34": {
-          "me": {
-            "deck": "-KWYo4K8PDs_zO1q8aqh",
-            "version": "v1 (2016-10-30)",
-            "name": "My Archer",
-            "type": 4,
-            "cls": 0
-          },
-          "opponent": {
-            "name": "Prophecy Assassin",
-            "type": 0,
-            "cls": 1
-          },
-          "first": false,
-          "win": true,
-          "rank": 4
-        }
+      "info": {
+        "name": "Mackciane Bastos",
+        "photoUrl": "https://lh5.googleusercontent.com/-o2RlvOLMZ7Y/AAAAAAAAAAI/AAAAAAAAPAM/1pxgQ_u-41g/s96-c/photo.jpg"
       }
     }
   },
   "decks": {
     "public": {
       "-KWYo4Jw4Wd6nc8oaUeh": {
-        "name": "Cycle Archer",
-        "type": 4,
+        "cards": {
+          "finishoff": 3,
+          "leaflurker": 1,
+          "moonlightwerebat": 3,
+          "murkwaterwitch": 3,
+          "rapidshot": 3,
+          "skavenpyromancer": 2,
+          "soulrestmarshal": 3,
+          "tazkadthepackmaster": 1,
+          "triumphantjarl": 2,
+          "ungolimthelistener": 1
+        },
         "cls": 0,
+        "comments": {
+          "hre8g7er6ger7g6er9gg8e6": {
+            "comment": "Nice deck",
+            "createdAt": "2016-10-28T14:17:23",
+            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+          }
+        },
         "cost": 5200,
-        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
         "createdAt": "2016-10-28T10:00:00",
-        "updatedAt": "2016-10-30T12:32:54",
-        "patch": "2016_09_28",
         "likes": [
           "Iu45y3i5UY345uhVi3u5h3Huf5h"
         ],
-        "views": 12,
-        "cards": {
-          "ungolimthelistener": 1,
-          "murkwaterwitch": 3,
-          "rapidshot": 3,
-          "finishoff": 3,
-          "moonlightwerebat": 3,
-          "skavenpyromancer": 2,
-          "soulrestmarshal": 3,
-          "leaflurker": 1,
-          "triumphantjarl": 2,
-          "tazkadthepackmaster": 1
-        },
+        "name": "Cycle Archer",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2016_09_28",
+        "type": 4,
+        "updatedAt": "2016-10-30T12:32:54",
         "updates": {
           "2016-10-30T12:32:54": {
+            "leaflurker": 2,
             "rapidshot": -1,
-            "skavenpyromancer": 1,
-            "leaflurker": 2
+            "skavenpyromancer": 1
           }
         },
-        "comments": {
-          "hre8g7er6ger7g6er9gg8e6": {
-            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
-            "comment": "Nice deck",
-            "createdAt": "2016-10-28T14:17:23"
-          }
-        }
+        "views": 12
       },
       "-KWYopKFZVdqz3-YtBh-": {
-        "name": "Deck Test",
-        "type": 4,
-        "cls": 1,
-        "cost": 2850,
-        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
-        "createdAt": "2016-10-28T10:00:00",
-        "updatedAt": "2016-10-28T10:00:00",
-        "patch": "2016_09_28",
-        "likes": [
-          "Iu45y3i5UY345uhVi3u5h3Huf5h",
-          "ZYO8GAaZfVYo2evDwPedYIFODcm1"
-        ],
-        "views": 7,
         "cards": {
-          "ungolimthelistener": 1,
           "dunmernightblade": 3,
           "elusiveschemer": 3,
-          "tazkadthepackmaster": 1
-        }
+          "tazkadthepackmaster": 1,
+          "ungolimthelistener": 1
+        },
+        "cls": 1,
+        "cost": 2850,
+        "createdAt": "2016-10-28T10:00:00",
+        "likes": [
+          "Iu45y3i5UY345uhVi3u5h3Huf5h"
+        ],
+        "name": "Deck Test",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2016_09_28",
+        "type": 4,
+        "updatedAt": "2016-10-28T10:00:00",
+        "views": 7
       }
     }
   }

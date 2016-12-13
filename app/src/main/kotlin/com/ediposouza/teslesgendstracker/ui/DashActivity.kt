@@ -93,7 +93,7 @@ class DashActivity : BaseActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         dash_drawer_layout.closeDrawer(Gravity.START)
         return when (item.itemId) {
-            R.id.menu_cards -> showFragment(CardsFragment())
+            R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches,
             R.id.menu_arena,

@@ -57,4 +57,7 @@
     <dimen name="deck_list_slot_rarity_height">12dp</dimen>
     <dimen name="deck_list_slot_rarity_margin">4dp</dimen>
 
+    <dimen name="deck_new_card_margin">@dimen/nano_margin</dimen>
+    <dimen name="deck_new_card_height">110dp</dimen>
+
 </resources>

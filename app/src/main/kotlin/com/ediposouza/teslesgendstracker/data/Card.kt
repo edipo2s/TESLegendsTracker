@@ -189,6 +189,8 @@ data class Card(
         val name: String,
         val shortName: String,
         val attr: Attribute,
+        val dualAttr1: Attribute,
+        val dualAttr2: Attribute,
         val rarity: CardRarity,
         val unique: Boolean,
         val cost: Int,
@@ -212,6 +214,7 @@ data class Card(
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(),
+            Attribute.values()[source.readInt()], Attribute.values()[source.readInt()],
             Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
@@ -230,6 +233,8 @@ data class Card(
         dest?.writeString(name)
         dest?.writeString(shortName)
         dest?.writeInt(attr.ordinal)
+        dest?.writeInt(dualAttr1.ordinal)
+        dest?.writeInt(dualAttr2.ordinal)
         dest?.writeInt(rarity.ordinal)
         dest?.writeInt((if (unique) 1 else 0))
         dest?.writeInt(cost)

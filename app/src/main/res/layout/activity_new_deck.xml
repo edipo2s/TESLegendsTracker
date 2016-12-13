@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title=""
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/dash_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
+                android:id="@+id/new_deck_attr_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <FrameLayout
+                android:id="@+id/new_deck_fragment_cards"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/new_deck_attr_filter"
+                app:layout_widthPercent="60%" />
+
+            <com.ediposouza.teslesgendstracker.ui.widget.DeckList
+                android:id="@+id/new_deck_cardlist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/new_deck_fragment_cards"
+                android:layout_below="@id/new_deck_attr_filter"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                app:layout_widthPercent="40%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
+            android:id="@+id/new_deck_filter_rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/large_margin" />
+
+        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
+            android:id="@+id/new_deck_filter_magika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/large_margin" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>

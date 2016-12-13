@@ -18,8 +18,10 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
+import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 
@@ -30,13 +32,26 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     var userFavorites = arrayListOf<String>()
+    var editMode = false
+
+    private fun showExpandedCard(card: Card, view: View) {
+        val favorite = userFavorites.contains(card.shortName)
+        val transitionName = context.getString(R.string.card_transition_name)
+        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card, favorite),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
+    }
 
     val deckListAdapter by lazy {
-        DeckListAdapter { view, card ->
-            val favorite = userFavorites.contains(card.shortName)
-            val transitionName = context.getString(R.string.card_transition_name)
-            ActivityCompat.startActivity(context, CardActivity.newIntent(context, card, favorite),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
+        DeckListAdapter(itemClick = { view, card ->
+            if (editMode) {
+                remCard(card)
+            } else {
+                showExpandedCard(card, view)
+            }
+        }) {
+            view, card ->
+            showExpandedCard(card, view)
+            true
         }
     }
 
@@ -46,8 +61,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_recycle_view.layoutManager = LinearLayoutManager(context)
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
-            val card = Card("Tyr", "tyr", Attribute.DUAL, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
-                    CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false)
+            val card = Card("Tyr", "tyr", Attribute.DUAL, Attribute.STRENGTH, Attribute.WILLPOWER,
+                    CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION, CardRace.ARGONIAN,
+                    emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false)
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
         }
@@ -80,15 +96,27 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         deckListAdapter.showMissingCards(missingCards)
     }
 
+    fun setListEditMode(editMode: Boolean) {
+        this.editMode = editMode
+    }
+
+    fun addCard(card: Card) {
+        deckListAdapter.addCard(card)
+    }
+
+    fun remCard(card: Card) {
+        deckListAdapter.remCard(card)
+    }
+
 }
 
-class DeckListAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<DeckListViewHolder>() {
+class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<DeckListViewHolder>() {
 
     private val items = arrayListOf<CardSlot>()
     private var missingCards: List<CardMissing> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
-        return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick)
+        return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
     }
 
     override fun onBindViewHolder(holder: DeckListViewHolder?, position: Int) {
@@ -110,12 +138,45 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit) : RecyclerView.Adapte
         notifyDataSetChanged()
     }
 
+    fun addCard(card: Card) {
+        val cardSlot = items.find { it.card == card }
+        if (cardSlot == null) {
+            items.add(CardSlot(card, 1))
+            notifyDataSetChanged()
+        } else {
+            val newQtd = if (cardSlot.qtd < 3) cardSlot.qtd.inc() else 3
+            val cardIndex = items.indexOf(cardSlot)
+            items[cardIndex] = CardSlot(card, newQtd)
+            notifyItemChanged(cardIndex)
+        }
+    }
+
+    fun remCard(card: Card) {
+        val cardSlot = items.find { it.card == card }
+        if (cardSlot != null) {
+            val newQtd = cardSlot.qtd.dec()
+            if (newQtd <= 0) {
+                items.remove(cardSlot)
+                notifyDataSetChanged()
+                if (items.map { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty()) {
+                    EventBus.getDefault().post(CmdRemAttr(card.attr))
+                }
+            } else {
+                val cardIndex = items.indexOf(cardSlot)
+                items[cardIndex] = CardSlot(card, newQtd)
+                notifyItemChanged(cardIndex)
+            }
+        }
+    }
+
 }
 
-class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
+class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit,
+                         val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
     fun bind(slot: CardSlot, missingQtd: Long) {
         itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
+        itemView.setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
         itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))
         itemView.decl_slot_card_name.text = slot.card.name
         itemView.deckslot_card_rarity.setImageResource(slot.card.rarity.imageRes)
