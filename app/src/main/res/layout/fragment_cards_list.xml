@@ -16,6 +16,8 @@
             android:layout_height="match_parent"
             android:padding="@dimen/default_margin"
             android:scrollbarFadeDuration="0"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+            android:scrollbarSize="@dimen/small_margin"
             android:scrollbars="vertical"
             app:layoutManager="StaggeredGridLayoutManager"
             app:spanCount="3"
