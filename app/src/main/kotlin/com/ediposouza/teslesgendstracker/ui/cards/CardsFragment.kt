@@ -42,7 +42,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 2 -> R.string.tab_cards_favorites
                 else -> R.string.app_name
             }
-            activity.dash_toolbar_title?.setText(title)
+            activity.toolbar_title?.setText(title)
             BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             metricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
@@ -71,7 +71,6 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             eventBus.post(CmdShowCardsByAttr(it))
             attr_filter.selectAttr(it, true)
         }
-        attr_filter.selectAttr(Attribute.STRENGTH, true)
         Handler().postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
@@ -80,7 +79,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.dash_toolbar_title.setText(R.string.app_name)
+        activity.toolbar_title.setText(R.string.app_name)
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
     }
 

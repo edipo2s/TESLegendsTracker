@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.decks
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
@@ -18,17 +19,21 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
+import org.jetbrains.anko.intentFor
 
 /**
  * Created by EdipoSouza on 11/12/16.
  */
 class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
+
+    private val RC_NEW_DECK = 125
 
     val adapter by lazy { DecksPageAdapter(context, fragmentManager) }
 
@@ -40,7 +45,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 2 -> R.string.tab_decks_favorites
                 else -> R.string.tab_decks_public
             }
-            activity.dash_toolbar_title.setText(title)
+            activity.toolbar_title?.setText(title)
             metricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
                 1 -> MetricScreen.SCREEN_DECKS_OWNED()
@@ -58,11 +63,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_view_pager.adapter = adapter
         decks_view_pager.addOnPageChangeListener(pageChange)
         activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
-        decks_attr_filter.deckMode = true
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
                 decks_attr_filter.unselectAttr(it)
@@ -70,6 +75,10 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 decks_attr_filter.selectAttr(it, false)
             }
             requestDecks()
+        }
+        decks_fab_add.setOnClickListener {
+            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
+            startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
         }
         Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
         metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())

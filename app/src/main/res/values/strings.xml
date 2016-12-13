@@ -16,6 +16,7 @@
     <string name="menu_unfavorite">Unfavorite</string>
     <string name="menu_like">Like</string>
     <string name="menu_unlike">Unlike</string>
+    <string name="menu_done">Done</string>
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
@@ -59,5 +60,13 @@
     <string name="deck_attr1_transition_name">deck_attr1_transition</string>
     <string name="deck_attr2_transition_name">deck_attr2_transition</string>
     <string name="deck_transition_name" translatable="false">deck_transition</string>
+
+    <string name="new_deck_title">New Deck</string>
+    <string name="new_deck_save_dialog_title">Deck Info</string>
+    <string name="new_deck_save_dialog_name_label">Name</string>
+    <string name="new_deck_save_dialog_type_label">Type</string>
+    <string name="new_deck_save_dialog_patch_label">Patch</string>
+    <string name="new_deck_save_dialog_public_label">Make deck public</string>
+    <string name="new_deck_save_dialog_save">Save</string>
 
 </resources>

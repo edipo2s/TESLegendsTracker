@@ -17,9 +17,17 @@ class CardParser() {
     val keyword: String = ""
     val arenaTier: String = CardArenaTier.NONE.name
     val evolves: Boolean = false
+    val attr1: String = ""
+    val attr2: String = ""
 
     fun toCard(shortName: String, cls: Attribute): Card {
-        return Card(name, shortName, cls,
+        var clsAttr1 = cls
+        var clsAttr2 = cls
+        if (cls == Attribute.DUAL) {
+            clsAttr1 = Attribute.valueOf(attr1.trim().toUpperCase())
+            clsAttr2 = Attribute.valueOf(attr2.trim().toUpperCase())
+        }
+        return Card(name, shortName, cls, clsAttr1, clsAttr2,
                 CardRarity.valueOf(rarity.trim().toUpperCase()), unique,
                 cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
                 CardType.valueOf(type.trim().toUpperCase()),
