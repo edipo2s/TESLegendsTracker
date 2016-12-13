@@ -47,7 +47,7 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        val qtdAdsBefore = getAdsQtdBefore(position)
+        val qtdAdsBefore = getAdsQtdBeforePosition(position)
         if (getItemViewType(position) == ITEM_VIEW_TYPE_DEFAULT) {
             onBindDefaultViewHolder(holder, position - qtdAdsBefore)
         }
@@ -56,14 +56,18 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
     override fun getItemCount(): Int = getDefaultItemCount() + getDefaultItemCount().div(adsEachItems)
 
     override fun getItemViewType(position: Int): Int {
-        val qtdAdsBefore = getAdsQtdBefore(position)
+        val qtdAdsBefore = getAdsQtdBeforePosition(position)
         val nextEachItems = adsEachItems * (qtdAdsBefore + 1) + qtdAdsBefore
         return if (position == nextEachItems) ITEM_VIEW_TYPE_ADS else ITEM_VIEW_TYPE_DEFAULT
     }
 
-    private fun getAdsQtdBefore(position: Int): Int {
+    private fun getAdsQtdBeforePosition(position: Int): Int {
         val qtdAds = position.div(adsEachItems)
         return (position - qtdAds).div(adsEachItems)
+    }
+
+    protected fun getAdsQtdBeforeDefaultPosition(position: Int): Int {
+        return position.div(adsEachItems)
     }
 
 }
