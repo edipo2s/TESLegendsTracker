@@ -158,7 +158,7 @@ class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager
         val slotIndex = items.indexOf(cardSlot)
         if (slotIndex > -1) {
             items[slotIndex] = CardSlot(cardSlot.card, newQtd)
-            notifyItemChanged(slotIndex)
+            notifyItemChanged(slotIndex + getAdsQtdBeforeDefaultPosition(slotIndex))
         }
     }
 
