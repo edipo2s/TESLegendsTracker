@@ -87,7 +87,7 @@ class PublicInteractor() : BaseInteractor() {
         query.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
-                Timber.d(ds.value.toString())
+                Timber.d(ds.value?.toString())
                 val decks = ds.children.mapTo(arrayListOf<Deck>()) {
                     it.getValue(DeckParser::class.java).toDeck(it.key, false)
                 }

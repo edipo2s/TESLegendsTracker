@@ -14,6 +14,8 @@ open class BaseFragment : Fragment() {
     protected val eventBus by lazy { EventBus.getDefault() }
     protected val metricsManager by lazy { MetricManager.getInstance() }
 
+    protected var fragmentSelected: Boolean = false
+
     override fun onStart() {
         super.onStart()
         try {
@@ -30,6 +32,11 @@ open class BaseFragment : Fragment() {
         } catch (e: Exception) {
             Timber.i(e.message)
         }
+    }
+
+    override fun setMenuVisibility(menuVisible: Boolean) {
+        super.setMenuVisibility(menuVisible)
+        fragmentSelected = menuVisible
     }
 
 }

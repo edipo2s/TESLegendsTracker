@@ -11,8 +11,7 @@
 
         <item
             android:id="@+id/menu_decks"
-            android:title="@string/menu_decks"
-            android:enabled="false" />
+            android:title="@string/menu_decks" />
 
         <item
             android:id="@+id/menu_matches"

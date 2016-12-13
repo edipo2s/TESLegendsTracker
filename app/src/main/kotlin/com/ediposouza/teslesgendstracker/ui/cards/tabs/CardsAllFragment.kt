@@ -46,8 +46,6 @@ open class CardsAllFragment : BaseFragment() {
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
 
-    var fragmentSelected: Boolean = false
-
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
@@ -67,11 +65,6 @@ open class CardsAllFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configRecycleView()
-    }
-
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        fragmentSelected = menuVisible
     }
 
     open fun configRecycleView() {

@@ -42,7 +42,15 @@ enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL,
     AGILITY(Attribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
     WILLPOWER(Attribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
     ENDURANCE(Attribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
-    NEUTRAL(Attribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral)
+    NEUTRAL(Attribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral);
+
+    companion object {
+
+        fun getClasses(attr: List<Attribute>): List<Class> {
+            return Class.values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
+        }
+
+    }
 
 }
 

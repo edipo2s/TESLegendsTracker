@@ -5,6 +5,7 @@ import android.support.annotation.IntDef
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.Class
 
 /**
  * Created by EdipoSouza on 11/6/16.
@@ -14,6 +15,8 @@ class CmdShowLogin
 class CmdLoginSuccess
 
 data class CmdShowCardsByAttr(val attr: Attribute)
+
+data class CmdShowDecksByClasses(val classes: List<Class>)
 
 data class CmdUpdateRarityMagikaFiltersVisibility(val show: Boolean)
 

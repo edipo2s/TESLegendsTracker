@@ -6,21 +6,25 @@ import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.util.DiffUtil
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_decks_list.*
 import kotlinx.android.synthetic.main.itemlist_deck.view.*
+import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
 import java.text.NumberFormat
 import java.util.*
@@ -31,6 +35,7 @@ import java.util.*
 open class DecksPublicFragment : BaseFragment() {
 
     protected val publicInteractor = PublicInteractor()
+    protected var currentClasses: Array<Class> = Class.values()
 
     val RC_DECK = 123
     val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
@@ -62,23 +67,43 @@ open class DecksPublicFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         decks_recycler_view.adapter = decksAdapter
         decks_recycler_view.itemAnimator = SlideInLeftAnimator()
+        decks_recycler_view.layoutManager = object : LinearLayoutManager(context) {
+            override fun supportsPredictiveItemAnimations(): Boolean = false
+        }
         decks_refresh_layout.setOnRefreshListener {
             decks_refresh_layout.isRefreshing = false
-            getDecks()
+            showDecks()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_DECK && resultCode == Activity.RESULT_OK) {
-            getDecks()
+            showDecks()
         }
     }
 
-    open fun getDecks() {
-        publicInteractor.getPublicDecks(null, {
+    @Subscribe
+    fun onShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
+        currentClasses = cmdShowDecksByClasses.classes.toTypedArray()
+        showDecks()
+        if (currentClasses.isEmpty()) {
+            decksAdapter.notifyDataSetChanged()
+        }
+    }
+
+    fun showDecks() {
+        Timber.d("Classes: %s", currentClasses.toSet())
+        decksAdapter.clearItems()
+        for (i in currentClasses.indices) {
+            getDecks(currentClasses[i], i == currentClasses.size - 1)
+        }
+    }
+
+    open fun getDecks(cls: Class?, last: Boolean) {
+        publicInteractor.getPublicDecks(cls, {
             it.forEach { Timber.d("Public: %s", it.toString()) }
-            decksAdapter.showDecks(it)
+            decksAdapter.showDecks(it, last)
         })
     }
 
@@ -89,7 +114,8 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
 
     val privateInteractor = PrivateInteractor()
 
-    var items: List<Deck> = ArrayList()
+    var items: List<Deck> = listOf()
+    var newItems: ArrayList<Deck> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DecksAllViewHolder {
         return DecksAllViewHolder(LayoutInflater.from(parent?.context)
@@ -103,9 +129,21 @@ class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
 
     override fun getItemCount(): Int = items.size
 
-    fun showDecks(decks: List<Deck>) {
+    fun clearItems() {
+        newItems.clear()
+    }
+
+    fun showDecks(decks: List<Deck>, last: Boolean) {
+        newItems.addAll(decks)
+        if (!last) {
+            return
+        }
         val oldItems = items
-        items = decks
+        items = newItems
+        if (items.isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return if (oldItemPosition == 0 || newItemPosition == 0) false
