@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid
+        android:angle="0"
+        android:color="@color/scrollBar" />
+
+    <corners android:radius="@dimen/default_margin" />
+
+</shape>
