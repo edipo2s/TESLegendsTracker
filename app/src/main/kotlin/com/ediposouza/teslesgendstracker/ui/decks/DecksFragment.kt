@@ -2,18 +2,21 @@ package com.ediposouza.teslesgendstracker.ui.decks
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
+import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
@@ -29,6 +32,25 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     val adapter by lazy { DecksPageAdapter(context, fragmentManager) }
 
+    val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
+
+        override fun onPageSelected(position: Int) {
+            val title = when (position) {
+                1 -> R.string.tab_decks_owned
+                2 -> R.string.tab_decks_favorites
+                else -> R.string.tab_decks_public
+            }
+            activity.dash_toolbar_title.setText(title)
+            metricsManager.trackScreen(when (position) {
+                0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
+                1 -> MetricScreen.SCREEN_DECKS_OWNED()
+                else -> MetricScreen.SCREEN_DECKS_FAVORED()
+            })
+            (adapter.getItem(position) as DecksPublicFragment).showDecks()
+        }
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks)
     }
@@ -36,31 +58,26 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_view_pager.adapter = adapter
-        decks_view_pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                val title = when (position) {
-                    1 -> R.string.tab_decks_owned
-                    2 -> R.string.tab_decks_favorites
-                    else -> R.string.tab_decks_public
-                }
-                activity.dash_toolbar_title.setText(title)
-                metricsManager.trackScreen(when (position) {
-                    0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
-                    1 -> MetricScreen.SCREEN_DECKS_OWNED()
-                    else -> MetricScreen.SCREEN_DECKS_FAVORED()
-                })
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                (adapter.getItem(position) as DecksPublicFragment).getDecks()
-            }
-
-        })
+        decks_view_pager.addOnPageChangeListener(pageChange)
         activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
-        decks_attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
+        decks_attr_filter.deckMode = true
+        decks_attr_filter.filterClick = {
+            if (decks_attr_filter.isAttrSelected(it)) {
+                decks_attr_filter.unselectAttr(it)
+            } else {
+                decks_attr_filter.selectAttr(it, false)
+            }
+            requestDecks()
+        }
+        Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
         metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
+    }
+
+    private fun requestDecks() {
+        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
+        eventBus.post(CmdShowDecksByClasses(classesToShow))
     }
 
     override fun onResume() {

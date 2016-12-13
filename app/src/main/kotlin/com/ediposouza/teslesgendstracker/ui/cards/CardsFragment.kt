@@ -14,6 +14,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
@@ -34,23 +35,20 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val handler = Handler()
     val trackSearch = Runnable { metricsManager.trackSearch(query ?: "") }
 
-    val pageSelecter = object : ViewPager.SimpleOnPageChangeListener() {
+    val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             val title = when (position) {
                 1 -> R.string.tab_cards_collection
                 2 -> R.string.tab_cards_favorites
                 else -> R.string.app_name
             }
-            activity.dash_toolbar_title.setText(title)
+            activity.dash_toolbar_title?.setText(title)
             BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
             metricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 else -> MetricScreen.SCREEN_CARDS_FAVORED()
             })
-        }
-
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             if (position == 1) {
                 collection_statistics.updateStatistics()
@@ -68,8 +66,15 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
-        cards_view_pager.addOnPageChangeListener(pageSelecter)
-        attr_filter.filterClick = { eventBus.post(CmdShowCardsByAttr(it)) }
+        cards_view_pager.addOnPageChangeListener(pageChange)
+        attr_filter.filterClick = {
+            eventBus.post(CmdShowCardsByAttr(it))
+            attr_filter.selectAttr(it, true)
+        }
+        attr_filter.selectAttr(Attribute.STRENGTH, true)
+        Handler().postDelayed({
+            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+        }, DateUtils.SECOND_IN_MILLIS)
         metricsManager.trackScreen(MetricScreen.SCREEN_CARDS_ALL())
     }
 

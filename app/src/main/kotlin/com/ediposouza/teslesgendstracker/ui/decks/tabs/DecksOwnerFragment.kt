@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -30,15 +31,15 @@ class DecksOwnerFragment : DecksPublicFragment() {
         menu?.clear()
         inflater?.inflate(R.menu.menu_decks_owner, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
-        onlyPrivate?.setOnCheckedChangeListener { button, checked -> getDecks() }
+        onlyPrivate?.setOnCheckedChangeListener { button, checked -> showDecks() }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun getDecks() {
-        privateInteractor.getOwnedDecks(null, {
+    override fun getDecks(cls: Class?, last: Boolean) {
+        privateInteractor.getOwnedDecks(cls, {
             val decksToShow = if (onlyPrivate?.isChecked ?: false) it.filter(Deck::private) else it
             decksToShow.forEach { Timber.d("Decks: %s", it.toString()) }
-            decksAdapter.showDecks(decksToShow)
+            decksAdapter.showDecks(decksToShow, last)
         })
     }
 

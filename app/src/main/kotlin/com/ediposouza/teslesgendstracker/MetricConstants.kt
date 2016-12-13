@@ -30,20 +30,20 @@ sealed class MetricAction(val name: String) {
         }
     }
 
-    class ACTION_CARD_FILTER_ATTR : MetricAction("FilterAttr") {
+    class ACTION_CARD_FILTER_ATTR : MetricAction("FilterCardAttr") {
         companion object {
             const val PARAM_ATTR = "Attr"
         }
     }
 
-    class ACTION_CARD_FILTER_RARITY : MetricAction("FilterRarity") {
+    class ACTION_CARD_FILTER_RARITY : MetricAction("FilterCardRarity") {
         companion object {
             const val PARAM_RARITY = "Rarity"
             const val VALUE_CLEAR = "Clear"
         }
     }
 
-    class ACTION_CARD_FILTER_MAGIKA : MetricAction("FilterMagika") {
+    class ACTION_CARD_FILTER_MAGIKA : MetricAction("FilterCardMagika") {
         companion object {
             const val PARAM_MAGIKA = "Magika"
             const val VALUE_CLEAR = "Clear"
