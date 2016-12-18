@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
 import android.support.annotation.DimenRes
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
@@ -37,8 +38,8 @@ import java.util.*
  */
 open class CardsAllFragment : BaseFragment() {
 
-    val ADS_EACH_ITEMS = 21 //after 7 lines
-    val CARDS_PER_ROW = 3
+    open val ADS_EACH_ITEMS = 21 //after 7 lines
+    open val CARDS_PER_ROW = 3
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
@@ -52,12 +53,17 @@ open class CardsAllFragment : BaseFragment() {
 
     open val cardsAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.dimen.card_height,
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads, R.dimen.card_height,
                 { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
         }
+    }
+
+    open val itemDecoration by lazy {
+        GridSpacingItemDecoration(CARDS_PER_ROW,
+                resources.getDimensionPixelSize(R.dimen.card_margin), true)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,14 +75,18 @@ open class CardsAllFragment : BaseFragment() {
         configRecycleView()
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+    }
+
     open fun configRecycleView() {
         cards_recycler_view.layoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }
         cards_recycler_view.itemAnimator = ScaleInAnimator()
         cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(CARDS_PER_ROW,
-                resources.getDimensionPixelSize(R.dimen.card_margin), true))
+        cards_recycler_view.addItemDecoration(itemDecoration)
         cards_refresh_layout.setOnRefreshListener {
             cards_refresh_layout.isRefreshing = false
             loadCardsByAttr(currentAttr)
@@ -188,9 +198,9 @@ open class CardsAllFragment : BaseFragment() {
 
 }
 
-class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @DimenRes val cardHeight: Int,
-                      val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
+class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
+                      @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
     var items: List<Card> = ArrayList()
 

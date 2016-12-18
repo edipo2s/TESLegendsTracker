@@ -1,17 +1,19 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
+import android.support.annotation.LayoutRes
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.load
-import kotlinx.android.synthetic.main.itemlist_ads.view.*
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.NativeExpressAdView
 
 /**
  * Created by ediposouza on 08/12/16.
  */
-abstract class BaseAdsAdapter(val adsEachItems: Int) :
+abstract class BaseAdsAdapter(val adsEachItems: Int, @LayoutRes val adsLayout: Int) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -21,15 +23,9 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
 
     }
 
-    constructor(adsEachItems: Int, layoutManager: GridLayoutManager) : this(adsEachItems) {
-        layoutManager.apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    val itemType = getItemViewType(position)
-                    return if (itemType == BaseAdsAdapter.ITEM_VIEW_TYPE_ADS) spanCount else 1
-                }
-            }
-        }
+    constructor(adsEachItems: Int, layoutManager: GridLayoutManager,
+                @LayoutRes adsLayout: Int) : this(adsEachItems, adsLayout) {
+        onRestoreState(layoutManager)
     }
 
     abstract fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
@@ -40,8 +36,12 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
         if (viewType == ITEM_VIEW_TYPE_DEFAULT) {
             return onCreateDefaultViewHolder(parent)
         } else {
-            val adsItemView = parent.inflate(R.layout.itemlist_ads)
-            adsItemView.ads_view.load()
+            val adsItemView = parent.inflate(adsLayout)
+            val ads = adsItemView.findViewById(R.id.ads_view)
+            when (ads) {
+                is AdView -> ads.load()
+                is NativeExpressAdView -> ads.load()
+            }
             return object : RecyclerView.ViewHolder(adsItemView) {}
         }
     }
@@ -68,6 +68,17 @@ abstract class BaseAdsAdapter(val adsEachItems: Int) :
 
     protected fun getAdsQtdBeforeDefaultPosition(position: Int): Int {
         return position.div(adsEachItems)
+    }
+
+    fun onRestoreState(layoutManager: GridLayoutManager) {
+        layoutManager.apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val itemType = getItemViewType(position)
+                    return if (itemType == ITEM_VIEW_TYPE_ADS) spanCount else 1
+                }
+            }
+        }
     }
 
 }
