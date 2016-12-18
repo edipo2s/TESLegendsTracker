@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.decks.tabs
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.util.DiffUtil
@@ -18,6 +19,7 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.DeckActivity
+import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +36,8 @@ import java.util.*
  */
 open class DecksPublicFragment : BaseFragment() {
 
+    val ADS_EACH_ITEMS = 15 //after 15 lines
+
     protected val publicInteractor = PublicInteractor()
     protected var currentClasses: Array<Class> = Class.values()
 
@@ -43,18 +47,19 @@ open class DecksPublicFragment : BaseFragment() {
     val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
     val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
 
-    protected val decksAdapter = DecksAllAdapter({ view: View, deck: Deck ->
-        PrivateInteractor().getFavoriteDecks(deck.cls) {
-            val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
-            val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
-            startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like),
-                    RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                    Pair(view.deck_name as View, nameTransitionName),
-                    Pair(view.deck_cover as View, coverTransitionName),
-                    Pair(view.deck_attr1 as View, attr1TransitionName),
-                    Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
-        }
-    }) {
+    protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
+            { view: View, deck: Deck ->
+                PrivateInteractor().getFavoriteDecks(deck.cls) {
+                    val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
+                    val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
+                    startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like),
+                            RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                            Pair(view.deck_name as View, nameTransitionName),
+                            Pair(view.deck_cover as View, coverTransitionName),
+                            Pair(view.deck_attr1 as View, attr1TransitionName),
+                            Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+                }
+            }) {
         view: View, deck: Deck ->
         true
     }
@@ -109,25 +114,24 @@ open class DecksPublicFragment : BaseFragment() {
 
 }
 
-class DecksAllAdapter(val itemClick: (View, Deck) -> Unit,
-                      val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.Adapter<DecksAllViewHolder>() {
+class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
+                      val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
 
     val privateInteractor = PrivateInteractor()
 
     var items: List<Deck> = listOf()
     var newItems: ArrayList<Deck> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DecksAllViewHolder {
-        return DecksAllViewHolder(LayoutInflater.from(parent?.context)
-                .inflate(R.layout.itemlist_deck, parent, false), itemClick, itemLongClick)
+    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
     }
 
-    override fun onBindViewHolder(holder: DecksAllViewHolder?, position: Int) {
+    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val deck = items[position]
-        holder?.bind(deck, privateInteractor)
+        (holder as DecksAllViewHolder).bind(deck, privateInteractor)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getDefaultItemCount(): Int = items.size
 
     fun clearItems() {
         newItems.clear()

@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">TES Legends Tracker (Preview)</string>
     <string name="app_ads_card_list">***REMOVED***</string>
+    <string name="app_ads_card_list_size">360x80</string>
     <string name="app_ads_card_full">***REMOVED***</string>
+    <string name="app_ads_deck_list">***REMOVED***</string>
+    <string name="app_ads_deck_list_size">360x80</string>
+    <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
+    <string name="app_ads_new_deck_card_list">***REMOVED***</string>
+    <string name="app_ads_new_deck_card_list_size">240x60</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>

@@ -4,5 +4,6 @@
     android:id="@+id/ads_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:adSize="280x80"
-    app:adUnitId="@string/app_ads_card_list" />
+    android:layout_marginTop="@dimen/default_margin"
+    app:adSize="@string/app_ads_deck_list_size"
+    app:adUnitId="@string/app_ads_deck_list" />

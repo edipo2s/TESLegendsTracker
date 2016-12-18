@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
@@ -30,7 +31,8 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     val cardsCollectionAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, { changeUserCardQtd(it) }) { view, card ->
+        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
+                { changeUserCardQtd(it) }) { view, card ->
             showCardExpanded(card, view)
             true
         }
@@ -119,8 +121,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
 }
 
-class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
+class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                             @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
