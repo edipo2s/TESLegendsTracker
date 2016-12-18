@@ -11,6 +11,8 @@ import com.ediposouza.teslesgendstracker.data.Class
 /**
  * Created by EdipoSouza on 11/6/16.
  */
+class CmdShowTabs
+
 class CmdShowLogin
 
 class CmdLoginSuccess

@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
@@ -92,6 +93,9 @@ class DashActivity : BaseActivity(),
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         dash_drawer_layout.closeDrawer(Gravity.START)
+        if (dash_navigation_view.menu.findItem(item.itemId).isChecked) {
+            return true
+        }
         return when (item.itemId) {
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
@@ -144,7 +148,12 @@ class DashActivity : BaseActivity(),
     }
 
     @Subscribe
-    fun updateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
+    fun onCmdShowTabs(cmdShowTabs: CmdShowTabs) {
+        dash_app_bar_bayout.setExpanded(true, true)
+    }
+
+    @Subscribe
+    fun onCmdUpdateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
         val filterMagikaLP = dash_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
         val filterRarityLP = dash_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
         val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)

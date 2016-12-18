@@ -89,7 +89,7 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
+    fun onCmdShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
         currentClasses = cmdShowDecksByClasses.classes.toTypedArray()
         showDecks()
         if (currentClasses.isEmpty()) {
