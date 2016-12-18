@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_below="@id/new_deck_attr_filter"
-                app:layout_widthPercent="60%" />
+                app:layout_widthPercent="65%" />
 
             <com.ediposouza.teslesgendstracker.ui.widget.DeckList
                 android:id="@+id/new_deck_cardlist"
@@ -63,9 +63,9 @@
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/new_deck_fragment_cards"
                 android:layout_below="@id/new_deck_attr_filter"
-                android:layout_marginEnd="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginTop="@dimen/large_margin"
-                app:layout_widthPercent="40%" />
+                app:layout_widthPercent="35%" />
 
         </android.support.percent.PercentRelativeLayout>
 
