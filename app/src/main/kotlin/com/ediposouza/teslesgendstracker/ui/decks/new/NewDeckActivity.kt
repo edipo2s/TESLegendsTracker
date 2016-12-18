@@ -92,18 +92,18 @@ class NewDeckActivity : BaseActivity() {
     }
 
     @Subscribe
-    fun onCardAdd(cmdCardAdd: CmdAddCard) {
+    fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
     }
 
     @Subscribe
-    fun onRemAttr(cmdRemAttr: CmdRemAttr) {
+    fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
     }
 
     @Subscribe
-    fun updateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
+    fun onCmdUpdateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
         val filterMagikaLP = new_deck_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
         val filterRarityLP = new_deck_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
         val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)

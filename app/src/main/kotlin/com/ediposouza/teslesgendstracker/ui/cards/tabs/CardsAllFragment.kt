@@ -100,7 +100,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
+    fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (fragmentSelected) {
             metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
@@ -108,19 +108,19 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
-    fun onFilterSearch(filterSearch: CmdFilterSearch) {
+    fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
         searchFilter = filterSearch.search
         showCards()
     }
 
     @Subscribe
-    fun onFilterRarity(filterRarity: CmdFilterRarity) {
+    fun onCmdFilterRarity(filterRarity: CmdFilterRarity) {
         rarityFilter = filterRarity.rarity
         showCards()
         if (fragmentSelected) {
@@ -130,7 +130,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterMagika(filterMagika: CmdFilterMagika) {
+    fun onCmdFilterMagika(filterMagika: CmdFilterMagika) {
         magikaFilter = filterMagika.magika
         showCards()
         if (fragmentSelected) {

@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
@@ -70,7 +71,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
-                decks_attr_filter.unselectAttr(it)
+                decks_attr_filter.unSelectAttr(it)
             } else {
                 decks_attr_filter.selectAttr(it, false)
             }
@@ -84,13 +85,9 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
-    private fun requestDecks() {
-        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
-        eventBus.post(CmdShowDecksByClasses(classesToShow))
-    }
-
     override fun onResume() {
         super.onResume()
+        eventBus.post(CmdShowTabs())
         eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(false))
     }
 
@@ -114,6 +111,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
+    }
+
+    private fun requestDecks() {
+        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
+        eventBus.post(CmdShowDecksByClasses(classesToShow))
     }
 
 }

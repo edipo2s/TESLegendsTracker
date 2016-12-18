@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
@@ -85,6 +86,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
+        eventBus.post(CmdShowTabs())
         eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
     }
 
