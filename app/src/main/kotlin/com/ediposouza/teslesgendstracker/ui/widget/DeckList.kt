@@ -158,7 +158,7 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
             if (newQtd <= 0) {
                 items.remove(cardSlot)
                 notifyDataSetChanged()
-                if (items.map { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty()) {
+                if (items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty()) {
                     EventBus.getDefault().post(CmdRemAttr(card.attr))
                 }
             } else {

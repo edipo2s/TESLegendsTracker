@@ -14,13 +14,17 @@ import org.greenrobot.eventbus.EventBus
 
 class NewDeckCardsListFragment() : CardsAllFragment() {
 
+    override val ADS_EACH_ITEMS = 20 //after 10 lines
+    override val CARDS_PER_ROW = 2
+
     val onItemClick = { view: View, card: Card ->
         EventBus.getDefault().post(CmdAddCard(card))
     }
 
     override val cardsAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.dimen.deck_new_card_height, onItemClick) {
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_new_deck_card_ads,
+                R.dimen.deck_new_card_height, onItemClick) {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true

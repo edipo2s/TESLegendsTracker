@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/deck_list_slot_half_height"
-        android:layout_marginStart="@dimen/deck_list_slot_height"
+        android:layout_marginStart="@dimen/deck_list_slot_half_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
         android:scaleType="centerCrop"
         android:src="@drawable/card" />
@@ -21,7 +21,6 @@
         android:id="@+id/deckslot_card_magika"
         android:layout_width="@dimen/deck_list_slot_height"
         android:layout_height="@dimen/deck_list_slot_height"
-        android:layout_marginStart="@dimen/deck_list_slot_half_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
         android:src="@drawable/ic_magika_0" />
 
