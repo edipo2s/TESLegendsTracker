@@ -139,7 +139,7 @@
 
     </ScrollView>
 
-    <com.ediposouza.teslesgendstracker.ui.widget.DeckList
+    <com.ediposouza.teslesgendstracker.ui.decks.DeckList
         android:id="@+id/deck_details_cardlist"
         android:layout_width="0dp"
         android:layout_height="match_parent"

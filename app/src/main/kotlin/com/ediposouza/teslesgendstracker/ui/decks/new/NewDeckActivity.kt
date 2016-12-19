@@ -17,11 +17,13 @@ import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import kotlinx.android.synthetic.main.activity_new_deck.*
@@ -47,9 +49,12 @@ class NewDeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_title.text = getString(R.string.new_deck_title)
-        new_deck_attr_filter.filterClick = {
-            eventBus.post(CmdShowCardsByAttr(it))
-            new_deck_attr_filter.selectAttr(it, true)
+        with(new_deck_attr_filter) {
+            filterClick = {
+                eventBus.post(CmdShowCardsByAttr(it))
+                new_deck_attr_filter.selectAttr(it, true)
+                new_deck_attr_filter.lastAttrSelected = it
+            }
         }
         new_deck_cardlist.setListEditMode(true)
         new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
@@ -95,11 +100,19 @@ class NewDeckActivity : BaseActivity() {
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
+        updateDualFilter()
     }
 
     @Subscribe
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
+        updateDualFilter()
+    }
+
+    private fun updateDualFilter() {
+        val cls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
+                new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).first()
+        eventBus.post(CmdFilterClass(cls))
     }
 
     @Subscribe
