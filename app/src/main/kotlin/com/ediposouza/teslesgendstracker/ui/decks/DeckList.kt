@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget
+package com.ediposouza.teslesgendstracker.ui.decks
 
 import android.app.Activity
 import android.content.Context
@@ -18,7 +18,6 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
-import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
 import org.greenrobot.eventbus.EventBus
@@ -158,13 +157,25 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
             if (newQtd <= 0) {
                 items.remove(cardSlot)
                 notifyDataSetChanged()
-                if (items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty()) {
-                    EventBus.getDefault().post(CmdRemAttr(card.attr))
-                }
+                notifyCardRemoved(card)
             } else {
                 val cardIndex = items.indexOf(cardSlot)
                 items[cardIndex] = CardSlot(card, newQtd)
                 notifyItemChanged(cardIndex)
+            }
+        }
+    }
+
+    private fun notifyCardRemoved(card: Card) {
+        when {
+            card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
+                EventBus.getDefault().post(CmdRemAttr(card.dualAttr1))
+            }
+            card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
+                EventBus.getDefault().post(CmdRemAttr(card.dualAttr2))
+            }
+            items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty() -> {
+                EventBus.getDefault().post(CmdRemAttr(card.attr))
             }
         }
     }

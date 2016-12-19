@@ -17,12 +17,14 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
@@ -47,6 +49,7 @@ open class CardsAllFragment : BaseFragment() {
     var magikaFilter: Int = -1
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
+    var classFilter: Class? = null
 
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
@@ -139,6 +142,12 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
+    @Subscribe
+    fun onCmdFilterClass(filterClass: CmdFilterClass) {
+        classFilter = filterClass.cls
+        showCards()
+    }
+
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
         PublicInteractor().getCards(attribute, {
@@ -186,6 +195,17 @@ open class CardsAllFragment : BaseFragment() {
                         magikaFilter == -1 -> it.cost is Int
                         magikaFilter < 7 -> it.cost == magikaFilter
                         else -> it.cost >= magikaFilter
+                    }
+                }
+                .filter {
+                    when {
+                        classFilter != null && currentAttr == Attribute.DUAL ->
+                            if (classFilter?.attr2 == Attribute.NEUTRAL)
+                                it.dualAttr1 == classFilter?.attr1 || it.dualAttr2 == classFilter?.attr1
+                            else
+                                (it.dualAttr1 == classFilter?.attr1 && it.dualAttr2 == classFilter?.attr2) ||
+                                        (it.dualAttr1 == classFilter?.attr2 && it.dualAttr2 == classFilter?.attr1)
+                        else -> it.attr is Attribute
                     }
                 }
     }
