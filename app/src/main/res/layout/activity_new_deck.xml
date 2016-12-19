@@ -42,7 +42,7 @@
             android:id="@+id/dash_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.utils.AutoHideBehaviour">
 
             <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttrLockable
                 android:id="@+id/new_deck_attr_filter"
@@ -57,15 +57,51 @@
                 android:layout_below="@id/new_deck_attr_filter"
                 app:layout_widthPercent="65%" />
 
-            <com.ediposouza.teslesgendstracker.ui.decks.DeckList
-                android:id="@+id/new_deck_cardlist"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/new_deck_fragment_cards"
                 android:layout_below="@id/new_deck_attr_filter"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginTop="@dimen/large_margin"
-                app:layout_widthPercent="35%" />
+                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_toEndOf="@id/new_deck_fragment_cards"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_widthPercent="35%">
+
+                <TextView
+                    android:id="@+id/new_deck_cardlist_qtd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="0/50" />
+
+                <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
+                    android:id="@+id/new_deck_cardlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/new_deck_cardlist_soul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:drawablePadding="@dimen/large_margin"
+                    android:drawableStart="@drawable/ic_soul"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="0" />
+
+                <com.ediposouza.teslesgendstracker.ui.widget.filter.MagikaCosts
+                    android:id="@+id/new_deck_cardlist_costs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/nano_margin"
+                    tools:layout_marginBottom="@dimen/navigation_bar_height" />
+
+            </LinearLayout>
 
         </android.support.percent.PercentRelativeLayout>
 

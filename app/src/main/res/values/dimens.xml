@@ -58,5 +58,8 @@
     <dimen name="deck_list_slot_rarity_margin">4dp</dimen>
 
     <dimen name="deck_new_card_margin">@dimen/small_margin</dimen>
+    <dimen name="deck_new_magika_costs_heigth">64dp</dimen>
+    <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
+    <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
 
 </resources>

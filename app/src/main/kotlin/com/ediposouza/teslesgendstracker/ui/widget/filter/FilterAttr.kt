@@ -17,6 +17,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     var deckMode: Boolean = false
         set(value) {
+            field = value
             if (!value) {
                 selectAttr(Attribute.STRENGTH, true)
             } else {

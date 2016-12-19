@@ -33,13 +33,27 @@ import org.jetbrains.anko.toast
 
 class NewDeckActivity : BaseActivity() {
 
+    val attrFilterClick: (Attribute) -> Unit = {
+        eventBus.post(CmdShowCardsByAttr(it))
+        new_deck_attr_filter.selectAttr(it, true)
+        new_deck_attr_filter.lastAttrSelected = it
+        updateDualFilter()
+    }
+
+    val onCardlistChange = {
+        val cards = new_deck_cardlist.getCards()
+        new_deck_cardlist_costs.updateCosts(cards)
+        new_deck_cardlist_qtd.text = getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
+        new_deck_cardlist_soul.text = cards.map { it.card.rarity.soulCost * it.qtd }.sum().toString()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_deck)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val layoutParams = toolbar.layoutParams as LinearLayout.LayoutParams
-            layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
-            toolbar.layoutParams = layoutParams
+            val toolBarLayoutParams = toolbar.layoutParams as LinearLayout.LayoutParams
+            toolBarLayoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
+            toolbar.layoutParams = toolBarLayoutParams
         }
 
         setResult(Activity.RESULT_CANCELED, Intent())
@@ -49,14 +63,9 @@ class NewDeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_title.text = getString(R.string.new_deck_title)
-        with(new_deck_attr_filter) {
-            filterClick = {
-                eventBus.post(CmdShowCardsByAttr(it))
-                new_deck_attr_filter.selectAttr(it, true)
-                new_deck_attr_filter.lastAttrSelected = it
-            }
-        }
-        new_deck_cardlist.setListEditMode(true)
+        new_deck_attr_filter.filterClick = attrFilterClick
+        new_deck_cardlist.editMode = true
+        new_deck_cardlist.onCardListChange = onCardlistChange
         new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         new_deck_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         supportFragmentManager.beginTransaction()
@@ -85,7 +94,7 @@ class NewDeckActivity : BaseActivity() {
                     customView(view)
                     positiveButton(R.string.new_deck_save_dialog_save) { saveDeck(view) }
                     cancelButton { }
-                }
+                }.show()
                 return true
             }
         }
@@ -96,23 +105,27 @@ class NewDeckActivity : BaseActivity() {
         toast("Saved!")
     }
 
+    private fun updateDualFilter() {
+        if (new_deck_attr_filter.lastAttrSelected == Attribute.DUAL) {
+            val cls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
+                    new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).first()
+            eventBus.post(CmdFilterClass(cls))
+        }
+    }
+
     @Subscribe
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
+        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
     }
 
     @Subscribe
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
+        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
-    }
-
-    private fun updateDualFilter() {
-        val cls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
-                new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).first()
-        eventBus.post(CmdFilterClass(cls))
     }
 
     @Subscribe

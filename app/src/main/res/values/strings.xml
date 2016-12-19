@@ -74,5 +74,6 @@
     <string name="new_deck_save_dialog_patch_label">Patch</string>
     <string name="new_deck_save_dialog_public_label">Make deck public</string>
     <string name="new_deck_save_dialog_save">Save</string>
+    <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
 
 </resources>
