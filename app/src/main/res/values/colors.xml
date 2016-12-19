@@ -12,6 +12,7 @@
 
     <color name="scrollBar">@color/teal_300_transparent</color>
     <color name="filter_background">#88000000</color>
+    <color name="cards_background">#55000000</color>
     <color name="card_zero_qtd">#889e9e9e</color>
     <color name="grey_900_with_alpha">#88212121</color>
 
@@ -24,7 +25,7 @@
     <color name="grey_500">#9e9e9e</color>
     <color name="grey_900">#212121</color>
     <color name="teal_300">#4db6ac</color>
-    <color name="teal_300_transparent">#884db6ac</color>
+    <color name="teal_300_transparent">#AA4db6ac</color>
     <color name="green_500">#4CAF50</color>
     <color name="cyan_800">#0097A7</color>
     <color name="red_100">#FFCDD2</color>

@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.decks
+package com.ediposouza.teslesgendstracker.ui.decks.widget
 
 import android.app.Activity
 import android.content.Context
@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
 import org.greenrobot.eventbus.EventBus
@@ -32,6 +33,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     var userFavorites = arrayListOf<String>()
     var editMode = false
+
+    var onCardListChange: (() -> Unit)? = null
 
     private fun showExpandedCard(card: Card, view: View) {
         val favorite = userFavorites.contains(card.shortName)
@@ -95,16 +98,18 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         deckListAdapter.showMissingCards(missingCards)
     }
 
-    fun setListEditMode(editMode: Boolean) {
-        this.editMode = editMode
-    }
-
     fun addCard(card: Card) {
         deckListAdapter.addCard(card)
+        onCardListChange?.invoke()
     }
 
     fun remCard(card: Card) {
         deckListAdapter.remCard(card)
+        onCardListChange?.invoke()
+    }
+
+    fun getCards(): List<CardSlot> {
+        return deckListAdapter.getCards()
     }
 
 }
@@ -178,6 +183,10 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
                 EventBus.getDefault().post(CmdRemAttr(card.attr))
             }
         }
+    }
+
+    fun getCards(): List<CardSlot> {
+        return items
     }
 
 }

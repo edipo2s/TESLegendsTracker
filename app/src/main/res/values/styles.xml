@@ -53,4 +53,12 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="MagikaCostsText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginTop">@dimen/nano_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
 </resources>
