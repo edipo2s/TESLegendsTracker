@@ -4,16 +4,15 @@ import android.animation.Animator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
@@ -33,6 +32,8 @@ import org.jetbrains.anko.toast
 
 class NewDeckActivity : BaseActivity() {
 
+    val ANIM_DURATION = 250L
+
     val attrFilterClick: (Attribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
         new_deck_attr_filter.selectAttr(it, true)
@@ -50,12 +51,6 @@ class NewDeckActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_deck)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val toolBarLayoutParams = toolbar.layoutParams as LinearLayout.LayoutParams
-            toolBarLayoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
-            toolbar.layoutParams = toolBarLayoutParams
-        }
-
         setResult(Activity.RESULT_CANCELED, Intent())
     }
 
@@ -63,7 +58,21 @@ class NewDeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_title.text = getString(R.string.new_deck_title)
-        new_deck_attr_filter.filterClick = attrFilterClick
+        with(new_deck_attr_filter) {
+            filterClick = attrFilterClick
+            onAttrLock = { attr1: Attribute, attr2: Attribute ->
+                val deckCls = Class.getClasses(listOf(attr1, attr2)).first()
+                new_deck_class_cover.setImageResource(deckCls.imageRes)
+                toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
+                val outValue = TypedValue()
+                resources.getValue(R.dimen.deck_class_cover_alpha, outValue, true)
+                new_deck_class_cover.animate().alpha(outValue.float).setDuration(ANIM_DURATION).start()
+            }
+            onAttrUnlock = {
+                toolbar_title.text = getString(R.string.new_deck_title)
+                new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
+            }
+        }
         new_deck_cardlist.editMode = true
         new_deck_cardlist.onCardListChange = onCardlistChange
         new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
