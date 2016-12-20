@@ -68,6 +68,7 @@
     <string name="deck_transition_name" translatable="false">deck_transition</string>
 
     <string name="new_deck_title">New Deck</string>
+    <string name="new_deck_class_title">New %s Deck</string>
     <string name="new_deck_save_dialog_title">Deck Info</string>
     <string name="new_deck_save_dialog_name_label">Name</string>
     <string name="new_deck_save_dialog_type_label">Type</string>

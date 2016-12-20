@@ -27,6 +27,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 rootView.attr_filter_neutral_indicator.visibility = if (value) View.GONE else View.VISIBLE
             }
         }
+
     var filterClick: ((Attribute) -> Unit)? = null
     var lastAttrSelected: Attribute = Attribute.STRENGTH
 

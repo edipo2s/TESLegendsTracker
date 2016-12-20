@@ -17,6 +17,9 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
     var lockAttr1: Attribute? = null
     var lockAttr2: Attribute? = null
 
+    var onAttrLock: ((Attribute, Attribute) -> Unit)? = null
+    var onAttrUnlock: (() -> Unit)? = null
+
     constructor(ctx: Context?) : this(ctx, null, 0) {
     }
 
@@ -93,6 +96,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
             if (isAttrBasic(lastAttrSelected)) {
                 selectAttr(dualAttr2, true)
             }
+            onAttrLock?.invoke(lockAttr1!!, lockAttr2!!)
         }
     }
 
@@ -108,6 +112,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
             if (isAttrBasic(lastAttrSelected)) {
                 selectAttr(lastAttrSelected, true)
             }
+            onAttrUnlock?.invoke()
         }
     }
 
