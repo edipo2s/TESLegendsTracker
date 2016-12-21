@@ -22,6 +22,7 @@ import com.ediposouza.teslesgendstracker.ui.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateDeckAndShowDeck
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_decks_list.*
@@ -37,11 +38,11 @@ import java.util.*
 open class DecksPublicFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 15 //after 15 lines
+    val RC_DECK = 123
 
     protected val publicInteractor = PublicInteractor()
     protected var currentClasses: Array<Class> = Class.values()
 
-    val RC_DECK = 123
     val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
     val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
     val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
@@ -86,6 +87,12 @@ open class DecksPublicFragment : BaseFragment() {
         if (requestCode == RC_DECK && resultCode == Activity.RESULT_OK) {
             showDecks()
         }
+    }
+
+    @Subscribe
+    fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
+        decksAdapter.clearItems()
+        showDecks()
     }
 
     @Subscribe
@@ -142,6 +149,7 @@ class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClic
         if (!last) {
             return
         }
+        Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
         val oldItems = items
         items = newItems
         if (items.isEmpty()) {

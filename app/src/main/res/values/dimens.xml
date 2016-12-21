@@ -2,6 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="status_bar_height">25dp</dimen>
     <dimen name="navigation_bar_height">48dp</dimen>
+    <dimen name="input_label_vertical_spacing">8dp</dimen>
+    <dimen name="input_label_horizontal_spacing">4dp</dimen>
 
     <dimen name="profile_image">96dp</dimen>
     <dimen name="navigation_drawer_header_height">150dp</dimen>

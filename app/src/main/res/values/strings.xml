@@ -69,12 +69,14 @@
 
     <string name="new_deck_title">New Deck</string>
     <string name="new_deck_class_title">New %s Deck</string>
+    <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
     <string name="new_deck_save_dialog_title">Deck Info</string>
     <string name="new_deck_save_dialog_name_label">Name</string>
     <string name="new_deck_save_dialog_type_label">Type</string>
     <string name="new_deck_save_dialog_patch_label">Patch</string>
     <string name="new_deck_save_dialog_public_label">Make deck public</string>
     <string name="new_deck_save_dialog_save">Save</string>
-    <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
+    <string name="new_deck_save_as_public">Deck saved as Public</string>
+    <string name="new_deck_save_as_private">Deck saved as Private</string>
 
 </resources>
