@@ -17,6 +17,8 @@ class CmdShowLogin
 
 class CmdLoginSuccess
 
+class CmdUpdateDeckAndShowDeck
+
 data class CmdShowCardsByAttr(val attr: Attribute)
 
 data class CmdShowDecksByClasses(val classes: List<Class>)

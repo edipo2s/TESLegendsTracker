@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.decks
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.ActivityOptionsCompat
@@ -16,10 +18,7 @@ import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
-import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
@@ -99,6 +98,15 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             setOnQueryTextListener(this@DecksFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_NEW_DECK && resultCode == Activity.RESULT_OK) {
+            val privateExtra = data?.getBooleanExtra(NewDeckActivity.DECK_PRIVATE_EXTRA, false) ?: false
+            decks_view_pager.currentItem = if (privateExtra) 1 else 0
+            Handler().postDelayed({ eventBus.post(CmdUpdateDeckAndShowDeck()) }, DateUtils.SECOND_IN_MILLIS / 2)
+        }
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

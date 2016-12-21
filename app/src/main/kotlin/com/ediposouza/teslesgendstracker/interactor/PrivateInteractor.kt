@@ -1,11 +1,13 @@
 package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.*
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import org.greenrobot.eventbus.EventBus
 import org.threeten.bp.LocalDateTime
 import timber.log.Timber
 import java.util.*
@@ -135,7 +137,7 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+    private fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(getUserID())) {
             keepSynced(true)
             addListenerForSingleValueEvent(object : ValueEventListener {
@@ -144,7 +146,7 @@ class PrivateInteractor() : BaseInteractor() {
                     Timber.d(ds.value?.toString())
                     val decks = ds.children.mapTo(arrayListOf<Deck>()) {
                         it.getValue(DeckParser::class.java).toDeck(it.key, false)
-                    }.filter { cls == null || it.cls == cls }.sortedBy(Deck::updatedAt)
+                    }.filter { cls == null || it.cls == cls }
                     Timber.d(decks.toString())
                     onSuccess.invoke(decks)
                 }
@@ -157,7 +159,7 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+    private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
             keepSynced(true)
             addListenerForSingleValueEvent(object : ValueEventListener {
@@ -245,16 +247,20 @@ class PrivateInteractor() : BaseInteractor() {
         })
     }
 
-    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String,
-                 cards: Map<String, Long>, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Long>,
+                 private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (uid: String) -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deck = Deck(push().key, name, getUserID(), private,
-                        type, cls, cost, LocalDateTime.now(), LocalDateTime.now(), patch, ArrayList(), 0,
-                        cards, ArrayList(), ArrayList())
+                val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now(),
+                        LocalDateTime.now(), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
                 child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
                     Timber.d(it.toString())
-                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                    if (it.isSuccessful) onSuccess.invoke(deck.id)
+                    else {
+                        val errorMsg = it.exception?.message ?: it.exception.toString()
+                        EventBus.getDefault().post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, errorMsg))
+                        onError?.invoke(it.exception)
+                    }
                 })
             }
         }
