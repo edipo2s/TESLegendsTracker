@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.MetricAction
-import com.ediposouza.teslesgendstracker.MetricConstants
 import com.ediposouza.teslesgendstracker.MetricScreen
+import com.ediposouza.teslesgendstracker.MetricsConstants
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
@@ -15,20 +15,7 @@ import io.fabric.sdk.android.Fabric
 /**
  * Created by ediposouza on 08/12/16.
  */
-class MetricManager() : MetricConstants() {
-
-    companion object {
-
-        private var static: MetricManager? = null
-
-        fun getInstance(): MetricManager {
-            if (static == null) {
-                static = MetricManager()
-            }
-            return static!!
-        }
-
-    }
+object MetricsManager : MetricsConstants() {
 
     var answers: Answers? = null
     var firebaseAnalytics: FirebaseAnalytics? = null

@@ -22,6 +22,7 @@ import com.ediposouza.teslesgendstracker.data.DeckType
 import com.ediposouza.teslesgendstracker.data.Patch
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
@@ -96,7 +97,7 @@ class NewDeckActivity : BaseActivity() {
         Handler().postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
-        metricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
