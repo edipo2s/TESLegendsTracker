@@ -290,14 +290,7 @@ class PrivateInteractor() : BaseInteractor() {
                 else
                     child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
                         Timber.d(it.toString())
-                        if (it.isSuccessful) {
-                            dbUser()?.apply {
-                                with(if (oldPrivate) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                                    child(deck.id).removeValue()
-                                }
-                                onSuccess.invoke()
-                            }
-                        } else onError?.invoke(it.exception)
+                        deleteDeck(deck, oldPrivate, onError, onSuccess)
                     })
             }
         }
@@ -315,6 +308,17 @@ class PrivateInteractor() : BaseInteractor() {
                     if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
                 })
                 child(deck.id).child(KEY_DECK_COST).setValue(cost)
+            }
+        }
+    }
+
+    fun deleteDeck(deck: Deck, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        dbUser()?.apply {
+            with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
+                child(deck.id).removeValue().addOnCompleteListener({
+                    Timber.d(it.toString())
+                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                })
             }
         }
     }

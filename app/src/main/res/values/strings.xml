@@ -21,12 +21,14 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_unfavorite">Unfavorite</string>
     <string name="menu_like">Like</string>
+    <string name="menu_delete">Delete</string>
     <string name="menu_unlike">Unlike</string>
     <string name="menu_done">Done</string>
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
     <string name="search_hint">Name, race, type or keyword</string>
+    <string name="confirm_message">Are you sure?</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -61,11 +63,12 @@
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
-    <string name="deck_name_transition_name">deck_name_transition</string>
-    <string name="deck_cover_transition_name">deck_cover_transition</string>
-    <string name="deck_attr1_transition_name">deck_attr1_transition</string>
-    <string name="deck_attr2_transition_name">deck_attr2_transition</string>
+    <string name="deck_deleted">Deck deleted!</string>
     <string name="deck_transition_name" translatable="false">deck_transition</string>
+    <string name="deck_name_transition_name" translatable="false">deck_name_transition</string>
+    <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>
+    <string name="deck_attr1_transition_name" translatable="false">deck_attr1_transition</string>
+    <string name="deck_attr2_transition_name" translatable="false">deck_attr2_transition</string>
 
     <string name="new_deck_title">New Deck</string>
     <string name="new_deck_class_title">New %s Deck</string>
