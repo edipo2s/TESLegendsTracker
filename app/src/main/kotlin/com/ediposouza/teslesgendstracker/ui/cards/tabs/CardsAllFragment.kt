@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
+import android.support.annotation.DimenRes
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
@@ -15,12 +17,15 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardRarity
+import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
+import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
@@ -36,8 +41,8 @@ import java.util.*
  */
 open class CardsAllFragment : BaseFragment() {
 
-    val ADS_EACH_ITEMS = 21 //after 7 lines
-    val CARDS_PER_ROW = 3
+    open val ADS_EACH_ITEMS = 21 //after 7 lines
+    open val CARDS_PER_ROW = 3
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
@@ -45,17 +50,24 @@ open class CardsAllFragment : BaseFragment() {
     var magikaFilter: Int = -1
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
+    var classFilter: Class? = null
 
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
     open val cardsAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, { view, card -> showCardExpanded(card, view) }) {
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads, R.dimen.card_height,
+                { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
         }
+    }
+
+    open val itemDecoration by lazy {
+        GridSpacingItemDecoration(CARDS_PER_ROW,
+                resources.getDimensionPixelSize(R.dimen.card_margin), true)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,14 +79,18 @@ open class CardsAllFragment : BaseFragment() {
         configRecycleView()
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+    }
+
     open fun configRecycleView() {
         cards_recycler_view.layoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }
         cards_recycler_view.itemAnimator = ScaleInAnimator()
         cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.addItemDecoration(GridSpacingItemDecoration(CARDS_PER_ROW,
-                resources.getDimensionPixelSize(R.dimen.card_margin), true, false))
+        cards_recycler_view.addItemDecoration(itemDecoration)
         cards_refresh_layout.setOnRefreshListener {
             cards_refresh_layout.isRefreshing = false
             loadCardsByAttr(currentAttr)
@@ -88,7 +104,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
+    fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (fragmentSelected) {
             metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
@@ -96,19 +112,19 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
-    fun onFilterSearch(filterSearch: CmdFilterSearch) {
+    fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
         searchFilter = filterSearch.search
         showCards()
     }
 
     @Subscribe
-    fun onFilterRarity(filterRarity: CmdFilterRarity) {
+    fun onCmdFilterRarity(filterRarity: CmdFilterRarity) {
         rarityFilter = filterRarity.rarity
         showCards()
         if (fragmentSelected) {
@@ -118,13 +134,19 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterMagika(filterMagika: CmdFilterMagika) {
+    fun onCmdFilterMagika(filterMagika: CmdFilterMagika) {
         magikaFilter = filterMagika.magika
         showCards()
         if (fragmentSelected) {
             metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
                 magikaFilter.toString() else MetricAction.ACTION_CARD_FILTER_MAGIKA.VALUE_CLEAR)
         }
+    }
+
+    @Subscribe
+    fun onCmdFilterClass(filterClass: CmdFilterClass) {
+        classFilter = filterClass.cls
+        showCards()
     }
 
     private fun loadCardsByAttr(attribute: Attribute) {
@@ -176,6 +198,17 @@ open class CardsAllFragment : BaseFragment() {
                         else -> it.cost >= magikaFilter
                     }
                 }
+                .filter {
+                    when {
+                        classFilter != null && currentAttr == Attribute.DUAL ->
+                            if (classFilter?.attr2 == Attribute.NEUTRAL)
+                                it.dualAttr1 == classFilter?.attr1 || it.dualAttr2 == classFilter?.attr1
+                            else
+                                (it.dualAttr1 == classFilter?.attr1 && it.dualAttr2 == classFilter?.attr2) ||
+                                        (it.dualAttr1 == classFilter?.attr2 && it.dualAttr2 == classFilter?.attr1)
+                        else -> it.attr is Attribute
+                    }
+                }
     }
 
     open fun showCardExpanded(card: Card, view: View) {
@@ -186,13 +219,14 @@ open class CardsAllFragment : BaseFragment() {
 
 }
 
-class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
+class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
+                      @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
     var items: List<Card> = ArrayList()
 
     override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), cardHeight, itemClick, itemLongClick)
     }
 
     override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -204,26 +238,24 @@ class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val i
     fun showCards(cards: List<Card>) {
         val oldItems = items
         items = cards
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.shortName == newItem.shortName
+        }).dispatchUpdatesTo(this)
     }
 }
 
-class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
+class CardsAllViewHolder(val view: View, @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
                          val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
+
+    init {
+        val cardLayoutParams = itemView.card_all_image.layoutParams
+        cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(cardHeight)
+        itemView.card_all_image.layoutParams = cardLayoutParams
+    }
 
     fun bind(card: Card) {
         itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }

@@ -5,7 +5,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
@@ -57,7 +57,7 @@ ext {
     okIOVersion = "1.10.+"
     okHttpVersion = "3.4.+"
     playServicesVersion = "9.8.0"//"10.0.1"
-    supportLibraryVersion = "25.0.1"
+    supportLibraryVersion = "25.1.0"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.1.+"

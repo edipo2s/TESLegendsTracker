@@ -1,8 +1,11 @@
 package com.ediposouza.teslesgendstracker.ui.decks
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.MenuItemCompat
@@ -15,20 +18,22 @@ import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
-import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
+import org.jetbrains.anko.intentFor
 
 /**
  * Created by EdipoSouza on 11/12/16.
  */
 class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
+
+    private val RC_NEW_DECK = 125
 
     val adapter by lazy { DecksPageAdapter(context, fragmentManager) }
 
@@ -40,7 +45,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 2 -> R.string.tab_decks_favorites
                 else -> R.string.tab_decks_public
             }
-            activity.dash_toolbar_title.setText(title)
+            activity.toolbar_title?.setText(title)
             metricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
                 1 -> MetricScreen.SCREEN_DECKS_OWNED()
@@ -58,30 +63,30 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_view_pager.adapter = adapter
         decks_view_pager.addOnPageChangeListener(pageChange)
         activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
-        decks_attr_filter.deckMode = true
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
-                decks_attr_filter.unselectAttr(it)
+                decks_attr_filter.unSelectAttr(it)
             } else {
                 decks_attr_filter.selectAttr(it, false)
             }
             requestDecks()
         }
+        decks_fab_add.setOnClickListener {
+            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
+            startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+        }
         Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
         metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
-    private fun requestDecks() {
-        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
-        eventBus.post(CmdShowDecksByClasses(classesToShow))
-    }
-
     override fun onResume() {
         super.onResume()
+        eventBus.post(CmdShowTabs())
         eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(false))
     }
 
@@ -95,6 +100,15 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_NEW_DECK && resultCode == Activity.RESULT_OK) {
+            val privateExtra = data?.getBooleanExtra(NewDeckActivity.DECK_PRIVATE_EXTRA, false) ?: false
+            decks_view_pager.currentItem = if (privateExtra) 1 else 0
+            Handler().postDelayed({ eventBus.post(CmdUpdateDeckAndShowDeck()) }, DateUtils.SECOND_IN_MILLIS / 2)
+        }
+    }
+
     override fun onQueryTextChange(newText: String?): Boolean {
         eventBus.post(CmdFilterSearch(newText))
         return true
@@ -105,6 +119,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
+    }
+
+    private fun requestDecks() {
+        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
+        eventBus.post(CmdShowDecksByClasses(classesToShow))
     }
 
 }

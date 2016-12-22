@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/deck_new_magika_costs_heigth">
+
+    <TextView
+        android:id="@+id/magika_costs_0_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:text="0" />
+
+    <View
+        android:id="@+id/magika_costs_0"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_0_label"
+        android:layout_alignStart="@id/magika_costs_0_label"
+        android:background="@drawable/xml_magika_costs_bar"
+        tools:layout_marginTop="@dimen/deck_new_magika_costs_bar_min_height" />
+
+    <TextView
+        android:id="@+id/magika_costs_1_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_0_label"
+        android:text="1" />
+
+    <View
+        android:id="@+id/magika_costs_1"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_1_label"
+        android:layout_alignStart="@id/magika_costs_1_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_2_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_1_label"
+        android:text="2" />
+
+    <View
+        android:id="@+id/magika_costs_2"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_2_label"
+        android:layout_alignStart="@id/magika_costs_2_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_3_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_2_label"
+        android:text="3" />
+
+    <View
+        android:id="@+id/magika_costs_3"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_3_label"
+        android:layout_alignStart="@id/magika_costs_3_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_4_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_3_label"
+        android:text="4" />
+
+    <View
+        android:id="@+id/magika_costs_4"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_4_label"
+        android:layout_alignStart="@id/magika_costs_4_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_5_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_4_label"
+        android:text="5" />
+
+    <View
+        android:id="@+id/magika_costs_5"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_5_label"
+        android:layout_alignStart="@id/magika_costs_5_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_6_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_5_label"
+        android:text="6" />
+
+    <View
+        android:id="@+id/magika_costs_6"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_6_label"
+        android:layout_alignStart="@id/magika_costs_6_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+    <TextView
+        android:id="@+id/magika_costs_7_plus_label"
+        style="@style/MagikaCostsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@id/magika_costs_6_label"
+        android:text="7+" />
+
+    <View
+        android:id="@+id/magika_costs_7_plus"
+        android:layout_width="@dimen/deck_new_magika_costs_bar_width"
+        android:layout_height="match_parent"
+        android:layout_above="@id/magika_costs_7_plus_label"
+        android:layout_alignStart="@id/magika_costs_7_plus_label"
+        android:background="@drawable/xml_magika_costs_bar" />
+
+</RelativeLayout>
