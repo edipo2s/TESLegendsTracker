@@ -23,6 +23,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateDeckAndShowDeck
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_decks_list.*
@@ -153,25 +154,13 @@ class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClic
         Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
         val oldItems = items
         items = newItems
-        if (items.isEmpty()) {
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
             notifyDataSetChanged()
             return
         }
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].id == items[newItemPosition].id
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.id == newItem.id
+        }).dispatchUpdatesTo(this)
     }
 
 }

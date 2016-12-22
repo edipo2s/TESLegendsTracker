@@ -12,6 +12,7 @@ import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -140,21 +141,13 @@ class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager
     fun showCards(cardSlots: ArrayList<CardSlot>) {
         val oldItems = items
         items = cardSlots
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.card.shortName == newItem.card.shortName
+        }).dispatchUpdatesTo(this)
     }
 
     fun updateSlot(cardSlot: CardSlot, newQtd: Long) {

@@ -24,6 +24,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
@@ -237,21 +238,13 @@ class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @Layo
     fun showCards(cards: List<Card>) {
         val oldItems = items
         items = cards
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].shortName == items[newItemPosition].shortName
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.shortName == newItem.shortName
+        }).dispatchUpdatesTo(this)
     }
 }
 
