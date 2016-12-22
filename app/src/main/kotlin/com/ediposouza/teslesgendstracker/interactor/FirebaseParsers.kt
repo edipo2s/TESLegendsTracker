@@ -27,17 +27,15 @@ class CardParser() {
             clsAttr1 = Attribute.valueOf(attr1.trim().toUpperCase())
             clsAttr2 = Attribute.valueOf(attr2.trim().toUpperCase())
         }
-        return Card(name, shortName, cls, clsAttr1, clsAttr2,
-                CardRarity.valueOf(rarity.trim().toUpperCase()), unique,
+        return Card(name, shortName, cls, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
                 cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
-                CardType.valueOf(type.trim().toUpperCase()),
-                CardRace.of(race.trim().toUpperCase().replace(" ", "_")),
+                CardType.of(type), CardRace.of(race),
                 keyword.split(",")
                         .filter { it.trim().isNotEmpty() }
                         .mapTo(arrayListOf<CardKeyword>()) {
-                            CardKeyword.valueOf(it.trim().toUpperCase().replace(" ", "_"))
+                            CardKeyword.of(it)
                         },
-                CardArenaTier.valueOf(arenaTier.trim().toUpperCase()),
+                CardArenaTier.of(arenaTier),
                 evolves)
     }
 
