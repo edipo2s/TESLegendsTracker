@@ -48,12 +48,14 @@ open class DecksPublicFragment : BaseFragment() {
     val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
     val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
 
+    open protected val isDeckOwned: Boolean = false
+
     protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
             { view: View, deck: Deck ->
                 PrivateInteractor().getFavoriteDecks(deck.cls) {
                     val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
                     val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
-                    startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like),
+                    startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
                             RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                             Pair(view.deck_name as View, nameTransitionName),
                             Pair(view.deck_cover as View, coverTransitionName),
@@ -91,7 +93,6 @@ open class DecksPublicFragment : BaseFragment() {
 
     @Subscribe
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
-        decksAdapter.clearItems()
         showDecks()
     }
 
