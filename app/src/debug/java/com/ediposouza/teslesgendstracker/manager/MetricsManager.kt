@@ -2,8 +2,8 @@ package com.ediposouza.teslesgendstracker.manager
 
 import android.content.Context
 import com.ediposouza.teslesgendstracker.MetricAction
-import com.ediposouza.teslesgendstracker.MetricConstants
 import com.ediposouza.teslesgendstracker.MetricScreen
+import com.ediposouza.teslesgendstracker.MetricsConstants
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber
@@ -12,20 +12,7 @@ import timber.log.Timber
  * Created by ediposouza on 08/12/16.
  */
 @SuppressWarnings("unused")
-class MetricManager() : MetricConstants() {
-
-    companion object {
-
-        private var static: MetricManager? = null
-
-        fun getInstance(): MetricManager {
-            if (static == null) {
-                static = MetricManager()
-            }
-            return static!!
-        }
-
-    }
+object MetricsManager : MetricsConstants() {
 
     fun initialize(context: Context) {
     }

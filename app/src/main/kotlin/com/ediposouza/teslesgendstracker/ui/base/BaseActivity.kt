@@ -11,7 +11,7 @@ import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.manager.MetricManager
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,7 +30,6 @@ import timber.log.Timber
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
 
     protected val eventBus by lazy { EventBus.getDefault() }
-    protected val metricsManager by lazy { MetricManager.getInstance() }
 
     private val RC_SIGN_IN: Int = 235
 
@@ -59,6 +58,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         super.onPostCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
     }
 
     override fun onStart() {
@@ -99,7 +99,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         if (currentUser != null) {
             Timber.d("onAuthStateChanged:signed_in:" + currentUser.uid)
             if (!App.hasUserLogged) {
-                metricsManager.trackSignIn(currentUser, true)
+                MetricsManager.trackSignIn(currentUser, true)
                 App.hasUserLogged = true
             }
         } else {
@@ -118,7 +118,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                         val currentUser = firebaseAuth.currentUser
                         PublicInteractor().getUserInfo(currentUser?.uid ?: "", {
                             toast("SignUp with " + currentUser?.displayName)
-                            metricsManager.trackSignUp()
+                            MetricsManager.trackSignUp()
                         }, {
                             toast("SignIn with " + currentUser?.displayName)
                         })
@@ -127,7 +127,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast(getString(R.string.error_login))
-                        metricsManager.trackSignIn(null, false)
+                        MetricsManager.trackSignIn(null, false)
                     }
                     hideLoading()
                 }

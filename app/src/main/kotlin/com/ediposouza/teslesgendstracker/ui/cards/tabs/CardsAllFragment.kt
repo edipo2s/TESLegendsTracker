@@ -21,6 +21,7 @@ import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
@@ -107,7 +108,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
         }
     }
 
@@ -128,7 +129,7 @@ open class CardsAllFragment : BaseFragment() {
         rarityFilter = filterRarity.rarity
         showCards()
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
                     rarityFilter?.name ?: MetricAction.ACTION_CARD_FILTER_RARITY.VALUE_CLEAR)
         }
     }
@@ -138,7 +139,7 @@ open class CardsAllFragment : BaseFragment() {
         magikaFilter = filterMagika.magika
         showCards()
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
                 magikaFilter.toString() else MetricAction.ACTION_CARD_FILTER_MAGIKA.VALUE_CLEAR)
         }
     }

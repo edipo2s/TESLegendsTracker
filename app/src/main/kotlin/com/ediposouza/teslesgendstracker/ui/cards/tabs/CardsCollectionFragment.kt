@@ -11,6 +11,7 @@ import android.view.*
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
@@ -53,11 +54,11 @@ class CardsCollectionFragment : CardsAllFragment() {
             }
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED -> {
-                    metricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_EXPAND())
-                    metricsManager.trackScreen(MetricScreen.SCREEN_CARDS_STATISTICS())
+                    MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_EXPAND())
+                    MetricsManager.trackScreen(MetricScreen.SCREEN_CARDS_STATISTICS())
                 }
                 BottomSheetBehavior.STATE_COLLAPSED ->
-                    metricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_COLLAPSE())
+                    MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_COLLAPSE())
             }
         }
 
@@ -116,7 +117,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics?.updateStatistics(currentAttr)
-            metricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(), finalQtd.toString())
+            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(), finalQtd.toString())
         }
     }
 
