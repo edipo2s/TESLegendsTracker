@@ -24,32 +24,37 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import java.text.NumberFormat
 
-class DeckActivity : BaseActivity() {
+class DeckActivity() : BaseActivity() {
 
     companion object {
 
-        private val EXTRA_DECK = "deck"
-        private val EXTRA_FAVORITE = "favorite"
-        private val EXTRA_LIKE = "like"
+        private val EXTRA_DECK = "deckExtra"
+        private val EXTRA_FAVORITE = "favoriteExtra"
+        private val EXTRA_LIKE = "likeExtra"
+        private val EXTRA_OWNED = "ownedExtra"
 
-        fun newIntent(context: Context, deck: Deck, favorite: Boolean, like: Boolean): Intent {
-            return context.intentFor<DeckActivity>(EXTRA_DECK to deck,
-                    EXTRA_FAVORITE to favorite, EXTRA_LIKE to like)
+        fun newIntent(context: Context, deck: Deck, favorite: Boolean, like: Boolean, owned: Boolean): Intent {
+            return context.intentFor<DeckActivity>(EXTRA_DECK to deck, EXTRA_FAVORITE to favorite,
+                    EXTRA_LIKE to like, EXTRA_OWNED to owned)
         }
 
     }
 
     val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
+    val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
     val numberInstance by lazy { NumberFormat.getNumberInstance() }
+    val privateInteractor by lazy { PrivateInteractor() }
+
     var favorite: Boolean = false
     var like: Boolean = false
-
     var menuLike: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +70,7 @@ class DeckActivity : BaseActivity() {
         like = intent.getBooleanExtra(EXTRA_LIKE, false)
         val sheetBehavior = BottomSheetBehavior.from(deck_bottom_sheet)
         deck_fab_favorite.setOnClickListener {
-            PrivateInteractor().setUserDeckFavorite(deck, !favorite) {
+            privateInteractor.setUserDeckFavorite(deck, !favorite) {
                 favorite = !favorite
                 updateFavoriteItem()
                 setResult(Activity.RESULT_OK, Intent())
@@ -81,7 +86,7 @@ class DeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         doAsync {
-            calculateMissingSoul(deck, PrivateInteractor())
+            calculateMissingSoul(deck, privateInteractor)
             PublicInteractor().getPatches {
                 val patch = it.find { it.uidDate == deck.patch }
                 runOnUiThread {
@@ -103,7 +108,7 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_deck, menu)
+        menuInflater.inflate(if (deckOwned) R.menu.menu_deck_owned else R.menu.menu_deck, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
@@ -116,13 +121,27 @@ class DeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_like -> {
-                PrivateInteractor().setUserDeckLike(deck, !like) {
+                privateInteractor.setUserDeckLike(deck, !like) {
                     like = !like
                     updateLikeItem()
                     setResult(Activity.RESULT_OK, Intent())
                     val deckLikes = Integer.parseInt(deck_details_likes.text.toString())
                     deck_details_likes.text = numberInstance.format(deckLikes + if (like) 1 else -1)
                 }
+                return true
+            }
+            R.id.menu_delete -> {
+                alert(R.string.confirm_message) {
+                    negativeButton(android.R.string.no, {})
+                    positiveButton(android.R.string.yes, {
+                        privateInteractor.deleteDeck(deck, deck.private) {
+                            toast(R.string.deck_deleted)
+                            setResult(Activity.RESULT_OK, Intent())
+                            ActivityCompat.finishAfterTransition(this@DeckActivity)
+                        }
+                    })
+                    setTheme(R.style.AppDialog)
+                }.show()
                 return true
             }
         }

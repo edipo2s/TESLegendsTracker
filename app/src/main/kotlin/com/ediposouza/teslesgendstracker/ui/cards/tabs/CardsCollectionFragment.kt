@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
@@ -11,6 +12,7 @@ import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -30,7 +32,8 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     val cardsCollectionAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, { changeUserCardQtd(it) }) { view, card ->
+        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
+                { changeUserCardQtd(it) }) { view, card ->
             showCardExpanded(card, view)
             true
         }
@@ -119,8 +122,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
 }
 
-class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager) {
+class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                             @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
@@ -137,28 +141,20 @@ class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager
     fun showCards(cardSlots: ArrayList<CardSlot>) {
         val oldItems = items
         items = cardSlots
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.card.shortName == newItem.card.shortName
+        }).dispatchUpdatesTo(this)
     }
 
     fun updateSlot(cardSlot: CardSlot, newQtd: Long) {
         val slotIndex = items.indexOf(cardSlot)
         if (slotIndex > -1) {
             items[slotIndex] = CardSlot(cardSlot.card, newQtd)
-            notifyItemChanged(slotIndex)
+            notifyItemChanged(slotIndex + getAdsQtdBeforeDefaultPosition(slotIndex))
         }
     }
 

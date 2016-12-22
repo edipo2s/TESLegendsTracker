@@ -149,7 +149,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     @SuppressWarnings("ResourceType")
     @Subscribe
-    fun showSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
+    fun onCmdShowSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
         val msg = if (msgRes > 0) getString(msgRes) else cmdShowSnackbarMsg.msg
@@ -163,7 +163,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     @Subscribe
-    fun showLogin(showLogin: CmdShowLogin) {
+    fun onCmdShowLogin(showLogin: CmdShowLogin) {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

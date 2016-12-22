@@ -2,6 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="status_bar_height">25dp</dimen>
     <dimen name="navigation_bar_height">48dp</dimen>
+    <dimen name="input_label_vertical_spacing">8dp</dimen>
+    <dimen name="input_label_horizontal_spacing">4dp</dimen>
 
     <dimen name="profile_image">96dp</dimen>
     <dimen name="navigation_drawer_header_height">150dp</dimen>
@@ -56,5 +58,10 @@
     <dimen name="deck_list_slot_half_height">16dp</dimen>
     <dimen name="deck_list_slot_rarity_height">12dp</dimen>
     <dimen name="deck_list_slot_rarity_margin">4dp</dimen>
+
+    <dimen name="deck_new_card_margin">@dimen/small_margin</dimen>
+    <dimen name="deck_new_magika_costs_heigth">64dp</dimen>
+    <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
+    <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
 
 </resources>

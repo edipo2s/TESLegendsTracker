@@ -15,6 +15,8 @@ import timber.log.Timber
  */
 class DecksOwnerFragment : DecksPublicFragment() {
 
+    override val isDeckOwned: Boolean = true
+
     private val privateInteractor = PrivateInteractor()
     private var onlyPrivate: Switch? = null
 
