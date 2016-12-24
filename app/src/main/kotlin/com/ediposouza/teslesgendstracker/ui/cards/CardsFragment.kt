@@ -16,6 +16,7 @@ import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
@@ -23,7 +24,6 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVis
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -34,7 +34,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     var query: String? = null
     val handler = Handler()
-    val trackSearch = Runnable { metricsManager.trackSearch(query ?: "") }
+    val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
@@ -45,7 +45,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
             activity.toolbar_title?.setText(title)
             BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
-            metricsManager.trackScreen(when (position) {
+            MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 else -> MetricScreen.SCREEN_CARDS_FAVORED()
@@ -75,7 +75,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         Handler().postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
-        metricsManager.trackScreen(MetricScreen.SCREEN_CARDS_ALL())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_CARDS_ALL())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -92,6 +92,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
+        inflater?.inflate(R.menu.menu_sets, menu)
         inflater?.inflate(R.menu.menu_search, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
             queryHint = getString(R.string.search_hint)

@@ -19,6 +19,7 @@ import com.ediposouza.teslesgendstracker.TIME_PATTERN
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.toogleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
@@ -104,7 +105,7 @@ class DeckActivity() : BaseActivity() {
                 }
             }
         }
-        metricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

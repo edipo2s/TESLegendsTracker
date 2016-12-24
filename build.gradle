@@ -6,6 +6,7 @@ buildscript {
         appVersionCode = 1
 
         kotlin_version = "1.0.5-3"
+        prepareRelease = false
     }
 
     repositories {

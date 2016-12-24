@@ -9,26 +9,22 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.MetricAction
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.data.CardRarity
-import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
@@ -48,9 +44,10 @@ open class CardsAllFragment : BaseFragment() {
     var cardsLoaded: List<Card> = ArrayList()
     var userFavorites: List<String> = ArrayList()
     var magikaFilter: Int = -1
+    var setFilter: CardSet? = null
+    var classFilter: Class? = null
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
-    var classFilter: Class? = null
 
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
@@ -70,6 +67,10 @@ open class CardsAllFragment : BaseFragment() {
                 resources.getDimensionPixelSize(R.dimen.card_margin), true)
     }
 
+    init {
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards_list)
     }
@@ -82,6 +83,15 @@ open class CardsAllFragment : BaseFragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_sets_all -> eventBus.post(CmdFilterSet(null))
+            R.id.menu_sets_core -> eventBus.post(CmdFilterSet(CardSet.CORE))
+            R.id.menu_sets_madhouse -> eventBus.post(CmdFilterSet(CardSet.MADHOUSE))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     open fun configRecycleView() {
@@ -107,7 +117,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
         }
     }
 
@@ -115,6 +125,18 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
+    }
+
+    @Subscribe
+    fun onCmdFilterSet(filterSet: CmdFilterSet) {
+        setFilter = filterSet.set
+        loadCardsByAttr(currentAttr)
+    }
+
+    @Subscribe
+    fun onCmdFilterClass(filterClass: CmdFilterClass) {
+        classFilter = filterClass.cls
+        showCards()
     }
 
     @Subscribe
@@ -128,7 +150,7 @@ open class CardsAllFragment : BaseFragment() {
         rarityFilter = filterRarity.rarity
         showCards()
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
                     rarityFilter?.name ?: MetricAction.ACTION_CARD_FILTER_RARITY.VALUE_CLEAR)
         }
     }
@@ -138,24 +160,18 @@ open class CardsAllFragment : BaseFragment() {
         magikaFilter = filterMagika.magika
         showCards()
         if (fragmentSelected) {
-            metricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
                 magikaFilter.toString() else MetricAction.ACTION_CARD_FILTER_MAGIKA.VALUE_CLEAR)
         }
     }
 
-    @Subscribe
-    fun onCmdFilterClass(filterClass: CmdFilterClass) {
-        classFilter = filterClass.cls
-        showCards()
-    }
-
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
-        PublicInteractor().getCards(attribute, {
+        PublicInteractor().getCards(setFilter, attribute, {
             cardsLoaded = it
             showCards()
         })
-        privateInteractor.getFavoriteCards(currentAttr) {
+        privateInteractor.getFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
         }
     }

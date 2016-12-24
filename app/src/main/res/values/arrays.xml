@@ -6,6 +6,12 @@
         <item name="device_id_3">63518A039B56083ED04CC7BF963344A0</item>
     </array>
 
+    <array name="cards_sets">
+        <item name="cards_sets_all">@string/cards_sets_all</item>
+        <item name="cards_sets_core">@string/cards_sets_core</item>
+        <item name="cards_sets_madhouse">@string/cards_sets_madhouse</item>
+    </array>
+
     <array name="cards_tabs">
         <item name="tab_cards_all_all">@string/tab_cards_all</item>
         <item name="tab_cards_collection">@string/tab_cards_collection</item>

@@ -4,7 +4,7 @@ import android.app.Application
 import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.manager.LoggerManager
-import com.ediposouza.teslesgendstracker.manager.MetricManager
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
@@ -27,7 +27,7 @@ class App : Application() {
     }
 
     private fun initializeDependencies() {
-        MetricManager.getInstance().initialize(this)
+        MetricsManager.initialize(this)
         AndroidThreeTen.init(this)
         FirebaseDatabase.getInstance().apply {
             setPersistenceEnabled(true)

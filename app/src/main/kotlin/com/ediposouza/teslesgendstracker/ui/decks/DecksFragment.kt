@@ -18,12 +18,13 @@ import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
 import org.jetbrains.anko.intentFor
@@ -46,7 +47,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 else -> R.string.tab_decks_public
             }
             activity.toolbar_title?.setText(title)
-            metricsManager.trackScreen(when (position) {
+            MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
                 1 -> MetricScreen.SCREEN_DECKS_OWNED()
                 else -> MetricScreen.SCREEN_DECKS_FAVORED()
@@ -81,7 +82,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
         }
         Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
-        metricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
     override fun onResume() {

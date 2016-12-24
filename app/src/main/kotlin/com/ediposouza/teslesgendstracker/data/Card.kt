@@ -13,6 +13,23 @@ import java.util.*
 /**
  * Created by ediposouza on 10/31/16.
  */
+enum class CardSet(val db: String) {
+
+    CORE("core"),
+    MADHOUSE("madhouse"),
+    UNKNOWN("unknown");
+
+    companion object {
+
+        fun of(value: String): CardSet {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
+
+}
+
 enum class Attribute(val color: Int, @IntegerRes val imageRes: Int) {
 
     STRENGTH(Color.RED, R.drawable.attr_strength),
@@ -59,7 +76,17 @@ enum class CardRarity(val color: Int, val soulCost: Int, @IntegerRes val imageRe
     COMMON(Color.WHITE, 50, R.drawable.ic_rarity_common),
     RARE(Color.BLUE, 100, R.drawable.ic_rarity_rare),
     EPIC(Color.parseColor("purple"), 400, R.drawable.ic_rarity_epic),
-    LEGENDARY(Color.YELLOW, 1200, R.drawable.ic_rarity_legendary);
+    LEGENDARY(Color.YELLOW, 1200, R.drawable.ic_rarity_legendary),
+    UNKNOWN(Color.BLACK, 0, R.drawable.ic_rarity);
+
+    companion object {
+
+        fun of(value: String): CardRarity {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
 
 }
 
@@ -68,7 +95,17 @@ enum class CardType() {
     ACTION,
     CREATURE,
     ITEM,
-    SUPPORT
+    SUPPORT,
+    UNKNOWN;
+
+    companion object {
+
+        fun of(value: String): CardType {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
 
 }
 
@@ -124,12 +161,15 @@ enum class CardRace(val desc: String) {
     WOLF(""),
     WAMASU(""),
     WRAITH(""),
+    UNKNOWN(""),
     NONE("");
 
     companion object {
 
         fun of(value: String): CardRace {
-            return if (value.trim().isEmpty()) CardRace.NONE else CardRace.valueOf(value)
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (value.trim().isEmpty()) CardRace.NONE else
+                if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
         }
 
     }
@@ -151,8 +191,17 @@ enum class CardKeyword() {
     SHACKLE,
     SILENCE,
     SUMMON,
-    WARD
+    WARD,
+    UNKNOWN;
 
+    companion object {
+
+        fun of(value: String): CardKeyword {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
 }
 
 enum class CardArenaTier() {
@@ -164,7 +213,16 @@ enum class CardArenaTier() {
     EXCELLENT,
     INSANE,
     UNKNOWN,
-    NONE
+    NONE;
+
+    companion object {
+
+        fun of(value: String): CardArenaTier {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
 
 }
 
@@ -188,6 +246,7 @@ data class Card(
 
         val name: String,
         val shortName: String,
+        val set: CardSet,
         val attr: Attribute,
         val dualAttr1: Attribute,
         val dualAttr2: Attribute,
@@ -204,6 +263,7 @@ data class Card(
 
 ) : Parcelable {
 
+    private val CARD_BACK = "card_back.png"
     private val CARD_PATH = "Cards"
 
     companion object {
@@ -214,6 +274,7 @@ data class Card(
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(),
+            CardSet.values()[source.readInt()],
             Attribute.values()[source.readInt()], Attribute.values()[source.readInt()],
             Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
@@ -225,13 +286,19 @@ data class Card(
 
     fun imageBitmap(context: Context): Bitmap {
         val cardAttr = attr.name.toLowerCase().capitalize()
-        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
-        return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+        val cardSet = set.name.toLowerCase().capitalize()
+        val imagePath = "$CARD_PATH/$cardSet/$cardAttr/$shortName.png"
+        try {
+            return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+        } catch (e: Exception) {
+            return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+        }
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
+        dest?.writeInt(set.ordinal)
         dest?.writeInt(attr.ordinal)
         dest?.writeInt(dualAttr1.ordinal)
         dest?.writeInt(dualAttr2.ordinal)

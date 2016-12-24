@@ -22,14 +22,15 @@ import com.ediposouza.teslesgendstracker.data.DeckType
 import com.ediposouza.teslesgendstracker.data.Patch
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import kotlinx.android.synthetic.main.activity_new_deck.*
 import kotlinx.android.synthetic.main.dialog_new_deck.view.*
 import org.greenrobot.eventbus.Subscribe
@@ -96,10 +97,11 @@ class NewDeckActivity : BaseActivity() {
         Handler().postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
-        metricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_sets, menu)
         menuInflater.inflate(R.menu.menu_done, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -120,7 +122,7 @@ class NewDeckActivity : BaseActivity() {
 
     private fun showSaveDialog() {
         val view = View.inflate(this@NewDeckActivity, R.layout.dialog_new_deck, null)
-        val deckTypes = DeckType.values().map { it.name.toLowerCase().capitalize() }
+        val deckTypes = DeckType.values().filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
         var deckPatches = listOf<Patch>()
