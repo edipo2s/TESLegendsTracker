@@ -307,7 +307,7 @@
           "attack": "",
           "health": "",
           "rarity": "Rare",
-          "keyword": "Prophecy",
+          "keyword": "Prophecy, Unsummon",
           "arenaTier": "Excellent"
         },
         "fearlessnorthlander": {
@@ -665,7 +665,7 @@
         },
         "burnandpillage": {
           "name": "Burn and Pillage",
-          "cost": "06",
+          "cost": "05",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -1923,6 +1923,17 @@
           "rarity": "Rare",
           "keyword": "Summon",
           "arenaTier": "Good"
+        },
+        "elsweyrlookout": {
+          "name": "Elsweyr Lookout",
+          "cost": "03",
+          "type": "Creature",
+          "race": "Khajiit",
+          "attack": "1",
+          "health": "1",
+          "rarity": "Epic",
+          "keyword": "Pilfer",
+          "arenaTier": "Unknown"
         },
         "imperiallegionnaire": {
           "name": "Imperial Legionnaire",
@@ -4648,9 +4659,137 @@
           "arenaTier": "Excellent"
         }
       }
+    },
+    "madhouse": {
+      "strength": {
+        "stoneshardorc": {
+          "name": "Stoneshard Orc",
+          "cost": "3",
+          "type": "Creature",
+          "race": "Orc",
+          "attack": "2",
+          "health": "1",
+          "rarity": "Rare",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        }
+      },
+      "intelligence": {
+        "gardenerofswords": {
+          "name": "Gardener of Swords",
+          "cost": "3",
+          "type": "Creature",
+          "race": "Redguard",
+          "attack": "1",
+          "health": "1",
+          "rarity": "Rare",
+          "keyword": "",
+          "arenaTier": "Unknown"
+        }
+      },
+      "willpower": {
+        "shiveringapothecary": {
+          "name": "Shivering Apothecary",
+          "cost": "4",
+          "type": "Creature",
+          "race": "Imperial",
+          "attack": "2",
+          "health": "2",
+          "rarity": "Rare",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        }
+      },
+      "agility": {
+        "swindlersmarket": {
+          "name": "Swindler's Market",
+          "cost": "3",
+          "type": "Support",
+          "race": "",
+          "attack": "",
+          "health": "",
+          "rarity": "Rare",
+          "keyword": "",
+          "arenaTier": "Unknown"
+        }
+      },
+      "endurance": {
+        "ringofimaginarymight": {
+          "name": "Ring of Imaginary Might",
+          "cost": "4",
+          "type": "Item",
+          "race": "",
+          "attack": "",
+          "health": "",
+          "rarity": "Rare",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        }
+      },
+      "neutral": {
+        "closecall": {
+          "name": "Close Call",
+          "cost": "0",
+          "type": "Action",
+          "race": "",
+          "attack": "",
+          "health": "",
+          "rarity": "Rare",
+          "keyword": "Unsummon",
+          "arenaTier": "Unknown"
+        },
+        "merchantscamel": {
+          "name": "Merchant's Camel",
+          "cost": "4",
+          "type": "Creature",
+          "race": "Beast",
+          "attack": "1",
+          "health": "4",
+          "rarity": "Common",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        },
+        "forsakenchampion": {
+          "name": "Forsaken Champion",
+          "cost": "5",
+          "type": "Creature",
+          "race": "Reachman",
+          "attack": "3",
+          "health": "3",
+          "rarity": "Epic",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        },
+        "altarofdespair": {
+          "name": "Altar of Despair",
+          "cost": "6",
+          "type": "Support",
+          "race": "",
+          "attack": "",
+          "health": "",
+          "rarity": "Legendary",
+          "keyword": "Activate",
+          "arenaTier": "Unknown"
+        },
+        "illusorymimic": {
+          "name": "Illusory Mimic",
+          "cost": "6",
+          "type": "Creature",
+          "race": "Spirit",
+          "attack": "5",
+          "health": "5",
+          "rarity": "Epic",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        }
+      }
     }
   },
   "season": {
+    "04": {
+      "reward": "elsweyrlookout",
+      "month": "2016_11"
+    },
     "03": {
       "reward": "mechanicalally",
       "month": "2016_10"
@@ -4685,6 +4824,26 @@
     }
   },
   "patches": {
+    "2016_12_20": {
+      "desc": "Elsweyr Lookout"
+    },
+    "2016_12_14": {
+      "core": {
+        "strength": {
+          "burnandpillage": {
+            "cost": {
+              "after": "5",
+              "before": "6"
+            },
+            "text": {
+              "after": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
+              "before": "Deal 1 damage to all enemy creatures for each destroyed enemy rune."
+            }
+          }
+        }
+      },
+      "desc": "Madhouse Collection"
+    },
     "2016_11_20": {
       "desc": "Mechanical Ally"
     },

@@ -63,9 +63,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_recycle_view.layoutManager = LinearLayoutManager(context)
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
-            val card = Card("Tyr", "tyr", Attribute.DUAL, Attribute.STRENGTH, Attribute.WILLPOWER,
-                    CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION, CardRace.ARGONIAN,
-                    emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false)
+            val card = Card("Tyr", "tyr", CardSet.CORE, Attribute.DUAL, Attribute.STRENGTH,
+                    Attribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
+                    CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false)
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
         }
@@ -84,9 +84,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
                 }
                 userFavorites.clear()
-                PrivateInteractor().getFavoriteCards(deck.cls.attr1) {
+                PrivateInteractor().getFavoriteCards(null, deck.cls.attr1) {
                     userFavorites.addAll(it)
-                    PrivateInteractor().getFavoriteCards(deck.cls.attr2) {
+                    PrivateInteractor().getFavoriteCards(null, deck.cls.attr2) {
                         userFavorites.addAll(it)
                     }
                 }

@@ -10,6 +10,7 @@ import android.view.View
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
@@ -40,7 +41,7 @@ class CardActivity : BaseActivity() {
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         card_all_image.setOnClickListener {
             ActivityCompat.finishAfterTransition(this)
-            metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
         }
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
         loadCardInfo()
@@ -50,8 +51,8 @@ class CardActivity : BaseActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        metricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
-        metricsManager.trackCardView(card)
+        MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
+        MetricsManager.trackCardView(card)
         ads_view.load()
     }
 
@@ -64,9 +65,9 @@ class CardActivity : BaseActivity() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED ->
-                        metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_EXPAND())
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_EXPAND())
                     BottomSheetBehavior.STATE_COLLAPSED ->
-                        metricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_COLLAPSE())
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_COLLAPSE())
                 }
             }
 
@@ -77,10 +78,11 @@ class CardActivity : BaseActivity() {
     private fun loadCardInfo() {
         val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
         card_favorite_btn.setImageResource(drawableRes)
-        card_race.text = card.race.name
+        card_set.text = card.set.name.toLowerCase().capitalize()
+        card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE
-        card_arena_tier.text = card.arenaTier.name
+        card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
         card_all_image.setImageBitmap(card.imageBitmap(this))
     }
 
@@ -88,7 +90,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
-                metricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()
+                MetricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()
                 else MetricAction.ACTION_CARD_DETAILS_UNFAVORITE())
                 val stringRes = if (favorite) R.string.card_favorited else R.string.card_unfavorited
                 toast(getString(stringRes, card.name))
