@@ -11,7 +11,7 @@ android {
                                  'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
-        minSdkVersion 21//16
+        minSdkVersion prepareRelease ? 16 : 21
         targetSdkVersion 25
         versionCode appVersionCode
         versionName appVersionName
@@ -56,7 +56,7 @@ ext {
     icePickVersion = "3.2.+"
     okIOVersion = "1.10.+"
     okHttpVersion = "3.4.+"
-    playServicesVersion = "9.8.0"//"10.0.1"
+    playServicesVersion = prepareRelease ? "10.0.1" : "9.8.0"
     supportLibraryVersion = "25.1.0"
     threetenabpVersion = "1.0.+"
 

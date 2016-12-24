@@ -38,8 +38,8 @@ class PrivateInteractor() : BaseInteractor() {
         return if (getUserID().isNotEmpty()) dbUsers.child(getUserID()) else null
     }
 
-    private fun dbUserCards(cls: Attribute): DatabaseReference? {
-        val dbRef = dbUser()?.child(NODE_CARDS)?.child(NODE_CARDS_CORE)?.child(cls.name.toLowerCase())
+    private fun dbUserCards(set: CardSet, cls: Attribute): DatabaseReference? {
+        val dbRef = dbUser()?.child(NODE_CARDS)?.child(set.db)?.child(cls.name.toLowerCase())
         dbRef?.keepSynced(true)
         return dbRef
     }
@@ -53,7 +53,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
-        dbUserCards(card.attr)?.apply {
+        dbUserCards(card.set, card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
             }
@@ -61,7 +61,7 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
-        dbUserCards(card.attr)?.apply {
+        dbUserCards(card.set, card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_FAVORITE).apply {
                 if (favorite) {
                     setValue(true).addOnCompleteListener { onComplete.invoke() }
@@ -72,60 +72,68 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
-        dbUserCards(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getUserCollection(set: CardSet?, onSuccess: (Map<String, Long>) -> Unit) {
+        getMapFromSets(set, onSuccess) { set, onEachSuccess ->
+            dbUser()?.child(NODE_CARDS)?.child(set.db)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
-            @Suppress("UNCHECKED_CAST")
-            override fun onDataChange(ds: DataSnapshot) {
-                val collection = ds.children.filter { it.hasChild(KEY_CARD_QTD) }.map({
-                    it.key to it.child(KEY_CARD_QTD).value as Long
-                }).toMap()
-                Timber.d(collection.toString())
-                onSuccess.invoke(collection)
-            }
+                @Suppress("UNCHECKED_CAST")
+                override fun onDataChange(ds: DataSnapshot) {
+                    val collection = ds.children.flatMap { it.children }
+                            .filter { it.hasChild(KEY_CARD_QTD) }
+                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .toMap()
+                    Timber.d(collection.toString())
+                    onEachSuccess.invoke(collection)
+                }
 
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-            }
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
 
-        })
+            })
+        }
     }
 
-    fun getUserCollection(onSuccess: (Map<String, Long>) -> Unit) {
-        dbUser()?.child(NODE_CARDS)?.child(NODE_CARDS_CORE)?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+        getMapFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
+            dbUserCards(set, attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
-            @Suppress("UNCHECKED_CAST")
-            override fun onDataChange(ds: DataSnapshot) {
-                val collection = ds.children.flatMap { it.children }.filter { it.hasChild(KEY_CARD_QTD) }.map({
-                    it.key to it.child(KEY_CARD_QTD).value as Long
-                }).toMap()
-                Timber.d(collection.toString())
-                onSuccess.invoke(collection)
-            }
+                @Suppress("UNCHECKED_CAST")
+                override fun onDataChange(ds: DataSnapshot) {
+                    val collection = ds.children
+                            .filter { it.hasChild(KEY_CARD_QTD) }
+                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .toMap()
+                    Timber.d(collection.toString())
+                    onEachSuccess.invoke(collection)
+                }
 
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-            }
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
 
-        })
+            })
+        }
     }
 
-    fun getFavoriteCards(attr: Attribute, onSuccess: (List<String>) -> Unit) {
-        dbUserCards(attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getFavoriteCards(set: CardSet?, attr: Attribute, onSuccess: (List<String>) -> Unit) {
+        getListFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
+            dbUserCards(set, attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
-            @Suppress("UNCHECKED_CAST")
-            override fun onDataChange(ds: DataSnapshot) {
-                val favorites = ds.children.filter { (it.child(KEY_CARD_FAVORITE)?.value ?: false) as Boolean }
-                        .map({ it.key })
-                Timber.d(favorites.toString())
-                onSuccess.invoke(favorites)
-            }
+                @Suppress("UNCHECKED_CAST")
+                override fun onDataChange(ds: DataSnapshot) {
+                    val favorites = ds.children.filter { (it.child(KEY_CARD_FAVORITE)?.value ?: false) as Boolean }
+                            .map({ it.key })
+                    Timber.d(favorites.toString())
+                    onEachSuccess.invoke(favorites)
+                }
 
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-            }
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
 
-        })
+            })
+        }
     }
 
     fun getOwnedDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
@@ -207,44 +215,27 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     fun getMissingCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardMissing>) -> Unit) {
-        with(database.child(NODE_CARDS).child(NODE_CARDS_CORE)) {
-            getAttrCardsRarity(deck.cls.attr1.name.toLowerCase(), onError) {
-                val cards = HashMap(it)
-                getAttrCardsRarity(deck.cls.attr2.name.toLowerCase(), onError) {
-                    cards.putAll(it)
-                    getUserCollection(deck.cls.attr1) {
-                        val userCards = HashMap(it)
-                        getUserCollection(deck.cls.attr2) {
-                            userCards.putAll(it)
-                            val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
-                                    .map { CardMissing(it.first, cards[it.first]!!, it.second) }
-                            Timber.d(missing.toString())
-                            onSuccess.invoke(missing)
-                        }
+        val publicInteractor = PublicInteractor()
+        val attr1 = deck.cls.attr1
+        val attr2 = deck.cls.attr2
+        val cards = hashMapOf<String, CardRarity>()
+        val userCards = hashMapOf<String, Long>()
+        publicInteractor.getCards(null, attr1) {
+            cards.putAll(it.map { it.shortName to it.rarity })
+            publicInteractor.getCards(null, attr2) {
+                cards.putAll(it.map { it.shortName to it.rarity })
+                getUserCollection(null, attr1) {
+                    userCards.putAll(it)
+                    getUserCollection(null, attr2) {
+                        userCards.putAll(it)
+                        val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
+                                .map { CardMissing(it.first, cards[it.first]!!, it.second) }
+                        Timber.d(missing.toString())
+                        onSuccess.invoke(missing)
                     }
                 }
             }
         }
-    }
-
-    private fun DatabaseReference.getAttrCardsRarity(nodeAttr: String, onError: ((e: Exception?) -> Unit)? = null,
-                                                     onSuccess: (Map<String, CardRarity>) -> Unit) {
-        child(nodeAttr).orderByChild(KEY_CARD_COST).addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(ds: DataSnapshot) {
-                val cardsAttr = ds.children.map({
-                    it.key to CardRarity.valueOf(it.child(KEY_DECK_RARITY).value.toString().toUpperCase())
-                }).toMap()
-                Timber.d(cardsAttr.toString())
-                onSuccess(cardsAttr)
-            }
-
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-                onError?.invoke(de.toException())
-            }
-
-        })
     }
 
     fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Long>,

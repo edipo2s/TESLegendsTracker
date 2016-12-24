@@ -26,11 +26,11 @@ import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterClass
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import kotlinx.android.synthetic.main.activity_new_deck.*
 import kotlinx.android.synthetic.main.dialog_new_deck.view.*
 import org.greenrobot.eventbus.Subscribe
@@ -101,6 +101,7 @@ class NewDeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_sets, menu)
         menuInflater.inflate(R.menu.menu_done, menu)
         return super.onCreateOptionsMenu(menu)
     }

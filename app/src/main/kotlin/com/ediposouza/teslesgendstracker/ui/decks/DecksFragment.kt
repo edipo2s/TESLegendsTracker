@@ -20,11 +20,11 @@ import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
 import org.jetbrains.anko.intentFor
