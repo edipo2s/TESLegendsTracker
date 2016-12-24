@@ -16,6 +16,7 @@ import java.util.*
 enum class CardSet(val db: String) {
 
     CORE("core"),
+    MADHOUSE("madhouse"),
     UNKNOWN("unknown");
 
     companion object {
