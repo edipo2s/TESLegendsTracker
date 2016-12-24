@@ -17,6 +17,9 @@ object MetricsManager : MetricsConstants() {
     fun initialize(context: Context) {
     }
 
+    fun flush() {
+    }
+
     fun trackAction(action: MetricAction, vararg params: String) {
         Timber.d(if (params.isEmpty()) action.name else "${action.name} with params: ${params.toSet()}")
     }

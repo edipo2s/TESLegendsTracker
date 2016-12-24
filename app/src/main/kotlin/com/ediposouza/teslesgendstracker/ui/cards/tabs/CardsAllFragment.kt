@@ -137,6 +137,10 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdFilterClass(filterClass: CmdFilterClass) {
         classFilter = filterClass.cls
         showCards()
+        if (fragmentSelected) {
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_SET(),
+                    setFilter?.name ?: MetricAction.ACTION_CARD_FILTER_SET.VALUE_CLEAR)
+        }
     }
 
     @Subscribe
