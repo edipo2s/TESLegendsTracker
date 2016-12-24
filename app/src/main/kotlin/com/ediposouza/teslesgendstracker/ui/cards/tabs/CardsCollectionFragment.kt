@@ -75,6 +75,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
+        inflater?.inflate(R.menu.menu_sets, menu)
         inflater?.inflate(R.menu.menu_cards_collection, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -101,7 +102,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        privateInteractor.getUserCollection(currentAttr) {
+        privateInteractor.getUserCollection(setFilter, currentAttr) {
             val userCards = it
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0L) }
             cards_recycler_view.itemAnimator = ScaleInAnimator()

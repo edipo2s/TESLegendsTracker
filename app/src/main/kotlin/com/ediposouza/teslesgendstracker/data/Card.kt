@@ -13,6 +13,22 @@ import java.util.*
 /**
  * Created by ediposouza on 10/31/16.
  */
+enum class CardSet(val db: String) {
+
+    CORE("core"),
+    UNKNOWN("unknown");
+
+    companion object {
+
+        fun of(value: String): CardSet {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
+
+}
+
 enum class Attribute(val color: Int, @IntegerRes val imageRes: Int) {
 
     STRENGTH(Color.RED, R.drawable.attr_strength),
@@ -229,6 +245,7 @@ data class Card(
 
         val name: String,
         val shortName: String,
+        val set: CardSet,
         val attr: Attribute,
         val dualAttr1: Attribute,
         val dualAttr2: Attribute,
@@ -256,6 +273,7 @@ data class Card(
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(),
+            CardSet.values()[source.readInt()],
             Attribute.values()[source.readInt()], Attribute.values()[source.readInt()],
             Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
@@ -267,7 +285,8 @@ data class Card(
 
     fun imageBitmap(context: Context): Bitmap {
         val cardAttr = attr.name.toLowerCase().capitalize()
-        val imagePath = "$CARD_PATH/$cardAttr/$shortName.png"
+        val cardSet = set.name.toLowerCase().capitalize()
+        val imagePath = "$CARD_PATH/$cardSet/$cardAttr/$shortName.png"
         try {
             return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
         } catch (e: Exception) {
@@ -278,6 +297,7 @@ data class Card(
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
+        dest?.writeInt(set.ordinal)
         dest?.writeInt(attr.ordinal)
         dest?.writeInt(dualAttr1.ordinal)
         dest?.writeInt(dualAttr2.ordinal)

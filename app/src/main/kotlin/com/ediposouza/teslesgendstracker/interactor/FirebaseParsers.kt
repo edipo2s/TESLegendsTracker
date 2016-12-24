@@ -20,14 +20,14 @@ class CardParser() {
     val attr1: String = ""
     val attr2: String = ""
 
-    fun toCard(shortName: String, cls: Attribute): Card {
-        var clsAttr1 = cls
-        var clsAttr2 = cls
-        if (cls == Attribute.DUAL) {
+    fun toCard(shortName: String, set: CardSet, attr: Attribute): Card {
+        var clsAttr1 = attr
+        var clsAttr2 = attr
+        if (attr == Attribute.DUAL) {
             clsAttr1 = Attribute.valueOf(attr1.trim().toUpperCase())
             clsAttr2 = Attribute.valueOf(attr2.trim().toUpperCase())
         }
-        return Card(name, shortName, cls, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
+        return Card(name, shortName, set, attr, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
                 cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
                 CardType.of(type), CardRace.of(race),
                 keyword.split(",")

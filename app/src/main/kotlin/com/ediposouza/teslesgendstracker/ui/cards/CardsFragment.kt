@@ -24,7 +24,6 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVis
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterSearch
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -93,6 +92,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
+        inflater?.inflate(R.menu.menu_sets, menu)
         inflater?.inflate(R.menu.menu_search, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
             queryHint = getString(R.string.search_hint)

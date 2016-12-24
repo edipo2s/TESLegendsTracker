@@ -79,17 +79,17 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     }
 
     private fun updateAttributeStatistics(attr: Attribute) {
-        publicInteractor.getCardsForStatistics(attr) {
+        publicInteractor.getCardsForStatistics(null, attr) {
             val allAttrCards = it.groupBy { it.rarity }
             Timber.d(attr.name + allAttrCards.toString())
-            privateInteractor.getUserCollection(attr) { collection: Map<String, Long> ->
-                val userCards = allAttrCards.map {
+            privateInteractor.getUserCollection(null, attr) { collection: Map<String, Long> ->
+                val userAttrCards = allAttrCards.map {
                     it.key to it.value.filter { collection.containsKey(it.shortName) }
                             .map { it to collection[it.shortName] }
                 }.toMap()
                 allAttrCards.forEach {
                     val allRarityCards = it.value
-                    val userRarityCards = userCards[it.key]
+                    val userRarityCards = userAttrCards[it.key]
                     Timber.d("${attr.name} - $it: $userRarityCards")
                     val owned = userRarityCards?.map { it.second ?: 0L }?.sum() ?: 0L
                     when (it.key) {
@@ -99,6 +99,8 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                         CardRarity.LEGENDARY -> {
                             val legendaryTotal = allRarityCards.map { if (it.unique) 1L else 3L }.sum()
                             statisticsAttr(attr).setLegendary(owned, legendaryTotal)
+                        }
+                        else -> {
                         }
                     }
                 }
