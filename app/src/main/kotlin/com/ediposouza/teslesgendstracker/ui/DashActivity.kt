@@ -17,12 +17,13 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.filter.CmdFilterRarity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -92,8 +93,11 @@ class DashActivity : BaseActivity(),
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         dash_drawer_layout.closeDrawer(Gravity.START)
+        if (dash_navigation_view.menu.findItem(item.itemId).isChecked) {
+            return true
+        }
         return when (item.itemId) {
-            R.id.menu_cards -> showFragment(CardsFragment())
+            R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches,
             R.id.menu_arena,
@@ -121,12 +125,15 @@ class DashActivity : BaseActivity(),
             profile_collection.visibility = View.INVISIBLE
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
-                publicInteractor.getCardsForStatistics {
+                publicInteractor.getCardsForStatistics(null) {
                     val allAttrCards = it
                     allCardsTotal += allAttrCards.filter { it.unique }.size
                     allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
-                    privateInteractor.getUserCollection {
-                        userCardsTotal += it.values.sum().toInt()
+                    privateInteractor.getUserCollection(null) {
+                        userCardsTotal += it.filter {
+                            allAttrCards.map { it.shortName }.contains(it.key)
+                        }.values.sum().toInt()
+                        Timber.d("Out: ${it.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
                         val stringPercent = getString(R.string.statistics_percent,
                                 if (allCardsTotal > 0)
                                     userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f
@@ -144,7 +151,12 @@ class DashActivity : BaseActivity(),
     }
 
     @Subscribe
-    fun updateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
+    fun onCmdShowTabs(cmdShowTabs: CmdShowTabs) {
+        dash_app_bar_bayout.setExpanded(true, true)
+    }
+
+    @Subscribe
+    fun onCmdUpdateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
         val filterMagikaLP = dash_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
         val filterRarityLP = dash_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
         val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)

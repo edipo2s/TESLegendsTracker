@@ -7,10 +7,11 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.ProgressBar
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.utils.MetricsManager
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,7 +30,6 @@ import timber.log.Timber
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
 
     protected val eventBus by lazy { EventBus.getDefault() }
-    protected val metricsManager by lazy { MetricsManager.getInstance() }
 
     private val RC_SIGN_IN: Int = 235
 
@@ -58,6 +58,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         super.onPostCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
     }
 
     override fun onStart() {
@@ -97,7 +98,10 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             Timber.d("onAuthStateChanged:signed_in:" + currentUser.uid)
-            metricsManager.trackSignIn(currentUser, true)
+            if (!App.hasUserLogged) {
+                MetricsManager.trackSignIn(currentUser, true)
+                App.hasUserLogged = true
+            }
         } else {
             Timber.d("onAuthStateChanged:signed_out")
         }
@@ -114,7 +118,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                         val currentUser = firebaseAuth.currentUser
                         PublicInteractor().getUserInfo(currentUser?.uid ?: "", {
                             toast("SignUp with " + currentUser?.displayName)
-                            metricsManager.trackSignUp()
+                            MetricsManager.trackSignUp()
                         }, {
                             toast("SignIn with " + currentUser?.displayName)
                         })
@@ -123,7 +127,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast(getString(R.string.error_login))
-                        metricsManager.trackSignIn(null, false)
+                        MetricsManager.trackSignIn(null, false)
                     }
                     hideLoading()
                 }
@@ -145,7 +149,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     @SuppressWarnings("ResourceType")
     @Subscribe
-    fun showSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
+    fun onCmdShowSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
         val msg = if (msgRes > 0) getString(msgRes) else cmdShowSnackbarMsg.msg
@@ -159,7 +163,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     @Subscribe
-    fun showLogin(showLogin: CmdShowLogin) {
+    fun onCmdShowLogin(showLogin: CmdShowLogin) {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

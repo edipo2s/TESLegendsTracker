@@ -3,17 +3,25 @@ package com.ediposouza.teslesgendstracker.ui.base
 import android.R
 import android.support.annotation.IntDef
 import android.support.annotation.StringRes
+import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
 import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.Class
 
 /**
  * Created by EdipoSouza on 11/6/16.
  */
+class CmdShowTabs
+
 class CmdShowLogin
 
 class CmdLoginSuccess
 
+class CmdUpdateDeckAndShowDeck
+
 data class CmdShowCardsByAttr(val attr: Attribute)
+
+data class CmdShowDecksByClasses(val classes: List<Class>)
 
 data class CmdUpdateRarityMagikaFiltersVisibility(val show: Boolean)
 
@@ -34,7 +42,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
     @StringRes
     var msgRes: Int = 0
 
-    @Snackbar.Duration
+    @BaseTransientBottomBar.Duration
     var duration: Int = 0
         private set
 
@@ -64,7 +72,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
         this.msg = msg
     }
 
-    fun withDuration(@Snackbar.Duration duration: Int): CmdShowSnackbarMsg {
+    fun withDuration(@BaseTransientBottomBar.Duration duration: Int): CmdShowSnackbarMsg {
         this.duration = duration
         return this
     }

@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="@dimen/medium_margin"
+    android:layout_marginBottom="@dimen/small_margin"
     android:orientation="horizontal"
     tools:layout_marginTop="@dimen/status_bar_height">
 
@@ -139,7 +140,7 @@
 
     </ScrollView>
 
-    <com.ediposouza.teslesgendstracker.ui.widget.DeckList
+    <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
         android:id="@+id/deck_details_cardlist"
         android:layout_width="0dp"
         android:layout_height="match_parent"

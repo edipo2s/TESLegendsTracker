@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_sets"
+        android:icon="@drawable/ic_sets"
+        android:title="@string/menu_sets"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/menu_sets_all"
+                android:title="@string/cards_sets_all" />
+
+            <item
+                android:id="@+id/menu_sets_core"
+                android:title="@string/cards_sets_core" />
+
+            <item
+                android:id="@+id/menu_sets_madhouse"
+                android:title="@string/cards_sets_madhouse" />
+
+        </menu>
+
+    </item>
+
+</menu>

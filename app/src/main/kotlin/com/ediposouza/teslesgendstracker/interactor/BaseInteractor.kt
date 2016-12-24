@@ -1,5 +1,7 @@
 package com.ediposouza.teslesgendstracker.interactor
 
+import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardSet
 import com.google.firebase.database.FirebaseDatabase
 
 /**
@@ -7,8 +9,12 @@ import com.google.firebase.database.FirebaseDatabase
  */
 open class BaseInteractor() {
 
-    protected val NODE_CARDS = "cards"
-    protected val NODE_CARDS_CORE = "core"
+    companion object {
+
+        val NODE_CARDS = "cards"
+
+    }
+
     protected val NODE_USERS = "users"
     protected val NODE_USERS_INFO = "info"
     protected val NODE_DECKS = "decks"
@@ -25,5 +31,61 @@ open class BaseInteractor() {
     protected val dbDecks by lazy { database.child(NODE_DECKS) }
 
     protected val dbUsers by lazy { database.child(NODE_USERS) }
+
+    fun <T> getListFromSets(set: CardSet?, onSuccess: (List<T>) -> Unit,
+                            getFromSet: (set: CardSet, onSuccess: (List<T>) -> Unit) -> Unit) {
+        getListFromSets(set, Attribute.NEUTRAL, onSuccess, { set, attr, success ->
+            getFromSet(set, success)
+        })
+    }
+
+    fun <T> getListFromSets(set: CardSet?, attr: Attribute, onSuccess: (List<T>) -> Unit,
+                            getFromSet: (set: CardSet, attr: Attribute, onSuccess: (List<T>) -> Unit) -> Unit) {
+        var setIndex = 0
+        val items = arrayListOf<T>()
+        if (set != null) {
+            return getFromSet(set, attr, onSuccess)
+        }
+
+        fun getSetsOnSuccess(attr: Attribute, onSuccess: (List<T>) -> Unit): (List<T>) -> Unit = {
+            items.addAll(it)
+            setIndex = setIndex.inc()
+            if (CardSet.values()[setIndex] == CardSet.values().last()) {
+                onSuccess.invoke(items)
+            } else {
+                getFromSet(CardSet.values()[setIndex], attr, getSetsOnSuccess(attr, onSuccess))
+            }
+        }
+
+        getFromSet(CardSet.values()[setIndex], attr, getSetsOnSuccess(attr, onSuccess))
+    }
+
+    fun <K, V> getMapFromSets(set: CardSet?, onSuccess: (Map<K, V>) -> Unit,
+                              getFromSet: (set: CardSet, onSuccess: (Map<K, V>) -> Unit) -> Unit) {
+        getMapFromSets(set, Attribute.NEUTRAL, onSuccess, { set, attr, success ->
+            getFromSet(set, success)
+        })
+    }
+
+    fun <K, V> getMapFromSets(set: CardSet?, attr: Attribute, onSuccess: (Map<K, V>) -> Unit,
+                              getFromSet: (set: CardSet, attr: Attribute, onSuccess: (Map<K, V>) -> Unit) -> Unit) {
+        var setIndex = 0
+        val items = hashMapOf<K, V>()
+        if (set != null) {
+            return getFromSet(set, attr, onSuccess)
+        }
+
+        fun getSetsOnSuccess(attr: Attribute, onSuccess: (Map<K, V>) -> Unit): (Map<K, V>) -> Unit = {
+            items.putAll(it)
+            setIndex = setIndex.inc()
+            if (CardSet.values()[setIndex] == CardSet.values().last()) {
+                onSuccess.invoke(items)
+            } else {
+                getFromSet(CardSet.values()[setIndex], attr, getSetsOnSuccess(attr, onSuccess))
+            }
+        }
+
+        getFromSet(CardSet.values()[setIndex], attr, getSetsOnSuccess(attr, onSuccess))
+    }
 
 }
