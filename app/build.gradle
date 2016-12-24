@@ -18,6 +18,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
+        buildConfigField("String", "MIXPANEL_TOKEN", '"***REMOVED***"')
+        buildConfigField("String", "GCM_SENDER", '"***REMOVED***"')
         vectorDrawables.useSupportLibrary true
     }
     signingConfigs {
@@ -85,11 +87,13 @@ dependencies {
 
     //Google
     compile "com.google.android.gms:play-services-auth:$playServicesVersion"
+    compile "com.google.android.gms:play-services-gcm:$playServicesVersion"
     compile "com.google.firebase:firebase-auth:$playServicesVersion"
     compile "com.google.firebase:firebase-ads:$playServicesVersion"
     compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
+    compile "com.google.firebase:firebase-messaging:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
 
     //Fabric
@@ -101,6 +105,7 @@ dependencies {
     }
 
     //Others
+    compile "com.mixpanel.android:mixpanel-android:4.9.2"
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
     compile "com.jakewharton.timber:timber:4.3.1"
     compile "org.greenrobot:eventbus:3.0.0"

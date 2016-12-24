@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker
 
 import android.content.Context
+import android.os.Bundle
 import android.support.annotation.IntegerRes
 import android.support.design.widget.BottomSheetBehavior
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
+import com.mixpanel.android.mpmetrics.MixpanelAPI
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -47,4 +49,8 @@ private fun createAdRequest(context: Context): AdRequest {
         adRequestBuilder.addTestDevice(deviceId)
     }
     return adRequestBuilder.build()
+}
+
+fun MixpanelAPI.trackBundle(eventName: String, bundle: Bundle) {
+    trackMap(eventName, bundle.keySet().map { it to bundle[it] }.toMap())
 }
