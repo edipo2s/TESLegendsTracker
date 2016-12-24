@@ -12,6 +12,8 @@
         android:layout_height="match_parent"
         android:padding="@dimen/default_margin"
         android:scrollbarFadeDuration="0"
+        android:scrollbarSize="@dimen/small_margin"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/itemlist_deck" />

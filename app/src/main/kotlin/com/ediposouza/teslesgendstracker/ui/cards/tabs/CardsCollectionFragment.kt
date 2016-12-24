@@ -1,19 +1,19 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import com.ediposouza.teslesgendstracker.R
+import android.view.*
+import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
-import com.ediposouza.teslesgendstracker.toogleExpanded
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
+import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -31,9 +31,13 @@ class CardsCollectionFragment : CardsAllFragment() {
         BottomSheetBehavior.from(view_statistics)
     }
 
-    val cardsCollectionAdapter = CardsCollectionAdapter(ADS_EACH_ITEMS, { changeUserCardQtd(it) }) { view, card ->
-        showCardExpanded(card, view)
-        true
+    val cardsCollectionAdapter by lazy {
+        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
+        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
+                { changeUserCardQtd(it) }) { view, card ->
+            showCardExpanded(card, view)
+            true
+        }
     }
 
     val sheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
@@ -48,6 +52,14 @@ class CardsCollectionFragment : CardsAllFragment() {
             if (expanded) {
                 activity.collection_statistics.scrollToTop()
             }
+            when (newState) {
+                BottomSheetBehavior.STATE_EXPANDED -> {
+                    MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_EXPAND())
+                    MetricsManager.trackScreen(MetricScreen.SCREEN_CARDS_STATISTICS())
+                }
+                BottomSheetBehavior.STATE_COLLAPSED ->
+                    MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_STATISTICS_COLLAPSE())
+            }
         }
 
     }
@@ -57,13 +69,13 @@ class CardsCollectionFragment : CardsAllFragment() {
         setHasOptionsMenu(true)
         view_statistics.setOnClickListener {
             statisticsSheetBehavior.toogleExpanded()
-            view_statistics.updateStatistics()
         }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
+        inflater?.inflate(R.menu.menu_sets, menu)
         inflater?.inflate(R.menu.menu_cards_collection, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -71,6 +83,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_statistics -> {
+                view_statistics?.updateStatistics()
                 statisticsSheetBehavior.toogleExpanded()
                 return true
             }
@@ -89,7 +102,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        privateInteractor.getUserCollection(currentAttr) {
+        privateInteractor.getUserCollection(setFilter, currentAttr) {
             val userCards = it
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0L) }
             cards_recycler_view.itemAnimator = ScaleInAnimator()
@@ -105,25 +118,20 @@ class CardsCollectionFragment : CardsAllFragment() {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics?.updateStatistics(currentAttr)
+            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(), finalQtd.toString())
         }
-    }
-
-    override fun configLoggedViews() {
-        super.configLoggedViews()
-        view_statistics?.updateStatistics()
     }
 
 }
 
-class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems) {
+class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                             @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
     var items: ArrayList<CardSlot> = ArrayList()
 
-    override fun onDefaultViewLayout(): Int = R.layout.itemlist_card_collection
-
-    override fun onCreateDefaultViewHolder(defaultItemView: View): RecyclerView.ViewHolder {
-        return CardsCollectionViewHolder(defaultItemView, itemClick, itemLongClick)
+    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
     }
 
     override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -135,28 +143,20 @@ class CardsCollectionAdapter(adsEachItems: Int, val itemClick: (CardSlot) -> Uni
     fun showCards(cardSlots: ArrayList<CardSlot>) {
         val oldItems = items
         items = cardSlots
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return if (oldItemPosition == 0 || newItemPosition == 0) false
-                else oldItems[oldItemPosition].card.shortName == items[newItemPosition].card.shortName
-            }
-
-            override fun getOldListSize(): Int = oldItems.size
-
-            override fun getNewListSize(): Int = items.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return areItemsTheSame(oldItemPosition, newItemPosition)
-            }
-
-        }, false).dispatchUpdatesTo(this)
+        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+            notifyDataSetChanged()
+            return
+        }
+        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+            oldItem.card.shortName == newItem.card.shortName
+        }).dispatchUpdatesTo(this)
     }
 
     fun updateSlot(cardSlot: CardSlot, newQtd: Long) {
         val slotIndex = items.indexOf(cardSlot)
         if (slotIndex > -1) {
             items[slotIndex] = CardSlot(cardSlot.card, newQtd)
-            notifyItemChanged(slotIndex)
+            notifyItemChanged(slotIndex + getAdsQtdBeforeDefaultPosition(slotIndex))
         }
     }
 

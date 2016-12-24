@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/decks_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/navigation_bar_height">
+    android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/decks_refresh_layout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/decks_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_margin"
+        android:scrollbarFadeDuration="0"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/itemlist_deck" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/decks_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/default_margin"
-            android:scrollbarFadeDuration="0"
-            android:scrollbars="vertical"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/itemlist_deck" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/decks_fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorPrimary"
-        app:fabSize="normal" />
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

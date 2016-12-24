@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">TES Legends Tracker (Preview)</string>
+    <string name="app_name">TES Legends Tracker</string>
     <string name="app_ads_card_list">ca-app-pub-7881623561544201/7976661172</string>
+    <string name="app_ads_card_list_size">360x80</string>
     <string name="app_ads_card_full">ca-app-pub-7881623561544201/1511325179</string>
+    <string name="app_ads_deck_list">ca-app-pub-7881623561544201/8255215977</string>
+    <string name="app_ads_deck_list_size">360x80</string>
+    <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
+    <string name="app_ads_new_deck_card_list">ca-app-pub-7881623561544201/6037962770</string>
+    <string name="app_ads_new_deck_card_list_size">240x50</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
@@ -10,16 +16,20 @@
     <string name="menu_arena">Arena</string>
     <string name="menu_about">About</string>
     <string name="menu_search">Search</string>
+    <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistics</string>
     <string name="menu_only_private">Only Private</string>
     <string name="menu_favorite">Favorite</string>
     <string name="menu_unfavorite">Unfavorite</string>
     <string name="menu_like">Like</string>
+    <string name="menu_delete">Delete</string>
     <string name="menu_unlike">Unlike</string>
+    <string name="menu_done">Done</string>
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
     <string name="search_hint">Name, race, type or keyword</string>
+    <string name="confirm_message">Are you sure?</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -28,7 +38,12 @@
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
 
+    <string name="cards_sets_all">All</string>
+    <string name="cards_sets_core">Core</string>
+    <string name="cards_sets_madhouse">Madhouse</string>
+
     <string name="card_arena_tier_label">Arena Tier:</string>
+    <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_favorited">%1$s favorited</string>
@@ -54,10 +69,23 @@
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
-    <string name="deck_name_transition_name">deck_name_transition</string>
-    <string name="deck_cover_transition_name">deck_cover_transition</string>
-    <string name="deck_attr1_transition_name">deck_attr1_transition</string>
-    <string name="deck_attr2_transition_name">deck_attr2_transition</string>
+    <string name="deck_deleted">Deck deleted!</string>
     <string name="deck_transition_name" translatable="false">deck_transition</string>
+    <string name="deck_name_transition_name" translatable="false">deck_name_transition</string>
+    <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>
+    <string name="deck_attr1_transition_name" translatable="false">deck_attr1_transition</string>
+    <string name="deck_attr2_transition_name" translatable="false">deck_attr2_transition</string>
+
+    <string name="new_deck_title">New Deck</string>
+    <string name="new_deck_class_title">New %s Deck</string>
+    <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
+    <string name="new_deck_save_dialog_title">Deck Info</string>
+    <string name="new_deck_save_dialog_name_label">Name</string>
+    <string name="new_deck_save_dialog_type_label">Type</string>
+    <string name="new_deck_save_dialog_patch_label">Patch</string>
+    <string name="new_deck_save_dialog_public_label">Make deck public</string>
+    <string name="new_deck_save_dialog_save">Save</string>
+    <string name="new_deck_save_as_public">Deck saved as Public</string>
+    <string name="new_deck_save_as_private">Deck saved as Private</string>
 
 </resources>

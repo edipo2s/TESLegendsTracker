@@ -14,8 +14,15 @@
         <item name="searchViewStyle">@style/SearchViewWithoutIcon</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme">
+    <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textAppearanceLarge">@style/AppDialog.TextAppearanceLarge</item>
     </style>
+
+    <style name="AppDialog.TextAppearanceLarge" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/primary_text_dark</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme"></style>
 
     <style name="AppThemeTransparent" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -51,6 +58,20 @@
         <item name="android:layout_marginStart">@dimen/large_margin</item>
         <item name="android:layout_marginTop">@dimen/default_margin</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MagikaCostsText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginTop">@dimen/nano_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="InputLabel" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:paddingBottom">@dimen/input_label_vertical_spacing</item>
+        <item name="android:paddingLeft">@dimen/input_label_horizontal_spacing</item>
+        <item name="android:paddingRight">@dimen/input_label_horizontal_spacing</item>
     </style>
 
 </resources>
