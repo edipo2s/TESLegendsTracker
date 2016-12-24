@@ -65,3 +65,9 @@
 -dontwarn org.junit.**
 -dontwarn android.test.**
 -dontwarn android.support.test.**
+
+## MixPanel
+-dontwarn com.mixpanel.**
+-keep class **.R$* {
+    <fields>;
+}
