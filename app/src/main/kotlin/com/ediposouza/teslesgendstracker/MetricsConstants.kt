@@ -17,6 +17,8 @@ abstract class MetricsConstants() {
         const val PARAM_VIEW_CARD_NAME = "Name"
         const val PARAM_VIEW_CARD_ATTR = "Attr"
 
+        const val EVENT_SEARCH = "Search"
+
         const val PARAM_CONTENT_VIEW_TYPE_CARD = "Card"
 
         const val PARAM_MIXPANEL_USER_ID = "User ID"

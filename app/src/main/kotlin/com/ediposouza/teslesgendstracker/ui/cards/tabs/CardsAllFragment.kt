@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
+import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -107,10 +108,16 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    open fun configLoggedViews() {
+    fun configLoggedViews() {
         signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
         signin_button.visibility = if (App.hasUserLogged) View.INVISIBLE else View.VISIBLE
         cards_recycler_view.visibility = if (App.hasUserLogged) View.VISIBLE else View.INVISIBLE
+    }
+
+    @Subscribe
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+        configLoggedViews()
+        loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
@@ -119,12 +126,6 @@ open class CardsAllFragment : BaseFragment() {
         if (fragmentSelected) {
             MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
         }
-    }
-
-    @Subscribe
-    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
-        configLoggedViews()
-        loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
