@@ -219,7 +219,7 @@
           "attack": "2",
           "health": "2",
           "rarity": "Rare",
-          "keyword": "Summon",
+          "keyword": "Summon, Evolves",
           "evolves": true
         },
         "plunder": {
@@ -252,7 +252,7 @@
           "attack": "2",
           "health": "2",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "silvenartracker": {
@@ -428,7 +428,7 @@
           "attack": "3",
           "health": "1",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "witheredhandcultist": {
@@ -450,7 +450,7 @@
           "attack": "3",
           "health": "4",
           "rarity": "Epic",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "alikrsurvivalist": {
@@ -594,7 +594,7 @@
           "attack": "4",
           "health": "2",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "whiteruntrooper": {
@@ -704,7 +704,7 @@
           "attack": "4",
           "health": "5",
           "rarity": "Epic",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "triumphantjarl": {
@@ -770,7 +770,7 @@
           "attack": "8",
           "health": "8",
           "rarity": "Legendary",
-          "keyword": "Breakthrough",
+          "keyword": "Breakthrough, Evolves",
           "evolves": true
         },
         "vigilantgiant": {
@@ -1081,7 +1081,7 @@
           "attack": "2",
           "health": "4",
           "rarity": "Common",
-          "keyword": "Guard",
+          "keyword": "Guard, Evolves",
           "evolves": true
         },
         "camlornhero": {
@@ -1235,7 +1235,7 @@
           "attack": "3",
           "health": "4",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "dresrenegade": {
@@ -1400,7 +1400,7 @@
           "attack": "",
           "health": "",
           "rarity": "Epic",
-          "keyword": "Shackle",
+          "keyword": "Shackle, Evolves",
           "evolves": true
         },
         "fateweaver": {
@@ -1422,7 +1422,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Rare",
-          "keyword": "Prophecy, Summon",
+          "keyword": "Prophecy, Summon, Evolves",
           "evolves": true
         },
         "heirloomgreatsword": {
@@ -1477,7 +1477,7 @@
           "attack": "4",
           "health": "4",
           "rarity": "Epic",
-          "keyword": "Summon",
+          "keyword": "Summon, Evolves",
           "evolves": true
         },
         "studiumheadmaster": {
@@ -1554,7 +1554,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Legendary",
-          "keyword": "Summon, Breakthrough",
+          "keyword": "Summon, Breakthrough, Evolves",
           "evolves": true
         },
         "supremeatromancer": {
@@ -1635,7 +1635,7 @@
           "attack": "",
           "health": "",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "blackmail": {
@@ -1679,7 +1679,7 @@
           "attack": "",
           "health": "",
           "rarity": "Rare",
-          "keyword": "Shackle",
+          "keyword": "Shackle, Evolves",
           "evolves": true
         },
         "execute": {
@@ -1866,7 +1866,7 @@
           "attack": "4",
           "health": "1",
           "rarity": "Epic",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "summersetshieldmage": {
@@ -2087,7 +2087,7 @@
           "attack": "",
           "health": "",
           "rarity": "Epic",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "divinefervor": {
@@ -2131,7 +2131,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "imperialreinforcements": {
@@ -2329,7 +2329,7 @@
           "attack": "5",
           "health": "5",
           "rarity": "Legendary",
-          "keyword": "Breakthrough, Summon",
+          "keyword": "Breakthrough, Summon, Evolves",
           "evolves": true
         },
         "auroransentry": {
@@ -2476,7 +2476,7 @@
           "attack": "3",
           "health": "1",
           "rarity": "Rare",
-          "keyword": "Prophecy",
+          "keyword": "Prophecy, Evolves",
           "evolves": true
         },
         "dunestalker": {
@@ -2542,7 +2542,7 @@
           "attack": "1",
           "health": "2",
           "rarity": "Common",
-          "keyword": "Lethal",
+          "keyword": "Lethal, Evolves",
           "evolves": true
         },
         "helstromfootpad": {
@@ -2817,7 +2817,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "greenpactstalker": {
@@ -2927,7 +2927,7 @@
           "attack": "4",
           "health": "2",
           "rarity": "Epic",
-          "keyword": "Prophecy",
+          "keyword": "Prophecy, Evolves",
           "evolves": true
         },
         "camoranscoutleader": {
@@ -3070,7 +3070,7 @@
           "attack": "4",
           "health": "4",
           "rarity": "Legendary",
-          "keyword": "Pilfer",
+          "keyword": "Pilfer, Evolves",
           "evolves": true
         },
         "ransack": {
@@ -3114,7 +3114,7 @@
           "attack": "3",
           "health": "4",
           "rarity": "Epic",
-          "keyword": "Summon",
+          "keyword": "Summon, Evolves",
           "evolves": true
         },
         "chaurusreaper": {
@@ -3238,7 +3238,7 @@
           "attack": "1",
           "health": "1",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "daedricdagger": {
@@ -3568,7 +3568,7 @@
           "attack": "2",
           "health": "4",
           "rarity": "Rare",
-          "keyword": "Lethal",
+          "keyword": "Lethal, Evolves",
           "evolves": true
         },
         "archeinvenomtongue": {
@@ -3601,7 +3601,7 @@
           "attack": "2",
           "health": "4",
           "rarity": "Epic",
-          "keyword": "Regenerate",
+          "keyword": "Regenerate, Evolves",
           "evolves": true
         },
         "cursedspectre": {
@@ -3701,7 +3701,7 @@
           "attack": "4",
           "health": "2",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "preserveroftheroot": {
@@ -3844,7 +3844,7 @@
           "attack": "5",
           "health": "5",
           "rarity": "Epic",
-          "keyword": "Breakthrough",
+          "keyword": "Breakthrough, Evolves",
           "evolves": true
         },
         "nightpredator": {
@@ -3944,7 +3944,7 @@
           "attack": "7",
           "health": "7",
           "rarity": "Legendary",
-          "keyword": "Drain",
+          "keyword": "Drain, Evolves",
           "evolves": true
         },
         "ironatronach": {
@@ -4319,7 +4319,7 @@
           "attack": "3",
           "health": "2",
           "rarity": "Common",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "adoringfan": {
@@ -4419,7 +4419,7 @@
           "attack": "1",
           "health": "1",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "slaughterfishspawning": {
@@ -4486,7 +4486,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Rare",
-          "keyword": "",
+          "keyword": "Evolves",
           "evolves": true
         },
         "sparkingspider": {
@@ -4552,7 +4552,7 @@
           "attack": "3",
           "health": "3",
           "rarity": "Epic",
-          "keyword": "Last Gasp",
+          "keyword": "Last Gasp, Evolves",
           "evolves": true
         },
         "wabbajack": {
