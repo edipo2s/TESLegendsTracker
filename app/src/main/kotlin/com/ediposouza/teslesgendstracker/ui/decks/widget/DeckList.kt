@@ -150,7 +150,7 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
         } else {
             val newQtd = if (cardSlot.qtd < 3) cardSlot.qtd.inc() else 3
             val cardIndex = items.indexOf(cardSlot)
-            items[cardIndex] = CardSlot(card, newQtd)
+            items[cardIndex] = CardSlot(card, if (card.unique) 1 else newQtd)
             notifyItemChanged(cardIndex)
         }
     }

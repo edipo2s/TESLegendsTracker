@@ -182,6 +182,7 @@ enum class CardKeyword() {
     CHARGE,
     COVER,
     DRAIN,
+    EVOLVES,
     GUARD,
     LAST_GASP,
     LETHAL,
