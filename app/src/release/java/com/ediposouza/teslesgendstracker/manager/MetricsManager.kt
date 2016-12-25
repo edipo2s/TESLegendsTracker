@@ -102,7 +102,7 @@ object MetricsManager : MetricsConstants() {
         }
         answers?.logSearch(SearchEvent().putQuery(searchTerm))
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
-        mixpanelAnalytics?.trackBundle(FirebaseAnalytics.Event.SEARCH, bundle)
+        mixpanelAnalytics?.trackBundle(EVENT_SEARCH, bundle)
     }
 
     fun trackCardView(card: Card) {
