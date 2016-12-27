@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
 import android.support.v4.app.Fragment
+import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
@@ -30,6 +31,11 @@ open class BaseFragment : Fragment() {
         } catch (e: Exception) {
             Timber.i(e.message)
         }
+    }
+
+    override fun onDestroy() {
+        MetricsManager.flush()
+        super.onDestroy()
     }
 
     override fun setMenuVisibility(menuVisible: Boolean) {

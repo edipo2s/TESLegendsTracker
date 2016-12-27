@@ -7,9 +7,23 @@ abstract class MetricsConstants() {
 
     companion object {
 
+        const val EVENT_LOGIN = "Login"
+        const val EVENT_SIGNUP = "SignUp"
+        const val PARAM_SIGN_METHOD = "method"
         const val PARAM_SIGN_METHOD_VALUE_GOOGLE = "Google"
+
+        const val EVENT_VIEW_CARD = "ViewCard"
+        const val PARAM_VIEW_CARD_ID = "ID"
+        const val PARAM_VIEW_CARD_NAME = "Name"
+        const val PARAM_VIEW_CARD_ATTR = "Attr"
+
+        const val EVENT_SEARCH = "Search"
+
         const val PARAM_CONTENT_VIEW_TYPE_CARD = "Card"
 
+        const val PARAM_MIXPANEL_USER_ID = "User ID"
+        const val PARAM_MIXPANEL_USER_NAME = "\$name"
+        const val PARAM_MIXPANEL_USER_EMAIL = "\$email"
     }
 
 }
@@ -27,6 +41,13 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_CARD_QTD_CHANGE : MetricAction("CollectionCardQtdChange") {
         companion object {
             val PARAM_QTD = "Qtd"
+        }
+    }
+
+    class ACTION_CARD_FILTER_SET : MetricAction("FilterCardSet") {
+        companion object {
+            const val PARAM_SET = "Set"
+            const val VALUE_CLEAR = "Clear"
         }
     }
 

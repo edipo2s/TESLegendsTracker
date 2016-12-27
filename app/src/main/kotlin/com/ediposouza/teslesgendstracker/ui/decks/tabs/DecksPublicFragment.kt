@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
@@ -19,15 +20,14 @@ import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.DeckActivity
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
-import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowDecksByClasses
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateDeckAndShowDeck
+import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_decks_list.*
+import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_deck.view.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
 import java.text.NumberFormat
@@ -90,6 +90,18 @@ open class DecksPublicFragment : BaseFragment() {
         if (requestCode == RC_DECK && resultCode == Activity.RESULT_OK) {
             showDecks()
         }
+    }
+
+    fun configLoggedViews() {
+        signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
+        signin_button.visibility = if (App.hasUserLogged) View.INVISIBLE else View.VISIBLE
+        decks_recycler_view.visibility = if (App.hasUserLogged) View.VISIBLE else View.INVISIBLE
+    }
+
+    @Subscribe
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+        configLoggedViews()
+        showDecks()
     }
 
     @Subscribe
