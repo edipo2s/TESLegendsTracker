@@ -19,11 +19,13 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
+import java.util.*
 
 /**
  * Created by EdipoSouza on 11/2/16.
@@ -44,13 +46,14 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     val deckListAdapter by lazy {
-        DeckListAdapter(itemClick = { view, card ->
-            if (editMode) {
-                remCard(card)
-            } else {
-                showExpandedCard(card, view)
-            }
-        }) {
+        DeckListAdapter({ index -> decklist_recycle_view.scrollToPosition(index) },
+                itemClick = { view, card ->
+                    if (editMode) {
+                        remCard(card)
+                    } else {
+                        showExpandedCard(card, view)
+                    }
+                }) {
             view, card ->
             showExpandedCard(card, view)
             true
@@ -60,6 +63,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     init {
         inflate(context, R.layout.widget_decklist, this)
         decklist_recycle_view.adapter = deckListAdapter
+        decklist_recycle_view.itemAnimator = SlideInLeftAnimator()
         decklist_recycle_view.layoutManager = LinearLayoutManager(context)
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
@@ -114,7 +118,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
 }
 
-class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<DeckListViewHolder>() {
+class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,
+                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<DeckListViewHolder>() {
 
     private val items = arrayListOf<CardSlot>()
     private var missingCards: List<CardMissing> = listOf()
@@ -133,7 +138,7 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
 
     fun showDeck(cards: List<CardSlot>) {
         items.clear()
-        items.addAll(cards)
+        items.addAll(cards.sorted())
         notifyDataSetChanged()
     }
 
@@ -145,12 +150,17 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
     fun addCard(card: Card) {
         val cardSlot = items.find { it.card == card }
         if (cardSlot == null) {
-            items.add(CardSlot(card, 1))
-            notifyDataSetChanged()
+            val newCardSlot = CardSlot(card, 1)
+            items.add(newCardSlot)
+            Collections.sort(items)
+            val newCardIndex = items.indexOf(newCardSlot)
+            onAdd(newCardIndex)
+            notifyItemInserted(newCardIndex)
         } else {
             val newQtd = if (cardSlot.qtd < 3) cardSlot.qtd.inc() else 3
             val cardIndex = items.indexOf(cardSlot)
             items[cardIndex] = CardSlot(card, if (card.unique) 1 else newQtd)
+            onAdd(cardIndex)
             notifyItemChanged(cardIndex)
         }
     }
@@ -160,8 +170,9 @@ class DeckListAdapter(val itemClick: (View, Card) -> Unit, val itemLongClick: (V
         if (cardSlot != null) {
             val newQtd = cardSlot.qtd.dec()
             if (newQtd <= 0) {
+                val cardRemovedIndex = items.indexOf(cardSlot)
                 items.remove(cardSlot)
-                notifyDataSetChanged()
+                notifyItemRemoved(cardRemovedIndex)
                 notifyCardRemoved(card)
             } else {
                 val cardIndex = items.indexOf(cardSlot)

@@ -262,7 +262,7 @@ data class Card(
         val arenaTier: CardArenaTier,
         val evolves: Boolean
 
-) : Parcelable {
+) : Comparable<Card>, Parcelable {
 
     private val CARD_BACK = "card_back.png"
     private val CARD_PATH = "Cards"
@@ -313,5 +313,10 @@ data class Card(
         dest?.writeList(keywords)
         dest?.writeInt(arenaTier.ordinal)
         dest?.writeInt((if (evolves) 1 else 0))
+    }
+
+    override fun compareTo(other: Card): Int {
+        val compareCost = cost.compareTo(other.cost)
+        return if (compareCost != 0) compareCost else name.compareTo(other.name)
     }
 }
