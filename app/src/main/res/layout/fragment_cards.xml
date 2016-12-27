@@ -24,12 +24,4 @@
 
     </LinearLayout>
 
-    <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
-        android:id="@+id/collection_statistics"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="0dp"
-        app:layout_behavior="@string/bottom_sheet_behavior" />
-
 </com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>

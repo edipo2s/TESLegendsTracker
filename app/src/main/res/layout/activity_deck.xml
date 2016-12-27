@@ -133,7 +133,7 @@
             android:elevation="@dimen/cardview_default_elevation"
             android:foreground="?attr/selectableItemBackground"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_heigth"
+            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_height"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <RelativeLayout
