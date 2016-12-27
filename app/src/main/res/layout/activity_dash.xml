@@ -34,7 +34,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                tools:text="@string/app_name" />
+                tools:text="@string/app_name_full" />
 
         </android.support.v7.widget.Toolbar>
 
