@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.widget
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
@@ -35,6 +36,10 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     }
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
+    }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        return true
     }
 
     fun scrollToTop() {

@@ -81,6 +81,16 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/large_margin" />
 
+            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
+                android:id="@+id/collection_statistics"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:elevation="@dimen/statistics_elevation"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="@dimen/statistics_bottom_peek_height"
+                app:layout_behavior="@string/bottom_sheet_behavior" />
+
         </android.support.design.widget.CoordinatorLayout>
 
     </LinearLayout>

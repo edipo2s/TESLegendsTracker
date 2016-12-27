@@ -17,10 +17,8 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.manager.MetricsManager
-import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.toogleExpanded
+import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
@@ -36,6 +34,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val handler = Handler()
     val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
+    val statisticsSheetBehavior by lazy { BottomSheetBehavior.from(activity.collection_statistics) }
+
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             val title = when (position) {
@@ -44,16 +44,19 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 else -> R.string.app_name_full
             }
             activity.toolbar_title?.setText(title)
-            BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            if (position == 1) {
+                statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                activity.collection_statistics.updateStatistics()
+            } else {
+                statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            }
+            eventBus.post(CmdUpdateRarityMagikaFiltersPosition(position == 1))
             MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 else -> MetricScreen.SCREEN_CARDS_FAVORED()
             })
-            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
-            if (position == 1) {
-                collection_statistics.updateStatistics()
-            }
         }
 
     }
@@ -66,6 +69,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
+        activity.collection_statistics.setOnClickListener {
+            statisticsSheetBehavior.toogleExpanded()
+        }
+        statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
         cards_view_pager.addOnPageChangeListener(pageChange)
         attr_filter.filterClick = {

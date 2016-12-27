@@ -53,6 +53,8 @@ open class CardsAllFragment : BaseFragment() {
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
 
+    open protected val isCardsCollection: Boolean = false
+
     open val cardsAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
         CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads, R.dimen.card_height,
@@ -68,16 +70,13 @@ open class CardsAllFragment : BaseFragment() {
                 resources.getDimensionPixelSize(R.dimen.card_margin), true)
     }
 
-    init {
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards_list)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         configRecycleView()
     }
 

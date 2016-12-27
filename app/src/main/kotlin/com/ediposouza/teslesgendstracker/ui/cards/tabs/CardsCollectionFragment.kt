@@ -7,16 +7,20 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.*
-import com.ediposouza.teslesgendstracker.*
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import com.ediposouza.teslesgendstracker.MetricAction
+import com.ediposouza.teslesgendstracker.MetricScreen
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.utils.SimpleDiffCallback
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.activity_dash.*
-import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
 import java.util.*
@@ -26,8 +30,10 @@ import java.util.*
  */
 class CardsCollectionFragment : CardsAllFragment() {
 
-    private val view_statistics by lazy { activity.collection_statistics }
-    private val statisticsSheetBehavior by lazy {
+    override val isCardsCollection: Boolean = true
+
+    val view_statistics by lazy { activity.collection_statistics }
+    val statisticsSheetBehavior by lazy {
         BottomSheetBehavior.from(view_statistics)
     }
 
@@ -47,10 +53,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
                     newState == BottomSheetBehavior.STATE_SETTLING
-            activity.dash_filter_rarity.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
-            activity.dash_filter_magika.visibility = if (expanded) View.INVISIBLE else View.VISIBLE
             if (expanded) {
-                activity.collection_statistics.scrollToTop()
+                view_statistics?.scrollToTop()
+                view_statistics?.updateStatistics()
             }
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED -> {
@@ -66,31 +71,11 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-        view_statistics.setOnClickListener {
-            statisticsSheetBehavior.toogleExpanded()
-        }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menu?.clear()
-        inflater?.inflate(R.menu.menu_sets, menu)
-        inflater?.inflate(R.menu.menu_cards_collection, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_statistics -> {
-                view_statistics?.updateStatistics()
-                statisticsSheetBehavior.toogleExpanded()
-                return true
-            }
-            else -> {
-                BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
+        BottomSheetBehavior.from(view_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
         return super.onOptionsItemSelected(item)
     }
 
