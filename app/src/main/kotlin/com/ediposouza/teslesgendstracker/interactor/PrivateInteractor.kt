@@ -220,18 +220,24 @@ class PrivateInteractor() : BaseInteractor() {
         val attr2 = deck.cls.attr2
         val cards = hashMapOf<String, CardRarity>()
         val userCards = hashMapOf<String, Long>()
-        publicInteractor.getCards(null, attr1) {
+        publicInteractor.getCards(null, Attribute.DUAL) {
             cards.putAll(it.map { it.shortName to it.rarity })
-            publicInteractor.getCards(null, attr2) {
+            publicInteractor.getCards(null, Attribute.NEUTRAL) {
                 cards.putAll(it.map { it.shortName to it.rarity })
-                getUserCollection(null, attr1) {
-                    userCards.putAll(it)
-                    getUserCollection(null, attr2) {
-                        userCards.putAll(it)
-                        val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
-                                .map { CardMissing(it.first, cards[it.first]!!, it.second) }
-                        Timber.d(missing.toString())
-                        onSuccess.invoke(missing)
+                publicInteractor.getCards(null, attr1) {
+                    cards.putAll(it.map { it.shortName to it.rarity })
+                    publicInteractor.getCards(null, attr2) {
+                        cards.putAll(it.map { it.shortName to it.rarity })
+                        getUserCollection(null, attr1) {
+                            userCards.putAll(it)
+                            getUserCollection(null, attr2) {
+                                userCards.putAll(it)
+                                val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
+                                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
+                                Timber.d(missing.toString())
+                                onSuccess.invoke(missing)
+                            }
+                        }
                     }
                 }
             }
