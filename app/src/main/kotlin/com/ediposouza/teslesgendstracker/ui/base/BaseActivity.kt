@@ -51,6 +51,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 .build()
     }
 
+    override fun onDestroy() {
+        MetricsManager.flush()
+        super.onDestroy()
+    }
+
     override fun onConnectionFailed(p0: ConnectionResult) {
     }
 

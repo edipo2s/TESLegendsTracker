@@ -21,6 +21,11 @@ class DecksFavoritedFragment : DecksPublicFragment() {
         return container?.inflate(R.layout.fragment_decks_list)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        configLoggedViews()
+    }
+
     override fun getDecks(cls: Class?, last: Boolean) {
         privateInteractor.getFavoriteDecks(cls, {
             it?.forEach { Timber.d("Public: %s", it.toString()) }
