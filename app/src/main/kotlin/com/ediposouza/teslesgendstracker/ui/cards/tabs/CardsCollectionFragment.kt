@@ -105,9 +105,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         privateInteractor.getUserCollection(setFilter, currentAttr) {
             val userCards = it
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0L) }
-            cards_recycler_view.itemAnimator = ScaleInAnimator()
+            cards_recycler_view?.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
-            cards_recycler_view.scrollToPosition(0)
+            cards_recycler_view?.scrollToPosition(0)
         }
     }
 

@@ -41,7 +41,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             val title = when (position) {
                 1 -> R.string.tab_cards_collection
                 2 -> R.string.tab_cards_favorites
-                else -> R.string.app_name
+                else -> R.string.app_name_full
             }
             activity.toolbar_title?.setText(title)
             BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
@@ -80,7 +80,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.toolbar_title.setText(R.string.app_name)
+        activity.toolbar_title.setText(R.string.app_name_full)
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
