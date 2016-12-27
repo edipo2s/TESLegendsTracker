@@ -17,7 +17,7 @@ class PublicInteractor() : BaseInteractor() {
     private val KEY_DECK_VIEWS = "views"
 
     fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
-        val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sortedBy(Card::cost)) }
+        val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sorted()) }
         getListFromSets(set, attr, onFinalSuccess) { set, attr, onEachSuccess ->
             val node_attr = attr.name.toLowerCase()
             database.child(NODE_CARDS).child(set.db).child(node_attr).orderByChild(KEY_CARD_COST)

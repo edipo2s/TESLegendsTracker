@@ -8,7 +8,11 @@ data class CardSlot(
         val card: Card,
         val qtd: Long
 
-)
+) : Comparable<CardSlot> {
+
+    override fun compareTo(other: CardSlot): Int = card.compareTo(other.card)
+
+}
 
 data class Patch(
 
