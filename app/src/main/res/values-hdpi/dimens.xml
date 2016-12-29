@@ -5,5 +5,6 @@
     <dimen name="default_margin">6dp</dimen>
     <dimen name="medium_margin">10dp</dimen>
     <dimen name="large_margin">14dp</dimen>
+    <dimen name="huge_margin">18dp</dimen>
 
 </resources>

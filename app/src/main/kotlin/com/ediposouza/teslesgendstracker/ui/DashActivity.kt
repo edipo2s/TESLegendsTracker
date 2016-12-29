@@ -142,7 +142,7 @@ class DashActivity : BaseActivity(),
                     privateInteractor.getUserCollection(null) {
                         userCardsTotal += it.filter {
                             allAttrCards.map { it.shortName }.contains(it.key)
-                        }.values.sum().toInt()
+                        }.values.sum()
                         Timber.d("Out: ${it.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
                         val stringPercent = getString(R.string.statistics_percent,
                                 if (allCardsTotal > 0)

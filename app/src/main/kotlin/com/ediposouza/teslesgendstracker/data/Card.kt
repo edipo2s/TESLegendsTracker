@@ -231,7 +231,7 @@ data class CardMissing(
 
         val shortName: String,
         val rarity: CardRarity,
-        val qtd: Long
+        val qtd: Int
 
 )
 

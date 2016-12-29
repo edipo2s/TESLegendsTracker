@@ -56,7 +56,7 @@ class DeckParser(
         val patch: String = "",
         val views: Int = 0,
         val likes: List<String> = listOf(),
-        val cards: Map<String, Long> = mapOf(),
+        val cards: Map<String, Int> = mapOf(),
         val updates: Map<String, Map<String, Int>> = mapOf(),
         val comments: Map<String, Map<String, String>> = mapOf()
 ) {

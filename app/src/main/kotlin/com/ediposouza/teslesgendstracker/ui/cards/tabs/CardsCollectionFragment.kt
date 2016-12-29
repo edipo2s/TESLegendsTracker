@@ -72,6 +72,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(cards_recycler_view) {
+            setPadding(paddingLeft, paddingTop, paddingRight, resources.getDimensionPixelSize(R.dimen.huge_margin))
+        }
         statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
@@ -90,7 +93,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         val cards = filteredCards()
         privateInteractor.getUserCollection(setFilter, currentAttr) {
             val userCards = it
-            val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0L) }
+            val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0) }
             cards_recycler_view?.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
             cards_recycler_view?.scrollToPosition(0)
@@ -99,7 +102,8 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
         val newQtd = cardSlot.qtd.inc()
-        val finalQtd = if (newQtd <= 3) newQtd else 0
+        val cardMaxQtd = if (cardSlot.card.unique) 1 else 3
+        val finalQtd = if (newQtd <= cardMaxQtd) newQtd else 0
         privateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
@@ -136,7 +140,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             }).dispatchUpdatesTo(this)
         }
 
-        fun updateSlot(cardSlot: CardSlot, newQtd: Long) {
+        fun updateSlot(cardSlot: CardSlot, newQtd: Int) {
             val slotIndex = items.indexOf(cardSlot)
             if (slotIndex > -1) {
                 items[slotIndex] = CardSlot(cardSlot.card, newQtd)
@@ -155,18 +159,18 @@ class CardsCollectionFragment : CardsAllFragment() {
                 itemLongClick(itemView.card_collection_image, cardSlot.card)
             }
             itemView.card_collection_image.setImageBitmap(cardSlot.card.imageBitmap(itemView.context))
-            if (cardSlot.qtd == 0L) {
+            if (cardSlot.qtd == 0) {
                 val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
                 itemView.card_collection_image.setColorFilter(color)
             } else {
                 itemView.card_collection_image.clearColorFilter()
             }
             itemView.card_collection_qtd.setImageResource(when (cardSlot.qtd) {
-                0L -> R.drawable.ic_qtd_zero
-                2L -> R.drawable.ic_qtd_two
+                0 -> R.drawable.ic_qtd_zero
+                2 -> R.drawable.ic_qtd_two
                 else -> R.drawable.ic_qtd_three
             })
-            itemView.card_collection_qtd.visibility = if (cardSlot.qtd == 1L) View.GONE else View.VISIBLE
+            itemView.card_collection_qtd.visibility = if (cardSlot.qtd == 1) View.GONE else View.VISIBLE
         }
 
     }

@@ -11,8 +11,6 @@ import timber.log.Timber
  */
 class PublicInteractor : BaseInteractor() {
 
-    private val NODE_PATCHES = "patches"
-
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 

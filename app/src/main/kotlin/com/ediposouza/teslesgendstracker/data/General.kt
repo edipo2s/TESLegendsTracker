@@ -6,7 +6,7 @@ package com.ediposouza.teslesgendstracker.data
 data class CardSlot(
 
         val card: Card,
-        val qtd: Long
+        val qtd: Int
 
 ) : Comparable<CardSlot> {
 
