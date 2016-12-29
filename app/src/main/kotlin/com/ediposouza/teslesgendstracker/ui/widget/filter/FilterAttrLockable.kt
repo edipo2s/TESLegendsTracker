@@ -20,11 +20,9 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
     var onAttrLock: ((Attribute, Attribute) -> Unit)? = null
     var onAttrUnlock: (() -> Unit)? = null
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
-    }
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     override fun attrClick(attr: Attribute, lockable: Boolean) {
         if (isLocked() && isAttrBasic(attr) && lockable) {

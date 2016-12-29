@@ -22,6 +22,7 @@ import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -34,7 +35,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val handler = Handler()
     val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
-    val statisticsSheetBehavior by lazy { BottomSheetBehavior.from(activity.collection_statistics) }
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
+        BottomSheetBehavior.from(activity.collection_statistics)
+    }
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
@@ -125,33 +128,29 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-}
+    class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        var titles: Array<String> = ctx.resources.getStringArray(R.array.cards_tabs)
+        val cardsCollectionFragment by lazy { CardsCollectionFragment() }
+        val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
+        val cardsAllFragment by lazy { CardsAllFragment() }
 
-    var titles: Array<String>
-    val cardsCollectionFragment by lazy { CardsCollectionFragment() }
-    val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
-    val cardsAllFragment by lazy { CardsAllFragment() }
-
-    init {
-        titles = ctx.resources.getStringArray(R.array.cards_tabs)
-    }
-
-    override fun getItem(position: Int): CardsAllFragment {
-        return when (position) {
-            1 -> cardsCollectionFragment
-            2 -> cardsFavoritesFragment
-            else -> cardsAllFragment
+        override fun getItem(position: Int): CardsAllFragment {
+            return when (position) {
+                1 -> cardsCollectionFragment
+                2 -> cardsFavoritesFragment
+                else -> cardsAllFragment
+            }
         }
-    }
 
-    override fun getCount(): Int {
-        return titles.size
-    }
+        override fun getCount(): Int {
+            return titles.size
+        }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
+        override fun getPageTitle(position: Int): CharSequence {
+            return titles[position]
+        }
+
     }
 
 }

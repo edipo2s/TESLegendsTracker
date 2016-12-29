@@ -15,10 +15,9 @@ import org.greenrobot.eventbus.EventBus
 class AutoHideBehaviour(context: Context?, attrs: AttributeSet?) :
         CoordinatorLayout.Behavior<View>(context, attrs) {
 
-    val eventBus by lazy { EventBus.getDefault() }
+    val eventBus: EventBus by lazy { EventBus.getDefault() }
 
-    constructor() : this(null, null) {
-    }
+    constructor() : this(null, null)
 
     override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: View,
                                      directTargetChild: View, target: View, nestedScrollAxes: Int): Boolean {

@@ -3,7 +3,7 @@ package com.ediposouza.teslesgendstracker
 /**
  * Created by ediposouza on 08/12/16.
  */
-abstract class MetricsConstants() {
+abstract class MetricsConstants {
 
     companion object {
 

@@ -109,7 +109,7 @@
                     android:text="0"
                     android:textColor="@android:color/white" />
 
-                <com.ediposouza.teslesgendstracker.ui.widget.filter.MagikaCosts
+                <com.ediposouza.teslesgendstracker.ui.decks.widget.MagikaCosts
                     android:id="@+id/new_deck_cardlist_costs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

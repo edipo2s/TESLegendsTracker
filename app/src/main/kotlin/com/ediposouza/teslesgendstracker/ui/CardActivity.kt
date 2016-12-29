@@ -31,7 +31,7 @@ class CardActivity : BaseActivity() {
 
     }
 
-    val card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
+    val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     var favorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

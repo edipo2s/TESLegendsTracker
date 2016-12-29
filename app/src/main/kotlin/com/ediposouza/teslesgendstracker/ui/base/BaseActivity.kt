@@ -39,7 +39,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     protected var keyboardVisible = false
-    protected val eventBus by lazy { EventBus.getDefault() }
+    protected val eventBus: EventBus by lazy { EventBus.getDefault() }
     protected var onKeyboardVisibilityChange: (() -> Unit)? = null
 
     public override fun onCreate(savedInstanceState: Bundle?) {

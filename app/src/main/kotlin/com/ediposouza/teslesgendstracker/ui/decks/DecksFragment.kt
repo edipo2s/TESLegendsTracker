@@ -127,33 +127,29 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         eventBus.post(CmdShowDecksByClasses(classesToShow))
     }
 
-}
+    class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        var titles: Array<String> = ctx.resources.getStringArray(R.array.decks_tabs)
+        val decksPublicFragment by lazy { DecksPublicFragment() }
+        val decksMyFragment by lazy { DecksOwnerFragment() }
+        val decksSavedFragment by lazy { DecksFavoritedFragment() }
 
-    var titles: Array<String>
-    val decksPublicFragment by lazy { DecksPublicFragment() }
-    val decksMyFragment by lazy { DecksOwnerFragment() }
-    val decksSavedFragment by lazy { DecksFavoritedFragment() }
-
-    init {
-        titles = ctx.resources.getStringArray(R.array.decks_tabs)
-    }
-
-    override fun getItem(position: Int): BaseFragment {
-        return when (position) {
-            1 -> decksMyFragment
-            2 -> decksSavedFragment
-            else -> decksPublicFragment
+        override fun getItem(position: Int): BaseFragment {
+            return when (position) {
+                1 -> decksMyFragment
+                2 -> decksSavedFragment
+                else -> decksPublicFragment
+            }
         }
-    }
 
-    override fun getCount(): Int {
-        return titles.size
-    }
+        override fun getCount(): Int {
+            return titles.size
+        }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
+        override fun getPageTitle(position: Int): CharSequence {
+            return titles[position]
+        }
+
     }
 
 }

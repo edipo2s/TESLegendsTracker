@@ -4,7 +4,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.toIntSafely
 import org.threeten.bp.LocalDateTime
 
-class CardParser() {
+class CardParser {
 
     val name: String = ""
     val rarity: String = ""
@@ -107,7 +107,7 @@ class DeckParser(
 
 }
 
-class PatchParser() {
+class PatchParser {
 
     val desc: String = ""
 

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import org.threeten.bp.LocalDateTime
 import java.util.*
 
-enum class DeckType() {
+enum class DeckType {
 
     AGGRO,
     ARENA,
