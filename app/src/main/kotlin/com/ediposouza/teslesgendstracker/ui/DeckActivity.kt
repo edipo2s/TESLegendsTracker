@@ -10,6 +10,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -58,10 +59,10 @@ class DeckActivity : BaseActivity() {
 
     val publicInteractor by lazy { PublicInteractor() }
     val privateInteractor by lazy { PrivateInteractor() }
-    val numberInstance by lazy { NumberFormat.getNumberInstance() }
-    val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
     val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
-    val commentsSheetBehavior by lazy { BottomSheetBehavior.from(deck_bottom_sheet) }
+    val deck: Deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
+    val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
+    val commentsSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(deck_bottom_sheet) }
 
     var favorite: Boolean = false
     var like: Boolean = false

@@ -15,7 +15,7 @@ import java.util.*
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PrivateInteractor() : BaseInteractor() {
+class PrivateInteractor : BaseInteractor() {
 
     private val NODE_DECKS_PRIVATE = "private"
     private val NODE_FAVORITE = "favorite"

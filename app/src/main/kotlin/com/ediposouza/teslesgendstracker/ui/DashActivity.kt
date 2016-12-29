@@ -25,6 +25,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
+import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
@@ -39,7 +40,9 @@ class DashActivity : BaseActivity(),
     val privateInteractor = PrivateInteractor()
 
     var filterGreatMargin = false
-    val statisticsSheetBehavior by lazy { BottomSheetBehavior.from(collection_statistics) }
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
+        BottomSheetBehavior.from(collection_statistics)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

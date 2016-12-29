@@ -14,7 +14,7 @@
         android:id="@+id/collection_statistics_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbarFadeDuration="0"
+        android:fadeScrollbars="false"
         android:scrollbars="vertical">
 
         <android.support.percent.PercentRelativeLayout

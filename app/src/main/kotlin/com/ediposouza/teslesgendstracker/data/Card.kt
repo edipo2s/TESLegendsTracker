@@ -90,7 +90,7 @@ enum class CardRarity(val color: Int, val soulCost: Int, @IntegerRes val imageRe
 
 }
 
-enum class CardType() {
+enum class CardType {
 
     ACTION,
     CREATURE,
@@ -175,7 +175,7 @@ enum class CardRace(val desc: String) {
     }
 }
 
-enum class CardKeyword() {
+enum class CardKeyword {
 
     ACTIVATE,
     BREAKTHROUGH,
@@ -205,7 +205,7 @@ enum class CardKeyword() {
     }
 }
 
-enum class CardArenaTier() {
+enum class CardArenaTier {
 
     TERRIBLE,
     POOR,

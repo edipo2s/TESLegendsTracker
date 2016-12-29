@@ -9,7 +9,7 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PublicInteractor() : BaseInteractor() {
+class PublicInteractor : BaseInteractor() {
 
     private val NODE_PATCHES = "patches"
 

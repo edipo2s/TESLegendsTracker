@@ -237,50 +237,50 @@ open class CardsAllFragment : BaseFragment() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
-}
+    class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
+                          @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
+                          val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
 
-class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
-                      @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
+        var items: List<Card> = ArrayList()
 
-    var items: List<Card> = ArrayList()
-
-    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), cardHeight, itemClick, itemLongClick)
-    }
-
-    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        (holder as CardsAllViewHolder).bind(items[position])
-    }
-
-    override fun getDefaultItemCount(): Int = items.size
-
-    fun showCards(cards: List<Card>) {
-        val oldItems = items
-        items = cards
-        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
-            notifyDataSetChanged()
-            return
+        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), cardHeight, itemClick, itemLongClick)
         }
-        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
-            oldItem.shortName == newItem.shortName
-        }).dispatchUpdatesTo(this)
+
+        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+            (holder as CardsAllViewHolder).bind(items[position])
+        }
+
+        override fun getDefaultItemCount(): Int = items.size
+
+        fun showCards(cards: List<Card>) {
+            val oldItems = items
+            items = cards
+            if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+                notifyDataSetChanged()
+                return
+            }
+            DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+                oldItem.shortName == newItem.shortName
+            }).dispatchUpdatesTo(this)
+        }
     }
-}
 
-class CardsAllViewHolder(val view: View, @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                         val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
+    class CardsAllViewHolder(val view: View, @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
+                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-    init {
-        val cardLayoutParams = itemView.card_all_image.layoutParams
-        cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(cardHeight)
-        itemView.card_all_image.layoutParams = cardLayoutParams
-    }
+        init {
+            val cardLayoutParams = itemView.card_all_image.layoutParams
+            cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(cardHeight)
+            itemView.card_all_image.layoutParams = cardLayoutParams
+        }
 
-    fun bind(card: Card) {
-        itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
-        itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
-        itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
+        fun bind(card: Card) {
+            itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
+            itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
+            itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
+        }
+
     }
 
 }

@@ -32,11 +32,9 @@ class CollectionStatisticsAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr
         }
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
-    }
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun setCommon(owned: Long, total: Long) {
         attr_statistics_common.text = context.getString(R.string.statistics_rarity, owned, total)

@@ -129,89 +129,89 @@ open class DecksPublicFragment : BaseFragment() {
     open fun getDecks(cls: Class?, last: Boolean) {
         publicInteractor.getPublicDecks(cls, {
             it.forEach { Timber.d("Public: %s", it.toString()) }
-            decksAdapter.showDecks(it, last)
+            decksAdapter.showDecks(it.sortedByDescending(Deck::updatedAt), last)
         })
     }
 
-}
+    class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
+                          val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
 
-class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
-                      val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
+        val privateInteractor = PrivateInteractor()
 
-    val privateInteractor = PrivateInteractor()
+        var items: List<Deck> = listOf()
+        var newItems: ArrayList<Deck> = ArrayList()
 
-    var items: List<Deck> = listOf()
-    var newItems: ArrayList<Deck> = ArrayList()
-
-    override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
-    }
-
-    override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        val deck = items[position]
-        (holder as DecksAllViewHolder).bind(deck, privateInteractor)
-    }
-
-    override fun getDefaultItemCount(): Int = items.size
-
-    fun clearItems() {
-        newItems.clear()
-    }
-
-    fun showDecks(decks: List<Deck>, last: Boolean) {
-        newItems.addAll(decks)
-        if (!last) {
-            return
+        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+            return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
         }
-        Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
-        val oldItems = items
-        items = newItems
-        if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
-            notifyDataSetChanged()
-            return
+
+        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+            val deck = items[position]
+            (holder as DecksAllViewHolder).bind(deck, privateInteractor)
         }
-        DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
-            oldItem.id == newItem.id
-        }).dispatchUpdatesTo(this)
+
+        override fun getDefaultItemCount(): Int = items.size
+
+        fun clearItems() {
+            newItems.clear()
+        }
+
+        fun showDecks(decks: List<Deck>, last: Boolean) {
+            newItems.addAll(decks)
+            if (!last) {
+                return
+            }
+            Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
+            val oldItems = items
+            items = newItems
+            if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+                notifyDataSetChanged()
+                return
+            }
+            DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+                oldItem.id == newItem.id
+            }).dispatchUpdatesTo(this)
+        }
+
     }
 
-}
+    class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
+                             val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
-                         val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
+        fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
+            itemView.setOnClickListener { itemClick(itemView, deck) }
+            itemView.setOnLongClickListener { itemLongClick(itemView, deck) }
+            itemView.deck_cover.setImageResource(deck.cls.imageRes)
+            itemView.deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
+            itemView.deck_name.text = deck.name
+            itemView.deck_attr1.setImageResource(deck.cls.attr1.imageRes)
+            itemView.deck_attr2.setImageResource(deck.cls.attr2.imageRes)
+            itemView.deck_type.text = deck.type.name.toLowerCase().capitalize()
+            itemView.deck_date.setCompoundDrawablesWithIntrinsicBounds(if (deck.updates.isEmpty())
+                R.drawable.ic_create_at else R.drawable.ic_updated_at, 0, 0, 0)
+            itemView.deck_date.text = deck.updatedAt.toLocalDate().toString()
+            val numberInstance = NumberFormat.getNumberInstance()
+            itemView.deck_soul_cost.text = numberInstance.format(deck.cost)
+            itemView.deck_comments.text = numberInstance.format(deck.comments.size)
+            itemView.deck_likes.text = numberInstance.format(deck.likes.size)
+            itemView.deck_views.text = numberInstance.format(deck.views)
+            calculateMissingSoul(deck, privateInteractor)
+        }
 
-    fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
-        itemView.setOnClickListener { itemClick(itemView, deck) }
-        itemView.setOnLongClickListener { itemLongClick(itemView, deck) }
-        itemView.deck_cover.setImageResource(deck.cls.imageRes)
-        itemView.deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
-        itemView.deck_name.text = deck.name
-        itemView.deck_attr1.setImageResource(deck.cls.attr1.imageRes)
-        itemView.deck_attr2.setImageResource(deck.cls.attr2.imageRes)
-        itemView.deck_type.text = deck.type.name.toLowerCase().capitalize()
-        itemView.deck_date.setCompoundDrawablesWithIntrinsicBounds(if (deck.updates.isEmpty())
-            R.drawable.ic_create_at else R.drawable.ic_updated_at, 0, 0, 0)
-        itemView.deck_date.text = deck.updatedAt.toLocalDate().toString()
-        val numberInstance = NumberFormat.getNumberInstance()
-        itemView.deck_soul_cost.text = numberInstance.format(deck.cost)
-        itemView.deck_comments.text = numberInstance.format(deck.comments.size)
-        itemView.deck_likes.text = numberInstance.format(deck.likes.size)
-        itemView.deck_views.text = numberInstance.format(deck.views)
-        calculateMissingSoul(deck, privateInteractor)
-    }
-
-    fun calculateMissingSoul(deck: Deck, interactor: PrivateInteractor) {
-        with(itemView.deck_soul_missing) {
-            visibility = View.INVISIBLE
-            itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-            interactor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
-                itemView.deck_soul_missing_loading.visibility = View.GONE
-                val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
-                Timber.d("Missing %d", missingSoul)
-                text = NumberFormat.getNumberInstance().format(missingSoul)
-                visibility = View.VISIBLE
+        fun calculateMissingSoul(deck: Deck, interactor: PrivateInteractor) {
+            with(itemView.deck_soul_missing) {
+                visibility = View.INVISIBLE
+                itemView.deck_soul_missing_loading.visibility = View.VISIBLE
+                interactor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                    itemView.deck_soul_missing_loading.visibility = View.GONE
+                    val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
+                    Timber.d("Missing %d", missingSoul)
+                    text = NumberFormat.getNumberInstance().format(missingSoul)
+                    visibility = View.VISIBLE
+                }
             }
         }
+
     }
 
 }

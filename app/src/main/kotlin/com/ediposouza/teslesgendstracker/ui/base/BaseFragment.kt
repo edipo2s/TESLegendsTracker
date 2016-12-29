@@ -11,7 +11,7 @@ import timber.log.Timber
 
 open class BaseFragment : Fragment() {
 
-    protected val eventBus by lazy { EventBus.getDefault() }
+    protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
     protected var fragmentSelected: Boolean = false
 
