@@ -171,10 +171,10 @@ open class CardsAllFragment : BaseFragment() {
 
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
-        PublicInteractor().getCards(setFilter, attribute, {
+        PublicInteractor().getCards(setFilter, attribute) {
             cardsLoaded = it
             showCards()
-        })
+        }
         privateInteractor.getFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
         }

@@ -16,7 +16,27 @@ class PublicInteractor : BaseInteractor() {
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
-    fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
+    fun getCards(set: CardSet?, vararg attrs: Attribute, onSuccess: (List<Card>) -> Unit) {
+        var attrIndex = 0
+        val cards = arrayListOf<Card>()
+        if (attrs.size == 1) {
+            return getCards(set, attrs[0], onSuccess)
+        }
+
+        fun getCardsOnSuccess(onSuccess: (List<Card>) -> Unit): (List<Card>) -> Unit = {
+            cards.addAll(it)
+            attrIndex = attrIndex.inc()
+            if (attrIndex >= attrs.size) {
+                onSuccess.invoke(cards)
+            } else {
+                getCards(set, attrs[attrIndex], getCardsOnSuccess(onSuccess))
+            }
+        }
+
+        getCards(set, attrs[attrIndex], getCardsOnSuccess(onSuccess))
+    }
+
+    private fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
         val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sorted()) }
         getListFromSets(set, attr, onFinalSuccess) { set, attr, onEachSuccess ->
             val node_attr = attr.name.toLowerCase()
@@ -122,17 +142,11 @@ class PublicInteractor : BaseInteractor() {
 
     fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
         with(database.child(NODE_CARDS)) {
-            val cards = arrayListOf<Card>()
-            getCards(null, deck.cls.attr1) {
-                cards.addAll(it)
-                getCards(null, deck.cls.attr2) {
-                    cards.addAll(it)
-                    val deckCards = cards
-                            .map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
-                            .filter { it.qtd > 0 }
-                    Timber.d(deckCards.toString())
-                    onSuccess(deckCards)
-                }
+            getCards(null, deck.cls.attr1, deck.cls.attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+                val deckCards = it.map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
+                        .filter { it.qtd > 0 }
+                Timber.d(deckCards.toString())
+                onSuccess(deckCards)
             }
         }
     }

@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
@@ -47,6 +46,8 @@ class NewDeckActivity : BaseActivity() {
     }
 
     val ANIM_DURATION = 250L
+    val DECK_MIN_CARDS_QTD = 50
+    val EXIT_CONFIRM_MIN_CARDS = 5
 
     val attrFilterClick: (Attribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
@@ -94,10 +95,20 @@ class NewDeckActivity : BaseActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
                 .commit()
-        Handler().postDelayed({
+        handler.postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+    }
+
+    override fun onBackPressed() {
+        if (canExit || new_deck_cardlist.getCards().size < EXIT_CONFIRM_MIN_CARDS) {
+            super.onBackPressed()
+        } else {
+            canExit = true
+            toast(R.string.deck_exit_confirm)
+            handler.postDelayed({ canExit = false }, DateUtils.SECOND_IN_MILLIS * 2)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -113,7 +124,7 @@ class NewDeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_done -> {
-                if (new_deck_cardlist.getCards().size >= 50) {
+                if (new_deck_cardlist.getCards().sumBy { it.qtd.toInt() } >= DECK_MIN_CARDS_QTD) {
                     showSaveDialog()
                 } else {
                     alert("Please complete your deck before save it") {

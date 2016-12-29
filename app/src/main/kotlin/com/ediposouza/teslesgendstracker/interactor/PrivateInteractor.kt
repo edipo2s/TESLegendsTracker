@@ -94,7 +94,27 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+    fun getUserCollection(set: CardSet?, vararg attrs: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+        var attrIndex = 0
+        val collection = hashMapOf<String, Long>()
+        if (attrs.size == 1) {
+            return getUserCollection(set, attrs[0], onSuccess)
+        }
+
+        fun getUserCollectionOnSuccess(onSuccess: (Map<String, Long>) -> Unit): (Map<String, Long>) -> Unit = {
+            collection.putAll(it)
+            attrIndex = attrIndex.inc()
+            if (attrIndex >= attrs.size) {
+                onSuccess.invoke(collection)
+            } else {
+                getUserCollection(set, attrs[attrIndex], getUserCollectionOnSuccess(onSuccess))
+            }
+        }
+
+        getUserCollection(set, attrs[attrIndex], getUserCollectionOnSuccess(onSuccess))
+    }
+
+    private fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
         getMapFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
             dbUserCards(set, attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -218,28 +238,16 @@ class PrivateInteractor : BaseInteractor() {
         val publicInteractor = PublicInteractor()
         val attr1 = deck.cls.attr1
         val attr2 = deck.cls.attr2
-        val cards = hashMapOf<String, CardRarity>()
-        val userCards = hashMapOf<String, Long>()
-        publicInteractor.getCards(null, Attribute.DUAL) {
-            cards.putAll(it.map { it.shortName to it.rarity })
-            publicInteractor.getCards(null, Attribute.NEUTRAL) {
-                cards.putAll(it.map { it.shortName to it.rarity })
-                publicInteractor.getCards(null, attr1) {
-                    cards.putAll(it.map { it.shortName to it.rarity })
-                    publicInteractor.getCards(null, attr2) {
-                        cards.putAll(it.map { it.shortName to it.rarity })
-                        getUserCollection(null, attr1) {
-                            userCards.putAll(it)
-                            getUserCollection(null, attr2) {
-                                userCards.putAll(it)
-                                val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
-                                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
-                                Timber.d(missing.toString())
-                                onSuccess.invoke(missing)
-                            }
-                        }
-                    }
-                }
+        publicInteractor.getCards(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+            val cards = it.map { it.shortName to it.rarity }.toMap()
+            getUserCollection(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+                val userCards = it
+                val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
+                        .filter { it.second > 0 }
+                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
+                        .filter { it.qtd > 0 }
+                Timber.d(missing.toString())
+                onSuccess.invoke(missing)
             }
         }
     }

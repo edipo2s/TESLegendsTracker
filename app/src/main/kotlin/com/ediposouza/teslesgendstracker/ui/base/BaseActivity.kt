@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.base
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -38,9 +39,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     private var googleApiClient: GoogleApiClient? = null
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    protected var canExit: Boolean = false
+    protected val handler = Handler()
     protected var keyboardVisible = false
-    protected val eventBus: EventBus by lazy { EventBus.getDefault() }
     protected var onKeyboardVisibilityChange: (() -> Unit)? = null
+    protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -72,6 +72,7 @@
     <string name="deck_details_last_update">Last update</string>
     <string name="deck_details_last_update_format">%1$s at %2$s</string>
     <string name="deck_deleted">Deck deleted!</string>
+    <string name="deck_exit_confirm">Press back again to exit without save</string>
     <string name="deck_comments_text">Comments</string>
     <string name="deck_comment_new_hint">Your comment!</string>
     <string name="deck_comment_new_hint_anonymous">Your comment! (Need login)</string>
