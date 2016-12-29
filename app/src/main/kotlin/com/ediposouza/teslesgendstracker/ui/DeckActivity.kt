@@ -83,13 +83,11 @@ class DeckActivity : BaseActivity() {
             privateInteractor.setUserDeckFavorite(deck, !favorite) {
                 favorite = !favorite
                 updateFavoriteItem()
-                setResult(Activity.RESULT_OK, Intent())
             }
         }
         deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toogleExpanded() }
         updateFavoriteItem()
         loadDeckInfo()
-        setResult(Activity.RESULT_CANCELED, Intent())
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -118,6 +116,9 @@ class DeckActivity : BaseActivity() {
         }
         doAsync {
             calculateMissingSoul(deck, privateInteractor)
+            publicInteractor.incDeckView(deck) {
+                deck_details_views.text = deck.views.inc().toString()
+            }
             publicInteractor.getPatches {
                 val patch = it.find { it.uidDate == deck.patch }
                 runOnUiThread {
@@ -135,6 +136,7 @@ class DeckActivity : BaseActivity() {
                 }
             }
         }
+        setResult(Activity.RESULT_OK, Intent())
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
     }
 
@@ -147,7 +149,7 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(if (deckOwned) R.menu.menu_deck_owned else R.menu.menu_deck, menu)
+        menuInflater.inflate(if (deckOwned) R.menu.menu_deck_owner else R.menu.menu_deck, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
@@ -163,7 +165,6 @@ class DeckActivity : BaseActivity() {
                 privateInteractor.setUserDeckLike(deck, !like) {
                     like = !like
                     updateLikeItem()
-                    setResult(Activity.RESULT_OK, Intent())
                     val deckLikes = Integer.parseInt(deck_details_likes.text.toString())
                     deck_details_likes.text = numberInstance.format(deckLikes + if (like) 1 else -1)
                 }
@@ -175,7 +176,6 @@ class DeckActivity : BaseActivity() {
                     positiveButton(android.R.string.yes, {
                         privateInteractor.deleteDeck(deck, deck.private) {
                             toast(R.string.deck_deleted)
-                            setResult(Activity.RESULT_OK, Intent())
                             ActivityCompat.finishAfterTransition(this@DeckActivity)
                         }
                     })
@@ -264,14 +264,12 @@ class DeckActivity : BaseActivity() {
         deck_comment_recycle_view.scrollToPosition(0)
         deck_comment_qtd.text = deck_comment_recycle_view.adapter.itemCount.toString()
         deck_comment_recycle_view.requestLayout()
-        setResult(Activity.RESULT_OK, Intent())
     }
 
     private fun remComment(commentId: String) {
         (deck_comment_recycle_view.adapter as DeckCommentAdapter).rem(commentId)
         deck_comment_qtd.text = deck_comment_recycle_view.adapter.itemCount.toString()
         deck_comment_recycle_view.requestLayout()
-        setResult(Activity.RESULT_OK, Intent())
     }
 
     class DeckCommentAdapter(val items: List<DeckComment>, val publicInteractor: PublicInteractor,

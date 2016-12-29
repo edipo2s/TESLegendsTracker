@@ -111,11 +111,11 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
-    fun incDeckView(deck: Deck, onSuccess: () -> Unit, onError: (e: Exception?) -> Unit) {
+    fun incDeckView(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC)) {
             child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to deck.views.inc())).addOnCompleteListener({
                 Timber.d(it.toString())
-                if (it.isSuccessful) onSuccess.invoke() else onError.invoke(it.exception)
+                if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
             })
         }
     }

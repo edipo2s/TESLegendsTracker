@@ -113,7 +113,14 @@ class NewDeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_done -> {
-                showSaveDialog()
+                if (new_deck_cardlist.getCards().size >= 50) {
+                    showSaveDialog()
+                } else {
+                    alert("Please complete your deck before save it") {
+                        okButton { }
+                        setTheme(R.style.AppDialog)
+                    }.show()
+                }
                 return true
             }
         }
