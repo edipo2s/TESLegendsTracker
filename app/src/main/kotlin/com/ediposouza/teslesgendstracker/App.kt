@@ -32,6 +32,7 @@ class App : Application() {
         FirebaseDatabase.getInstance().apply {
             setPersistenceEnabled(true)
             reference.child(BaseInteractor.NODE_CARDS).keepSynced(true)
+            reference.child(BaseInteractor.NODE_PATCHES).keepSynced(true)
         }
         Timber.plant(LoggerManager())
     }

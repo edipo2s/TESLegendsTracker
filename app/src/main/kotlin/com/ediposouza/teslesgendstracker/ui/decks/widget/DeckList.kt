@@ -208,7 +208,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit,
                              val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-        fun bind(slot: CardSlot, missingQtd: Long) {
+        fun bind(slot: CardSlot, missingQtd: Int) {
             itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
             itemView.setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
             itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))

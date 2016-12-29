@@ -52,7 +52,7 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
+    fun setUserCardQtd(card: Card, qtd: Int, onComplete: () -> Unit) {
         dbUserCards(card.set, card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
@@ -72,7 +72,7 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(set: CardSet?, onSuccess: (Map<String, Long>) -> Unit) {
+    fun getUserCollection(set: CardSet?, onSuccess: (Map<String, Int>) -> Unit) {
         getMapFromSets(set, onSuccess) { set, onEachSuccess ->
             dbUser()?.child(NODE_CARDS)?.child(set.db)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -80,7 +80,7 @@ class PrivateInteractor : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children.flatMap { it.children }
                             .filter { it.hasChild(KEY_CARD_QTD) }
-                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())
                     onEachSuccess.invoke(collection)
@@ -94,14 +94,14 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(set: CardSet?, vararg attrs: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+    fun getUserCollection(set: CardSet?, vararg attrs: Attribute, onSuccess: (Map<String, Int>) -> Unit) {
         var attrIndex = 0
-        val collection = hashMapOf<String, Long>()
+        val collection = hashMapOf<String, Int>()
         if (attrs.size == 1) {
             return getUserCollection(set, attrs[0], onSuccess)
         }
 
-        fun getUserCollectionOnSuccess(onSuccess: (Map<String, Long>) -> Unit): (Map<String, Long>) -> Unit = {
+        fun getUserCollectionOnSuccess(onSuccess: (Map<String, Int>) -> Unit): (Map<String, Int>) -> Unit = {
             collection.putAll(it)
             attrIndex = attrIndex.inc()
             if (attrIndex >= attrs.size) {
@@ -114,7 +114,7 @@ class PrivateInteractor : BaseInteractor() {
         getUserCollection(set, attrs[attrIndex], getUserCollectionOnSuccess(onSuccess))
     }
 
-    private fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+    private fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Int>) -> Unit) {
         getMapFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
             dbUserCards(set, attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -122,7 +122,7 @@ class PrivateInteractor : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children
                             .filter { it.hasChild(KEY_CARD_QTD) }
-                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())
                     onEachSuccess.invoke(collection)
@@ -252,7 +252,7 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Long>,
+    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Int>,
                  private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (uid: String) -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
