@@ -2,41 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/deck_list_slot_height"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     tools:layout_marginTop="@dimen/status_bar_height">
 
+    <ImageView
+        android:id="@+id/deck_comment_owner_photo"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:src="@drawable/ic_user" />
+
     <TextView
         android:id="@+id/deck_comment_owner"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/deck_list_comment_name_width"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/default_margin"
-        android:gravity="center"
-        android:maxLines="3"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="@dimen/small_margin"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="@color/primary_text_dark"
         android:textSize="@dimen/font_small"
-        tools:text="Édipo Souza" />
+        tools:text="Édipo da Silva Souza"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/deck_comment_msg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/nano_margin"
         android:layout_weight="1"
         android:gravity="center"
-        android:maxLines="3"
-        android:textColor="@android:color/white"
-        tools:text="Amazing deck" />
+        android:maxLines="5"
+        android:textColor="@color/primary_text_dark"
+        tools:text="Amazing deck with some awesome features that I never expected"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/deck_comment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
         android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:gravity="center"
         android:maxLines="3"
-        android:textColor="@android:color/white"
+        android:textColor="@color/primary_text_dark"
         android:textSize="@dimen/font_small"
-        tools:text="10/11/2016 18h35" />
+        tools:text="10/11/2016\n18h35"
+        tools:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/deck_comment_delete"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginTop="@dimen/default_margin"
+        android:src="@drawable/ic_delete_red"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </LinearLayout>
