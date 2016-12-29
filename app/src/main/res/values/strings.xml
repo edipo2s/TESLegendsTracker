@@ -70,7 +70,13 @@
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
+    <string name="deck_details_last_update_format">%1$s at %2$s</string>
     <string name="deck_deleted">Deck deleted!</string>
+    <string name="deck_comments_text">Comments</string>
+    <string name="deck_comment_new_hint">Your comment!</string>
+    <string name="deck_comment_new_hint_anonymous">Your comment! (Need login)</string>
+    <string name="deck_comment_size_error">Message is too short!</string>
+    <string name="deck_comment_date_format" translatable="false">%1$s\n%2$s</string>
     <string name="deck_transition_name" translatable="false">deck_transition</string>
     <string name="deck_name_transition_name" translatable="false">deck_name_transition</string>
     <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>

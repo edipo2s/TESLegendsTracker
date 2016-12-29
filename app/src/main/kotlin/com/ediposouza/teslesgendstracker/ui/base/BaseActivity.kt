@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.contentView
 import org.jetbrains.anko.toast
 import timber.log.Timber
 
@@ -29,14 +31,16 @@ import timber.log.Timber
  */
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
 
-    protected val eventBus by lazy { EventBus.getDefault() }
-
     private val RC_SIGN_IN: Int = 235
 
     private var loading: AlertDialog? = null
     private var snackbar: Snackbar? = null
     private var googleApiClient: GoogleApiClient? = null
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    protected var keyboardVisible = false
+    protected val eventBus by lazy { EventBus.getDefault() }
+    protected var onKeyboardVisibilityChange: (() -> Unit)? = null
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,19 +55,20 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 .build()
     }
 
-    override fun onDestroy() {
-        MetricsManager.flush()
-        super.onDestroy()
-    }
-
-    override fun onConnectionFailed(p0: ConnectionResult) {
-    }
-
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        contentView?.viewTreeObserver?.addOnGlobalLayoutListener({
+            val r = Rect()
+            contentView?.getWindowVisibleDisplayFrame(r)
+            val screenHeight = contentView?.rootView?.height ?: 0
+            // r.bottom is the position above soft keypad or device button. if keypad is shown, the r.bottom is smaller than that before.
+            val keypadHeight = screenHeight - r.bottom
+            keyboardVisible = keypadHeight > (screenHeight * 0.15) // 0.15 ratio is perhaps enough to determine keypad height.
+            onKeyboardVisibilityChange?.invoke()
+        })
     }
 
     override fun onStart() {
@@ -86,6 +91,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         firebaseAuth.removeAuthStateListener(this)
     }
 
+    override fun onDestroy() {
+        MetricsManager.flush()
+        super.onDestroy()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -97,6 +107,9 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 hideLoading()
             }
         }
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
     }
 
     override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
@@ -112,7 +125,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         }
     }
 
-    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         Timber.d("firebaseAuthWithGoogle:" + acct?.id)
         showLoading()
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)

@@ -40,7 +40,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.decks.new.NewDeckActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"

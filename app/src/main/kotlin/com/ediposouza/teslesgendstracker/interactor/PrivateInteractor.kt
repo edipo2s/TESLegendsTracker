@@ -332,21 +332,26 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null,
+                       onSuccess: (comment: DeckComment) -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val comment = DeckParser.toNewCommentMap(getUserID(), msg)
                 with(child(deck.id).child(KEY_DECK_COMMENTS)) {
-                    child(push().key).setValue(comment).addOnCompleteListener({
+                    val commentKey = push().key
+                    child(commentKey).setValue(comment).addOnCompleteListener({
                         Timber.d(it.toString())
-                        if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                        if (it.isSuccessful) {
+                            onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now()))
+                        } else
+                            onError?.invoke(it.exception)
                     })
                 }
             }
         }
     }
 
-    fun remDeckComment(deck: Deck, commentId: String, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun remDeckComment(deck: Deck, commentId: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 child(deck.id).child(KEY_DECK_COMMENTS).child(commentId).removeValue().addOnCompleteListener({
