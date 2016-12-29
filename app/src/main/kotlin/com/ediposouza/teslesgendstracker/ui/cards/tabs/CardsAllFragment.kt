@@ -114,6 +114,13 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    fun onCmdUpdateRarityMagikaFiltersVisibility(update: CmdUpdateVisibility) {
+        if (isFragmentSelected) {
+            (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(update.show)
+        }
+    }
+
+    @Subscribe
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
@@ -122,7 +129,7 @@ open class CardsAllFragment : BaseFragment() {
     @Subscribe
     fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
-        if (fragmentSelected) {
+        if (isFragmentSelected) {
             MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
         }
     }
@@ -137,7 +144,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdFilterClass(filterClass: CmdFilterClass) {
         classFilter = filterClass.cls
         showCards()
-        if (fragmentSelected) {
+        if (isFragmentSelected) {
             MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_SET(),
                     setFilter?.name ?: MetricAction.ACTION_CARD_FILTER_SET.VALUE_CLEAR)
         }
@@ -153,7 +160,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdFilterRarity(filterRarity: CmdFilterRarity) {
         rarityFilter = filterRarity.rarity
         showCards()
-        if (fragmentSelected) {
+        if (isFragmentSelected) {
             MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
                     rarityFilter?.name ?: MetricAction.ACTION_CARD_FILTER_RARITY.VALUE_CLEAR)
         }
@@ -163,7 +170,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdFilterMagika(filterMagika: CmdFilterMagika) {
         magikaFilter = filterMagika.magika
         showCards()
-        if (fragmentSelected) {
+        if (isFragmentSelected) {
             MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
                 magikaFilter.toString() else MetricAction.ACTION_CARD_FILTER_MAGIKA.VALUE_CLEAR)
         }

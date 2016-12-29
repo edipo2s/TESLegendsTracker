@@ -44,7 +44,7 @@
             android:layout_height="match_parent">
 
             <android.support.design.widget.AppBarLayout
-                android:id="@+id/dash_app_bar_bayout"
+                android:id="@+id/dash_app_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null">
@@ -68,21 +68,21 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
-                android:id="@+id/dash_filter_rarity"
+                android:id="@+id/filter_rarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:layout_margin="@dimen/large_margin" />
 
             <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
-                android:id="@+id/dash_filter_magika"
+                android:id="@+id/filter_magika"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/large_margin" />
 
             <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
-                android:id="@+id/collection_statistics"
+                android:id="@+id/cards_collection_statistics"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -90,6 +90,16 @@
                 app:behavior_hideable="true"
                 app:behavior_peekHeight="@dimen/statistics_bottom_peek_height"
                 app:layout_behavior="@string/bottom_sheet_behavior" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/decks_fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/large_margin"
+                android:src="@drawable/ic_add"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal" />
 
         </android.support.design.widget.CoordinatorLayout>
 

@@ -1,11 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.decks.new
 
-import android.animation.Animator
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
 import android.util.TypedValue
@@ -22,9 +19,8 @@ import com.ediposouza.teslesgendstracker.data.Patch
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.manager.MetricsManager
-import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
@@ -37,7 +33,7 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class NewDeckActivity : BaseActivity() {
+class NewDeckActivity : BaseFilterActivity() {
 
     companion object {
 
@@ -47,7 +43,7 @@ class NewDeckActivity : BaseActivity() {
 
     val ANIM_DURATION = 250L
     val DECK_MIN_CARDS_QTD = 50
-    val EXIT_CONFIRM_MIN_CARDS = 5
+    val EXIT_CONFIRM_MIN_CARDS = 3
 
     val attrFilterClick: (Attribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
@@ -82,8 +78,8 @@ class NewDeckActivity : BaseActivity() {
             }
         }
         new_deck_cardlist.editMode = true
-        new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        new_deck_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         supportFragmentManager.beginTransaction()
                 .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
                 .commit()
@@ -97,9 +93,7 @@ class NewDeckActivity : BaseActivity() {
         if (canExit || new_deck_cardlist.getCards().size < EXIT_CONFIRM_MIN_CARDS) {
             super.onBackPressed()
         } else {
-            canExit = true
-            toast(R.string.deck_exit_confirm)
-            handler.postDelayed({ canExit = false }, DateUtils.SECOND_IN_MILLIS * 2)
+            showExitConfirm(R.string.deck_exit_confirm)
         }
     }
 
@@ -187,44 +181,6 @@ class NewDeckActivity : BaseActivity() {
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
         updateDualFilter()
-    }
-
-    @Subscribe
-    fun onCmdUpdateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
-        val filterMagikaLP = new_deck_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
-        val filterRarityLP = new_deck_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
-        val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
-        val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
-        if (update.show && filterMagikaLP.bottomMargin == showBottomMargin ||
-                !update.show && filterMagikaLP.bottomMargin == hideBottomMargin) {
-            return
-        }
-        val animFrom = if (update.show) hideBottomMargin else showBottomMargin
-        val animTo = if (update.show) showBottomMargin else hideBottomMargin
-        with(ValueAnimator.ofInt(animFrom, animTo)) {
-            duration = DateUtils.SECOND_IN_MILLIS
-            addUpdateListener {
-                filterRarityLP.bottomMargin = it.animatedValue as Int
-                filterMagikaLP.bottomMargin = it.animatedValue as Int
-                new_deck_filter_magika.layoutParams = filterMagikaLP
-                new_deck_filter_rarity.layoutParams = filterRarityLP
-            }
-            addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(p0: Animator?) {
-                }
-
-                override fun onAnimationEnd(p0: Animator?) {
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {
-                }
-
-                override fun onAnimationStart(p0: Animator?) {
-                }
-
-            })
-            start()
-        }
     }
 
 }

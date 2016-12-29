@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_decks.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.intentFor
 
 /**
@@ -77,18 +78,32 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
             requestDecks()
         }
-        decks_fab_add.setOnClickListener {
-            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-            startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
-        }
         Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        with(activity.decks_fab_add) {
+            setOnClickListener {
+                val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
+                startActivityForResult(context?.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+            }
+            postDelayed({ show() }, DateUtils.SECOND_IN_MILLIS * 2)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         eventBus.post(CmdShowTabs())
-        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(false))
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        with(activity.decks_fab_add) {
+            setOnClickListener { }
+            hide()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -125,6 +140,15 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private fun requestDecks() {
         val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
         eventBus.post(CmdShowDecksByClasses(classesToShow))
+    }
+
+    @Subscribe
+    fun onCmdUpdateRarityMagikaFiltersVisibility(update: CmdUpdateVisibility) {
+        if (update.show) {
+            activity.decks_fab_add.show()
+        } else {
+            activity.decks_fab_add.hide()
+        }
     }
 
     class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

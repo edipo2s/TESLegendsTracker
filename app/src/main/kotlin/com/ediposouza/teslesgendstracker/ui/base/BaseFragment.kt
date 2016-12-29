@@ -13,7 +13,7 @@ open class BaseFragment : Fragment() {
 
     protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
-    protected var fragmentSelected: Boolean = false
+    protected var isFragmentSelected: Boolean = false
 
     override fun onStart() {
         super.onStart()
@@ -40,7 +40,7 @@ open class BaseFragment : Fragment() {
 
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
-        fragmentSelected = menuVisible
+        isFragmentSelected = menuVisible
     }
 
 }

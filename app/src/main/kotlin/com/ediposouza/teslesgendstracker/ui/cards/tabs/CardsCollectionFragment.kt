@@ -33,7 +33,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override val isCardsCollection: Boolean = true
 
-    val view_statistics: CollectionStatistics by lazy { activity.collection_statistics }
+    val view_statistics: CollectionStatistics by lazy { activity.cards_collection_statistics }
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
         BottomSheetBehavior.from(view_statistics)
     }

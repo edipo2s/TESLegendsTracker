@@ -5,8 +5,9 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import org.greenrobot.eventbus.EventBus
+import timber.log.Timber
 
 
 /**
@@ -31,10 +32,12 @@ class AutoHideBehaviour(context: Context?, attrs: AttributeSet?) :
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
         if (dyConsumed > 0) {
             // User scrolled down and the FAB is currently visible -> hide the FAB
-            eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(false))
+            Timber.d("Scroll Down")
+            eventBus.post(CmdUpdateVisibility(false))
         } else if (dyConsumed < 0) {
             // User scrolled up and the FAB is currently not visible -> show the FAB
-            eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
+            Timber.d("Scroll Up")
+            eventBus.post(CmdUpdateVisibility(true))
         }
     }
 
