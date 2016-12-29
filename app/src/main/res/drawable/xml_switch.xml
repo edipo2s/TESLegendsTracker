@@ -9,37 +9,32 @@
             </item>
             <item android:bottom="1dp">
                 <shape android:shape="oval">
-                    <solid android:color="@android:color/white" />
+                    <solid android:color="@color/colorAccent" />
 
                     <size
                         android:width="@dimen/deck_private_switch_size"
                         android:height="@dimen/deck_private_switch_size" />
                 </shape>
             </item>
-            <item
-                android:drawable="@drawable/ic_private_menu_checked"
+            <item android:drawable="@drawable/ic_private_menu"
                 android:gravity="center" />
         </layer-list>
     </item>
     <item>
         <layer-list>
-        <item>
-            <shape android:shape="oval">
-                <solid android:color="@color/grey_900_with_alpha" />
-            </shape>
-        </item>
-        <item android:bottom="1dp">
-            <shape android:shape="oval">
-                <solid android:color="@color/colorPrimaryDark" />
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/grey_900_with_alpha" />
+                </shape>
+            </item>
+            <item android:bottom="1dp">
+                <shape android:shape="oval">
+                    <solid android:color="@android:color/white" />
 
-                <size
-                    android:width="@dimen/deck_private_switch_size"
-                    android:height="@dimen/deck_private_switch_size" />
-            </shape>
-        </item>
-        <item
-            android:drawable="@drawable/ic_private_menu"
-            android:gravity="center" />
+                    <size android:width="@dimen/deck_private_switch_size" android:height="@dimen/deck_private_switch_size" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/ic_private_menu_checked" android:gravity="center" />
         </layer-list>
     </item>
 </selector>
