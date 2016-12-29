@@ -36,7 +36,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(activity.collection_statistics)
+        BottomSheetBehavior.from(activity.cards_collection_statistics)
     }
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
@@ -50,7 +50,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                activity.collection_statistics.updateStatistics()
+                activity.cards_collection_statistics.updateStatistics()
             } else {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
@@ -72,7 +72,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
-        activity.collection_statistics.setOnClickListener {
+        activity.cards_collection_statistics.setOnClickListener {
             statisticsSheetBehavior.toogleExpanded()
         }
         statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -97,7 +97,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onResume() {
         super.onResume()
         eventBus.post(CmdShowTabs())
-        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
+        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

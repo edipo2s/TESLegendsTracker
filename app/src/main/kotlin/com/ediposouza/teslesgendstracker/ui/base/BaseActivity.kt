@@ -4,10 +4,12 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.text.format.DateUtils
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
@@ -126,6 +128,12 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         } else {
             Timber.d("onAuthStateChanged:signed_out")
         }
+    }
+
+    protected fun showExitConfirm(@StringRes exitMsg: Int = R.string.exit_confirm) {
+        canExit = true
+        handler.postDelayed({ canExit = false }, DateUtils.SECOND_IN_MILLIS * 2)
+        toast(exitMsg)
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
