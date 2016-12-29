@@ -117,7 +117,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/navigation_bar_height"
+            android:layout_marginBottom="@dimen/deck_comment_bottom_sheet_peek_height"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/include_deck_info" />
@@ -135,7 +135,7 @@
             android:fitsSystemWindows="false"
             android:foreground="?attr/selectableItemBackground"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_height"
+            app:behavior_peekHeight="@dimen/deck_comment_bottom_sheet_peek_height"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <RelativeLayout

@@ -213,7 +213,7 @@ class DeckActivity : BaseActivity() {
         val updateDate = deck.updatedAt.toLocalDate()
         val updateTime = deck.updatedAt.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
         deck_details_update_at.text = getString(R.string.deck_details_last_update_format, updateDate, updateTime)
-        deck_details_cardlist.showDeck(deck)
+        deck_details_cardlist.showDeck(deck, false)
         configDeckComments()
     }
 

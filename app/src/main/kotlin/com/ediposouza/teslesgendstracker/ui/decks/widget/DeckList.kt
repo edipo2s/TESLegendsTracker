@@ -36,8 +36,6 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var userFavorites = arrayListOf<String>()
     var editMode = false
 
-    var onCardListChange: (() -> Unit)? = null
-
     private fun showExpandedCard(card: Card, view: View) {
         val favorite = userFavorites.contains(card.shortName)
         val transitionName = context.getString(R.string.card_transition_name)
@@ -79,11 +77,13 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck) {
+    fun showDeck(deck: Deck, showSoulCost: Boolean = true) {
+        decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
         doAsync {
             PublicInteractor().getDeckCards(deck) {
                 context.runOnUiThread {
                     (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
+                    onCardListChange()
                 }
                 userFavorites.clear()
                 PrivateInteractor().getFavoriteCards(null, deck.cls.attr1) {
@@ -102,16 +102,23 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun addCard(card: Card) {
         deckListAdapter.addCard(card)
-        onCardListChange?.invoke()
+        onCardListChange()
     }
 
     fun remCard(card: Card) {
         deckListAdapter.remCard(card)
-        onCardListChange?.invoke()
+        onCardListChange()
     }
 
-    fun getCards(): List<CardSlot> {
-        return deckListAdapter.getCards()
+    fun getCards(): List<CardSlot> = deckListAdapter.getCards()
+
+    fun getSoulCost(): Int = getCards().sumBy { (it.card.rarity.soulCost * it.qtd).toInt() }
+
+    private fun onCardListChange() {
+        val cards = getCards()
+        decklist_costs.updateCosts(cards)
+        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
+        decklist_soul.text = getSoulCost().toString()
     }
 
     class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,
