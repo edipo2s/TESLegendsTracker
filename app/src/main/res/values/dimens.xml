@@ -44,7 +44,7 @@
     <!-- Card View -->
     <dimen name="card_full_margin">24dp</dimen>
     <dimen name="card_card_margin_top">@dimen/status_bar_height</dimen>
-    <dimen name="card_bottom_sheet_peek_height">40dp</dimen>
+    <dimen name="card_bottom_sheet_peek_height">84dp</dimen>
     <dimen name="card_bottom_sheet_margin_bottom">@dimen/navigation_bar_height</dimen>
 
     <!-- Deck -->
@@ -56,6 +56,7 @@
 
     <dimen name="deck_header_height">140dp</dimen>
     <dimen name="deck_header_attr_icon_height">32dp</dimen>
+    <dimen name="deck_comment_bottom_sheet_peek_height">40dp</dimen>
     <dimen name="deck_list_comment_name_width">56dp</dimen>
     <dimen name="deck_list_slot_height">32dp</dimen>
     <dimen name="deck_list_slot_half_height">16dp</dimen>

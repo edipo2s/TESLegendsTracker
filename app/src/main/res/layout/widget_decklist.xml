@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/decklist_recycle_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/xml_cards_bg"
-    android:paddingTop="@dimen/nano_margin"
-    android:fadeScrollbars="false"
-    android:scrollbarSize="@dimen/small_margin"
-    android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-    android:scrollbars="vertical"
-    app:layoutManager="LinearLayoutManager"
-    tools:layout_gravity="end"
-    tools:layout_width="200dp"
-    tools:listitem="@layout/itemlist_decklist_slot" />
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/decklist_qtd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0/50"
+        android:textColor="@android:color/white" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/decklist_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_weight="1"
+        android:background="@drawable/xml_cards_bg"
+        android:fadeScrollbars="false"
+        android:paddingTop="@dimen/nano_margin"
+        android:paddingBottom="@dimen/nano_margin"
+        android:scrollbarSize="@dimen/small_margin"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:layout_gravity="end"
+        tools:layout_width="200dp"
+        tools:listitem="@layout/itemlist_decklist_slot" />
+
+    <TextView
+        android:id="@+id/decklist_soul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawablePadding="@dimen/large_margin"
+        android:drawableStart="@drawable/ic_soul"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@android:color/white" />
+
+    <com.ediposouza.teslesgendstracker.ui.decks.widget.MagikaCosts
+        android:id="@+id/decklist_costs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/nano_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        tools:layout_marginBottom="@dimen/navigation_bar_height" />
+
+</LinearLayout>

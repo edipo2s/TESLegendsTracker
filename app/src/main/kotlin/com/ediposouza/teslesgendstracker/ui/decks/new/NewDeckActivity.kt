@@ -56,13 +56,6 @@ class NewDeckActivity : BaseActivity() {
         updateDualFilter()
     }
 
-    val onCardlistChange = {
-        val cards = new_deck_cardlist.getCards()
-        new_deck_cardlist_costs.updateCosts(cards)
-        new_deck_cardlist_qtd.text = getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
-        new_deck_cardlist_soul.text = cards.map { it.card.rarity.soulCost * it.qtd }.sum().toString()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_deck)
@@ -89,7 +82,6 @@ class NewDeckActivity : BaseActivity() {
             }
         }
         new_deck_cardlist.editMode = true
-        new_deck_cardlist.onCardListChange = onCardlistChange
         new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         new_deck_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         supportFragmentManager.beginTransaction()
@@ -165,10 +157,9 @@ class NewDeckActivity : BaseActivity() {
         val deckTypeSelected = DeckType.valueOf(deckTypeText.toUpperCase())
         val deckPatchDesc = view.new_deck_dialog_patch_spinner.selectedItem as String
         val deckPatchSelected = deckPatches.find { it.desc == deckPatchDesc } ?: deckPatches.last()
-        val deckCost = new_deck_cardlist_soul.text.toString().toInt()
         val deckCards = new_deck_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deckPrivate = !view.new_deck_dialog_public.isChecked
-        PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, deckCost,
+        PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
                 deckPatchSelected.uidDate, deckCards, deckPrivate) {
             toast(if (deckPrivate) R.string.new_deck_save_as_private else R.string.new_deck_save_as_public)
             val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)
@@ -189,14 +180,12 @@ class NewDeckActivity : BaseActivity() {
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
-        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
     }
 
     @Subscribe
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
-        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
     }
 
