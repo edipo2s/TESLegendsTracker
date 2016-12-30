@@ -17,7 +17,7 @@
             android:id="@+id/dash_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.utils.AutoHideBehaviour">
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
             <FrameLayout
                 android:id="@+id/new_deck_class_cover_layout"

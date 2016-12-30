@@ -7,13 +7,14 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.view.View
-import com.ediposouza.teslesgendstracker.*
+import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast

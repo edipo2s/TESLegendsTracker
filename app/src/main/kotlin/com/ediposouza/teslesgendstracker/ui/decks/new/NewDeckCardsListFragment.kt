@@ -6,7 +6,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
-import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import org.greenrobot.eventbus.EventBus
 

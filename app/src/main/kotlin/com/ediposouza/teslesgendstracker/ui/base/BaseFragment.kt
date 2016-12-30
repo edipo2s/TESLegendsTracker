@@ -1,7 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
 import android.support.v4.app.Fragment
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 

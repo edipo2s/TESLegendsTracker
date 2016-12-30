@@ -19,14 +19,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.ediposouza.teslesgendstracker.*
+import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.TIME_PATTERN
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.DeckComment
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
-import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
+import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.toggleExpanded
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
@@ -310,7 +315,7 @@ class DeckActivity : BaseActivity() {
     class DeckCommentViewHolder(view: View?, val onRemComment: (commentId: String) -> Unit) : RecyclerView.ViewHolder(view) {
 
         fun bind(comment: DeckComment, publicInteractor: PublicInteractor) {
-            val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+            val timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN)
             itemView.deck_comment_msg.text = comment.comment
             itemView.deck_comment_date.text = itemView.context.getString(R.string.deck_comment_date_format,
                     comment.date.toLocalDate(), comment.date.toLocalTime().format(timeFormatter))

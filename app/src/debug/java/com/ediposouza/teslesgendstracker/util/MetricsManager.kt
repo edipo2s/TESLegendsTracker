@@ -1,9 +1,6 @@
-package com.ediposouza.teslesgendstracker.manager
+package com.ediposouza.teslesgendstracker.util
 
 import android.content.Context
-import com.ediposouza.teslesgendstracker.MetricAction
-import com.ediposouza.teslesgendstracker.MetricScreen
-import com.ediposouza.teslesgendstracker.MetricsConstants
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber

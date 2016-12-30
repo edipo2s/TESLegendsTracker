@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker
+package com.ediposouza.teslesgendstracker.util
 
 /**
  * Created by ediposouza on 08/12/16.
