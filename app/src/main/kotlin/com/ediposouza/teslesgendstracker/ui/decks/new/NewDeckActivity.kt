@@ -10,12 +10,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
@@ -129,13 +131,15 @@ class NewDeckActivity : BaseFilterActivity() {
                 return true
             }
             R.id.menu_done -> {
-                if (new_deck_cardlist.getCards().sumBy { it.qtd.toInt() } >= DECK_MIN_CARDS_QTD) {
+                if (!App.hasUserLogged()) {
+                    showErrorUserNotLogged()
+                    return false
+                }
+                if (new_deck_cardlist.getCards().sumBy { it.qtd } >= DECK_MIN_CARDS_QTD) {
                     showSaveDialog()
                 } else {
-                    alert("Please complete your deck before save it") {
-                        okButton { }
-                        setTheme(R.style.AppDialog)
-                    }.show()
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_deck_save_error_incomplete)
+                            .withAction(android.R.string.ok, {}))
                 }
                 return true
             }

@@ -56,7 +56,7 @@
 
     <dimen name="deck_header_height">140dp</dimen>
     <dimen name="deck_header_attr_icon_height">32dp</dimen>
-    <dimen name="deck_comment_bottom_sheet_peek_height">40dp</dimen>
+    <dimen name="deck_comment_bottom_sheet_peek_height">88dp</dimen>
     <dimen name="deck_list_comment_name_width">56dp</dimen>
     <dimen name="deck_list_slot_height">32dp</dimen>
     <dimen name="deck_list_slot_half_height">16dp</dimen>

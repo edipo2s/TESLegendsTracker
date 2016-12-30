@@ -6,11 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.StringRes
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.text.format.DateUtils
+import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
@@ -30,6 +32,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.contentView
+import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import timber.log.Timber
 
@@ -45,10 +48,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     private var googleApiClient: GoogleApiClient? = null
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    protected var canExit: Boolean = false
-    protected val handler = Handler()
+    protected var canExit = false
     protected var keyboardVisible = false
+    protected var snackbarNeedMargin = true
     protected var onKeyboardVisibilityChange: (() -> Unit)? = null
+    protected val handler = Handler()
     protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
     val keyboardChangeListener = {
@@ -149,6 +153,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         toast(exitMsg)
     }
 
+    protected fun showErrorUserNotLogged() {
+        eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
+                .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+    }
+
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         Timber.d("firebaseAuthWithGoogle:" + acct?.id)
         showLoading()
@@ -195,11 +204,16 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
         val msg = if (msgRes > 0) getString(msgRes) else cmdShowSnackbarMsg.msg
-        snackbar = Snackbar.make(findViewById(R.id.coordinatorLayout), msg, cmdShowSnackbarMsg.duration)
+        snackbar = Snackbar.make(find<View>(R.id.coordinatorLayout), msg, cmdShowSnackbarMsg.duration)
         if (cmdShowSnackbarMsg.action != null) {
             val actionTextRes = cmdShowSnackbarMsg.actionTextRes
             val actionText = if (actionTextRes > 0) getString(actionTextRes) else cmdShowSnackbarMsg.actionText
             snackbar?.setAction(actionText, { cmdShowSnackbarMsg.action?.invoke() })
+        }
+        if (snackbarNeedMargin) {
+            val snackbarLP = snackbar?.view?.layoutParams as CoordinatorLayout.LayoutParams
+            snackbarLP.bottomMargin = resources.getDimensionPixelSize(R.dimen.navigation_bar_height)
+            snackbar?.view?.layoutParams = snackbarLP
         }
         snackbar?.show()
     }

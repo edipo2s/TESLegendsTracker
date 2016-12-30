@@ -3,15 +3,15 @@ package com.ediposouza.teslesgendstracker.ui.widget
 import android.content.Context
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import android.support.design.widget.CoordinatorLayout
 import android.util.AttributeSet
 import android.view.WindowInsets
-import android.widget.FrameLayout
 
 /**
  * Created by EdipoSouza on 12/28/16.
  */
-class InsetFrameLayout(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
-        FrameLayout(ctx, attrs, defStyleAttr) {
+class InsetFrameCoordinatorLayout(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+        CoordinatorLayout(ctx, attrs, defStyleAttr) {
 
     private val mInsets = IntArray(4)
 

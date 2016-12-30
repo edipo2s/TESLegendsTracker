@@ -12,8 +12,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
@@ -38,6 +36,7 @@ class CardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
+        snackbarNeedMargin = false
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         card_all_image.setOnClickListener {
@@ -104,8 +103,7 @@ class CardActivity : BaseActivity() {
                 setResult(Activity.RESULT_OK, Intent())
             }
         } else {
-            eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
-                    .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+            showErrorUserNotLogged()
         }
     }
 

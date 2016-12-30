@@ -44,6 +44,7 @@ class DashActivity : BaseFilterActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash)
+        snackbarNeedMargin = false
         decks_fab_add.hide()
         filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
