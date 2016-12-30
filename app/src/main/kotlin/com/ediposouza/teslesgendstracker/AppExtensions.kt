@@ -29,7 +29,7 @@ fun ViewGroup.inflate(@IntegerRes resource: Int): View {
     return LayoutInflater.from(context).inflate(resource, this, false)
 }
 
-fun BottomSheetBehavior<*>.toogleExpanded() {
+fun BottomSheetBehavior<*>.toggleExpanded() {
     this.state = if (this.state == BottomSheetBehavior.STATE_COLLAPSED)
         BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
 }

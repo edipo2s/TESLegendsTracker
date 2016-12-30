@@ -17,7 +17,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.manager.MetricsManager
-import com.ediposouza.teslesgendstracker.toogleExpanded
+import com.ediposouza.teslesgendstracker.toggleExpanded
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
@@ -73,7 +73,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
         activity.cards_collection_statistics.setOnClickListener {
-            statisticsSheetBehavior.toogleExpanded()
+            statisticsSheetBehavior.toggleExpanded()
         }
         statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)

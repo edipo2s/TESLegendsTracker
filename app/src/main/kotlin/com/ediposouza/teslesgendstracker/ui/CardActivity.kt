@@ -72,7 +72,7 @@ class CardActivity : BaseActivity() {
             }
 
         })
-        card_bottom_sheet.setOnClickListener { sheetBehavior.toogleExpanded() }
+        card_bottom_sheet.setOnClickListener { sheetBehavior.toggleExpanded() }
     }
 
     private fun loadCardInfo() {

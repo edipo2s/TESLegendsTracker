@@ -85,7 +85,7 @@ class DeckActivity : BaseActivity() {
                 updateFavoriteItem()
             }
         }
-        deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toogleExpanded() }
+        deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toggleExpanded() }
         updateFavoriteItem()
         loadDeckInfo()
     }
