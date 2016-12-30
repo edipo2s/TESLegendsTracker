@@ -1,8 +1,10 @@
 package com.ediposouza.teslesgendstracker
 
 import android.app.Application
+import android.content.Context
 import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
+import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.LoggerManager
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.database.FirebaseDatabase
@@ -16,12 +18,19 @@ class App : Application() {
 
     companion object {
 
+        private var ctx: Context? = null
+
         var hasUserLogged: Boolean = false
+
+        fun getVersion(): String {
+            return ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
+        }
 
     }
 
     override fun onCreate() {
         super.onCreate()
+        ctx = applicationContext
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initializeDependencies()
     }
@@ -31,8 +40,11 @@ class App : Application() {
         AndroidThreeTen.init(this)
         FirebaseDatabase.getInstance().apply {
             setPersistenceEnabled(true)
-            reference.child(BaseInteractor.NODE_CARDS).keepSynced(true)
-            reference.child(BaseInteractor.NODE_PATCHES).keepSynced(true)
+            ConfigManager.updateCaches {
+                val sync = !ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported()
+                reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
+                reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
+            }
         }
         Timber.plant(LoggerManager())
     }

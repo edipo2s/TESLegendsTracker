@@ -2,8 +2,10 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.CardSet
+import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -86,6 +88,10 @@ open class BaseInteractor {
         }
 
         getFromSet(CardSet.values()[setIndex], attr, getSetsOnSuccess(attr, onSuccess))
+    }
+
+    fun Query.keepSynced() {
+        keepSynced(!ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported())
     }
 
 }

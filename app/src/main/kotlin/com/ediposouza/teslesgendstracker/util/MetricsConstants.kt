@@ -71,6 +71,9 @@ sealed class MetricAction(val name: String) {
         }
     }
 
+    class ACTION_NOTIFY_UPDATE : MetricAction("NotifyUpdate")
+    class ACTION_VERSION_UNSUPPORTED : MetricAction("VersionUnsupported")
+
 }
 
 sealed class MetricScreen(val name: String) {

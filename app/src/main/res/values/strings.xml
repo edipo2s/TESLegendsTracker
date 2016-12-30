@@ -9,6 +9,10 @@
     <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
     <string name="app_ads_new_deck_card_list">ca-app-pub-7881623561544201/6037962770</string>
     <string name="app_ads_new_deck_card_list_size">240x50</string>
+    <string name="app_exit_confirm">Press again to exit</string>
+    <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
+    <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using.</string>
+    <string name="playstore_url_format">http://play.google.com/store/apps/details?id=%s</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
@@ -27,11 +31,10 @@
     <string name="menu_unlike">Unlike</string>
     <string name="menu_done">Done</string>
 
+    <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
     <string name="search_hint">Name, race, type or keyword</string>
-    <string name="confirm_message">Are you sure?</string>
-    <string name="exit_confirm">Press again to exit</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
