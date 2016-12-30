@@ -106,7 +106,7 @@ class PublicInteractor : BaseInteractor() {
 
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
-        dbPublicDeck.keepSynced(true)
+        dbPublicDeck.keepSynced()
         var query = dbPublicDeck.orderByChild(KEY_DECK_UPDATE_AT)
         if (cls != null) {
             query = dbPublicDeck.orderByChild(KEY_DECK_CLASS).equalTo(cls.ordinal.toDouble())

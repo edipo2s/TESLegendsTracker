@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.base
 
 import android.content.Intent
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.StringRes
@@ -15,6 +16,8 @@ import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.util.ConfigManager
+import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -25,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.toast
 import timber.log.Timber
@@ -79,20 +83,25 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     override fun onStart() {
         super.onStart()
         firebaseAuth.addAuthStateListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
         eventBus.register(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        eventBus.unregister(this)
+        ConfigManager.updateCaches {
+            if (ConfigManager.isVersionUnsupported()) {
+                alert(getString(R.string.app_version_unsupported)) {
+                    okButton {
+                        MetricsManager.trackAction(MetricAction.ACTION_VERSION_UNSUPPORTED())
+                        startActivity(Intent(Intent.ACTION_VIEW)
+                                .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
+                        System.exit(0)
+                    }
+                    setTheme(R.style.AppDialog)
+                }.show()
+            }
+        }
     }
 
     override fun onStop() {
         super.onStop()
+        eventBus.unregister(this)
         firebaseAuth.removeAuthStateListener(this)
     }
 
@@ -130,7 +139,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         }
     }
 
-    protected fun showExitConfirm(@StringRes exitMsg: Int = R.string.exit_confirm) {
+    protected fun showExitConfirm(@StringRes exitMsg: Int = R.string.app_exit_confirm) {
         canExit = true
         handler.postDelayed({ canExit = false }, DateUtils.SECOND_IN_MILLIS * 2)
         toast(exitMsg)

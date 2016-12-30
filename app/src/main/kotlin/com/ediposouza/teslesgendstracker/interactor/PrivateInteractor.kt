@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +24,6 @@ class PrivateInteractor : BaseInteractor() {
     private val KEY_CARD_FAVORITE = "favorite"
     private val KEY_CARD_QTD = "qtd"
 
-    private val KEY_DECK_RARITY = "rarity"
     private val KEY_DECK_OWNER = "owner"
     private val KEY_DECK_LIKES = "likes"
     private val KEY_DECK_COST = "cost"
@@ -35,12 +35,13 @@ class PrivateInteractor : BaseInteractor() {
     }
 
     private fun dbUser(): DatabaseReference? {
-        return if (getUserID().isNotEmpty()) dbUsers.child(getUserID()) else null
+        val userID = getUserID()
+        return if (userID.isEmpty() || ConfigManager.isDBUpdating()) null else dbUsers.child(userID)
     }
 
     private fun dbUserCards(set: CardSet, cls: Attribute): DatabaseReference? {
         val dbRef = dbUser()?.child(NODE_CARDS)?.child(set.db)?.child(cls.name.toLowerCase())
-        dbRef?.keepSynced(true)
+        dbRef?.keepSynced()
         return dbRef
     }
 
@@ -167,7 +168,7 @@ class PrivateInteractor : BaseInteractor() {
 
     private fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(getUserID())) {
-            keepSynced(true)
+            keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
@@ -189,7 +190,7 @@ class PrivateInteractor : BaseInteractor() {
 
     private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
-            keepSynced(true)
+            keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
@@ -212,7 +213,7 @@ class PrivateInteractor : BaseInteractor() {
         PublicInteractor().getPublicDecks(cls) {
             val publicDecks = it
             dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
-                keepSynced(true)
+                keepSynced()
                 addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
