@@ -23,8 +23,8 @@ class CardActivity : BaseActivity() {
 
     companion object {
 
-        private val EXTRA_CARD = "card"
-        private val EXTRA_FAVORITE = "favorite"
+        private val EXTRA_CARD = "cardExtra"
+        private val EXTRA_FAVORITE = "favoriteExtra"
 
         fun newIntent(context: Context, card: Card, favorite: Boolean = false): Intent {
             return context.intentFor<CardActivity>(EXTRA_CARD to card, EXTRA_FAVORITE to favorite)
@@ -55,6 +55,11 @@ class CardActivity : BaseActivity() {
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
         ads_view.load()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        ActivityCompat.finishAfterTransition(this)
     }
 
     private fun configureBottomSheet() {
@@ -88,7 +93,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun onFavoriteClick() {
-        if (App.hasUserLogged) {
+        if (App.hasUserLogged()) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
                 MetricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()

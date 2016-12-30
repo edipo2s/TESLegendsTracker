@@ -25,15 +25,19 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.itemsSequence
 import timber.log.Timber
 
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
-    val publicInteractor = PublicInteractor()
-    val privateInteractor = PrivateInteractor()
+    private val KEY_MENU_ITEM_SELECTED = "menu_index_key"
 
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
+    private var menuItemSelected = 0
+    private val publicInteractor = PublicInteractor()
+    private val privateInteractor = PrivateInteractor()
+
+    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
         BottomSheetBehavior.from(cards_collection_statistics)
     }
 
@@ -74,12 +78,27 @@ class DashActivity : BaseFilterActivity(),
         }
         dash_drawer_layout.addDrawerListener(drawerToggle)
         dash_navigation_view.setNavigationItemSelectedListener(this)
-        dash_navigation_view.menu.findItem(R.id.menu_cards)?.isChecked = true
         drawerToggle.syncState()
-        supportFragmentManager.beginTransaction()
-                .add(R.id.dash_content, CardsFragment())
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .commit()
+        if (savedInstanceState == null) {
+            dash_navigation_view.setCheckedItem(R.id.menu_cards)
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.dash_content, CardsFragment())
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .commit()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply { putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected) }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.apply {
+            menuItemSelected = getInt(KEY_MENU_ITEM_SELECTED)
+            dash_navigation_view.setCheckedItem(menuItemSelected)
+        }
     }
 
     override fun onBackPressed() {
@@ -99,8 +118,9 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        menuItemSelected = dash_navigation_view.menu.itemsSequence().indexOf(item)
         dash_drawer_layout.closeDrawer(Gravity.START)
-        if (dash_navigation_view.menu.findItem(item.itemId).isChecked) {
+        if (item.isChecked) {
             return true
         }
         return when (item.itemId) {

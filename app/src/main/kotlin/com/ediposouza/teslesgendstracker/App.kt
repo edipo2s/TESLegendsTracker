@@ -7,6 +7,7 @@ import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.LoggerManager
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
@@ -20,11 +21,11 @@ class App : Application() {
 
         private var ctx: Context? = null
 
-        var hasUserLogged: Boolean = false
+        var hasUserAlreadyLogged: Boolean = false
 
-        fun getVersion(): String {
-            return ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
-        }
+        fun hasUserLogged(): Boolean = FirebaseAuth.getInstance().currentUser != null
+
+        fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 
     }
 

@@ -94,8 +94,8 @@ open class DecksPublicFragment : BaseFragment() {
 
     fun configLoggedViews() {
         signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
-        signin_button.visibility = if (App.hasUserLogged) View.INVISIBLE else View.VISIBLE
-        decks_recycler_view.visibility = if (App.hasUserLogged) View.VISIBLE else View.INVISIBLE
+        signin_button.visibility = if (App.hasUserLogged()) View.INVISIBLE else View.VISIBLE
+        decks_recycler_view.visibility = if (App.hasUserLogged()) View.VISIBLE else View.INVISIBLE
     }
 
     @Subscribe

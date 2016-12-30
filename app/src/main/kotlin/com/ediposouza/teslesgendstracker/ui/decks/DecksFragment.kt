@@ -16,6 +16,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
@@ -35,19 +36,16 @@ import org.jetbrains.anko.intentFor
  */
 class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
+    private val KEY_FAB_NEW_DECK = "newDeckKey"
+    private val KEY_PAGE_VIEW_POSITION = "pageViewPositionKey"
     private val RC_NEW_DECK = 125
 
-    val adapter by lazy { DecksPageAdapter(context, fragmentManager) }
+    private val adapter by lazy { DecksPageAdapter(context, fragmentManager) }
 
-    val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
+    private val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
 
         override fun onPageSelected(position: Int) {
-            val title = when (position) {
-                1 -> R.string.tab_decks_owned
-                2 -> R.string.tab_decks_favorites
-                else -> R.string.tab_decks_public
-            }
-            activity.toolbar_title?.setText(title)
+            updateActivityTitle(position)
             MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_DECKS_PUBLIC()
                 1 -> MetricScreen.SCREEN_DECKS_OWNED()
@@ -58,6 +56,14 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     }
 
+    private fun updateActivityTitle(position: Int) {
+        activity.toolbar_title?.setText(when (position) {
+            1 -> R.string.title_tab_decks_owned
+            2 -> R.string.title_tab_decks_favorites
+            else -> R.string.title_tab_decks_public
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks)
     }
@@ -65,11 +71,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
         decks_view_pager.adapter = adapter
-        decks_view_pager.addOnPageChangeListener(pageChange)
         activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
+        activity.toolbar_title?.setText(R.string.title_tab_decks_public)
+        decks_view_pager.addOnPageChangeListener(pageChange)
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
                 decks_attr_filter.unSelectAttr(it)
@@ -82,12 +88,34 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            putInt(KEY_PAGE_VIEW_POSITION, decks_view_pager?.currentItem ?: 0)
+            putBoolean(KEY_FAB_NEW_DECK, activity?.decks_fab_add?.isShown ?: false)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.apply {
+            decks_view_pager.currentItem = getInt(KEY_PAGE_VIEW_POSITION)
+            if (getBoolean(KEY_FAB_NEW_DECK)) {
+                configFABNewDeck(activity as DashActivity)
+            }
+        }
+    }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        with(activity.decks_fab_add) {
+        configFABNewDeck(context as DashActivity)
+    }
+
+    private fun configFABNewDeck(dashActivity: DashActivity) {
+        dashActivity.decks_fab_add?.apply {
             setOnClickListener {
                 val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-                startActivityForResult(context?.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+                startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
             }
             postDelayed({ show() }, DateUtils.SECOND_IN_MILLIS * 2)
         }

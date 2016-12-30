@@ -105,6 +105,11 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         onCardListChange()
     }
 
+    fun addCards(cards: List<CardSlot>) {
+        deckListAdapter.addCards(cards)
+        onCardListChange()
+    }
+
     fun remCard(card: Card) {
         deckListAdapter.remCard(card)
         onCardListChange()
@@ -166,6 +171,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 onAdd(cardIndex)
                 notifyItemChanged(cardIndex)
             }
+        }
+
+
+        fun addCards(cards: List<CardSlot>) {
+            items.addAll(cards)
+            notifyDataSetChanged()
         }
 
         fun remCard(card: Card) {

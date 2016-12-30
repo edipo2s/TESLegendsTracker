@@ -51,16 +51,27 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     protected var onKeyboardVisibilityChange: (() -> Unit)? = null
     protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
+    val keyboardChangeListener = {
+        val r = Rect()
+        contentView?.getWindowVisibleDisplayFrame(r)
+        val screenHeight = contentView?.rootView?.height ?: 0
+        // r.bottom is the position above soft keypad or device button. if keypad is shown, the r.bottom is smaller than that before.
+        val keypadHeight = screenHeight - r.bottom
+        val newKeyboardVisible = keypadHeight > (screenHeight * 0.15) // 0.15 ratio is perhaps enough to determine keypad height.
+        if (keyboardVisible != newKeyboardVisible) {
+            keyboardVisible == newKeyboardVisible
+            onKeyboardVisibilityChange?.invoke()
+        }
+    }
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
         googleApiClient = GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build())
                 .build()
     }
 
@@ -69,15 +80,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
-        contentView?.viewTreeObserver?.addOnGlobalLayoutListener({
-            val r = Rect()
-            contentView?.getWindowVisibleDisplayFrame(r)
-            val screenHeight = contentView?.rootView?.height ?: 0
-            // r.bottom is the position above soft keypad or device button. if keypad is shown, the r.bottom is smaller than that before.
-            val keypadHeight = screenHeight - r.bottom
-            keyboardVisible = keypadHeight > (screenHeight * 0.15) // 0.15 ratio is perhaps enough to determine keypad height.
-            onKeyboardVisibilityChange?.invoke()
-        })
+        contentView?.viewTreeObserver?.addOnGlobalLayoutListener(keyboardChangeListener)
     }
 
     override fun onStart() {
@@ -106,6 +109,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     override fun onDestroy() {
+        contentView?.viewTreeObserver?.removeOnGlobalLayoutListener(keyboardChangeListener)
         MetricsManager.flush()
         super.onDestroy()
     }
@@ -130,9 +134,9 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             Timber.d("onAuthStateChanged:signed_in:" + currentUser.uid)
-            if (!App.hasUserLogged) {
+            if (!App.hasUserAlreadyLogged) {
                 MetricsManager.trackSignIn(currentUser, true)
-                App.hasUserLogged = true
+                App.hasUserAlreadyLogged = true
             }
         } else {
             Timber.d("onAuthStateChanged:signed_out")
