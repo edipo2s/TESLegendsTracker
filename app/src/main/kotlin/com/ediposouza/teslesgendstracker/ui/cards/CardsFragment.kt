@@ -31,9 +31,11 @@ import kotlinx.android.synthetic.main.fragment_cards.*
  */
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
-    var query: String? = null
-    val handler = Handler()
-    val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
+    private val KEY_PAGE_VIEW_POSITION = "pageViewPositionKey"
+
+    private var query: String? = null
+    private val handler = Handler()
+    private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
         BottomSheetBehavior.from(activity.cards_collection_statistics)
@@ -41,12 +43,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
-            val title = when (position) {
-                1 -> R.string.tab_cards_collection
-                2 -> R.string.tab_cards_favorites
-                else -> R.string.app_name_full
-            }
-            activity.toolbar_title?.setText(title)
+            updateActivityTitle(position)
             (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -62,6 +59,14 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             })
         }
 
+    }
+
+    private fun updateActivityTitle(position: Int) {
+        activity.toolbar_title?.setText(when (position) {
+            1 -> R.string.title_tab_cards_collection
+            2 -> R.string.title_tab_cards_favorites
+            else -> R.string.title_tab_cards_all
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -92,6 +97,18 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onActivityCreated(savedInstanceState)
         activity.toolbar_title.setText(R.string.app_name_full)
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, cards_view_pager?.currentItem ?: 0) }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.apply {
+            cards_view_pager.currentItem = getInt(KEY_PAGE_VIEW_POSITION)
+        }
     }
 
     override fun onResume() {

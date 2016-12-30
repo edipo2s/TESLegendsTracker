@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -33,6 +34,7 @@ import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.toggleExpanded
 import com.google.firebase.auth.FirebaseAuth
+import io.fabric.sdk.android.services.common.CommonUtils
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
@@ -62,16 +64,16 @@ class DeckActivity : BaseActivity() {
 
     }
 
-    val publicInteractor by lazy { PublicInteractor() }
-    val privateInteractor by lazy { PrivateInteractor() }
-    val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
-    val deck: Deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
-    val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
-    val commentsSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(deck_bottom_sheet) }
+    private val publicInteractor by lazy { PublicInteractor() }
+    private val privateInteractor by lazy { PrivateInteractor() }
+    private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
+    private val deck: Deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
+    private val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
+    private val commentsSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(deck_bottom_sheet) }
 
-    var favorite: Boolean = false
-    var like: Boolean = false
-    var menuLike: MenuItem? = null
+    private var favorite: Boolean = false
+    private var like: Boolean = false
+    private var menuLike: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,32 +116,16 @@ class DeckActivity : BaseActivity() {
         onKeyboardVisibilityChange = {
             deck_comment_recycle_view.requestLayout()
         }
-        if (!App.hasUserLogged) {
+        if (!App.hasUserLogged()) {
             deck_comment_new?.isEnabled = false
             deck_comment_send?.isEnabled = false
             deck_comment_new?.hint = getText(R.string.deck_comment_new_hint_anonymous)
         }
-        doAsync {
-            calculateMissingSoul(deck, privateInteractor)
-            publicInteractor.incDeckView(deck) {
-                deck_details_views.text = deck.views.inc().toString()
-            }
-            publicInteractor.getPatches {
-                val patch = it.find { it.uidDate == deck.patch }
-                runOnUiThread {
-                    deck_details_patch.text = patch?.desc ?: ""
-                }
-            }
-            publicInteractor.getUserInfo(deck.owner) {
-                val ownerUser = it
-                runOnUiThread {
-                    deck_details_create_by.text = ownerUser.name
-                    Glide.with(this@DeckActivity)
-                            .load(ownerUser.photoUrl)
-                            .transform(CircleTransform(this@DeckActivity))
-                            .into(deck_details_create_by_photo)
-                }
-            }
+        loadDeckRemoteInfo()
+        if (savedInstanceState != null) {
+            deck_comment_new.postDelayed({
+                CommonUtils.hideKeyboard(this, deck_comment_new)
+            }, DateUtils.SECOND_IN_MILLIS / 2)
         }
         setResult(Activity.RESULT_OK, Intent())
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
@@ -238,15 +224,38 @@ class DeckActivity : BaseActivity() {
                     super.setMeasuredDimension(childrenBounds, wSpec, hSpec)
                 }
 
-                private fun getVisiblePercent(): Float {
-                    Timber.d("Keyboard visible: " + keyboardVisible)
-                    return if (keyboardVisible) 0.2f else 0.6f
-                }
+                private fun getVisiblePercent(): Float = if (keyboardVisible) 0.2f else 0.6f
+
             }
             itemAnimator = SlideInLeftAnimator()
             addItemDecoration(DividerItemDecoration(this@DeckActivity, DividerItemDecoration.VERTICAL))
         }
         deck_comment_qtd.text = numberInstance.format(deck.comments.size)
+    }
+
+    private fun loadDeckRemoteInfo() {
+        doAsync {
+            calculateMissingSoul(deck, privateInteractor)
+            publicInteractor.incDeckView(deck) {
+                deck_details_views.text = deck.views.inc().toString()
+            }
+            publicInteractor.getPatches {
+                val patch = it.find { it.uidDate == deck.patch }
+                runOnUiThread {
+                    deck_details_patch.text = patch?.desc ?: ""
+                }
+            }
+            publicInteractor.getUserInfo(deck.owner) {
+                val ownerUser = it
+                runOnUiThread {
+                    deck_details_create_by.text = ownerUser.name
+                    Glide.with(this@DeckActivity)
+                            .load(ownerUser.photoUrl)
+                            .transform(CircleTransform(this@DeckActivity))
+                            .into(deck_details_create_by_photo)
+                }
+            }
+        }
     }
 
     fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {

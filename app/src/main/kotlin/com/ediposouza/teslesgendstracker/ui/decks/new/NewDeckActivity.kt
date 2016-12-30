@@ -11,10 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.data.DeckType
-import com.ediposouza.teslesgendstracker.data.Patch
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
@@ -32,6 +29,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import java.util.*
 
 class NewDeckActivity : BaseFilterActivity() {
 
@@ -41,11 +39,12 @@ class NewDeckActivity : BaseFilterActivity() {
 
     }
 
-    val ANIM_DURATION = 250L
-    val DECK_MIN_CARDS_QTD = 50
-    val EXIT_CONFIRM_MIN_CARDS = 3
+    private val ANIM_DURATION = 250L
+    private val DECK_MIN_CARDS_QTD = 50
+    private val EXIT_CONFIRM_MIN_CARDS = 3
+    private val KEY_DECK_CARDS = "deckCardsKey"
 
-    val attrFilterClick: (Attribute) -> Unit = {
+    private val attrFilterClick: (Attribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
         new_deck_attr_filter.selectAttr(it, true)
         new_deck_attr_filter.lastAttrSelected = it
@@ -62,6 +61,18 @@ class NewDeckActivity : BaseFilterActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_title.text = getString(R.string.new_deck_title)
+        new_deck_cardlist.editMode = true
+        configDeckFilters()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
+                .commit()
+        handler.postDelayed({
+            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+        }, DateUtils.SECOND_IN_MILLIS)
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+    }
+
+    private fun configDeckFilters() {
         with(new_deck_attr_filter) {
             filterClick = attrFilterClick
             onAttrLock = { attr1: Attribute, attr2: Attribute ->
@@ -77,16 +88,24 @@ class NewDeckActivity : BaseFilterActivity() {
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
         }
-        new_deck_cardlist.editMode = true
         filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
-                .commit()
-        handler.postDelayed({
-            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
-        }, DateUtils.SECOND_IN_MILLIS)
-        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            val cardsArrayList = ArrayList<CardSlot>()
+            cardsArrayList.addAll(new_deck_cardlist?.getCards() ?: listOf())
+            putParcelableArrayList(KEY_DECK_CARDS, cardsArrayList)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.apply {
+            new_deck_cardlist?.addCards(getParcelableArrayList<CardSlot>(KEY_DECK_CARDS))
+        }
     }
 
     override fun onBackPressed() {
