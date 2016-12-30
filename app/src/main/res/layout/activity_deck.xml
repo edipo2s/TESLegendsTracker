@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ediposouza.teslesgendstracker.ui.widget.InsetFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ediposouza.teslesgendstracker.ui.widget.InsetFrameCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:animateLayoutChanges="true"
     tools:context="com.ediposouza.teslesgendstracker.ui.DeckActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:paddingBottom="@dimen/navigation_bar_height">
+        android:paddingBottom="@dimen/navigation_bar_height">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
-                tools:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
+                android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,4 +224,4 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-</com.ediposouza.teslesgendstracker.ui.widget.InsetFrameLayout>
+</com.ediposouza.teslesgendstracker.ui.widget.InsetFrameCoordinatorLayout>

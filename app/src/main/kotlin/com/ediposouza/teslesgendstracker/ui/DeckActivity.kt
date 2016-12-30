@@ -28,6 +28,7 @@ import com.ediposouza.teslesgendstracker.data.DeckComment
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
@@ -87,9 +88,13 @@ class DeckActivity : BaseActivity() {
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         like = intent.getBooleanExtra(EXTRA_LIKE, false)
         deck_fab_favorite.setOnClickListener {
-            privateInteractor.setUserDeckFavorite(deck, !favorite) {
-                favorite = !favorite
-                updateFavoriteItem()
+            if (App.hasUserLogged()) {
+                privateInteractor.setUserDeckFavorite(deck, !favorite) {
+                    favorite = !favorite
+                    updateFavoriteItem()
+                }
+            } else {
+                showErrorUserNotLogged()
             }
         }
         deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toggleExpanded() }
@@ -101,16 +106,18 @@ class DeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         deck_comment_send?.setOnClickListener {
-            if (deck_comment_new.text.toString().length < 4) {
-                alert(getString(R.string.deck_comment_size_error)) {
-                    okButton { }
-                    setTheme(R.style.AppDialog)
-                }.show()
-            } else {
-                PrivateInteractor().addDeckComment(deck, deck_comment_new.text.toString()) {
-                    deck_comment_new.setText("")
-                    addComment(it)
+            if (App.hasUserLogged()) {
+                if (deck_comment_new.text.toString().length < 4) {
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.deck_comment_size_error)
+                            .withAction(android.R.string.ok, {}))
+                } else {
+                    PrivateInteractor().addDeckComment(deck, deck_comment_new.text.toString()) {
+                        deck_comment_new.setText("")
+                        addComment(it)
+                    }
                 }
+            } else {
+                showErrorUserNotLogged()
             }
         }
         onKeyboardVisibilityChange = {
@@ -153,6 +160,10 @@ class DeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_like -> {
+                if (!App.hasUserLogged()) {
+                    showErrorUserNotLogged()
+                    return false
+                }
                 privateInteractor.setUserDeckLike(deck, !like) {
                     like = !like
                     updateLikeItem()

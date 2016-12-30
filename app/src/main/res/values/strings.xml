@@ -66,7 +66,7 @@
     <string name="unknown">Unknown</string>
     <string name="zero_percent" translatable="false">0%</string>
 
-    <string name="error_auth">Favorite a card require user login.</string>
+    <string name="error_auth">This action require a logged user.</string>
     <string name="error_login">Authentication failed.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
@@ -106,5 +106,6 @@
     <string name="new_deck_save_dialog_save">Save</string>
     <string name="new_deck_save_as_public">Deck saved as Public</string>
     <string name="new_deck_save_as_private">Deck saved as Private</string>
+    <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
 
 </resources>
