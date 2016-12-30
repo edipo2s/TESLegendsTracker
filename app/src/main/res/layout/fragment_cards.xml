@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.utils.AutoHideBehaviour">
+    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
     <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
         android:id="@+id/attr_filter"

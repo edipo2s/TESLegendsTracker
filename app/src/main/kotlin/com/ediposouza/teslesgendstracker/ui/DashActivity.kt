@@ -18,7 +18,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
-import com.ediposouza.teslesgendstracker.ui.utils.CircleTransform
+import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*

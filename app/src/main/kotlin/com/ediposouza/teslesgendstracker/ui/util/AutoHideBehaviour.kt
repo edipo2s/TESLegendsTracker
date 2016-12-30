@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.utils
+package com.ediposouza.teslesgendstracker.ui.util
 
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout

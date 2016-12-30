@@ -1,11 +1,13 @@
-package com.ediposouza.teslesgendstracker.manager
+package com.ediposouza.teslesgendstracker.util
 
 import android.content.Context
 import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
-import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.BuildConfig
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsConstants
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser

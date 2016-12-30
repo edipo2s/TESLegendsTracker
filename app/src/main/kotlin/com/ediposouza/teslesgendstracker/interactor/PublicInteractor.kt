@@ -43,7 +43,7 @@ class PublicInteractor : BaseInteractor() {
 
                         override fun onDataChange(ds: DataSnapshot) {
                             val cards = ds.children.mapTo(arrayListOf()) {
-                                it.getValue(CardParser::class.java).toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
                             }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -66,7 +66,7 @@ class PublicInteractor : BaseInteractor() {
                             val cards = ds.children.flatMap { it.children }
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(CardParser::class.java).toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java).toCardStatistic(it.key)
                                     }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -90,7 +90,7 @@ class PublicInteractor : BaseInteractor() {
                             val cards = ds.children
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(CardParser::class.java).toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java).toCardStatistic(it.key)
                                     }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -116,7 +116,7 @@ class PublicInteractor : BaseInteractor() {
             override fun onDataChange(ds: DataSnapshot) {
                 Timber.d(ds.value?.toString())
                 val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                    it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
                 }
                 Timber.d(decks.toString())
                 onSuccess.invoke(decks)
@@ -174,7 +174,7 @@ class PublicInteractor : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val patches = ds.children.mapTo(arrayListOf()) {
-                    it.getValue(PatchParser::class.java).toPatch(it.key)
+                    it.getValue(FirebaseParsers.PatchParser::class.java).toPatch(it.key)
                 }
                 Timber.d(patches.toString())
                 onSuccess.invoke(patches)

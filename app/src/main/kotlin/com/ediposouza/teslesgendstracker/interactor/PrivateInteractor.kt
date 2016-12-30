@@ -173,7 +173,7 @@ class PrivateInteractor : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     Timber.d(ds.value?.toString())
                     val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
                     }.filter { cls == null || it.cls == cls }
                     Timber.d(decks.toString())
                     onSuccess.invoke(decks)
@@ -194,7 +194,7 @@ class PrivateInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(DeckParser::class.java).toDeck(it.key, true)
+                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, true)
                     }.filter { cls == null || it.cls == cls }
                     Timber.d(decks.toString())
                     onSuccess.invoke(decks)
@@ -258,7 +258,7 @@ class PrivateInteractor : BaseInteractor() {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now(),
                         LocalDateTime.now(), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
-                child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                child(deck.id).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
                     Timber.d(it.toString())
                     if (it.isSuccessful) onSuccess.invoke(deck.id)
                     else {
@@ -288,12 +288,12 @@ class PrivateInteractor : BaseInteractor() {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 if (deck.private == oldPrivate)
-                    child(deck.id).updateChildren(DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
+                    child(deck.id).updateChildren(FirebaseParsers.DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
                         Timber.d(it.toString())
                         if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
                     })
                 else
-                    child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                    child(deck.id).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
                         Timber.d(it.toString())
                         deleteDeck(deck, oldPrivate, onError, onSuccess)
                     })
@@ -344,7 +344,7 @@ class PrivateInteractor : BaseInteractor() {
                        onSuccess: (comment: DeckComment) -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val comment = DeckParser.toNewCommentMap(getUserID(), msg)
+                val comment = FirebaseParsers.DeckParser.toNewCommentMap(getUserID(), msg)
                 with(child(deck.id).child(KEY_DECK_COMMENTS)) {
                     val commentKey = push().key
                     child(commentKey).setValue(comment).addOnCompleteListener({

@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.utils
+package com.ediposouza.teslesgendstracker.ui.util
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView

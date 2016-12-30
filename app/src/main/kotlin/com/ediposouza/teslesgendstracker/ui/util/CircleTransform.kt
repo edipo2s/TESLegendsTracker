@@ -4,7 +4,7 @@
  * Copyright (c) 2016 Beauty Date. All rights reserved.
  */
 
-package com.ediposouza.teslesgendstracker.ui.utils
+package com.ediposouza.teslesgendstracker.ui.util
 
 import android.content.Context
 import android.graphics.*
