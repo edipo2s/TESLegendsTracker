@@ -19,6 +19,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
@@ -76,9 +77,15 @@ class DeckActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deck)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val statusBarHeight = resources.getDimensionPixelSize(R.dimen.status_bar_height)
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            val coverLP = deck_class_cover.layoutParams as RelativeLayout.LayoutParams
+            coverLP.height = coverLP.height - statusBarHeight
+            deck_class_cover.layoutParams = coverLP
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val layoutParams = toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams
-            layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
+            layoutParams.topMargin = statusBarHeight
             toolbar.layoutParams = layoutParams
         }
 

@@ -1,7 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="status_bar_height">25dp</dimen>
-    <dimen name="navigation_bar_height">48dp</dimen>
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="navigation_bar_height">0dp</dimen>
     <dimen name="input_label_vertical_spacing">8dp</dimen>
     <dimen name="input_label_horizontal_spacing">4dp</dimen>
 
@@ -24,8 +24,8 @@
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
-    <!-- navigation_bar_height + default_margin-->
-    <dimen name="card_list_padding_bottom">56dp</dimen>
+    <!-- transparent navigation_bar_height + default_margin-->
+    <dimen name="card_list_padding_bottom">8dp</dimen>
     <dimen name="attributes_filter_height">48dp</dimen>
     <dimen name="attributes_filter_indicator_height">2dp</dimen>
     <dimen name="attributes_filter_indicator_margin">@dimen/default_margin</dimen>
@@ -44,7 +44,8 @@
     <!-- Card View -->
     <dimen name="card_full_margin">24dp</dimen>
     <dimen name="card_card_margin_top">@dimen/status_bar_height</dimen>
-    <dimen name="card_bottom_sheet_peek_height">84dp</dimen>
+    <!-- transparent navigation_bar_height + 36dp-->
+    <dimen name="card_bottom_sheet_peek_height">36dp</dimen>
     <dimen name="card_bottom_sheet_margin_bottom">@dimen/navigation_bar_height</dimen>
 
     <!-- Deck -->
@@ -52,11 +53,14 @@
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
     <dimen name="deck_private_switch_size">20dp</dimen>
-    <dimen name="deck_private_switch_icon_size">12dp</dimen>
+    <dimen name="deck_private_switch_icon_size">@dimen/medium_margin</dimen>
 
-    <dimen name="deck_header_height">140dp</dimen>
+    <!-- transparent status_bar_height + 115dp-->
+    <dimen name="deck_header_height">115dp</dimen>
     <dimen name="deck_header_attr_icon_height">32dp</dimen>
-    <dimen name="deck_comment_bottom_sheet_peek_height">88dp</dimen>
+    <dimen name="deck_info_bottom_margin">40dp</dimen>
+    <!-- transparent navigation_bar_height + 38dp-->
+    <dimen name="deck_comment_bottom_sheet_peek_height">38dp</dimen>
     <dimen name="deck_list_comment_name_width">56dp</dimen>
     <dimen name="deck_list_slot_height">32dp</dimen>
     <dimen name="deck_list_slot_half_height">16dp</dimen>

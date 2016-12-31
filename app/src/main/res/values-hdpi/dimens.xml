@@ -7,4 +7,6 @@
     <dimen name="large_margin">14dp</dimen>
     <dimen name="huge_margin">20dp</dimen>
 
+    <dimen name="filter_hide_magika_spacing">-7dp</dimen>
+
 </resources>
