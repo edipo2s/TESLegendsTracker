@@ -40,6 +40,7 @@
                     android:background="@android:color/transparent"
                     android:elevation="@dimen/cardview_default_elevation"
                     android:fitsSystemWindows="true"
+                    android:lines="1"
                     android:minHeight="?attr/actionBarSize"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -90,17 +91,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:paddingStart="@dimen/huge_margin"
+            android:layout_marginBottom="@dimen/large_margin"
             android:layout_marginStart="@dimen/huge_margin"
-            android:layout_marginBottom="@dimen/large_margin" />
+            android:paddingStart="@dimen/huge_margin" />
 
         <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
             android:id="@+id/filter_rarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:paddingStart="@dimen/nano_margin"
-            android:layout_margin="@dimen/large_margin" />
+            android:layout_margin="@dimen/large_margin"
+            android:paddingStart="@dimen/nano_margin" />
 
     </android.support.design.widget.CoordinatorLayout>
 
