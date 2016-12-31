@@ -130,7 +130,7 @@ open class CardsAllFragment : BaseFragment() {
     fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (isFragmentSelected) {
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(), showCardsByAttr.attr.name)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_ATTR(showCardsByAttr.attr))
         }
     }
 
@@ -145,8 +145,7 @@ open class CardsAllFragment : BaseFragment() {
         classFilter = filterClass.cls
         showCards()
         if (isFragmentSelected) {
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_SET(),
-                    setFilter?.name ?: MetricAction.ACTION_CARD_FILTER_SET.VALUE_CLEAR)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_SET(setFilter))
         }
     }
 
@@ -161,8 +160,7 @@ open class CardsAllFragment : BaseFragment() {
         rarityFilter = filterRarity.rarity
         showCards()
         if (isFragmentSelected) {
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(),
-                    rarityFilter?.name ?: MetricAction.ACTION_CARD_FILTER_RARITY.VALUE_CLEAR)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_RARITY(rarityFilter))
         }
     }
 
@@ -171,8 +169,7 @@ open class CardsAllFragment : BaseFragment() {
         magikaFilter = filterMagika.magika
         showCards()
         if (isFragmentSelected) {
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(), if (magikaFilter >= 0)
-                magikaFilter.toString() else MetricAction.ACTION_CARD_FILTER_MAGIKA.VALUE_CLEAR)
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(magikaFilter))
         }
     }
 

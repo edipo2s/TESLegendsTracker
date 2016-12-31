@@ -108,7 +108,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics.updateStatistics(currentAttr)
-            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(), finalQtd.toString())
+            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(finalQtd))
         }
     }
 

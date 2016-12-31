@@ -30,10 +30,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.toggleExpanded
+import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import io.fabric.sdk.android.services.common.CommonUtils
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
@@ -87,24 +84,39 @@ class DeckActivity : BaseActivity() {
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         like = intent.getBooleanExtra(EXTRA_LIKE, false)
+        configViews()
+        updateFavoriteItem()
+        loadDeckInfo()
+    }
+
+    private fun configViews() {
         deck_fab_favorite.setOnClickListener {
             if (App.hasUserLogged()) {
                 privateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
                     updateFavoriteItem()
+                    MetricsManager.trackAction(if (favorite)
+                        MetricAction.ACTION_DECK_DETAILS_FAVORITE() else MetricAction.ACTION_DECK_DETAILS_UNFAVORITE())
                 }
             } else {
                 showErrorUserNotLogged()
             }
         }
-        deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toggleExpanded() }
-        updateFavoriteItem()
-        loadDeckInfo()
-    }
+        commentsSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED ->
+                        MetricsManager.trackAction(MetricAction.ACTION_DECK_COMMENTS_EXPAND())
+                    BottomSheetBehavior.STATE_COLLAPSED ->
+                        MetricsManager.trackAction(MetricAction.ACTION_DECK_COMMENTS_COLLAPSE())
+                }
+            }
+
+        })
+        deck_bottom_sheet.setOnClickListener { commentsSheetBehavior.toggleExpanded() }
         deck_comment_send?.setOnClickListener {
             if (App.hasUserLogged()) {
                 if (deck_comment_new.text.toString().length < 4) {
@@ -114,12 +126,18 @@ class DeckActivity : BaseActivity() {
                     PrivateInteractor().addDeckComment(deck, deck_comment_new.text.toString()) {
                         deck_comment_new.setText("")
                         addComment(it)
+                        MetricsManager.trackAction(MetricAction.ACTION_DECK_COMMENTS_SEND())
                     }
                 }
             } else {
                 showErrorUserNotLogged()
             }
         }
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         onKeyboardVisibilityChange = {
             deck_comment_recycle_view.requestLayout()
         }
@@ -169,6 +187,8 @@ class DeckActivity : BaseActivity() {
                     updateLikeItem()
                     val deckLikes = Integer.parseInt(deck_details_likes.text.toString())
                     deck_details_likes.text = numberInstance.format(deckLikes + if (like) 1 else -1)
+                    MetricsManager.trackAction(if (like)
+                        MetricAction.ACTION_DECK_DETAILS_LIKE() else MetricAction.ACTION_DECK_DETAILS_UNLIKE())
                 }
                 return true
             }
@@ -179,6 +199,7 @@ class DeckActivity : BaseActivity() {
                         privateInteractor.deleteDeck(deck, deck.private) {
                             toast(R.string.deck_deleted)
                             ActivityCompat.finishAfterTransition(this@DeckActivity)
+                            MetricsManager.trackAction(MetricAction.ACTION_DECK_DETAILS_DELETE())
                         }
                     })
                     setTheme(R.style.AppDialog)
