@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,7 +16,7 @@ import java.util.*
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PrivateInteractor() : BaseInteractor() {
+class PrivateInteractor : BaseInteractor() {
 
     private val NODE_DECKS_PRIVATE = "private"
     private val NODE_FAVORITE = "favorite"
@@ -23,7 +24,6 @@ class PrivateInteractor() : BaseInteractor() {
     private val KEY_CARD_FAVORITE = "favorite"
     private val KEY_CARD_QTD = "qtd"
 
-    private val KEY_DECK_RARITY = "rarity"
     private val KEY_DECK_OWNER = "owner"
     private val KEY_DECK_LIKES = "likes"
     private val KEY_DECK_COST = "cost"
@@ -35,12 +35,13 @@ class PrivateInteractor() : BaseInteractor() {
     }
 
     private fun dbUser(): DatabaseReference? {
-        return if (getUserID().isNotEmpty()) dbUsers.child(getUserID()) else null
+        val userID = getUserID()
+        return if (userID.isEmpty() || ConfigManager.isDBUpdating()) null else dbUsers.child(userID)
     }
 
     private fun dbUserCards(set: CardSet, cls: Attribute): DatabaseReference? {
         val dbRef = dbUser()?.child(NODE_CARDS)?.child(set.db)?.child(cls.name.toLowerCase())
-        dbRef?.keepSynced(true)
+        dbRef?.keepSynced()
         return dbRef
     }
 
@@ -52,7 +53,7 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun setUserCardQtd(card: Card, qtd: Long, onComplete: () -> Unit) {
+    fun setUserCardQtd(card: Card, qtd: Int, onComplete: () -> Unit) {
         dbUserCards(card.set, card.attr)?.apply {
             child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
                 onComplete.invoke()
@@ -72,7 +73,7 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(set: CardSet?, onSuccess: (Map<String, Long>) -> Unit) {
+    fun getUserCollection(set: CardSet?, onSuccess: (Map<String, Int>) -> Unit) {
         getMapFromSets(set, onSuccess) { set, onEachSuccess ->
             dbUser()?.child(NODE_CARDS)?.child(set.db)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -80,7 +81,7 @@ class PrivateInteractor() : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children.flatMap { it.children }
                             .filter { it.hasChild(KEY_CARD_QTD) }
-                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())
                     onEachSuccess.invoke(collection)
@@ -94,7 +95,27 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Long>) -> Unit) {
+    fun getUserCollection(set: CardSet?, vararg attrs: Attribute, onSuccess: (Map<String, Int>) -> Unit) {
+        var attrIndex = 0
+        val collection = hashMapOf<String, Int>()
+        if (attrs.size == 1) {
+            return getUserCollection(set, attrs[0], onSuccess)
+        }
+
+        fun getUserCollectionOnSuccess(onSuccess: (Map<String, Int>) -> Unit): (Map<String, Int>) -> Unit = {
+            collection.putAll(it)
+            attrIndex = attrIndex.inc()
+            if (attrIndex >= attrs.size) {
+                onSuccess.invoke(collection)
+            } else {
+                getUserCollection(set, attrs[attrIndex], getUserCollectionOnSuccess(onSuccess))
+            }
+        }
+
+        getUserCollection(set, attrs[attrIndex], getUserCollectionOnSuccess(onSuccess))
+    }
+
+    private fun getUserCollection(set: CardSet?, attr: Attribute, onSuccess: (Map<String, Int>) -> Unit) {
         getMapFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
             dbUserCards(set, attr)?.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -102,7 +123,7 @@ class PrivateInteractor() : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children
                             .filter { it.hasChild(KEY_CARD_QTD) }
-                            .map({ it.key to it.child(KEY_CARD_QTD).value as Long })
+                            .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())
                     onEachSuccess.invoke(collection)
@@ -147,13 +168,13 @@ class PrivateInteractor() : BaseInteractor() {
 
     private fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(getUserID())) {
-            keepSynced(true)
+            keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     Timber.d(ds.value?.toString())
                     val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
                     }.filter { cls == null || it.cls == cls }
                     Timber.d(decks.toString())
                     onSuccess.invoke(decks)
@@ -169,12 +190,12 @@ class PrivateInteractor() : BaseInteractor() {
 
     private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
-            keepSynced(true)
+            keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(DeckParser::class.java).toDeck(it.key, true)
+                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, true)
                     }.filter { cls == null || it.cls == cls }
                     Timber.d(decks.toString())
                     onSuccess.invoke(decks)
@@ -192,7 +213,7 @@ class PrivateInteractor() : BaseInteractor() {
         PublicInteractor().getPublicDecks(cls) {
             val publicDecks = it
             dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
-                keepSynced(true)
+                keepSynced()
                 addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
@@ -218,39 +239,27 @@ class PrivateInteractor() : BaseInteractor() {
         val publicInteractor = PublicInteractor()
         val attr1 = deck.cls.attr1
         val attr2 = deck.cls.attr2
-        val cards = hashMapOf<String, CardRarity>()
-        val userCards = hashMapOf<String, Long>()
-        publicInteractor.getCards(null, Attribute.DUAL) {
-            cards.putAll(it.map { it.shortName to it.rarity })
-            publicInteractor.getCards(null, Attribute.NEUTRAL) {
-                cards.putAll(it.map { it.shortName to it.rarity })
-                publicInteractor.getCards(null, attr1) {
-                    cards.putAll(it.map { it.shortName to it.rarity })
-                    publicInteractor.getCards(null, attr2) {
-                        cards.putAll(it.map { it.shortName to it.rarity })
-                        getUserCollection(null, attr1) {
-                            userCards.putAll(it)
-                            getUserCollection(null, attr2) {
-                                userCards.putAll(it)
-                                val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
-                                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
-                                Timber.d(missing.toString())
-                                onSuccess.invoke(missing)
-                            }
-                        }
-                    }
-                }
+        publicInteractor.getCards(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+            val cards = it.map { it.shortName to it.rarity }.toMap()
+            getUserCollection(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+                val userCards = it
+                val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
+                        .filter { it.second > 0 }
+                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
+                        .filter { it.qtd > 0 }
+                Timber.d(missing.toString())
+                onSuccess.invoke(missing)
             }
         }
     }
 
-    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Long>,
+    fun saveDeck(name: String, cls: Class, type: DeckType, cost: Int, patch: String, cards: Map<String, Int>,
                  private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (uid: String) -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now(),
                         LocalDateTime.now(), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
-                child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                child(deck.id).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
                     Timber.d(it.toString())
                     if (it.isSuccessful) onSuccess.invoke(deck.id)
                     else {
@@ -280,12 +289,12 @@ class PrivateInteractor() : BaseInteractor() {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 if (deck.private == oldPrivate)
-                    child(deck.id).updateChildren(DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
+                    child(deck.id).updateChildren(FirebaseParsers.DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
                         Timber.d(it.toString())
                         if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
                     })
                 else
-                    child(deck.id).setValue(DeckParser().fromDeck(deck)).addOnCompleteListener({
+                    child(deck.id).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
                         Timber.d(it.toString())
                         deleteDeck(deck, oldPrivate, onError, onSuccess)
                     })
@@ -332,21 +341,26 @@ class PrivateInteractor() : BaseInteractor() {
         }
     }
 
-    fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun addDeckComment(deck: Deck, msg: String, onError: ((e: Exception?) -> Unit)? = null,
+                       onSuccess: (comment: DeckComment) -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val comment = DeckParser.toNewCommentMap(getUserID(), msg)
+                val comment = FirebaseParsers.DeckParser.toNewCommentMap(getUserID(), msg)
                 with(child(deck.id).child(KEY_DECK_COMMENTS)) {
-                    child(push().key).setValue(comment).addOnCompleteListener({
+                    val commentKey = push().key
+                    child(commentKey).setValue(comment).addOnCompleteListener({
                         Timber.d(it.toString())
-                        if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                        if (it.isSuccessful) {
+                            onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now()))
+                        } else
+                            onError?.invoke(it.exception)
                     })
                 }
             }
         }
     }
 
-    fun remDeckComment(deck: Deck, commentId: String, msg: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun remDeckComment(deck: Deck, commentId: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 child(deck.id).child(KEY_DECK_COMMENTS).child(commentId).removeValue().addOnCompleteListener({

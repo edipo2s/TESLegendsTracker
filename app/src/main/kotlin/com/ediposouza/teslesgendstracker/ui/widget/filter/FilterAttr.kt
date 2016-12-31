@@ -47,11 +47,9 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
-    }
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     open protected fun attrClick(attr: Attribute, lockable: Boolean) {
         filterClick?.invoke(attr)

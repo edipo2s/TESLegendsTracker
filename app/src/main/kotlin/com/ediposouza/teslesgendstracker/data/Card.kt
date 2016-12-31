@@ -30,15 +30,15 @@ enum class CardSet(val db: String) {
 
 }
 
-enum class Attribute(val color: Int, @IntegerRes val imageRes: Int) {
+enum class Attribute(@IntegerRes val imageRes: Int) {
 
-    STRENGTH(Color.RED, R.drawable.attr_strength),
-    INTELLIGENCE(Color.BLUE, R.drawable.attr_intelligence),
-    WILLPOWER(Color.YELLOW, R.drawable.attr_willpower),
-    AGILITY(Color.GREEN, R.drawable.attr_agility),
-    ENDURANCE(Color.parseColor("purple"), R.drawable.attr_endurance),
-    NEUTRAL(Color.GRAY, R.drawable.attr_neutral),
-    DUAL(Color.LTGRAY, R.drawable.attr_dual)
+    STRENGTH(R.drawable.attr_strength),
+    INTELLIGENCE(R.drawable.attr_intelligence),
+    WILLPOWER(R.drawable.attr_willpower),
+    AGILITY(R.drawable.attr_agility),
+    ENDURANCE(R.drawable.attr_endurance),
+    NEUTRAL(R.drawable.attr_neutral),
+    DUAL(R.drawable.attr_dual)
 
 }
 
@@ -90,7 +90,7 @@ enum class CardRarity(val color: Int, val soulCost: Int, @IntegerRes val imageRe
 
 }
 
-enum class CardType() {
+enum class CardType {
 
     ACTION,
     CREATURE,
@@ -175,7 +175,7 @@ enum class CardRace(val desc: String) {
     }
 }
 
-enum class CardKeyword() {
+enum class CardKeyword {
 
     ACTIVATE,
     BREAKTHROUGH,
@@ -205,7 +205,7 @@ enum class CardKeyword() {
     }
 }
 
-enum class CardArenaTier() {
+enum class CardArenaTier {
 
     TERRIBLE,
     POOR,
@@ -231,7 +231,7 @@ data class CardMissing(
 
         val shortName: String,
         val rarity: CardRarity,
-        val qtd: Long
+        val qtd: Int
 
 )
 
@@ -262,7 +262,7 @@ data class Card(
         val arenaTier: CardArenaTier,
         val evolves: Boolean
 
-) : Parcelable {
+) : Comparable<Card>, Parcelable {
 
     private val CARD_BACK = "card_back.png"
     private val CARD_PATH = "Cards"
@@ -313,5 +313,10 @@ data class Card(
         dest?.writeList(keywords)
         dest?.writeInt(arenaTier.ordinal)
         dest?.writeInt((if (evolves) 1 else 0))
+    }
+
+    override fun compareTo(other: Card): Int {
+        val compareCost = cost.compareTo(other.cost)
+        return if (compareCost != 0) compareCost else name.compareTo(other.name)
     }
 }

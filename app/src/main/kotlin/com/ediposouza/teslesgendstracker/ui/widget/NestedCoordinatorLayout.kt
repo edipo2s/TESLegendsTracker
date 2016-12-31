@@ -15,16 +15,12 @@ import android.view.View
 /**
  * Created by ediposouza on 1/22/16.
  */
-class NestedCoordinatorLayout : CoordinatorLayout, NestedScrollingParent {
+class NestedCoordinatorLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
+        CoordinatorLayout(context, attrs, defStyleAttr), NestedScrollingParent {
 
-    constructor(context: Context) : super(context) {
-    }
+    constructor(context: Context) : this(context, null, 0)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-    }
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     override fun onStartNestedScroll(child: View, target: View, nestedScrollAxes: Int): Boolean {
         parentCoordinatorLayout.onStartNestedScroll(child, target, nestedScrollAxes)

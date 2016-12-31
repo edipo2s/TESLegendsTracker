@@ -6,8 +6,8 @@ import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
-import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.util.inflate
 import timber.log.Timber
 
 /**
@@ -32,7 +32,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_decks_owner, menu)
+        inflater?.inflate(R.menu.menu_decks_owned, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
         onlyPrivate?.setOnCheckedChangeListener { button, checked -> showDecks() }
         super.onCreateOptionsMenu(menu, inflater)

@@ -5,8 +5,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.inflate
-import com.ediposouza.teslesgendstracker.load
+import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.load
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
 

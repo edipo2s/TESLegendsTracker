@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.manager
+package com.ediposouza.teslesgendstracker.util
 
 import android.util.Log
 import com.ediposouza.teslesgendstracker.BuildConfig

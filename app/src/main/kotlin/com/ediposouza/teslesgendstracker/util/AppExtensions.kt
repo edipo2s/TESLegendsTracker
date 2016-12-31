@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker
+package com.ediposouza.teslesgendstracker.util
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ediposouza.teslesgendstracker.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
@@ -29,17 +30,17 @@ fun ViewGroup.inflate(@IntegerRes resource: Int): View {
     return LayoutInflater.from(context).inflate(resource, this, false)
 }
 
-fun BottomSheetBehavior<*>.toogleExpanded() {
+fun BottomSheetBehavior<*>.toggleExpanded() {
     this.state = if (this.state == BottomSheetBehavior.STATE_COLLAPSED)
         BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
 }
 
 fun AdView.load() {
-    this.loadAd(createAdRequest(context))
+    this.loadAd(com.ediposouza.teslesgendstracker.util.createAdRequest(context))
 }
 
 fun NativeExpressAdView.load() {
-    this.loadAd(createAdRequest(context))
+    this.loadAd(com.ediposouza.teslesgendstracker.util.createAdRequest(context))
 }
 
 private fun createAdRequest(context: Context): AdRequest {

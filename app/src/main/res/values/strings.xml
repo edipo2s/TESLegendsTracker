@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">TES Legends Tracker</string>
+    <string name="app_name">TESL Tracker</string>
+    <string name="app_name_full">TES Legends Tracker</string>
     <string name="app_ads_card_list">***REMOVED***</string>
     <string name="app_ads_card_list_size">360x80</string>
     <string name="app_ads_card_full">***REMOVED***</string>
@@ -8,6 +9,10 @@
     <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
     <string name="app_ads_new_deck_card_list">***REMOVED***</string>
     <string name="app_ads_new_deck_card_list_size">240x50</string>
+    <string name="app_exit_confirm">Press again to exit</string>
+    <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
+    <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using.</string>
+    <string name="playstore_url_format">http://play.google.com/store/apps/details?id=%s</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
@@ -26,10 +31,10 @@
     <string name="menu_unlike">Unlike</string>
     <string name="menu_done">Done</string>
 
+    <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
     <string name="search_hint">Name, race, type or keyword</string>
-    <string name="confirm_message">Are you sure?</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -37,6 +42,13 @@
     <string name="tab_decks_public">Public</string>
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
+
+    <string name="title_tab_cards_all">@string/app_name_full</string>
+    <string name="title_tab_cards_collection">Cards Collection</string>
+    <string name="title_tab_cards_favorites">Cards Favorites</string>
+    <string name="title_tab_decks_public">Decks Public</string>
+    <string name="title_tab_decks_owned">Decks Owned</string>
+    <string name="title_tab_decks_favorites">Decks Favorites</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_sets_core">Core</string>
@@ -54,7 +66,7 @@
     <string name="unknown">Unknown</string>
     <string name="zero_percent" translatable="false">0%</string>
 
-    <string name="error_auth">Favorite a card require user login.</string>
+    <string name="error_auth">This action require a logged user.</string>
     <string name="error_login">Authentication failed.</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
@@ -69,7 +81,14 @@
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
+    <string name="deck_details_last_update_format">%1$s at %2$s</string>
     <string name="deck_deleted">Deck deleted!</string>
+    <string name="deck_exit_confirm">Press back again to exit without save</string>
+    <string name="deck_comments_text">Comments</string>
+    <string name="deck_comment_new_hint">Your comment!</string>
+    <string name="deck_comment_new_hint_anonymous">Your comment! (Need login)</string>
+    <string name="deck_comment_size_error">Message is too short!</string>
+    <string name="deck_comment_date_format" translatable="false">%1$s\n%2$s</string>
     <string name="deck_transition_name" translatable="false">deck_transition</string>
     <string name="deck_name_transition_name" translatable="false">deck_name_transition</string>
     <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>
@@ -87,5 +106,6 @@
     <string name="new_deck_save_dialog_save">Save</string>
     <string name="new_deck_save_as_public">Deck saved as Public</string>
     <string name="new_deck_save_as_private">Deck saved as Private</string>
+    <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
 
 </resources>

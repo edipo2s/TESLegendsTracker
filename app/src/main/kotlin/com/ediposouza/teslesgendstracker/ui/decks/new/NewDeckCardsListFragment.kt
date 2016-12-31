@@ -4,14 +4,13 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllAdapter
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
-import com.ediposouza.teslesgendstracker.ui.utils.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import org.greenrobot.eventbus.EventBus
 
-class NewDeckCardsListFragment() : CardsAllFragment() {
+class NewDeckCardsListFragment : CardsAllFragment() {
 
     override val ADS_EACH_ITEMS = 20 //after 10 lines
     override val CARDS_PER_ROW = 2
@@ -37,7 +36,7 @@ class NewDeckCardsListFragment() : CardsAllFragment() {
 
     override fun configRecycleView() {
         super.configRecycleView()
-        configLoggedViews()
+        isFragmentSelected = true
         cards_recycler_view.setPadding(0, 0, 0, 0)
     }
 

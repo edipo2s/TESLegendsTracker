@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -17,7 +17,7 @@
             android:id="@+id/dash_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.utils.AutoHideBehaviour">
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
             <FrameLayout
                 android:id="@+id/new_deck_class_cover_layout"
@@ -54,7 +54,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        tools:text="@string/app_name" />
+                        tools:text="@string/app_name_full" />
 
                 </android.support.v7.widget.Toolbar>
 
@@ -73,68 +73,35 @@
                 android:layout_below="@id/new_deck_attr_filter"
                 app:layout_widthPercent="65%" />
 
-            <LinearLayout
+            <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
+                android:id="@+id/new_deck_cardlist"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_below="@id/new_deck_attr_filter"
                 android:layout_marginEnd="@dimen/small_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_toEndOf="@id/new_deck_fragment_cards"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layout_widthPercent="35%">
-
-                <TextView
-                    android:id="@+id/new_deck_cardlist_qtd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0/50"
-                    android:textColor="@android:color/white" />
-
-                <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
-                    android:id="@+id/new_deck_cardlist"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/new_deck_cardlist_soul"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:drawablePadding="@dimen/large_margin"
-                    android:drawableStart="@drawable/ic_soul"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@android:color/white" />
-
-                <com.ediposouza.teslesgendstracker.ui.widget.filter.MagikaCosts
-                    android:id="@+id/new_deck_cardlist_costs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/nano_margin"
-                    android:layout_marginTop="@dimen/small_margin"
-                    tools:layout_marginBottom="@dimen/navigation_bar_height" />
-
-            </LinearLayout>
+                app:layout_widthPercent="35%" />
 
         </android.support.percent.PercentRelativeLayout>
 
+        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
+            android:id="@+id/filter_magika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:paddingStart="@dimen/huge_margin"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginBottom="@dimen/large_margin" />
+
         <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
-            android:id="@+id/new_deck_filter_rarity"
+            android:id="@+id/filter_rarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_margin="@dimen/large_margin" />
-
-        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
-            android:id="@+id/new_deck_filter_magika"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:paddingStart="@dimen/nano_margin"
             android:layout_margin="@dimen/large_margin" />
 
     </android.support.design.widget.CoordinatorLayout>
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

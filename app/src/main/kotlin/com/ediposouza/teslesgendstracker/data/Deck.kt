@@ -5,7 +5,7 @@ import android.os.Parcelable
 import org.threeten.bp.LocalDateTime
 import java.util.*
 
-enum class DeckType() {
+enum class DeckType {
 
     AGGRO,
     ARENA,
@@ -82,7 +82,7 @@ data class Deck(
         val patch: String,
         val likes: List<String>,
         val views: Int,
-        val cards: Map<String, Long>,
+        val cards: Map<String, Int>,
         val updates: List<DeckUpdate>,
         val comments: List<DeckComment>
 
@@ -102,7 +102,7 @@ data class Deck(
             1 == source.readInt(), DeckType.values()[source.readInt()], Class.values()[source.readInt()],
             source.readInt(), source.readSerializable() as LocalDateTime, source.readSerializable() as LocalDateTime,
             source.readString(), source.createStringArrayList(), source.readInt(),
-            hashMapOf<String, Long>().apply { source.readMap(this, Long::class.java.classLoader) },
+            hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) },
             ArrayList<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
             ArrayList<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
 
