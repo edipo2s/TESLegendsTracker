@@ -4,7 +4,7 @@
     android:id="@+id/magika_filter"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:menu_buttonSpacing="-4dp"
+    app:menu_buttonSpacing="@dimen/filter_hide_magika_spacing"
     app:menu_colorNormal="@android:color/transparent"
     app:menu_fab_size="mini"
     app:menu_icon="@drawable/ic_magika">

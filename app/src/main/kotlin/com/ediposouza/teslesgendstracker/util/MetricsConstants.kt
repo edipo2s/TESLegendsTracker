@@ -1,5 +1,9 @@
 package com.ediposouza.teslesgendstracker.util
 
+import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardRarity
+import com.ediposouza.teslesgendstracker.data.CardSet
+
 /**
  * Created by ediposouza on 08/12/16.
  */
@@ -30,6 +34,10 @@ abstract class MetricsConstants {
 
 sealed class MetricAction(val name: String) {
 
+    companion object {
+        const val CLEAR = "Clear"
+    }
+
     class ACTION_CARD_DETAILS_EXPAND : MetricAction("CardDetailsExpand")
     class ACTION_CARD_DETAILS_COLLAPSE : MetricAction("CardDetailsCollapse")
     class ACTION_CARD_DETAILS_CLOSE_TAP : MetricAction("CardDetailsCloseTap")
@@ -38,41 +46,42 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_STATISTICS_EXPAND : MetricAction("CollectionStatisticsExpand")
     class ACTION_COLLECTION_STATISTICS_COLLAPSE : MetricAction("CollectionStatisticsCollapse")
 
-    class ACTION_COLLECTION_CARD_QTD_CHANGE : MetricAction("CollectionCardQtdChange") {
-        companion object {
-            val PARAM_QTD = "Qtd"
-        }
+    class ACTION_COLLECTION_CARD_QTD_CHANGE(val qtd: Int) : MetricAction("CollectionCardQtdChange") {
+        val PARAM_QTD = "Qtd"
     }
 
-    class ACTION_CARD_FILTER_SET : MetricAction("FilterCardSet") {
-        companion object {
-            const val PARAM_SET = "Set"
-            const val VALUE_CLEAR = "Clear"
-        }
+    class ACTION_CARD_FILTER_SET(val set: CardSet?) : MetricAction("FilterCardSet") {
+        val PARAM_SET = "Set"
     }
 
-    class ACTION_CARD_FILTER_ATTR : MetricAction("FilterCardAttr") {
-        companion object {
-            const val PARAM_ATTR = "Attr"
-        }
+    class ACTION_CARD_FILTER_ATTR(val attr: Attribute?) : MetricAction("FilterCardAttr") {
+        val PARAM_ATTR = "Attr"
     }
 
-    class ACTION_CARD_FILTER_RARITY : MetricAction("FilterCardRarity") {
-        companion object {
-            const val PARAM_RARITY = "Rarity"
-            const val VALUE_CLEAR = "Clear"
-        }
+    class ACTION_CARD_FILTER_RARITY(val rarity: CardRarity?) : MetricAction("FilterCardRarity") {
+        val PARAM_RARITY = "Rarity"
     }
 
-    class ACTION_CARD_FILTER_MAGIKA : MetricAction("FilterCardMagika") {
-        companion object {
-            const val PARAM_MAGIKA = "Magika"
-            const val VALUE_CLEAR = "Clear"
-        }
+    class ACTION_CARD_FILTER_MAGIKA(val magika: Int) : MetricAction("FilterCardMagika") {
+        val PARAM_MAGIKA = "Magika"
     }
 
     class ACTION_NOTIFY_UPDATE : MetricAction("NotifyUpdate")
     class ACTION_VERSION_UNSUPPORTED : MetricAction("VersionUnsupported")
+    class ACTION_DECK_DETAILS_DELETE : MetricAction("DeckDetailsDelete")
+    class ACTION_DECK_DETAILS_LIKE : MetricAction("DeckDetailsLike")
+    class ACTION_DECK_DETAILS_UNLIKE : MetricAction("DeckDetailsUnlike")
+    class ACTION_DECK_DETAILS_FAVORITE : MetricAction("DeckDetailsFavorite")
+    class ACTION_DECK_DETAILS_UNFAVORITE : MetricAction("DeckDetailsUnfavorite")
+    class ACTION_DECK_COMMENTS_EXPAND : MetricAction("DeckCommentExpand")
+    class ACTION_DECK_COMMENTS_COLLAPSE : MetricAction("DeckCommentCollapse")
+    class ACTION_DECK_COMMENTS_SEND : MetricAction("DeckCommentSend")
+
+    class ACTION_NEW_DECK_SAVE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckCommentSend") {
+        val PARAM_TYPE = "Type"
+        val PARAM_PATCH = "Patch"
+        val PARAM_PRIVATE = "Private"
+    }
 
 }
 

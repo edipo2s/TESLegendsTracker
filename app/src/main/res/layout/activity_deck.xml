@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:elevation="@dimen/cardview_default_elevation"
                     android:gravity="center"
+                    android:lines="1"
                     android:minHeight="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -117,7 +118,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/deck_comment_bottom_sheet_peek_height"
+            android:layout_marginBottom="@dimen/deck_info_bottom_margin"
+            android:layout_marginTop="@dimen/small_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/include_deck_info" />

@@ -95,12 +95,12 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged()) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
-                MetricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()
-                else MetricAction.ACTION_CARD_DETAILS_UNFAVORITE())
                 val stringRes = if (favorite) R.string.card_favorited else R.string.card_unfavorited
                 toast(getString(stringRes, card.name))
                 loadCardInfo()
                 setResult(Activity.RESULT_OK, Intent())
+                MetricsManager.trackAction(if (favorite)
+                    MetricAction.ACTION_CARD_DETAILS_FAVORITE() else MetricAction.ACTION_CARD_DETAILS_UNFAVORITE())
             }
         } else {
             showErrorUserNotLogged()

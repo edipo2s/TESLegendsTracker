@@ -37,7 +37,9 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        return true
+        val statisticPeekHeight = resources.getDimensionPixelSize(R.dimen.statistics_bottom_peek_height)
+        val clickYPos = ev?.y ?: 0f
+        return clickYPos < statisticPeekHeight || super.onInterceptTouchEvent(ev)
     }
 
     fun scrollToTop() {
