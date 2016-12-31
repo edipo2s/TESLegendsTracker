@@ -5,15 +5,13 @@ import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.BuildConfig
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsConstants
 import com.ediposouza.teslesgendstracker.data.Card
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.fabric.sdk.android.Fabric
+import timber.log.Timber
 
 /**
  * Created by ediposouza on 08/12/16.
@@ -25,7 +23,12 @@ object MetricsManager : MetricsConstants() {
     var mixpanelAnalytics: MixpanelAPI? = null
 
     fun initialize(context: Context) {
-        Fabric.with(context, Answers(), Crashlytics())
+        if (BuildConfig.PREPARE_TO_RELEASE) {
+            Fabric.with(context, Answers(), Crashlytics())
+        } else {
+            Fabric.with(context, Answers())
+            Timber.w("Crashlytics not initialized")
+        }
         answers = Answers.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)
         mixpanelAnalytics = MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_TOKEN)
@@ -82,7 +85,7 @@ object MetricsManager : MetricsConstants() {
 
     private fun identifyUser(user: FirebaseUser?) {
         val userId = user?.uid
-        if (Fabric.isInitialized()) {
+        if (Fabric.isInitialized() && BuildConfig.PREPARE_TO_RELEASE) {
             Crashlytics.setUserIdentifier(userId)
             Crashlytics.setUserName(user?.displayName)
             Crashlytics.setUserEmail(user?.email)

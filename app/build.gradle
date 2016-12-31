@@ -11,13 +11,14 @@ android {
                                  'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
-        minSdkVersion prepareRelease ? 16 : 21
+        minSdkVersion prepareToRelease ? 16 : 21
         targetSdkVersion 25
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
+        buildConfigField("boolean", "PREPARE_TO_RELEASE", "$prepareToRelease")
         buildConfigField("String", "MIXPANEL_TOKEN", '"***REMOVED***"')
         buildConfigField("String", "GCM_SENDER", '"***REMOVED***"')
         vectorDrawables.useSupportLibrary true
@@ -58,7 +59,7 @@ ext {
     icePickVersion = "3.2.+"
     okIOVersion = "1.10.+"
     okHttpVersion = "3.4.+"
-    playServicesVersion = prepareRelease ? "10.0.1" : "9.8.0"
+    playServicesVersion = prepareToRelease ? "10.0.1" : "9.8.0"
     supportLibraryVersion = "25.1.0"
     threetenabpVersion = "1.0.+"
 
