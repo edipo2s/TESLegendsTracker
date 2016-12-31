@@ -38,15 +38,24 @@ object MetricsManager : MetricsConstants() {
         mixpanelAnalytics?.flush()
     }
 
-    fun trackAction(action: MetricAction, vararg params: String) {
+    fun trackAction(action: MetricAction) {
         val bundle = Bundle().apply {
             when (action) {
                 is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE ->
-                    putString(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE.PARAM_QTD, params[0])
-                is MetricAction.ACTION_CARD_FILTER_SET -> putString(MetricAction.ACTION_CARD_FILTER_SET.PARAM_SET, params[0])
-                is MetricAction.ACTION_CARD_FILTER_ATTR -> putString(MetricAction.ACTION_CARD_FILTER_ATTR.PARAM_ATTR, params[0])
-                is MetricAction.ACTION_CARD_FILTER_RARITY -> putString(MetricAction.ACTION_CARD_FILTER_RARITY.PARAM_RARITY, params[0])
-                is MetricAction.ACTION_CARD_FILTER_MAGIKA -> putString(MetricAction.ACTION_CARD_FILTER_MAGIKA.PARAM_MAGIKA, params[0])
+                    putInt(action.PARAM_QTD, action.qtd)
+                is MetricAction.ACTION_CARD_FILTER_SET ->
+                    putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
+                is MetricAction.ACTION_CARD_FILTER_ATTR ->
+                    putString(action.PARAM_ATTR, action.attr?.name ?: MetricAction.CLEAR)
+                is MetricAction.ACTION_CARD_FILTER_RARITY ->
+                    putString(action.PARAM_RARITY, action.rarity?.name ?: MetricAction.CLEAR)
+                is MetricAction.ACTION_CARD_FILTER_MAGIKA ->
+                    putString(action.PARAM_MAGIKA, if (action.magika > 0) action.magika.toString() else MetricAction.CLEAR)
+                is MetricAction.ACTION_NEW_DECK_SAVE -> {
+                    putString(action.PARAM_TYPE, action.type)
+                    putString(action.PARAM_PATCH, action.patch)
+                    putString(action.PARAM_PRIVATE, action.private.toString())
+                }
             }
         }
         answers?.logCustom(CustomEvent(action.name))

@@ -23,6 +23,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import kotlinx.android.synthetic.main.activity_new_deck.*
@@ -182,6 +183,7 @@ class NewDeckActivity : BaseFilterActivity() {
             val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)
             setResult(Activity.RESULT_OK, data)
             ActivityCompat.finishAfterTransition(this)
+            MetricsManager.trackAction(MetricAction.ACTION_NEW_DECK_SAVE(deckTypeText, deckPatchDesc, deckPrivate))
         }
     }
 

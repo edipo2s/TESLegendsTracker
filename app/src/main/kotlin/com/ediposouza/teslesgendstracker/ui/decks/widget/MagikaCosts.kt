@@ -76,14 +76,14 @@ class MagikaCosts(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun updateCosts(cards: List<CardSlot>) {
-        magikaCost0Qtd = cards.filter { it.card.cost == 0 }.sumBy { it.qtd.toInt() }
-        magikaCost1Qtd = cards.filter { it.card.cost == 1 }.sumBy { it.qtd.toInt() }
-        magikaCost2Qtd = cards.filter { it.card.cost == 2 }.sumBy { it.qtd.toInt() }
-        magikaCost3Qtd = cards.filter { it.card.cost == 3 }.sumBy { it.qtd.toInt() }
-        magikaCost4Qtd = cards.filter { it.card.cost == 4 }.sumBy { it.qtd.toInt() }
-        magikaCost5Qtd = cards.filter { it.card.cost == 5 }.sumBy { it.qtd.toInt() }
-        magikaCost6Qtd = cards.filter { it.card.cost == 6 }.sumBy { it.qtd.toInt() }
-        magikaCost7PlusQtd = cards.filter { it.card.cost >= 7 }.sumBy { it.qtd.toInt() }
+        magikaCost0Qtd = cards.filter { it.card.cost == 0 }.sumBy { it.qtd }
+        magikaCost1Qtd = cards.filter { it.card.cost == 1 }.sumBy { it.qtd }
+        magikaCost2Qtd = cards.filter { it.card.cost == 2 }.sumBy { it.qtd }
+        magikaCost3Qtd = cards.filter { it.card.cost == 3 }.sumBy { it.qtd }
+        magikaCost4Qtd = cards.filter { it.card.cost == 4 }.sumBy { it.qtd }
+        magikaCost5Qtd = cards.filter { it.card.cost == 5 }.sumBy { it.qtd }
+        magikaCost6Qtd = cards.filter { it.card.cost == 6 }.sumBy { it.qtd }
+        magikaCost7PlusQtd = cards.filter { it.card.cost >= 7 }.sumBy { it.qtd }
     }
 
     private fun updateMagikaCostBars() {
@@ -108,7 +108,8 @@ class MagikaCosts(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val zeroMargin = resources.getDimensionPixelSize(R.dimen.deck_new_magika_costs_bar_min_height)
         val magikaCostViewLP = magikaCostView?.layoutParams as RelativeLayout.LayoutParams
         val factor: Float = if (maxMagikaCostQtd == 0) 0f else magikaCostQtd / maxMagikaCostQtd.toFloat()
-        magikaCostViewLP.topMargin = (zeroMargin - zeroMargin * factor).toInt()
+        val topMargin = (zeroMargin - zeroMargin * factor).toInt()
+        magikaCostViewLP.topMargin = if (topMargin == zeroMargin) topMargin - 5 else topMargin
         magikaCostView?.layoutParams = magikaCostViewLP
     }
 
