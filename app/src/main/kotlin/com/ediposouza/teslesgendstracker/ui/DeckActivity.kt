@@ -31,6 +31,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
+import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import io.fabric.sdk.android.services.common.CommonUtils
@@ -38,10 +39,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import java.text.NumberFormat
@@ -65,6 +63,7 @@ class DeckActivity : BaseActivity() {
 
     private val publicInteractor by lazy { PublicInteractor() }
     private val privateInteractor by lazy { PrivateInteractor() }
+    private val keyboardUtil by lazy { KeyboardUtil(this, contentView) }
     private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
     private val deck: Deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
     private val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
@@ -169,6 +168,16 @@ class DeckActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        keyboardUtil.enable()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        keyboardUtil.disable()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
