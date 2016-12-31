@@ -117,7 +117,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
                 startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
             }
-            postDelayed({ show() }, DateUtils.SECOND_IN_MILLIS * 2)
+            postDelayed({ if (this@DecksFragment.isAdded) show() }, DateUtils.SECOND_IN_MILLIS * 2)
         }
     }
 

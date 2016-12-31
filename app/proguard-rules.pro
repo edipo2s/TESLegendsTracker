@@ -17,7 +17,7 @@
 #}
 
 ## TES Legends Tracker
--keepclassmembers class com.ediposouza.teslesgendstracker.interactor.FirebaseParsers.*Parser { *; }
+-keepclassmembers class com.ediposouza.teslesgendstracker.interactor.FirebaseParsers$* { *; }
 
 ## Kotlin
 -dontwarn kotlin.**

@@ -37,6 +37,7 @@ class App : Application() {
     }
 
     private fun initializeDependencies() {
+        Timber.plant(LoggerManager())
         MetricsManager.initialize(this)
         AndroidThreeTen.init(this)
         FirebaseDatabase.getInstance().apply {
@@ -47,7 +48,6 @@ class App : Application() {
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
             }
         }
-        Timber.plant(LoggerManager())
     }
 
 }
