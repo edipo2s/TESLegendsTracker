@@ -22,7 +22,7 @@
         <item name="android:textColor">@color/primary_text_dark</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme"></style>
+    <style name="AppTheme" parent="BaseAppTheme" />
 
     <style name="AppThemeTransparent" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>

@@ -1,35 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:orientation="vertical"
+    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
-    <LinearLayout
+    <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
+        android:id="@+id/attr_filter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="com.ediposouza.teslesgendstracker.ui.utils.AutoHideBehaviour">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin" />
 
-        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
-            android:id="@+id/attr_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/cards_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
-        android:id="@+id/collection_statistics"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/cards_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="0dp"
-        app:layout_behavior="@string/bottom_sheet_behavior" />
+        android:layout_height="match_parent" />
 
-</com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>
+</LinearLayout>

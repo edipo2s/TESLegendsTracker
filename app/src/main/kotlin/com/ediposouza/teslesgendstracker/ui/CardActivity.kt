@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.view.View
-import com.ediposouza.teslesgendstracker.*
+import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowLogin
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_card.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
@@ -22,8 +21,8 @@ class CardActivity : BaseActivity() {
 
     companion object {
 
-        private val EXTRA_CARD = "card"
-        private val EXTRA_FAVORITE = "favorite"
+        private val EXTRA_CARD = "cardExtra"
+        private val EXTRA_FAVORITE = "favoriteExtra"
 
         fun newIntent(context: Context, card: Card, favorite: Boolean = false): Intent {
             return context.intentFor<CardActivity>(EXTRA_CARD to card, EXTRA_FAVORITE to favorite)
@@ -31,12 +30,13 @@ class CardActivity : BaseActivity() {
 
     }
 
-    val card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
+    val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     var favorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
+        snackbarNeedMargin = false
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         card_all_image.setOnClickListener {
@@ -56,6 +56,11 @@ class CardActivity : BaseActivity() {
         ads_view.load()
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        ActivityCompat.finishAfterTransition(this)
+    }
+
     private fun configureBottomSheet() {
         val sheetBehavior = BottomSheetBehavior.from(card_bottom_sheet)
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -72,7 +77,7 @@ class CardActivity : BaseActivity() {
             }
 
         })
-        card_bottom_sheet.setOnClickListener { sheetBehavior.toogleExpanded() }
+        card_bottom_sheet.setOnClickListener { sheetBehavior.toggleExpanded() }
     }
 
     private fun loadCardInfo() {
@@ -87,7 +92,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun onFavoriteClick() {
-        if (App.hasUserLogged) {
+        if (App.hasUserLogged()) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
                 MetricsManager.trackAction(if (favorite) MetricAction.ACTION_CARD_DETAILS_FAVORITE()
@@ -98,8 +103,7 @@ class CardActivity : BaseActivity() {
                 setResult(Activity.RESULT_OK, Intent())
             }
         } else {
-            eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
-                    .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+            showErrorUserNotLogged()
         }
     }
 

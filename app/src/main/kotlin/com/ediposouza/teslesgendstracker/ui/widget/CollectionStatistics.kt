@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.widget
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
@@ -31,10 +32,12 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         }
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        return true
     }
 
     fun scrollToTop() {
@@ -82,7 +85,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         publicInteractor.getCardsForStatistics(null, attr) {
             val allAttrCards = it.groupBy { it.rarity }
             Timber.d(attr.name + allAttrCards.toString())
-            privateInteractor.getUserCollection(null, attr) { collection: Map<String, Long> ->
+            privateInteractor.getUserCollection(null, attr) { collection: Map<String, Int> ->
                 val userAttrCards = allAttrCards.map {
                     it.key to it.value.filter { collection.containsKey(it.shortName) }
                             .map { it to collection[it.shortName] }
@@ -91,13 +94,13 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                     val allRarityCards = it.value
                     val userRarityCards = userAttrCards[it.key]
                     Timber.d("${attr.name} - $it: $userRarityCards")
-                    val owned = userRarityCards?.map { it.second ?: 0L }?.sum() ?: 0L
+                    val owned = userRarityCards?.map { it.second ?: 0 }?.sum() ?: 0
                     when (it.key) {
-                        CardRarity.COMMON -> statisticsAttr(attr).setCommon(owned, allRarityCards.size * 3L)
-                        CardRarity.RARE -> statisticsAttr(attr).setRare(owned, allRarityCards.size * 3L)
-                        CardRarity.EPIC -> statisticsAttr(attr).setEpic(owned, allRarityCards.size * 3L)
+                        CardRarity.COMMON -> statisticsAttr(attr).setCommon(owned, allRarityCards.size * 3)
+                        CardRarity.RARE -> statisticsAttr(attr).setRare(owned, allRarityCards.size * 3)
+                        CardRarity.EPIC -> statisticsAttr(attr).setEpic(owned, allRarityCards.size * 3)
                         CardRarity.LEGENDARY -> {
-                            val legendaryTotal = allRarityCards.map { if (it.unique) 1L else 3L }.sum()
+                            val legendaryTotal = allRarityCards.map { if (it.unique) 1 else 3 }.sum()
                             statisticsAttr(attr).setLegendary(owned, legendaryTotal)
                         }
                         else -> {

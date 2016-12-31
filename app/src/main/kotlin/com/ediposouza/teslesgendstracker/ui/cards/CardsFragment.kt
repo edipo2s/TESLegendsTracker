@@ -12,18 +12,17 @@ import android.support.v7.widget.SearchView
 import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import com.ediposouza.teslesgendstracker.MetricScreen
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.inflate
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
-import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.toggleExpanded
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -32,30 +31,42 @@ import kotlinx.android.synthetic.main.fragment_cards.*
  */
 class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
-    var query: String? = null
-    val handler = Handler()
-    val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
+    private val KEY_PAGE_VIEW_POSITION = "pageViewPositionKey"
+
+    private var query: String? = null
+    private val handler = Handler()
+    private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
+
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
+        BottomSheetBehavior.from(activity.cards_collection_statistics)
+    }
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
-            val title = when (position) {
-                1 -> R.string.tab_cards_collection
-                2 -> R.string.tab_cards_favorites
-                else -> R.string.app_name
+            updateActivityTitle(position)
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            if (position == 1) {
+                statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                activity.cards_collection_statistics.updateStatistics()
+            } else {
+                statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
-            activity.toolbar_title?.setText(title)
-            BottomSheetBehavior.from(activity.collection_statistics).state = BottomSheetBehavior.STATE_COLLAPSED
+            eventBus.post(CmdUpdateRarityMagikaFiltersPosition(position == 1))
             MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 else -> MetricScreen.SCREEN_CARDS_FAVORED()
             })
-            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
-            if (position == 1) {
-                collection_statistics.updateStatistics()
-            }
         }
 
+    }
+
+    private fun updateActivityTitle(position: Int) {
+        activity.toolbar_title?.setText(when (position) {
+            1 -> R.string.title_tab_cards_collection
+            2 -> R.string.title_tab_cards_favorites
+            else -> R.string.title_tab_cards_all
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,6 +77,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
+        activity.cards_collection_statistics.setOnClickListener {
+            statisticsSheetBehavior.toggleExpanded()
+        }
+        statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
         cards_view_pager.addOnPageChangeListener(pageChange)
         attr_filter.filterClick = {
@@ -80,20 +95,37 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.toolbar_title.setText(R.string.app_name)
+        activity.toolbar_title.setText(R.string.app_name_full)
         activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, cards_view_pager?.currentItem ?: 0) }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.apply {
+            cards_view_pager.currentItem = getInt(KEY_PAGE_VIEW_POSITION)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         eventBus.post(CmdShowTabs())
-        eventBus.post(CmdUpdateRarityMagikaFiltersVisibility(true))
+        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_sets, menu)
         inflater?.inflate(R.menu.menu_search, menu)
+        inflater?.inflate(R.menu.menu_sets, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
             queryHint = getString(R.string.search_hint)
             setOnQueryTextListener(this@CardsFragment)
@@ -118,33 +150,29 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-}
+    class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        var titles: Array<String> = ctx.resources.getStringArray(R.array.cards_tabs)
+        val cardsCollectionFragment by lazy { CardsCollectionFragment() }
+        val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
+        val cardsAllFragment by lazy { CardsAllFragment() }
 
-    var titles: Array<String>
-    val cardsCollectionFragment by lazy { CardsCollectionFragment() }
-    val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
-    val cardsAllFragment by lazy { CardsAllFragment() }
-
-    init {
-        titles = ctx.resources.getStringArray(R.array.cards_tabs)
-    }
-
-    override fun getItem(position: Int): CardsAllFragment {
-        return when (position) {
-            1 -> cardsCollectionFragment
-            2 -> cardsFavoritesFragment
-            else -> cardsAllFragment
+        override fun getItem(position: Int): CardsAllFragment {
+            return when (position) {
+                1 -> cardsCollectionFragment
+                2 -> cardsFavoritesFragment
+                else -> cardsAllFragment
+            }
         }
-    }
 
-    override fun getCount(): Int {
-        return titles.size
-    }
+        override fun getCount(): Int {
+            return titles.size
+        }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
+        override fun getPageTitle(position: Int): CharSequence {
+            return titles[position]
+        }
+
     }
 
 }

@@ -1,9 +1,9 @@
-package com.ediposouza.teslesgendstracker
+package com.ediposouza.teslesgendstracker.util
 
 /**
  * Created by ediposouza on 08/12/16.
  */
-abstract class MetricsConstants() {
+abstract class MetricsConstants {
 
     companion object {
 
@@ -70,6 +70,9 @@ sealed class MetricAction(val name: String) {
             const val VALUE_CLEAR = "Clear"
         }
     }
+
+    class ACTION_NOTIFY_UPDATE : MetricAction("NotifyUpdate")
+    class ACTION_VERSION_UNSUPPORTED : MetricAction("VersionUnsupported")
 
 }
 

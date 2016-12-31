@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/navigation_bar_height">
+    android:orientation="vertical"
+    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
-    <LinearLayout
+    <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
+        android:id="@+id/decks_attr_filter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
-            android:id="@+id/decks_attr_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            app:deckMode="true" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/decks_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/decks_fab_add"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorPrimary"
-        app:fabSize="normal" />
+        android:layout_marginTop="@dimen/default_margin"
+        app:deckMode="true" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/decks_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

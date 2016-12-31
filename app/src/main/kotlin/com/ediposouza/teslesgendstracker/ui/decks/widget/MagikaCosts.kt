@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget.filter
+package com.ediposouza.teslesgendstracker.ui.decks.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -71,11 +71,9 @@ class MagikaCosts(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
-    }
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun updateCosts(cards: List<CardSlot>) {
         magikaCost0Qtd = cards.filter { it.card.cost == 0 }.sumBy { it.qtd.toInt() }

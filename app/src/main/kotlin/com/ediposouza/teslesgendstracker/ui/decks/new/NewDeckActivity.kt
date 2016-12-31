@@ -1,12 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.decks.new
 
-import android.animation.Animator
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
 import android.util.TypedValue
@@ -14,31 +10,30 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import com.ediposouza.teslesgendstracker.MetricScreen
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.data.DeckType
-import com.ediposouza.teslesgendstracker.data.Patch
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.manager.MetricsManager
-import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
-import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateRarityMagikaFiltersVisibility
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import kotlinx.android.synthetic.main.activity_new_deck.*
 import kotlinx.android.synthetic.main.dialog_new_deck.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import java.util.*
 
-class NewDeckActivity : BaseActivity() {
+class NewDeckActivity : BaseFilterActivity() {
 
     companion object {
 
@@ -46,20 +41,16 @@ class NewDeckActivity : BaseActivity() {
 
     }
 
-    val ANIM_DURATION = 250L
+    private val ANIM_DURATION = 250L
+    private val DECK_MIN_CARDS_QTD = 50
+    private val EXIT_CONFIRM_MIN_CARDS = 3
+    private val KEY_DECK_CARDS = "deckCardsKey"
 
-    val attrFilterClick: (Attribute) -> Unit = {
+    private val attrFilterClick: (Attribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
         new_deck_attr_filter.selectAttr(it, true)
         new_deck_attr_filter.lastAttrSelected = it
         updateDualFilter()
-    }
-
-    val onCardlistChange = {
-        val cards = new_deck_cardlist.getCards()
-        new_deck_cardlist_costs.updateCosts(cards)
-        new_deck_cardlist_qtd.text = getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
-        new_deck_cardlist_soul.text = cards.map { it.card.rarity.soulCost * it.qtd }.sum().toString()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +63,18 @@ class NewDeckActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_title.text = getString(R.string.new_deck_title)
+        new_deck_cardlist.editMode = true
+        configDeckFilters()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
+                .commit()
+        handler.postDelayed({
+            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+        }, DateUtils.SECOND_IN_MILLIS)
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+    }
+
+    private fun configDeckFilters() {
         with(new_deck_attr_filter) {
             filterClick = attrFilterClick
             onAttrLock = { attr1: Attribute, attr2: Attribute ->
@@ -87,17 +90,32 @@ class NewDeckActivity : BaseActivity() {
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
         }
-        new_deck_cardlist.editMode = true
-        new_deck_cardlist.onCardListChange = onCardlistChange
-        new_deck_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        new_deck_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
-                .commit()
-        Handler().postDelayed({
-            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
-        }, DateUtils.SECOND_IN_MILLIS)
-        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+        filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            val cardsArrayList = ArrayList<CardSlot>()
+            cardsArrayList.addAll(new_deck_cardlist?.getCards() ?: listOf())
+            putParcelableArrayList(KEY_DECK_CARDS, cardsArrayList)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.apply {
+            new_deck_cardlist?.addCards(getParcelableArrayList<CardSlot>(KEY_DECK_CARDS))
+        }
+    }
+
+    override fun onBackPressed() {
+        if (canExit || new_deck_cardlist.getCards().size < EXIT_CONFIRM_MIN_CARDS) {
+            super.onBackPressed()
+        } else {
+            showExitConfirm(R.string.deck_exit_confirm)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -113,7 +131,16 @@ class NewDeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_done -> {
-                showSaveDialog()
+                if (!App.hasUserLogged()) {
+                    showErrorUserNotLogged()
+                    return false
+                }
+                if (new_deck_cardlist.getCards().sumBy { it.qtd } >= DECK_MIN_CARDS_QTD) {
+                    showSaveDialog()
+                } else {
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_deck_save_error_incomplete)
+                            .withAction(android.R.string.ok, {}))
+                }
                 return true
             }
         }
@@ -147,10 +174,9 @@ class NewDeckActivity : BaseActivity() {
         val deckTypeSelected = DeckType.valueOf(deckTypeText.toUpperCase())
         val deckPatchDesc = view.new_deck_dialog_patch_spinner.selectedItem as String
         val deckPatchSelected = deckPatches.find { it.desc == deckPatchDesc } ?: deckPatches.last()
-        val deckCost = new_deck_cardlist_soul.text.toString().toInt()
         val deckCards = new_deck_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deckPrivate = !view.new_deck_dialog_public.isChecked
-        PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, deckCost,
+        PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
                 deckPatchSelected.uidDate, deckCards, deckPrivate) {
             toast(if (deckPrivate) R.string.new_deck_save_as_private else R.string.new_deck_save_as_public)
             val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)
@@ -171,53 +197,13 @@ class NewDeckActivity : BaseActivity() {
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
-        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
     }
 
     @Subscribe
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
-        new_deck_cardlist_costs.updateCosts(new_deck_cardlist.getCards())
         updateDualFilter()
-    }
-
-    @Subscribe
-    fun onCmdUpdateRarityMagikaFilters(update: CmdUpdateRarityMagikaFiltersVisibility) {
-        val filterMagikaLP = new_deck_filter_magika.layoutParams as CoordinatorLayout.LayoutParams
-        val filterRarityLP = new_deck_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams
-        val showBottomMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
-        val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
-        if (update.show && filterMagikaLP.bottomMargin == showBottomMargin ||
-                !update.show && filterMagikaLP.bottomMargin == hideBottomMargin) {
-            return
-        }
-        val animFrom = if (update.show) hideBottomMargin else showBottomMargin
-        val animTo = if (update.show) showBottomMargin else hideBottomMargin
-        with(ValueAnimator.ofInt(animFrom, animTo)) {
-            duration = DateUtils.SECOND_IN_MILLIS
-            addUpdateListener {
-                filterRarityLP.bottomMargin = it.animatedValue as Int
-                filterMagikaLP.bottomMargin = it.animatedValue as Int
-                new_deck_filter_magika.layoutParams = filterMagikaLP
-                new_deck_filter_rarity.layoutParams = filterRarityLP
-            }
-            addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(p0: Animator?) {
-                }
-
-                override fun onAnimationEnd(p0: Animator?) {
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {
-                }
-
-                override fun onAnimationStart(p0: Animator?) {
-                }
-
-            })
-            start()
-        }
     }
 
 }

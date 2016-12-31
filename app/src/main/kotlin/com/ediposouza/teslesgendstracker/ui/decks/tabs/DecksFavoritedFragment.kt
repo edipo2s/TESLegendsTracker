@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.inflate
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.util.inflate
 import timber.log.Timber
 
 /**

@@ -1403,6 +1403,17 @@
           "keyword": "Shackle, Evolves",
           "evolves": true
         },
+        "battlereeveofdusk": {
+          "name": "Battlereeve of Dusk",
+          "cost": "06",
+          "type": "Creature",
+          "race": "High Elf",
+          "attack": "3",
+          "health": "3",
+          "rarity": "Epic",
+          "keyword": "Summon",
+          "arenaTier": "Unknown"
+        },
         "fateweaver": {
           "name": "Fate Weaver",
           "cost": "06",
@@ -4786,8 +4797,12 @@
     }
   },
   "season": {
-    "04": {
+    "05": {
       "reward": "elsweyrlookout",
+      "month": "2016_12"
+    },
+    "04": {
+      "reward": "battlereeveofdusk",
       "month": "2016_11"
     },
     "03": {
@@ -4824,7 +4839,7 @@
     }
   },
   "patches": {
-    "2016_12_20": {
+    "2017_01_01": {
       "desc": "Elsweyr Lookout"
     },
     "2016_12_14": {
@@ -4844,8 +4859,8 @@
       },
       "desc": "Madhouse Collection"
     },
-    "2016_11_20": {
-      "desc": "Mechanical Ally"
+    "2016_12_01": {
+      "desc": "Battlereeve Of Dusk"
     },
     "2016_11_03": {
       "core": {
@@ -4958,8 +4973,14 @@
       },
       "desc": "Nahkriin Nerf"
     },
-    "2016_10_20": {
+    "2016_11_01": {
+      "desc": "Mechanical Ally"
+    },
+    "2016_10_01": {
       "desc": "Hist Grove"
+    },
+    "2016_09_01": {
+      "desc": "Smuggler's Haul"
     },
     "2016_09_28": {
       "core": {

@@ -40,7 +40,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.decks.new.NewDeckActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"
@@ -58,9 +59,16 @@
             android:value="@integer/google_play_services_version" />
 
         <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_legend" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
+        <meta-data
             android:name="io.fabric.ApiKey"
             android:value="e056905fcbc01f84ea9cad8acf63b74cb07f2506" />
-
     </application>
 
 </manifest>

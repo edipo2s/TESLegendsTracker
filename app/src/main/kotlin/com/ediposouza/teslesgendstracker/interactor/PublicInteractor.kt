@@ -9,15 +9,33 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PublicInteractor() : BaseInteractor() {
-
-    private val NODE_PATCHES = "patches"
+class PublicInteractor : BaseInteractor() {
 
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
-    fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
-        val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sortedBy(Card::cost)) }
+    fun getCards(set: CardSet?, vararg attrs: Attribute, onSuccess: (List<Card>) -> Unit) {
+        var attrIndex = 0
+        val cards = arrayListOf<Card>()
+        if (attrs.size == 1) {
+            return getCards(set, attrs[0], onSuccess)
+        }
+
+        fun getCardsOnSuccess(onSuccess: (List<Card>) -> Unit): (List<Card>) -> Unit = {
+            cards.addAll(it)
+            attrIndex = attrIndex.inc()
+            if (attrIndex >= attrs.size) {
+                onSuccess.invoke(cards)
+            } else {
+                getCards(set, attrs[attrIndex], getCardsOnSuccess(onSuccess))
+            }
+        }
+
+        getCards(set, attrs[attrIndex], getCardsOnSuccess(onSuccess))
+    }
+
+    private fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
+        val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sorted()) }
         getListFromSets(set, attr, onFinalSuccess) { set, attr, onEachSuccess ->
             val node_attr = attr.name.toLowerCase()
             database.child(NODE_CARDS).child(set.db).child(node_attr).orderByChild(KEY_CARD_COST)
@@ -25,7 +43,7 @@ class PublicInteractor() : BaseInteractor() {
 
                         override fun onDataChange(ds: DataSnapshot) {
                             val cards = ds.children.mapTo(arrayListOf()) {
-                                it.getValue(CardParser::class.java).toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
                             }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -48,7 +66,7 @@ class PublicInteractor() : BaseInteractor() {
                             val cards = ds.children.flatMap { it.children }
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(CardParser::class.java).toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java).toCardStatistic(it.key)
                                     }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -72,7 +90,7 @@ class PublicInteractor() : BaseInteractor() {
                             val cards = ds.children
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(CardParser::class.java).toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java).toCardStatistic(it.key)
                                     }
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -88,7 +106,7 @@ class PublicInteractor() : BaseInteractor() {
 
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
-        dbPublicDeck.keepSynced(true)
+        dbPublicDeck.keepSynced()
         var query = dbPublicDeck.orderByChild(KEY_DECK_UPDATE_AT)
         if (cls != null) {
             query = dbPublicDeck.orderByChild(KEY_DECK_CLASS).equalTo(cls.ordinal.toDouble())
@@ -98,7 +116,7 @@ class PublicInteractor() : BaseInteractor() {
             override fun onDataChange(ds: DataSnapshot) {
                 Timber.d(ds.value?.toString())
                 val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                    it.getValue(DeckParser::class.java).toDeck(it.key, false)
+                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
                 }
                 Timber.d(decks.toString())
                 onSuccess.invoke(decks)
@@ -111,28 +129,22 @@ class PublicInteractor() : BaseInteractor() {
         })
     }
 
-    fun incDeckView(deck: Deck, onSuccess: () -> Unit, onError: (e: Exception?) -> Unit) {
+    fun incDeckView(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC)) {
             child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to deck.views.inc())).addOnCompleteListener({
                 Timber.d(it.toString())
-                if (it.isSuccessful) onSuccess.invoke() else onError.invoke(it.exception)
+                if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
             })
         }
     }
 
     fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
         with(database.child(NODE_CARDS)) {
-            val cards = arrayListOf<Card>()
-            getCards(null, deck.cls.attr1) {
-                cards.addAll(it)
-                getCards(null, deck.cls.attr2) {
-                    cards.addAll(it)
-                    val deckCards = cards
-                            .map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
-                            .filter { it.qtd > 0 }
-                    Timber.d(deckCards.toString())
-                    onSuccess(deckCards)
-                }
+            getCards(null, deck.cls.attr1, deck.cls.attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+                val deckCards = it.map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
+                        .filter { it.qtd > 0 }
+                Timber.d(deckCards.toString())
+                onSuccess(deckCards)
             }
         }
     }
@@ -162,7 +174,7 @@ class PublicInteractor() : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val patches = ds.children.mapTo(arrayListOf()) {
-                    it.getValue(PatchParser::class.java).toPatch(it.key)
+                    it.getValue(FirebaseParsers.PatchParser::class.java).toPatch(it.key)
                 }
                 Timber.d(patches.toString())
                 onSuccess.invoke(patches)

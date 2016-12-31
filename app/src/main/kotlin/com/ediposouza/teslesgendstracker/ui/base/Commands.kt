@@ -23,7 +23,9 @@ data class CmdShowCardsByAttr(val attr: Attribute)
 
 data class CmdShowDecksByClasses(val classes: List<Class>)
 
-data class CmdUpdateRarityMagikaFiltersVisibility(val show: Boolean)
+data class CmdUpdateRarityMagikaFiltersPosition(val high: Boolean)
+
+data class CmdUpdateVisibility(val show: Boolean)
 
 class CmdShowSnackbarMsg private constructor(type: Long) {
 

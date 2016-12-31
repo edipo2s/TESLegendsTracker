@@ -15,12 +15,12 @@ class CollectionStatisticsAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     private var attribute = Attribute.STRENGTH
-    private val cards = hashMapOf(CardRarity.COMMON to Pair(0L, 0L), CardRarity.RARE to Pair(0L, 0L),
-            CardRarity.EPIC to Pair(0L, 0L), CardRarity.LEGENDARY to Pair(0L, 0L))
+    private val cards = hashMapOf(CardRarity.COMMON to Pair(0, 0), CardRarity.RARE to Pair(0, 0),
+            CardRarity.EPIC to Pair(0, 0), CardRarity.LEGENDARY to Pair(0, 0))
 
-    var soulMissing: Long = 0
-    var owned: Long = 0
-    var total: Long = 0
+    var soulMissing: Int = 0
+    var owned: Int = 0
+    var total: Int = 0
 
     init {
         inflate(context, R.layout.widget_collection_statistics_attr, this)
@@ -32,31 +32,29 @@ class CollectionStatisticsAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr
         }
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0) {
-    }
+    constructor(ctx: Context?) : this(ctx, null, 0)
 
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0) {
-    }
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun setCommon(owned: Long, total: Long) {
+    fun setCommon(owned: Int, total: Int) {
         attr_statistics_common.text = context.getString(R.string.statistics_rarity, owned, total)
         cards[CardRarity.COMMON] = Pair(owned, total)
         updateTotal()
     }
 
-    fun setRare(owned: Long, total: Long) {
+    fun setRare(owned: Int, total: Int) {
         attr_statistics_rare.text = context.getString(R.string.statistics_rarity, owned, total)
         cards[CardRarity.RARE] = Pair(owned, total)
         updateTotal()
     }
 
-    fun setEpic(owned: Long, total: Long) {
+    fun setEpic(owned: Int, total: Int) {
         attr_statistics_epic.text = context.getString(R.string.statistics_rarity, owned, total)
         cards[CardRarity.EPIC] = Pair(owned, total)
         updateTotal()
     }
 
-    fun setLegendary(owned: Long, total: Long) {
+    fun setLegendary(owned: Int, total: Int) {
         attr_statistics_legendary.text = context.getString(R.string.statistics_rarity, owned, total)
         cards[CardRarity.LEGENDARY] = Pair(owned, total)
         updateTotal()

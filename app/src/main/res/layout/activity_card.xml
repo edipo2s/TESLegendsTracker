@@ -5,6 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context="com.ediposouza.teslesgendstracker.ui.CardActivity">
 
     <android.support.design.widget.CoordinatorLayout
@@ -49,13 +50,16 @@
             android:elevation="@dimen/cardview_default_elevation"
             android:foreground="?attr/selectableItemBackground"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_heigth"
+            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_height"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/default_margin"
                 android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
 
                 <ImageView

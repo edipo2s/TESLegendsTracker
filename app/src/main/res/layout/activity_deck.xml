@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ediposouza.teslesgendstracker.ui.widget.InsetFrameCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context="com.ediposouza.teslesgendstracker.ui.DeckActivity">
 
     <android.support.design.widget.CoordinatorLayout
@@ -80,8 +81,8 @@
                         android:layout_width="@dimen/deck_header_attr_icon_height"
                         android:layout_height="@dimen/deck_header_attr_icon_height"
                         android:layout_alignBottom="@id/deck_class_attr1"
-                        android:layout_marginEnd="@dimen/default_margin"
-                        android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_marginStart="@dimen/default_margin"
                         android:layout_toEndOf="@id/deck_class_attr1"
                         android:transitionName="@string/deck_attr2_transition_name"
                         tools:src="@drawable/attr_agility" />
@@ -90,9 +91,9 @@
                         android:id="@+id/deck_details_create_by_photo"
                         android:layout_width="@dimen/size_small"
                         android:layout_height="@dimen/size_small"
-                        android:layout_marginStart="@dimen/large_margin"
                         android:layout_alignBottom="@id/deck_class_attr2"
                         android:layout_marginBottom="@dimen/nano_margin"
+                        android:layout_marginStart="@dimen/large_margin"
                         android:layout_toEndOf="@id/deck_class_attr2"
                         android:src="@drawable/ic_user" />
 
@@ -101,9 +102,9 @@
                         style="@style/DeckInfoItem"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size_small"
-                        android:layout_marginStart="@dimen/default_margin"
                         android:layout_alignTop="@id/deck_class_attr2"
                         android:layout_marginBottom="@dimen/default_margin"
+                        android:layout_marginStart="@dimen/default_margin"
                         android:layout_toEndOf="@id/deck_details_create_by_photo"
                         tools:text="Édipo Souza" />
 
@@ -116,7 +117,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/navigation_bar_height"
+            android:layout_marginBottom="@dimen/deck_comment_bottom_sheet_peek_height"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/include_deck_info" />
@@ -131,9 +132,10 @@
             android:layout_marginStart="@dimen/large_margin"
             android:clickable="true"
             android:elevation="@dimen/cardview_default_elevation"
+            android:fitsSystemWindows="false"
             android:foreground="?attr/selectableItemBackground"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_heigth"
+            app:behavior_peekHeight="@dimen/deck_comment_bottom_sheet_peek_height"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <RelativeLayout
@@ -142,11 +144,21 @@
                 android:layout_margin="@dimen/default_margin"
                 android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/nano_margin"
+                    android:text="@string/deck_comments_text"
+                    android:textSize="@dimen/font_medium" />
+
                 <ImageView
                     android:id="@+id/deck_comment_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/nano_margin"
                     android:src="@drawable/ic_comment" />
 
                 <TextView
@@ -164,7 +176,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/deck_comment_icon"
-                    android:layout_margin="@dimen/default_margin" />
+                    android:layout_margin="@dimen/default_margin"
+                    android:fadeScrollbars="false"
+                    android:scrollbarSize="@dimen/small_margin"
+                    android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                    android:scrollbars="vertical"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/itemlist_deck_comment" />
+
+                <ImageView
+                    android:id="@+id/deck_comment_send"
+                    android:layout_width="@dimen/size_small"
+                    android:layout_height="@dimen/size_small"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/deck_comment_recycle_view"
+                    android:layout_margin="@dimen/default_margin"
+                    android:src="@drawable/ic_send" />
+
+                <EditText
+                    android:id="@+id/deck_comment_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/deck_comment_recycle_view"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_toStartOf="@id/deck_comment_send"
+                    android:hint="@string/deck_comment_new_hint"
+                    android:textColor="@color/primary_text_dark"
+                    tools:text="Nice Deck!" />
 
             </RelativeLayout>
 
@@ -186,4 +224,4 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-</FrameLayout>
+</com.ediposouza.teslesgendstracker.ui.widget.InsetFrameCoordinatorLayout>
