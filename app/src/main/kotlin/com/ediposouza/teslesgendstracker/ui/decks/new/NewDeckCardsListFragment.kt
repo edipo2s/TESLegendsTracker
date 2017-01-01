@@ -8,7 +8,6 @@ import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_cards_list.*
-import org.greenrobot.eventbus.EventBus
 
 class NewDeckCardsListFragment : CardsAllFragment() {
 
@@ -16,7 +15,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     override val CARDS_PER_ROW = 2
 
     val onItemClick = { view: View, card: Card ->
-        EventBus.getDefault().post(CmdAddCard(card))
+        eventBus.post(CmdAddCard(card))
     }
 
     override val itemDecoration by lazy {

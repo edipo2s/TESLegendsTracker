@@ -155,7 +155,25 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     protected fun showErrorUserNotLogged() {
         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
-                .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+                .withAction(R.string.action_login, { showLogin() }))
+    }
+
+    protected fun showLogin() {
+        eventBus.post(CmdShowLogin())
+    }
+
+    private fun showLoading() {
+        val progressBar = ProgressBar(this)
+        progressBar.isIndeterminate = true
+        val largeMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
+        progressBar.setPadding(0, largeMargin, 0, largeMargin)
+        loading = AlertDialog.Builder(this)
+                .setView(progressBar)
+                .show()
+    }
+
+    private fun hideLoading() {
+        loading?.dismiss()
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
@@ -174,7 +192,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                             toast("SignIn with " + currentUser?.displayName)
                         })
                         PrivateInteractor().setUserInfo()
-                        EventBus.getDefault().post(CmdLoginSuccess())
+                        eventBus.post(CmdLoginSuccess())
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast(getString(R.string.error_login))
@@ -182,20 +200,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     }
                     hideLoading()
                 }
-    }
-
-    private fun showLoading() {
-        val progressBar = ProgressBar(this)
-        progressBar.isIndeterminate = true
-        val largeMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
-        progressBar.setPadding(0, largeMargin, 0, largeMargin)
-        loading = AlertDialog.Builder(this)
-                .setView(progressBar)
-                .show()
-    }
-
-    private fun hideLoading() {
-        loading?.dismiss()
     }
 
     @SuppressWarnings("ResourceType")
@@ -220,6 +224,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     @Subscribe
     fun onCmdShowLogin(showLogin: CmdShowLogin) {
+        googleApiClient?.clearDefaultAccountAndReconnect()
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
