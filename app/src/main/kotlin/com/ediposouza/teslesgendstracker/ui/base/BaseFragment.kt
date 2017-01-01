@@ -63,4 +63,8 @@ open class BaseFragment : Fragment() {
         isFragmentSelected = menuVisible
     }
 
+    protected fun showLogin() {
+        eventBus.post(CmdShowLogin())
+    }
+
 }
