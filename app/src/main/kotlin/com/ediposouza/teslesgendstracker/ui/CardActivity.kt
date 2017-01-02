@@ -31,6 +31,7 @@ class CardActivity : BaseActivity() {
     }
 
     val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
+    val cardInfoSheetBehavior by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     var favorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +62,16 @@ class CardActivity : BaseActivity() {
         ActivityCompat.finishAfterTransition(this)
     }
 
+    override fun onBackPressed() {
+        if (cardInfoSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            cardInfoSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun configureBottomSheet() {
-        val sheetBehavior = BottomSheetBehavior.from(card_bottom_sheet)
-        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        cardInfoSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
 
@@ -77,7 +85,7 @@ class CardActivity : BaseActivity() {
             }
 
         })
-        card_bottom_sheet.setOnClickListener { sheetBehavior.toggleExpanded() }
+        card_bottom_sheet.setOnClickListener { cardInfoSheetBehavior.toggleExpanded() }
     }
 
     private fun loadCardInfo() {
