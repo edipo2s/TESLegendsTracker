@@ -188,6 +188,8 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun getOwnedPrivateDecksRef() = dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)
+
     private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
             keepSynced()

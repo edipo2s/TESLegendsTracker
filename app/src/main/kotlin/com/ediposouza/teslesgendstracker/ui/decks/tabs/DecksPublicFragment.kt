@@ -38,6 +38,7 @@ import java.util.*
 open class DecksPublicFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 15 //after 15 lines
+    val DECK_PAGE_SIZE = 7
     val RC_DECK = 123
 
     protected val publicInteractor = PublicInteractor()
@@ -50,22 +51,24 @@ open class DecksPublicFragment : BaseFragment() {
 
     open protected val isDeckOwned: Boolean = false
 
-    protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
-            { view: View, deck: Deck ->
-                PrivateInteractor().getFavoriteDecks(deck.cls) {
-                    val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
-                    val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
-                    startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
-                            RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                            Pair(view.deck_name as View, nameTransitionName),
-                            Pair(view.deck_cover as View, coverTransitionName),
-                            Pair(view.deck_attr1 as View, attr1TransitionName),
-                            Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
-                }
-            }) {
+    val itemClick = { view: View, deck: Deck ->
+        PrivateInteractor().getFavoriteDecks(deck.cls) {
+            val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
+            val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
+            startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
+                    RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                    Pair(view.deck_name as View, nameTransitionName),
+                    Pair(view.deck_cover as View, coverTransitionName),
+                    Pair(view.deck_attr1 as View, attr1TransitionName),
+                    Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+        }
+    }
+    val itemLongClick = {
         view: View, deck: Deck ->
         true
     }
+    open protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
+            itemClick, itemLongClick)
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list)
