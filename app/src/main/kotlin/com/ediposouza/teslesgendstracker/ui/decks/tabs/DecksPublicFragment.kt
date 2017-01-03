@@ -180,6 +180,8 @@ open class DecksPublicFragment : BaseFragment() {
     class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
+        constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
+
         fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
             itemView.setOnClickListener { itemClick(itemView, deck) }
             itemView.setOnLongClickListener { itemLongClick(itemView, deck) }

@@ -56,14 +56,14 @@ import java.lang.reflect.InvocationTargetException
  *         }
  *     }
  *
- *     FirebaseRecyclerViewAdapter<ChatMessage, ChatMessageViewHolder> adapter;
+ *     FirebaseRVAdapter<ChatMessage, ChatMessageViewHolder> adapter;
  *     ref = new Firebase("https://<yourapp>.firebaseio.com");
  *
  *     RecyclerView recycler = (RecyclerView) findViewById(R.id.messages_recycler);
  *     recycler.setHasFixedSize(true);
  *     recycler.setLayoutManager(new LinearLayoutManager(this));
  *
- *     adapter = new FirebaseRecyclerViewAdapter<ChatMessage, ChatMessageViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, ChatMessageViewHolder.class, mRef) {
+ *     adapter = new FirebaseRVAdapter<ChatMessage, ChatMessageViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, ChatMessageViewHolder.class, mRef) {
  *         public void populateViewHolder(ChatMessageViewHolder chatMessageViewHolder, ChatMessage chatMessage) {
  *             chatMessageViewHolder.nameText.setText(chatMessage.getName());
  *             chatMessageViewHolder.messageText.setText(chatMessage.getMessage());
@@ -78,8 +78,6 @@ import java.lang.reflect.InvocationTargetException
  * </VH></T>
  *
  * CONSTRUCTOR
- * @param modelClass Firebase will marshall the data at a location into an instance of a class that you provide
- * *
  * @param modelLayout This is the layout used to represent a single item in the list. You will be responsible for populating an
  * *                    instance of the corresponding view with the data from an instance of modelClass.
  * *
@@ -89,9 +87,9 @@ import java.lang.reflect.InvocationTargetException
  * *
  * @param pageSize   initial page size. set 0 for no limit.
  */
-abstract class FirebaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(
-        var mModelClass: Class<T>,
+abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
         protected var mModelLayout: Int,
+        var mModel: Class<T>,
         var mViewHolderClass: Class<VH>,
         ref: Query?,
         pageSize: Int = 0,
@@ -153,7 +151,7 @@ abstract class FirebaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(
     }
 
     fun getItem(position: Int): T {
-        return mSnapshots.getItem(position - snapShotOffset).getValue(mModelClass)
+        return mSnapshots.getItem(position - snapShotOffset).getValue(mModel)
     }
 
     fun getRef(position: Int): DatabaseReference {
@@ -202,7 +200,7 @@ abstract class FirebaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(
      * this class. The third argument is the item's position in the list.
      * <p>
      * Your implementation should populate the view using the data contained in the model.
-     * You should implement either this method or the other FirebaseRecyclerViewAdapter#populateViewHolder(VH, Object) method
+     * You should implement either this method or the other FirebaseRVAdapter#populateViewHolder(VH, Object) method
      * but not both.
      *
      * @param viewHolder The view to populate
@@ -219,7 +217,7 @@ abstract class FirebaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(
      * This is a backwards compatible version of populateViewHolder.
      *
      *
-     * You should implement either this method or the other FirebaseRecyclerViewAdapter#populateViewHolder(VH, T, int) method
+     * You should implement either this method or the other FirebaseRVAdapter#populateViewHolder(VH, T, int) method
      * but not both.
      * see FirebaseListAdapter#populateView(View, Object, int)
      * @param viewHolder The view to populate
