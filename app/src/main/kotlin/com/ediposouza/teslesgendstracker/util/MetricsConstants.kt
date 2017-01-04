@@ -104,5 +104,7 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_DECKS_FAVORED : MetricScreen("DecksFavored")
     class SCREEN_DECK_DETAILS : MetricScreen("DeckDetails")
     class SCREEN_NEW_DECKS : MetricScreen("NewDeck")
+    class SCREEN_MATCHES_STATISTICS : MetricScreen("MatchesStatistics")
+    class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
 
 }
