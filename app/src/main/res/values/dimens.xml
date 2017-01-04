@@ -72,4 +72,8 @@
     <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
     <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
 
+    <dimen name="_150dp">150dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+
 </resources>

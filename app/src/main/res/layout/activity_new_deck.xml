@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context="com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity">
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
