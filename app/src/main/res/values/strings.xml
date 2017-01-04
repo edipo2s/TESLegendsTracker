@@ -42,6 +42,8 @@
     <string name="tab_decks_public">Public</string>
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
+    <string name="tab_matches_statistics">Statistics</string>
+    <string name="tab_matches_history">History</string>
 
     <string name="title_tab_cards_all">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
@@ -49,6 +51,8 @@
     <string name="title_tab_decks_public">Decks Public</string>
     <string name="title_tab_decks_owned">Decks Owned</string>
     <string name="title_tab_decks_favorites">Decks Favorites</string>
+    <string name="title_tab_matches_statistics">Matches Statistics</string>
+    <string name="title_tab_matches_history">Matches History</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_sets_core">Core</string>
