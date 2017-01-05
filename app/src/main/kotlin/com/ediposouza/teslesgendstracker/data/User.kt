@@ -25,16 +25,17 @@ data class Match(
 
         val player: MatchDeck,
         val opponent: MatchDeck,
-        val result: Boolean,
-        val rack: Int,
+        val win: Boolean,
+        val rank: Int,
         val legend: Boolean
 
 )
 
 data class MatchDeck(
 
-        val name: String?,
-        val cls: Class?,
-        val type: DeckType?
+        val name: String,
+        val cls: Class,
+        val type: DeckType,
+        val version: String
 
 )
