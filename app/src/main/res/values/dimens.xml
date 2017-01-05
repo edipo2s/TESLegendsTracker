@@ -72,8 +72,8 @@
     <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
     <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
 
-    <dimen name="_150dp">150dp</dimen>
-    <dimen name="_100dp">100dp</dimen>
-    <dimen name="_40dp">40dp</dimen>
+    <dimen name="match_statistics_cell_height">48dp</dimen>
+    <dimen name="match_statistics_cell_width">72dp</dimen>
+    <dimen name="match_statistics_header_width">88dp</dimen>
 
 </resources>

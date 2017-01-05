@@ -158,7 +158,7 @@
                 android:layout_alignTop="@id/collection_statistics_pack"
                 android:layout_toEndOf="@id/collection_statistics_pack"
                 android:gravity="center_vertical"
-                android:text="@string/statistics_total_cards"
+                android:text="@string/collection_statistics_total_cards"
                 android:textSize="@dimen/font_medium" />
 
             <TextView

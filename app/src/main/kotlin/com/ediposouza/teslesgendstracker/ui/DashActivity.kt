@@ -183,7 +183,7 @@ class DashActivity : BaseFilterActivity(),
                             allAttrCards.map { it.shortName }.contains(it.key)
                         }.values.sum()
                         Timber.d("Out: ${it.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
-                        val stringPercent = getString(R.string.statistics_percent,
+                        val stringPercent = getString(R.string.collection_statistics_percent,
                                 if (allCardsTotal > 0)
                                     userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f
                                 else 0f)
