@@ -167,6 +167,8 @@ class PrivateInteractor : BaseInteractor() {
         keepSynced()
     }
 
+    fun getFavoriteDecks() = PublicInteractor().getPublicDecksRef()
+
     fun getFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {
         PublicInteractor().getPublicDecks(cls) {
             val publicDecks = it

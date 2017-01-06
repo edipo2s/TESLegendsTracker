@@ -104,6 +104,11 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
+    fun getPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
+            .orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+        keepSynced()
+    }
+
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
         dbPublicDeck.keepSynced()
