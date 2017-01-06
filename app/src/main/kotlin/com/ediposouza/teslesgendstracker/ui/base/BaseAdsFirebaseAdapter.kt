@@ -14,12 +14,14 @@ import com.google.firebase.database.Query
 /**
  * Created by ediposouza on 08/12/16.
  */
-abstract class BaseAdsFirebaseAdapter<T, VH : RecyclerView.ViewHolder>(val adsEachItems: Int,
+abstract class BaseAdsFirebaseAdapter<T, VH : RecyclerView.ViewHolder>(model: Class<T>,
+                                                                       ref: () -> Query?,
+                                                                       pageSize: Int,
+                                                                       val adsEachItems: Int,
                                                                        @LayoutRes val adsLayout: Int,
-                                                                       model: Class<T>,
-                                                                       ref: Query?,
-                                                                       pageSize: Int) :
-        BaseFirebaseRVAdapter<T, VH>(model, ref, pageSize) {
+                                                                       orderASC: Boolean = false,
+                                                                       filter: ((T) -> Boolean)? = null) :
+        BaseFirebaseRVAdapter<T, VH>(model, ref, pageSize, orderASC, filter) {
 
     val VIEW_TYPE_ADS = 3
 
@@ -27,8 +29,8 @@ abstract class BaseAdsFirebaseAdapter<T, VH : RecyclerView.ViewHolder>(val adsEa
                 layoutManager: GridLayoutManager,
                 @LayoutRes adsLayout: Int,
                 model: Class<T>,
-                ref: Query?,
-                pageSize: Int) : this(adsEachItems, adsLayout, model, ref, pageSize) {
+                ref: () -> Query?,
+                pageSize: Int) : this(model, ref, pageSize, adsEachItems, adsLayout) {
         onRestoreState(layoutManager)
     }
 

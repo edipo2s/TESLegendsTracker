@@ -63,10 +63,12 @@ open class DecksPublicFragment : BaseFragment() {
                     Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
         }
     }
+
     val itemLongClick = {
         view: View, deck: Deck ->
         true
     }
+
     open protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
             itemClick, itemLongClick)
 

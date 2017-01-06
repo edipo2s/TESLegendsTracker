@@ -157,66 +157,14 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getOwnedDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        getOwnedPublicDecks(cls) {
-            val decks = it
-            getOwnedPrivateDecks(cls) {
-                onSuccess.invoke(decks.plus(it))
-            }
-        }
-    }
-
     fun getOwnedPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
             .orderByChild(KEY_DECK_OWNER).equalTo(getUserID())?.apply {
         keepSynced()
     }
 
-    private fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        getOwnedPublicDecksRef()?.apply {
-            keepSynced()
-            addListenerForSingleValueEvent(object : ValueEventListener {
-
-                override fun onDataChange(ds: DataSnapshot) {
-                    Timber.d(ds.value?.toString())
-                    val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
-                    }.filter { cls == null || it.cls == cls }
-                    Timber.d(decks.toString())
-                    onSuccess.invoke(decks)
-                }
-
-                override fun onCancelled(de: DatabaseError) {
-                    Timber.d("Fail: " + de.message)
-                }
-
-            })
-        }
-    }
-
     fun getOwnedPrivateDecksRef() = dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)
             ?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
         keepSynced()
-    }
-
-    private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        getOwnedPrivateDecksRef()?.apply {
-            keepSynced()
-            addListenerForSingleValueEvent(object : ValueEventListener {
-
-                override fun onDataChange(ds: DataSnapshot) {
-                    val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                        it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, true)
-                    }.filter { cls == null || it.cls == cls }
-                    Timber.d(decks.toString())
-                    onSuccess.invoke(decks)
-                }
-
-                override fun onCancelled(de: DatabaseError) {
-                    Timber.d("Fail: " + de.message)
-                }
-
-            })
-        }
     }
 
     fun getFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {

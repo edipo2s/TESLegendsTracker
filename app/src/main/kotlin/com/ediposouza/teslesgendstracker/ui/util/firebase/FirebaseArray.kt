@@ -34,7 +34,7 @@ import java.util.*
 /**
  * This class implements an array-like collection on top of a Firebase location.
  */
-class FirebaseArray(val mOriginalQuery: Query?, pageSize: Int = 0,
+class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
                     val mOrderASC: Boolean = true) : ChildEventListener, ValueEventListener {
 
     enum class EventType {
@@ -110,8 +110,10 @@ class FirebaseArray(val mOriginalQuery: Query?, pageSize: Int = 0,
     val count: Int
         get() = mSnapshots.size
 
-    fun getItem(index: Int): DataSnapshot {
-        return mSnapshots[index]
+    fun getCount(cond: (DataSnapshot) -> Boolean): Int = mSnapshots.filter { cond.invoke(it) }.size
+
+    fun getItem(index: Int, cond: (DataSnapshot) -> Boolean): DataSnapshot {
+        return mSnapshots.filter { cond.invoke(it) }[index]
     }
 
     private fun setup() {
@@ -119,11 +121,11 @@ class FirebaseArray(val mOriginalQuery: Query?, pageSize: Int = 0,
             cleanup()
         }
         if (mPageSize == 0) {
-            mQuery = mOriginalQuery
+            mQuery = mOriginalQuery()
         } else if (mOrderASC) {
-            mQuery = mOriginalQuery?.limitToFirst(mCurrentSize)
+            mQuery = mOriginalQuery()?.limitToFirst(mCurrentSize)
         } else {
-            mQuery = mOriginalQuery?.limitToLast(mCurrentSize)
+            mQuery = mOriginalQuery()?.limitToLast(mCurrentSize)
         }
         isSyncing = true
         mQuery?.addChildEventListener(this)
@@ -168,7 +170,7 @@ class FirebaseArray(val mOriginalQuery: Query?, pageSize: Int = 0,
         notifyChangedListeners(EventType.Added, index)
     }
 
-    override fun onChildChanged(snapshot: DataSnapshot, previousChildKey: String) {
+    override fun onChildChanged(snapshot: DataSnapshot, previousChildKey: String?) {
         val index = getIndexForKey(snapshot.key)
         mSnapshots[index] = snapshot
         notifyChangedListeners(EventType.Changed, index)
