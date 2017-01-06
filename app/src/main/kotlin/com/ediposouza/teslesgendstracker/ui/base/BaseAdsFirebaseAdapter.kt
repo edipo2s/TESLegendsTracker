@@ -47,18 +47,20 @@ abstract class BaseAdsFirebaseAdapter<T, VH : RecyclerView.ViewHolder>(val adsEa
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val adsQtdBeforePosition = getAdsQtdBeforePosition(position)
+        var itemKey: String? = null
         var model: T? = null
         val arrayPosition = position - snapShotOffset
         if (arrayPosition < getContentCount() + adsQtdBeforePosition && arrayPosition >= 0) {
+            itemKey = getItemKey(position - adsQtdBeforePosition)
             model = getItem(position - adsQtdBeforePosition)
         }
-        populateViewHolder(viewHolder, model, position)
+        populateViewHolder(itemKey, viewHolder, model, position)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun populateViewHolder(viewHolder: RecyclerView.ViewHolder, model: T?, position: Int) {
+    override fun populateViewHolder(itemKey: String?, viewHolder: RecyclerView.ViewHolder, model: T?, position: Int) {
         if (getItemViewType(position) != VIEW_TYPE_ADS) {
-            super.populateViewHolder(viewHolder, model)
+            super.populateViewHolder(itemKey, viewHolder, model)
         }
     }
 

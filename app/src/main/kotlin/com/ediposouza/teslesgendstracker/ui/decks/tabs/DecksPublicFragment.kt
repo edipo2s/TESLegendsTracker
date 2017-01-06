@@ -37,8 +37,8 @@ import java.util.*
  */
 open class DecksPublicFragment : BaseFragment() {
 
-    val ADS_EACH_ITEMS = 5 //after 15 lines
-    val DECK_PAGE_SIZE = 7
+    val ADS_EACH_ITEMS = 10 //after 10 lines
+    val DECK_PAGE_SIZE = 8
     val RC_DECK = 123
 
     protected val publicInteractor = PublicInteractor()
