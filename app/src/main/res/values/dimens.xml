@@ -52,8 +52,9 @@
     <dimen name="deck_height">88dp</dimen>
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
-    <dimen name="deck_private_switch_size">20dp</dimen>
-    <dimen name="deck_private_switch_icon_size">@dimen/medium_margin</dimen>
+    <dimen name="deck_menu_switch_size">20dp</dimen>
+    <dimen name="deck_menu_private_icon_size">12dp</dimen>
+    <dimen name="deck_menu_percent_icon_size">14dp</dimen>
 
     <!-- transparent status_bar_height + 115dp-->
     <dimen name="deck_header_height">115dp</dimen>

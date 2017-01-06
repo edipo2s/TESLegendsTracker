@@ -2,10 +2,9 @@ package com.ediposouza.teslesgendstracker.ui.matches.tabs
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
+import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Class
@@ -24,6 +23,9 @@ import java.util.*
  */
 class MatchesStatistics : BaseFragment() {
 
+    private var showPercent: Switch? = null
+
+    var statisticsTableAdapter: StatisticsTableAdapter? = null
     val results = HashMap(Class.values().map { it to mutableListOf<Match>() }.toMap())
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +34,8 @@ class MatchesStatistics : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        matches_statistics_table.adapter = StatisticsTableAdapter(context).apply {
+        setHasOptionsMenu(true)
+        statisticsTableAdapter = StatisticsTableAdapter(context).apply {
             setFirstHeader("Vs")
             val classTotal: Class? = null
             header = Class.values().asList().plus(classTotal)
@@ -40,44 +43,59 @@ class MatchesStatistics : BaseFragment() {
             updateStatisticsData(this)
             setSection(listOf())
         }
+        matches_statistics_table.adapter = statisticsTableAdapter
         getMatches()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu?.clear()
+        inflater?.inflate(R.menu.menu_percent, menu)
+        inflater?.inflate(R.menu.menu_season, menu)
+        showPercent = menu?.findItem(R.id.menu_percent)?.actionView as Switch
+        showPercent?.setOnCheckedChangeListener { button, checked -> updateStatisticsData() }
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun getMatches() {
         val matches = TestUtils.getTestMatches()
         matches.groupBy { it.player.cls }.forEach {
             results[it.key]?.addAll(it.value)
-            updateStatisticsData(matches_statistics_table.adapter as StatisticsTableAdapter)
+            updateStatisticsData()
         }
     }
 
-    private fun updateStatisticsData(statisticsTableAdapter: StatisticsTableAdapter) {
-        statisticsTableAdapter.body = mutableListOf<List<BodyItem>>().apply {
+    private fun updateStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
+        tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
             Class.values().forEach { myCls ->
                 add(mutableListOf<BodyItem>().apply {
                     val resByMyCls = results[myCls]!!
                     Class.values().forEach { opponentCls ->
                         val matchesVsOpponent = resByMyCls.filter { it.opponent.cls == opponentCls }
-                        add(getWinLossBodyItem(matchesVsOpponent))
+                        add(getResultBodyItem(matchesVsOpponent))
                     }
-                    add(getWinLossBodyItem(resByMyCls))
+                    add(getResultBodyItem(resByMyCls))
                 })
             }
             val allMatches = results.flatMap { it.value }
             add(mutableListOf<BodyItem>().apply {
                 Class.values().forEach {
                     val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
-                    add(getWinLossBodyItem(resByOpponent))
+                    add(getResultBodyItem(resByOpponent))
                 }
-                add(getWinLossBodyItem(allMatches))
+                add(getResultBodyItem(allMatches))
             })
         }
     }
 
-    private fun getWinLossBodyItem(matches: List<Match>): BodyItem {
+    private fun getResultBodyItem(matches: List<Match>): BodyItem {
         val result = matches.groupBy { it.win }
-        return BodyItem(result = "${result[true]?.size ?: 0}/${result[false]?.size ?: 0}")
+        val wins = result[true]?.size ?: 0
+        val losses = result[false]?.size ?: 0
+        return BodyItem(result = if (!(showPercent?.isChecked ?: false)) "$wins/$losses" else
+            getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat())))
     }
+
+    private fun calcWinRate(losses: Float, wins: Float) = losses / (wins + losses) * 100
 
     class BodyItem(val cls: Class? = null, val result: String? = null)
 

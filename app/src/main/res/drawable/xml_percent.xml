@@ -14,8 +14,7 @@
                     <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
                 </shape>
             </item>
-            <item android:drawable="@drawable/ic_private_menu"
-                android:gravity="center" />
+            <item android:drawable="@drawable/ic_percent_menu" android:gravity="center" />
         </layer-list>
     </item>
     <item>
@@ -32,7 +31,7 @@
                     <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
                 </shape>
             </item>
-            <item android:drawable="@drawable/ic_private_menu_checked" android:gravity="center" />
+            <item android:drawable="@drawable/ic_percent_menu_checked" android:gravity="center" />
         </layer-list>
     </item>
 </selector>

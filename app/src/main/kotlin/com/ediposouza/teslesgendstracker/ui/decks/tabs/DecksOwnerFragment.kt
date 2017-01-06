@@ -32,7 +32,8 @@ class DecksOwnerFragment : DecksPublicFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_decks_owned, menu)
+        inflater?.inflate(R.menu.menu_private, menu)
+        inflater?.inflate(R.menu.menu_search, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
         onlyPrivate?.setOnCheckedChangeListener { button, checked ->
             showDecks()

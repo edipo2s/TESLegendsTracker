@@ -30,6 +30,7 @@
     <string name="menu_delete">Delete</string>
     <string name="menu_unlike">Unlike</string>
     <string name="menu_done">Done</string>
+    <string name="menu_percent">Percent</string>
 
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
