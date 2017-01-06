@@ -1,12 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.decks.tabs
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,11 +12,12 @@ import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
-import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
+import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
@@ -30,7 +27,6 @@ import kotlinx.android.synthetic.main.itemlist_deck.view.*
 import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
 import java.text.NumberFormat
-import java.util.*
 
 /**
  * Created by EdipoSouza on 11/18/16.
@@ -39,24 +35,32 @@ open class DecksPublicFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 10 //after 10 lines
     val DECK_PAGE_SIZE = 8
-    val RC_DECK = 123
 
     protected val publicInteractor = PublicInteractor()
+    protected val privateInteractor = PrivateInteractor()
     protected var currentClasses: Array<Class> = Class.values()
 
-    val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
-    val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
-    val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
-    val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
+    private val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
+    private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
+    private val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
+    private val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
 
     open protected val isDeckOwned: Boolean = false
+
+    open protected val dataRef = {
+        publicInteractor.getPublicDecksRef()
+    }
+
+    open protected val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
+        currentClasses.map { it.ordinal }.contains(it.cls)
+    }
 
     val itemClick = { view: View, deck: Deck ->
         PrivateInteractor().getFavoriteDecks(deck.cls) {
             val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
             val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
-            startActivityForResult(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
-                    RC_DECK, ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+            startActivity(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     Pair(view.deck_name as View, nameTransitionName),
                     Pair(view.deck_cover as View, coverTransitionName),
                     Pair(view.deck_attr1 as View, attr1TransitionName),
@@ -69,8 +73,25 @@ open class DecksPublicFragment : BaseFragment() {
         true
     }
 
-    open protected val decksAdapter = DecksAllAdapter(ADS_EACH_ITEMS, R.layout.itemlist_deck_ads,
-            itemClick, itemLongClick)
+    private val decksAdapter by lazy {
+        object : BaseAdsFirebaseAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
+                FirebaseParsers.DeckParser::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
+                R.layout.itemlist_deck_ads, false, dataFilter) {
+
+            override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
+                return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
+            }
+
+            override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
+                viewHolder.bind(model.toDeck(itemKey, true), privateInteractor)
+            }
+
+            override fun onSyncEnd() {
+                decks_refresh_layout?.isRefreshing = false
+            }
+
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list)
@@ -78,21 +99,18 @@ open class DecksPublicFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        decks_recycler_view.adapter = decksAdapter
-        decks_recycler_view.itemAnimator = SlideInLeftAnimator()
-        decks_recycler_view.layoutManager = object : LinearLayoutManager(context) {
-            override fun supportsPredictiveItemAnimations(): Boolean = false
+        with(decks_recycler_view) {
+            adapter = decksAdapter
+            itemAnimator = SlideInLeftAnimator()
+            layoutManager = object : LinearLayoutManager(context) {
+                override fun supportsPredictiveItemAnimations(): Boolean = false
+            }
+            addOnScrollListener(OnLinearLayoutItemScrolled(decksAdapter.getContentCount() - 3) {
+                decksAdapter.more()
+            })
         }
         decks_refresh_layout.setOnRefreshListener {
-            decks_refresh_layout.isRefreshing = false
-            showDecks()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_DECK && resultCode == Activity.RESULT_OK) {
-            showDecks()
+            decksAdapter.reset()
         }
     }
 
@@ -123,61 +141,62 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     open fun showDecks() {
-        Timber.d("Classes: %s", currentClasses.toSet())
-        decksAdapter.clearItems()
-        for (i in currentClasses.indices) {
-            getDecks(currentClasses[i], i == currentClasses.size - 1)
-        }
+        decksAdapter.reset()
+//        Timber.d("Classes: %s", currentClasses.toSet())
+//        decksAdapter.clearItems()
+//        for (i in currentClasses.indices) {
+//            getDecks(currentClasses[i], i == currentClasses.size - 1)
+//        }
     }
 
-    open fun getDecks(cls: Class?, last: Boolean) {
-        publicInteractor.getPublicDecks(cls, {
-            it.forEach { Timber.d("Public: %s", it.toString()) }
-            decksAdapter.showDecks(it.sortedByDescending(Deck::updatedAt), last)
-        })
-    }
-
-    class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
-                          val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
-
-        val privateInteractor = PrivateInteractor()
-
-        var items: List<Deck> = listOf()
-        var newItems: ArrayList<Deck> = ArrayList()
-
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
-        }
-
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-            val deck = items[position]
-            (holder as DecksAllViewHolder).bind(deck, privateInteractor)
-        }
-
-        override fun getDefaultItemCount(): Int = items.size
-
-        fun clearItems() {
-            newItems.clear()
-        }
-
-        fun showDecks(decks: List<Deck>, last: Boolean) {
-            newItems.addAll(decks)
-            if (!last) {
-                return
-            }
-            Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
-            val oldItems = items
-            items = newItems
-            if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
-                notifyDataSetChanged()
-                return
-            }
-            DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
-                oldItem.id == newItem.id
-            }).dispatchUpdatesTo(this)
-        }
-
-    }
+//    open fun getDecks(cls: Class?, last: Boolean) {
+//        publicInteractor.getPublicDecks(cls, {
+//            it.forEach { Timber.d("Public: %s", it.toString()) }
+//            decksAdapter.showDecks(it.sortedByDescending(Deck::updatedAt), last)
+//        })
+//    }
+//
+//    class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
+//                          val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
+//
+//        val privateInteractor = PrivateInteractor()
+//
+//        var items: List<Deck> = listOf()
+//        var newItems: ArrayList<Deck> = ArrayList()
+//
+//        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+//            return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
+//        }
+//
+//        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+//            val deck = items[position]
+//            (holder as DecksAllViewHolder).bind(deck, privateInteractor)
+//        }
+//
+//        override fun getDefaultItemCount(): Int = items.size
+//
+//        fun clearItems() {
+//            newItems.clear()
+//        }
+//
+//        fun showDecks(decks: List<Deck>, last: Boolean) {
+//            newItems.addAll(decks)
+//            if (!last) {
+//                return
+//            }
+//            Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
+//            val oldItems = items
+//            items = newItems
+//            if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
+//                notifyDataSetChanged()
+//                return
+//            }
+//            DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
+//                oldItem.id == newItem.id
+//            }).dispatchUpdatesTo(this)
+//        }
+//
+//    }
 
     class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
