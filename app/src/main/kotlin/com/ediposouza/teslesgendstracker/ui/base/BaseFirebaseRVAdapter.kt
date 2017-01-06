@@ -16,9 +16,11 @@ import timber.log.Timber
  * Created by EdipoSouza on 1/2/17.
  */
 abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Class<T>,
-                                                                      ref: Query?,
-                                                                      pageSize: Int) :
-        FirebaseRVAdapter<T, RecyclerView.ViewHolder>(model, ref, pageSize, false) {
+                                                                      ref: () -> Query?,
+                                                                      pageSize: Int,
+                                                                      orderASC: Boolean = false,
+                                                                      filter: ((T) -> Boolean)? = null) :
+        FirebaseRVAdapter<T, RecyclerView.ViewHolder>(model, ref, pageSize, orderASC, filter) {
 
     protected var VIEW_TYPE_HEADER = 0
     protected var VIEW_TYPE_CONTENT = 1

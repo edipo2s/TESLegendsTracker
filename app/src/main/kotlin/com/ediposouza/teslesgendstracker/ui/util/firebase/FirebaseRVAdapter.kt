@@ -29,6 +29,7 @@
 package com.ediposouza.teslesgendstracker.ui.util.firebase
 
 import android.support.v7.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
@@ -84,7 +85,11 @@ import com.google.firebase.database.Query
  * @param pageSize   initial page size. set 0 for no limit.
  */
 abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
-        var mModel: Class<T>, ref: Query?, pageSize: Int = 0, orderASC: Boolean = false) : RecyclerView.Adapter<VH>() {
+        var mModel: Class<T>,
+        ref: () -> Query?,
+        pageSize: Int = 0,
+        orderASC: Boolean = false,
+        val filter: ((T) -> Boolean)? = null) : RecyclerView.Adapter<VH>() {
 
     var mSnapshots: FirebaseArray = FirebaseArray(ref, pageSize, orderASC)
 
@@ -127,33 +132,35 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
 
     fun cleanup() = mSnapshots.cleanup()
 
+    private fun filterResult(it: DataSnapshot) = filter?.invoke(it.getValue(mModel)) ?: true
+
     /**
      * Override when adding headers.
      * @return number of items inserted in front of the FirebaseArray
      */
     open val snapShotOffset: Int = 0
 
-    open fun getContentCount(): Int = mSnapshots.count
+    open fun getContentCount(): Int = mSnapshots.getCount { filterResult(it) }
 
     /**
      * Override when adding headers or footers
      * @return number of items including headers and footers.
      */
-    override fun getItemCount(): Int = mSnapshots.count
+    override fun getItemCount(): Int = mSnapshots.getCount { filterResult(it) }
 
-    open fun getItem(position: Int): T = mSnapshots.getItem(position - snapShotOffset).getValue(mModel)
+    open fun getItem(position: Int): T = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).getValue(mModel)
 
-    fun getItemKey(position: Int): String = mSnapshots.getItem(position - snapShotOffset).key
+    fun getItemKey(position: Int): String = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).key
 
-    fun getRef(position: Int): DatabaseReference = mSnapshots.getItem(position).ref
+    fun getRef(position: Int): DatabaseReference = mSnapshots.getItem(position, { filterResult(it) }).ref
 
     override fun getItemId(position: Int): Long {
         if (position < snapShotOffset)
             return ("header" + position).hashCode().toLong()
-        if (position >= snapShotOffset + mSnapshots.count)
-            return ("footer" + (position - (snapShotOffset + mSnapshots.count))).hashCode().toLong()
+        if (position >= snapShotOffset + mSnapshots.getCount { filterResult(it) })
+            return ("footer" + (position - (snapShotOffset + mSnapshots.getCount { filterResult(it) }))).hashCode().toLong()
         // http://stackoverflow.com/questions/5100071/whats-the-purpose-of-item-ids-in-android-listview-adapter
-        return mSnapshots.getItem(position).key.hashCode().toLong()
+        return mSnapshots.getItem(position, { filterResult(it) }).key.hashCode().toLong()
     }
 
     override fun onBindViewHolder(viewHolder: VH, position: Int) {

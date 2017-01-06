@@ -114,7 +114,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
                                  @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
-                                 val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
+                                 val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
         var items: ArrayList<CardSlot> = ArrayList()
 

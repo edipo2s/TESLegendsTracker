@@ -242,7 +242,7 @@ open class CardsAllFragment : BaseFragment() {
 
     class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
                           @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                          val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
+                          val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
         var items: List<Card> = ArrayList()
 
