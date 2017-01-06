@@ -37,7 +37,7 @@ import java.util.*
  */
 open class DecksPublicFragment : BaseFragment() {
 
-    val ADS_EACH_ITEMS = 15 //after 15 lines
+    val ADS_EACH_ITEMS = 5 //after 15 lines
     val DECK_PAGE_SIZE = 7
     val RC_DECK = 123
 
@@ -120,7 +120,7 @@ open class DecksPublicFragment : BaseFragment() {
         }
     }
 
-    fun showDecks() {
+    open fun showDecks() {
         Timber.d("Classes: %s", currentClasses.toSet())
         decksAdapter.clearItems()
         for (i in currentClasses.indices) {
