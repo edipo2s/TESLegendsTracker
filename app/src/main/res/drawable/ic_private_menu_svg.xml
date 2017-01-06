@@ -1,7 +1,7 @@
 <!-- drawable/key_variant.xml -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="12dp"
-    android:height="12dp"
+    android:width="@dimen/deck_menu_private_icon_size"
+    android:height="@dimen/deck_menu_private_icon_size"
     android:viewportHeight="12"
     android:viewportWidth="12">
     <path

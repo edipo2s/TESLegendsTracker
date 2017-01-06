@@ -8,10 +8,4 @@
         android:title="@string/menu_delete"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/menu_like"
-        android:icon="@drawable/ic_like_unchecked"
-        android:title="@string/menu_like"
-        app:showAsAction="always" />
-
 </menu>
