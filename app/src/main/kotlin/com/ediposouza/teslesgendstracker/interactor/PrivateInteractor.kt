@@ -166,8 +166,13 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun getOwnedPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
+            .orderByChild(KEY_DECK_OWNER).equalTo(getUserID())?.apply {
+        keepSynced()
+    }
+
     private fun getOwnedPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        with(dbDecks.child(NODE_DECKS_PUBLIC).orderByChild(KEY_DECK_OWNER).equalTo(getUserID())) {
+        getOwnedPublicDecksRef()?.apply {
             keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -188,10 +193,13 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getOwnedPrivateDecksRef() = dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)
+    fun getOwnedPrivateDecksRef() = dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)
+            ?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+        keepSynced()
+    }
 
     private fun getOwnedPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
-        dbUser()?.child(NODE_DECKS)?.child(NODE_DECKS_PRIVATE)?.orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+        getOwnedPrivateDecksRef()?.apply {
             keepSynced()
             addListenerForSingleValueEvent(object : ValueEventListener {
 

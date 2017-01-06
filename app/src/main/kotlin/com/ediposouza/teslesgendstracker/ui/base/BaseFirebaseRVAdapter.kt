@@ -29,7 +29,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
     override val snapShotOffset: Int = 1
 
     abstract fun onCreateDefaultViewHolder(parent: ViewGroup): VH
-    abstract fun onBindContentHolder(model: T, viewHolder: VH)
+    abstract fun onBindContentHolder(itemKey: String, model: T, viewHolder: VH)
     abstract fun onSyncEnd()
 
     override fun getContentCount(): Int = super.getItemCount()
@@ -56,9 +56,9 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun populateViewHolder(viewHolder: RecyclerView.ViewHolder, model: T?) {
-        if (model != null) {
-            onBindContentHolder(model, viewHolder as VH)
+    override fun populateViewHolder(itemKey: String?, viewHolder: RecyclerView.ViewHolder, model: T?) {
+        if (itemKey != null && model != null) {
+            onBindContentHolder(itemKey, model, viewHolder as VH)
         } else {
             viewHolder.itemView.loadingBar?.visibility = if (synced) View.GONE else View.VISIBLE
         }

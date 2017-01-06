@@ -143,6 +143,8 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
 
     open fun getItem(position: Int): T = mSnapshots.getItem(position - snapShotOffset).getValue(mModel)
 
+    fun getItemKey(position: Int): String = mSnapshots.getItem(position - snapShotOffset).key
+
     fun getRef(position: Int): DatabaseReference = mSnapshots.getItem(position).ref
 
     override fun getItemId(position: Int): Long {
@@ -155,12 +157,14 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
     }
 
     override fun onBindViewHolder(viewHolder: VH, position: Int) {
+        var itemKey: String? = null
         var model: T? = null
         val arrayPosition = position - snapShotOffset
         if (arrayPosition < getContentCount() && arrayPosition >= 0) {
+            itemKey = getItemKey(position)
             model = getItem(position)
         }
-        populateViewHolder(viewHolder, model, position)
+        populateViewHolder(itemKey, viewHolder, model, position)
     }
 
     /**
@@ -178,8 +182,8 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
      * *
      * @param position  The position in the list of the view being populated
      */
-    open protected fun populateViewHolder(viewHolder: VH, model: T?, position: Int) {
-        populateViewHolder(viewHolder, model)
+    open protected fun populateViewHolder(itemKey: String?, viewHolder: VH, model: T?, position: Int) {
+        populateViewHolder(itemKey, viewHolder, model)
     }
 
     /**
@@ -193,7 +197,7 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
      * *
      * @param model      The object containing the data used to populate the view
      */
-    open protected fun populateViewHolder(viewHolder: VH, model: T?) {
+    open protected fun populateViewHolder(itemKey: String?, viewHolder: VH, model: T?) {
     }
 
     open protected fun onSyncStatusChanged(synced: Boolean) {}
