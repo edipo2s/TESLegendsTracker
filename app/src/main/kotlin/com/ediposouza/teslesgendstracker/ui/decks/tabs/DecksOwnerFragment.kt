@@ -10,7 +10,7 @@ import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseFirebaseRVAdapter
+import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_decks_list.*
 import timber.log.Timber
@@ -25,9 +25,10 @@ class DecksOwnerFragment : DecksPublicFragment() {
     private val privateInteractor = PrivateInteractor()
     private var onlyPrivate: Switch? = null
 
-    val ownerDecksAdapter = object : BaseFirebaseRVAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
-            R.layout.itemlist_deck, FirebaseParsers.DeckParser::class.java, DecksAllViewHolder::class.java,
+    val ownerDecksAdapter = object : BaseAdsFirebaseAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
+            ADS_EACH_ITEMS, R.layout.itemlist_deck_ads, FirebaseParsers.DeckParser::class.java,
             privateInteractor.getOwnedPrivateDecksRef(), DECK_PAGE_SIZE) {
+
         override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
             return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
         }
@@ -37,10 +38,26 @@ class DecksOwnerFragment : DecksPublicFragment() {
         }
 
         override fun onSyncEnd() {
-            decks_refresh_layout.isRefreshing = false
+            decks_refresh_layout?.isRefreshing = false
         }
 
     }
+
+//    val ownerDecksAdapter = object : BaseFirebaseRVAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
+//            FirebaseParsers.DeckParser::class.java, privateInteractor.getOwnedPrivateDecksRef(), DECK_PAGE_SIZE) {
+//        override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
+//            return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
+//        }
+//
+//        override fun onBindContentHolder(model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
+//            viewHolder.bind(model.toDeck("", true), privateInteractor)
+//        }
+//
+//        override fun onSyncEnd() {
+//            decks_refresh_layout?.isRefreshing = false
+//        }
+//
+//    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list_owner)
@@ -63,6 +80,10 @@ class DecksOwnerFragment : DecksPublicFragment() {
         decks_refresh_layout.setOnRefreshListener { ownerDecksAdapter.reset() }
         setHasOptionsMenu(true)
         configLoggedViews()
+    }
+
+    override fun showDecks() {
+        ownerDecksAdapter.reset()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

@@ -1,6 +1,5 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
-import android.support.annotation.IntegerRes
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -16,17 +15,16 @@ import timber.log.Timber
 /**
  * Created by EdipoSouza on 1/2/17.
  */
-abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(@IntegerRes val layout: Int,
-                                                                      model: Class<T>,
-                                                                      val viewHolder: Class<VH>,
-                                                                      ref: Query?, pageSize: Int) :
-        FirebaseRVAdapter<T, VH>(layout, model, viewHolder, ref, pageSize, false) {
+abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Class<T>,
+                                                                      ref: Query?,
+                                                                      pageSize: Int) :
+        FirebaseRVAdapter<T, RecyclerView.ViewHolder>(model, ref, pageSize, false) {
 
-    var VIEW_TYPE_HEADER = 0
-    var VIEW_TYPE_CONTENT = 1
-    var VIEW_TYPE_LOADING = 2
+    protected var VIEW_TYPE_HEADER = 0
+    protected var VIEW_TYPE_CONTENT = 1
+    protected var VIEW_TYPE_LOADING = 2
 
-    private var synced: Boolean = false
+    protected var synced: Boolean = false
 
     override val snapShotOffset: Int = 1
 
@@ -34,7 +32,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(@IntegerRe
     abstract fun onBindContentHolder(model: T, viewHolder: VH)
     abstract fun onSyncEnd()
 
-    fun getContentCount(): Int = super.getItemCount()
+    override fun getContentCount(): Int = super.getItemCount()
 
     override fun getItemCount(): Int = super.getItemCount() + 2
 
@@ -46,20 +44,21 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(@IntegerRe
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             VIEW_TYPE_CONTENT -> return onCreateDefaultViewHolder(parent)
             else -> {
                 val view = if (viewType == VIEW_TYPE_LOADING) parent.inflate(R.layout.itemlist_loading) else
                     LinearLayout(parent.context).apply { minimumHeight = 1 }
-                return viewHolder.getConstructor(View::class.java).newInstance(view)
+                return object : RecyclerView.ViewHolder(view) {}
             }
         }
     }
 
-    override fun populateViewHolder(viewHolder: VH, model: T?) {
+    @Suppress("UNCHECKED_CAST")
+    override fun populateViewHolder(viewHolder: RecyclerView.ViewHolder, model: T?) {
         if (model != null) {
-            onBindContentHolder(model, viewHolder)
+            onBindContentHolder(model, viewHolder as VH)
         } else {
             viewHolder.itemView.loadingBar?.visibility = if (synced) View.GONE else View.VISIBLE
         }
