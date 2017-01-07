@@ -6,6 +6,14 @@
     android:layout_marginTop="@dimen/default_margin"
     tools:layout_marginTop="@dimen/status_bar_height">
 
+    <ProgressBar
+        android:id="@+id/deck_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/deck_cover"
         android:layout_width="match_parent"
@@ -17,6 +25,7 @@
         android:transitionName="@string/deck_cover_transition_name" />
 
     <RelativeLayout
+        android:id="@+id/deck_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/default_margin">

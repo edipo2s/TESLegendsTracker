@@ -36,9 +36,9 @@ open class DecksPublicFragment : BaseFragment() {
     val ADS_EACH_ITEMS = 10 //after 10 lines
     val DECK_PAGE_SIZE = 8
 
+    protected var currentClasses = Class.values()
     protected val publicInteractor = PublicInteractor()
     protected val privateInteractor = PrivateInteractor()
-    protected var currentClasses: Array<Class> = Class.values()
 
     private val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
     private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
@@ -61,10 +61,10 @@ open class DecksPublicFragment : BaseFragment() {
             val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
             startActivity(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                    Pair(view.deck_name as View, nameTransitionName),
-                    Pair(view.deck_cover as View, coverTransitionName),
-                    Pair(view.deck_attr1 as View, attr1TransitionName),
-                    Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+                            Pair(view.deck_name as View, nameTransitionName),
+                            Pair(view.deck_cover as View, coverTransitionName),
+                            Pair(view.deck_attr1 as View, attr1TransitionName),
+                            Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
         }
     }
 
@@ -73,7 +73,7 @@ open class DecksPublicFragment : BaseFragment() {
         true
     }
 
-    private val decksAdapter by lazy {
+    open protected val decksAdapter: BaseAdsFirebaseAdapter<*, DecksAllViewHolder> by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
                 FirebaseParsers.DeckParser::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
                 R.layout.itemlist_deck_ads, false, dataFilter) {
@@ -83,7 +83,8 @@ open class DecksPublicFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
-                viewHolder.bind(model.toDeck(itemKey, true), privateInteractor)
+                Timber.d(model.toString())
+                viewHolder.bind(model.toDeck(itemKey, isDeckOwned), privateInteractor)
             }
 
             override fun onSyncEnd() {
@@ -142,68 +143,26 @@ open class DecksPublicFragment : BaseFragment() {
 
     open fun showDecks() {
         decksAdapter.reset()
-//        Timber.d("Classes: %s", currentClasses.toSet())
-//        decksAdapter.clearItems()
-//        for (i in currentClasses.indices) {
-//            getDecks(currentClasses[i], i == currentClasses.size - 1)
-//        }
     }
-
-//    open fun getDecks(cls: Class?, last: Boolean) {
-//        publicInteractor.getPublicDecks(cls, {
-//            it.forEach { Timber.d("Public: %s", it.toString()) }
-//            decksAdapter.showDecks(it.sortedByDescending(Deck::updatedAt), last)
-//        })
-//    }
-//
-//    class DecksAllAdapter(adsEachItems: Int, @LayoutRes adsLayout: Int, val itemClick: (View, Deck) -> Unit,
-//                          val itemLongClick: (View, Deck) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout) {
-//
-//        val privateInteractor = PrivateInteractor()
-//
-//        var items: List<Deck> = listOf()
-//        var newItems: ArrayList<Deck> = ArrayList()
-//
-//        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-//            return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
-//        }
-//
-//        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-//            val deck = items[position]
-//            (holder as DecksAllViewHolder).bind(deck, privateInteractor)
-//        }
-//
-//        override fun getDefaultItemCount(): Int = items.size
-//
-//        fun clearItems() {
-//            newItems.clear()
-//        }
-//
-//        fun showDecks(decks: List<Deck>, last: Boolean) {
-//            newItems.addAll(decks)
-//            if (!last) {
-//                return
-//            }
-//            Collections.sort(newItems, { d1, d2 -> d2.updatedAt.compareTo(d1.updatedAt) })
-//            val oldItems = items
-//            items = newItems
-//            if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
-//                notifyDataSetChanged()
-//                return
-//            }
-//            DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
-//                oldItem.id == newItem.id
-//            }).dispatchUpdatesTo(this)
-//        }
-//
-//    }
 
     class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
 
+        fun bind(itemKey: String, publicInteractor: PublicInteractor, privateInteractor: PrivateInteractor) {
+            itemView.deck_loading.visibility = View.VISIBLE
+            itemView.deck_cover.visibility = View.GONE
+            itemView.deck_info.visibility = View.GONE
+            publicInteractor.getPublicDeck(itemKey) {
+                bind(it, privateInteractor)
+            }
+        }
+
         fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
+            itemView.deck_loading.visibility = View.GONE
+            itemView.deck_cover.visibility = View.VISIBLE
+            itemView.deck_info.visibility = View.VISIBLE
             itemView.setOnClickListener { itemClick(itemView, deck) }
             itemView.setOnLongClickListener { itemLongClick(itemView, deck) }
             itemView.deck_cover.setImageResource(deck.cls.imageRes)
@@ -223,11 +182,11 @@ open class DecksPublicFragment : BaseFragment() {
             calculateMissingSoul(deck, privateInteractor)
         }
 
-        fun calculateMissingSoul(deck: Deck, interactor: PrivateInteractor) {
+        fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {
             with(itemView.deck_soul_missing) {
                 visibility = View.INVISIBLE
                 itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-                interactor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                privateInteractor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
                     itemView.deck_soul_missing_loading.visibility = View.GONE
                     val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                     Timber.d("Missing %d", missingSoul)
