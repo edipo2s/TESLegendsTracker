@@ -51,7 +51,6 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 1 -> MetricScreen.SCREEN_DECKS_OWNED()
                 else -> MetricScreen.SCREEN_DECKS_FAVORED()
             })
-            (adapter.getItem(position) as DecksPublicFragment).showDecks()
         }
 
     }
@@ -82,9 +81,8 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             } else {
                 decks_attr_filter.selectAttr(it, false)
             }
-            requestDecks()
+            eventBus.post(CmdShowDecksByClasses(Class.getClasses(decks_attr_filter.getSelectedAttrs())))
         }
-        Handler().postDelayed({ requestDecks() }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
@@ -163,11 +161,6 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
-    }
-
-    private fun requestDecks() {
-        val classesToShow = Class.getClasses(decks_attr_filter.getSelectedAttrs())
-        eventBus.post(CmdShowDecksByClasses(classesToShow))
     }
 
     @Subscribe

@@ -187,12 +187,8 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (deckOwned) {
-            menuInflater.inflate(R.menu.menu_delete, menu)
-        }
-        menuInflater.inflate(R.menu.menu_like, menu)
+        menuInflater.inflate(if (deckOwned) R.menu.menu_delete else R.menu.menu_like, menu)
         menuLike = menu?.findItem(R.id.menu_like)
-        menuLike?.isVisible = !deckOwned
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
     }

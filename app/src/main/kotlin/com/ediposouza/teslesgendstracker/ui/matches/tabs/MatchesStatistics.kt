@@ -16,12 +16,16 @@ import kotlinx.android.synthetic.main.fragment_matches_statistics.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
 import kotlinx.android.synthetic.main.itemcell_text.view.*
 import miguelbcr.ui.tableFixHeadesWrapper.TableFixHeaderAdapter
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.util.*
 
 /**
  * Created by EdipoSouza on 1/3/17.
  */
 class MatchesStatistics : BaseFragment() {
+
+    private val HEADER_FIRST = "Vs"
 
     private var showPercent: Switch? = null
 
@@ -36,7 +40,7 @@ class MatchesStatistics : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         statisticsTableAdapter = StatisticsTableAdapter(context).apply {
-            setFirstHeader("Vs")
+            setFirstHeader(HEADER_FIRST)
             val classTotal: Class? = null
             header = Class.values().asList().plus(classTotal)
             setFirstBody(Class.values().map { listOf(BodyItem(it)) }.plus(listOf(listOf(BodyItem()))))
@@ -65,25 +69,30 @@ class MatchesStatistics : BaseFragment() {
     }
 
     private fun updateStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
-        tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            Class.values().forEach { myCls ->
+        doAsync {
+            val data = mutableListOf<List<BodyItem>>().apply {
+                Class.values().forEach { myCls ->
+                    add(mutableListOf<BodyItem>().apply {
+                        val resByMyCls = results[myCls]!!
+                        Class.values().forEach { opponentCls ->
+                            val matchesVsOpponent = resByMyCls.filter { it.opponent.cls == opponentCls }
+                            add(getResultBodyItem(matchesVsOpponent))
+                        }
+                        add(getResultBodyItem(resByMyCls))
+                    })
+                }
+                val allMatches = results.flatMap { it.value }
                 add(mutableListOf<BodyItem>().apply {
-                    val resByMyCls = results[myCls]!!
-                    Class.values().forEach { opponentCls ->
-                        val matchesVsOpponent = resByMyCls.filter { it.opponent.cls == opponentCls }
-                        add(getResultBodyItem(matchesVsOpponent))
+                    Class.values().forEach {
+                        val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
+                        add(getResultBodyItem(resByOpponent))
                     }
-                    add(getResultBodyItem(resByMyCls))
+                    add(getResultBodyItem(allMatches))
                 })
             }
-            val allMatches = results.flatMap { it.value }
-            add(mutableListOf<BodyItem>().apply {
-                Class.values().forEach {
-                    val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
-                    add(getResultBodyItem(resByOpponent))
-                }
-                add(getResultBodyItem(allMatches))
-            })
+            uiThread {
+                tableAdapter?.body = data
+            }
         }
     }
 

@@ -159,11 +159,14 @@ class DashActivity : BaseFilterActivity(),
 
     private fun showFragment(frag: Fragment): Boolean {
         statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.dash_content, frag)
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .addToBackStack(null)
-                .commit()
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+        }
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.dash_content, frag)
+            setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            addToBackStack(null)
+        }.commit()
         return true
     }
 
