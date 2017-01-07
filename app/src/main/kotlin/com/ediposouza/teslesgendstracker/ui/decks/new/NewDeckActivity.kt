@@ -178,7 +178,7 @@ class NewDeckActivity : BaseFilterActivity() {
         val deckCards = new_deck_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deckPrivate = !view.new_deck_dialog_public.isChecked
         PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
-                deckPatchSelected.uidDate, deckCards, deckPrivate) {
+                deckPatchSelected.uuidDate, deckCards, deckPrivate) {
             toast(if (deckPrivate) R.string.new_deck_save_as_private else R.string.new_deck_save_as_public)
             val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)
             setResult(Activity.RESULT_OK, data)

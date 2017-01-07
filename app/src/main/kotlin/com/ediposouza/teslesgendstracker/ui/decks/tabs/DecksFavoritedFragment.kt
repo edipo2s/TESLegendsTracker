@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_decks_list.*
 class DecksFavoritedFragment : DecksPublicFragment() {
 
     override val dataRef = {
-        privateInteractor.getFavoriteDecksRef()
+        privateInteractor.getUserFavoriteDecksRef()
     }
 
     private val dataFilter: (Int) -> Boolean = {

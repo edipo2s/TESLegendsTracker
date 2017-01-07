@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import android.text.format.DateUtils
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistory
@@ -78,6 +80,11 @@ class MatchesFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         eventBus.post(CmdShowTabs())
+        matches_view_pager.postDelayed({
+            if (activity != null) {
+                (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
+            }
+        }, DateUtils.SECOND_IN_MILLIS)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

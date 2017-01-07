@@ -35,7 +35,7 @@ data class CardSlot(
 
 data class Patch(
 
-        val uidDate: String,
+        val uuidDate: String,
         val desc: String
 
 )

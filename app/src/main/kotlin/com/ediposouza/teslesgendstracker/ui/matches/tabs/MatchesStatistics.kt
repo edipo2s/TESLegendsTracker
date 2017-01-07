@@ -9,8 +9,8 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Match
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.util.TestUtils
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
@@ -44,7 +44,22 @@ class MatchesStatistics : BaseFragment() {
             val classTotal: Class? = null
             header = Class.values().asList().plus(classTotal)
             setFirstBody(Class.values().map { listOf(BodyItem(it)) }.plus(listOf(listOf(BodyItem()))))
-            updateStatisticsData(this)
+            body = mutableListOf<List<BodyItem>>().apply {
+                Class.values().forEach { myCls ->
+                    add(mutableListOf<BodyItem>().apply {
+                        Class.values().forEach { opponentCls ->
+                            add(BodyItem())
+                        }
+                        add(BodyItem())
+                    })
+                }
+                add(mutableListOf<BodyItem>().apply {
+                    Class.values().forEach {
+                        add(BodyItem())
+                    }
+                    add(BodyItem())
+                })
+            }
             setSection(listOf())
         }
         matches_statistics_table.adapter = statisticsTableAdapter
@@ -61,14 +76,15 @@ class MatchesStatistics : BaseFragment() {
     }
 
     private fun getMatches() {
-        val matches = TestUtils.getTestMatches()
-        matches.groupBy { it.player.cls }.forEach {
-            results[it.key]?.addAll(it.value)
-            updateStatisticsData()
+        PrivateInteractor().getUserMatches {
+            it.groupBy { it.player.cls }.forEach {
+                results[it.key]?.addAll(it.value)
+                updateStatisticsData()
+            }
         }
     }
 
-    private fun updateStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
+    private fun updateStatisticsData() {
         doAsync {
             val data = mutableListOf<List<BodyItem>>().apply {
                 Class.values().forEach { myCls ->
@@ -91,7 +107,7 @@ class MatchesStatistics : BaseFragment() {
                 })
             }
             uiThread {
-                tableAdapter?.body = data
+                statisticsTableAdapter?.body = data
             }
         }
     }
@@ -180,11 +196,19 @@ class MatchesStatistics : BaseFragment() {
         }
 
         override fun bindFirstHeader(result: String) {
-            rootView.cell_text.text = result
+            bindResult(result)
         }
 
         override fun bindBody(bodyItems: List<BodyItem>, row: Int, col: Int) {
-            rootView.cell_text.text = bodyItems[col].result
+            bindResult(bodyItems[col].result)
+        }
+
+        private fun bindResult(result: String?) {
+            with(rootView) {
+                cell_text.text = result
+                cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
+                cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
+            }
         }
 
         override fun bindSection(bodyItems: List<BodyItem>, row: Int, col: Int) {

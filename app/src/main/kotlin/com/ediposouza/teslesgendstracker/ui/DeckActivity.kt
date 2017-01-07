@@ -296,7 +296,7 @@ class DeckActivity : BaseActivity() {
                 }
             }
             publicInteractor.getPatches {
-                val patch = it.find { it.uidDate == deck.patch }
+                val patch = it.find { it.uuidDate == deck.patch }
                 runOnUiThread {
                     deck_details_patch.text = patch?.desc ?: ""
                 }
@@ -318,7 +318,7 @@ class DeckActivity : BaseActivity() {
         with(deck_details_soul_missing) {
             visibility = View.INVISIBLE
             deck_details_soul_missing_loading.visibility = View.VISIBLE
-            privateInteractor.getMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
+            privateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
                 deck_details_soul_missing_loading.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                 Timber.d("Missing %d", missingSoul)
@@ -365,7 +365,7 @@ class DeckActivity : BaseActivity() {
         }
 
         fun rem(commentId: String) {
-            val deckComment = items.find { it.id == commentId }
+            val deckComment = items.find { it.uuid == commentId }
             val deckCommentIndex = items.indexOf(deckComment)
             (items as ArrayList).remove(deckComment)
             notifyItemRemoved(deckCommentIndex)
@@ -392,7 +392,7 @@ class DeckActivity : BaseActivity() {
                         with(itemView.deck_comment_delete) {
                             val owner = comment.owner == FirebaseAuth.getInstance().currentUser?.uid
                             visibility = if (owner) View.VISIBLE else View.GONE
-                            setOnClickListener { onRemComment(comment.id) }
+                            setOnClickListener { onRemComment(comment.uuid) }
                         }
                         Glide.with(itemView.context)
                                 .load(ownerUser.photoUrl)

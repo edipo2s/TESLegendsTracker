@@ -86,9 +86,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     onCardListChange()
                 }
                 userFavorites.clear()
-                PrivateInteractor().getFavoriteCards(null, deck.cls.attr1) {
+                PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
                     userFavorites.addAll(it)
-                    PrivateInteractor().getFavoriteCards(null, deck.cls.attr2) {
+                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
                         userFavorites.addAll(it)
                     }
                 }

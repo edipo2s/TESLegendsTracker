@@ -3,17 +3,6 @@ package com.ediposouza.teslesgendstracker.data
 /**
  * Created by ediposouza on 10/31/16.
  */
-data class User(
-
-        val name: String,
-        val collection: List<CardSlot>,
-        val collectionPercent: Float,
-        val decks: List<Deck>,
-        val decksFavorites: List<Deck>,
-        val matches: List<Match>
-
-)
-
 data class UserInfo(
 
         val name: String,
@@ -23,11 +12,13 @@ data class UserInfo(
 
 data class Match(
 
+        val uuid: String,
+        val first: Boolean,
         val player: MatchDeck,
         val opponent: MatchDeck,
-        val win: Boolean,
         val rank: Int,
-        val legend: Boolean
+        val legend: Boolean,
+        val win: Boolean
 
 )
 
@@ -36,6 +27,7 @@ data class MatchDeck(
         val name: String,
         val cls: Class,
         val type: DeckType,
-        val version: String
+        val deck: String? = null,
+        val version: String? = null
 
 )

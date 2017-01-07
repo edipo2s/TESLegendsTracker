@@ -34,10 +34,10 @@ object TestUtils {
                 for ((indexOpponent, opponentDeck) in decks.withIndex()) {
                     addAll(mutableListOf<Match>().apply {
                         for (i in 1..indexPlayer + 1) {
-                            add(Match(playerDeck, opponentDeck, true, 0, false))
+                            add(Match("", false, playerDeck, opponentDeck, 0, false, true))
                         }
                         for (i in 1..indexOpponent + 1) {
-                            add(Match(playerDeck, opponentDeck, false, 0, false))
+                            add(Match("", false, playerDeck, opponentDeck, 0, false, false))
                         }
                     })
                 }
