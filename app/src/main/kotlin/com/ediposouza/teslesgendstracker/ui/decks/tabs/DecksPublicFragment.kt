@@ -57,8 +57,8 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     val itemClick = { view: View, deck: Deck ->
-        PrivateInteractor().getFavoriteDecks(deck.cls) {
-            val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
+        PrivateInteractor().getUserFavoriteDecks(deck.cls) {
+            val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
             startActivity(DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId),
@@ -203,7 +203,7 @@ open class DecksPublicFragment : BaseFragment() {
             with(itemView.deck_soul_missing) {
                 visibility = View.INVISIBLE
                 itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-                privateInteractor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                privateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
                     itemView.deck_soul_missing_loading.visibility = View.GONE
                     val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                     Timber.d("Missing %d", missingSoul)

@@ -178,7 +178,7 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         }
-        privateInteractor.getFavoriteCards(setFilter, currentAttr) {
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
         }
     }

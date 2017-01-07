@@ -28,7 +28,7 @@ class CardsFavoritesFragment : CardsAllFragment() {
     }
 
     override fun showCards() {
-        privateInteractor.getFavoriteCards(setFilter, currentAttr) {
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
             cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
             cards_recycler_view?.scrollToPosition(0)

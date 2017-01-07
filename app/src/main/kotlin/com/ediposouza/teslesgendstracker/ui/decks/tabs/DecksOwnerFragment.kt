@@ -17,7 +17,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         get() = onlyPrivate?.isChecked ?: false
 
     override val dataRef = {
-        if (isDeckPrivate) privateInteractor.getOwnedPrivateDecksRef() else privateInteractor.getOwnedPublicDecksRef()
+        if (isDeckPrivate) privateInteractor.getUserPrivateDecksRef() else privateInteractor.getUserPublicDecksRef()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -104,11 +104,6 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
-            .orderByChild(KEY_DECK_UPDATE_AT)?.apply {
-        keepSynced()
-    }
-
     fun getPublicDeck(uuid: String, onSuccess: (Deck) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC).child(uuid)) {
             keepSynced()
@@ -129,6 +124,11 @@ class PublicInteractor : BaseInteractor() {
 
             })
         }
+    }
+
+    fun getPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
+            .orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+        keepSynced()
     }
 
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
@@ -159,7 +159,7 @@ class PublicInteractor : BaseInteractor() {
     fun incDeckView(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (Int) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC)) {
             val views = deck.views.inc()
-            child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to views)).addOnCompleteListener({
+            child(deck.uuid).updateChildren(mapOf(KEY_DECK_VIEWS to views)).addOnCompleteListener({
                 Timber.d(it.toString())
                 if (it.isSuccessful) onSuccess.invoke(views) else onError?.invoke(it.exception)
             })
@@ -177,25 +177,6 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getUserInfo(uuid: String, onError: ((e: Exception?) -> Unit)? = null,
-                    onSuccess: (UserInfo) -> Unit) {
-        dbUsers.child(uuid)?.child(NODE_USERS_INFO)?.addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(ds: DataSnapshot) {
-                val userInfo = UserInfo(ds.child(KEY_USER_NAME)?.value?.toString() ?: "",
-                        ds.child(KEY_USER_PHOTO)?.value?.toString() ?: "")
-                Timber.d(userInfo.toString())
-                onSuccess.invoke(userInfo)
-            }
-
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-                onError?.invoke(de.toException())
-            }
-
-        })
-    }
-
     fun getPatches(onError: ((e: Exception?) -> Unit)? = null,
                    onSuccess: (List<Patch>) -> Unit) {
         database.child(NODE_PATCHES).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -206,6 +187,25 @@ class PublicInteractor : BaseInteractor() {
                 }
                 Timber.d(patches.toString())
                 onSuccess.invoke(patches)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
+    fun getUserInfo(uuid: String, onError: ((e: Exception?) -> Unit)? = null,
+                    onSuccess: (UserInfo) -> Unit) {
+        dbUsers.child(uuid)?.child(NODE_USERS_INFO)?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val userInfo = UserInfo(ds.child(KEY_USER_NAME)?.value?.toString() ?: "",
+                        ds.child(KEY_USER_PHOTO)?.value?.toString() ?: "")
+                Timber.d(userInfo.toString())
+                onSuccess.invoke(userInfo)
             }
 
             override fun onCancelled(de: DatabaseError) {
