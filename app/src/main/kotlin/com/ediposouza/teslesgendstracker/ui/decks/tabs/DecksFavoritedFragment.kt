@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_decks_list.*
@@ -20,20 +19,20 @@ class DecksFavoritedFragment : DecksPublicFragment() {
         privateInteractor.getFavoriteDecksRef()
     }
 
-    override val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
-        true//currentClasses.map { it.ordinal }.contains(it.cls)
+    private val dataFilter: (Int) -> Boolean = {
+        currentClasses.map { it.ordinal }.contains(it)
     }
 
-    override val decksAdapter: BaseAdsFirebaseAdapter<Boolean, DecksAllViewHolder> by lazy {
-        object : BaseAdsFirebaseAdapter<Boolean, DecksAllViewHolder>(
-                Boolean::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
-                R.layout.itemlist_deck_ads, false) {
+    override val decksAdapter: BaseAdsFirebaseAdapter<Int, DecksAllViewHolder> by lazy {
+        object : BaseAdsFirebaseAdapter<Int, DecksAllViewHolder>(
+                Int::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
+                R.layout.itemlist_deck_ads, false, dataFilter) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
                 return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)
             }
 
-            override fun onBindContentHolder(itemKey: String, model: Boolean, viewHolder: DecksAllViewHolder) {
+            override fun onBindContentHolder(itemKey: String, model: Int, viewHolder: DecksAllViewHolder) {
                 if (!TextUtils.isEmpty(itemKey)) {
                     viewHolder.bind(itemKey, publicInteractor, privateInteractor)
                 }

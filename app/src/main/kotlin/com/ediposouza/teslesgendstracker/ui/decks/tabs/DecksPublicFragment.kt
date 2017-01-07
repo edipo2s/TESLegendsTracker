@@ -52,7 +52,7 @@ open class DecksPublicFragment : BaseFragment() {
         publicInteractor.getPublicDecksRef()
     }
 
-    open protected val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
+    private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
         currentClasses.map { it.ordinal }.contains(it.cls)
     }
 

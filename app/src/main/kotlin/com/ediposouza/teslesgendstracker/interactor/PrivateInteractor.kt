@@ -237,7 +237,7 @@ class PrivateInteractor : BaseInteractor() {
     fun setUserDeckFavorite(deck: Deck, favorite: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
             if (favorite) {
-                child(deck.id)?.setValue(true)?.addOnCompleteListener { onSuccess.invoke() }
+                child(deck.id)?.setValue(deck.cls.ordinal)?.addOnCompleteListener { onSuccess.invoke() }
             } else {
                 child(deck.id)?.removeValue()?.addOnCompleteListener { onSuccess.invoke() }
             }
