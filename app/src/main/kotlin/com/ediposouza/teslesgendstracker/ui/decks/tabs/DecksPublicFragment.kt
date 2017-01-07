@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
@@ -45,7 +46,7 @@ open class DecksPublicFragment : BaseFragment() {
     private val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
     private val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
 
-    open protected val isDeckOwned: Boolean = false
+    open protected val isDeckPrivate: Boolean = false
 
     open protected val dataRef = {
         publicInteractor.getPublicDecksRef()
@@ -58,8 +59,9 @@ open class DecksPublicFragment : BaseFragment() {
     val itemClick = { view: View, deck: Deck ->
         PrivateInteractor().getFavoriteDecks(deck.cls) {
             val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
-            val like = deck.likes.contains(FirebaseAuth.getInstance().currentUser?.uid)
-            startActivity(DeckActivity.newIntent(context, deck, favorite, like, isDeckOwned),
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            val like = deck.likes.contains(userId)
+            startActivity(DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId),
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                             Pair(view.deck_name as View, nameTransitionName),
                             Pair(view.deck_cover as View, coverTransitionName),
@@ -84,7 +86,7 @@ open class DecksPublicFragment : BaseFragment() {
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
                 Timber.d(model.toString())
-                viewHolder.bind(model.toDeck(itemKey, isDeckOwned), privateInteractor)
+                viewHolder.bind(model.toDeck(itemKey, isDeckPrivate), privateInteractor)
             }
 
             override fun onSyncEnd() {
@@ -160,26 +162,41 @@ open class DecksPublicFragment : BaseFragment() {
         }
 
         fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
-            itemView.deck_loading.visibility = View.GONE
-            itemView.deck_cover.visibility = View.VISIBLE
-            itemView.deck_info.visibility = View.VISIBLE
-            itemView.setOnClickListener { itemClick(itemView, deck) }
-            itemView.setOnLongClickListener { itemLongClick(itemView, deck) }
-            itemView.deck_cover.setImageResource(deck.cls.imageRes)
-            itemView.deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
-            itemView.deck_name.text = deck.name
-            itemView.deck_attr1.setImageResource(deck.cls.attr1.imageRes)
-            itemView.deck_attr2.setImageResource(deck.cls.attr2.imageRes)
-            itemView.deck_type.text = deck.type.name.toLowerCase().capitalize()
-            itemView.deck_date.setCompoundDrawablesWithIntrinsicBounds(if (deck.updates.isEmpty())
-                R.drawable.ic_create_at else R.drawable.ic_updated_at, 0, 0, 0)
-            itemView.deck_date.text = deck.updatedAt.toLocalDate().toString()
-            val numberInstance = NumberFormat.getNumberInstance()
-            itemView.deck_soul_cost.text = numberInstance.format(deck.cost)
-            itemView.deck_comments.text = numberInstance.format(deck.comments.size)
-            itemView.deck_likes.text = numberInstance.format(deck.likes.size)
-            itemView.deck_views.text = numberInstance.format(deck.views)
-            calculateMissingSoul(deck, privateInteractor)
+            with(itemView) {
+                deck_loading.visibility = View.GONE
+                deck_cover.visibility = View.VISIBLE
+                deck_info.visibility = View.VISIBLE
+                setOnClickListener { itemClick(itemView, deck) }
+                setOnLongClickListener { itemLongClick(itemView, deck) }
+                deck_cover.setImageResource(deck.cls.imageRes)
+                deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
+                deck_name.text = deck.name
+                deck_attr1.setImageResource(deck.cls.attr1.imageRes)
+                deck_attr2.setImageResource(deck.cls.attr2.imageRes)
+                deck_type.text = deck.type.name.toLowerCase().capitalize()
+                deck_date.text = deck.updatedAt.toLocalDate().toString()
+                (deck_date.layoutParams as RelativeLayout.LayoutParams).apply {
+                    if (deck.private) {
+                        addRule(RelativeLayout.ALIGN_PARENT_END)
+                        removeRule(RelativeLayout.END_OF)
+                    } else {
+                        addRule(RelativeLayout.END_OF, R.id.deck_center)
+                        removeRule(RelativeLayout.ALIGN_PARENT_END)
+                    }
+                    deck_date.layoutParams = this
+                }
+                deck_date.setCompoundDrawablesWithIntrinsicBounds(if (deck.updates.isEmpty())
+                    R.drawable.ic_create_at else R.drawable.ic_updated_at, 0, 0, 0)
+                val numberInstance = NumberFormat.getNumberInstance()
+                deck_soul_cost.text = numberInstance.format(deck.cost)
+                deck_comments.text = numberInstance.format(deck.comments.size)
+                deck_comments.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_likes.text = numberInstance.format(deck.likes.size)
+                deck_likes.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_views.text = numberInstance.format(deck.views)
+                deck_views.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                calculateMissingSoul(deck, privateInteractor)
+            }
         }
 
         fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {

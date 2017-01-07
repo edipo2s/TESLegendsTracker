@@ -11,13 +11,13 @@ import com.ediposouza.teslesgendstracker.util.inflate
  */
 class DecksOwnerFragment : DecksPublicFragment() {
 
-    override val isDeckOwned: Boolean = true
-
     private var onlyPrivate: Switch? = null
 
+    override val isDeckPrivate: Boolean
+        get() = onlyPrivate?.isChecked ?: false
+
     override val dataRef = {
-        if (onlyPrivate?.isChecked ?: false)
-            privateInteractor.getOwnedPrivateDecksRef() else privateInteractor.getOwnedPublicDecksRef()
+        if (isDeckPrivate) privateInteractor.getOwnedPrivateDecksRef() else privateInteractor.getOwnedPublicDecksRef()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
