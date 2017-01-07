@@ -96,6 +96,12 @@ class DeckActivity : BaseActivity() {
     }
 
     private fun configViews() {
+        if (deckOwned) {
+            deck_fab_favorite.hide()
+            deck_details_likes.visibility = View.GONE
+            deck_details_views.visibility = View.GONE
+            commentsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
         deck_fab_favorite.setOnClickListener {
             if (App.hasUserLogged()) {
                 privateInteractor.setUserDeckFavorite(deck, !favorite) {
@@ -183,6 +189,7 @@ class DeckActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(if (deckOwned) R.menu.menu_deck_owner else R.menu.menu_deck, menu)
         menuLike = menu?.findItem(R.id.menu_like)
+        menuLike?.isVisible = !deckOwned
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
     }
@@ -284,8 +291,10 @@ class DeckActivity : BaseActivity() {
     private fun loadDeckRemoteInfo() {
         doAsync {
             calculateMissingSoul(deck, privateInteractor)
-            publicInteractor.incDeckView(deck) {
-                deck_details_views.text = deck.views.inc().toString()
+            if (!deckOwned) {
+                publicInteractor.incDeckView(deck) {
+                    deck_details_views.text = it.toString()
+                }
             }
             publicInteractor.getPatches {
                 val patch = it.find { it.uidDate == deck.patch }

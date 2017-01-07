@@ -107,6 +107,10 @@ abstract class FirebaseParsers {
             return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls, KEY_DECK_PATCH to patch)
         }
 
+        override fun toString(): String {
+            return "DeckParser(name='$name', type=$type, cls=$cls, cost=$cost, owner='$owner', createdAt='$createdAt', updatedAt='$updatedAt', patch='$patch', views=$views, likes=$likes, cards=$cards, updates=$updates, comments=$comments)"
+        }
+
     }
 
     class PatchParser {
