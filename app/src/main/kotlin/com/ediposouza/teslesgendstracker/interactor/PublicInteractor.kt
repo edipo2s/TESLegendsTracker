@@ -104,6 +104,33 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
+    fun getPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
+            .orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+        keepSynced()
+    }
+
+    fun getPublicDeck(uuid: String, onSuccess: (Deck) -> Unit) {
+        with(dbDecks.child(NODE_DECKS_PUBLIC).child(uuid)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val value = ds.getValue(FirebaseParsers.DeckParser::class.java)
+                    val deck = value?.toDeck(ds.key, false)
+                    if (deck != null) {
+                        Timber.d(deck.toString())
+                        onSuccess.invoke(deck)
+                    }
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
+
+            })
+        }
+    }
+
     fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
         dbPublicDeck.keepSynced()
@@ -129,11 +156,12 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
-    fun incDeckView(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun incDeckView(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (Int) -> Unit) {
         with(dbDecks.child(NODE_DECKS_PUBLIC)) {
-            child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to deck.views.inc())).addOnCompleteListener({
+            val views = deck.views.inc()
+            child(deck.id).updateChildren(mapOf(KEY_DECK_VIEWS to views)).addOnCompleteListener({
                 Timber.d(it.toString())
-                if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                if (it.isSuccessful) onSuccess.invoke(views) else onError?.invoke(it.exception)
             })
         }
     }
