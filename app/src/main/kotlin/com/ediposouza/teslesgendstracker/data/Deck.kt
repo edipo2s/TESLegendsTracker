@@ -66,6 +66,9 @@ data class DeckComment(
         dest?.writeString(comment)
         dest?.writeSerializable(date)
     }
+
+    override fun toString(): String = "DeckComment(id='$id', owner='$owner', comment='$comment', date=$date)"
+
 }
 
 data class Deck(
@@ -125,4 +128,9 @@ data class Deck(
         dest?.writeList(updates)
         dest?.writeList(comments)
     }
+
+    override fun toString(): String {
+        return "Deck(id='$id', name='$name', owner='$owner', private=$private, type=$type, cls=$cls, cost=$cost, createdAt=$createdAt, updatedAt=$updatedAt, patch='$patch', likes=$likes, views=$views, cards=$cards, updates=$updates, comments=$comments)"
+    }
+
 }

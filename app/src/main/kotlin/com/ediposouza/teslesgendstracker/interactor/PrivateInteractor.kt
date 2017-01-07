@@ -167,7 +167,9 @@ class PrivateInteractor : BaseInteractor() {
         keepSynced()
     }
 
-    fun getFavoriteDecks() = PublicInteractor().getPublicDecksRef()
+    fun getFavoriteDecksRef() = dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
+        keepSynced()
+    }
 
     fun getFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {
         PublicInteractor().getPublicDecks(cls) {
