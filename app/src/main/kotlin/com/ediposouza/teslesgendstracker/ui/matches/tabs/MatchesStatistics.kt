@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.itemcell_text.view.*
 import miguelbcr.ui.tableFixHeadesWrapper.TableFixHeaderAdapter
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.itemsSequence
 import org.jetbrains.anko.uiThread
 import java.util.*
 
@@ -31,6 +32,7 @@ class MatchesStatistics : BaseFragment() {
     private var currentMatchMode = MatchMode.RANKED
     private var seasons: List<Season> = listOf()
     private var showPercent: Switch? = null
+    private var menuSeasons: SubMenu? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
     var results: HashMap<Class, ArrayList<Match>> = HashMap()
@@ -73,9 +75,10 @@ class MatchesStatistics : BaseFragment() {
     }
 
     private fun getSeasons(menuSeason: MenuItem?) {
-        menuSeason?.subMenu?.apply {
+        menuSeasons = menuSeason?.subMenu
+        menuSeasons?.apply {
             clear()
-            add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all))
+            add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all)).setIcon(R.drawable.ic_checked)
             PublicInteractor().getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
@@ -86,6 +89,10 @@ class MatchesStatistics : BaseFragment() {
     }
 
     private fun getMatches(season: Season? = null) {
+        val seasonId = season?.id ?: R.id.menu_season_all
+        menuSeasons?.itemsSequence()?.forEach {
+            it.setIcon(if (it.itemId == seasonId) R.drawable.ic_checked else 0)
+        }
         loadingStatisticsData()
         PrivateInteractor().getUserMatches(season) {
             it.filter { it.mode == currentMatchMode }.groupBy { it.player.cls }.forEach {

@@ -26,12 +26,12 @@
     <color name="grey_900">#212121</color>
     <color name="teal_300">#4db6ac</color>
     <color name="teal_300_transparent">#AA4db6ac</color>
-    <color name="teal_300_transparent2">#664db6ac</color>
     <color name="green_500">#4CAF50</color>
     <color name="cyan_800">#0097A7</color>
     <color name="red_100">#FFCDD2</color>
     <color name="red_300">#e57373</color>
     <color name="red_800">#C62828</color>
+    <color name="white_transparent">#33ffffff</color>
 
     <color name="colorBlue">#6f99ff</color>
     <color name="colorYellow">#FFD54F</color>

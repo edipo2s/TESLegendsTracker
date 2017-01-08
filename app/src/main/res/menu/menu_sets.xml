@@ -12,6 +12,7 @@
 
             <item
                 android:id="@+id/menu_sets_all"
+                android:icon="@drawable/ic_checked"
                 android:title="@string/cards_sets_all" />
 
             <item
