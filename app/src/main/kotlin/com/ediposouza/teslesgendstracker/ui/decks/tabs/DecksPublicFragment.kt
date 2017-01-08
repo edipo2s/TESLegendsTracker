@@ -85,7 +85,6 @@ open class DecksPublicFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
-                Timber.d(model.toString())
                 viewHolder.bind(model.toDeck(itemKey, isDeckPrivate), privateInteractor)
             }
 
@@ -145,9 +144,10 @@ open class DecksPublicFragment : BaseFragment() {
 
     open fun showDecks() {
         decksAdapter.reset()
+        decksAdapter.notifyDataSetChanged()
     }
 
-    class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
+    class DecksAllViewHolder(view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
