@@ -6,18 +6,17 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.data.Match
-import com.ediposouza.teslesgendstracker.data.Season
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMode
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
 import kotlinx.android.synthetic.main.itemcell_text.view.*
 import miguelbcr.ui.tableFixHeadesWrapper.TableFixHeaderAdapter
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.*
@@ -29,6 +28,7 @@ class MatchesStatistics : BaseFragment() {
 
     private val HEADER_FIRST = "Vs"
 
+    private var currentMatchMode = MatchMode.RANKED
     private var seasons: List<Season> = listOf()
     private var showPercent: Switch? = null
 
@@ -88,7 +88,7 @@ class MatchesStatistics : BaseFragment() {
     private fun getMatches(season: Season? = null) {
         loadingStatisticsData()
         PrivateInteractor().getUserMatches(season) {
-            it.groupBy { it.player.cls }.forEach {
+            it.filter { it.mode == currentMatchMode }.groupBy { it.player.cls }.forEach {
                 results[it.key]?.addAll(it.value)
             }
             updateStatisticsData()
@@ -154,6 +154,12 @@ class MatchesStatistics : BaseFragment() {
     private fun calcWinRate(wins: Float, losses: Float): Float {
         val total = (wins + losses)
         return if (total == 0f) -1f else 100 / total * wins
+    }
+
+    @Subscribe
+    fun onUpdateMode(cmdUpdateMode: CmdUpdateMode) {
+        currentMatchMode = cmdUpdateMode.mode
+        getMatches()
     }
 
     class BodyItem(val result: String? = null, val cls: Class? = null)

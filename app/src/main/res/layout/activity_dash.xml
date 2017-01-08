@@ -118,6 +118,6 @@
         app:itemIconTint="@drawable/selector_menu_item"
         app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:itemTextColor="@drawable/selector_menu_item"
-        app:menu="@menu/menu_drawer" />
+        app:menu="@menu/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

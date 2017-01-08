@@ -155,7 +155,7 @@ abstract class FirebaseParsers {
             val opponentDeck = MatchDeck(opponent[KEY_MATCH_DECK_NAME].toString(),
                     Class.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
-            val matchMode = MatchType.values()[mode]
+            val matchMode = MatchMode.values()[mode]
             return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)
         }
 

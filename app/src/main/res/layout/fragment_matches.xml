@@ -9,6 +9,17 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/matches_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/matches_nav_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/navigation_bar_height"
+        app:itemBackground="@color/teal_300_transparent2"
+        app:itemIconTint="@drawable/selector_bottom_tab_mode"
+        app:itemTextColor="@drawable/selector_bottom_tab_mode"
+        app:menu="@menu/navigation_bottom_mode"/>
 
 </LinearLayout>

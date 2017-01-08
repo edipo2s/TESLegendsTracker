@@ -56,7 +56,7 @@ data class Season(
 
 )
 
-enum class MatchType {
+enum class MatchMode {
 
     RANKED,
     CASUAL,
@@ -80,7 +80,7 @@ data class Match(
         val first: Boolean,
         val player: MatchDeck,
         val opponent: MatchDeck,
-        val mode: MatchType,
+        val mode: MatchMode,
         val season: String,
         val rank: Int,
         val legend: Boolean,
