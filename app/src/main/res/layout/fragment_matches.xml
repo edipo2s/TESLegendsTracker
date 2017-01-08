@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/navigation_bar_height"
-        app:itemBackground="@color/teal_300_transparent2"
+        app:itemBackground="@color/white_transparent"
         app:itemIconTint="@drawable/selector_bottom_tab_mode"
         app:itemTextColor="@drawable/selector_bottom_tab_mode"
         app:menu="@menu/navigation_bottom_mode"/>
