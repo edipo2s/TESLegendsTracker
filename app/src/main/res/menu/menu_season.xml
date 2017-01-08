@@ -6,6 +6,17 @@
         android:id="@+id/menu_season"
         android:icon="@drawable/ic_timer_sand"
         android:title="@string/menu_season"
-        app:showAsAction="always" />
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/menu_season_all"
+                android:title="@string/matches_seasons_all"
+                app:showAsAction="always" />
+
+        </menu>
+
+    </item>
 
 </menu>

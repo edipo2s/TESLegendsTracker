@@ -5208,46 +5208,12 @@
     }
   },
   "season": {
-    "00": {
-      "month": "2016_07",
-      "reward": "dagirahtmystic"
-    },
-    "01": {
-      "month": "2016_08",
-      "reward": "smugglershaul"
-    },
-    "02": {
-      "month": "2016_09",
-      "reward": "histgrove"
-    },
-    "03": {
-      "month": "2016_10",
-      "reward": "mechanicalally"
-    },
-    "04": {
-      "month": "2016_11",
-      "reward": "battlereeveofdusk"
-    },
-    "05": {
-      "month": "2016_12",
-      "reward": "elsweyrlookout"
-    },
-    "2016_03": {
-      "month": "2016_03",
-      "reward": "magesguildretreat"
-    },
-    "2016_04": {
-      "month": "2016_04",
-      "reward": "witheredhandcultist"
-    },
-    "2016_05": {
-      "month": "2016_05",
-      "reward": "staffofsparks"
-    },
-    "2016_06": {
-      "month": "2016_06",
-      "reward": "plunder"
-    }
+    "2016_08": "smugglershaul",
+    "2016_09": "histgrove",
+    "2016_10": "mechanicalally",
+    "2016_11": "battlereeveofdusk",
+    "2016_12": "elsweyrlookout",
+    "2017_01": "unknown"
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
@@ -6356,8 +6322,95 @@
             "name": "Prophecy Assassin",
             "type": 0
           },
+          "type": 0,
+          "mode": 0,
           "rank": 4,
+          "season": "2016_11",
           "win": true
+        },
+        "2016-12-03T09:22:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 0,
+            "deck": "-KWYo4K8PDs_zO1q8aqh",
+            "name": "My Archer",
+            "type": 4,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 0,
+            "name": "Cycle Archer",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 0,
+          "rank": 4,
+          "season": "2016_12",
+          "win": false
+        },
+        "2017-01-03T10:22:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 2,
+            "name": "Prophecy Assassin",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 1,
+          "rank": 3,
+          "season": "2017_01",
+          "win": true
+        },
+        "2017-01-03T11:20:34": {
+          "first": false,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 6,
+            "name": "Mimic Scout",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 1,
+          "rank": 3,
+          "season": "2017_01",
+          "win": true
+        },
+        "2017-01-03T12:20:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 6,
+            "name": "Mimic Scout",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 2,
+          "rank": 3,
+          "season": "2017_01",
+          "win": false
         }
       }
     },

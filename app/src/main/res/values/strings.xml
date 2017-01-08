@@ -113,6 +113,7 @@
     <string name="new_deck_save_as_private">Deck saved as Private</string>
     <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
 
+    <string name="matches_seasons_all">All Seasons</string>
     <string name="match_statistics_total_label">Total</string>
     <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
 

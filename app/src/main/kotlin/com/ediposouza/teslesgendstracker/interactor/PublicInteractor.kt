@@ -4,7 +4,10 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import org.threeten.bp.Month
+import org.threeten.bp.format.TextStyle
 import timber.log.Timber
+import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -177,8 +180,7 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getPatches(onError: ((e: Exception?) -> Unit)? = null,
-                   onSuccess: (List<Patch>) -> Unit) {
+    fun getPatches(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Patch>) -> Unit) {
         database.child(NODE_PATCHES).addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
@@ -187,6 +189,29 @@ class PublicInteractor : BaseInteractor() {
                 }
                 Timber.d(patches.toString())
                 onSuccess.invoke(patches)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
+    fun getSeasons(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Season>) -> Unit) {
+        database.child(NODE_SEASONS).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val seasons = ds.children.mapTo(arrayListOf()) {
+                    val id = it.key.replace("_", "").toInt()
+                    val date = it.key.split("_")
+                    val month = Month.of(date[1].toInt())
+                    val desc = "${month.getDisplayName(TextStyle.FULL, Locale.getDefault())}/${date[0].toInt()}"
+                    Season(id, it.key, desc, it.value.toString())
+                }
+                Timber.d(seasons.toString())
+                onSuccess.invoke(seasons)
             }
 
             override fun onCancelled(de: DatabaseError) {
