@@ -3,7 +3,6 @@ package com.ediposouza.teslesgendstracker.interactor
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
 import org.threeten.bp.LocalDateTime
-import timber.log.Timber
 
 abstract class FirebaseParsers {
 
@@ -129,8 +128,10 @@ abstract class FirebaseParsers {
             val first: Boolean = false,
             val player: Map<String, Any> = mapOf(),
             val opponent: Map<String, Any> = mapOf(),
-            val rank: Int = 0,
             val legend: Boolean = false,
+            val mode: Int = 0,
+            val rank: Int = 0,
+            val season: String = "",
             val win: Boolean = false
 
     ) {
@@ -146,7 +147,6 @@ abstract class FirebaseParsers {
         }
 
         fun toMatch(uuid: String): Match {
-            Timber.d(this.toString())
             val playerDeck = MatchDeck(player[KEY_MATCH_DECK_NAME].toString(),
                     Class.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[player[KEY_MATCH_DECK_TYPE].toString().toInt()],
@@ -155,11 +155,12 @@ abstract class FirebaseParsers {
             val opponentDeck = MatchDeck(opponent[KEY_MATCH_DECK_NAME].toString(),
                     Class.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
-            return Match(uuid, first, playerDeck, opponentDeck, rank, legend, win)
+            val matchMode = MatchType.values()[mode]
+            return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)
         }
 
         override fun toString(): String {
-            return "MatchParser(first=$first, player=$player, opponent=$opponent, rank=$rank, legend=$legend, win=$win)"
+            return "MatchParser(first=$first, player=$player, opponent=$opponent, legend=$legend, mode=$mode, rank=$rank, win=$win)"
         }
 
     }

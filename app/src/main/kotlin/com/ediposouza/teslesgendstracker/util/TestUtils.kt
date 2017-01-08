@@ -1,9 +1,6 @@
 package com.ediposouza.teslesgendstracker.util
 
-import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.data.DeckType
-import com.ediposouza.teslesgendstracker.data.Match
-import com.ediposouza.teslesgendstracker.data.MatchDeck
+import com.ediposouza.teslesgendstracker.data.*
 
 /**
  * Created by EdipoSouza on 1/5/17.
@@ -34,10 +31,10 @@ object TestUtils {
                 for ((indexOpponent, opponentDeck) in decks.withIndex()) {
                     addAll(mutableListOf<Match>().apply {
                         for (i in 1..indexPlayer + 1) {
-                            add(Match("", false, playerDeck, opponentDeck, 0, false, true))
+                            add(Match("", false, playerDeck, opponentDeck, MatchType.RANKED, "2016_12", 0, false, true))
                         }
                         for (i in 1..indexOpponent + 1) {
-                            add(Match("", false, playerDeck, opponentDeck, 0, false, false))
+                            add(Match("", false, playerDeck, opponentDeck, MatchType.RANKED, "2016_12", 0, false, false))
                         }
                     })
                 }

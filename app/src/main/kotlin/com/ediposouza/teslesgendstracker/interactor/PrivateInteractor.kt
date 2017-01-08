@@ -31,6 +31,8 @@ class PrivateInteractor : BaseInteractor() {
     private val KEY_DECK_UPDATES = "updates"
     private val KEY_DECK_COMMENTS = "comments"
 
+    private val KEY_MATCH_SEASON = "season"
+
     private fun getUserID(): String {
         return FirebaseAuth.getInstance().currentUser?.uid ?: ""
     }
@@ -334,10 +336,11 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun getUserMatches(onSuccess: (List<Match>) -> Unit) {
+    fun getUserMatches(season: Season?, onSuccess: (List<Match>) -> Unit) {
         dbUser()?.child(NODE_MATCHES)?.apply {
             keepSynced()
-            addListenerForSingleValueEvent(object : ValueEventListener {
+            val query = orderByChild(KEY_MATCH_SEASON).equalTo(season?.uuid)
+            (if (season != null) query else this).addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val matches = ds.children.mapTo(arrayListOf<Match>()) {

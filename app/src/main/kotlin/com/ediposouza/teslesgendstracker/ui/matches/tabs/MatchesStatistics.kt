@@ -9,7 +9,9 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Match
+import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
@@ -27,10 +29,11 @@ class MatchesStatistics : BaseFragment() {
 
     private val HEADER_FIRST = "Vs"
 
+    private var seasons: List<Season> = listOf()
     private var showPercent: Switch? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
-    val results = HashMap(Class.values().map { it to mutableListOf<Match>() }.toMap())
+    var results: HashMap<Class, ArrayList<Match>> = HashMap()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_statistics)
@@ -43,23 +46,8 @@ class MatchesStatistics : BaseFragment() {
             setFirstHeader(HEADER_FIRST)
             val classTotal: Class? = null
             header = Class.values().asList().plus(classTotal)
-            setFirstBody(Class.values().map { listOf(BodyItem(it)) }.plus(listOf(listOf(BodyItem()))))
-            body = mutableListOf<List<BodyItem>>().apply {
-                Class.values().forEach { myCls ->
-                    add(mutableListOf<BodyItem>().apply {
-                        Class.values().forEach { opponentCls ->
-                            add(BodyItem())
-                        }
-                        add(BodyItem())
-                    })
-                }
-                add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach {
-                        add(BodyItem())
-                    }
-                    add(BodyItem())
-                })
-            }
+            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
+            loadingStatisticsData(this)
             setSection(listOf())
         }
         matches_statistics_table.adapter = statisticsTableAdapter
@@ -70,17 +58,60 @@ class MatchesStatistics : BaseFragment() {
         menu?.clear()
         inflater?.inflate(R.menu.menu_percent, menu)
         inflater?.inflate(R.menu.menu_season, menu)
+        getSeasons(menu?.findItem(R.id.menu_season))
         showPercent = menu?.findItem(R.id.menu_percent)?.actionView as Switch
         showPercent?.setOnCheckedChangeListener { button, checked -> updateStatisticsData() }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun getMatches() {
-        PrivateInteractor().getUserMatches {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_season_all -> getMatches()
+            else -> seasons.find { it.id == item?.itemId }?.apply { getMatches(this) }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun getSeasons(menuSeason: MenuItem?) {
+        menuSeason?.subMenu?.apply {
+            clear()
+            add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all))
+            PublicInteractor().getSeasons {
+                seasons = it.reversed()
+                seasons.forEach {
+                    add(0, it.id, 0, it.desc)
+                }
+            }
+        }
+    }
+
+    private fun getMatches(season: Season? = null) {
+        loadingStatisticsData()
+        PrivateInteractor().getUserMatches(season) {
             it.groupBy { it.player.cls }.forEach {
                 results[it.key]?.addAll(it.value)
-                updateStatisticsData()
             }
+            updateStatisticsData()
+        }
+    }
+
+    private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
+        results = HashMap(Class.values().map { it to ArrayList<Match>() }.toMap())
+        tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
+            Class.values().forEach { myCls ->
+                add(mutableListOf<BodyItem>().apply {
+                    Class.values().forEach { opponentCls ->
+                        add(BodyItem())
+                    }
+                    add(BodyItem())
+                })
+            }
+            add(mutableListOf<BodyItem>().apply {
+                Class.values().forEach {
+                    add(BodyItem())
+                }
+                add(BodyItem())
+            })
         }
     }
 
@@ -116,13 +147,16 @@ class MatchesStatistics : BaseFragment() {
         val result = matches.groupBy { it.win }
         val wins = result[true]?.size ?: 0
         val losses = result[false]?.size ?: 0
-        return BodyItem(result = if (!(showPercent?.isChecked ?: false)) "$wins/$losses" else
+        return BodyItem(if (!(showPercent?.isChecked ?: false)) "$wins/$losses" else
             getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat())))
     }
 
-    private fun calcWinRate(losses: Float, wins: Float) = losses / (wins + losses) * 100
+    private fun calcWinRate(wins: Float, losses: Float): Float {
+        val total = (wins + losses)
+        return if (total == 0f) -1f else 100 / total * wins
+    }
 
-    class BodyItem(val cls: Class? = null, val result: String? = null)
+    class BodyItem(val result: String? = null, val cls: Class? = null)
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
             Class, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
@@ -205,7 +239,7 @@ class MatchesStatistics : BaseFragment() {
 
         private fun bindResult(result: String?) {
             with(rootView) {
-                cell_text.text = result
+                cell_text.text = if (result == "0/0" || result == "-1.0%") "-" else result
                 cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
                 cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
             }

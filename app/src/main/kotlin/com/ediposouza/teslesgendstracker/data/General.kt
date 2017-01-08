@@ -6,6 +6,13 @@ import android.os.Parcelable
 /**
  * Created by EdipoSouza on 10/31/16.
  */
+data class UserInfo(
+
+        val name: String,
+        val photoUrl: String
+
+)
+
 data class CardSlot(
 
         val card: Card,
@@ -37,5 +44,46 @@ data class Patch(
 
         val uuidDate: String,
         val desc: String
+
+)
+
+data class Season(
+
+        val id: Int,
+        val uuid: String,
+        val desc: String,
+        val reward: String
+
+)
+
+enum class MatchType {
+
+    RANKED,
+    CASUAL,
+    ARENA
+
+}
+
+data class MatchDeck(
+
+        val name: String,
+        val cls: Class,
+        val type: DeckType,
+        val deck: String? = null,
+        val version: String? = null
+
+)
+
+data class Match(
+
+        val uuid: String,
+        val first: Boolean,
+        val player: MatchDeck,
+        val opponent: MatchDeck,
+        val mode: MatchType,
+        val season: String,
+        val rank: Int,
+        val legend: Boolean,
+        val win: Boolean
 
 )
