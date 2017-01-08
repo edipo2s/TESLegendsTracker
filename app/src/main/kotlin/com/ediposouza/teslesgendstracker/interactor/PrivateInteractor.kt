@@ -175,10 +175,8 @@ class PrivateInteractor : BaseInteractor() {
     }
 
     fun getUserFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {
-        PublicInteractor().getPublicDecks(cls) {
-            val publicDecks = it
-            dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
-                keepSynced()
+        PublicInteractor().getPublicDecks(cls) { publicDecks ->
+            getUserFavoriteDecksRef()?.apply {
                 addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
@@ -336,9 +334,12 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun getUserMatchesRef() = dbUser()?.child(NODE_MATCHES)?.apply {
+        keepSynced()
+    }
+
     fun getUserMatches(season: Season?, onSuccess: (List<Match>) -> Unit) {
-        dbUser()?.child(NODE_MATCHES)?.apply {
-            keepSynced()
+        getUserMatchesRef()?.apply {
             val query = orderByChild(KEY_MATCH_SEASON).equalTo(season?.uuid)
             (if (season != null) query else this).addListenerForSingleValueEvent(object : ValueEventListener {
 

@@ -8,9 +8,9 @@ import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMode
+import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
+import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.itemcell_text.view.*
 import miguelbcr.ui.tableFixHeadesWrapper.TableFixHeaderAdapter
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.itemsSequence
 import org.jetbrains.anko.uiThread
 import java.util.*
 
@@ -27,12 +26,11 @@ import java.util.*
  */
 class MatchesStatistics : BaseFragment() {
 
-    private val HEADER_FIRST = "Vs"
+    private val HEADER_FIRST by lazy { getString(R.string.match_vs) }
 
     private var currentMatchMode = MatchMode.RANKED
-    private var seasons: List<Season> = listOf()
+    private var currentSeason: Season? = null
     private var showPercent: Switch? = null
-    private var menuSeasons: SubMenu? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
     var results: HashMap<Class, ArrayList<Match>> = HashMap()
@@ -57,44 +55,16 @@ class MatchesStatistics : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menu?.clear()
-        inflater?.inflate(R.menu.menu_percent, menu)
-        inflater?.inflate(R.menu.menu_season, menu)
-        getSeasons(menu?.findItem(R.id.menu_season))
-        showPercent = menu?.findItem(R.id.menu_percent)?.actionView as Switch
+        val menuPercent = menu?.findItem(R.id.menu_percent)
+        menuPercent?.isVisible = true
+        showPercent = menuPercent?.actionView as Switch
         showPercent?.setOnCheckedChangeListener { button, checked -> updateStatisticsData() }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_season_all -> getMatches()
-            else -> seasons.find { it.id == item?.itemId }?.apply { getMatches(this) }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun getSeasons(menuSeason: MenuItem?) {
-        menuSeasons = menuSeason?.subMenu
-        menuSeasons?.apply {
-            clear()
-            add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all)).setIcon(R.drawable.ic_checked)
-            PublicInteractor().getSeasons {
-                seasons = it.reversed()
-                seasons.forEach {
-                    add(0, it.id, 0, it.desc)
-                }
-            }
-        }
-    }
-
-    private fun getMatches(season: Season? = null) {
-        val seasonId = season?.id ?: R.id.menu_season_all
-        menuSeasons?.itemsSequence()?.forEach {
-            it.setIcon(if (it.itemId == seasonId) R.drawable.ic_checked else 0)
-        }
+    private fun getMatches() {
         loadingStatisticsData()
-        PrivateInteractor().getUserMatches(season) {
+        PrivateInteractor().getUserMatches(currentSeason) {
             it.filter { it.mode == currentMatchMode }.groupBy { it.player.cls }.forEach {
                 results[it.key]?.addAll(it.value)
             }
@@ -164,8 +134,14 @@ class MatchesStatistics : BaseFragment() {
     }
 
     @Subscribe
-    fun onUpdateMode(cmdUpdateMode: CmdUpdateMode) {
-        currentMatchMode = cmdUpdateMode.mode
+    fun onFilterMode(cmdFilterMode: CmdFilterMode) {
+        currentMatchMode = cmdFilterMode.mode
+        getMatches()
+    }
+
+    @Subscribe
+    fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
+        currentSeason = cmdFilterSeason.season
         getMatches()
     }
 
