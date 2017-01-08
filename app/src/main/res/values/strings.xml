@@ -45,6 +45,9 @@
     <string name="tab_decks_favorites">Favorites</string>
     <string name="tab_matches_statistics">Statistics</string>
     <string name="tab_matches_history">History</string>
+    <string name="tab_mode_ranked">Ranked</string>
+    <string name="tab_mode_casual">Casual</string>
+    <string name="tab_mode_arena">Arena</string>
 
     <string name="title_tab_cards_all">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>

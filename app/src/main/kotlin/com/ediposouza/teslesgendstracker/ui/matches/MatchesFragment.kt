@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager
 import android.text.format.DateUtils
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
@@ -56,6 +57,14 @@ class MatchesFragment : BaseFragment() {
         activity.dash_navigation_view.setCheckedItem(R.id.menu_matches)
         matches_view_pager.adapter = MatchesPageAdapter(context, childFragmentManager)
         matches_view_pager.addOnPageChangeListener(pageChange)
+        matches_nav_mode.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.tab_mode_ranked -> eventBus.post(CmdUpdateMode(MatchMode.RANKED))
+                R.id.tab_mode_casual -> eventBus.post(CmdUpdateMode(MatchMode.CASUAL))
+                R.id.tab_mode_arena -> eventBus.post(CmdUpdateMode(MatchMode.ARENA))
+            }
+            true
+        }
         MetricsManager.trackScreen(MetricScreen.SCREEN_MATCHES_STATISTICS())
     }
 

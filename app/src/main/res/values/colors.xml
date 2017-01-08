@@ -26,6 +26,7 @@
     <color name="grey_900">#212121</color>
     <color name="teal_300">#4db6ac</color>
     <color name="teal_300_transparent">#AA4db6ac</color>
+    <color name="teal_300_transparent2">#664db6ac</color>
     <color name="green_500">#4CAF50</color>
     <color name="cyan_800">#0097A7</color>
     <color name="red_100">#FFCDD2</color>
