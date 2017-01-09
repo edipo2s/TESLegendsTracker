@@ -78,5 +78,8 @@
     <dimen name="match_statistics_cell_height">48dp</dimen>
     <dimen name="match_statistics_cell_width">72dp</dimen>
     <dimen name="match_statistics_header_width">88dp</dimen>
+    <dimen name="match_statistics_class_header_width">100dp</dimen>
+
+    <dimen name="new_match_class_icons_width">56dp</dimen>
 
 </resources>
