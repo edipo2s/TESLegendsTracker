@@ -51,14 +51,16 @@
         android:src="@drawable/attr_intelligence" />
 
     <TextView
-        android:id="@+id/match_history_result"
-        android:layout_width="0dp"
+        android:id="@+id/match_history_rank"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_marginStart="@dimen/large_margin"
+        android:gravity="end"
         android:padding="@dimen/default_margin"
-        android:textColor="@color/green_500"
-        tools:text="Win" />
+        android:ems="5"
+        android:textColor="@color/teal_100"
+        android:textStyle="bold"
+        tools:text="7" />
 
     <ImageView
         android:id="@+id/match_history_legend"
@@ -67,12 +69,14 @@
         android:src="@drawable/ic_rank_legend" />
 
     <TextView
-        android:id="@+id/match_history_rank"
-        android:layout_width="wrap_content"
+        android:id="@+id/match_history_result"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_weight="1"
+        android:gravity="center"
         android:padding="@dimen/default_margin"
-        android:textColor="@color/colorAccent"
-        tools:text="7" />
+        android:textColor="@color/green_200"
+        android:textStyle="bold"
+        tools:text="Win" />
 
 </LinearLayout>

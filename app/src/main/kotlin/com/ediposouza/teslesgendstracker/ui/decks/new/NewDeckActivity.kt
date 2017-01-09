@@ -63,7 +63,7 @@ class NewDeckActivity : BaseFilterActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar_title.text = getString(R.string.new_deck_title)
+        new_deck_toolbar_title.text = getString(R.string.new_deck_title)
         new_deck_cardlist.editMode = true
         configDeckFilters()
         supportFragmentManager.beginTransaction()
@@ -81,18 +81,18 @@ class NewDeckActivity : BaseFilterActivity() {
             onAttrLock = { attr1: Attribute, attr2: Attribute ->
                 val deckCls = Class.getClasses(listOf(attr1, attr2)).first()
                 new_deck_class_cover.setImageResource(deckCls.imageRes)
-                toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
+                new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
                 val outValue = TypedValue()
                 resources.getValue(R.dimen.deck_class_cover_alpha, outValue, true)
                 new_deck_class_cover.animate().alpha(outValue.float).setDuration(ANIM_DURATION).start()
             }
             onAttrUnlock = {
-                toolbar_title.text = getString(R.string.new_deck_title)
+                new_deck_toolbar_title.text = getString(R.string.new_deck_title)
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
         }
-        filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

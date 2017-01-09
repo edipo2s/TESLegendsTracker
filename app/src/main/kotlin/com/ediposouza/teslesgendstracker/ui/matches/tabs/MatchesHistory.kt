@@ -107,7 +107,7 @@ class MatchesHistory : BaseFragment() {
                 match_history_player_class_attr2.setImageResource(match.player.cls.attr2.imageRes)
                 match_history_opponent_class_attr1.setImageResource(match.opponent.cls.attr1.imageRes)
                 match_history_opponent_class_attr2.setImageResource(match.opponent.cls.attr2.imageRes)
-                val resultColor = if (match.win) R.color.green_500 else R.color.red_800
+                val resultColor = if (match.win) R.color.green_200 else R.color.red_100
                 val resultText = if (match.win) R.string.match_win else R.string.match_loss
                 match_history_result.setTextColor(ContextCompat.getColor(context, resultColor))
                 match_history_result.text = context.getString(resultText)

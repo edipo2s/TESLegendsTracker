@@ -21,9 +21,9 @@ import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
-import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
+import org.jetbrains.anko.find
 import java.util.*
 
 /**
@@ -33,7 +33,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override val isCardsCollection: Boolean = true
 
-    val view_statistics: CollectionStatistics by lazy { activity.cards_collection_statistics }
+    val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
         BottomSheetBehavior.from(view_statistics)
     }

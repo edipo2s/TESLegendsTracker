@@ -48,7 +48,7 @@
                     tools:targetApi="lollipop">
 
                     <TextView
-                        android:id="@+id/toolbar_title"
+                        android:id="@+id/new_deck_toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -87,7 +87,7 @@
         </android.support.percent.PercentRelativeLayout>
 
         <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
-            android:id="@+id/filter_magika"
+            android:id="@+id/cards_filter_magika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
@@ -96,7 +96,7 @@
             android:paddingStart="@dimen/huge_margin" />
 
         <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
-            android:id="@+id/filter_rarity"
+            android:id="@+id/cards_filter_rarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"

@@ -6,15 +6,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
-import android.text.format.DateUtils
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistory
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesStatistics
 import com.ediposouza.teslesgendstracker.util.MetricScreen
@@ -22,6 +21,7 @@ import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_matches.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.itemsSequence
 
 /**
@@ -46,10 +46,11 @@ class MatchesFragment : BaseFragment() {
     }
 
     private fun updateActivityTitle(position: Int) {
-        activity.toolbar_title?.setText(when (position) {
+        val title = when (position) {
             0 -> R.string.title_tab_matches_statistics
             else -> R.string.title_tab_matches_history
-        })
+        }
+        eventBus.post(CmdUpdateTitle(title))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -75,8 +76,8 @@ class MatchesFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.toolbar_title.setText(R.string.title_tab_matches_statistics)
-        activity.dash_tab_layout.setupWithViewPager(matches_view_pager)
+        eventBus.post(CmdUpdateTitle(R.string.title_tab_matches_statistics))
+        matches_tab_layout.setupWithViewPager(matches_view_pager)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -93,12 +94,7 @@ class MatchesFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        eventBus.post(CmdShowTabs())
-        matches_view_pager.postDelayed({
-            if (activity != null) {
-                (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
-            }
-        }, DateUtils.SECOND_IN_MILLIS)
+        matches_app_bar_layout.setExpanded(true, true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -136,6 +132,15 @@ class MatchesFragment : BaseFragment() {
                     add(0, it.id, 0, it.desc)
                 }
             }
+        }
+    }
+
+    @Subscribe
+    fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
+        if (update.show) {
+            matches_fab_add.show()
+        } else {
+            matches_fab_add.hide()
         }
     }
 

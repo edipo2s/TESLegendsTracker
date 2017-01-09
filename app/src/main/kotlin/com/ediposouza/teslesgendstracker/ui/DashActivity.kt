@@ -15,14 +15,11 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowTabs
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
-import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
-import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
-import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
@@ -40,17 +37,10 @@ class DashActivity : BaseFilterActivity(),
     private val publicInteractor = PublicInteractor()
     private val privateInteractor = PrivateInteractor()
 
-    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(cards_collection_statistics)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash)
-        decks_fab_add.hide()
         snackbarNeedMargin = false
-        filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         with(dash_navigation_view.getHeaderView(0)) {
             profile_change_user.setOnClickListener { showLogin() }
             profile_image.setOnClickListener {
@@ -68,7 +58,7 @@ class DashActivity : BaseFilterActivity(),
 
             override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
-                with(statisticsSheetBehavior) {
+                getStatisticsBottomSheetBehavior()?.apply {
                     if (state == BottomSheetBehavior.STATE_EXPANDED) {
                         state = BottomSheetBehavior.STATE_COLLAPSED
                     }
@@ -123,9 +113,11 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onBackPressed() {
-        if (statisticsSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            return
+        getStatisticsBottomSheetBehavior()?.apply {
+            if (state == BottomSheetBehavior.STATE_EXPANDED) {
+                state = BottomSheetBehavior.STATE_COLLAPSED
+                return
+            }
         }
         if (dash_drawer_layout.isDrawerOpen(Gravity.START)) {
             dash_drawer_layout.closeDrawer(Gravity.START)
@@ -158,7 +150,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     private fun showFragment(frag: Fragment): Boolean {
-        statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        getStatisticsBottomSheetBehavior()?.state = BottomSheetBehavior.STATE_HIDDEN
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStackImmediate()
         }
@@ -168,6 +160,13 @@ class DashActivity : BaseFilterActivity(),
             addToBackStack(null)
         }.commit()
         return true
+    }
+
+    private fun getStatisticsBottomSheetBehavior(): BottomSheetBehavior<*>? {
+        findViewById(R.id.cards_collection_statistics)?.apply {
+            return BottomSheetBehavior.from<View>(this)
+        }
+        return null
     }
 
     private fun updateCollectionStatistics() {
@@ -203,14 +202,14 @@ class DashActivity : BaseFilterActivity(),
     }
 
     @Subscribe
-    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
-        updateUserMenuInfo()
-        updateCollectionStatistics()
+    fun onUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
+        dash_toolbar_title.setText(cmdUpdateTitle.title)
     }
 
     @Subscribe
-    fun onCmdShowTabs(cmdShowTabs: CmdShowTabs) {
-        dash_app_bar_layout.setExpanded(true, true)
+    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+        updateUserMenuInfo()
+        updateCollectionStatistics()
     }
 
 }
