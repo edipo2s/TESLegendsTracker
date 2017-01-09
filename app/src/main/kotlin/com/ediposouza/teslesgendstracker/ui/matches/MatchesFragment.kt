@@ -6,30 +6,28 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.data.Deck
-import com.ediposouza.teslesgendstracker.data.MatchMode
-import com.ediposouza.teslesgendstracker.data.Season
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
-import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistory
-import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesStatistics
+import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
+import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesStatisticsFragment
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.limitHeight
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_new_match.view.*
 import kotlinx.android.synthetic.main.fragment_matches.*
 import kotlinx.android.synthetic.main.itemlist_class.view.*
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.itemsSequence
 import timber.log.Timber
 
@@ -147,37 +145,47 @@ class MatchesFragment : BaseFragment() {
 
     private fun showNewMatchDialog() {
         val dialogView = View.inflate(context, R.layout.dialog_new_match, null)
-        var decks = listOf<Deck>()
-        dialogView.new_match_dialog_class_spinner.apply {
-            adapter = ClassAdapter(context)
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    PrivateInteractor().getUserDecks(Class.values()[position]) {
-                        decks = it
-                        dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
-                                android.R.layout.simple_spinner_dropdown_item, decks.map(Deck::name))
-                    }
+        val classClickListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                PrivateInteractor().getUserDecks(Class.values()[pos]) { decks ->
+                    dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, decks.map(Deck::name))
                 }
+            }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-        val modeTypes = MatchMode.values().map { it.name.toLowerCase().capitalize() }
-        dialogView.new_match_dialog_mode_spinner.adapter = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_dropdown_item, modeTypes)
-        context.alert {
-            customView(dialogView)
-            positiveButton(R.string.new_match_dialog_start) {
-                val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
-                val deck = if (deckPosition >= 0) decks[deckPosition] else null
-                val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                startNewMatches(cls, deck, mode)
-            }
-            cancelButton { }
-        }.show()
+        val decks = listOf<Deck>()
+        AlertDialog.Builder(context)
+                .setView(dialogView)
+                .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
+                    val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
+                    val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                    val deck = if (deckPosition >= 0) decks[deckPosition] else null
+                    val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
+                    startNewMatches(cls, deck, mode)
+                })
+                .setNegativeButton(android.R.string.cancel, { dialog, which -> })
+                .create()
+                .apply {
+                    setOnShowListener {
+                        dialogView.new_match_dialog_class_spinner.apply {
+                            adapter = ClassAdapter(context)
+                            onItemSelectedListener = classClickListener
+                            limitHeight()
+                        }
+                        dialogView.new_match_dialog_deck_spinner.apply {
+                            if (decks.size >= 5) {
+                                limitHeight()
+                            }
+                        }
+                        val modeTypes = MatchMode.values().map { it.name.toLowerCase().capitalize() }
+                        dialogView.new_match_dialog_mode_spinner.adapter = ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_dropdown_item, modeTypes)
+                    }
+                    show()
+                }
     }
 
     private fun startNewMatches(cls: Class, deck: Deck?, mode: MatchMode) {
@@ -196,8 +204,8 @@ class MatchesFragment : BaseFragment() {
     class MatchesPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         var titles: Array<String> = ctx.resources.getStringArray(R.array.matches_tabs)
-        val matchesStatisticsFragment by lazy { MatchesStatistics() }
-        val matchesHistoryFragment by lazy { MatchesHistory() }
+        val matchesStatisticsFragment by lazy { MatchesStatisticsFragment() }
+        val matchesHistoryFragment by lazy { MatchesHistoryFragment() }
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
@@ -224,6 +232,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
+                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                 }
             }
@@ -234,6 +243,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
+                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                 }
             }
