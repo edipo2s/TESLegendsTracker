@@ -24,8 +24,8 @@ open class BaseFilterActivity : BaseActivity() {
 
     var filterGreatMargin = false
 
-    val fab_filter_magika by lazy { find<FilterMagika>(R.id.filter_magika) }
-    val fab_filter_rarity by lazy { find<FilterRarity>(R.id.filter_rarity) }
+    val fab_filter_magika by lazy { find<FilterMagika>(R.id.cards_filter_magika) }
+    val fab_filter_rarity by lazy { find<FilterRarity>(R.id.cards_filter_rarity) }
     val filterMagikaLP by lazy { fab_filter_magika.layoutParams as CoordinatorLayout.LayoutParams }
     val filterRarityLP by lazy { fab_filter_rarity.layoutParams as CoordinatorLayout.LayoutParams }
 

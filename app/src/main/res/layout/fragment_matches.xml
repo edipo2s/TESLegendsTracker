@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+    tools:layout_marginBottom="@dimen/navigation_bar_height"
+    tools:layout_marginTop="@dimen/status_bar_height">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/matches_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/matches_nav_mode"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/matches_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/navigation_bar_height"
-        app:itemBackground="@color/white_transparent"
-        app:itemIconTint="@drawable/selector_bottom_tab_mode"
-        app:itemTextColor="@drawable/selector_bottom_tab_mode"
-        app:menu="@menu/navigation_bottom_mode"/>
+        android:background="@null">
 
-</LinearLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/matches_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/cardview_default_elevation"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:tabBackground="@android:color/transparent"
+            app:tabGravity="fill"
+            tools:targetApi="lollipop" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
+        android:id="@+id/dash_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/navigation_bar_height"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/matches_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottom_navigation_height"
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour" />
+
+    </com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/matches_fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/large_margin"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/matches_nav_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/white_transparent"
+            app:itemIconTint="@drawable/selector_bottom_tab_mode"
+            app:itemTextColor="@drawable/selector_bottom_tab_mode"
+            app:menu="@menu/navigation_bottom_mode" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

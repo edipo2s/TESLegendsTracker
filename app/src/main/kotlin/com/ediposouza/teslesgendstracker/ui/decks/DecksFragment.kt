@@ -16,7 +16,6 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
-import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
@@ -56,11 +55,12 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun updateActivityTitle(position: Int) {
-        activity.toolbar_title?.setText(when (position) {
+        val title = CmdUpdateTitle(when (position) {
             1 -> R.string.title_tab_decks_owned
             2 -> R.string.title_tab_decks_favorites
             else -> R.string.title_tab_decks_public
         })
+        eventBus.post(title)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,9 +71,9 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         decks_view_pager.adapter = adapter
-        activity.dash_tab_layout.setupWithViewPager(decks_view_pager)
+        decks_tab_layout.setupWithViewPager(decks_view_pager)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
-        activity.toolbar_title?.setText(R.string.title_tab_decks_public)
+        eventBus.post(CmdUpdateTitle(R.string.title_tab_decks_public))
         decks_view_pager.addOnPageChangeListener(pageChange)
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
@@ -83,13 +83,17 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
             eventBus.post(CmdShowDecksByClasses(Class.getClasses(decks_attr_filter.getSelectedAttrs())))
         }
+        decks_fab_add.setOnClickListener {
+            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
+            startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+        }
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.apply {
             putInt(KEY_PAGE_VIEW_POSITION, decks_view_pager?.currentItem ?: 0)
-            putBoolean(KEY_FAB_NEW_DECK, activity?.decks_fab_add?.isShown ?: false)
+            putBoolean(KEY_FAB_NEW_DECK, decks_fab_add?.isShown ?: false)
         }
         super.onSaveInstanceState(outState)
     }
@@ -98,38 +102,12 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.apply {
             decks_view_pager.currentItem = getInt(KEY_PAGE_VIEW_POSITION)
-            if (getBoolean(KEY_FAB_NEW_DECK)) {
-                configFABNewDeck(activity as DashActivity)
-            }
-        }
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        configFABNewDeck(context as DashActivity)
-    }
-
-    private fun configFABNewDeck(dashActivity: DashActivity) {
-        dashActivity.decks_fab_add?.apply {
-            setOnClickListener {
-                val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-                startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
-            }
-            postDelayed({ if (this@DecksFragment.isAdded) show() }, DateUtils.SECOND_IN_MILLIS * 2)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        eventBus.post(CmdShowTabs())
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        with(activity.decks_fab_add) {
-            setOnClickListener { }
-            hide()
-        }
+        decks_app_bar_layout.setExpanded(true, true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -164,11 +142,11 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     @Subscribe
-    fun onCmdUpdateRarityMagikaFiltersVisibility(update: CmdUpdateVisibility) {
+    fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
-            activity.decks_fab_add.show()
+            decks_fab_add.show()
         } else {
-            activity.decks_fab_add.hide()
+            decks_fab_add.hide()
         }
     }
 
