@@ -174,6 +174,51 @@ class PrivateInteractor : BaseInteractor() {
         keepSynced()
     }
 
+    fun getUserDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+        getUserPublicDecks(cls) { decks ->
+            getUserPrivateDecks(cls) {
+                onSuccess.invoke(decks.plus(it))
+            }
+        }
+    }
+
+    private fun getUserPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+        getUserPublicDecksRef()?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                Timber.d(ds.value?.toString())
+                val decks = ds.children.mapTo(arrayListOf<Deck>()) {
+                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
+                }.filter { cls == null || it.cls == cls }
+                Timber.d(decks.toString())
+                onSuccess.invoke(decks)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+            }
+
+        })
+    }
+
+    private fun getUserPrivateDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+        getUserPrivateDecksRef()?.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val decks = ds.children.mapTo(arrayListOf<Deck>()) {
+                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, true)
+                }.filter { cls == null || it.cls == cls }
+                Timber.d(decks.toString())
+                onSuccess.invoke(decks)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+            }
+
+        })
+    }
+
     fun getUserFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {
         PublicInteractor().getPublicDecks(cls) { publicDecks ->
             getUserFavoriteDecksRef()?.apply {
