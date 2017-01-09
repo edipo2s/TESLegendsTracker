@@ -127,4 +127,11 @@
     <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
     <string name="matches_seasons_all">All Seasons</string>
 
+    <string name="new_match_dialog_title">I\'m playing with</string>
+    <string name="new_match_save_dialog_name_label">Name</string>
+    <string name="new_match_dialog_class_label">Class</string>
+    <string name="new_match_dialog_deck_label">Deck</string>
+    <string name="new_match_dialog_mode_label">Mode</string>
+    <string name="new_match_dialog_start">Start</string>
+
 </resources>

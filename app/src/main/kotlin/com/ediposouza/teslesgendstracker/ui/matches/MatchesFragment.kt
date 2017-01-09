@@ -7,9 +7,14 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
@@ -20,9 +25,13 @@ import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.activity_dash.*
+import kotlinx.android.synthetic.main.dialog_new_match.view.*
 import kotlinx.android.synthetic.main.fragment_matches.*
+import kotlinx.android.synthetic.main.itemlist_class.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.itemsSequence
+import timber.log.Timber
 
 /**
  * Created by EdipoSouza on 1/3/17.
@@ -71,6 +80,7 @@ class MatchesFragment : BaseFragment() {
             }
             true
         }
+        matches_fab_add.setOnClickListener { showNewMatchDialog() }
         MetricsManager.trackScreen(MetricScreen.SCREEN_MATCHES_STATISTICS())
     }
 
@@ -135,6 +145,45 @@ class MatchesFragment : BaseFragment() {
         }
     }
 
+    private fun showNewMatchDialog() {
+        val dialogView = View.inflate(context, R.layout.dialog_new_match, null)
+        var decks = listOf<Deck>()
+        dialogView.new_match_dialog_class_spinner.apply {
+            adapter = ClassAdapter(context)
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    PrivateInteractor().getUserDecks(Class.values()[position]) {
+                        decks = it
+                        dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_dropdown_item, decks.map(Deck::name))
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+            }
+        }
+        val modeTypes = MatchMode.values().map { it.name.toLowerCase().capitalize() }
+        dialogView.new_match_dialog_mode_spinner.adapter = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, modeTypes)
+        context.alert {
+            customView(dialogView)
+            positiveButton(R.string.new_match_dialog_start) {
+                val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
+                val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                val deck = if (deckPosition >= 0) decks[deckPosition] else null
+                val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
+                startNewMatches(cls, deck, mode)
+            }
+            cancelButton { }
+        }.show()
+    }
+
+    private fun startNewMatches(cls: Class, deck: Deck?, mode: MatchMode) {
+        Timber.d("$cls $deck $mode")
+    }
+
     @Subscribe
     fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
@@ -163,6 +212,31 @@ class MatchesFragment : BaseFragment() {
 
         override fun getPageTitle(position: Int): CharSequence {
             return titles[position]
+        }
+
+    }
+
+    class ClassAdapter(ctx: Context) : ArrayAdapter<Class>(ctx, R.layout.itemlist_class,
+            R.id.class_name, Class.values()) {
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            return super.getDropDownView(position, convertView, parent).apply {
+                with(getItem(position)) {
+                    class_attr1.setImageResource(attr1.imageRes)
+                    class_attr2.setImageResource(attr2.imageRes)
+                    class_name.text = name.toLowerCase().capitalize()
+                }
+            }
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            return super.getView(position, convertView, parent).apply {
+                with(getItem(position)) {
+                    class_attr1.setImageResource(attr1.imageRes)
+                    class_attr2.setImageResource(attr2.imageRes)
+                    class_name.text = name.toLowerCase().capitalize()
+                }
+            }
         }
 
     }

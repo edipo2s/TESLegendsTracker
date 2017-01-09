@@ -21,6 +21,7 @@ android {
         buildConfigField("boolean", "PREPARE_TO_RELEASE", "$prepareToRelease")
         buildConfigField("String", "MIXPANEL_TOKEN", '"***REMOVED***"')
         buildConfigField("String", "GCM_SENDER", '"***REMOVED***"')
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary true
     }
     signingConfigs {

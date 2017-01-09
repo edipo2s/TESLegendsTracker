@@ -149,7 +149,7 @@ class NewDeckActivity : BaseFilterActivity() {
     }
 
     private fun showSaveDialog() {
-        val view = View.inflate(this@NewDeckActivity, R.layout.dialog_new_deck, null)
+        val view = View.inflate(this, R.layout.dialog_new_deck, null)
         val deckTypes = DeckType.values().filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
