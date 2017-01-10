@@ -17,10 +17,17 @@ import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_matches_history.*
 import kotlinx.android.synthetic.main.itemlist_match_history.view.*
+import kotlinx.android.synthetic.main.itemlist_match_history_section.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.FormatStyle
 
 /**
  * Created by EdipoSouza on 1/3/17.
@@ -40,7 +47,8 @@ class MatchesHistoryFragment : BaseFragment() {
     private val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
                 FirebaseParsers.MatchParser::class.java, { PrivateInteractor().getUserMatchesRef() },
-                MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter) {
+                MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter),
+                StickyRecyclerHeadersAdapter<MatchViewHolder> {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): MatchViewHolder {
                 return MatchViewHolder(parent.inflate(R.layout.itemlist_match_history))
@@ -54,8 +62,32 @@ class MatchesHistoryFragment : BaseFragment() {
                 matches_refresh_layout?.isRefreshing = false
             }
 
+            override fun onCreateHeaderViewHolder(parent: ViewGroup): MatchViewHolder {
+                return MatchViewHolder(parent.inflate(R.layout.itemlist_match_history_section))
+            }
+
+            override fun onBindHeaderViewHolder(holder: MatchViewHolder?, position: Int) {
+                holder?.bindSection(LocalDateTime.parse(getItemKey(position)).toLocalDate())
+            }
+
+            override fun getHeaderId(position: Int): Long {
+                if (getItemViewType(position) != VIEW_TYPE_CONTENT){
+                    return -1
+                }
+                val date = LocalDateTime.parse(getItemKey(position)).toLocalDate()
+                return date.year + date.monthValue + date.dayOfMonth.toLong()
+            }
+
+        }.apply {
+            registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+                override fun onChanged() {
+                    sectionDecoration.invalidateHeaders()
+                }
+            })
         }
     }
+
+    private val sectionDecoration by lazy { StickyRecyclerHeadersDecoration(matchesAdapter as StickyRecyclerHeadersAdapter<*>) }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_history)
@@ -70,6 +102,7 @@ class MatchesHistoryFragment : BaseFragment() {
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
+            addItemDecoration(sectionDecoration)
             addOnScrollListener(OnLinearLayoutItemScrolled(matchesAdapter.getContentCount() - 3) {
                 matchesAdapter.more()
             })
@@ -116,6 +149,10 @@ class MatchesHistoryFragment : BaseFragment() {
                 match_history_rank.text = context.getString(rankText, match.rank)
                 match_history_rank.visibility = if (match.mode == MatchMode.RANKED) View.VISIBLE else View.INVISIBLE
             }
+        }
+
+        fun bindSection(date: LocalDate) {
+            itemView.match_history_date.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
         }
 
     }

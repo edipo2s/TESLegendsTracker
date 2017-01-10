@@ -44,6 +44,9 @@ class MatchesFragment : BaseFragment() {
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             updateActivityTitle(position)
+            if (position == 0) {
+                matches_fab_add.show()
+            }
             MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_MATCHES_STATISTICS()
                 else -> MetricScreen.SCREEN_MATCHES_HISTORY()
