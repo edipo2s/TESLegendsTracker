@@ -14,7 +14,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration

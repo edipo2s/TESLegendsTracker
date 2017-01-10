@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget.filter
+package com.ediposouza.teslesgendstracker.ui.cards.widget
 
 import android.animation.Animator
 import android.animation.ValueAnimator

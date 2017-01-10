@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:ctx="com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity">
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.decks.NewDeckActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
 
             </FrameLayout>
 
-            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttrLockable
+            <com.ediposouza.teslesgendstracker.ui.decks.widget.FilterAttrLockable
                 android:id="@+id/new_deck_attr_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
 
         </android.support.percent.PercentRelativeLayout>
 
-        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
             android:id="@+id/cards_filter_magika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             android:layout_marginStart="@dimen/huge_margin"
             android:paddingStart="@dimen/huge_margin" />
 
-        <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
             android:id="@+id/cards_filter_rarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget
+package com.ediposouza.teslesgendstracker.ui.cards.widget
 
 import android.content.Context
 import android.os.Build
@@ -26,7 +26,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     init {
         inflate(context, R.layout.widget_collection_statistics, this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val layoutParams = collection_statistics_container.layoutParams as FrameLayout.LayoutParams
+            val layoutParams = collection_statistics_container.layoutParams as LayoutParams
             layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.navigation_bar_height)
             collection_statistics_container.layoutParams = layoutParams
         }

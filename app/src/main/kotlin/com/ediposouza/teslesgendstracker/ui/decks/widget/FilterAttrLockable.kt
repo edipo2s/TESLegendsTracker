@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget.filter
+package com.ediposouza.teslesgendstracker.ui.decks.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
 import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 
 /**

@@ -18,7 +18,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
-import com.ediposouza.teslesgendstracker.ui.decks.new.NewDeckActivity
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksOwnerFragment
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksPublicFragment

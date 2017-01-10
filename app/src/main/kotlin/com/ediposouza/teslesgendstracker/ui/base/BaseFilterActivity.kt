@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.text.format.DateUtils
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
-import com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
+import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 
