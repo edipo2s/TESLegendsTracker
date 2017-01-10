@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.decks.new
+package com.ediposouza.teslesgendstracker.ui.decks
 
 import android.app.Activity
 import android.content.Intent
@@ -21,8 +21,6 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
-import com.ediposouza.teslesgendstracker.ui.decks.CmdAddCard
-import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager

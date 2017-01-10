@@ -88,7 +88,7 @@
                 android:src="@drawable/ic_rarity"
                 app:layout_widthPercent="20%" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_strength"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="strength" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_intelligence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="intelligence" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_willpower"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="willpower" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_agility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="agility" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_endurance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="endurance" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_dual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                 android:layout_marginTop="@dimen/statistics_attributes_margin_top"
                 app:attribute="dual" />
 
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatisticsAttr
+            <com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatisticsAttr
                 android:id="@+id/rarity_statistics_neutral"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

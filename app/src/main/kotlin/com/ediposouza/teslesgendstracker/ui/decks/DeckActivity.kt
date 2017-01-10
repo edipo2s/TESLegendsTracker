@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui
+package com.ediposouza.teslesgendstracker.ui.decks
 
 import android.app.Activity
 import android.content.Context

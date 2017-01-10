@@ -1,4 +1,4 @@
-package com.ediposouza.teslesgendstracker.ui.widget.filter
+package com.ediposouza.teslesgendstracker.ui.cards.widget
 
 import android.content.Context
 import android.util.AttributeSet
