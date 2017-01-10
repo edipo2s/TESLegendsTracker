@@ -123,12 +123,14 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         showDecks()
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
         showDecks()
     }

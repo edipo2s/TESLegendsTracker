@@ -8,7 +8,7 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 08/12/16.
  */
-@SuppressWarnings("unused")
+@Suppress("UNUSED_PARAMETER")
 object MetricsManager : MetricsConstants() {
 
     fun initialize(context: Context) {

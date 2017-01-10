@@ -223,6 +223,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdShowLogin(showLogin: CmdShowLogin) {
         googleApiClient?.clearDefaultAccountAndReconnect()
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)

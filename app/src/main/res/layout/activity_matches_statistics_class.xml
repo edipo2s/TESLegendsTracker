@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:paddingBottom="@dimen/navigation_bar_height"
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.matches.MatchesStatisticsClassActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:statusBarScrim="@color/colorPrimary"
+            app:titleEnabled="false">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:gravity="center"
+                android:lines="1"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title=""
+                tools:layout_marginTop="@dimen/status_bar_height">
+
+                <TextView
+                    android:id="@+id/statistics_class_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lines="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_large"
+                    android:transitionName="@string/deck_name_transition_name"
+                    tools:text="Cycle Archer" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <ImageView
+                    android:id="@+id/statistics_class_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/deck_header_height"
+                    android:alpha="@dimen/deck_class_cover_alpha"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/deck_class_archer"
+                    android:transitionName="@string/deck_cover_transition_name" />
+
+                <ImageView
+                    android:id="@+id/statistics_class_attr1"
+                    android:layout_width="@dimen/deck_header_attr_icon_height"
+                    android:layout_height="@dimen/deck_header_attr_icon_height"
+                    android:layout_alignBottom="@id/statistics_class_cover"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:transitionName="@string/deck_attr1_transition_name"
+                    tools:src="@drawable/attr_strength" />
+
+                <ImageView
+                    android:id="@+id/statistics_class_attr2"
+                    android:layout_width="@dimen/deck_header_attr_icon_height"
+                    android:layout_height="@dimen/deck_header_attr_icon_height"
+                    android:layout_alignBottom="@id/statistics_class_attr1"
+                    android:layout_marginEnd="@dimen/large_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_toEndOf="@id/statistics_class_attr1"
+                    android:transitionName="@string/deck_attr2_transition_name"
+                    tools:src="@drawable/attr_agility" />
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.inqbarna.tablefixheaders.TableFixHeaders
+        android:id="@+id/matches_statistics_class_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>
