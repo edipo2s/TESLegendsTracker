@@ -207,6 +207,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         updateUserMenuInfo()
         updateCollectionStatistics()

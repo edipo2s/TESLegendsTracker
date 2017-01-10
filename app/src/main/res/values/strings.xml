@@ -126,6 +126,7 @@
     <string name="match_statistics_total_label">Total</string>
     <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
     <string name="matches_seasons_all">All Seasons</string>
+    <string name="matches_class_title">%1$s Statistics</string>
 
     <string name="new_match_dialog_title">I\'m playing with</string>
     <string name="new_match_save_dialog_name_label">Name</string>

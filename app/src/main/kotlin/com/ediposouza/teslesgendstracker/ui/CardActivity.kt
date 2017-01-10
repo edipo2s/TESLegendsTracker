@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
+import android.support.v7.widget.CardView
 import android.view.View
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
@@ -31,7 +32,7 @@ class CardActivity : BaseActivity() {
     }
 
     val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
-    val cardInfoSheetBehavior by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
+    val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     var favorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

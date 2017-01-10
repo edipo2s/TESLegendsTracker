@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.Subscribe
 /**
  * Created by EdipoSouza on 1/3/17.
  */
-class MatchesHistory : BaseFragment() {
+class MatchesHistoryFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 20 //after 10 lines
     val MATCH_PAGE_SIZE = 15
