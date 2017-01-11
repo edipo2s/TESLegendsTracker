@@ -106,6 +106,8 @@ class DeckActivity : BaseActivity() {
             if (App.hasUserLogged()) {
                 privateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
+                    val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
+                    toast(getString(stringRes, deck.name))
                     updateFavoriteItem()
                     MetricsManager.trackAction(if (favorite)
                         MetricAction.ACTION_DECK_DETAILS_FAVORITE() else MetricAction.ACTION_DECK_DETAILS_UNFAVORITE())

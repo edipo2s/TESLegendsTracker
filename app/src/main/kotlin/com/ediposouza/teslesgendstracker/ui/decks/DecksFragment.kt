@@ -113,7 +113,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.search_hint)
+            queryHint = getString(R.string.decks_search_hint)
             setOnQueryTextListener(this@DecksFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)

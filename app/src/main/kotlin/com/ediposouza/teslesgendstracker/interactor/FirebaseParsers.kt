@@ -113,6 +113,13 @@ abstract class FirebaseParsers {
 
     }
 
+    class DeckFavoriteParser(
+
+            val name: String = "",
+            val cls: Int = 0
+
+    )
+
     class PatchParser {
 
         val desc: String = ""
