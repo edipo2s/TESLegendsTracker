@@ -77,8 +77,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck, showSoulCost: Boolean = true) {
+    fun showDeck(deck: Deck, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true) {
         decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
+        decklist_costs.visibility = if (showMagikaCosts) View.VISIBLE else View.GONE
         doAsync {
             PublicInteractor().getDeckCards(deck) {
                 context.runOnUiThread {

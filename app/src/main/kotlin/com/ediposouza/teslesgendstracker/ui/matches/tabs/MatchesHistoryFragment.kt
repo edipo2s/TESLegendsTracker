@@ -15,6 +15,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
+import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMatches
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
@@ -129,6 +130,11 @@ class MatchesHistoryFragment : BaseFragment() {
         currentSeason = cmdFilterSeason.season
         matchesAdapter.reset()
         matches_recycler_view.scrollToPosition(0)
+    }
+
+    @Subscribe
+    fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
+        matchesAdapter.reset()
     }
 
     class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {

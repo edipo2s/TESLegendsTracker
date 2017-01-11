@@ -1,8 +1,6 @@
 package com.ediposouza.teslesgendstracker.util
 
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.CardRarity
-import com.ediposouza.teslesgendstracker.data.CardSet
+import com.ediposouza.teslesgendstracker.data.*
 
 /**
  * Created by ediposouza on 08/12/16.
@@ -77,7 +75,32 @@ sealed class MetricAction(val name: String) {
     class ACTION_DECK_COMMENTS_COLLAPSE : MetricAction("DeckCommentCollapse")
     class ACTION_DECK_COMMENTS_SEND : MetricAction("DeckCommentSend")
 
-    class ACTION_NEW_DECK_SAVE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckCommentSend") {
+    class ACTION_NEW_DECK_SAVE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckNew") {
+        val PARAM_TYPE = "Type"
+        val PARAM_PATCH = "Patch"
+        val PARAM_PRIVATE = "Private"
+    }
+
+    class ACTION_MATCH_STATISTICS_WIN_RATE : MetricAction("MatchStatisticsWinRate")
+    class ACTION_MATCH_STATISTICS_CLASS_WIN_RATE : MetricAction("MatchStatisticsClassWinRate")
+
+    class ACTION_MATCH_FILTER_MODE(val mode: MatchMode) : MetricAction("FilterMatchMode") {
+        val PARAM_MODE = "Mode"
+    }
+
+    class ACTION_MATCH_STATISTICS_FILTER_SEASON(val season: Season) : MetricAction("FilterMatchStatisticsSeason") {
+        val PARAM_SEASON = "Season"
+    }
+
+    class ACTION_MATCH_STATISTICS_CLASS_FILTER_SEASON(val season: Season) : MetricAction("FilterMatchStatisticsClassSeason") {
+        val PARAM_SEASON = "Season"
+    }
+
+    class ACTION_MATCH_STATISTICS_CLASS(val cls: Class) : MetricAction("MatchStatisticsClass") {
+        val PARAM_CLASS = "Class"
+    }
+
+    class ACTION_NEW_MATCH_SAVE(val type: String, val patch: String, val private: Boolean) : MetricAction("MatchNew") {
         val PARAM_TYPE = "Type"
         val PARAM_PATCH = "Patch"
         val PARAM_PRIVATE = "Private"
@@ -105,6 +128,8 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_DECK_DETAILS : MetricScreen("DeckDetails")
     class SCREEN_NEW_DECKS : MetricScreen("NewDeck")
     class SCREEN_MATCHES_STATISTICS : MetricScreen("MatchesStatistics")
+    class SCREEN_MATCHES_STATISTICS_CLASS : MetricScreen("MatchesStatisticsClass")
     class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
+    class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
 
 }
