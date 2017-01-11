@@ -246,7 +246,8 @@ class PrivateInteractor : BaseInteractor() {
     fun setUserDeckFavorite(deck: Deck, favorite: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
             if (favorite) {
-                child(deck.uuid)?.setValue(deck.cls.ordinal)?.addOnCompleteListener { onSuccess.invoke() }
+                val deckFavorite = FirebaseParsers.DeckFavoriteParser(deck.name, deck.cls.ordinal)
+                child(deck.uuid)?.setValue(deckFavorite)?.addOnCompleteListener { onSuccess.invoke() }
             } else {
                 child(deck.uuid)?.removeValue()?.addOnCompleteListener { onSuccess.invoke() }
             }

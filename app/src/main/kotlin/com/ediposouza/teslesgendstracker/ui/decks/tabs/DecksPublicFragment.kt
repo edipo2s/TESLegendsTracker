@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -37,6 +38,7 @@ open class DecksPublicFragment : BaseFragment() {
     val ADS_EACH_ITEMS = 10 //after 10 lines
     val DECK_PAGE_SIZE = 8
 
+    protected var searchFilter: String? = null
     protected var currentClasses = Class.values()
     protected val publicInteractor = PublicInteractor()
     protected val privateInteractor = PrivateInteractor()
@@ -53,7 +55,8 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
-        currentClasses.map { it.ordinal }.contains(it.cls)
+        currentClasses.map { it.ordinal }.contains(it.cls) &&
+                it.name.toLowerCase().trim().contains(searchFilter ?: "")
     }
 
     val itemClick = { view: View, deck: Deck ->
@@ -133,6 +136,12 @@ open class DecksPublicFragment : BaseFragment() {
     @Suppress("UNUSED_PARAMETER")
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
         showDecks()
+    }
+
+    @Subscribe
+    fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
+        searchFilter = filterSearch.search?.toLowerCase()?.trim()
+        decksAdapter.reset()
     }
 
     @Subscribe

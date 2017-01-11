@@ -130,7 +130,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_search, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.search_hint)
+            queryHint = getString(R.string.cards_search_hint)
             setOnQueryTextListener(this@CardsFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)

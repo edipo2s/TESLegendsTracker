@@ -104,7 +104,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged()) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
-                val stringRes = if (favorite) R.string.card_favorited else R.string.card_unfavorited
+                val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
                 toast(getString(stringRes, card.name))
                 loadCardInfo()
                 setResult(Activity.RESULT_OK, Intent())
