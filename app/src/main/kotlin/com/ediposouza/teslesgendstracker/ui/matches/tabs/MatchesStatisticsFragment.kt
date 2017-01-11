@@ -14,6 +14,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
+import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMatches
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesStatisticsClassActivity
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
@@ -176,6 +177,11 @@ class MatchesStatisticsFragment : BaseFragment() {
     @Subscribe
     fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
+        getMatches()
+    }
+
+    @Subscribe
+    fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         getMatches()
     }
 

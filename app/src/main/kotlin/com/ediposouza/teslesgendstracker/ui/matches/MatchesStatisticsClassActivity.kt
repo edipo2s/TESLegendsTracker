@@ -15,6 +15,8 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import kotlinx.android.synthetic.main.activity_matches_statistics_class.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
 import kotlinx.android.synthetic.main.itemcell_text.view.*
@@ -92,6 +94,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             statistics_class_attr1.setImageResource(attr1.imageRes)
             statistics_class_attr2.setImageResource(attr2.imageRes)
         }
+        MetricsManager.trackScreen(MetricScreen.SCREEN_MATCHES_STATISTICS_CLASS())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

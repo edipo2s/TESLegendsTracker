@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.matches
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -29,7 +31,6 @@ import kotlinx.android.synthetic.main.fragment_matches.*
 import kotlinx.android.synthetic.main.itemlist_class.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.itemsSequence
-import timber.log.Timber
 
 /**
  * Created by EdipoSouza on 1/3/17.
@@ -37,6 +38,7 @@ import timber.log.Timber
 class MatchesFragment : BaseFragment() {
 
     private val KEY_PAGE_VIEW_POSITION = "pageViewPositionKey"
+    private val RC_NEW_MATCHES = 145
 
     private var seasons: List<Season> = listOf()
     private var menuSeasons: SubMenu? = null
@@ -124,6 +126,13 @@ class MatchesFragment : BaseFragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_NEW_MATCHES && resultCode == Activity.RESULT_OK) {
+            eventBus.post(CmdUpdateMatches())
+        }
+    }
+
     private fun filterSeason(season: Season?) {
         val seasonId = season?.id ?: R.id.menu_season_all
         menuSeasons?.itemsSequence()?.forEach {
@@ -148,18 +157,19 @@ class MatchesFragment : BaseFragment() {
 
     private fun showNewMatchDialog() {
         val dialogView = View.inflate(context, R.layout.dialog_new_match, null)
+        var decks = listOf<Deck?>(null)
         val classClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                PrivateInteractor().getUserDecks(Class.values()[pos]) { decks ->
+                PrivateInteractor().getUserDecks(Class.values()[pos]) { myDecks ->
+                    decks = (myDecks as List<Deck?>).plusElement(null).sortedBy { it?.name ?: "" }
                     dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
-                            android.R.layout.simple_spinner_dropdown_item, decks.map(Deck::name))
+                            android.R.layout.simple_spinner_dropdown_item, decks.map { it?.name ?: "" })
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-        val decks = listOf<Deck>()
         AlertDialog.Builder(context)
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
@@ -167,7 +177,7 @@ class MatchesFragment : BaseFragment() {
                     val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val deck = if (deckPosition >= 0) decks[deckPosition] else null
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    startNewMatches(cls, deck, mode)
+                    startActivityForResult(NewMatchesActivity.newIntent(context, cls, deck, mode), RC_NEW_MATCHES)
                 })
                 .setNegativeButton(android.R.string.cancel, { dialog, which -> })
                 .create()
@@ -189,10 +199,6 @@ class MatchesFragment : BaseFragment() {
                     }
                     show()
                 }
-    }
-
-    private fun startNewMatches(cls: Class, deck: Deck?, mode: MatchMode) {
-        Timber.d("$cls $deck $mode")
     }
 
     @Subscribe
