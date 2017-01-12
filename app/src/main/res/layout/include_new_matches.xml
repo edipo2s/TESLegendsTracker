@@ -30,8 +30,7 @@
             style="@style/SpinnerWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/new_match_class_label"
-            android:spinnerItemStyle="@style/SpinnerWhiteItem" />
+            android:layout_below="@id/new_match_class_label" />
 
         <TextView
             android:id="@+id/new_match_type_label"
@@ -48,8 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/new_match_type_label"
-            android:inputType="none"
-            android:spinnerItemStyle="@style/SpinnerWhiteItem" />
+            android:inputType="none" />
 
         <TextView
             android:id="@+id/new_match_name_label"

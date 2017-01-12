@@ -8,6 +8,7 @@ import android.support.annotation.IntegerRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.view.*
@@ -234,7 +235,8 @@ class MatchesFragment : BaseFragment() {
 
     }
 
-    class ClassAdapter(ctx: Context, @IntegerRes layout: Int = R.layout.itemlist_class) :
+    class ClassAdapter(ctx: Context, @IntegerRes layout: Int = R.layout.itemlist_class,
+                       @IntegerRes val textColor: Int = R.color.primary_text_dark) :
             ArrayAdapter<Class>(ctx, layout, R.id.class_name, Class.values()) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -255,6 +257,7 @@ class MatchesFragment : BaseFragment() {
                     class_attr2.setImageResource(attr2.imageRes)
                     class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
                     class_name.text = name.toLowerCase().capitalize()
+                    class_name.setTextColor(ContextCompat.getColor(context, textColor))
                 }
             }
         }
