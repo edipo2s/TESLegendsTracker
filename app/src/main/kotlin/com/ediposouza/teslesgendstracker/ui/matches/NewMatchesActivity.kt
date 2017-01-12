@@ -78,10 +78,12 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_deck_cardlist.editMode = true
         new_matches_deck_cardlist.showDeck(deck, false, false, false)
         new_match_type_spinner.adapter = ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, DeckType.values()
-                .filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() })
+                R.layout.widget_spinner_white_text, DeckType.values()
+                .filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
         new_match_class_spinner.apply {
-            adapter = MatchesFragment.ClassAdapter(context, R.layout.itemlist_new_match_class)
+            adapter = MatchesFragment.ClassAdapter(context, R.layout.itemlist_new_match_class, R.color.primary_text)
             limitHeight(8)
         }
     }

@@ -47,15 +47,6 @@
         <item name="android:backgroundTint">@android:color/white</item>
     </style>
 
-    <style name="SpinnerWhiteItem" parent="Widget.AppCompat.TextView.SpinnerItem">
-        <item name="android:textAppearance">@style/SpinnerWhiteTextBlack</item>
-        <item name="android:textColor">@color/primary_text</item>
-    </style>
-
-    <style name="SpinnerWhiteTextBlack" parent="TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
-        <item name="android:textColor">@color/primary_text</item>
-    </style>
-
     <style name="RarityItem">
         <item name="android:layout_marginStart">@dimen/small_margin</item>
         <item name="android:clickable">true</item>

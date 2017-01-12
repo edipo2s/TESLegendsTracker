@@ -33,7 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_small"
         android:layout_marginStart="@dimen/large_margin"
+        android:ellipsize="end"
         android:gravity="center"
+        android:lines="1"
         android:textColor="@color/primary_text_dark"
         tools:text="Battlemage"
         tools:textColor="@android:color/white" />
