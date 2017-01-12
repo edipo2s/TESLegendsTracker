@@ -9,15 +9,18 @@ import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.DeckType
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.limitHeight
 import kotlinx.android.synthetic.main.activity_new_matches.*
 import kotlinx.android.synthetic.main.include_new_matches.*
 import org.jetbrains.anko.intentFor
@@ -72,8 +75,14 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_class_cover.setImageResource(cls.imageRes)
         new_matches_class_attr1.setImageResource(cls.attr1.imageRes)
         new_matches_class_attr2.setImageResource(cls.attr2.imageRes)
-        if (deck != null) {
-            new_matches_deck_cardlist.showDeck(deck!!, false, false)
+        new_matches_deck_cardlist.editMode = true
+        new_matches_deck_cardlist.showDeck(deck, false, false, false)
+        new_match_type_spinner.adapter = ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, DeckType.values()
+                .filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() })
+        new_match_class_spinner.apply {
+            adapter = MatchesFragment.ClassAdapter(context, R.layout.itemlist_new_match_class)
+            limitHeight(8)
         }
     }
 

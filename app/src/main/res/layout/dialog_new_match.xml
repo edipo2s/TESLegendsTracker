@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/new_match_dialog_title"
             android:layout_marginTop="@dimen/huge_margin"
-            android:text="@string/new_match_dialog_class_label" />
+            android:text="@string/new_match_dialog_class_label"
+            android:textColor="@color/grey_500" />
 
         <Spinner
             android:id="@+id/new_match_dialog_class_spinner"
@@ -41,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/new_match_dialog_class_spinner"
             android:layout_marginTop="@dimen/medium_margin"
-            android:text="@string/new_match_dialog_deck_label" />
+            android:text="@string/new_match_dialog_deck_label"
+            android:textColor="@color/grey_500" />
 
         <Spinner
             android:id="@+id/new_match_dialog_deck_spinner"
@@ -57,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/new_match_dialog_deck_spinner"
             android:layout_marginTop="@dimen/medium_margin"
-            android:text="@string/new_match_dialog_mode_label" />
+            android:text="@string/new_match_dialog_mode_label"
+            android:textColor="@color/grey_500" />
 
         <Spinner
             android:id="@+id/new_match_dialog_mode_spinner"

@@ -77,20 +77,23 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true) {
+    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true, showQtd: Boolean = true) {
         decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
         decklist_costs.visibility = if (showMagikaCosts) View.VISIBLE else View.GONE
-        doAsync {
-            PublicInteractor().getDeckCards(deck) {
-                context.runOnUiThread {
-                    (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
-                    onCardListChange()
-                }
-                userFavorites.clear()
-                PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
-                    userFavorites.addAll(it)
-                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
+        decklist_qtd.visibility = if (showQtd) View.VISIBLE else View.GONE
+        if (deck != null) {
+            doAsync {
+                PublicInteractor().getDeckCards(deck) {
+                    context.runOnUiThread {
+                        (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
+                        onCardListChange()
+                    }
+                    userFavorites.clear()
+                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
                         userFavorites.addAll(it)
+                        PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
+                            userFavorites.addAll(it)
+                        }
                     }
                 }
             }
