@@ -46,7 +46,8 @@
         <activity
             android:name=".ui.matches.NewMatchesActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppThemeAccentEqualsPrimaryDark"/>
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"

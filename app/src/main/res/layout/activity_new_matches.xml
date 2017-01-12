@@ -84,6 +84,22 @@
                     android:transitionName="@string/deck_attr2_transition_name"
                     tools:src="@drawable/attr_agility" />
 
+                <View
+                    android:id="@+id/new_matches_center"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/new_matches_class_cover"
+                    android:layout_alignStart="@id/new_matches_center"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="@string/new_match_cards_remains_label"
+                    android:textColor="@android:color/white" />
+
             </RelativeLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -93,7 +109,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/deck_info_bottom_margin"
+        android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginTop="@dimen/small_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

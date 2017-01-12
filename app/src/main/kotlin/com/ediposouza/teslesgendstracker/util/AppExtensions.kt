@@ -59,14 +59,16 @@ fun MixpanelAPI.trackBundle(eventName: String, bundle: Bundle) {
 }
 
 
-fun Spinner.limitHeight() {
+fun Spinner.limitHeight(lines: Int? = null) {
     val displayHeight = context.resources.displayMetrics.heightPixels
+    val itemHeight = context.resources.getDimensionPixelSize(R.dimen.material_design_default_height)
     Spinner::class.java.getDeclaredField("mPopup")
             ?.apply { isAccessible = true }?.get(this)
             ?.apply popup@ {
                 IntArray(2).apply {
                     getLocationOnScreen(this)
-                    (this@popup as ListPopupWindow).height = displayHeight - get(1)
+                    val listPopupWindow = this@popup as ListPopupWindow
+                    listPopupWindow.height = if(lines != null) lines * itemHeight else displayHeight - get(1)
                 }
             }
 }

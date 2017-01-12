@@ -135,5 +135,10 @@
     <string name="new_match_dialog_deck_label">Deck</string>
     <string name="new_match_dialog_mode_label">Mode</string>
     <string name="new_match_dialog_start">Start</string>
+    <string name="new_match_cards_remains_label">Cards Remains</string>
+    <string name="new_match_name_label">(Optional)</string>
+    <string name="new_match_first_label">Going First</string>
+    <string name="new_match_legend_label">Rank Legend</string>
+    <string name="new_match_rank_label">Rank</string>
 
 </resources>

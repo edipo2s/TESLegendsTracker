@@ -44,7 +44,8 @@
             android:layout_below="@id/new_deck_dialog_nameLayout"
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginTop="@dimen/medium_margin"
-            android:text="@string/new_deck_save_dialog_type_label" />
+            android:text="@string/new_deck_save_dialog_type_label"
+            android:textColor="@color/grey_500" />
 
         <Spinner
             android:id="@+id/new_deck_dialog_type_spinner"
@@ -62,7 +63,8 @@
             android:layout_below="@id/new_deck_dialog_type_spinner"
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginTop="@dimen/medium_margin"
-            android:text="@string/new_deck_save_dialog_patch_label" />
+            android:text="@string/new_deck_save_dialog_patch_label"
+            android:textColor="@color/grey_500" />
 
         <Spinner
             android:id="@+id/new_deck_dialog_patch_spinner"
