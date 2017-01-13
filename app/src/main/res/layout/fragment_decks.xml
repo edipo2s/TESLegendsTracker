@@ -1,21 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+    tools:layout_marginBottom="@dimen/navigation_bar_height"
+    tools:layout_marginTop="@dimen/status_bar_height">
 
-    <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterAttr
-        android:id="@+id/decks_attr_filter"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/decks_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        app:deckMode="true" />
+        android:background="@null">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/decks_view_pager"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/decks_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/cardview_default_elevation"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:tabBackground="@android:color/transparent"
+            app:tabGravity="fill"
+            tools:targetApi="lollipop" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
+        android:id="@+id/dash_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+
+            <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
+                android:id="@+id/decks_attr_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                app:deckMode="true" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/decks_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/decks_fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/large_margin"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="normal" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:id="@+id/new_matches_space_start"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingStart="@dimen/default_margin">
+
+            <TextView
+                android:id="@+id/new_match_opt_class_label"
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_dialog_title"
+                android:layout_marginTop="@dimen/huge_margin"
+                android:text="@string/new_match_opt_class_label" />
+
+            <Spinner
+                android:id="@+id/new_matches_opt_class_spinner"
+                style="@style/SpinnerWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_opt_class_label" />
+
+            <TextView
+                android:id="@+id/new_match_opt_type_label"
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_matches_opt_class_spinner"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/new_match_opt_type_label" />
+
+            <Spinner
+                android:id="@+id/new_matches_opt_type_spinner"
+                style="@style/SpinnerWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_opt_type_label"
+                android:inputType="none" />
+
+            <TextView
+                android:id="@+id/new_match_opt_name_label"
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_matches_opt_type_spinner"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/new_match_opt_name_label" />
+
+            <EditText
+                android:id="@+id/new_matches_opt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_opt_name_label"
+                android:hint="@string/new_match_name_label"
+                android:inputType="text"
+                android:textColorHint="@color/grey_300" />
+
+            <CheckBox
+                android:id="@+id/new_match_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_matches_opt_name"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/new_match_first_label"
+                android:textColor="@android:color/white" />
+
+            <CheckBox
+                android:id="@+id/new_matches_legend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_first"
+                android:layout_marginTop="@dimen/nano_margin"
+                android:text="@string/new_match_legend_label"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/new_matches_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/new_matches_legend"
+                android:layout_alignParentEnd="true"
+                android:ems="3"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                tools:text="235" />
+
+            <TextView
+                android:id="@+id/new_matches_rank_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/new_matches_rank"
+                android:layout_alignParentEnd="true"
+                android:layout_alignStart="@id/new_matches_rank"
+                android:gravity="center"
+                android:text="@string/new_match_rank_label"
+                android:textColor="@android:color/white" />
+
+            <com.andexert.library.RippleView
+                android:id="@+id/new_match_win_ripple"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_matches_legend"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_widthPercent="49%">
+
+                <Button
+                    android:id="@+id/new_matches_win"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/xml_button_green"
+                    android:text="@string/match_win" />
+
+            </com.andexert.library.RippleView>
+
+            <com.andexert.library.RippleView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/new_matches_legend"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_widthPercent="49%">
+
+                <Button
+                    android:id="@+id/new_matches_loss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/xml_button_red"
+                    android:text="@string/match_loss" />
+
+            </com.andexert.library.RippleView>
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
+            android:id="@+id/new_matches_deck_cardlist"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_weight="0.75"
+            tools:layout_weight="0.75" />
+
+        <Space
+            android:id="@+id/new_matches_space_end"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/new_matches_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/medium_margin"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/small_margin"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/itemlist_match_history" />
+
+</LinearLayout>

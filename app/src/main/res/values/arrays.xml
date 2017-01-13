@@ -24,4 +24,9 @@
         <item name="tab_decks_favorites">@string/tab_decks_favorites</item>
     </array>
 
+    <array name="matches_tabs">
+        <item name="tab_matches_statistics">@string/tab_matches_statistics</item>
+        <item name="tab_matches_history">@string/tab_matches_history</item>
+    </array>
+
 </resources>

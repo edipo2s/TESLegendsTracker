@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/match_statistics_cell_height"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/cell_class_attr1"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/default_margin"
+        tools:src="@drawable/attr_strength" />
+
+    <ImageView
+        android:id="@+id/cell_class_attr2"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/small_margin"
+        tools:src="@drawable/attr_intelligence" />
+
+    <TextView
+        android:id="@+id/cell_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/default_margin"
+        android:textColor="@android:color/white"
+        android:text="@string/match_statistics_total_label" />
+
+</LinearLayout>

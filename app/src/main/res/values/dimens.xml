@@ -2,6 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="status_bar_height">24dp</dimen>
     <dimen name="navigation_bar_height">0dp</dimen>
+    <dimen name="material_design_default_height">48dp</dimen>
+    <dimen name="bottom_navigation_height">56dp</dimen>
     <dimen name="input_label_vertical_spacing">8dp</dimen>
     <dimen name="input_label_horizontal_spacing">4dp</dimen>
 
@@ -52,8 +54,9 @@
     <dimen name="deck_height">88dp</dimen>
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
-    <dimen name="deck_private_switch_size">20dp</dimen>
-    <dimen name="deck_private_switch_icon_size">@dimen/medium_margin</dimen>
+    <dimen name="deck_menu_switch_size">20dp</dimen>
+    <dimen name="deck_menu_private_icon_size">12dp</dimen>
+    <dimen name="deck_menu_percent_icon_size">14dp</dimen>
 
     <!-- transparent status_bar_height + 115dp-->
     <dimen name="deck_header_height">115dp</dimen>
@@ -71,5 +74,12 @@
     <dimen name="deck_new_magika_costs_heigth">64dp</dimen>
     <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
     <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
+
+    <dimen name="match_statistics_cell_height">48dp</dimen>
+    <dimen name="match_statistics_cell_width">72dp</dimen>
+    <dimen name="match_statistics_header_width">88dp</dimen>
+    <dimen name="match_statistics_class_header_width">120dp</dimen>
+
+    <dimen name="new_match_class_icons_width">56dp</dimen>
 
 </resources>

@@ -14,16 +14,16 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
+import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
-import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
-import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
+import org.jetbrains.anko.find
 import java.util.*
 
 /**
@@ -33,10 +33,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override val isCardsCollection: Boolean = true
 
-    val view_statistics: CollectionStatistics by lazy { activity.cards_collection_statistics }
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(view_statistics)
-    }
+    val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
+        get() = BottomSheetBehavior.from(view_statistics)
 
     val cardsCollectionAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager

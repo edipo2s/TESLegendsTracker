@@ -42,7 +42,7 @@ data class DeckUpdate(
 
 data class DeckComment(
 
-        val id: String,
+        val uuid: String,
         val owner: String,
         val comment: String,
         val date: LocalDateTime
@@ -61,19 +61,19 @@ data class DeckComment(
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(id)
+        dest?.writeString(uuid)
         dest?.writeString(owner)
         dest?.writeString(comment)
         dest?.writeSerializable(date)
     }
 
-    override fun toString(): String = "DeckComment(id='$id', owner='$owner', comment='$comment', date=$date)"
+    override fun toString(): String = "DeckComment(id='$uuid', owner='$owner', comment='$comment', date=$date)"
 
 }
 
 data class Deck(
 
-        val id: String,
+        val uuid: String,
         val name: String,
         val owner: String,
         val private: Boolean,
@@ -91,8 +91,8 @@ data class Deck(
 
 ) : Parcelable {
 
-    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now(),
-            LocalDateTime.now(), "", listOf(), 0, mapOf(), listOf(), listOf())
+    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now().withNano(0),
+            LocalDateTime.now().withNano(0), "", listOf(), 0, mapOf(), listOf(), listOf())
 
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Deck> = object : Parcelable.Creator<Deck> {
@@ -112,7 +112,7 @@ data class Deck(
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(id)
+        dest?.writeString(uuid)
         dest?.writeString(name)
         dest?.writeString(owner)
         dest?.writeInt((if (private) 1 else 0))
@@ -130,7 +130,7 @@ data class Deck(
     }
 
     override fun toString(): String {
-        return "Deck(id='$id', name='$name', owner='$owner', private=$private, type=$type, cls=$cls, cost=$cost, createdAt=$createdAt, updatedAt=$updatedAt, patch='$patch', likes=$likes, views=$views, cards=$cards, updates=$updates, comments=$comments)"
+        return "Deck(id='$uuid', name='$name', owner='$owner', private=$private, type=$type, cls=$cls, cost=$cost, createdAt=$createdAt, updatedAt=$updatedAt, patch='$patch', likes=$likes, views=$views, cards=$cards, updates=$updates, comments=$comments)"
     }
 
 }

@@ -32,15 +32,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.CardActivity"
+            android:name=".ui.cards.CardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparent" />
         <activity
-            android:name=".ui.DeckActivity"
+            android:name=".ui.decks.DeckActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.decks.new.NewDeckActivity"
+            android:name=".ui.decks.NewDeckActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.matches.MatchesStatisticsClassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.matches.NewMatchesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeAccentEqualsPrimaryDark"
             android:windowSoftInputMode="adjustPan" />
 
         <receiver

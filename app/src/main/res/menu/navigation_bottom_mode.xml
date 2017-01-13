@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_mode_ranked"
+        android:icon="@drawable/ic_mode_ranked"
+        android:title="@string/tab_mode_ranked" />
+
+    <item
+        android:id="@+id/tab_mode_casual"
+        android:icon="@drawable/ic_mode_casual"
+        android:title="@string/tab_mode_casual" />
+
+    <item
+        android:id="@+id/tab_mode_arena"
+        android:icon="@drawable/ic_mode_arena"
+        android:title="@string/tab_mode_arena" />
+
+</menu>
