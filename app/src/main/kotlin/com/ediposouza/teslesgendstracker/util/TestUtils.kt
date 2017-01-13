@@ -37,11 +37,11 @@ object TestUtils {
                 for ((indexOpponent, opponentDeck) in decks.withIndex()) {
                     addAll(mutableListOf<Match>().apply {
                         for (i in 1..indexPlayer + 1) {
-                            val uuid = LocalDateTime.now().minusDays(playerDeck.type.ordinal.toLong()).toString()
+                            val uuid = LocalDateTime.now().withNano(0).minusDays(playerDeck.type.ordinal.toLong()).toString()
                             add(Match(uuid, false, playerDeck, opponentDeck, MatchMode.RANKED, "2016_12", 0, false, true))
                         }
                         for (i in 1..indexOpponent + 1) {
-                            val uuid = LocalDateTime.now().minusDays(opponentDeck.type.ordinal.toLong()).toString()
+                            val uuid = LocalDateTime.now().withNano(0).minusDays(opponentDeck.type.ordinal.toLong()).toString()
                             add(Match(uuid, false, playerDeck, opponentDeck, MatchMode.RANKED, "2016_12", 0, false, false))
                         }
                     })
@@ -61,7 +61,6 @@ object TestUtils {
             return MatchesHistoryFragment.MatchViewHolder(parent.inflate(R.layout.itemlist_match_history))
         }
 
-
         override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
             holder?.bind(items[position])
         }
@@ -80,7 +79,6 @@ object TestUtils {
             val date = LocalDateTime.parse(items[position].uuid).toLocalDate()
             return date.year + date.monthValue + date.dayOfMonth.toLong()
         }
-
 
         fun getContentCount(): Int = items.size
         fun more() {}

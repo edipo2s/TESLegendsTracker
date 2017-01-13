@@ -91,8 +91,8 @@ data class Deck(
 
 ) : Parcelable {
 
-    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now(),
-            LocalDateTime.now(), "", listOf(), 0, mapOf(), listOf(), listOf())
+    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now().withNano(0),
+            LocalDateTime.now().withNano(0), "", listOf(), 0, mapOf(), listOf(), listOf())
 
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Deck> = object : Parcelable.Creator<Deck> {

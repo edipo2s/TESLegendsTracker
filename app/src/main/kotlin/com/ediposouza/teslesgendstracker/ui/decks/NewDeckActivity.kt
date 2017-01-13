@@ -175,6 +175,10 @@ class NewDeckActivity : BaseFilterActivity() {
         val deckPatchSelected = deckPatches.find { it.desc == deckPatchDesc } ?: deckPatches.last()
         val deckCards = new_deck_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deckPrivate = !view.new_deck_dialog_public.isChecked
+        if (deckName.length < 5) {
+            eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
+            return
+        }
         PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
                 deckPatchSelected.uuidDate, deckCards, deckPrivate) {
             toast(if (deckPrivate) R.string.new_deck_save_as_private else R.string.new_deck_save_as_public)

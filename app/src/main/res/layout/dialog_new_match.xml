@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/new_match_dialog_class_spinner"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/new_match_dialog_deck_label"
             android:textColor="@color/grey_500" />
 
@@ -52,13 +52,58 @@
             android:layout_below="@id/new_match_dialog_deck_label"
             android:inputType="none" />
 
+        <RelativeLayout
+            android:id="@+id/new_match_dialog_deck_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_match_dialog_deck_spinner"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/new_match_dialog_deck_name_label"
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_500"
+                android:text="@string/new_deck_save_dialog_name_label" />
+
+            <EditText
+                android:id="@+id/new_match_dialog_deck_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_dialog_deck_name_label"
+                android:hint="@string/new_match_dialog_name_hint"
+                android:inputType="text"
+                android:textColor="@color/primary_text_dark"
+                android:textColorHint="@color/grey_400" />
+
+            <TextView
+                android:id="@+id/new_match_dialog_deck_type_label"
+                style="@style/InputLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_dialog_deck_name"
+                android:textColor="@color/grey_500"
+                android:text="@string/new_deck_save_dialog_type_label" />
+
+            <Spinner
+                android:id="@+id/new_match_dialog_deck_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_match_dialog_deck_type_label"
+                android:inputType="none" />
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/new_match_dialog_mode_label"
             style="@style/InputLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/new_match_dialog_deck_spinner"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_below="@id/new_match_dialog_deck_info"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/new_match_dialog_mode_label"
             android:textColor="@color/grey_500" />
 

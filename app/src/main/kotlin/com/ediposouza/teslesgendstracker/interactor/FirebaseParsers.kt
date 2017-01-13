@@ -75,7 +75,7 @@ abstract class FirebaseParsers {
 
             fun toNewCommentMap(owner: String, comment: String): Map<String, String> {
                 return mapOf(KEY_DECK_COMMENT_OWNER to owner, KEY_DECK_COMMENT_MSG to comment,
-                        KEY_DECK_COMMENT_CREATE_AT to LocalDateTime.now().toString())
+                        KEY_DECK_COMMENT_CREATE_AT to LocalDateTime.now().withNano(0).toString())
             }
 
         }
@@ -164,6 +164,20 @@ abstract class FirebaseParsers {
                     DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
             val matchMode = MatchMode.values()[mode]
             return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)
+        }
+
+        fun fromMatch(match: Match): MatchParser {
+            val player = with(match.player) {
+                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                        KEY_MATCH_DECK_TYPE to type.ordinal, KEY_MATCH_DECK_DECK_UUID to (deck ?: ""),
+                        KEY_MATCH_DECK_VERSION to (version ?: ""))
+            }
+            val opponent = with(match.opponent) {
+                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                        KEY_MATCH_DECK_TYPE to type.ordinal)
+            }
+            return MatchParser(match.first, player, opponent, match.legend, match.mode.ordinal,
+                    match.rank, match.season, match.win)
         }
 
         override fun toString(): String {

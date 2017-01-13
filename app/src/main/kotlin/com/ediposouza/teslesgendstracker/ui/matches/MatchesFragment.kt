@@ -19,6 +19,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
@@ -163,10 +164,22 @@ class MatchesFragment : BaseFragment() {
         val classClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 PrivateInteractor().getUserDecks(Class.values()[pos]) { myDecks ->
-                    decks = (myDecks as List<Deck?>).plusElement(null).sortedBy { it?.name ?: "" }
+                    decks = (myDecks as List<Deck?>).sortedBy { it?.name }.plusElement(null)
                     dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
-                            android.R.layout.simple_spinner_dropdown_item, decks.map { it?.name ?: "" })
+                            android.R.layout.simple_spinner_dropdown_item,
+                            decks.map { it?.name ?: getString(R.string.new_match_dialog_deck_other) })
                 }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+        val deckClickListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                val lastItem = pos == parent.count - 1
+                dialogView.new_match_dialog_deck_info.visibility = if (lastItem) View.VISIBLE else View.GONE
+                dialogView.new_match_dialog_deck_name.setText(decks[pos]?.name ?: "")
+                dialogView.new_match_dialog_deck_type_spinner.setSelection(decks[pos]?.type?.ordinal ?: 0)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -176,10 +189,16 @@ class MatchesFragment : BaseFragment() {
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
+                    val name = dialogView.new_match_dialog_deck_name.text.toString()
                     val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                    val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
                     val deck = if (deckPosition >= 0) decks[deckPosition] else null
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    startActivityForResult(NewMatchesActivity.newIntent(context, cls, deck, mode), RC_NEW_MATCHES)
+                    if (name.length < 5) {
+                        eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
+                    } else {
+                        startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)
+                    }
                 })
                 .setNegativeButton(android.R.string.cancel, { dialog, which -> })
                 .create()
@@ -191,13 +210,21 @@ class MatchesFragment : BaseFragment() {
                             limitHeight()
                         }
                         dialogView.new_match_dialog_deck_spinner.apply {
+                            onItemSelectedListener = deckClickListener
                             if (decks.size >= 5) {
                                 limitHeight()
                             }
                         }
-                        val modeTypes = MatchMode.values().map { it.name.toLowerCase().capitalize() }
+                        dialogView.new_match_dialog_deck_type_spinner.apply {
+                            adapter = ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    DeckType.values().filter { it != DeckType.ARENA }
+                                            .map { it.name.toLowerCase().capitalize() })
+                            limitHeight(4)
+                        }
                         dialogView.new_match_dialog_mode_spinner.adapter = ArrayAdapter<String>(context,
-                                android.R.layout.simple_spinner_dropdown_item, modeTypes)
+                                android.R.layout.simple_spinner_dropdown_item,
+                                MatchMode.values().map { it.name.toLowerCase().capitalize() })
                     }
                     show()
                 }

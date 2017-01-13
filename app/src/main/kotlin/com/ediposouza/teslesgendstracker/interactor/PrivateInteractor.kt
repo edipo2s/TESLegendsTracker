@@ -288,8 +288,8 @@ class PrivateInteractor : BaseInteractor() {
                  private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (uid: String) -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now(),
-                        LocalDateTime.now(), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
+                val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now().withNano(0),
+                        LocalDateTime.now().withNano(0), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
                 child(deck.uuid).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
                     Timber.d(it.toString())
                     if (it.isSuccessful) onSuccess.invoke(deck.uuid)
@@ -327,7 +327,7 @@ class PrivateInteractor : BaseInteractor() {
                         onError: ((e: Exception?) -> Unit)? = null) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val updateKey = org.threeten.bp.LocalDateTime.now().toString()
+                val updateKey = LocalDateTime.now().withNano(0).toString()
                 val cardsRem = oldCards.filter { !deck.cards.keys.contains(it.key) }.mapValues { it.key to it.value * -1 }
                 val cardsDiff = deck.cards.mapValues { it.key to it.value.minus(oldCards[it.key] ?: 0) }.plus(cardsRem)
                 child(deck.uuid).child(KEY_DECK_UPDATES).child(updateKey).setValue(cardsDiff).addOnCompleteListener({
@@ -349,7 +349,7 @@ class PrivateInteractor : BaseInteractor() {
                     child(commentKey).setValue(comment).addOnCompleteListener({
                         Timber.d(it.toString())
                         if (it.isSuccessful) {
-                            onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now()))
+                            onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now().withNano(0)))
                         } else
                             onError?.invoke(it.exception)
                     })
@@ -402,6 +402,18 @@ class PrivateInteractor : BaseInteractor() {
                 }
 
             })
+        }
+    }
+
+    fun saveMatch(newMatch: Match, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        getUserMatchesRef()?.apply {
+            child(newMatch.uuid).setValue(FirebaseParsers.MatchParser().fromMatch(newMatch)).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Timber.d(it.toString())
+                    onSuccess.invoke()
+                } else
+                    onError?.invoke(it.exception)
+            }
         }
     }
 

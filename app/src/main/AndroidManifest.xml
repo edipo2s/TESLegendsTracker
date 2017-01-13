@@ -42,12 +42,14 @@
             android:name=".ui.decks.NewDeckActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.matches.MatchesStatisticsClassActivity" />
+        <activity
+            android:name=".ui.matches.MatchesStatisticsClassActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.matches.NewMatchesActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppThemeAccentEqualsPrimaryDark"/>
+            android:theme="@style/AppThemeAccentEqualsPrimaryDark"
+            android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"

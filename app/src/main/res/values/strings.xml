@@ -132,13 +132,21 @@
     <string name="new_match_dialog_title">I\'m playing with</string>
     <string name="new_match_save_dialog_name_label">Name</string>
     <string name="new_match_dialog_class_label">Class</string>
-    <string name="new_match_dialog_deck_label">Deck</string>
     <string name="new_match_dialog_mode_label">Mode</string>
+    <string name="new_match_dialog_deck_label">Deck</string>
+    <string name="new_match_dialog_deck_other">Other</string>
+    <string name="new_match_dialog_name_hint">Deck Name</string>
     <string name="new_match_dialog_start">Start</string>
+    <string name="new_match_dialog_start_error_name">Name must be at least 5 characters</string>
+    <string name="new_match_opt_class_label">Opponent Deck Class</string>
+    <string name="new_match_opt_type_label">Opponent Deck Type</string>
+    <string name="new_match_opt_name_label">Opponent Deck Name</string>
     <string name="new_match_cards_remains_label">Cards Remains</string>
     <string name="new_match_name_label">(Optional)</string>
     <string name="new_match_first_label">Going First</string>
     <string name="new_match_legend_label">Rank Legend</string>
     <string name="new_match_rank_label">Rank</string>
+    <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
+    <string name="new_match_saved">New Match Saved!</string>
 
 </resources>
