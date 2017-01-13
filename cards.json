@@ -88,7 +88,7 @@
           "health": "1",
           "rarity": "Legendary",
           "keyword": "",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "scuttler": {
           "name": "Scuttler",
@@ -132,7 +132,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Good"
         },
         "bonebow": {
           "name": "Bone Bow",
@@ -264,7 +264,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon, Charge",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "assassinsbow": {
           "name": "Assassin's Bow",
@@ -286,7 +286,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "blightedalit": {
           "name": "Blighted Alit",
@@ -352,7 +352,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Prophecy, Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Insane"
         },
         "raidingparty": {
           "name": "Raiding Party",
@@ -363,7 +363,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "riftenpillager": {
           "name": "Riften Pillager",
@@ -407,7 +407,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "valenwoodhuntsman": {
           "name": "Valenwood Huntsman",
@@ -749,7 +749,7 @@
           "health": "5",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "wrothgarforge": {
           "name": "Wrothgar Forge",
@@ -805,7 +805,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         }
       },
       "intelligence": {
@@ -840,7 +840,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Last Gasp",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "crownquartermaster": {
           "name": "Crown Quartermaster",
@@ -873,7 +873,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "abeceannavigator": {
           "name": "Abecean Navigator",
@@ -906,15 +906,15 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "crystaltowercrafter": {
           "name": "Crystal Tower Crafter",
           "cost": "02",
           "type": "Creature",
           "race": "High Elf",
-          "attack": "2",
-          "health": "2",
+          "attack": "1",
+          "health": "1",
           "rarity": "Common",
           "keyword": "",
           "arenaTier": "Excellent"
@@ -928,7 +928,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Activate",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "dunmernightblade": {
           "name": "Dunmer Nightblade",
@@ -1093,7 +1093,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "camlornsentinel": {
           "name": "Camlorn Sentinel",
@@ -1126,7 +1126,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "daggerfallmage": {
           "name": "Daggerfall Mage",
@@ -1269,7 +1269,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon, Last Gasp",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "firestorm": {
           "name": "Fire Storm",
@@ -1324,7 +1324,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dragonstarrider": {
           "name": "Dragonstar Rider",
@@ -1335,7 +1335,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "elixirofdeflection": {
           "name": "Elixir of Deflection",
@@ -1346,7 +1346,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Activate, Ward",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "glenumbrasorceress": {
           "name": "Glenumbra Sorceress",
@@ -1368,7 +1368,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "mentorsring": {
           "name": "Mentor's Ring",
@@ -1555,7 +1555,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "expertatromancer": {
           "name": "Expert Atromancer",
@@ -1589,7 +1589,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "divaythfyr": {
           "name": "Divayth Fyr",
@@ -1636,7 +1636,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "apprenticespotion": {
           "name": "Apprentices Potion",
@@ -1680,7 +1680,7 @@
           "health": "1",
           "rarity": "Legendary",
           "keyword": "Pilfer",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "detain": {
           "name": "Detain",
@@ -1812,7 +1812,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "legionshield": {
           "name": "Legion Shield",
@@ -1988,7 +1988,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "rajhinihighwayman": {
           "name": "Rajhini Highwayman",
@@ -2054,7 +2054,7 @@
           "health": "1",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "auridonpaladin": {
           "name": "Auridon Paladin",
@@ -2110,7 +2110,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "hivedefender": {
           "name": "Hive Defender",
@@ -2176,7 +2176,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Pilfer",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "haafingarmarauder": {
           "name": "Haafingar Marauder",
@@ -2209,7 +2209,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "imperialsiegeengine": {
           "name": "Imperial Siege Engine",
@@ -2231,7 +2231,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy, Summon, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "piercingjavelin": {
           "name": "Piercing Javelin",
@@ -2253,7 +2253,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon, Drain",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "spitefuldremora": {
           "name": "Spiteful Dremora",
@@ -2330,7 +2330,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "risinglegate": {
           "name": "Rising Legate",
@@ -2352,7 +2352,7 @@
           "health": "7",
           "rarity": "Legendary",
           "keyword": "Guard",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dawnswrath": {
           "name": "Dawn's Wrath",
@@ -2374,7 +2374,7 @@
           "health": "6",
           "rarity": "Epic",
           "keyword": "Guard, Summon",
-          "arenaTier": "Insane"
+          "arenaTier": "Good"
         },
         "miraakdragonborn": {
           "name": "Miraak, Dragonborn",
@@ -2399,7 +2399,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "murkwatergoblin": {
           "name": "Murkwater Goblin",
@@ -2421,7 +2421,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "Shackle",
-          "arenaTier": "Good"
+          "arenaTier": "Poor"
         },
         "mournholdguardian": {
           "name": "Mournhold Guardian",
@@ -2466,7 +2466,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Drain",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "daringcutpurse": {
           "name": "Daring Cutpurse",
@@ -2532,7 +2532,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "goblinskulk": {
           "name": "Goblin Skulk",
@@ -2598,7 +2598,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "snaketoothnecklace": {
           "name": "Snake tooth Necklace",
@@ -2609,7 +2609,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Drain",
-          "arenaTier": "Terrible"
+          "arenaTier": "Excellent"
         },
         "thievesguildrecruit": {
           "name": "Thieves Guild Recruit",
@@ -2620,7 +2620,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "arenthiaswindler": {
           "name": "Arenthia Swindler",
@@ -2642,7 +2642,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Pilfer",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "blacksapprotector": {
           "name": "Blacksap Protector",
@@ -2653,7 +2653,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "dunesmuggler": {
           "name": "Dune Smuggler",
@@ -2796,7 +2796,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Guard, Last Gasp",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "anxileelinvader": {
           "name": "An-Xileel Invader",
@@ -2818,7 +2818,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Last Gasp",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "deshaansneak": {
           "name": "Deshaan Sneak",
@@ -2840,7 +2840,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Guard, Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "hiddentrail": {
           "name": "Hidden Trail",
@@ -2862,7 +2862,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy, Drain",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "murkwatershaman": {
           "name": "Murkwater Shaman",
@@ -2906,7 +2906,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Charge, Lethal",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "thievesden": {
           "name": "Thieves' Den",
@@ -2961,7 +2961,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "eldercentaur": {
           "name": "Elder Centaur",
@@ -3027,7 +3027,7 @@
           "health": "6",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "snowysabrecat": {
           "name": "Snowy Sabre Cat",
@@ -3038,11 +3038,11 @@
           "health": "7",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "soulrestmarshal": {
           "name": "Soulrest Marshal",
-          "cost": "05",
+          "cost": "06",
           "type": "Creature",
           "race": "Argonian",
           "attack": "4",
@@ -3217,7 +3217,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Lethal",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "deathlessdraugr": {
           "name": "Deathless Draugr",
@@ -3228,7 +3228,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Last Gasp",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "iliacsorcerer": {
           "name": "Iliac Sorcerer",
@@ -3481,7 +3481,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Prophecy",
-          "arenaTier": "Insane"
+          "arenaTier": "Good"
         },
         "necromancersamulet": {
           "name": "Necromancer's Amulet",
@@ -3536,7 +3536,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Excellent"
         },
         "youngmammoth": {
           "name": "Young Mammoth",
@@ -3691,7 +3691,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "northpointcaptain": {
           "name": "Northpoint Captain",
@@ -3779,7 +3779,7 @@
           "health": "6",
           "rarity": "Common",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "shadowfenpriest": {
           "name": "Shadowfen Priest",
@@ -3823,7 +3823,7 @@
           "health": "4",
           "rarity": "Legendary",
           "keyword": "Lethal",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "fleshatronach": {
           "name": "Flesh Atronach",
@@ -3912,7 +3912,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Guard",
-          "arenaTier": "Excellent"
+          "arenaTier": "Insane"
         },
         "swampleviathan": {
           "name": "Swamp Leviathan",
@@ -3967,7 +3967,7 @@
           "health": "12",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Guard, Regenerate",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         }
       },
       "dual": {
@@ -4020,7 +4020,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Drain, Summon, Guard",
-          "arenaTier": "Excellent",
+          "arenaTier": "Good",
           "attr1": "intelligence",
           "attr2": "agility"
         },
@@ -4090,7 +4090,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Insane",
+          "arenaTier": "Excellent",
           "attr1": "intelligence",
           "attr2": "willpower"
         },
@@ -4129,7 +4129,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Guard, Summon",
-          "arenaTier": "Excellent",
+          "arenaTier": "Insane",
           "attr1": "agility",
           "attr2": "endurance"
         },
@@ -4212,7 +4212,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Average",
+          "arenaTier": "Good",
           "attr1": "strength",
           "attr2": "intelligence"
         },
@@ -4225,7 +4225,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Excellent",
+          "arenaTier": "Average",
           "attr1": "strength",
           "attr2": "agility"
         },
@@ -4287,7 +4287,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Prophecy",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "ravenouscrocodile": {
           "name": "Ravenous Crocodile",
@@ -4365,7 +4365,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Insane"
         },
         "dwarvensphere": {
           "name": "Dwarven Sphere",
@@ -4420,11 +4420,11 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         },
         "slaughterfish": {
           "name": "Slaughterfish",
-          "cost": "03",
+          "cost": "04",
           "type": "Creature",
           "race": "Fish",
           "attack": "1",
@@ -4435,7 +4435,7 @@
         },
         "slaughterfishspawning": {
           "name": "Slaughterfish Spawning",
-          "cost": "03",
+          "cost": "04",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -4520,7 +4520,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "portcullis": {
           "name": "Portcullis",
@@ -4576,7 +4576,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dwarvenarmaments": {
           "name": "Dwarven Armaments",
@@ -4598,7 +4598,7 @@
           "health": "5",
           "rarity": "Common",
           "keyword": "Breakthrough",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "hallsofthedwemer": {
           "name": "Halls of the Dwemer",
@@ -4609,7 +4609,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Summon, Guard",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "orbofvaermina": {
           "name": "Orb of Vaermina",
@@ -4621,7 +4621,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "darkharvester": {
           "name": "Dark Harvester",
@@ -4655,7 +4655,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "odahviing": {
           "name": "Odahviing",
@@ -4667,7 +4667,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         }
       }
     },
@@ -4682,7 +4682,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       },
       "intelligence": {
@@ -4695,7 +4695,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         }
       },
       "willpower": {
@@ -4708,7 +4708,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Good"
         }
       },
       "agility": {
@@ -4721,7 +4721,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "arenaTier": "Terrible"
         }
       },
       "endurance": {
@@ -4734,7 +4734,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       },
       "neutral": {
@@ -4747,7 +4747,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Unsummon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         },
         "merchantscamel": {
           "name": "Merchant's Camel",
@@ -4758,7 +4758,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         },
         "forsakenchampion": {
           "name": "Forsaken Champion",
@@ -4769,7 +4769,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         },
         "altarofdespair": {
           "name": "Altar of Despair",
@@ -4780,7 +4780,7 @@
           "health": "",
           "rarity": "Legendary",
           "keyword": "Activate",
-          "arenaTier": "Unknown"
+          "arenaTier": "Terrible"
         },
         "illusorymimic": {
           "name": "Illusory Mimic",
@@ -4791,7 +4791,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       }
     }
@@ -4940,6 +4940,83 @@
     }
   },
   "patches": {
+    "2017_01_11": {
+      "core": {
+        "agility": {
+          "dunesmuggler": {
+            "text": {
+              "after": "Summon: Move another friendly creature in this lane. When a friendly creature moves, give it +1/+1.",
+              "before": "Summon: Move another friendly creature. When a friendly creature moves, give it +1/+1."
+            }
+          },
+          "dunestalker": {
+            "text": {
+              "after": "Prophecy. Summon: Move another friendly creature in this lane.",
+              "before": "Prophecy. Summon: Move another friendly creature."
+            }
+          },
+          "snaketoothnecklace": {
+            "text": {
+              "after": "+1/+1. Summon: Give the wielder Drain this turn.",
+              "before": "Drain. +1/+1"
+            }
+          },
+          "soulrestmarshal": {
+            "cost": {
+              "after": 6,
+              "before": 5
+            },
+            "text": {
+              "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less.",
+              "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less."
+            }
+          }
+        },
+        "intelligence": {
+          "crystaltowercrafter": {
+            "attack": {
+              "after": 1,
+              "before": 2
+            },
+            "health": {
+              "after": 1,
+              "before": 2
+            }
+          }
+        },
+        "willpower": {
+          "pillagingtribune": {
+            "text": {
+              "after": "Summon: Give a friendly creature Drain this turn.",
+              "before": "Summon: Give other friendly creature Drain this turn."
+            }
+          }
+        },
+        "endurance": {
+          "histgrove": {
+            "text": {
+              "after": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
+              "before": "Summon: +1 max magicka. When you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane."
+            }
+          }
+        },
+        "neutral": {
+          "slaughterfishspawning": {
+            "cost": {
+              "after": 4,
+              "before": 3
+            }
+          },
+          "slaughterfish": {
+            "cost": {
+              "after": 4,
+              "before": 3
+            }
+          }
+        }
+      },
+      "desc": "slaughterfishspawning Nerf"
+    },
     "2016_08_25": {
       "core": {
         "agility": {
