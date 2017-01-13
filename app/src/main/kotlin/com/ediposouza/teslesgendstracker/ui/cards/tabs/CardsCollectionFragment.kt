@@ -34,9 +34,8 @@ class CardsCollectionFragment : CardsAllFragment() {
     override val isCardsCollection: Boolean = true
 
     val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(view_statistics)
-    }
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
+        get() = BottomSheetBehavior.from(view_statistics)
 
     val cardsCollectionAdapter by lazy {
         val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
