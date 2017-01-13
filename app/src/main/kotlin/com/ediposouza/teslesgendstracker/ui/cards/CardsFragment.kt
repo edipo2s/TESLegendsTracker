@@ -37,9 +37,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private val handler = Handler()
     private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
-    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(cards_collection_statistics)
-    }
+    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
+        get() = BottomSheetBehavior.from(cards_collection_statistics)
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
