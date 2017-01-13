@@ -16,7 +16,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
@@ -77,19 +77,23 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck, showSoulCost: Boolean = true) {
+    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true, showQtd: Boolean = true) {
         decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
-        doAsync {
-            PublicInteractor().getDeckCards(deck) {
-                context.runOnUiThread {
-                    (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
-                    onCardListChange()
-                }
-                userFavorites.clear()
-                PrivateInteractor().getFavoriteCards(null, deck.cls.attr1) {
-                    userFavorites.addAll(it)
-                    PrivateInteractor().getFavoriteCards(null, deck.cls.attr2) {
+        decklist_costs.visibility = if (showMagikaCosts) View.VISIBLE else View.GONE
+        decklist_qtd.visibility = if (showQtd) View.VISIBLE else View.GONE
+        if (deck != null) {
+            doAsync {
+                PublicInteractor().getDeckCards(deck) {
+                    context.runOnUiThread {
+                        (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
+                        onCardListChange()
+                    }
+                    userFavorites.clear()
+                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
                         userFavorites.addAll(it)
+                        PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
+                            userFavorites.addAll(it)
+                        }
                     }
                 }
             }

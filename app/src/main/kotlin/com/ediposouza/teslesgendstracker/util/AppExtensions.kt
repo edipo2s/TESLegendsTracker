@@ -7,6 +7,8 @@ import android.support.design.widget.BottomSheetBehavior
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListPopupWindow
+import android.widget.Spinner
 import com.ediposouza.teslesgendstracker.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -54,4 +56,19 @@ private fun createAdRequest(context: Context): AdRequest {
 
 fun MixpanelAPI.trackBundle(eventName: String, bundle: Bundle) {
     trackMap(eventName, bundle.keySet().map { it to bundle[it] }.toMap())
+}
+
+
+fun Spinner.limitHeight(lines: Int? = null) {
+    val displayHeight = context.resources.displayMetrics.heightPixels
+    val itemHeight = context.resources.getDimensionPixelSize(R.dimen.material_design_default_height)
+    Spinner::class.java.getDeclaredField("mPopup")
+            ?.apply { isAccessible = true }?.get(this)
+            ?.apply popup@ {
+                IntArray(2).apply {
+                    getLocationOnScreen(this)
+                    val listPopupWindow = this@popup as ListPopupWindow
+                    listPopupWindow.height = if(lines != null) lines * itemHeight else displayHeight - get(1)
+                }
+            }
 }

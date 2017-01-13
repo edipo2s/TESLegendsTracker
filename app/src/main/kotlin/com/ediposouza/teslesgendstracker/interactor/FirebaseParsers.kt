@@ -65,23 +65,23 @@ abstract class FirebaseParsers {
 
         companion object {
 
-            private val KEY_DECK_NAME = "owner"
-            private val KEY_DECK_TYPE = "type"
-            private val KEY_DECK_CLASS = "cls"
-            private val KEY_DECK_PATCH = "patch"
-            private val KEY_DECK_COMMENT_OWNER = "owner"
-            private val KEY_DECK_COMMENT_MSG = "comment"
-            private val KEY_DECK_COMMENT_CREATE_AT = "createdAt"
+            private const val KEY_DECK_NAME = "owner"
+            private const val KEY_DECK_TYPE = "type"
+            private const val KEY_DECK_CLASS = "cls"
+            private const val KEY_DECK_PATCH = "patch"
+            private const val KEY_DECK_COMMENT_OWNER = "owner"
+            private const val KEY_DECK_COMMENT_MSG = "comment"
+            private const val KEY_DECK_COMMENT_CREATE_AT = "createdAt"
 
             fun toNewCommentMap(owner: String, comment: String): Map<String, String> {
                 return mapOf(KEY_DECK_COMMENT_OWNER to owner, KEY_DECK_COMMENT_MSG to comment,
-                        KEY_DECK_COMMENT_CREATE_AT to LocalDateTime.now().toString())
+                        KEY_DECK_COMMENT_CREATE_AT to LocalDateTime.now().withNano(0).toString())
             }
 
         }
 
-        fun toDeck(id: String, private: Boolean): Deck {
-            return Deck(id, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
+        fun toDeck(uuid: String, private: Boolean): Deck {
+            return Deck(uuid, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
                     LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
                     updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                     comments.map {
@@ -96,7 +96,7 @@ abstract class FirebaseParsers {
                     deck.createdAt.toString(), deck.updatedAt.toString(), deck.patch, deck.views,
                     deck.likes, deck.cards, deck.updates.map { it.date.toString() to it.changes }.toMap(),
                     deck.comments.map {
-                        it.id to mapOf(
+                        it.uuid to mapOf(
                                 KEY_DECK_COMMENT_OWNER to it.owner,
                                 KEY_DECK_COMMENT_MSG to it.comment,
                                 KEY_DECK_COMMENT_CREATE_AT to it.date.toString())
@@ -113,12 +113,75 @@ abstract class FirebaseParsers {
 
     }
 
+    class DeckFavoriteParser(
+
+            val name: String = "",
+            val cls: Int = 0
+
+    )
+
     class PatchParser {
 
         val desc: String = ""
 
-        fun toPatch(uidDate: String): Patch {
-            return Patch(uidDate, desc)
+        fun toPatch(uuidDate: String): Patch {
+            return Patch(uuidDate, desc)
+        }
+
+    }
+
+    class MatchParser(
+
+            val first: Boolean = false,
+            val player: Map<String, Any> = mapOf(),
+            val opponent: Map<String, Any> = mapOf(),
+            val legend: Boolean = false,
+            val mode: Int = 0,
+            val rank: Int = 0,
+            val season: String = "",
+            val win: Boolean = false
+
+    ) {
+
+        companion object {
+
+            private const val KEY_MATCH_DECK_CLASS = "cls"
+            private const val KEY_MATCH_DECK_DECK_UUID = "deck"
+            private const val KEY_MATCH_DECK_NAME = "name"
+            private const val KEY_MATCH_DECK_TYPE = "type"
+            private const val KEY_MATCH_DECK_VERSION = "version"
+
+        }
+
+        fun toMatch(uuid: String): Match {
+            val playerDeck = MatchDeck(player[KEY_MATCH_DECK_NAME].toString(),
+                    Class.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckType.values()[player[KEY_MATCH_DECK_TYPE].toString().toInt()],
+                    player[KEY_MATCH_DECK_DECK_UUID].toString(),
+                    player[KEY_MATCH_DECK_VERSION].toString())
+            val opponentDeck = MatchDeck(opponent[KEY_MATCH_DECK_NAME].toString(),
+                    Class.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
+            val matchMode = MatchMode.values()[mode]
+            return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)
+        }
+
+        fun fromMatch(match: Match): MatchParser {
+            val player = with(match.player) {
+                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                        KEY_MATCH_DECK_TYPE to type.ordinal, KEY_MATCH_DECK_DECK_UUID to (deck ?: ""),
+                        KEY_MATCH_DECK_VERSION to (version ?: ""))
+            }
+            val opponent = with(match.opponent) {
+                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                        KEY_MATCH_DECK_TYPE to type.ordinal)
+            }
+            return MatchParser(match.first, player, opponent, match.legend, match.mode.ordinal,
+                    match.rank, match.season, match.win)
+        }
+
+        override fun toString(): String {
+            return "MatchParser(first=$first, player=$player, opponent=$opponent, legend=$legend, mode=$mode, rank=$rank, win=$win)"
         }
 
     }

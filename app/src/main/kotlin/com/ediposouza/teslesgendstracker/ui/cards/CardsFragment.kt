@@ -18,7 +18,7 @@ import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
+import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -37,9 +37,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private val handler = Handler()
     private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(activity.cards_collection_statistics)
-    }
+    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
+        get() = BottomSheetBehavior.from(cards_collection_statistics)
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
@@ -47,7 +46,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                activity.cards_collection_statistics.updateStatistics()
+                cards_collection_statistics.updateStatistics()
             } else {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
@@ -62,11 +61,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun updateActivityTitle(position: Int) {
-        activity.toolbar_title?.setText(when (position) {
+        val title = when (position) {
             1 -> R.string.title_tab_cards_collection
             2 -> R.string.title_tab_cards_favorites
             else -> R.string.title_tab_cards_all
-        })
+        }
+        eventBus.post(CmdUpdateTitle(title))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -77,16 +77,18 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
-        activity.cards_collection_statistics.setOnClickListener {
+        cards_collection_statistics.setOnClickListener {
             statisticsSheetBehavior.toggleExpanded()
         }
         statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
         cards_view_pager.addOnPageChangeListener(pageChange)
-        attr_filter.filterClick = {
+        cards_filter_attr.filterClick = {
             eventBus.post(CmdShowCardsByAttr(it))
-            attr_filter.selectAttr(it, true)
+            cards_filter_attr.selectAttr(it, true)
         }
+        cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         Handler().postDelayed({
             eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
@@ -95,8 +97,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.toolbar_title.setText(R.string.app_name_full)
-        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+        eventBus.post(CmdUpdateTitle(R.string.app_name_full))
+        cards_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -113,7 +115,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
-        eventBus.post(CmdShowTabs())
+        cards_app_bar_layout.setExpanded(true, true)
         (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
     }
 
@@ -127,7 +129,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_search, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.search_hint)
+            queryHint = getString(R.string.cards_search_hint)
             setOnQueryTextListener(this@CardsFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)

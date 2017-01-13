@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.base
 
 import android.R
 import android.support.annotation.IntDef
+import android.support.annotation.IntegerRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
@@ -11,13 +12,13 @@ import com.ediposouza.teslesgendstracker.data.Class
 /**
  * Created by EdipoSouza on 11/6/16.
  */
-class CmdShowTabs
-
 class CmdShowLogin
 
 class CmdLoginSuccess
 
 class CmdUpdateDeckAndShowDeck
+
+data class CmdUpdateTitle(@IntegerRes val title: Int)
 
 data class CmdShowCardsByAttr(val attr: Attribute)
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tools:TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@android:id/text1"
+    style="?android:attr/spinnerItemStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:maxLines="1"
+    android:textAlignment="inherit"
+    android:textColor="@color/primary_text"
+    tools:layout_marginTop="@dimen/status_bar_height"
+    tools:text="Item 1" />

@@ -8,16 +8,12 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
@@ -30,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.itemsSequence
 import java.util.*
 
 /**
@@ -48,6 +45,7 @@ open class CardsAllFragment : BaseFragment() {
     var classFilter: Class? = null
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
+    var menuSets: SubMenu? = null
 
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
@@ -84,13 +82,25 @@ open class CardsAllFragment : BaseFragment() {
         cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menuSets = menu?.findItem(R.id.menu_sets)?.subMenu
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menu_sets_all -> eventBus.post(CmdFilterSet(null))
-            R.id.menu_sets_core -> eventBus.post(CmdFilterSet(CardSet.CORE))
-            R.id.menu_sets_madhouse -> eventBus.post(CmdFilterSet(CardSet.MADHOUSE))
+            R.id.menu_sets_all -> filterSet(item, null)
+            R.id.menu_sets_core -> filterSet(item, CardSet.CORE)
+            R.id.menu_sets_madhouse -> filterSet(item, CardSet.MADHOUSE)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun filterSet(menuItem: MenuItem?, set: CardSet?) {
+        menuSets?.itemsSequence()?.forEach {
+            it.setIcon(if (it.itemId == menuItem?.itemId) R.drawable.ic_checked else 0)
+        }
+        eventBus.post(CmdFilterSet(set))
     }
 
     open fun configRecycleView() {
@@ -120,6 +130,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
@@ -178,7 +189,7 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         }
-        privateInteractor.getFavoriteCards(setFilter, currentAttr) {
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
         }
     }

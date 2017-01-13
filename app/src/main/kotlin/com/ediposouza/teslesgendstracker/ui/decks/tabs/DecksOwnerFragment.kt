@@ -17,7 +17,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         get() = onlyPrivate?.isChecked ?: false
 
     override val dataRef = {
-        if (isDeckPrivate) privateInteractor.getOwnedPrivateDecksRef() else privateInteractor.getOwnedPublicDecksRef()
+        if (isDeckPrivate) privateInteractor.getUserPrivateDecksRef() else privateInteractor.getUserPublicDecksRef()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +32,8 @@ class DecksOwnerFragment : DecksPublicFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_decks_owned, menu)
+        inflater?.inflate(R.menu.menu_private, menu)
+        inflater?.inflate(R.menu.menu_search, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
         onlyPrivate?.setOnCheckedChangeListener { button, checked ->
             showDecks()

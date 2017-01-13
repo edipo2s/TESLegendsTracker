@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_only_private"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/menu_only_private"
+        app:actionLayout="@layout/widget_switch_private"
+        app:showAsAction="always" />
+
+</menu>

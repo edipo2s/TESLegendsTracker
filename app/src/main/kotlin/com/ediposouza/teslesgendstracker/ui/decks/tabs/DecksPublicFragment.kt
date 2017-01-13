@@ -16,8 +16,9 @@ import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
+import com.ediposouza.teslesgendstracker.ui.decks.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,7 @@ open class DecksPublicFragment : BaseFragment() {
     val ADS_EACH_ITEMS = 10 //after 10 lines
     val DECK_PAGE_SIZE = 8
 
+    protected var searchFilter: String? = null
     protected var currentClasses = Class.values()
     protected val publicInteractor = PublicInteractor()
     protected val privateInteractor = PrivateInteractor()
@@ -53,12 +55,13 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
-        currentClasses.map { it.ordinal }.contains(it.cls)
+        currentClasses.map { it.ordinal }.contains(it.cls) &&
+                it.name.toLowerCase().trim().contains(searchFilter ?: "")
     }
 
     val itemClick = { view: View, deck: Deck ->
-        PrivateInteractor().getFavoriteDecks(deck.cls) {
-            val favorite = it?.filter { it.id == deck.id }?.isNotEmpty() ?: false
+        PrivateInteractor().getUserFavoriteDecks(deck.cls) {
+            val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
             startActivity(DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId),
@@ -85,7 +88,6 @@ open class DecksPublicFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
-                Timber.d(model.toString())
                 viewHolder.bind(model.toDeck(itemKey, isDeckPrivate), privateInteractor)
             }
 
@@ -124,14 +126,22 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         showDecks()
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
         showDecks()
+    }
+
+    @Subscribe
+    fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
+        searchFilter = filterSearch.search?.toLowerCase()?.trim()
+        decksAdapter.reset()
     }
 
     @Subscribe
@@ -145,9 +155,10 @@ open class DecksPublicFragment : BaseFragment() {
 
     open fun showDecks() {
         decksAdapter.reset()
+        decksAdapter.notifyDataSetChanged()
     }
 
-    class DecksAllViewHolder(val view: View, val itemClick: (View, Deck) -> Unit,
+    class DecksAllViewHolder(view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
@@ -203,7 +214,7 @@ open class DecksPublicFragment : BaseFragment() {
             with(itemView.deck_soul_missing) {
                 visibility = View.INVISIBLE
                 itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-                privateInteractor.getMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                privateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
                     itemView.deck_soul_missing_loading.visibility = View.GONE
                     val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                     Timber.d("Missing %d", missingSoul)

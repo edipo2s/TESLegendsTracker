@@ -9,6 +9,8 @@
     <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
     <string name="app_ads_new_deck_card_list">***REMOVED***</string>
     <string name="app_ads_new_deck_card_list_size">240x50</string>
+    <string name="app_ads_match_list">***REMOVED***</string>
+    <string name="app_ads_match_list_size">360x80</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using.</string>
@@ -30,11 +32,11 @@
     <string name="menu_delete">Delete</string>
     <string name="menu_unlike">Unlike</string>
     <string name="menu_done">Done</string>
+    <string name="menu_percent">Percent</string>
 
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
-    <string name="search_hint">Name, race, type or keyword</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -42,6 +44,11 @@
     <string name="tab_decks_public">Public</string>
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
+    <string name="tab_matches_statistics">Statistics</string>
+    <string name="tab_matches_history">History</string>
+    <string name="tab_mode_ranked">Ranked</string>
+    <string name="tab_mode_casual">Casual</string>
+    <string name="tab_mode_arena">Arena</string>
 
     <string name="title_tab_cards_all">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
@@ -49,6 +56,8 @@
     <string name="title_tab_decks_public">Decks Public</string>
     <string name="title_tab_decks_owned">Decks Owned</string>
     <string name="title_tab_decks_favorites">Decks Favorites</string>
+    <string name="title_tab_matches_statistics">Matches Statistics</string>
+    <string name="title_tab_matches_history">Matches History</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_sets_core">Core</string>
@@ -58,10 +67,10 @@
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
-    <string name="card_favorited">%1$s favorited</string>
-    <string name="card_unfavorited">%1$s unfavorited</string>
 
     <string name="action_login">Do Login</string>
+    <string name="action_favorited">%1$s favorited</string>
+    <string name="action_unfavorited">%1$s unfavorited</string>
     <string name="profile_collection">Collection</string>
     <string name="unknown">Unknown</string>
     <string name="zero_percent" translatable="false">0%</string>
@@ -72,11 +81,13 @@
     <string name="sign_in_with_twitter">Sign in with Twitter</string>
 
     <string name="zero_of_zero" translatable="false">0/0</string>
-    <string name="statistics_rarity" translatable="false">%1$02d/%2$02d</string>
-    <string name="statistics_total" translatable="false">%1$03d/%2$03d</string>
-    <string name="statistics_percent" translatable="false">%1$.2f%%</string>
-    <string name="statistics_total_cards">Total Cards\nSoul to complete</string>
+    <string name="cards_search_hint">Name, race, type or keyword</string>
+    <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
+    <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
+    <string name="collection_statistics_percent" translatable="false">%1$.2f%%</string>
+    <string name="collection_statistics_total_cards">Total Cards\nSoul to complete</string>
 
+    <string name="decks_search_hint">Deck Name</string>
     <string name="deck_details">Details</string>
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
@@ -107,5 +118,35 @@
     <string name="new_deck_save_as_public">Deck saved as Public</string>
     <string name="new_deck_save_as_private">Deck saved as Private</string>
     <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
+
+    <string name="match_vs" translatable="false">Vs</string>
+    <string name="match_rank_normal" translatable="false"> %1$d</string>
+    <string name="match_rank_legend" translatable="true">#%1$d</string>
+    <string name="match_win">Win</string>
+    <string name="match_loss">Loss</string>
+    <string name="match_statistics_total_label">Total</string>
+    <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
+    <string name="matches_seasons_all">All Seasons</string>
+    <string name="matches_class_title">%1$s Statistics</string>
+
+    <string name="new_match_dialog_title">I\'m playing with</string>
+    <string name="new_match_save_dialog_name_label">Name</string>
+    <string name="new_match_dialog_class_label">Class</string>
+    <string name="new_match_dialog_mode_label">Mode</string>
+    <string name="new_match_dialog_deck_label">Deck</string>
+    <string name="new_match_dialog_deck_other">Other</string>
+    <string name="new_match_dialog_name_hint">Deck Name</string>
+    <string name="new_match_dialog_start">Start</string>
+    <string name="new_match_dialog_start_error_name">Name must be at least 5 characters</string>
+    <string name="new_match_opt_class_label">Opponent Deck Class</string>
+    <string name="new_match_opt_type_label">Opponent Deck Type</string>
+    <string name="new_match_opt_name_label">Opponent Deck Name</string>
+    <string name="new_match_cards_remains_label">Cards Remains</string>
+    <string name="new_match_name_label">(Optional)</string>
+    <string name="new_match_first_label">Going First</string>
+    <string name="new_match_legend_label">Rank Legend</string>
+    <string name="new_match_rank_label">Rank</string>
+    <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
+    <string name="new_match_saved">New Match Saved!</string>
 
 </resources>
