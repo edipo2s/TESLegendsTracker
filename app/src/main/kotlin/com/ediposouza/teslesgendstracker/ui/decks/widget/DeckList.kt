@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
@@ -135,6 +136,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
         private val items = arrayListOf<CardSlot>()
         private var missingCards: List<CardMissing> = listOf()
+        private val eventBus by lazy { EventBus.getDefault() }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
             return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
@@ -175,6 +177,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 onAdd(cardIndex)
                 notifyItemChanged(cardIndex)
             }
+            eventBus.post(CmdUpdateCardSlot(items.find { it.card == card } ?: CardSlot(card, 0)))
         }
 
 
@@ -198,18 +201,19 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     notifyItemChanged(cardIndex)
                 }
             }
+            eventBus.post(CmdUpdateCardSlot(items.find { it.card == card } ?: CardSlot(card, 0)))
         }
 
         private fun notifyCardRemoved(card: Card) {
             when {
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.dualAttr1))
+                    eventBus.post(CmdRemAttr(card.dualAttr1))
                 }
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.dualAttr2))
+                    eventBus.post(CmdRemAttr(card.dualAttr2))
                 }
                 items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.attr))
+                    eventBus.post(CmdRemAttr(card.attr))
                 }
             }
         }

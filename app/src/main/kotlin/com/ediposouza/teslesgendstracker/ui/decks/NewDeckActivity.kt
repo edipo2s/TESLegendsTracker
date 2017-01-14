@@ -34,6 +34,8 @@ import java.util.*
 
 class NewDeckActivity : BaseFilterActivity() {
 
+    private val KEY_DECK_CARD_SLOTS = "deckCardSlotsKey"
+
     companion object {
 
         val DECK_PRIVATE_EXTRA = "privateExtra"
@@ -105,7 +107,15 @@ class NewDeckActivity : BaseFilterActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState?.apply {
-            new_deck_cardlist?.addCards(getParcelableArrayList<CardSlot>(KEY_DECK_CARDS))
+            val deckCardSlots = getParcelableArrayList<CardSlot>(KEY_DECK_CARDS)
+            new_deck_cardlist?.addCards(deckCardSlots)
+            handler.postDelayed({
+                deckCardSlots.forEach {
+                    eventBus.post(CmdUpdateCardSlot(it))
+                    new_deck_attr_filter.lockAttrs(it.card.dualAttr1, it.card.dualAttr2)
+                }
+            }, DateUtils.SECOND_IN_MILLIS / 2)
+            updateDualFilter()
         }
     }
 
