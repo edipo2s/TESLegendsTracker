@@ -31,9 +31,9 @@ class CardActivity : BaseActivity() {
 
     }
 
-    val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
-    val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
-    var favorite: Boolean = false
+    private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
+    private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
+    private var favorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

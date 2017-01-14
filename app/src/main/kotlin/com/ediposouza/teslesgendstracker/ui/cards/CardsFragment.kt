@@ -97,7 +97,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        eventBus.post(CmdUpdateTitle(R.string.app_name_full))
+        view?.post { updateActivityTitle(cards_view_pager?.currentItem ?: 0) }
         cards_tab_layout.setupWithViewPager(cards_view_pager)
     }
 

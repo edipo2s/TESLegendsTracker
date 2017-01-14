@@ -33,6 +33,7 @@ abstract class MetricsConstants {
 sealed class MetricAction(val name: String) {
 
     companion object {
+        const val ALL = "All"
         const val CLEAR = "Clear"
     }
 
@@ -81,18 +82,23 @@ sealed class MetricAction(val name: String) {
         val PARAM_PRIVATE = "Private"
     }
 
-    class ACTION_MATCH_STATISTICS_WIN_RATE : MetricAction("MatchStatisticsWinRate")
-    class ACTION_MATCH_STATISTICS_CLASS_WIN_RATE : MetricAction("MatchStatisticsClassWinRate")
+    class ACTION_MATCH_STATISTICS_WIN_RATE(val checked: Boolean) : MetricAction("MatchStatisticsWinRate") {
+        val PARAM_CHECKED = "Checked"
+    }
 
-    class ACTION_MATCH_FILTER_MODE(val mode: MatchMode) : MetricAction("FilterMatchMode") {
+    class ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(val checked: Boolean) : MetricAction("MatchStatisticsClassWinRate") {
+        val PARAM_CHECKED = "Checked"
+    }
+
+    class ACTION_MATCH_STATISTICS_FILTER_MODE(val mode: MatchMode) : MetricAction("FilterMatchMode") {
         val PARAM_MODE = "Mode"
     }
 
-    class ACTION_MATCH_STATISTICS_FILTER_SEASON(val season: Season) : MetricAction("FilterMatchStatisticsSeason") {
+    class ACTION_MATCH_STATISTICS_FILTER_SEASON(val season: Season?) : MetricAction("FilterMatchStatisticsSeason") {
         val PARAM_SEASON = "Season"
     }
 
-    class ACTION_MATCH_STATISTICS_CLASS_FILTER_SEASON(val season: Season) : MetricAction("FilterMatchStatisticsClassSeason") {
+    class ACTION_MATCH_STATISTICS_CLASS_FILTER_SEASON(val season: Season?) : MetricAction("FilterMatchStatisticsClassSeason") {
         val PARAM_SEASON = "Season"
     }
 
@@ -100,10 +106,21 @@ sealed class MetricAction(val name: String) {
         val PARAM_CLASS = "Class"
     }
 
-    class ACTION_NEW_MATCH_SAVE(val type: String, val patch: String, val private: Boolean) : MetricAction("MatchNew") {
-        val PARAM_TYPE = "Type"
-        val PARAM_PATCH = "Patch"
-        val PARAM_PRIVATE = "Private"
+    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?) : MetricAction("MatchStatisticsClass") {
+        val PARAM_DECK = "Deck"
+        val PARAM_DECK_VALUE_OTHER = "Other"
+    }
+
+    class ACTION_NEW_MATCH_SAVE(val myDeckCls: Class, val myDeckType: DeckType, val optDeckCls: Class,
+                                val optDeckType: DeckType, val mode: MatchMode, val season: String?,
+                                val legendRank: Boolean, val deckTrackerUsed: Boolean) : MetricAction("MatchNew") {
+        val PARAM_MY_CLS = "MyClass"
+        val PARAM_MY_TYPE = "MyType"
+        val PARAM_OPT_CLS = "OptClass"
+        val PARAM_OPT_TYPE = "OptType"
+        val PARAM_MODE = "Mode"
+        val PARAM_SEASON = "Season"
+        val PARAM_LEGEND = "Legend"
     }
 
 }

@@ -15,6 +15,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import kotlinx.android.synthetic.main.activity_matches_statistics_class.*
@@ -103,7 +104,10 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         getSeasons(menu?.findItem(R.id.menu_season))
         val menuPercent = menu?.findItem(R.id.menu_percent)
         showPercent = menuPercent?.actionView as Switch
-        showPercent?.setOnCheckedChangeListener { button, checked -> updateStatisticsData() }
+        showPercent?.setOnCheckedChangeListener { button, checked ->
+            updateStatisticsData()
+            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(checked))
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -126,6 +130,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             it.setIcon(if (it.itemId == seasonId) R.drawable.ic_checked else 0)
         }
         getMatches()
+        MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_FILTER_SEASON(season))
     }
 
     private fun getSeasons(menuSeason: MenuItem?) {

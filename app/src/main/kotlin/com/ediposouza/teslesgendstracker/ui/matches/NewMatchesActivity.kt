@@ -16,15 +16,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.SEASON_PATTERN
+import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.limitHeight
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_new_matches.*
 import kotlinx.android.synthetic.main.include_new_matches.*
@@ -114,7 +111,7 @@ class NewMatchesActivity : BaseActivity() {
     }
 
     private fun configViews() {
-        new_matches_deck_class_name.text = if (deck != null) deck?.name else deckCls.name.toLowerCase().capitalize()
+        new_matches_deck_class_name.text = deckName
         new_matches_class_cover.setImageResource(deckCls.imageRes)
         new_matches_class_attr1.setImageResource(deckCls.attr1.imageRes)
         new_matches_class_attr2.setImageResource(deckCls.attr2.imageRes)
@@ -123,6 +120,7 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_deck_cardlist.visibility = if (deck != null) View.VISIBLE else View.GONE
         new_matches_space_start.visibility = if (deck != null) View.GONE else View.VISIBLE
         new_matches_space_end.visibility = if (deck != null) View.GONE else View.VISIBLE
+        new_matches_cards_remains.visibility = if (deck != null) View.VISIBLE else View.GONE
         new_matches_legend.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
         new_matches_rank_label.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
         new_matches_rank.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
@@ -163,22 +161,25 @@ class NewMatchesActivity : BaseActivity() {
     }
 
     private fun addNewMatch(win: Boolean) {
-        val deckUpdates = deck?.updates ?: listOf()
-        val deckVersion = if (deckUpdates.isEmpty()) "v1 (${deck?.createdAt})" else
-            "v${deckUpdates.size + 1} (${deckUpdates.last().date.toLocalDate()}"
+        val myDeckCls = deck?.cls ?: deckCls
+        val myDeckType = deck?.type ?: deckType
+        val myDeckUpdates = deck?.updates ?: listOf()
+        val myDeckVersion = if (myDeckUpdates.isEmpty()) "v1 (${deck?.createdAt})" else
+            "v${myDeckUpdates.size + 1} (${myDeckUpdates.last().date.toLocalDate()}"
         val optDeckName = new_matches_opt_name.text.toString()
         val optDeckCls = Class.values()[new_matches_opt_class_spinner.selectedItemPosition]
         val optDeckType = DeckType.values()[new_matches_opt_type_spinner.selectedItemPosition]
-        val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_PATTERN))
+        val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
         val currentRank = new_matches_rank.text.toString()
         if (currentRank.isEmpty()) {
             new_matches_rank.error = getString(R.string.new_match_save_rank_error)
             return
         }
+        val legendRank = new_matches_legend.isChecked
         val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_match_first.isChecked,
-                MatchDeck(deck?.name ?: deckName, deck?.cls ?: deckCls, deck?.type ?: deckType, deck?.uuid, deckVersion),
+                MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
                 MatchDeck(optDeckName, optDeckCls, optDeckType),
-                mode, currentSeason, currentRank.toInt(), new_matches_legend.isChecked, win)
+                mode, currentSeason, currentRank.toInt(), legendRank, win)
         privateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
             new_matches_opt_name.setText("")
@@ -187,6 +188,9 @@ class NewMatchesActivity : BaseActivity() {
             new_matches_deck_cardlist.showDeck(deck, false, false, false)
             matchesAddedAdapter.addMatch(newMatch)
             toast(R.string.new_match_saved)
+            val deckTrackerUsed = new_matches_deck_cardlist.getCards().size < deck?.cards?.size ?: 0
+            MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_SAVE(myDeckCls, myDeckType,
+                    optDeckCls, optDeckType, mode, currentSeason, legendRank, deckTrackerUsed))
         }
     }
 
