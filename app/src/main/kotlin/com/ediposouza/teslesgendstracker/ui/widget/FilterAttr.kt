@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.widget
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +17,14 @@ import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
+    var filterClick: ((Attribute) -> Unit)? = null
+    var lastAttrSelected: Attribute = Attribute.STRENGTH
+
     var deckMode: Boolean = false
         set(value) {
             field = value
             if (!value) {
-                selectAttr(Attribute.STRENGTH, true)
+                selectAttr(lastAttrSelected, true)
             } else {
                 rootView.attr_filter_dual.visibility = if (value) View.GONE else View.VISIBLE
                 rootView.attr_filter_dual_indicator.visibility = if (value) View.GONE else View.VISIBLE
@@ -27,9 +32,6 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 rootView.attr_filter_neutral_indicator.visibility = if (value) View.GONE else View.VISIBLE
             }
         }
-
-    var filterClick: ((Attribute) -> Unit)? = null
-    var lastAttrSelected: Attribute = Attribute.STRENGTH
 
     init {
         inflate(context, R.layout.widget_attributes_filter, rootView as ViewGroup)
@@ -53,6 +55,22 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     open protected fun attrClick(attr: Attribute, lockable: Boolean) {
         filterClick?.invoke(attr)
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+        return SavedState(superState, lastAttrSelected)
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is SavedState) {
+            if (!deckMode) {
+                selectAttr(state.attrSelected, true)
+            }
+            super.onRestoreInstanceState(state.superState)
+        } else {
+            super.onRestoreInstanceState(state)
+        }
     }
 
     open fun selectAttr(attr: Attribute, only: Boolean) {
@@ -98,6 +116,33 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     protected fun updateVisibility(v: View, show: Boolean, only: Boolean) {
         v.visibility = if (show) View.VISIBLE else if (only) View.INVISIBLE else v.visibility
+    }
+
+    class SavedState : BaseSavedState {
+
+        var attrSelected: Attribute = Attribute.STRENGTH
+
+        constructor(source: Parcel?) : super(source) {
+            this.attrSelected = Attribute.values()[source?.readInt() ?: 0]
+        }
+
+        constructor(source: Parcelable, attrSelected: Attribute) : super(source) {
+            this.attrSelected = attrSelected
+        }
+
+        companion object {
+            @JvmField val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
+                override fun createFromParcel(source: Parcel): SavedState = SavedState(source)
+                override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
+            }
+        }
+
+        override fun describeContents() = 0
+
+        override fun writeToParcel(dest: Parcel?, flags: Int) {
+            super.writeToParcel(dest, flags)
+            dest?.writeInt(attrSelected.ordinal)
+        }
     }
 
 }

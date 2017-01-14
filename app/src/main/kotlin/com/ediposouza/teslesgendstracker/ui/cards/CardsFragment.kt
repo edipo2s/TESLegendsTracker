@@ -13,7 +13,6 @@ import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
@@ -90,7 +89,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         Handler().postDelayed({
-            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+            eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARDS_ALL())
     }

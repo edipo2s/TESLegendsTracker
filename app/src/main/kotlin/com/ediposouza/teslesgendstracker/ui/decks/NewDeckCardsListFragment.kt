@@ -40,6 +40,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.setPadding(0, 0, 0, 0)
+        isFragmentSelected = true
     }
 
     @Subscribe

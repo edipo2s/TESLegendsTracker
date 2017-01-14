@@ -21,6 +21,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSet
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
@@ -33,8 +34,6 @@ import org.jetbrains.anko.toast
 import java.util.*
 
 class NewDeckActivity : BaseFilterActivity() {
-
-    private val KEY_DECK_CARD_SLOTS = "deckCardSlotsKey"
 
     companion object {
 
@@ -66,33 +65,15 @@ class NewDeckActivity : BaseFilterActivity() {
         new_deck_toolbar_title.text = getString(R.string.new_deck_title)
         new_deck_cardlist.editMode = true
         configDeckFilters()
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
-                .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment())
+                    .commit()
+        }
         handler.postDelayed({
-            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+            eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
-    }
-
-    private fun configDeckFilters() {
-        with(new_deck_attr_filter) {
-            filterClick = attrFilterClick
-            onAttrLock = { attr1: Attribute, attr2: Attribute ->
-                val deckCls = Class.getClasses(listOf(attr1, attr2)).first()
-                new_deck_class_cover.setImageResource(deckCls.imageRes)
-                new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
-                val outValue = TypedValue()
-                resources.getValue(R.dimen.deck_class_cover_alpha, outValue, true)
-                new_deck_class_cover.animate().alpha(outValue.float).setDuration(ANIM_DURATION).start()
-            }
-            onAttrUnlock = {
-                new_deck_toolbar_title.text = getString(R.string.new_deck_title)
-                new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
-            }
-        }
-        cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -112,7 +93,7 @@ class NewDeckActivity : BaseFilterActivity() {
             handler.postDelayed({
                 deckCardSlots.forEach {
                     eventBus.post(CmdUpdateCardSlot(it))
-                    new_deck_attr_filter.lockAttrs(it.card.dualAttr1, it.card.dualAttr2)
+                    new_deck_attr_filter.lockAttrs(it.card.dualAttr1, it.card.dualAttr2, false)
                 }
             }, DateUtils.SECOND_IN_MILLIS / 2)
             updateDualFilter()
@@ -154,6 +135,26 @@ class NewDeckActivity : BaseFilterActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun configDeckFilters() {
+        with(new_deck_attr_filter) {
+            filterClick = attrFilterClick
+            onAttrLock = { attr1: Attribute, attr2: Attribute ->
+                val deckCls = Class.getClasses(listOf(attr1, attr2)).first()
+                new_deck_class_cover.setImageResource(deckCls.imageRes)
+                new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
+                val outValue = TypedValue()
+                resources.getValue(R.dimen.deck_class_cover_alpha, outValue, true)
+                new_deck_class_cover.animate().alpha(outValue.float).setDuration(ANIM_DURATION).start()
+            }
+            onAttrUnlock = {
+                new_deck_toolbar_title.text = getString(R.string.new_deck_title)
+                new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
+            }
+        }
+        cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
     }
 
     private fun showSaveDialog() {
@@ -202,8 +203,8 @@ class NewDeckActivity : BaseFilterActivity() {
     private fun updateDualFilter() {
         if (new_deck_attr_filter.lastAttrSelected == Attribute.DUAL) {
             val cls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
-                    new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).first()
-            eventBus.post(CmdFilterClass(cls))
+                    new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).filter { it != Class.NEUTRAL }
+            eventBus.post(CmdFilterClass(cls.firstOrNull()))
         }
     }
 
