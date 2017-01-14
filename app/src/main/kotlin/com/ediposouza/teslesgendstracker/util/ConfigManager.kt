@@ -12,6 +12,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 object ConfigManager {
 
     val DB_UPDATE_CONFIG = "db_update"
+    val SHOW_DECK_ADS_CONFIG = "showDeckAds"
     val VERSION_UNSUPPORTED_CONFIG = "version_unsupported"
 
     val remoteConfig: FirebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
@@ -22,6 +23,7 @@ object ConfigManager {
                     .setDeveloperModeEnabled(BuildConfig.DEBUG)
                     .build())
             setDefaults(mapOf(DB_UPDATE_CONFIG to false,
+                    SHOW_DECK_ADS_CONFIG to false,
                     VERSION_UNSUPPORTED_CONFIG to ""))
         }
         updateCaches {}
@@ -39,6 +41,8 @@ object ConfigManager {
     }
 
     fun isDBUpdating() = remoteConfig.getBoolean(DB_UPDATE_CONFIG)
+
+    fun isShowDeckAds() = remoteConfig.getBoolean(SHOW_DECK_ADS_CONFIG)
 
     fun isVersionUnsupported(): Boolean {
         val unsupportedVersions = remoteConfig.getString(VERSION_UNSUPPORTED_CONFIG)

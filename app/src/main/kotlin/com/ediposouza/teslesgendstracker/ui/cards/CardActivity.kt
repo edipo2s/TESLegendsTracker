@@ -55,7 +55,7 @@ class CardActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
-        ads_view.load()
+        card_ads_view.load()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

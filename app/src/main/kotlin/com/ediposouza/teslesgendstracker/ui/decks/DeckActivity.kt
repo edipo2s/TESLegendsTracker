@@ -166,6 +166,10 @@ class DeckActivity : BaseActivity() {
                 CommonUtils.hideKeyboard(this, deck_comment_new)
             }, DateUtils.SECOND_IN_MILLIS / 2)
         }
+        if (ConfigManager.isShowDeckAds()) {
+            deck_ads_view.visibility = View.VISIBLE
+            deck_ads_view.load()
+        }
         setResult(Activity.RESULT_OK, Intent())
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
     }

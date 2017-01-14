@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.load
 import kotlinx.android.synthetic.main.activity_matches_statistics_class.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
 import kotlinx.android.synthetic.main.itemcell_text.view.*
@@ -95,6 +96,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             statistics_class_attr1.setImageResource(attr1.imageRes)
             statistics_class_attr2.setImageResource(attr2.imageRes)
         }
+        matches_statistics_class_ads_view.load()
         MetricsManager.trackScreen(MetricScreen.SCREEN_MATCHES_STATISTICS_CLASS())
     }
 

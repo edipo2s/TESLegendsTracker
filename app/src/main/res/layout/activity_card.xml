@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <com.google.android.gms.ads.AdView
-                android:id="@+id/ads_view"
+                android:id="@+id/card_ads_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

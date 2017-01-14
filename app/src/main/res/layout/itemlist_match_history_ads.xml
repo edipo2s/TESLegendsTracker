@@ -6,4 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/default_margin"
     app:adSize="@string/app_ads_match_list_size"
-    app:adUnitId="@string/app_ads_match_list" />
+    app:adUnitId="@string/app_ads_match_list"
+    adUnitId="@string/app_ads_match_history_list"
+    adSize="@string/app_ads_match_history_list_size" />

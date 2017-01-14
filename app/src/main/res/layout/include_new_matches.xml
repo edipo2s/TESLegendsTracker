@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_opt_class_spinner"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
                 android:text="@string/new_match_opt_type_label" />
 
             <Spinner
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_opt_type_spinner"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
                 android:text="@string/new_match_opt_name_label" />
 
             <EditText
@@ -127,7 +127,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_legend"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 app:layout_widthPercent="49%">
 
                 <Button
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/new_matches_legend"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 app:layout_widthPercent="49%">
 
                 <Button
@@ -179,7 +179,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/new_matches_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="@dimen/medium_margin"
         android:fadeScrollbars="false"
         android:scrollbarSize="@dimen/small_margin"
@@ -187,5 +188,14 @@
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/itemlist_match_history" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/new_matches_ads_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        app:adSize="BANNER"
+        app:adUnitId="@string/app_ads_new_matches_full" />
 
 </LinearLayout>

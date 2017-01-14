@@ -142,6 +142,7 @@ class NewMatchesActivity : BaseActivity() {
         }
         new_matches_win.setOnClickListener { addNewMatch(true) }
         new_matches_loss.setOnClickListener { addNewMatch(false) }
+        new_matches_ads_view.load()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
