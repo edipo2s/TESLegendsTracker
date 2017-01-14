@@ -90,10 +90,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.inqbarna.tablefixheaders.TableFixHeaders
-        android:id="@+id/matches_statistics_class_table"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.inqbarna.tablefixheaders.TableFixHeaders
+            android:id="@+id/matches_statistics_class_table"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/matches_statistics_class_ads_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            app:adSize="BANNER"
+            app:adUnitId="@string/app_ads_match_statistics_class_full" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
