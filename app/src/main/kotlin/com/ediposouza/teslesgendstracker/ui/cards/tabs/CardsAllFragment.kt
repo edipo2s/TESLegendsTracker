@@ -1,7 +1,6 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
-import android.support.annotation.DimenRes
 import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -49,12 +48,12 @@ open class CardsAllFragment : BaseFragment() {
 
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
+    val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
 
     open protected val isCardsCollection: Boolean = false
 
     open val cardsAdapter by lazy {
-        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads, R.dimen.card_height,
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
                 { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
@@ -251,14 +250,14 @@ open class CardsAllFragment : BaseFragment() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
-    class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
-                          @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                          val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
+    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                               @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
+                               val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
         var items: List<Card> = ArrayList()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), cardHeight, itemClick, itemLongClick)
+            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
         override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -278,14 +277,15 @@ open class CardsAllFragment : BaseFragment() {
                 oldItem.shortName == newItem.shortName
             }).dispatchUpdatesTo(this)
         }
+
     }
 
-    class CardsAllViewHolder(val view: View, @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
+    open class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
+                                  val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         init {
             val cardLayoutParams = itemView.card_all_image.layoutParams
-            cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(cardHeight)
+            cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(R.dimen.card_height)
             itemView.card_all_image.layoutParams = cardLayoutParams
         }
 

@@ -116,6 +116,11 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
     }
 
     private fun startAnimLock() {
+        if (lockAttr1!!.ordinal > lockAttr2!!.ordinal) {
+            val lockAttrTmp = lockAttr1
+            lockAttr1 = lockAttr2
+            lockAttr2 = lockAttrTmp
+        }
         val scaleDownAnimation = AnimationUtils.loadAnimation(context, R.anim.fab_scale_down)
         scaleDownAnimation.fillAfter = true
         rootView.attr_filter_strength?.startAnimation(scaleDownAnimation)

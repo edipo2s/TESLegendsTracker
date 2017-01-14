@@ -38,7 +38,6 @@ class CardsCollectionFragment : CardsAllFragment() {
         get() = BottomSheetBehavior.from(view_statistics)
 
     val cardsCollectionAdapter by lazy {
-        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
         CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
                 { changeUserCardQtd(it) }) { view, card ->
             showCardExpanded(card, view)
