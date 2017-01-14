@@ -127,6 +127,12 @@
     <string name="match_rank_legend" translatable="true">#%1$d</string>
     <string name="match_win">Win</string>
     <string name="match_loss">Loss</string>
+    <string name="match_statistics_summary_label">Class Summary</string>
+    <string name="match_statistics_tree_wins_label">3 Wins</string>
+    <string name="match_statistics_games_label">Games</string>
+    <string name="match_statistics_wins_label">Wins</string>
+    <string name="match_statistics_losses_label">Losses</string>
+    <string name="match_statistics_win_rate_label">Win Rate</string>
     <string name="match_statistics_total_label">Total</string>
     <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
     <string name="matches_seasons_all">All Seasons</string>

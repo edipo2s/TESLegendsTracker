@@ -88,4 +88,18 @@
         <item name="android:paddingRight">@dimen/input_label_horizontal_spacing</item>
     </style>
 
+    <style name="StatisticsSummaryItemsLabels">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:layout_marginTop">@dimen/medium_margin</item>
+        <item name="android:layout_below">@id/matches_statistics_summary</item>
+    </style>
+
+    <style name="StatisticsSummaryItems">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:layout_marginTop">@dimen/small_margin</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

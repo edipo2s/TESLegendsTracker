@@ -51,8 +51,9 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
     private val HEADER_FIRST by lazy { getString(R.string.match_vs) }
 
+    private val playerClass by lazy { Class.values()[intent.getIntExtra(EXTRA_CLASS, 0)] }
+    private val matchMode by lazy { MatchMode.values()[intent.getIntExtra(EXTRA_MATCH_MODE, 0)] }
     private var seasons = listOf<Season>()
-    private var matchMode = MatchMode.RANKED
     private var currentSeason: Season? = null
     private var menuSeasons: SubMenu? = null
     private var showPercent: Switch? = null
@@ -84,13 +85,12 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             setFirstHeader(HEADER_FIRST)
             val classTotal: Class? = null
             header = Class.values().asList().plus(classTotal)
-            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
+            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) })
             loadingStatisticsData(this)
             setSection(listOf())
         }
         matches_statistics_class_table.adapter = statisticsClassTableAdapter
-        matchMode = MatchMode.values()[intent.getIntExtra(EXTRA_MATCH_MODE, 0)]
-        with(Class.values()[intent.getIntExtra(EXTRA_CLASS, 0)]) {
+        with(playerClass) {
             statistics_class_name.text = getString(R.string.matches_class_title, name.toLowerCase().capitalize())
             statistics_class_cover.setImageResource(imageRes)
             statistics_class_attr1.setImageResource(attr1.imageRes)
@@ -155,7 +155,8 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         loadingStatisticsData()
         PrivateInteractor().getUserMatches(currentSeason) {
             results.clear()
-            it.filter { it.mode == matchMode }.groupBy { it.player }.forEach {
+            val classMatches = it.filter { it.player.cls == playerClass }
+            classMatches.filter { it.mode == matchMode }.groupBy { it.player }.forEach {
                 results.put(it.key, it.value as ArrayList)
             }
             updateStatisticsData()
@@ -163,7 +164,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsClassTableAdapter) {
-        tableAdapter?.setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
+        tableAdapter?.setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) })
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
             Class.values().forEach { myCls ->
                 add(mutableListOf<BodyItem>().apply {
@@ -173,12 +174,6 @@ class MatchesStatisticsClassActivity : BaseActivity() {
                     add(BodyItem())
                 })
             }
-            add(mutableListOf<BodyItem>().apply {
-                Class.values().forEach {
-                    add(BodyItem())
-                }
-                add(BodyItem())
-            })
         }
     }
 
@@ -194,20 +189,19 @@ class MatchesStatisticsClassActivity : BaseActivity() {
                         add(getResultBodyItem(matches))
                     })
                 }
-                val allMatches = results.flatMap { it.value }
-                add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach {
-                        val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
-                        add(getResultBodyItem(resByOpponent))
-                    }
-                    add(getResultBodyItem(allMatches))
-                })
             }
             uiThread {
-                val decks = results.map { listOf(BodyItem(it.key.name)) }
-                val total = listOf(listOf(BodyItem(getString(R.string.match_statistics_total_label))))
-                statisticsClassTableAdapter?.setFirstBody(decks.plus(total))
+                statisticsClassTableAdapter?.setFirstBody(results.map { listOf(BodyItem(it.key.name)) })
                 statisticsClassTableAdapter?.body = data
+                val allMatches = results.flatMap { it.value }
+                val wins = allMatches.filter { it.win }.size
+                val losses = allMatches.filter { !it.win }.size
+                val winRate = calcWinRate(wins.toFloat(), losses.toFloat())
+                matches_statistics_games.text = allMatches.size.toString()
+                matches_statistics_wins.text = wins.toString()
+                matches_statistics_losses.text = losses.toString()
+                matches_statistics_win_rate.text = getString(R.string.match_statistics_percent,
+                        if (winRate < 0) 0f else winRate)
             }
         }
     }

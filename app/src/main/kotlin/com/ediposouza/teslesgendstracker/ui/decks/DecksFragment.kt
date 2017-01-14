@@ -70,9 +70,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         decks_view_pager.adapter = adapter
-        decks_tab_layout.setupWithViewPager(decks_view_pager)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
-        eventBus.post(CmdUpdateTitle(R.string.title_tab_decks_public))
         decks_view_pager.addOnPageChangeListener(pageChange)
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
@@ -87,6 +85,12 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        view?.post { updateActivityTitle(decks_view_pager?.currentItem ?: 0) }
+        decks_tab_layout.setupWithViewPager(decks_view_pager)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
