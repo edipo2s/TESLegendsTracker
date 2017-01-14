@@ -84,7 +84,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         }
     }
 
-    fun lockAttrs(dualAttr1: Attribute, dualAttr2: Attribute) {
+    fun lockAttrs(dualAttr1: Attribute, dualAttr2: Attribute, reselectBasicAttr: Boolean = true) {
         if (isLocked()) {
             return
         }
@@ -92,7 +92,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         lockAttr(dualAttr2)
         if (isLocked()) {
             startAnimLock()
-            if (isAttrBasic(lastAttrSelected)) {
+            if (reselectBasicAttr && isAttrBasic(lastAttrSelected)) {
                 selectAttr(dualAttr2, true)
             }
             onAttrLock?.invoke(lockAttr1!!, lockAttr2!!)

@@ -33,6 +33,8 @@ import java.util.*
  */
 open class CardsAllFragment : BaseFragment() {
 
+    protected val KEY_CURRENT_ATTR = "currentClassKey"
+
     open val ADS_EACH_ITEMS = 21 //after 7 lines
     open val CARDS_PER_ROW = 3
 
@@ -76,9 +78,17 @@ open class CardsAllFragment : BaseFragment() {
         configRecycleView()
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            putInt(KEY_CURRENT_ATTR, currentAttr.ordinal)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+        currentAttr = Attribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

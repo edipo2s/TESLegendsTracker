@@ -208,9 +208,15 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             when {
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
                     eventBus.post(CmdRemAttr(card.dualAttr1))
+                    if (items.isEmpty()) {
+                        eventBus.post(CmdRemAttr(card.dualAttr2))
+                    }
                 }
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
                     eventBus.post(CmdRemAttr(card.dualAttr2))
+                    if (items.isEmpty()) {
+                        eventBus.post(CmdRemAttr(card.dualAttr1))
+                    }
                 }
                 items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty() -> {
                     eventBus.post(CmdRemAttr(card.attr))
