@@ -24,10 +24,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesStatisticsFragment
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.limitHeight
+import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_new_match.view.*
 import kotlinx.android.synthetic.main.fragment_matches.*
@@ -80,9 +77,9 @@ class MatchesFragment : BaseFragment() {
         matches_view_pager.addOnPageChangeListener(pageChange)
         matches_nav_mode.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.tab_mode_ranked -> eventBus.post(CmdFilterMode(MatchMode.RANKED))
-                R.id.tab_mode_casual -> eventBus.post(CmdFilterMode(MatchMode.CASUAL))
-                R.id.tab_mode_arena -> eventBus.post(CmdFilterMode(MatchMode.ARENA))
+                R.id.tab_mode_ranked -> filterMode(MatchMode.RANKED)
+                R.id.tab_mode_casual -> filterMode(MatchMode.CASUAL)
+                R.id.tab_mode_arena -> filterMode(MatchMode.ARENA)
             }
             true
         }
@@ -136,12 +133,18 @@ class MatchesFragment : BaseFragment() {
         }
     }
 
+    private fun filterMode(mode: MatchMode) {
+        eventBus.post(CmdFilterMode(mode))
+        MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_FILTER_MODE(mode))
+    }
+
     private fun filterSeason(season: Season?) {
         val seasonId = season?.id ?: R.id.menu_season_all
         menuSeasons?.itemsSequence()?.forEach {
             it.setIcon(if (it.itemId == seasonId) R.drawable.ic_checked else 0)
         }
         eventBus.post(CmdFilterSeason(season))
+        MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_FILTER_SEASON(season))
     }
 
     private fun getSeasons(menuSeason: MenuItem?) {
@@ -199,6 +202,7 @@ class MatchesFragment : BaseFragment() {
                     } else {
                         startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)
                     }
+                    MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
                 })
                 .setNegativeButton(android.R.string.cancel, { dialog, which -> })
                 .create()

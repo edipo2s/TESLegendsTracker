@@ -16,6 +16,8 @@ import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
 import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMatches
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesStatisticsClassActivity
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_matches_statistics.*
 import kotlinx.android.synthetic.main.itemcell_class.view.*
@@ -69,7 +71,10 @@ class MatchesStatisticsFragment : BaseFragment() {
         val menuPercent = menu?.findItem(R.id.menu_percent)
         menuPercent?.isVisible = true
         showPercent = menuPercent?.actionView as Switch
-        showPercent?.setOnCheckedChangeListener { button, checked -> updateStatisticsData() }
+        showPercent?.setOnCheckedChangeListener { button, checked ->
+            updateStatisticsData()
+            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE(checked))
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -93,6 +98,7 @@ class MatchesStatisticsFragment : BaseFragment() {
                     selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     Pair(classView.cell_class_attr1 as View, attr1TransitionName),
                     Pair(classView.cell_class_attr2 as View, attr2TransitionName)).toBundle())
+            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS(selectedClass!!))
         }
     }
 

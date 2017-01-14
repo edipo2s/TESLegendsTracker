@@ -19,17 +19,16 @@ open class BaseFilterActivity : BaseActivity() {
     private val UPDATE_FILTERS_POSITION_DURATION = DateUtils.SECOND_IN_MILLIS
     private val UPDATE_FILTERS_VISIBILITY_DURATION = UPDATE_FILTERS_POSITION_DURATION / 2
 
-    var filterGreatMargin = false
-    var fab_filter_magika: View? = null
+    protected var filterGreatMargin = false
+
+    private var fab_filter_magika: View? = null
         get() = findViewById(R.id.cards_filter_magika)
-    var fab_filter_rarity: View? = null
+    private var fab_filter_rarity: View? = null
         get() = findViewById(R.id.cards_filter_rarity)
-
-    val filterMagikaLP: CoordinatorLayout.LayoutParams?
-        get() = if (fab_filter_magika == null) null else fab_filter_magika?.layoutParams as CoordinatorLayout.LayoutParams
-
-    val filterRarityLP: CoordinatorLayout.LayoutParams?
-        get() = if (fab_filter_rarity == null) null else fab_filter_rarity?.layoutParams as CoordinatorLayout.LayoutParams
+    private val filterMagikaLP: CoordinatorLayout.LayoutParams?
+        get() = fab_filter_magika?.layoutParams as? CoordinatorLayout.LayoutParams
+    private val filterRarityLP: CoordinatorLayout.LayoutParams?
+        get() = fab_filter_rarity?.layoutParams as? CoordinatorLayout.LayoutParams
 
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.apply {

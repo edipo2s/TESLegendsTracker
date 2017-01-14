@@ -5,6 +5,6 @@ package com.ediposouza.teslesgendstracker
  */
 val TIME_PATTERN = "HH:mm"
 
-val SEASON_PATTERN = "yyyy_MM"
+val SEASON_UUID_PATTERN = "yyyy_MM"
 
 val DEFAULT_DELIMITER = ";"

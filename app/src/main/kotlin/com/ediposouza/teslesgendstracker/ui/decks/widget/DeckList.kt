@@ -121,12 +121,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun getCards(): List<CardSlot> = deckListAdapter.getCards()
 
-    fun getSoulCost(): Int = getCards().sumBy { (it.card.rarity.soulCost * it.qtd).toInt() }
+    fun getSoulCost(): Int = getCards().sumBy { it.card.rarity.soulCost * it.qtd }
 
     private fun onCardListChange() {
         val cards = getCards()
         decklist_costs.updateCosts(cards)
-        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
+        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
     }
 
