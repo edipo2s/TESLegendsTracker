@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -9,33 +11,42 @@ import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
-import com.ediposouza.teslesgendstracker.App
-import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.google.firebase.auth.FirebaseAuth
+import com.google.inapp.util.IabHelper
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.itemsSequence
+import org.jetbrains.anko.toast
 import timber.log.Timber
 
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
     private val KEY_MENU_ITEM_SELECTED = "menuIndexKey"
+    private val SKU_TEST = "android.test.purchased"
+    private val SKU_DONATE_BASIC = "donate_basic"
+    private val SKU_DONATE_PRO = "donate_pro"
+    private val RC_DONATE = 221
 
     private var menuItemSelected = 0
     private val publicInteractor = PublicInteractor()
     private val privateInteractor = PrivateInteractor()
+
+    private var iabHelper: IabHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +57,24 @@ class DashActivity : BaseFilterActivity(),
             profile_image.setOnClickListener {
                 if (!App.hasUserLogged()) {
                     showLogin()
+                }
+            }
+        }
+        iabHelper = IabHelper(this, "$PPKA$PPKB$PPKC$PPKD").apply {
+            enableDebugLogging(BuildConfig.DEBUG)
+            startSetup {
+                if (it.isSuccess) {
+                    queryInventoryAsync { iabResult, inventory ->
+                        if (inventory != null) {
+                            if (inventory.hasPurchase(SKU_DONATE_BASIC) || inventory.hasPurchase(SKU_DONATE_PRO)) {
+                                handleDonation()
+                            } else {
+                                Timber.d("No donation yet")
+                            }
+                        }
+                    }
+                } else {
+                    Timber.e("Iab start setup error: ${it.message}")
                 }
             }
         }
@@ -97,6 +126,11 @@ class DashActivity : BaseFilterActivity(),
         updateUserMenuInfo()
     }
 
+    override fun onDestroy() {
+        iabHelper?.disposeWhenFinished()
+        super.onDestroy()
+    }
+
     private fun updateUserMenuInfo() {
         val user = FirebaseAuth.getInstance().currentUser
         dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = App.hasUserLogged()
@@ -130,6 +164,13 @@ class DashActivity : BaseFilterActivity(),
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        if (iabHelper?.handleActivityResult(requestCode, resultCode, data) ?: false) {
+            return
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         menuItemSelected = dash_navigation_view.menu.itemsSequence().indexOf(item)
         dash_drawer_layout.closeDrawer(Gravity.START)
@@ -141,12 +182,65 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
             R.id.menu_arena,
-            R.id.menu_season,
+            R.id.menu_season -> {
+                true
+            }
+            R.id.menu_donate -> showDonateDialog()
             R.id.menu_about -> {
                 true
             }
             else -> false
         }
+    }
+
+    private fun showDonateDialog(): Boolean {
+        iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { iabResult, inventory ->
+            if (inventory != null) {
+                val skuBasic = inventory.getSkuDetails(SKU_DONATE_BASIC)
+                val skuPro = inventory.getSkuDetails(SKU_DONATE_PRO)
+                showDonateDialog(skuBasic?.price ?: "", skuPro?.price ?: "")
+            } else {
+                eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.app_donate_dialog_payment_error))
+            }
+        }
+        return true
+    }
+
+    private fun showDonateDialog(basicValue: String, proValue: String) {
+        alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
+            positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
+                processDonate(SKU_DONATE_BASIC)
+            })
+            negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
+                processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
+            })
+            neutralButton(R.string.app_donate_dialog_not_now, { })
+        }.show()
+    }
+
+    private fun processDonate(skuItem: String) {
+        iabHelper?.launchPurchaseFlow(this@DashActivity, skuItem, RC_DONATE) { result, info ->
+            if (result.isFailure) {
+                toast(R.string.app_donate_dialog_payment_fail)
+                return@launchPurchaseFlow
+            }
+            if (info.sku == skuItem) {
+                handleDonation()
+                toast(R.string.app_donate_dialog_payment_success)
+            }
+        }
+    }
+
+    private fun handleDonation() {
+        dash_drawer_layout.closeDrawer(Gravity.START)
+        dash_navigation_view.menu.findItem(R.id.menu_donate)?.apply {
+            isEnabled = false
+            title = getString(R.string.menu_donate_done)
+        }
+        PreferenceManager.getDefaultSharedPreferences(this@DashActivity).edit()
+                .putBoolean(PREF_USER_DONATE, true)
+                .apply()
+        Timber.d("Donated!")
     }
 
     private fun showFragment(frag: Fragment): Boolean {

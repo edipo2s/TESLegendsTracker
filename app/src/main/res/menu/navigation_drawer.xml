@@ -23,7 +23,9 @@
     <group
         android:id="@+id/group_tools"
         android:checkableBehavior="single"
-        android:enabled="false">
+        android:enabled="false"
+        android:visible="false"
+        tools:visible="true">
 
         <item
             android:id="@+id/menu_arena"
@@ -34,12 +36,16 @@
             android:title="@string/menu_season" />
     </group>
 
-    <group
-        android:checkableBehavior="single"
-        android:enabled="false">
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/menu_donate"
+            android:checkable="false"
+            android:title="@string/menu_donate" />
 
         <item
             android:id="@+id/menu_about"
+            android:checkable="false"
             android:title="@string/menu_about" />
 
     </group>

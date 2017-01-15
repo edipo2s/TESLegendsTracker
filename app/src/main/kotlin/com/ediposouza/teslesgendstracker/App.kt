@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker
 
 import android.content.Context
+import android.preference.PreferenceManager
 import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
@@ -23,7 +24,9 @@ class App : MultiDexApplication() {
 
         var hasUserAlreadyLogged: Boolean = false
 
-        fun hasUserLogged(): Boolean = FirebaseAuth.getInstance().currentUser != null
+        fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null
+
+        fun hasUserDonate() = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
 
         fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 
