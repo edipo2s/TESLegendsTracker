@@ -140,8 +140,10 @@ class NewMatchesActivity : BaseActivity() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
-        new_matches_win.setOnClickListener { addNewMatch(true) }
-        new_matches_loss.setOnClickListener { addNewMatch(false) }
+        new_matches_win.rippleDuration = 200
+        new_matches_win.setOnRippleCompleteListener { addNewMatch(true) }
+        new_matches_loss.rippleDuration = 200
+        new_matches_loss.setOnRippleCompleteListener { addNewMatch(false) }
         new_matches_ads_view.load()
     }
 

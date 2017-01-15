@@ -23,6 +23,10 @@
     <string name="app_donate_dialog_payment_error">Service unavailable</string>
     <string name="app_donate_dialog_payment_fail">Donate fail, please try again.</string>
     <string name="app_donate_dialog_payment_success">Thanks for donate. Enjoy the app free of ads.</string>
+    <string name="app_new_version_available">New version available!</string>
+    <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
+    <string name="app_new_version_update_now">Update Now</string>
+    <string name="app_new_version_update_later">Later</string>
     <string name="playstore_url_format">http://play.google.com/store/apps/details?id=%s</string>
 
     <string name="menu_cards">Cards</string>

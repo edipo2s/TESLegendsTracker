@@ -37,6 +37,7 @@
     <color name="red_500">#f44336</color>
     <color name="red_600">#e53935</color>
     <color name="red_800">#C62828</color>
+    <color name="indigo_transparent">#333f51b5</color>
     <color name="white_transparent">#33ffffff</color>
 
     <color name="colorBlue">#6f99ff</color>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_update_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/xml_update_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/default_margin"
+    android:visibility="gone"
+    tools:showIn="@layout/fragment_cards"
+    tools:visibility="visible">
+
+    <TextView
+        android:id="@+id/new_update_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:text="@string/app_new_version_available"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/new_update_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_update_title"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/medium_margin"
+        android:gravity="center"
+        android:text="@string/app_new_version_message"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_medium" />
+
+    <com.andexert.library.RippleView
+        android:id="@+id/new_update_later"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_update_msg"
+        app:layout_widthPercent="48%">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/app_new_version_update_later" />
+
+    </com.andexert.library.RippleView>
+
+    <com.andexert.library.RippleView
+        android:id="@+id/new_update_now"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/new_update_msg"
+        app:layout_widthPercent="48%">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xml_button_accent"
+            android:text="@string/app_new_version_update_now" />
+
+    </com.andexert.library.RippleView>
+
+</android.support.percent.PercentRelativeLayout>

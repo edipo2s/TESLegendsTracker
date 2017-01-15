@@ -122,6 +122,7 @@ dependencies {
     compile "com.github.miguelbcr:TableFixHeaders-Wrapper:0.2.0"
     compile "com.timehop.stickyheadersrecyclerview:library:0.4.3"
     compile "jp.wasabeef:recyclerview-animators:2.2.4"
+    compile "org.jsoup:jsoup:1.10.1"
 
     testCompile "junit:junit:4.12"
     testCompile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
