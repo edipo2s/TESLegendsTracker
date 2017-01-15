@@ -22,6 +22,9 @@ import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
@@ -210,12 +213,17 @@ class DashActivity : BaseFilterActivity(),
         alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
             positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
                 processDonate(SKU_DONATE_BASIC)
+                MetricsManager.trackAction(MetricAction.ACTION_DONATE_BASIC())
             })
             negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
                 processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
+                MetricsManager.trackAction(MetricAction.ACTION_DONATE_PRO())
             })
-            neutralButton(R.string.app_donate_dialog_not_now, { })
+            neutralButton(R.string.app_donate_dialog_not_now, {
+                MetricsManager.trackAction(MetricAction.ACTION_DONATE_NOT_NOW())
+            })
         }.show()
+        MetricsManager.trackScreen(MetricScreen.SCREEN_DONATE())
     }
 
     private fun processDonate(skuItem: String) {
