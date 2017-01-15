@@ -72,7 +72,9 @@ class MatchesHistoryFragment : BaseFragment() {
             }
 
             override fun onBindHeaderViewHolder(holder: MatchViewHolder?, position: Int) {
-                holder?.bindSection(LocalDateTime.parse(getItemKey(position)).toLocalDate())
+                if (position <= getContentCount()) {
+                    holder?.bindSection(LocalDateTime.parse(getItemKey(position)).toLocalDate())
+                }
             }
 
             override fun getHeaderId(position: Int): Long {

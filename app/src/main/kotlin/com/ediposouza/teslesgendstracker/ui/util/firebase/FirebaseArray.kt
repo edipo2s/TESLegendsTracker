@@ -34,8 +34,8 @@ import java.util.*
 /**
  * This class implements an array-like collection on top of a Firebase location.
  */
-class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
-                    val mOrderASC: Boolean = true) : ChildEventListener, ValueEventListener {
+class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, pageSize: Int = 0,
+                       val mOrderASC: Boolean = true) : ChildEventListener, ValueEventListener {
 
     enum class EventType {
         Added, Changed, Removed, Moved, Reset
@@ -58,7 +58,7 @@ class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
     }
 
     private var mQuery: Query? = null
-    private val mSnapshots: ArrayList<DataSnapshot> = ArrayList()
+    private val mSnapshots: ArrayList<Pair<String, T>> = ArrayList()
     private val mPageSize: Int
     private var mCurrentSize: Int = 0
     private var isSyncing: Boolean = false
@@ -110,10 +110,10 @@ class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
     val count: Int
         get() = mSnapshots.size
 
-    fun getCount(cond: (DataSnapshot) -> Boolean): Int = mSnapshots.filter { cond.invoke(it) }.size
+    fun getCount(cond: (T) -> Boolean): Int = mSnapshots.filter { cond.invoke(it.second) }.size
 
-    fun getItem(index: Int, cond: (DataSnapshot) -> Boolean): DataSnapshot {
-        return mSnapshots.filter { cond.invoke(it) }[index]
+    fun getItem(index: Int, cond: (T) -> Boolean): Pair<String, T> {
+        return mSnapshots.filter { cond.invoke(it.second) }[index]
     }
 
     private fun setup() {
@@ -135,7 +135,7 @@ class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
     private fun getIndexForKey(key: String): Int {
         var index = 0
         for (snapshot in mSnapshots) {
-            if (snapshot.key == key) {
+            if (snapshot.first == key) {
                 return index
             } else {
                 index++
@@ -157,22 +157,22 @@ class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
         }
         if (mOrderASC &&
                 index < count &&
-                mSnapshots[index].key == snapshot.key) {
+                mSnapshots[index].first == snapshot.key) {
             return
         } else if (!mOrderASC &&
                 index < count + 1 &&
                 index > 0 &&
-                mSnapshots[index - 1].key == snapshot.key) {
+                mSnapshots[index - 1].first == snapshot.key) {
             return
         }
 
-        mSnapshots.add(index, snapshot)
+        mSnapshots.add(index, Pair(snapshot.key, snapshot.getValue(mModel)))
         notifyChangedListeners(EventType.Added, index)
     }
 
     override fun onChildChanged(snapshot: DataSnapshot, previousChildKey: String?) {
         val index = getIndexForKey(snapshot.key)
-        mSnapshots[index] = snapshot
+        mSnapshots[index] = Pair(snapshot.key, snapshot.getValue(mModel))
         notifyChangedListeners(EventType.Changed, index)
     }
 
@@ -186,7 +186,7 @@ class FirebaseArray(val mOriginalQuery: () -> Query?, pageSize: Int = 0,
         val oldIndex = getIndexForKey(snapshot.key)
         mSnapshots.removeAt(oldIndex)
         val newIndex = if (previousChildKey == null) 0 else getIndexForKey(previousChildKey) + 1
-        mSnapshots.add(newIndex, snapshot)
+        mSnapshots.add(newIndex, Pair(snapshot.key, snapshot.getValue(mModel)))
         notifyChangedListeners(EventType.Moved, newIndex, oldIndex)
     }
 
