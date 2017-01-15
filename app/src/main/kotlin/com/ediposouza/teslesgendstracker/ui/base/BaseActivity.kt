@@ -21,6 +21,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,7 +31,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
@@ -93,14 +93,13 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         eventBus.register(this)
         ConfigManager.updateCaches {
             if (ConfigManager.isVersionUnsupported()) {
-                alert(getString(R.string.app_version_unsupported)) {
+                alertThemed(R.string.app_version_unsupported, R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_VERSION_UNSUPPORTED())
                         startActivity(Intent(Intent.ACTION_VIEW)
                                 .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                         System.exit(0)
                     }
-                    setTheme(R.style.AppDialog)
                 }.show()
             }
         }

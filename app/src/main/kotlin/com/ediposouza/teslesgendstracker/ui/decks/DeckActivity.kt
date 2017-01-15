@@ -39,7 +39,10 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
-import org.jetbrains.anko.*
+import org.jetbrains.anko.contentView
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import java.text.NumberFormat
@@ -221,7 +224,7 @@ class DeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_delete -> {
-                alert(R.string.confirm_message) {
+                alertThemed(R.string.confirm_message, R.style.AppDialog) {
                     negativeButton(android.R.string.no, {})
                     positiveButton(android.R.string.yes, {
                         privateInteractor.deleteDeck(deck, deck.private) {
@@ -230,7 +233,6 @@ class DeckActivity : BaseActivity() {
                             MetricsManager.trackAction(MetricAction.ACTION_DECK_DETAILS_DELETE())
                         }
                     })
-                    setTheme(R.style.AppDialog)
                 }.show()
                 return true
             }
