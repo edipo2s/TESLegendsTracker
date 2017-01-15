@@ -38,6 +38,8 @@
             android:orientation="vertical"
             app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
 
+            <include layout="@layout/include_new_update" />
+
             <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
                 android:id="@+id/cards_filter_attr"
                 android:layout_width="match_parent"

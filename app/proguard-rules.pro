@@ -71,3 +71,8 @@
 -keep class **.R$* {
     <fields>;
 }
+
+## JSoup
+-keep public class org.jsoup.** {
+    public *;
+}

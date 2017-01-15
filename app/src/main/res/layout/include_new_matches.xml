@@ -123,7 +123,7 @@
                 android:textColor="@android:color/white" />
 
             <com.andexert.library.RippleView
-                android:id="@+id/new_match_win_ripple"
+                android:id="@+id/new_matches_win"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_legend"
@@ -131,7 +131,6 @@
                 app:layout_widthPercent="49%">
 
                 <Button
-                    android:id="@+id/new_matches_win"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/xml_button_green"
@@ -140,6 +139,7 @@
             </com.andexert.library.RippleView>
 
             <com.andexert.library.RippleView
+                android:id="@+id/new_matches_loss"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -148,7 +148,6 @@
                 app:layout_widthPercent="49%">
 
                 <Button
-                    android:id="@+id/new_matches_loss"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/xml_button_red"

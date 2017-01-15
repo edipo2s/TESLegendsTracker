@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomSheetBehavior
@@ -24,6 +26,12 @@ import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.toggleExpanded
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
+import kotlinx.android.synthetic.main.include_new_update.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import org.jsoup.Jsoup
+import timber.log.Timber
+
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -116,6 +124,17 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onResume()
         cards_app_bar_layout.setExpanded(true, true)
         (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+        checkLastVersion {
+            Timber.d("New version $it found!")
+            new_update_layout.visibility = View.VISIBLE
+            new_update_later.rippleDuration = 200
+            new_update_later.setOnRippleCompleteListener { new_update_layout.visibility = View.GONE }
+            new_update_now.rippleDuration = 200
+            new_update_now.setOnRippleCompleteListener {
+                startActivity(Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse(getString(R.string.playstore_url_format, context.packageName))))
+            }
+        }
     }
 
     override fun onPause() {
@@ -149,6 +168,33 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
+    }
+
+    fun checkLastVersion(onNewVersion: (String?) -> Unit) {
+        doAsync {
+            try {
+                val pkg = context.packageName
+                val newer = Jsoup.connect(getString(R.string.playstore_url_format, pkg))
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div[itemprop=softwareVersion]")
+                        .first()
+                        .ownText()
+                val pInfo = context.packageManager.getPackageInfo(pkg, 0)
+                val newerVersion = newer.replace(".", "")
+                val actualVersion = pInfo.versionName.replace(".", "")
+                Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
+                uiThread {
+                    if (Integer.parseInt(newerVersion) > Integer.parseInt(actualVersion)) {
+                        onNewVersion(newer)
+                    }
+                }
+            } catch (e: Exception) {
+                Timber.e(e.message)
+            }
+        }
     }
 
     class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
