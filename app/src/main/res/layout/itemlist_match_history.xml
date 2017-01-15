@@ -52,12 +52,12 @@
 
     <TextView
         android:id="@+id/match_history_rank"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginStart="@dimen/large_margin"
         android:gravity="end"
         android:padding="@dimen/default_margin"
-        android:ems="5"
         android:textColor="@color/teal_100"
         android:textStyle="bold"
         tools:text="7" />
@@ -78,5 +78,12 @@
         android:textColor="@color/green_200"
         android:textStyle="bold"
         tools:text="Win" />
+
+    <ImageView
+        android:id="@+id/match_history_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@drawable/ic_delete" />
 
 </LinearLayout>

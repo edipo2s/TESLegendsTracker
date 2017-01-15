@@ -111,7 +111,7 @@ open class DecksPublicFragment : BaseFragment() {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
             addOnScrollListener(OnLinearLayoutItemScrolled(decksAdapter.getContentCount() - 3) {
-                decksAdapter.more()
+                view?.post { decksAdapter.more() }
             })
         }
         decks_refresh_layout.setOnRefreshListener {

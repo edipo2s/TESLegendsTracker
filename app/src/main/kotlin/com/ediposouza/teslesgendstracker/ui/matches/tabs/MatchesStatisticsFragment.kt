@@ -177,18 +177,24 @@ class MatchesStatisticsFragment : BaseFragment() {
     @Subscribe
     fun onFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
-        getMatches()
+        if (isFragmentSelected) {
+            getMatches()
+        }
     }
 
     @Subscribe
     fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
-        getMatches()
+        if (isFragmentSelected) {
+            getMatches()
+        }
     }
 
     @Subscribe
     fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
-        getMatches()
+        if (isFragmentSelected) {
+            getMatches()
+        }
     }
 
     class BodyItem(val result: String? = null, val cls: Class? = null, val selected: Boolean = false)

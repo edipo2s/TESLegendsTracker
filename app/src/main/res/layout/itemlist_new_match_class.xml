@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/small_margin"
+    android:padding="@dimen/default_margin"
     android:orientation="horizontal"
     tools:layout_marginTop="@dimen/status_bar_height">
 

@@ -7,6 +7,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
 import org.threeten.bp.LocalDateTime
+import timber.log.Timber
 
 /**
  * Created by EdipoSouza on 1/5/17.
@@ -62,7 +63,7 @@ object TestUtils {
         }
 
         override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
-            holder?.bind(items[position])
+            holder?.bind(items[position], { notifyItemRemoved(position) })
         }
 
         override fun getItemCount(): Int = items.size
@@ -81,8 +82,11 @@ object TestUtils {
         }
 
         fun getContentCount(): Int = items.size
-        fun more() {}
+        fun more() {
+            Timber.d("More")
+        }
         fun reset() {
+            Timber.d("Reset")
             notifyDataSetChanged()
         }
 

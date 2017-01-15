@@ -117,8 +117,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         super.onDestroy()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result.isSuccess) {
@@ -128,6 +127,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 hideLoading()
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
