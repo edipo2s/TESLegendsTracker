@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.util
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.IntegerRes
@@ -9,15 +10,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListPopupWindow
 import android.widget.Spinner
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
 import com.mixpanel.android.mpmetrics.MixpanelAPI
+import org.jetbrains.anko.AlertDialogBuilder
 
 /**
  * Created by ediposouza on 01/11/16.
  */
+fun Context.alertThemed(
+        message: Int,
+        title: Int? = null,
+        theme: Int = 0,
+        init: (AlertDialogBuilder.() -> Unit)? = null
+) = AlertDialogBuilder(this).apply {
+    val builderField = AlertDialogBuilder::class.java.getDeclaredField("builder")
+    builderField.isAccessible = true
+    builderField.set(this, AlertDialog.Builder(ctx, theme))
+    if (title != null) title(title)
+    message(message)
+    if (init != null) init()
+}
+
 fun String.toIntSafely(): Int {
     if (this.trim().isEmpty())
         return 0
@@ -38,11 +55,19 @@ fun BottomSheetBehavior<*>.toggleExpanded() {
 }
 
 fun AdView.load() {
-    this.loadAd(com.ediposouza.teslesgendstracker.util.createAdRequest(context))
+    if (App.hasUserDonate()) {
+        layoutParams = layoutParams.apply { height = 0 }
+    } else {
+        loadAd(createAdRequest(context))
+    }
 }
 
 fun NativeExpressAdView.load() {
-    this.loadAd(com.ediposouza.teslesgendstracker.util.createAdRequest(context))
+    if (App.hasUserDonate()) {
+        layoutParams = layoutParams.apply { height = 0 }
+    } else {
+        loadAd(createAdRequest(context))
+    }
 }
 
 private fun createAdRequest(context: Context): AdRequest {
@@ -68,7 +93,7 @@ fun Spinner.limitHeight(lines: Int? = null) {
                 IntArray(2).apply {
                     getLocationOnScreen(this)
                     val listPopupWindow = this@popup as ListPopupWindow
-                    listPopupWindow.height = if(lines != null) lines * itemHeight else displayHeight - get(1)
+                    listPopupWindow.height = if (lines != null) lines * itemHeight else displayHeight - get(1)
                 }
             }
 }

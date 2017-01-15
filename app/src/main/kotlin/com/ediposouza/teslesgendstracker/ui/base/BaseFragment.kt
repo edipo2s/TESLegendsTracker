@@ -6,8 +6,8 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import org.greenrobot.eventbus.EventBus
-import org.jetbrains.anko.alert
 import timber.log.Timber
 
 /**
@@ -50,12 +50,11 @@ open class BaseFragment : Fragment() {
         super.onResume()
         ConfigManager.updateCaches {
             if (ConfigManager.isDBUpdating()) {
-                activity.alert(getString(R.string.app_bd_under_updating)) {
+                context.alertThemed(R.string.app_bd_under_updating, R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_NOTIFY_UPDATE())
                         System.exit(0)
                     }
-                    activity.setTheme(R.style.AppDialog)
                 }.show()
             }
         }
