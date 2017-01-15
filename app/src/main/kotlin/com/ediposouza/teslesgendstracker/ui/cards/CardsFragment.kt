@@ -20,10 +20,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.toggleExpanded
+import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
@@ -128,12 +125,17 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             Timber.d("New version $it found!")
             new_update_layout.visibility = View.VISIBLE
             new_update_later.rippleDuration = 200
-            new_update_later.setOnRippleCompleteListener { new_update_layout.visibility = View.GONE }
+            new_update_later.setOnRippleCompleteListener {
+                new_update_layout.visibility = View.GONE
+                MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_LATER())
+            }
             new_update_now.rippleDuration = 200
             new_update_now.setOnRippleCompleteListener {
                 startActivity(Intent(Intent.ACTION_VIEW)
                         .setData(Uri.parse(getString(R.string.playstore_url_format, context.packageName))))
+                MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_NOW())
             }
+            MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_DETECTED())
         }
     }
 

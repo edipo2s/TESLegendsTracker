@@ -123,6 +123,13 @@ sealed class MetricAction(val name: String) {
         val PARAM_LEGEND = "Legend"
     }
 
+    class ACTION_DONATE_BASIC : MetricAction("DonateBasic")
+    class ACTION_DONATE_PRO : MetricAction("DonatePro")
+    class ACTION_DONATE_NOT_NOW : MetricAction("DonateNotNow")
+    class ACTION_NEW_VERSION_DETECTED : MetricAction("NewVersionDetected")
+    class ACTION_NEW_VERSION_UPDATE_NOW : MetricAction("NewVersionUpdateNow")
+    class ACTION_NEW_VERSION_UPDATE_LATER : MetricAction("NewVersionUpdateLater")
+
 }
 
 sealed class MetricScreen(val name: String) {
@@ -148,5 +155,6 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_MATCHES_STATISTICS_CLASS : MetricScreen("MatchesStatisticsClass")
     class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
+    class SCREEN_DONATE : MetricScreen("Donate")
 
 }
