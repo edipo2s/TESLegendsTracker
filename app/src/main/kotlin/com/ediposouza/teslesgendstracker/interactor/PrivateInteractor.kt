@@ -417,4 +417,16 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun deleteMatch(match: Match, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        getUserMatchesRef()?.apply {
+            child(match.uuid).removeValue().addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Timber.d(it.toString())
+                    onSuccess.invoke()
+                } else
+                    onError?.invoke(it.exception)
+            }
+        }
+    }
+
 }

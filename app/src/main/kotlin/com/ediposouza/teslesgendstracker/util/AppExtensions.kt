@@ -35,6 +35,20 @@ fun Context.alertThemed(
     if (init != null) init()
 }
 
+fun Context.alertThemed(
+        message: String,
+        title: String? = null,
+        theme: Int = 0,
+        init: (AlertDialogBuilder.() -> Unit)? = null
+) = AlertDialogBuilder(this).apply {
+    val builderField = AlertDialogBuilder::class.java.getDeclaredField("builder")
+    builderField.isAccessible = true
+    builderField.set(this, AlertDialog.Builder(ctx, theme))
+    if (title != null) title(title)
+    message(message)
+    if (init != null) init()
+}
+
 fun String.toIntSafely(): Int {
     if (this.trim().isEmpty())
         return 0

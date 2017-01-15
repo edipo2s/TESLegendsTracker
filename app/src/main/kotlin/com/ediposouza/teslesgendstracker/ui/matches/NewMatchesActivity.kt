@@ -73,7 +73,10 @@ class NewMatchesActivity : BaseActivity() {
         }
 
         override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
-            holder?.bind(items[position])
+            holder?.bind(items[position], {
+                items.removeAt(position)
+                notifyItemRemoved(position)
+            })
         }
 
         override fun getItemCount(): Int = items.size
@@ -81,6 +84,7 @@ class NewMatchesActivity : BaseActivity() {
         fun addMatch(match: Match) {
             items.add(match)
             notifyItemInserted(itemCount - 1)
+            new_matches_recycler_view.scrollToPosition(itemCount - 1)
         }
 
     }
@@ -137,7 +141,7 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_recycler_view.apply {
             adapter = matchesAddedAdapter
             itemAnimator = SlideInLeftAnimator()
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
             setHasFixedSize(true)
         }
         new_matches_win.rippleDuration = 200
@@ -175,6 +179,7 @@ class NewMatchesActivity : BaseActivity() {
         val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
         val currentRank = new_matches_rank.text.toString()
         if (currentRank.isEmpty()) {
+            new_matches_rank.requestFocus()
             new_matches_rank.error = getString(R.string.new_match_save_rank_error)
             return
         }

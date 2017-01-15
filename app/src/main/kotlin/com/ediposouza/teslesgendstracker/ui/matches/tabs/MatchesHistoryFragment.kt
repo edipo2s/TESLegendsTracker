@@ -17,6 +17,7 @@ import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
 import com.ediposouza.teslesgendstracker.ui.matches.CmdUpdateMatches
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
@@ -56,7 +57,10 @@ class MatchesHistoryFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.MatchParser, viewHolder: MatchViewHolder) {
-                viewHolder.bind(model.toMatch(itemKey))
+                viewHolder.bind(model.toMatch(itemKey), {
+                    reset()
+                    matches_recycler_view.scrollToPosition(0)
+                })
             }
 
             override fun onSyncEnd() {
@@ -105,7 +109,7 @@ class MatchesHistoryFragment : BaseFragment() {
             }
             addItemDecoration(sectionDecoration)
             addOnScrollListener(OnLinearLayoutItemScrolled(matchesAdapter.getContentCount() - 3) {
-                matchesAdapter.more()
+                view?.post { matchesAdapter.more() }
             })
         }
         matches_refresh_layout.setOnRefreshListener {
@@ -121,25 +125,31 @@ class MatchesHistoryFragment : BaseFragment() {
     @Subscribe
     fun onFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
-        matchesAdapter.reset()
-        matches_recycler_view.scrollToPosition(0)
+        if (isFragmentSelected) {
+            matchesAdapter.reset()
+            matches_recycler_view.scrollToPosition(0)
+        }
     }
 
     @Subscribe
     fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
-        matchesAdapter.reset()
-        matches_recycler_view.scrollToPosition(0)
+        if (isFragmentSelected) {
+            matchesAdapter.reset()
+            matches_recycler_view.scrollToPosition(0)
+        }
     }
 
     @Subscribe
     fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
-        matchesAdapter.reset()
+        if (isFragmentSelected) {
+            matchesAdapter.reset()
+        }
     }
 
     class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(match: Match) {
+        fun bind(match: Match, onDelete: () -> Unit) {
             with(itemView) {
                 match_history_first.visibility = if (match.first) View.VISIBLE else View.INVISIBLE
                 match_history_player_class_attr1.setImageResource(match.player.cls.attr1.imageRes)
@@ -154,6 +164,18 @@ class MatchesHistoryFragment : BaseFragment() {
                 val rankText = if (match.legend) R.string.match_rank_legend else R.string.match_rank_normal
                 match_history_rank.text = context.getString(rankText, match.rank)
                 match_history_rank.visibility = if (match.mode == MatchMode.RANKED) View.VISIBLE else View.INVISIBLE
+                match_history_delete.setOnClickListener {
+                    val opponentClass = match.opponent.cls.name.toLowerCase().capitalize()
+                    val title = context.getString(R.string.match_history_delete, opponentClass)
+                    context.alertThemed(title, context.getString(R.string.confirm_message), R.style.AppDialog) {
+                        positiveButton(android.R.string.yes, {
+                            PrivateInteractor().deleteMatch(match) {
+                                onDelete.invoke()
+                            }
+                        })
+                        negativeButton(android.R.string.no, { })
+                    }.show()
+                }
             }
         }
 

@@ -17,11 +17,6 @@
     <dimen name="font_large">22sp</dimen>
     <dimen name="font_huge">26sp</dimen>
 
-    <dimen name="size_micro">12dp</dimen>
-    <dimen name="size_small">24dp</dimen>
-    <dimen name="size_normal">36dp</dimen>
-    <dimen name="size_medium">48dp</dimen>
-
     <!-- Cards List -->
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>

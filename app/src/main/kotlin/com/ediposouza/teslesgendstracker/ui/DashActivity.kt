@@ -168,7 +168,7 @@ class DashActivity : BaseFilterActivity(),
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (iabHelper?.handleActivityResult(requestCode, resultCode, data) ?: false) {
             return
         }

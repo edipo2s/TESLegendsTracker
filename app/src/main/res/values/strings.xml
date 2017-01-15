@@ -147,6 +147,7 @@
     <string name="match_statistics_win_rate_label">Win Rate</string>
     <string name="match_statistics_total_label">Total</string>
     <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
+    <string name="match_history_delete">Deleting Match versus %1$s</string>
     <string name="matches_seasons_all">All Seasons</string>
     <string name="matches_class_title">%1$s Statistics</string>
 
