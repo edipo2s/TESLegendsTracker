@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_season"
-        android:icon="@drawable/ic_timer_sand"
+        android:icon="@drawable/ic_season"
         android:title="@string/menu_season"
         app:showAsAction="always">
 
