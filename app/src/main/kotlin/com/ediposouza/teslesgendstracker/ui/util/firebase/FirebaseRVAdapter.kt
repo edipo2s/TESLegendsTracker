@@ -29,9 +29,7 @@
 package com.ediposouza.teslesgendstracker.ui.util.firebase
 
 import android.support.v7.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
 
 /**
@@ -91,7 +89,7 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
         orderASC: Boolean = false,
         val filter: ((T) -> Boolean)? = null) : RecyclerView.Adapter<VH>() {
 
-    var mSnapshots: FirebaseArray = FirebaseArray(ref, pageSize, orderASC)
+    var mSnapshots = FirebaseArray(mModel, ref, pageSize, orderASC)
 
     init {
         mSnapshots.mOnChangedListener = object : FirebaseArray.OnChangedListener {
@@ -132,7 +130,7 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
 
     fun cleanup() = mSnapshots.cleanup()
 
-    private fun filterResult(it: DataSnapshot) = filter?.invoke(it.getValue(mModel)) ?: true
+    private fun filterResult(it: T) = filter?.invoke(it) ?: true
 
     /**
      * Override when adding headers.
@@ -148,11 +146,9 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
      */
     override fun getItemCount(): Int = mSnapshots.getCount { filterResult(it) }
 
-    open fun getItem(position: Int): T = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).getValue(mModel)
+    open fun getItem(position: Int): T = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).second
 
-    fun getItemKey(position: Int): String = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).key
-
-    fun getRef(position: Int): DatabaseReference = mSnapshots.getItem(position, { filterResult(it) }).ref
+    fun getItemKey(position: Int): String = mSnapshots.getItem(position - snapShotOffset, { filterResult(it) }).first
 
     override fun getItemId(position: Int): Long {
         if (position < snapShotOffset)
@@ -160,7 +156,7 @@ abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
         if (position >= snapShotOffset + mSnapshots.getCount { filterResult(it) })
             return ("footer" + (position - (snapShotOffset + mSnapshots.getCount { filterResult(it) }))).hashCode().toLong()
         // http://stackoverflow.com/questions/5100071/whats-the-purpose-of-item-ids-in-android-listview-adapter
-        return mSnapshots.getItem(position, { filterResult(it) }).key.hashCode().toLong()
+        return mSnapshots.getItem(position, { filterResult(it) }).first.hashCode().toLong()
     }
 
     override fun onBindViewHolder(viewHolder: VH, position: Int) {
