@@ -24,7 +24,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/small_margin"
-            android:layout_marginTop="@dimen/medium_margin"
             android:layout_weight="1"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -35,8 +34,8 @@
                 style="@style/InputLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
                 android:layout_below="@id/new_match_dialog_title"
-                android:layout_marginTop="@dimen/huge_margin"
                 android:text="@string/new_match_opt_class_label" />
 
             <Spinner
