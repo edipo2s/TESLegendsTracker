@@ -2,7 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.decks.tabs
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Switch
+import android.widget.CompoundButton
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.util.inflate
 
@@ -11,7 +11,7 @@ import com.ediposouza.teslesgendstracker.util.inflate
  */
 class DecksOwnerFragment : DecksPublicFragment() {
 
-    private var onlyPrivate: Switch? = null
+    private var onlyPrivate: CompoundButton? = null
 
     override val isDeckPrivate: Boolean
         get() = onlyPrivate?.isChecked ?: false
@@ -34,7 +34,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         menu?.clear()
         inflater?.inflate(R.menu.menu_private, menu)
         inflater?.inflate(R.menu.menu_search, menu)
-        onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as Switch
+        onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as CompoundButton
         onlyPrivate?.setOnCheckedChangeListener { button, checked ->
             showDecks()
         }
