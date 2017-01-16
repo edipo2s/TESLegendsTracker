@@ -3,9 +3,7 @@ package com.ediposouza.teslesgendstracker.interactor
 import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.CardSet
 import com.ediposouza.teslesgendstracker.util.ConfigManager
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
+import com.google.firebase.database.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -93,6 +91,25 @@ open class BaseInteractor {
 
     fun Query.keepSynced() {
         keepSynced(!ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported())
+    }
+
+    abstract class SimpleChildEventListener : ChildEventListener {
+
+        override fun onChildMoved(snapshot: DataSnapshot?, previousChildName: String?) {
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot?, previousChildName: String?) {
+        }
+
+        override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+        }
+
+        override fun onChildRemoved(snapshot: DataSnapshot?) {
+        }
+
+        override fun onCancelled(error: DatabaseError?) {
+        }
+
     }
 
 }

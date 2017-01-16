@@ -78,7 +78,7 @@ class MatchesHistoryFragment : BaseFragment() {
             }
 
             override fun getHeaderId(position: Int): Long {
-                if (getItemViewType(position) != VIEW_TYPE_CONTENT){
+                if (getItemViewType(position) != VIEW_TYPE_CONTENT || position > getContentCount()) {
                     return -1
                 }
                 val date = LocalDateTime.parse(getItemKey(position)).toLocalDate()
