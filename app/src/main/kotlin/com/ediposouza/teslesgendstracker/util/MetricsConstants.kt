@@ -129,6 +129,9 @@ sealed class MetricAction(val name: String) {
     class ACTION_NEW_VERSION_DETECTED : MetricAction("NewVersionDetected")
     class ACTION_NEW_VERSION_UPDATE_NOW : MetricAction("NewVersionUpdateNow")
     class ACTION_NEW_VERSION_UPDATE_LATER : MetricAction("NewVersionUpdateLater")
+    class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
+    class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
+    class ACTION_ABOUT_RATE : MetricAction("AboutRate")
 
 }
 
@@ -156,5 +159,6 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
     class SCREEN_DONATE : MetricScreen("Donate")
+    class SCREEN_ABOUT : MetricScreen("About")
 
 }
