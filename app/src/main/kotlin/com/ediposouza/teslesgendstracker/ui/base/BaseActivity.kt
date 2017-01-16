@@ -93,7 +93,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         eventBus.register(this)
         ConfigManager.updateCaches {
             if (ConfigManager.isVersionUnsupported()) {
-                alertThemed(R.string.app_version_unsupported, R.style.AppDialog) {
+                alertThemed(R.string.app_version_unsupported, theme = R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_VERSION_UNSUPPORTED())
                         startActivity(Intent(Intent.ACTION_VIEW)

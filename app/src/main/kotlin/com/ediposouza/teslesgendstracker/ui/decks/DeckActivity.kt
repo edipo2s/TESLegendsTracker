@@ -224,7 +224,7 @@ class DeckActivity : BaseActivity() {
                 return true
             }
             R.id.menu_delete -> {
-                alertThemed(R.string.confirm_message, R.style.AppDialog) {
+                alertThemed(R.string.confirm_message, theme = R.style.AppDialog) {
                     negativeButton(android.R.string.no, {})
                     positiveButton(android.R.string.yes, {
                         privateInteractor.deleteDeck(deck, deck.private) {
