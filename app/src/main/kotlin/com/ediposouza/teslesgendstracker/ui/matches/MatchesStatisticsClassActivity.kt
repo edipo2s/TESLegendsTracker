@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
 import android.view.*
+import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import android.widget.Switch
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -56,7 +56,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     private var seasons = listOf<Season>()
     private var currentSeason: Season? = null
     private var menuSeasons: SubMenu? = null
-    private var showPercent: Switch? = null
+    private var showPercent: CompoundButton? = null
 
     var statisticsClassTableAdapter: StatisticsTableAdapter? = null
     var results: HashMap<MatchDeck, ArrayList<Match>> = HashMap()
@@ -105,7 +105,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         menuInflater?.inflate(R.menu.menu_season, menu)
         getSeasons(menu?.findItem(R.id.menu_season))
         val menuPercent = menu?.findItem(R.id.menu_percent)
-        showPercent = menuPercent?.actionView as Switch
+        showPercent = menuPercent?.actionView as CompoundButton
         showPercent?.setOnCheckedChangeListener { button, checked ->
             updateStatisticsData()
             MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(checked))

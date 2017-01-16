@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Switch xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kyleduo.switchbutton.SwitchButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:thumb="@drawable/xml_switch"/>
+    android:layout_height="24dp"
+    app:kswThumbDrawable="@drawable/xml_switch"
+    tools:layout_marginTop="@dimen/status_bar_height" />
