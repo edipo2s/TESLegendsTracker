@@ -64,13 +64,29 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun setUserCardFavorite(card: Card, favorite: Boolean, onComplete: () -> Unit) {
+    fun setUserCardFavorite(card: Card, favorite: Boolean, onSuccess: () -> Unit) {
         dbUserCards(card.set, card.attr)?.apply {
-            child(card.shortName).child(KEY_CARD_FAVORITE).apply {
+            child(card.shortName).apply {
+                val childEventListener = object : SimpleChildEventListener() {
+                    override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                        Timber.d(snapshot.toString())
+                        if (snapshot?.key == KEY_CARD_FAVORITE) {
+                            removeEventListener(this)
+                            onSuccess.invoke()
+                        }
+                    }
+
+                    override fun onChildRemoved(snapshot: DataSnapshot?) {
+                        removeEventListener(this)
+                        Timber.d(snapshot.toString())
+                        onSuccess.invoke()
+                    }
+                }
+                addChildEventListener(childEventListener)
                 if (favorite) {
-                    setValue(true).addOnCompleteListener { onComplete.invoke() }
+                    child(KEY_CARD_FAVORITE).setValue(true).addOnFailureListener { removeEventListener(childEventListener) }
                 } else {
-                    removeValue().addOnCompleteListener { onComplete.invoke() }
+                    child(KEY_CARD_FAVORITE).removeValue().addOnFailureListener { removeEventListener(childEventListener) }
                 }
             }
         }
@@ -245,11 +261,33 @@ class PrivateInteractor : BaseInteractor() {
 
     fun setUserDeckFavorite(deck: Deck, favorite: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.child(NODE_DECKS)?.child(NODE_FAVORITE)?.apply {
+            val childEventListener = object : SimpleChildEventListener() {
+                override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                    Timber.d(snapshot.toString())
+                    if (snapshot?.key == deck.uuid) {
+                        removeEventListener(this)
+                        onSuccess.invoke()
+                    }
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot?) {
+                    removeEventListener(this)
+                    Timber.d(snapshot.toString())
+                    onSuccess.invoke()
+                }
+            }
+            addChildEventListener(childEventListener)
             if (favorite) {
                 val deckFavorite = FirebaseParsers.DeckFavoriteParser(deck.name, deck.cls.ordinal)
-                child(deck.uuid)?.setValue(deckFavorite)?.addOnCompleteListener { onSuccess.invoke() }
+                child(deck.uuid)?.setValue(deckFavorite)?.addOnFailureListener {
+                    removeEventListener(childEventListener)
+                    onError?.invoke(it)
+                }
             } else {
-                child(deck.uuid)?.removeValue()?.addOnCompleteListener { onSuccess.invoke() }
+                child(deck.uuid)?.removeValue()?.addOnFailureListener {
+                    removeEventListener(childEventListener)
+                    onError?.invoke(it)
+                }
             }
         }
     }
@@ -258,9 +296,19 @@ class PrivateInteractor : BaseInteractor() {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val deckLikesUpdated = if (like) deck.likes.plus(getUserID()) else deck.likes.minus(getUserID())
-                child(deck.uuid).updateChildren(mapOf(KEY_DECK_LIKES to deckLikesUpdated)).addOnCompleteListener({
-                    Timber.d(it.toString())
-                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                val childEventListener = object : SimpleChildEventListener() {
+                    override fun onChildChanged(snapshot: DataSnapshot?, previousChildName: String?) {
+                        Timber.d(snapshot.toString())
+                        if (snapshot?.key == deck.uuid) {
+                            removeEventListener(this)
+                            onSuccess.invoke()
+                        }
+                    }
+                }
+                addChildEventListener(childEventListener)
+                child(deck.uuid).updateChildren(mapOf(KEY_DECK_LIKES to deckLikesUpdated)).addOnFailureListener({
+                    removeEventListener(childEventListener)
+                    onError?.invoke(it)
                 })
             }
         }
@@ -290,14 +338,20 @@ class PrivateInteractor : BaseInteractor() {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now().withNano(0),
                         LocalDateTime.now().withNano(0), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
-                child(deck.uuid).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnCompleteListener({
-                    Timber.d(it.toString())
-                    if (it.isSuccessful) onSuccess.invoke(deck.uuid)
-                    else {
-                        val errorMsg = it.exception?.message ?: it.exception.toString()
-                        EventBus.getDefault().post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, errorMsg))
-                        onError?.invoke(it.exception)
+                val childEventListener = object : SimpleChildEventListener() {
+                    override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                        Timber.d(snapshot.toString())
+                        if (snapshot?.key == deck.uuid) {
+                            removeEventListener(this)
+                            onSuccess.invoke(deck.uuid)
+                        }
                     }
+                }
+                addChildEventListener(childEventListener)
+                child(deck.uuid).setValue(FirebaseParsers.DeckParser().fromDeck(deck)).addOnFailureListener({
+                    removeEventListener(childEventListener)
+                    EventBus.getDefault().post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, it.message ?: ""))
+                    onError?.invoke(it)
                 })
             }
         }
@@ -346,12 +400,19 @@ class PrivateInteractor : BaseInteractor() {
                 val comment = FirebaseParsers.DeckParser.toNewCommentMap(getUserID(), msg)
                 with(child(deck.uuid).child(KEY_DECK_COMMENTS)) {
                     val commentKey = push().key
-                    child(commentKey).setValue(comment).addOnCompleteListener({
-                        Timber.d(it.toString())
-                        if (it.isSuccessful) {
-                            onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now().withNano(0)))
-                        } else
-                            onError?.invoke(it.exception)
+                    val childEventListener = object : SimpleChildEventListener() {
+                        override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                            Timber.d(snapshot.toString())
+                            if (snapshot?.key == commentKey) {
+                                removeEventListener(this)
+                                onSuccess.invoke(DeckComment(commentKey, getUserID(), msg, LocalDateTime.now().withNano(0)))
+                            }
+                        }
+                    }
+                    addChildEventListener(childEventListener)
+                    child(commentKey).setValue(comment).addOnFailureListener({
+                        removeEventListener(childEventListener)
+                        onError?.invoke(it)
                     })
                 }
             }
@@ -361,10 +422,20 @@ class PrivateInteractor : BaseInteractor() {
     fun remDeckComment(deck: Deck, commentId: String, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                child(deck.uuid).child(KEY_DECK_COMMENTS).child(commentId).removeValue().addOnCompleteListener({
-                    Timber.d(it.toString())
-                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
-                })
+                child(deck.uuid).child(KEY_DECK_COMMENTS).apply {
+                    val childEventListener = object : SimpleChildEventListener() {
+                        override fun onChildRemoved(snapshot: DataSnapshot?) {
+                            removeEventListener(this)
+                            Timber.d(snapshot.toString())
+                            onSuccess.invoke()
+                        }
+                    }
+                    addChildEventListener(childEventListener)
+                    child(commentId).removeValue().addOnFailureListener({
+                        removeEventListener(childEventListener)
+                        onError?.invoke(it)
+                    })
+                }
             }
         }
     }
@@ -372,9 +443,17 @@ class PrivateInteractor : BaseInteractor() {
     fun deleteDeck(deck: Deck, private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                child(deck.uuid).removeValue().addOnCompleteListener({
-                    Timber.d(it.toString())
-                    if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
+                val childEventListener = object : SimpleChildEventListener() {
+                    override fun onChildRemoved(snapshot: DataSnapshot?) {
+                        removeEventListener(this)
+                        Timber.d(snapshot.toString())
+                        onSuccess.invoke()
+                    }
+                }
+                addChildEventListener(childEventListener)
+                child(deck.uuid).removeValue().addOnFailureListener({
+                    removeEventListener(childEventListener)
+                    onError?.invoke(it)
                 })
             }
         }
@@ -407,12 +486,19 @@ class PrivateInteractor : BaseInteractor() {
 
     fun saveMatch(newMatch: Match, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         getUserMatchesRef()?.apply {
-            child(newMatch.uuid).setValue(FirebaseParsers.MatchParser().fromMatch(newMatch)).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Timber.d(it.toString())
-                    onSuccess.invoke()
-                } else
-                    onError?.invoke(it.exception)
+            val childEventListener = object : SimpleChildEventListener() {
+                override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                    Timber.d(snapshot.toString())
+                    if (snapshot?.key == newMatch.uuid) {
+                        removeEventListener(this)
+                        onSuccess.invoke()
+                    }
+                }
+            }
+            addChildEventListener(childEventListener)
+            child(newMatch.uuid).setValue(FirebaseParsers.MatchParser().fromMatch(newMatch)).addOnFailureListener {
+                removeEventListener(childEventListener)
+                onError?.invoke(it)
             }
         }
     }

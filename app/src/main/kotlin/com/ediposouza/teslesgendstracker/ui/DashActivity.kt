@@ -54,6 +54,7 @@ class DashActivity : BaseFilterActivity(),
     private val privateInteractor = PrivateInteractor()
 
     private var iabHelper: IabHelper? = null
+    private var iabHelperStarted: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +72,7 @@ class DashActivity : BaseFilterActivity(),
             enableDebugLogging(BuildConfig.DEBUG)
             startSetup {
                 if (it.isSuccess) {
+                    iabHelperStarted = true
                     queryInventoryAsync { iabResult, inventory ->
                         if (inventory != null) {
                             if (inventory.hasPurchase(SKU_DONATE_BASIC) || inventory.hasPurchase(SKU_DONATE_PRO)) {
@@ -193,44 +195,50 @@ class DashActivity : BaseFilterActivity(),
                 true
             }
             R.id.menu_donate -> showDonateDialog()
-            R.id.menu_about -> {
-                val dialogView = View.inflate(this, R.layout.dialog_about, null).apply {
-                    about_dialog_version.text = packageManager.getPackageInfo(packageName, 0).versionName
-                    about_dialog_thanks_cvh_text.setOnClickListener {
-                        val linkUri = Uri.parse(getString(R.string.about_info_thanks_cvh_link))
-                        startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
-                        MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CVH())
-                    }
-                    about_dialog_thanks_direwolf_text.setOnClickListener {
-                        val linkUri = Uri.parse(getString(R.string.about_info_thanks_direwolf_link))
-                        startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
-                        MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DIREWOLF())
-                    }
-                }
-                AlertDialog.Builder(this, R.style.AppDialog)
-                        .setView(dialogView)
-                        .setPositiveButton(R.string.about_rate_app, { di, which ->
-                            startActivity(Intent(Intent.ACTION_VIEW)
-                                    .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
-                            MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
-                        })
-                        .show()
-                MetricsManager.trackScreen(MetricScreen.SCREEN_ABOUT())
-                true
-            }
+            R.id.menu_about -> showAboutDialog()
             else -> false
         }
     }
 
-    private fun showDonateDialog(): Boolean {
-        iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { iabResult, inventory ->
-            if (inventory != null) {
-                val skuBasic = inventory.getSkuDetails(SKU_DONATE_BASIC)
-                val skuPro = inventory.getSkuDetails(SKU_DONATE_PRO)
-                showDonateDialog(skuBasic?.price ?: "", skuPro?.price ?: "")
-            } else {
-                eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.app_donate_dialog_payment_error))
+    private fun showAboutDialog(): Boolean {
+        val dialogView = View.inflate(this, R.layout.dialog_about, null).apply {
+            about_dialog_version.text = packageManager.getPackageInfo(packageName, 0).versionName
+            about_dialog_thanks_cvh_text.setOnClickListener {
+                val linkUri = Uri.parse(getString(R.string.about_info_thanks_cvh_link))
+                startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CVH())
             }
+            about_dialog_thanks_direwolf_text.setOnClickListener {
+                val linkUri = Uri.parse(getString(R.string.about_info_thanks_direwolf_link))
+                startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DIREWOLF())
+            }
+        }
+        AlertDialog.Builder(this, R.style.AppDialog)
+                .setView(dialogView)
+                .setPositiveButton(R.string.about_rate_app, { di, which ->
+                    startActivity(Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
+                    MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
+                })
+                .show()
+        MetricsManager.trackScreen(MetricScreen.SCREEN_ABOUT())
+        return true
+    }
+
+    private fun showDonateDialog(): Boolean {
+        if (iabHelperStarted) {
+            iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { iabResult, inventory ->
+                if (inventory != null) {
+                    val skuBasic = inventory.getSkuDetails(SKU_DONATE_BASIC)
+                    val skuPro = inventory.getSkuDetails(SKU_DONATE_PRO)
+                    showDonateDialog(skuBasic?.price ?: "", skuPro?.price ?: "")
+                } else {
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.app_donate_dialog_payment_error))
+                }
+            }
+        } else {
+            eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.app_donate_dialog_payment_error))
         }
         return true
     }
