@@ -50,7 +50,7 @@ open class BaseFragment : Fragment() {
         super.onResume()
         ConfigManager.updateCaches {
             if (ConfigManager.isDBUpdating()) {
-                context.alertThemed(R.string.app_bd_under_updating, R.style.AppDialog) {
+                context.alertThemed(R.string.app_bd_under_updating, theme = R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_NOTIFY_UPDATE())
                         System.exit(0)

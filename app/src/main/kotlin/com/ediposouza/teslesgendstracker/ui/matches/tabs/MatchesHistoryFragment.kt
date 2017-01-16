@@ -59,7 +59,7 @@ class MatchesHistoryFragment : BaseFragment() {
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.MatchParser, viewHolder: MatchViewHolder) {
                 viewHolder.bind(model.toMatch(itemKey), {
                     reset()
-                    matches_recycler_view.scrollToPosition(0)
+                    matches_recycler_view?.scrollToPosition(0)
                 })
             }
 
