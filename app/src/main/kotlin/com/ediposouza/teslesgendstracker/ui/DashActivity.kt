@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.BottomSheetBehavior
@@ -8,6 +9,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -30,6 +32,7 @@ import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
 import kotlinx.android.synthetic.main.activity_dash.*
+import kotlinx.android.synthetic.main.dialog_about.view.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
@@ -191,6 +194,28 @@ class DashActivity : BaseFilterActivity(),
             }
             R.id.menu_donate -> showDonateDialog()
             R.id.menu_about -> {
+                val dialogView = View.inflate(this, R.layout.dialog_about, null).apply {
+                    about_dialog_version.text = packageManager.getPackageInfo(packageName, 0).versionName
+                    about_dialog_thanks_cvh_text.setOnClickListener {
+                        val linkUri = Uri.parse(getString(R.string.about_info_thanks_cvh_link))
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                        MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CVH())
+                    }
+                    about_dialog_thanks_direwolf_text.setOnClickListener {
+                        val linkUri = Uri.parse(getString(R.string.about_info_thanks_direwolf_link))
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                        MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DIREWOLF())
+                    }
+                }
+                AlertDialog.Builder(this, R.style.AppDialog)
+                        .setView(dialogView)
+                        .setPositiveButton(R.string.about_rate_app, { di, which ->
+                            startActivity(Intent(Intent.ACTION_VIEW)
+                                    .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
+                            MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
+                        })
+                        .show()
+                MetricsManager.trackScreen(MetricScreen.SCREEN_ABOUT())
                 true
             }
             else -> false
