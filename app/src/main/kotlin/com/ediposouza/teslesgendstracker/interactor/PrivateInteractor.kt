@@ -67,28 +67,32 @@ class PrivateInteractor : BaseInteractor() {
     fun setUserCardFavorite(card: Card, favorite: Boolean, onSuccess: () -> Unit) {
         dbUserCards(card.set, card.attr)?.apply {
             child(card.shortName).apply {
-                val childEventListener = object : SimpleChildEventListener() {
-                    override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
-                        Timber.d(snapshot.toString())
-                        if (snapshot?.key == KEY_CARD_FAVORITE) {
-                            removeEventListener(this)
-                            onSuccess.invoke()
-                        }
-                    }
+                execSetUserCardFavorite(this, favorite, onSuccess)
+            }
+        }
+    }
 
-                    override fun onChildRemoved(snapshot: DataSnapshot?) {
-                        removeEventListener(this)
-                        Timber.d(snapshot.toString())
-                        onSuccess.invoke()
-                    }
-                }
-                addChildEventListener(childEventListener)
-                if (favorite) {
-                    child(KEY_CARD_FAVORITE).setValue(true).addOnFailureListener { removeEventListener(childEventListener) }
-                } else {
-                    child(KEY_CARD_FAVORITE).removeValue().addOnFailureListener { removeEventListener(childEventListener) }
+    private fun execSetUserCardFavorite(dr: DatabaseReference, favorite: Boolean, onSuccess: () -> Unit) {
+        val childEventListener = object : SimpleChildEventListener() {
+            override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+                Timber.d(snapshot.toString())
+                if (snapshot?.key == KEY_CARD_FAVORITE) {
+                    dr.removeEventListener(this)
+                    onSuccess.invoke()
                 }
             }
+
+            override fun onChildRemoved(snapshot: DataSnapshot?) {
+                dr.removeEventListener(this)
+                Timber.d(snapshot.toString())
+                onSuccess.invoke()
+            }
+        }
+        dr.addChildEventListener(childEventListener)
+        if (favorite) {
+            dr.child(KEY_CARD_FAVORITE).setValue(true).addOnFailureListener { dr.removeEventListener(childEventListener) }
+        } else {
+            dr.child(KEY_CARD_FAVORITE).removeValue().addOnFailureListener { dr.removeEventListener(childEventListener) }
         }
     }
 
