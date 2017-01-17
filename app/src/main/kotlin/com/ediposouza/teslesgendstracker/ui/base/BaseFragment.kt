@@ -1,12 +1,13 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import org.greenrobot.eventbus.EventBus
-import org.jetbrains.anko.alert
 import timber.log.Timber
 
 /**
@@ -15,9 +16,25 @@ import timber.log.Timber
 
 open class BaseFragment : Fragment() {
 
+    private val KEY_IS_FRAGMENT_SELECTED = "isFragmentSelectedKey"
+
     protected val eventBus: EventBus by lazy { EventBus.getDefault() }
 
     protected var isFragmentSelected: Boolean = false
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            putBoolean(KEY_IS_FRAGMENT_SELECTED, isFragmentSelected)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+            isFragmentSelected = savedInstanceState.getBoolean(KEY_IS_FRAGMENT_SELECTED)
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -33,12 +50,11 @@ open class BaseFragment : Fragment() {
         super.onResume()
         ConfigManager.updateCaches {
             if (ConfigManager.isDBUpdating()) {
-                activity.alert(getString(R.string.app_bd_under_updating)) {
+                context.alertThemed(R.string.app_bd_under_updating, theme = R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_NOTIFY_UPDATE())
                         System.exit(0)
                     }
-                    activity.setTheme(R.style.AppDialog)
                 }.show()
             }
         }
@@ -61,6 +77,10 @@ open class BaseFragment : Fragment() {
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
         isFragmentSelected = menuVisible
+    }
+
+    protected fun showLogin() {
+        eventBus.post(CmdShowLogin())
     }
 
 }

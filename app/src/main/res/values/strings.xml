@@ -1,24 +1,41 @@
 <resources>
-    <string name="app_name">TESL Tracker</string>
-    <string name="app_name_full">TES Legends Tracker</string>
-    <string name="app_ads_card_list">ca-app-pub-7881623561544201/7976661172</string>
-    <string name="app_ads_card_list_size">360x80</string>
-    <string name="app_ads_card_full">ca-app-pub-7881623561544201/1511325179</string>
-    <string name="app_ads_deck_list">ca-app-pub-7881623561544201/8255215977</string>
-    <string name="app_ads_deck_list_size">360x80</string>
-    <string name="app_ads_deck_full">ca-app-pub-7881623561544201/2208682379</string>
-    <string name="app_ads_new_deck_card_list">ca-app-pub-7881623561544201/6037962770</string>
-    <string name="app_ads_new_deck_card_list_size">240x50</string>
+    <string name="app_name" translatable="false">TESL Tracker</string>
+    <string name="app_name_full" translatable="false">TES Legends Tracker</string>
+    <string name="app_ads_card_list" translatable="false">ca-app-pub-7881623561544201/7976661172</string>
+    <string name="app_ads_card_list_size" translatable="false">280x80</string>
+    <string name="app_ads_card_full" translatable="false">ca-app-pub-7881623561544201/1511325179</string>
+    <string name="app_ads_deck_list" translatable="false">ca-app-pub-7881623561544201/8255215977</string>
+    <string name="app_ads_deck_list_size" translatable="false">280x80</string>
+    <string name="app_ads_deck_full" translatable="false">ca-app-pub-7881623561544201/4768635172</string>
+    <string name="app_ads_deck_full_size" translatable="false">240x50</string>
+    <string name="app_ads_new_deck_card_list" translatable="false">ca-app-pub-7881623561544201/6037962770</string>
+    <string name="app_ads_new_deck_card_list_size" translatable="false">220x50</string>
+    <string name="app_ads_match_history_list" translatable="false">ca-app-pub-7881623561544201/6811091571</string>
+    <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
+    <string name="app_ads_match_statistics_class_full" translatable="false">ca-app-pub-7881623561544201/8978508773</string>
+    <string name="app_ads_new_matches_full" translatable="false">ca-app-pub-7881623561544201/1315641179</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
-    <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using.</string>
-    <string name="playstore_url_format">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
+    <string name="app_donate_dialog_text">All app features are free, but if you want to support development, you can donate some value and stay free of ads.</string>
+    <string name="app_donate_dialog_value">Donate %1$s</string>
+    <string name="app_donate_dialog_not_now">Not now, thanks</string>
+    <string name="app_donate_dialog_payment_error">Service unavailable</string>
+    <string name="app_donate_dialog_payment_fail">Donate fail, please try again.</string>
+    <string name="app_donate_dialog_payment_success">Thanks for donate. Enjoy the app free of ads.</string>
+    <string name="app_new_version_available">New version available!</string>
+    <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
+    <string name="app_new_version_update_now">Update Now</string>
+    <string name="app_new_version_update_later">Later</string>
+    <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
     <string name="menu_season">Season</string>
     <string name="menu_arena">Arena</string>
+    <string name="menu_donate">Free Version</string>
+    <string name="menu_donate_done">No Ads Version</string>
     <string name="menu_about">About</string>
     <string name="menu_search">Search</string>
     <string name="menu_sets">Sets</string>
@@ -27,14 +44,42 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_unfavorite">Unfavorite</string>
     <string name="menu_like">Like</string>
-    <string name="menu_delete">Delete</string>
     <string name="menu_unlike">Unlike</string>
+    <string name="menu_delete">Delete</string>
     <string name="menu_done">Done</string>
+    <string name="menu_percent">Percent</string>
+    <string name="menu_import">Import from Legends-Decks</string>
 
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
-    <string name="search_hint">Name, race, type or keyword</string>
+
+    <string name="about_title">About TES Legends Tracker</string>
+    <string name="about_text">TES Legends Tracker is a assistant app for card game The Elder Scroll Legends developed by Dire Wolf Digital and published by Bethesda Softworks.</string>
+    <string name="about_text_bottom">Dire Wolf Digital has all rights reserved of all cards images and other game resource in this app.</string>
+    <string name="about_info_version">App Version:</string>
+    <string name="about_info_developer_label">Developer:</string>
+    <string name="about_info_developer" translatable="false">Édipo Souza (edipo2s)</string>
+    <string name="about_info_thanks_label">Special Thanks:</string>
+    <string name="about_info_thanks_direwolf" translatable="false">Dire Wolf - </string>
+    <string name="about_info_thanks_direwolf_text">TES Legends game</string>
+    <string name="about_info_thanks_direwolf_link" translatable="false">https://legends.bethesda.net</string>
+    <string name="about_info_thanks_cvh" translatable="false">CVH - </string>
+    <string name="about_info_thanks_cvh_text">Arena Tier List</string>
+    <string name="about_info_thanks_cvh_link" translatable="false">https://betweenthelanes.net/arena-tier-list</string>
+    <string name="about_rate_app">Rate App</string>
+
+    <string name="dialog_import_title">Import from Legends-Decks</string>
+    <string name="dialog_import_text">Please do login and open your collection edit page</string>
+    <string name="dialog_import_result_title">Collection Import</string>
+    <string name="dialog_import_result_imported_text">Cards imported:</string>
+    <string name="dialog_import_result_difference_text">Collection differences of Legends-Decks:</string>
+    <string name="dialog_import_result_added">ADDED</string>
+    <string name="dialog_import_result_updated">UPDATED</string>
+    <string name="dialog_import_result_you_have">YOU HAVE</string>
+    <string name="dialog_import_result_has_more">HAS MORE</string>
+    <string name="dialog_import_legends_deck_link" translatable="false">http://www.legends-decks.com/collection-manager</string>
+    <string name="dialog_import_legends_deck_login_done_link" translatable="false">http://www.legends-decks.com/#</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -42,41 +87,48 @@
     <string name="tab_decks_public">Public</string>
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
+    <string name="tab_matches_statistics">Statistics</string>
+    <string name="tab_matches_history">History</string>
+    <string name="tab_mode_ranked">Ranked</string>
+    <string name="tab_mode_casual">Casual</string>
+    <string name="tab_mode_arena">Arena</string>
 
-    <string name="title_tab_cards_all">@string/app_name_full</string>
+    <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
     <string name="title_tab_cards_favorites">Cards Favorites</string>
     <string name="title_tab_decks_public">Decks Public</string>
     <string name="title_tab_decks_owned">Decks Owned</string>
     <string name="title_tab_decks_favorites">Decks Favorites</string>
+    <string name="title_tab_matches_statistics">Matches Statistics</string>
+    <string name="title_tab_matches_history">Matches History</string>
 
     <string name="cards_sets_all">All</string>
-    <string name="cards_sets_core">Core</string>
-    <string name="cards_sets_madhouse">Madhouse</string>
+    <string name="cards_sets_core" translatable="false">Core</string>
+    <string name="cards_sets_madhouse" translatable="false">Madhouse</string>
 
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
-    <string name="card_favorited">%1$s favorited</string>
-    <string name="card_unfavorited">%1$s unfavorited</string>
 
     <string name="action_login">Do Login</string>
+    <string name="action_favorited">%1$s favorited</string>
+    <string name="action_unfavorited">%1$s unfavorited</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="error_auth">This action require a logged user.</string>
+    <string name="error_login">Authentication failed.</string>
     <string name="profile_collection">Collection</string>
     <string name="unknown">Unknown</string>
     <string name="zero_percent" translatable="false">0%</string>
 
-    <string name="error_auth">This action require a logged user.</string>
-    <string name="error_login">Authentication failed.</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="sign_in_with_twitter">Sign in with Twitter</string>
-
     <string name="zero_of_zero" translatable="false">0/0</string>
-    <string name="statistics_rarity" translatable="false">%1$02d/%2$02d</string>
-    <string name="statistics_total" translatable="false">%1$03d/%2$03d</string>
-    <string name="statistics_percent" translatable="false">%1$.2f%%</string>
-    <string name="statistics_total_cards">Total Cards\nSoul to complete</string>
+    <string name="cards_search_hint">Name, race, type or keyword</string>
+    <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
+    <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
+    <string name="collection_statistics_percent" translatable="false">%1$.2f%%</string>
+    <string name="collection_statistics_total_cards">Total Cards\nSoul to complete</string>
 
+    <string name="decks_search_hint">Deck Name</string>
     <string name="deck_details">Details</string>
     <string name="deck_details_create_by">Create by</string>
     <string name="deck_details_create_at">Create at</string>
@@ -101,11 +153,48 @@
     <string name="new_deck_save_dialog_title">Deck Info</string>
     <string name="new_deck_save_dialog_name_label">Name</string>
     <string name="new_deck_save_dialog_type_label">Type</string>
-    <string name="new_deck_save_dialog_patch_label">Patch</string>
+    <string name="new_deck_save_dialog_patch_label" translatable="false">Patch</string>
     <string name="new_deck_save_dialog_public_label">Make deck public</string>
     <string name="new_deck_save_dialog_save">Save</string>
     <string name="new_deck_save_as_public">Deck saved as Public</string>
     <string name="new_deck_save_as_private">Deck saved as Private</string>
     <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
+
+    <string name="match_vs" translatable="false">Vs</string>
+    <string name="match_rank_normal" translatable="false"> %1$d</string>
+    <string name="match_rank_legend" translatable="false">#%1$d</string>
+    <string name="match_win">Win</string>
+    <string name="match_loss">Loss</string>
+    <string name="match_statistics_summary_label">Class Summary</string>
+    <string name="match_statistics_tree_wins_label">3 Wins</string>
+    <string name="match_statistics_games_label">Games</string>
+    <string name="match_statistics_wins_label">Wins</string>
+    <string name="match_statistics_losses_label">Losses</string>
+    <string name="match_statistics_win_rate_label">Win Rate</string>
+    <string name="match_statistics_total_label">Total</string>
+    <string name="match_statistics_percent" translatable="false">%1$.1f%%</string>
+    <string name="match_history_delete">Deleting Match versus %1$s</string>
+    <string name="matches_seasons_all">All Seasons</string>
+    <string name="matches_class_title">%1$s Statistics</string>
+
+    <string name="new_match_dialog_title">I\'m playing with</string>
+    <string name="new_match_save_dialog_name_label">Name</string>
+    <string name="new_match_dialog_class_label">Class</string>
+    <string name="new_match_dialog_mode_label">Mode</string>
+    <string name="new_match_dialog_deck_label">Deck</string>
+    <string name="new_match_dialog_deck_other">Other</string>
+    <string name="new_match_dialog_name_hint">Deck Name</string>
+    <string name="new_match_dialog_start">Start</string>
+    <string name="new_match_dialog_start_error_name">Name must be at least 5 characters</string>
+    <string name="new_match_opt_class_label">Opponent Deck Class</string>
+    <string name="new_match_opt_type_label">Opponent Deck Type</string>
+    <string name="new_match_opt_name_label">Opponent Deck Name</string>
+    <string name="new_match_cards_remains_label">Cards Remains</string>
+    <string name="new_match_name_label">(Optional)</string>
+    <string name="new_match_first_label">Going First</string>
+    <string name="new_match_legend_label">Rank Legend</string>
+    <string name="new_match_rank_label">Rank</string>
+    <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
+    <string name="new_match_saved">New Match Saved!</string>
 
 </resources>

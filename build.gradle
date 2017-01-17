@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        appVersionName = "0.2.3"
-        appVersionCode = 5
+        appVersionName = "0.3.0"
+        appVersionCode = 7
 
         kotlin_version = "1.0.6"
         prepareToRelease = true
@@ -16,7 +16,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0-beta2'
         classpath "com.google.gms:google-services:3.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.fabric.tools:gradle:1.22.0"

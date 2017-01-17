@@ -7,6 +7,14 @@
     android:paddingTop="@dimen/status_bar_height">
 
     <ImageView
+        android:id="@+id/profile_change_user"
+        android:layout_width="@dimen/size_normal"
+        android:layout_height="@dimen/size_normal"
+        android:layout_margin="@dimen/small_margin"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_user" />
+
+    <ImageView
         android:id="@+id/profile_image"
         android:layout_width="@dimen/profile_image"
         android:layout_height="@dimen/profile_image"
@@ -22,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/profile_image"
         android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginTop="@dimen/huge_margin"
         android:layout_toEndOf="@id/profile_image"
         android:lines="1"
         android:textColor="@android:color/white"
@@ -61,5 +69,11 @@
         android:indeterminate="true"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <WebView
+        android:id="@+id/profile_clear_cache_webview"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

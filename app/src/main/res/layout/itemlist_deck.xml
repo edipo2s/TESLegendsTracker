@@ -6,6 +6,14 @@
     android:layout_marginTop="@dimen/default_margin"
     tools:layout_marginTop="@dimen/status_bar_height">
 
+    <ProgressBar
+        android:id="@+id/deck_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/deck_cover"
         android:layout_width="match_parent"
@@ -17,6 +25,7 @@
         android:transitionName="@string/deck_cover_transition_name" />
 
     <RelativeLayout
+        android:id="@+id/deck_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/default_margin">
@@ -45,20 +54,6 @@
             android:layout_marginEnd="@dimen/small_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:src="@drawable/ic_private" />
-
-        <TextView
-            android:id="@+id/deck_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/large_margin"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_toEndOf="@id/deck_private"
-            android:layout_toStartOf="@id/deck_date"
-            android:lines="1"
-            android:textSize="@dimen/font_large"
-            android:transitionName="@string/deck_name_transition_name"
-            tools:text="Cycle Archer" />
 
         <ImageView
             android:id="@+id/deck_attr1"
@@ -160,6 +155,21 @@
             android:indeterminate="true"
             android:visibility="gone"
             tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/deck_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_toEndOf="@id/deck_private"
+            android:layout_toStartOf="@id/deck_soul_missing"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="@dimen/font_large"
+            android:transitionName="@string/deck_name_transition_name"
+            tools:text="Cycle Archer Shot" />
 
     </RelativeLayout>
 

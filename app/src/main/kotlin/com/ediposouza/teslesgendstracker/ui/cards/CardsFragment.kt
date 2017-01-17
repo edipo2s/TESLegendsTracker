@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomSheetBehavior
@@ -13,18 +15,20 @@ import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
-import com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.toggleExpanded
+import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
+import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
+import kotlinx.android.synthetic.main.include_new_update.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import org.jsoup.Jsoup
+import timber.log.Timber
+
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -37,9 +41,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private val handler = Handler()
     private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics> by lazy {
-        BottomSheetBehavior.from(activity.cards_collection_statistics)
-    }
+    private val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
+        get() = BottomSheetBehavior.from(cards_collection_statistics)
 
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
@@ -47,7 +50,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                activity.cards_collection_statistics.updateStatistics()
+                cards_collection_statistics.updateStatistics()
             } else {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
@@ -62,11 +65,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun updateActivityTitle(position: Int) {
-        activity.toolbar_title?.setText(when (position) {
+        val title = when (position) {
             1 -> R.string.title_tab_cards_collection
             2 -> R.string.title_tab_cards_favorites
             else -> R.string.title_tab_cards_all
-        })
+        }
+        eventBus.post(CmdUpdateTitle(title))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -77,26 +81,28 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
-        activity.cards_collection_statistics.setOnClickListener {
+        cards_collection_statistics.setOnClickListener {
             statisticsSheetBehavior.toggleExpanded()
         }
         statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         cards_view_pager.adapter = CardsPageAdapter(context, childFragmentManager)
         cards_view_pager.addOnPageChangeListener(pageChange)
-        attr_filter.filterClick = {
+        cards_filter_attr.filterClick = {
             eventBus.post(CmdShowCardsByAttr(it))
-            attr_filter.selectAttr(it, true)
+            cards_filter_attr.selectAttr(it, true)
         }
+        cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
+        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
         Handler().postDelayed({
-            eventBus.post(CmdShowCardsByAttr(Attribute.STRENGTH))
+            eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARDS_ALL())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity.toolbar_title.setText(R.string.app_name_full)
-        activity.dash_tab_layout.setupWithViewPager(cards_view_pager)
+        view?.post { updateActivityTitle(cards_view_pager?.currentItem ?: 0) }
+        cards_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -113,8 +119,24 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
-        eventBus.post(CmdShowTabs())
+        cards_app_bar_layout.setExpanded(true, true)
         (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+        checkLastVersion {
+            Timber.d("New version $it found!")
+            new_update_layout.visibility = View.VISIBLE
+            new_update_later.rippleDuration = 200
+            new_update_later.setOnRippleCompleteListener {
+                new_update_layout.visibility = View.GONE
+                MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_LATER())
+            }
+            new_update_now.rippleDuration = 200
+            new_update_now.setOnRippleCompleteListener {
+                startActivity(Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse(getString(R.string.playstore_url_format, context.packageName))))
+                MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_NOW())
+            }
+            MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_DETECTED())
+        }
     }
 
     override fun onPause() {
@@ -125,9 +147,11 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
+        inflater?.inflate(R.menu.menu_import, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
+        menu?.findItem(R.id.menu_import)?.isVisible = false
         with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.search_hint)
+            queryHint = getString(R.string.cards_search_hint)
             setOnQueryTextListener(this@CardsFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)
@@ -148,6 +172,33 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
+    }
+
+    fun checkLastVersion(onNewVersion: (String?) -> Unit) {
+        doAsync {
+            try {
+                val pkg = context.packageName
+                val newer = Jsoup.connect(getString(R.string.playstore_url_format, pkg))
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div[itemprop=softwareVersion]")
+                        .first()
+                        .ownText()
+                val pInfo = context.packageManager.getPackageInfo(pkg, 0)
+                val newerVersion = newer.replace(".", "")
+                val actualVersion = pInfo.versionName.replace(".", "")
+                Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
+                uiThread {
+                    if (Integer.parseInt(newerVersion) > Integer.parseInt(actualVersion)) {
+                        onNewVersion(newer)
+                    }
+                }
+            } catch (e: Exception) {
+                Timber.e(e.message)
+            }
+        }
     }
 
     class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

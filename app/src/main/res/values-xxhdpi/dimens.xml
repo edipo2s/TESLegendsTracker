@@ -7,6 +7,11 @@
     <dimen name="large_margin">16dp</dimen>
     <dimen name="huge_margin">24dp</dimen>
 
+    <dimen name="size_micro">12dp</dimen>
+    <dimen name="size_small">24dp</dimen>
+    <dimen name="size_normal">36dp</dimen>
+    <dimen name="size_medium">48dp</dimen>
+
     <dimen name="filter_hide_magika_spacing">-4dp</dimen>
 
 </resources>

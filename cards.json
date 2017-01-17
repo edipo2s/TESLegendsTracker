@@ -88,7 +88,7 @@
           "health": "1",
           "rarity": "Legendary",
           "keyword": "",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "scuttler": {
           "name": "Scuttler",
@@ -132,7 +132,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Good"
         },
         "bonebow": {
           "name": "Bone Bow",
@@ -264,7 +264,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon, Charge",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "assassinsbow": {
           "name": "Assassin's Bow",
@@ -286,7 +286,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "blightedalit": {
           "name": "Blighted Alit",
@@ -352,7 +352,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Prophecy, Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Insane"
         },
         "raidingparty": {
           "name": "Raiding Party",
@@ -363,7 +363,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "riftenpillager": {
           "name": "Riften Pillager",
@@ -407,7 +407,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "valenwoodhuntsman": {
           "name": "Valenwood Huntsman",
@@ -749,7 +749,7 @@
           "health": "5",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "wrothgarforge": {
           "name": "Wrothgar Forge",
@@ -805,7 +805,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         }
       },
       "intelligence": {
@@ -840,7 +840,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Last Gasp",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "crownquartermaster": {
           "name": "Crown Quartermaster",
@@ -873,7 +873,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "abeceannavigator": {
           "name": "Abecean Navigator",
@@ -906,15 +906,15 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "crystaltowercrafter": {
           "name": "Crystal Tower Crafter",
           "cost": "02",
           "type": "Creature",
           "race": "High Elf",
-          "attack": "2",
-          "health": "2",
+          "attack": "1",
+          "health": "1",
           "rarity": "Common",
           "keyword": "",
           "arenaTier": "Excellent"
@@ -928,7 +928,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Activate",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "dunmernightblade": {
           "name": "Dunmer Nightblade",
@@ -1093,7 +1093,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "camlornsentinel": {
           "name": "Camlorn Sentinel",
@@ -1126,7 +1126,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "daggerfallmage": {
           "name": "Daggerfall Mage",
@@ -1269,7 +1269,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon, Last Gasp",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "firestorm": {
           "name": "Fire Storm",
@@ -1324,7 +1324,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dragonstarrider": {
           "name": "Dragonstar Rider",
@@ -1335,7 +1335,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "elixirofdeflection": {
           "name": "Elixir of Deflection",
@@ -1346,7 +1346,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Activate, Ward",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "glenumbrasorceress": {
           "name": "Glenumbra Sorceress",
@@ -1368,7 +1368,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "mentorsring": {
           "name": "Mentor's Ring",
@@ -1555,7 +1555,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "expertatromancer": {
           "name": "Expert Atromancer",
@@ -1589,7 +1589,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "divaythfyr": {
           "name": "Divayth Fyr",
@@ -1636,7 +1636,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "apprenticespotion": {
           "name": "Apprentices Potion",
@@ -1680,7 +1680,7 @@
           "health": "1",
           "rarity": "Legendary",
           "keyword": "Pilfer",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "detain": {
           "name": "Detain",
@@ -1812,7 +1812,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "legionshield": {
           "name": "Legion Shield",
@@ -1988,7 +1988,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "rajhinihighwayman": {
           "name": "Rajhini Highwayman",
@@ -2054,7 +2054,7 @@
           "health": "1",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "auridonpaladin": {
           "name": "Auridon Paladin",
@@ -2110,7 +2110,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "hivedefender": {
           "name": "Hive Defender",
@@ -2176,7 +2176,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Pilfer",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "haafingarmarauder": {
           "name": "Haafingar Marauder",
@@ -2209,7 +2209,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "imperialsiegeengine": {
           "name": "Imperial Siege Engine",
@@ -2231,7 +2231,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy, Summon, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "piercingjavelin": {
           "name": "Piercing Javelin",
@@ -2253,7 +2253,7 @@
           "health": "4",
           "rarity": "Epic",
           "keyword": "Summon, Drain",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "spitefuldremora": {
           "name": "Spiteful Dremora",
@@ -2330,7 +2330,7 @@
           "health": "5",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Summon",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "risinglegate": {
           "name": "Rising Legate",
@@ -2352,7 +2352,7 @@
           "health": "7",
           "rarity": "Legendary",
           "keyword": "Guard",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dawnswrath": {
           "name": "Dawn's Wrath",
@@ -2374,7 +2374,7 @@
           "health": "6",
           "rarity": "Epic",
           "keyword": "Guard, Summon",
-          "arenaTier": "Insane"
+          "arenaTier": "Good"
         },
         "miraakdragonborn": {
           "name": "Miraak, Dragonborn",
@@ -2399,7 +2399,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "murkwatergoblin": {
           "name": "Murkwater Goblin",
@@ -2421,7 +2421,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "Shackle",
-          "arenaTier": "Good"
+          "arenaTier": "Poor"
         },
         "mournholdguardian": {
           "name": "Mournhold Guardian",
@@ -2466,7 +2466,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Drain",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "daringcutpurse": {
           "name": "Daring Cutpurse",
@@ -2532,7 +2532,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "goblinskulk": {
           "name": "Goblin Skulk",
@@ -2598,7 +2598,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Guard, Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "snaketoothnecklace": {
           "name": "Snake tooth Necklace",
@@ -2609,7 +2609,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Drain",
-          "arenaTier": "Terrible"
+          "arenaTier": "Excellent"
         },
         "thievesguildrecruit": {
           "name": "Thieves Guild Recruit",
@@ -2620,7 +2620,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "arenthiaswindler": {
           "name": "Arenthia Swindler",
@@ -2642,7 +2642,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Pilfer",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "blacksapprotector": {
           "name": "Blacksap Protector",
@@ -2653,7 +2653,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "dunesmuggler": {
           "name": "Dune Smuggler",
@@ -2796,7 +2796,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Guard, Last Gasp",
-          "arenaTier": "Poor"
+          "arenaTier": "Average"
         },
         "anxileelinvader": {
           "name": "An-Xileel Invader",
@@ -2818,7 +2818,7 @@
           "health": "3",
           "rarity": "Rare",
           "keyword": "Last Gasp",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "deshaansneak": {
           "name": "Deshaan Sneak",
@@ -2840,7 +2840,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Guard, Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "hiddentrail": {
           "name": "Hidden Trail",
@@ -2862,7 +2862,7 @@
           "health": "2",
           "rarity": "Epic",
           "keyword": "Prophecy, Drain",
-          "arenaTier": "Insane"
+          "arenaTier": "Excellent"
         },
         "murkwatershaman": {
           "name": "Murkwater Shaman",
@@ -2906,7 +2906,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Charge, Lethal",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "thievesden": {
           "name": "Thieves' Den",
@@ -2961,7 +2961,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Charge",
-          "arenaTier": "Average"
+          "arenaTier": "Excellent"
         },
         "eldercentaur": {
           "name": "Elder Centaur",
@@ -3027,7 +3027,7 @@
           "health": "6",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "snowysabrecat": {
           "name": "Snowy Sabre Cat",
@@ -3038,11 +3038,11 @@
           "health": "7",
           "rarity": "Epic",
           "keyword": "",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "soulrestmarshal": {
           "name": "Soulrest Marshal",
-          "cost": "05",
+          "cost": "06",
           "type": "Creature",
           "race": "Argonian",
           "attack": "4",
@@ -3217,7 +3217,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Lethal",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "deathlessdraugr": {
           "name": "Deathless Draugr",
@@ -3228,7 +3228,7 @@
           "health": "1",
           "rarity": "Common",
           "keyword": "Last Gasp",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "iliacsorcerer": {
           "name": "Iliac Sorcerer",
@@ -3481,7 +3481,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Prophecy",
-          "arenaTier": "Insane"
+          "arenaTier": "Good"
         },
         "necromancersamulet": {
           "name": "Necromancer's Amulet",
@@ -3536,7 +3536,7 @@
           "health": "3",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Poor"
+          "arenaTier": "Excellent"
         },
         "youngmammoth": {
           "name": "Young Mammoth",
@@ -3691,7 +3691,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "northpointcaptain": {
           "name": "Northpoint Captain",
@@ -3779,7 +3779,7 @@
           "health": "6",
           "rarity": "Common",
           "keyword": "Prophecy, Guard",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "shadowfenpriest": {
           "name": "Shadowfen Priest",
@@ -3823,7 +3823,7 @@
           "health": "4",
           "rarity": "Legendary",
           "keyword": "Lethal",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "fleshatronach": {
           "name": "Flesh Atronach",
@@ -3912,7 +3912,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Guard",
-          "arenaTier": "Excellent"
+          "arenaTier": "Insane"
         },
         "swampleviathan": {
           "name": "Swamp Leviathan",
@@ -3967,7 +3967,7 @@
           "health": "12",
           "rarity": "Legendary",
           "keyword": "Breakthrough, Guard, Regenerate",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         }
       },
       "dual": {
@@ -4020,7 +4020,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Drain, Summon, Guard",
-          "arenaTier": "Excellent",
+          "arenaTier": "Good",
           "attr1": "intelligence",
           "attr2": "agility"
         },
@@ -4090,7 +4090,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Insane",
+          "arenaTier": "Excellent",
           "attr1": "intelligence",
           "attr2": "willpower"
         },
@@ -4129,7 +4129,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Guard, Summon",
-          "arenaTier": "Excellent",
+          "arenaTier": "Insane",
           "attr1": "agility",
           "attr2": "endurance"
         },
@@ -4212,7 +4212,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Average",
+          "arenaTier": "Good",
           "attr1": "strength",
           "attr2": "intelligence"
         },
@@ -4225,7 +4225,7 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Excellent",
+          "arenaTier": "Average",
           "attr1": "strength",
           "attr2": "agility"
         },
@@ -4287,7 +4287,7 @@
           "health": "2",
           "rarity": "Common",
           "keyword": "Prophecy",
-          "arenaTier": "Good"
+          "arenaTier": "Excellent"
         },
         "ravenouscrocodile": {
           "name": "Ravenous Crocodile",
@@ -4365,7 +4365,7 @@
           "health": "",
           "rarity": "Common",
           "keyword": "",
-          "arenaTier": "Excellent"
+          "arenaTier": "Insane"
         },
         "dwarvensphere": {
           "name": "Dwarven Sphere",
@@ -4420,11 +4420,11 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         },
         "slaughterfish": {
           "name": "Slaughterfish",
-          "cost": "03",
+          "cost": "04",
           "type": "Creature",
           "race": "Fish",
           "attack": "1",
@@ -4435,7 +4435,7 @@
         },
         "slaughterfishspawning": {
           "name": "Slaughterfish Spawning",
-          "cost": "03",
+          "cost": "04",
           "type": "Action",
           "race": "",
           "attack": "",
@@ -4520,7 +4520,7 @@
           "health": "4",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         },
         "portcullis": {
           "name": "Portcullis",
@@ -4576,7 +4576,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Average"
+          "arenaTier": "Good"
         },
         "dwarvenarmaments": {
           "name": "Dwarven Armaments",
@@ -4598,7 +4598,7 @@
           "health": "5",
           "rarity": "Common",
           "keyword": "Breakthrough",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "hallsofthedwemer": {
           "name": "Halls of the Dwemer",
@@ -4609,7 +4609,7 @@
           "health": "",
           "rarity": "Epic",
           "keyword": "Summon, Guard",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "orbofvaermina": {
           "name": "Orb of Vaermina",
@@ -4621,7 +4621,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Average"
+          "arenaTier": "Poor"
         },
         "darkharvester": {
           "name": "Dark Harvester",
@@ -4655,7 +4655,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Activate",
-          "arenaTier": "Good"
+          "arenaTier": "Average"
         },
         "odahviing": {
           "name": "Odahviing",
@@ -4667,7 +4667,7 @@
           "rarity": "Legendary",
           "unique": true,
           "keyword": "Summon",
-          "arenaTier": "Excellent"
+          "arenaTier": "Good"
         }
       }
     },
@@ -4682,7 +4682,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       },
       "intelligence": {
@@ -4695,7 +4695,7 @@
           "health": "1",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         }
       },
       "willpower": {
@@ -4708,7 +4708,7 @@
           "health": "2",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Good"
         }
       },
       "agility": {
@@ -4721,7 +4721,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "",
-          "arenaTier": "Unknown"
+          "arenaTier": "Terrible"
         }
       },
       "endurance": {
@@ -4734,7 +4734,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       },
       "neutral": {
@@ -4747,7 +4747,7 @@
           "health": "",
           "rarity": "Rare",
           "keyword": "Unsummon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         },
         "merchantscamel": {
           "name": "Merchant's Camel",
@@ -4758,7 +4758,7 @@
           "health": "4",
           "rarity": "Common",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         },
         "forsakenchampion": {
           "name": "Forsaken Champion",
@@ -4769,7 +4769,7 @@
           "health": "3",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Poor"
         },
         "altarofdespair": {
           "name": "Altar of Despair",
@@ -4780,7 +4780,7 @@
           "health": "",
           "rarity": "Legendary",
           "keyword": "Activate",
-          "arenaTier": "Unknown"
+          "arenaTier": "Terrible"
         },
         "illusorymimic": {
           "name": "Illusory Mimic",
@@ -4791,93 +4791,366 @@
           "health": "5",
           "rarity": "Epic",
           "keyword": "Summon",
-          "arenaTier": "Unknown"
+          "arenaTier": "Average"
         }
       }
     }
   },
-  "season": {
-    "05": {
-      "reward": "elsweyrlookout",
-      "month": "2016_12"
-    },
-    "04": {
-      "reward": "battlereeveofdusk",
-      "month": "2016_11"
-    },
-    "03": {
-      "reward": "mechanicalally",
-      "month": "2016_10"
-    },
-    "02": {
-      "reward": "histgrove",
-      "month": "2016_09"
-    },
-    "01": {
-      "reward": "smugglershaul",
-      "month": "2016_08"
-    },
-    "00": {
-      "reward": "dagirahtmystic",
-      "month": "2016_07"
-    },
-    "2016_06": {
-      "reward": "plunder",
-      "month": "2016_06"
-    },
-    "2016_05": {
-      "reward": "staffofsparks",
-      "month": "2016_05"
-    },
-    "2016_04": {
-      "reward": "witheredhandcultist",
-      "month": "2016_04"
-    },
-    "2016_03": {
-      "reward": "magesguildretreat",
-      "month": "2016_03"
+  "decks": {
+    "public": {
+      "-K_-MCInX62rl826jQf1": {
+        "cards": {
+          "belligerentgiant": 2,
+          "blooddragon": 3,
+          "cliffracer": 2,
+          "daringcutpurse": 3,
+          "earthbonespinner": 3,
+          "fightersguildrecruit": 3,
+          "finishoff": 3,
+          "housekinsman": 3,
+          "leaflurker": 3,
+          "moonlightwerebat": 3,
+          "murkwaterwitch": 3,
+          "rapidshot": 3,
+          "skavenpyromancer": 3,
+          "snaketoothnecklace": 1,
+          "soulrestmarshal": 3,
+          "tazkadthepackmaster": 1,
+          "thievesguildrecruit": 3,
+          "triumphantjarl": 2,
+          "ungolimthelistener": 1,
+          "witheredhandcultist": 2
+        },
+        "cls": 0,
+        "comments": {
+          "-K_6sQmQSJYrQVKYojSJ": {
+            "comment": "Great deck, I just change Tazkar beacuse I don't have it",
+            "createdAt": "2016-12-28T22:01:32.864",
+            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+          }
+        },
+        "cost": 14400,
+        "createdAt": "2016-12-27T09:59:03.560",
+        "name": "Cycle Archer",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2016_12_01",
+        "type": 4,
+        "updatedAt": "2016-12-27T09:59:03.561",
+        "views": 50
+      },
+      "-K_9ongYoCXYadur5EVZ": {
+        "cards": {
+          "blackwormnecromancer": 3,
+          "cliffracer": 3,
+          "daringcutpurse": 3,
+          "dunesmuggler": 3,
+          "fightersguildrecruit": 3,
+          "giantbat": 3,
+          "housekinsman": 3,
+          "illusorymimic": 3,
+          "moonlightwerebat": 3,
+          "mournholdtraitor": 3,
+          "murkwaterwitch": 3,
+          "nahagliiv": 1,
+          "shadowfenpriest": 2,
+          "soulrestmarshal": 3,
+          "tazkadthepackmaster": 1,
+          "territorialviper": 3,
+          "ungolimthelistener": 1,
+          "windkeepspellsword": 3,
+          "youngmammoth": 3
+        },
+        "cls": 6,
+        "cost": 11900,
+        "createdAt": "2016-12-29T11:44:33.906",
+        "likes": [
+          "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+          "h2KTcpHAnxRY0EaIM8KFKXVWz8L2"
+        ],
+        "name": "Mimic Scout",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2016_12_14",
+        "type": 0,
+        "updatedAt": "2016-12-29T11:44:33.906",
+        "views": 33
+      },
+      "-K_iNXh_xHakLMUcDbMK": {
+        "cards": {
+          "blackwormnecromancer": 3,
+          "cursedspectre": 2,
+          "daggerfallmage": 3,
+          "darkrift": 3,
+          "firebolt": 3,
+          "hauntingspirit": 3,
+          "highkingemeric": 1,
+          "lightningbolt": 3,
+          "lurkingcrocodile": 3,
+          "midnightsweep": 3,
+          "mummify": 3,
+          "nahagliiv": 1,
+          "nightshadow": 2,
+          "royalsage": 2,
+          "shadowfenpriest": 2,
+          "shriekingharpy": 3,
+          "supremeatromancer": 1,
+          "wardcrafter": 3,
+          "windkeepspellsword": 3,
+          "youngmammoth": 3
+        },
+        "cls": 7,
+        "cost": 13000,
+        "createdAt": "2017-01-05T09:27:24.423",
+        "name": "Prophecy Sorcerer",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2017_01_01",
+        "type": 0,
+        "updatedAt": "2017-01-05T09:27:24.424",
+        "views": 8
+      },
+      "-K_nqdgsJMWGGrLyGN9v": {
+        "cards": {
+          "afflictedalit": 3,
+          "castout": 3,
+          "darkrift": 3,
+          "earthbonespinner": 3,
+          "fateweaver": 3,
+          "gladiatorarena": 3,
+          "grahtwoodambusher": 3,
+          "graystoneravager": 3,
+          "lightningbolt": 3,
+          "morkulgatekeeper": 3,
+          "relentlessraider": 3,
+          "sentinelbattlemace": 3,
+          "sharpshooterscout": 3,
+          "shriekingharpy": 3,
+          "slaughterfishspawning": 3,
+          "triumphantjarl": 2,
+          "wardcrafter": 3
+        },
+        "cls": 2,
+        "cost": 12200,
+        "createdAt": "2017-01-06T10:57:03.207",
+        "name": "Prophecy battlemage",
+        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "patch": "2017_01_01",
+        "type": 0,
+        "updatedAt": "2017-01-06T10:57:03.207",
+        "views": 1
+      }
     }
   },
   "patches": {
-    "2017_01_01": {
-      "desc": "Elsweyr Lookout"
-    },
-    "2016_12_14": {
+    "2017_01_11": {
       "core": {
-        "strength": {
-          "burnandpillage": {
+        "agility": {
+          "dunesmuggler": {
+            "text": {
+              "after": "Summon: Move another friendly creature in this lane. When a friendly creature moves, give it +1/+1.",
+              "before": "Summon: Move another friendly creature. When a friendly creature moves, give it +1/+1."
+            }
+          },
+          "dunestalker": {
+            "text": {
+              "after": "Prophecy. Summon: Move another friendly creature in this lane.",
+              "before": "Prophecy. Summon: Move another friendly creature."
+            }
+          },
+          "snaketoothnecklace": {
+            "text": {
+              "after": "+1/+1. Summon: Give the wielder Drain this turn.",
+              "before": "Drain. +1/+1"
+            }
+          },
+          "soulrestmarshal": {
             "cost": {
-              "after": "5",
-              "before": "6"
+              "after": 6,
+              "before": 5
             },
             "text": {
-              "after": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
-              "before": "Deal 1 damage to all enemy creatures for each destroyed enemy rune."
+              "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less.",
+              "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less."
+            }
+          }
+        },
+        "intelligence": {
+          "crystaltowercrafter": {
+            "attack": {
+              "after": 1,
+              "before": 2
+            },
+            "health": {
+              "after": 1,
+              "before": 2
+            }
+          }
+        },
+        "willpower": {
+          "pillagingtribune": {
+            "text": {
+              "after": "Summon: Give a friendly creature Drain this turn.",
+              "before": "Summon: Give other friendly creature Drain this turn."
+            }
+          }
+        },
+        "endurance": {
+          "histgrove": {
+            "text": {
+              "after": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
+              "before": "Summon: +1 max magicka. When you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane."
+            }
+          }
+        },
+        "neutral": {
+          "slaughterfishspawning": {
+            "cost": {
+              "after": 4,
+              "before": 3
+            }
+          },
+          "slaughterfish": {
+            "cost": {
+              "after": 4,
+              "before": 3
             }
           }
         }
       },
-      "desc": "Madhouse Collection"
+      "desc": "slaughterfishspawning Nerf"
     },
-    "2016_12_01": {
-      "desc": "Battlereeve Of Dusk"
-    },
-    "2016_11_03": {
+    "2016_08_25": {
       "core": {
-        "strength": {
-          "morkulgatekeeper": {
-            "keyword": {
-              "after": "Prophecy, Guard, Summon",
-              "before": "Guard, Summon"
+        "agility": {
+          "murkwatersavage": {
+            "cost": {
+              "after": "3",
+              "before": "2"
             }
           },
-          "volendrung": {
+          "soulrestmarshal": {
             "text": {
-              "after": "Uses: 2. Activate: Give a creature +4/+4.",
-              "before": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough."
+              "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less.",
+              "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less."
+            }
+          }
+        }
+      },
+      "desc": "Soulrest Marshal Nerf"
+    },
+    "2016_09_01": {
+      "desc": "Smuggler's Haul"
+    },
+    "2016_09_20": {
+      "core": {
+        "endurance": {
+          "bonecolossus": {
+            "text": {
+              "after": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Skeleton have +1/+1.",
+              "before": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1."
+            }
+          }
+        }
+      },
+      "desc": "Bone Colossus Nerf"
+    },
+    "2016_09_28": {
+      "core": {
+        "agility": {
+          "blacksapprotector": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "voraciousspriggan": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
             }
           }
         },
+        "intelligence": {
+          "evermoresteward": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "farsightnereid": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "nibenbaycutthroat": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "shockingwamasu": {
+            "text": {
+              "after": "Summon: Deal 4 damage to a creature.",
+              "before": "Summon: Deal 4 damage."
+            }
+          },
+          "shriekingharpy": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          }
+        },
+        "strength": {
+          "fieryimp": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "fortresswatchman": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "intimidate": {
+            "rarity": {
+              "after": "Rare",
+              "before": "Common"
+            }
+          },
+          "valenwoodhuntsman": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          },
+          "valenwoodtrapper": {
+            "rarity": {
+              "after": "Common",
+              "before": "Rare"
+            }
+          }
+        },
+        "willpower": {
+          "mantikora": {
+            "text": {
+              "after": "Guard. Summon: Destroy an enemy creature in this lane.",
+              "before": "Guard. Summon: Destroy an enemy creature."
+            }
+          }
+        }
+      },
+      "desc": "Mantikora Nerf"
+    },
+    "2016_10_01": {
+      "desc": "Hist Grove"
+    },
+    "2016_11_01": {
+      "desc": "Mechanical Ally"
+    },
+    "2016_11_03": {
+      "core": {
         "agility": {
           "housekinsman": {
             "health": {
@@ -4901,6 +5174,22 @@
             "health": {
               "after": 2,
               "before": 3
+            }
+          }
+        },
+        "dual": {
+          "allenabenoch": {
+            "text": {
+              "after": "Lethal. Summon: Deal 1 damage to an enemy.",
+              "before": "Lethal. Summon: Deal 1 damage to an enemy creature."
+            }
+          }
+        },
+        "endurance": {
+          "wrothgarartisan": {
+            "health": {
+              "after": 3,
+              "before": 2
             }
           }
         },
@@ -4934,17 +5223,31 @@
             }
           }
         },
-        "willpower": {
-          "divinefervor": {
-            "cost": {
-              "after": "05",
-              "before": "04"
+        "strength": {
+          "morkulgatekeeper": {
+            "keyword": {
+              "after": "Prophecy, Guard, Summon",
+              "before": "Guard, Summon"
             }
           },
+          "volendrung": {
+            "text": {
+              "after": "Uses: 2. Activate: Give a creature +4/+4.",
+              "before": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough."
+            }
+          }
+        },
+        "willpower": {
           "apprenticespotion": {
             "cost": {
               "after": "02",
               "before": "01"
+            }
+          },
+          "divinefervor": {
+            "cost": {
+              "after": "05",
+              "before": "04"
             }
           },
           "healingpotion": {
@@ -4953,282 +5256,1126 @@
               "before": "01"
             }
           }
-        },
-        "endurance": {
-          "wrothgarartisan": {
-            "health": {
-              "after": 3,
-              "before": 2
-            }
-          }
-        },
-        "dual": {
-          "allenabenoch": {
-            "text": {
-              "after": "Lethal. Summon: Deal 1 damage to an enemy.",
-              "before": "Lethal. Summon: Deal 1 damage to an enemy creature."
-            }
-          }
         }
       },
       "desc": "Nahkriin Nerf"
     },
-    "2016_11_01": {
-      "desc": "Mechanical Ally"
+    "2016_12_01": {
+      "desc": "Battlereeve Of Dusk"
     },
-    "2016_10_01": {
-      "desc": "Hist Grove"
-    },
-    "2016_09_01": {
-      "desc": "Smuggler's Haul"
-    },
-    "2016_09_28": {
+    "2016_12_14": {
       "core": {
         "strength": {
-          "intimidate": {
-            "rarity": {
-              "after": "Rare",
-              "before": "Common"
-            }
-          },
-          "fieryimp": {
-            "rarity": {
-              "after": "Rare",
-              "before": "Common"
-            }
-          },
-          "valenwoodhuntsman": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          },
-          "valenwoodtrapper": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          },
-          "fortresswatchman": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          }
-        },
-        "intelligence": {
-          "evermoresteward": {
-            "rarity": {
-              "after": "Rare",
-              "before": "Common"
-            }
-          },
-          "shriekingharpy": {
-            "rarity": {
-              "after": "Rare",
-              "before": "Common"
-            }
-          },
-          "nibenbaycutthroat": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          },
-          "farsightnereid": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          },
-          "shockingwamasu": {
-            "text": {
-              "after": "Summon: Deal 4 damage to a creature.",
-              "before": "Summon: Deal 4 damage."
-            }
-          }
-        },
-        "agility": {
-          "blacksapprotector": {
-            "rarity": {
-              "after": "Rare",
-              "before": "Common"
-            }
-          },
-          "voraciousspriggan": {
-            "rarity": {
-              "after": "Common",
-              "before": "Rare"
-            }
-          }
-        },
-        "willpower": {
-          "mantikora": {
-            "text": {
-              "after": "Guard. Summon: Destroy an enemy creature in this lane.",
-              "before": "Guard. Summon: Destroy an enemy creature."
-            }
-          }
-        }
-      },
-      "desc": "Mantikora Nerf"
-    },
-    "2016_09_20": {
-      "core": {
-        "endurance": {
-          "bonecolossus": {
-            "text": {
-              "after": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Skeleton have +1/+1.",
-              "before": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1."
-            }
-          }
-        }
-      },
-      "desc": "Bone Colossus Nerf"
-    },
-    "2016_08_25": {
-      "core": {
-        "agility": {
-          "soulrestmarshal": {
-            "text": {
-              "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less.",
-              "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less."
-            }
-          },
-          "murkwatersavage": {
+          "burnandpillage": {
             "cost": {
-              "after": "3",
-              "before": "2"
+              "after": "5",
+              "before": "6"
+            },
+            "text": {
+              "after": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
+              "before": "Deal 1 damage to all enemy creatures for each destroyed enemy rune."
             }
           }
         }
       },
-      "desc": "Soulrest Marshal Nerf"
+      "desc": "Madhouse Collection"
+    },
+    "2017_01_01": {
+      "desc": "Elsweyr Lookout"
     }
+  },
+  "season": {
+    "2016_08": "smugglershaul",
+    "2016_09": "histgrove",
+    "2016_10": "mechanicalally",
+    "2016_11": "battlereeveofdusk",
+    "2016_12": "elsweyrlookout",
+    "2017_01": "unknown"
   },
   "users": {
     "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
       "cards": {
         "core": {
           "agility": {
+            "anxileelinvader": {
+              "qtd": 3
+            },
+            "arrowintheknee": {
+              "qtd": 3
+            },
+            "baandaribruiser": {
+              "qtd": 3
+            },
+            "blacksapprotector": {
+              "qtd": 3
+            },
+            "chaurusreaper": {
+              "qtd": 3
+            },
+            "cliffracer": {
+              "qtd": 3
+            },
+            "curse": {
+              "qtd": 3
+            },
+            "daringcutpurse": {
+              "qtd": 3
+            },
+            "deshaanavenger": {
+              "qtd": 3
+            },
+            "dunesmuggler": {
+              "qtd": 3
+            },
+            "dunestalker": {
+              "qtd": 2
+            },
+            "eldercentaur": {
+              "qtd": 2
+            },
+            "feastingvulture": {
+              "qtd": 0
+            },
+            "fightersguildrecruit": {
+              "qtd": 3
+            },
             "finishoff": {
+              "qtd": 3
+            },
+            "giantbat": {
+              "qtd": 3
+            },
+            "giantsnake": {
+              "qtd": 1
+            },
+            "goblinskulk": {
+              "qtd": 3
+            },
+            "greenheartknight": {
+              "qtd": 3
+            },
+            "greenpactstalker": {
+              "qtd": 3
+            },
+            "greentouchedspriggan": {
+              "qtd": 1
+            },
+            "helstromfootpad": {
+              "qtd": 3
+            },
+            "highlandlurcher": {
+              "qtd": 3
+            },
+            "housekinsman": {
+              "qtd": 3
+            },
+            "leaflurker": {
+              "qtd": 3
+            },
+            "leafwaterblessing": {
+              "qtd": 1
+            },
+            "maleficwreath": {
+              "qtd": 2
+            },
+            "moonlightwerebat": {
+              "qtd": 3
+            },
+            "mournholdguardian": {
+              "qtd": 3
+            },
+            "mournholdtraitor": {
+              "qtd": 3
+            },
+            "murkwaterbutcher": {
+              "qtd": 3
+            },
+            "murkwatergoblin": {
+              "qtd": 3
+            },
+            "murkwatersavage": {
+              "qtd": 3
+            },
+            "murkwatershaman": {
               "qtd": 2
             },
             "murkwaterwitch": {
               "qtd": 3
             },
+            "nimbleally": {
+              "qtd": 3
+            },
+            "quinrawlburglar": {
+              "qtd": 2
+            },
+            "quinrawlskulker": {
+              "qtd": 0
+            },
+            "ransack": {
+              "qtd": 3
+            },
+            "shadowshift": {
+              "qtd": 3
+            },
+            "skoomaracketeer": {
+              "qtd": 3
+            },
+            "smugglershaul": {
+              "qtd": 3
+            },
+            "snaketoothnecklace": {
+              "qtd": 3
+            },
+            "snowysabrecat": {
+              "qtd": 1
+            },
+            "soulrestmarshal": {
+              "qtd": 3
+            },
+            "spiderdaedra": {
+              "qtd": 1
+            },
+            "spiderlair": {
+              "qtd": 1
+            },
+            "swiftstrike": {
+              "qtd": 3
+            },
+            "tazkadthepackmaster": {
+              "qtd": 1
+            },
+            "tenmarswiftclaw": {
+              "qtd": 1
+            },
+            "territorialviper": {
+              "qtd": 3
+            },
+            "thievery": {
+              "qtd": 3
+            },
+            "thievesguildrecruit": {
+              "qtd": 3
+            },
             "ungolimthelistener": {
-              "favorite": true
+              "favorite": true,
+              "qtd": 1
+            },
+            "varaniscourier": {
+              "qtd": 3
+            },
+            "voraciousspriggan": {
+              "qtd": 3
+            },
+            "wildbeastcaller": {
+              "qtd": 2
+            }
+          },
+          "dual": {
+            "allenabenoch": {
+              "qtd": 1
+            },
+            "edictofazura": {
+              "qtd": 1
+            },
+            "falinestireaver": {
+              "qtd": 1
+            },
+            "highkingemeric": {
+              "qtd": 1
+            },
+            "masterofthieves": {
+              "qtd": 3
+            },
+            "militantchieftain": {
+              "qtd": 1
+            },
+            "riftthane": {
+              "qtd": 1
+            },
+            "sadrasagent": {
+              "qtd": 2
+            },
+            "sentinelbattlemace": {
+              "qtd": 1
+            },
+            "shornhelmchampion": {
+              "qtd": 2
+            },
+            "skywatchvindicator": {
+              "qtd": 2
+            },
+            "thornhistmage": {
+              "qtd": 1
+            },
+            "tyr": {
+              "qtd": 1
+            }
+          },
+          "endurance": {
+            "angrygrahl": {
+              "qtd": 1
+            },
+            "archeinelite": {
+              "qtd": 2
+            },
+            "archeinvenomtongue": {
+              "qtd": 3
+            },
+            "blackwormnecromancer": {
+              "qtd": 3
+            },
+            "bloodmagiclord": {
+              "qtd": 1
+            },
+            "brumaarmorer": {
+              "qtd": 3
+            },
+            "cursedspectre": {
+              "qtd": 3
+            },
+            "daedricdagger": {
+              "qtd": 3
+            },
+            "deadlydraugr": {
+              "qtd": 3
+            },
+            "deathlessdraugr": {
+              "qtd": 3
+            },
+            "discipleofnamira": {
+              "qtd": 3
+            },
+            "doomcragvampire": {
+              "qtd": 1
+            },
+            "dragontailsavior": {
+              "qtd": 3
+            },
+            "elixirofvigor": {
+              "qtd": 3
+            },
+            "enchantedplate": {
+              "qtd": 3
+            },
+            "fharundefender": {
+              "qtd": 3
+            },
+            "fleshatronach": {
+              "qtd": 1
+            },
+            "frostbitespider": {
+              "qtd": 3
+            },
+            "hackwingfeather": {
+              "qtd": 1
+            },
+            "hauntingspirit": {
+              "qtd": 3
+            },
+            "healinghands": {
+              "qtd": 3
+            },
+            "histgrove": {
+              "qtd": 3
+            },
+            "histspeaker": {
+              "qtd": 3
+            },
+            "iliacsorcerer": {
+              "qtd": 1
+            },
+            "imperialarmor": {
+              "qtd": 3
+            },
+            "imprisoneddeathlord": {
+              "qtd": 2
+            },
+            "ironatronach": {
+              "qtd": 1
+            },
+            "lowlandtroll": {
+              "qtd": 2
+            },
+            "lurkingmummy": {
+              "qtd": 3
+            },
+            "midnightsweep": {
+              "qtd": 3
+            },
+            "mummify": {
+              "qtd": 3
+            },
+            "nahagliiv": {
+              "qtd": 1
+            },
+            "nightshadow": {
+              "qtd": 2
+            },
+            "northpointcaptain": {
+              "qtd": 3
+            },
+            "oldgatewarden": {
+              "qtd": 3
+            },
+            "pleatokynareth": {
+              "qtd": 3
+            },
+            "preserveroftheroot": {
+              "qtd": 2
+            },
+            "restlesstemplar": {
+              "qtd": 3
+            },
+            "shadowfenpriest": {
+              "qtd": 3
+            },
+            "siegecatapult": {
+              "qtd": 2
+            },
+            "stalwartally": {
+              "qtd": 3
+            },
+            "stampedingmammoth": {
+              "qtd": 2
+            },
+            "stonetoothscrapper": {
+              "qtd": 3
+            },
+            "stormholdhenchman": {
+              "qtd": 3
+            },
+            "suppress": {
+              "qtd": 2
+            },
+            "swampleviathan": {
+              "qtd": 3
+            },
+            "treeminder": {
+              "qtd": 3
+            },
+            "watchcommander": {
+              "qtd": 3
+            },
+            "windkeepspellsword": {
+              "qtd": 3
+            },
+            "wrothgarartisan": {
+              "qtd": 3
+            },
+            "wrothgarkingpin": {
+              "qtd": 1
+            },
+            "yewshield": {
+              "qtd": 1
+            },
+            "youngmammoth": {
+              "qtd": 3
+            }
+          },
+          "intelligence": {
+            "abeceannavigator": {
+              "qtd": 3
+            },
+            "ashservant": {
+              "qtd": 3
+            },
+            "baronoftear": {
+              "qtd": 3
+            },
+            "battlereeveofdusk": {
+              "qtd": 3
+            },
+            "bretonconjurer": {
+              "qtd": 3
+            },
+            "brilliantexperiment": {
+              "qtd": 3
+            },
+            "brutalashlander": {
+              "qtd": 3
+            },
+            "camlornhero": {
+              "qtd": 3
+            },
+            "camlornsentinel": {
+              "qtd": 3
+            },
+            "craglornscavenger": {
+              "qtd": 1
+            },
+            "crownquartermaster": {
+              "qtd": 3
+            },
+            "cruelfirebloom": {
+              "qtd": 3
+            },
+            "crystaltowercrafter": {
+              "qtd": 3
+            },
+            "cunningally": {
+              "qtd": 3
+            },
+            "daggerfallmage": {
+              "qtd": 2
+            },
+            "darkrift": {
+              "qtd": 1
+            },
+            "desperateconjuring": {
+              "qtd": 1
+            },
+            "divaythfyr": {
+              "qtd": 1
+            },
+            "dragonstarrider": {
+              "qtd": 1
+            },
+            "dresrenegade": {
+              "qtd": 3
+            },
+            "drestormentor": {
+              "qtd": 3
+            },
+            "elixirofdeflection": {
+              "qtd": 3
+            },
+            "elusiveschemer": {
+              "qtd": 3
+            },
+            "evermoresteward": {
+              "qtd": 3
+            },
+            "farsightnereid": {
+              "qtd": 3
+            },
+            "fateweaver": {
+              "qtd": 3
+            },
+            "firebolt": {
+              "qtd": 3
+            },
+            "firestorm": {
+              "qtd": 1
+            },
+            "glenumbrasorceress": {
+              "qtd": 1
+            },
+            "highrocksummoner": {
+              "qtd": 3
+            },
+            "icespike": {
+              "qtd": 3
+            },
+            "icewraith": {
+              "qtd": 1
+            },
+            "indorilarchmage": {
+              "qtd": 1
+            },
+            "keeperofwhispers": {
+              "qtd": 1
+            },
+            "lesserward": {
+              "qtd": 3
+            },
+            "lightningbolt": {
+              "qtd": 3
+            },
+            "lillandrilhexmage": {
+              "qtd": 3
+            },
+            "maceofencumbrance": {
+              "qtd": 3
+            },
+            "magesguildretreat": {
+              "qtd": 2
+            },
+            "masterofarms": {
+              "qtd": 3
+            },
+            "mentorsring": {
+              "qtd": 1
+            },
+            "momentofclarity": {
+              "qtd": 2
+            },
+            "nibenbaycutthroat": {
+              "qtd": 3
+            },
+            "redoranenforcer": {
+              "qtd": 3
+            },
+            "royalsage": {
+              "qtd": 3
+            },
+            "shimmerenepeddler": {
+              "qtd": 2
+            },
+            "shockingwamasu": {
+              "qtd": 1
+            },
+            "shriekingharpy": {
+              "qtd": 3
+            },
+            "skilledblacksmith": {
+              "qtd": 3
+            },
+            "soulsplit": {
+              "qtd": 3
+            },
+            "staffofsparks": {
+              "qtd": 2
+            },
+            "steelsword": {
+              "qtd": 3
+            },
+            "studiumheadmaster": {
+              "qtd": 1
+            },
+            "summersetorrery": {
+              "qtd": 2
+            },
+            "supremeatromancer": {
+              "qtd": 1
+            },
+            "telvanniarcanist": {
+              "qtd": 3
+            },
+            "tomeofalteration": {
+              "qtd": 3
+            },
+            "wardcrafter": {
+              "qtd": 2
+            },
+            "wintersgrasp": {
+              "qtd": 2
+            },
+            "wisdomofancients": {
+              "qtd": 1
+            }
+          },
+          "neutral": {
+            "adoringfan": {
+              "qtd": 1
+            },
+            "agelessautomaton": {
+              "qtd": 3
+            },
+            "bardedguar": {
+              "qtd": 3
+            },
+            "crushingblow": {
+              "qtd": 3
+            },
+            "darkharvester": {
+              "qtd": 3
+            },
+            "dreughshellarmor": {
+              "qtd": 3
+            },
+            "dwarvenarmaments": {
+              "qtd": 2
+            },
+            "dwarvenballista": {
+              "qtd": 3
+            },
+            "dwarvencenturion": {
+              "qtd": 1
+            },
+            "dwarvensphere": {
+              "qtd": 3
+            },
+            "dwarvenspider": {
+              "qtd": 3
+            },
+            "elixirofconflict": {
+              "qtd": 3
+            },
+            "enragedmudcrab": {
+              "qtd": 3
+            },
+            "ferociousdreugh": {
+              "qtd": 3
+            },
+            "forswornguide": {
+              "qtd": 3
+            },
+            "frenziedwitchman": {
+              "qtd": 3
+            },
+            "goldbrand": {
+              "qtd": 1
+            },
+            "lurkingcrocodile": {
+              "qtd": 3
+            },
+            "mapleshield": {
+              "qtd": 3
+            },
+            "mechanicalally": {
+              "qtd": 3
+            },
+            "orbofvaermina": {
+              "qtd": 1
+            },
+            "portcullis": {
+              "qtd": 3
+            },
+            "ravenouscrocodile": {
+              "qtd": 3
+            },
+            "reachmanshaman": {
+              "qtd": 3
+            },
+            "slaughterfish": {
+              "qtd": 0
+            },
+            "slaughterfishspawning": {
+              "qtd": 3
+            },
+            "sparkingspider": {
+              "qtd": 2
+            },
+            "spiderworker": {
+              "qtd": 3
+            },
+            "strongholderadicator": {
+              "qtd": 2
+            },
+            "strongholdincubator": {
+              "qtd": 1
+            },
+            "viciousdreugh": {
+              "qtd": 3
             }
           },
           "strength": {
-            "fearlessnorthlander": {
+            "afflictedalit": {
+              "qtd": 3
+            },
+            "alikrsurvivalist": {
               "qtd": 1
+            },
+            "assassinsbow": {
+              "qtd": 3
+            },
+            "bangkoraibutcher": {
+              "qtd": 3
+            },
+            "battlerageorc": {
+              "qtd": 3
+            },
+            "belligerentgiant": {
+              "qtd": 2
+            },
+            "blooddragon": {
+              "qtd": 2
+            },
+            "boglurcher": {
+              "qtd": 2
+            },
+            "bonebow": {
+              "qtd": 3
+            },
+            "burnandpillage": {
+              "qtd": 2
+            },
+            "castout": {
+              "qtd": 3
+            },
+            "childofhircine": {
+              "qtd": 1
+            },
+            "covenantmarauder": {
+              "qtd": 0
+            },
+            "dreadclannfear": {
+              "qtd": 1
+            },
+            "dremoramarkynaz": {
+              "qtd": 1
+            },
+            "earthbonespinner": {
+              "qtd": 3
+            },
+            "fearlessnorthlander": {
+              "qtd": 0
             },
             "fieryimp": {
               "favorite": true,
+              "qtd": 3
+            },
+            "fireball": {
+              "qtd": 3
+            },
+            "fortresswatchman": {
               "qtd": 2
             },
+            "grahtwoodambusher": {
+              "qtd": 3
+            },
+            "graystoneravager": {
+              "qtd": 3
+            },
+            "heavybattleaxe": {
+              "qtd": 3
+            },
             "improvisedweapon": {
-              "favorite": true
+              "favorite": true,
+              "qtd": 3
+            },
+            "initiateofhircine": {
+              "qtd": 0
             },
             "intimidate": {
+              "favorite": true,
+              "qtd": 2
+            },
+            "jerallforager": {
               "qtd": 1
+            },
+            "mageslayer": {
+              "favorite": true,
+              "qtd": 2
+            },
+            "markarthbannerman": {
+              "qtd": 2
+            },
+            "mightyally": {
+              "qtd": 3
+            },
+            "morkulgatekeeper": {
+              "qtd": 3
             },
             "morthalwatchman": {
+              "qtd": 2
+            },
+            "nordfirebrand": {
+              "qtd": 3
+            },
+            "northwindoutpost": {
+              "qtd": 0
+            },
+            "orcclanshaman": {
+              "qtd": 3
+            },
+            "orcclansman": {
+              "qtd": 0
+            },
+            "orcishwarhammer": {
+              "qtd": 3
+            },
+            "plunder": {
               "qtd": 1
             },
+            "raidingparty": {
+              "qtd": 2
+            },
             "rampagingminotaur": {
-              "qtd": 1
+              "qtd": 3
             },
             "rapidshot": {
               "favorite": true,
               "qtd": 3
             },
+            "reclusivegiant": {
+              "qtd": 0
+            },
             "reiveblademaster": {
-              "qtd": 1
+              "qtd": 0
             },
             "relentlessraider": {
-              "qtd": 1
+              "qtd": 0
+            },
+            "riftenpillager": {
+              "qtd": 3
             },
             "rihadbattlemage": {
               "qtd": 3
             },
-            "steelscimitar": {
+            "rihadhorseman": {
+              "qtd": 3
+            },
+            "rihadnomad": {
+              "qtd": 0
+            },
+            "savageogre": {
+              "qtd": 3
+            },
+            "scuttler": {
+              "qtd": 2
+            },
+            "sharpshooterscout": {
+              "qtd": 3
+            },
+            "silvenartracker": {
+              "qtd": 3
+            },
+            "skavenpyromancer": {
+              "qtd": 3
+            },
+            "skirmisherselixir": {
               "qtd": 1
             },
+            "steelscimitar": {
+              "qtd": 3
+            },
+            "stonethrow": {
+              "qtd": 3
+            },
             "triumphantjarl": {
+              "qtd": 3
+            },
+            "valenwoodhuntsman": {
+              "qtd": 3
+            },
+            "vigilantgiant": {
               "qtd": 1
+            },
+            "volendrung": {
+              "qtd": 0
+            },
+            "whirlingduelist": {
+              "qtd": 1
+            },
+            "whiteruntrooper": {
+              "qtd": 2
+            },
+            "witheredhandcultist": {
+              "qtd": 3
+            },
+            "wrothgarforge": {
+              "qtd": 2
+            }
+          },
+          "willpower": {
+            "aldmeripatriot": {
+              "qtd": 2
+            },
+            "alphawolf": {
+              "qtd": 1
+            },
+            "arrowstorm": {
+              "qtd": 3
+            },
+            "auridonpaladin": {
+              "qtd": 3
+            },
+            "brumaprofiteer": {
+              "qtd": 3
+            },
+            "calm": {
+              "qtd": 2
+            },
+            "cathayrahtveteran": {
+              "qtd": 3
+            },
+            "cheydinhalsapper": {
+              "qtd": 3
+            },
+            "dawnstarhealer": {
+              "qtd": 3
+            },
+            "divinefervor": {
+              "qtd": 3
+            },
+            "eastmarchcrusader": {
+              "qtd": 3
+            },
+            "elixirofthedefender": {
+              "qtd": 3
+            },
+            "execute": {
+              "qtd": 3
+            },
+            "fifthlegiontrainer": {
+              "qtd": 3
+            },
+            "goldensaint": {
+              "qtd": 3
+            },
+            "haafingarmarauder": {
+              "qtd": 1
+            },
+            "healingpotion": {
+              "qtd": 3
+            },
+            "heroofanvil": {
+              "qtd": 1
+            },
+            "hivedefender": {
+              "qtd": 3
+            },
+            "hivewarrior": {
+              "qtd": 1
+            },
+            "imperiallegionnaire": {
+              "qtd": 3
+            },
+            "imperialmight": {
+              "qtd": 1
+            },
+            "imperialreinforcements": {
+              "qtd": 3
+            },
+            "imperialsiegeengine": {
+              "qtd": 3
+            },
+            "imprison": {
+              "qtd": 3
+            },
+            "kvatchsoldier": {
+              "qtd": 3
+            },
+            "legionpraefect": {
+              "qtd": 0
+            },
+            "legionshield": {
+              "qtd": 3
+            },
+            "loyalhousecarl": {
+              "qtd": 3
+            },
+            "morthalexecutioner": {
+              "qtd": 2
+            },
+            "packwolf": {
+              "qtd": 3
+            },
+            "piercingjavelin": {
+              "qtd": 3
+            },
+            "pitlion": {
+              "qtd": 1
+            },
+            "priestofthemoons": {
+              "qtd": 3
+            },
+            "rajhinihighwayman": {
+              "qtd": 3
+            },
+            "ravenoushunger": {
+              "qtd": 3
+            },
+            "renownedlegate": {
+              "qtd": 1
+            },
+            "resoluteally": {
+              "qtd": 3
+            },
+            "riverholdescort": {
+              "qtd": 3
+            },
+            "scoutingpatrol": {
+              "qtd": 3
+            },
+            "senchetiger": {
+              "qtd": 3
+            },
+            "septimguardsman": {
+              "qtd": 3
+            },
+            "skingradpatroller": {
+              "qtd": 3
+            },
+            "summersetshieldmage": {
+              "qtd": 3
+            },
+            "sunholdmedic": {
+              "qtd": 3
+            },
+            "tuskedbristleback": {
+              "qtd": 3
+            },
+            "twomoonscontemplation": {
+              "qtd": 3
+            },
+            "warcry": {
+              "qtd": 3
+            }
+          }
+        },
+        "madhouse": {
+          "agility": {
+            "swindlersmarket": {
+              "qtd": 3
+            }
+          },
+          "endurance": {
+            "ringofimaginarymight": {
+              "qtd": 3
+            }
+          },
+          "intelligence": {
+            "gardenerofswords": {
+              "qtd": 3
+            }
+          },
+          "neutral": {
+            "altarofdespair": {
+              "qtd": 3
+            },
+            "closecall": {
+              "qtd": 3
+            },
+            "forsakenchampion": {
+              "qtd": 3
+            },
+            "illusorymimic": {
+              "qtd": 3
+            },
+            "merchantscamel": {
+              "qtd": 3
+            }
+          },
+          "strength": {
+            "stoneshardorc": {
+              "favorite": true,
+              "qtd": 3
+            }
+          },
+          "willpower": {
+            "shiveringapothecary": {
+              "qtd": 3
             }
           }
         }
       },
       "decks": {
         "favorite": {
-          "-KWYopKFZVdqz3-YtBh-": true
+          "-KZwF4-30Ip7qC4wnMix": 1
         },
         "private": {
-          "-KWYo4K8PDs_zO1q8aqh": {
+          "-K_t7BMw5-q1sFGXCfoi": {
             "cards": {
-              "finishoff": 3,
-              "leaflurker": 1,
-              "moonlightwerebat": 3,
-              "murkwaterwitch": 3,
-              "rapidshot": 3,
-              "skavenpyromancer": 2,
-              "soulrestmarshal": 3,
-              "triumphantjarl": 2,
-              "ungolimthelistener": 1
+              "camlornsentinel": 3,
+              "crownquartermaster": 3,
+              "cunningally": 3,
+              "daggerfallmage": 3,
+              "enchantedplate": 3,
+              "firebolt": 3,
+              "gardenerofswords": 3,
+              "highkingemeric": 1,
+              "lightningbolt": 3,
+              "maceofencumbrance": 3,
+              "masterofarms": 3,
+              "royalsage": 2,
+              "shriekingharpy": 3,
+              "skilledblacksmith": 3,
+              "steelsword": 2,
+              "wardcrafter": 3,
+              "windkeepspellsword": 3,
+              "youngmammoth": 3
             },
-            "cls": 0,
-            "cost": 4000,
-            "createdAt": "2016-10-28T10:00:00",
-            "likes": [
-              "Iu45y3i5UY345uhVi3u5h3Huf5h"
-            ],
-            "name": "My Archer",
-            "patch": "2016_09_28",
-            "type": 4,
-            "updatedAt": "2016-10-30T12:32:54",
-            "updates": {
-              "2016-10-30T12:32:54": {
-                "leaflurker": 2,
-                "rapidshot": -1,
-                "skavenpyromancer": 1
-              }
-            },
-            "views": 12
-          },
-          "-KWYopLfHszRwXRYOL_q": {
-            "cards": {
-              "dunmernightblade": 3,
-              "elusiveschemer": 2,
-              "tazkadthepackmaster": 1,
-              "ungolimthelistener": 1
-            },
-            "cls": 1,
-            "cost": 2850,
-            "createdAt": "2016-10-28T10:00:00",
-            "likes": [
-              "Iu45y3i5UY345uhVi3u5h3Huf5h",
-              "ZYO8GAaZfVYo2evDwPedYIFODcm1"
-            ],
-            "name": "My Deck",
-            "patch": "2016_09_28",
-            "type": 4,
-            "updatedAt": "2016-10-31T15:30:00",
-            "updates": {
-              "2016-10-30T12:32:54": {
-                "dunmernightblade": -1,
-                "elusiveschemer": 1
-              },
-              "2016-10-31T15:30:00": {
-                "dunmernightblade": -1,
-                "elusiveschemer": 1,
-                "tazkadthepackmaster": -1
-              }
-            },
-            "views": 7
+            "cls": 7,
+            "cost": 9150,
+            "createdAt": "2017-01-07T11:31:47.932",
+            "name": "Item Sorcerer",
+            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+            "patch": "2017_01_01",
+            "type": 0,
+            "updatedAt": "2017-01-07T11:31:47.932",
+            "views": 0
           }
         }
       },
@@ -5239,7 +6386,8 @@
       "matches": {
         "2016-11-30T08:22:34": {
           "first": false,
-          "me": {
+          "legend": false,
+          "player": {
             "cls": 0,
             "deck": "-KWYo4K8PDs_zO1q8aqh",
             "name": "My Archer",
@@ -5251,8 +6399,95 @@
             "name": "Prophecy Assassin",
             "type": 0
           },
+          "type": 0,
+          "mode": 0,
           "rank": 4,
+          "season": "2016_11",
           "win": true
+        },
+        "2016-12-03T09:22:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 0,
+            "deck": "-KWYo4K8PDs_zO1q8aqh",
+            "name": "My Archer",
+            "type": 4,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 0,
+            "name": "Cycle Archer",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 0,
+          "rank": 4,
+          "season": "2016_12",
+          "win": false
+        },
+        "2017-01-03T10:22:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 2,
+            "name": "Prophecy Assassin",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 1,
+          "rank": 3,
+          "season": "2017_01",
+          "win": true
+        },
+        "2017-01-03T11:20:34": {
+          "first": false,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 6,
+            "name": "Mimic Scout",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 1,
+          "rank": 3,
+          "season": "2017_01",
+          "win": true
+        },
+        "2017-01-03T12:20:34": {
+          "first": true,
+          "legend": false,
+          "player": {
+            "cls": 7,
+            "deck": "-K_t7BMw5-q1sFGXCfoi",
+            "name": "Item Sorcerer",
+            "type": 0,
+            "version": "v1 (2016-10-30)"
+          },
+          "opponent": {
+            "cls": 6,
+            "name": "Mimic Scout",
+            "type": 0
+          },
+          "type": 1,
+          "mode": 2,
+          "rank": 3,
+          "season": "2017_01",
+          "win": false
         }
       }
     },
@@ -5285,70 +6520,6 @@
       "info": {
         "name": "Mackciane Bastos",
         "photoUrl": "https://lh5.googleusercontent.com/-o2RlvOLMZ7Y/AAAAAAAAAAI/AAAAAAAAPAM/1pxgQ_u-41g/s96-c/photo.jpg"
-      }
-    }
-  },
-  "decks": {
-    "public": {
-      "-KWYo4Jw4Wd6nc8oaUeh": {
-        "cards": {
-          "finishoff": 3,
-          "leaflurker": 1,
-          "moonlightwerebat": 3,
-          "murkwaterwitch": 3,
-          "rapidshot": 3,
-          "skavenpyromancer": 2,
-          "soulrestmarshal": 3,
-          "tazkadthepackmaster": 1,
-          "triumphantjarl": 2,
-          "ungolimthelistener": 1
-        },
-        "cls": 0,
-        "comments": {
-          "hre8g7er6ger7g6er9gg8e6": {
-            "comment": "Nice deck",
-            "createdAt": "2016-10-28T14:17:23",
-            "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1"
-          }
-        },
-        "cost": 5200,
-        "createdAt": "2016-10-28T10:00:00",
-        "likes": [
-          "Iu45y3i5UY345uhVi3u5h3Huf5h"
-        ],
-        "name": "Cycle Archer",
-        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
-        "patch": "2016_09_28",
-        "type": 4,
-        "updatedAt": "2016-10-30T12:32:54",
-        "updates": {
-          "2016-10-30T12:32:54": {
-            "leaflurker": 2,
-            "rapidshot": -1,
-            "skavenpyromancer": 1
-          }
-        },
-        "views": 12
-      },
-      "-KWYopKFZVdqz3-YtBh-": {
-        "cards": {
-          "dunmernightblade": 3,
-          "elusiveschemer": 3,
-          "tazkadthepackmaster": 1,
-          "ungolimthelistener": 1
-        },
-        "cls": 1,
-        "cost": 2850,
-        "createdAt": "2016-10-28T10:00:00",
-        "likes": [
-          "Iu45y3i5UY345uhVi3u5h3Huf5h"
-        ],
-        "name": "Deck Test",
-        "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
-        "patch": "2016_09_28",
-        "type": 4,
-        "updatedAt": "2016-10-28T10:00:00",
-        "views": 7
       }
     }
   }

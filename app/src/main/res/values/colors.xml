@@ -6,7 +6,7 @@
 
     <color name="primary_text">#FFFFFF</color>
     <color name="primary_text_dark">@color/grey_900</color>
-    <color name="secondary_text">@color/grey_500</color>
+    <color name="secondary_text">@android:color/white</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">@color/grey_400</color>
 
@@ -21,15 +21,25 @@
     <color name="amber_500">#FF9800</color>
     <color name="amber_700">#FFA000</color>
     <color name="amber_800">#FF8F00</color>
+    <color name="grey_300">#e0e0e0</color>
     <color name="grey_400">#BDBDBD</color>
     <color name="grey_500">#9e9e9e</color>
     <color name="grey_900">#212121</color>
+    <color name="teal_100">#b2dfdb</color>
     <color name="teal_300">#4db6ac</color>
     <color name="teal_300_transparent">#AA4db6ac</color>
+    <color name="green_200">#a5d6a7</color>
     <color name="green_500">#4CAF50</color>
+    <color name="green_600">#43a047</color>
     <color name="cyan_800">#0097A7</color>
     <color name="red_100">#FFCDD2</color>
     <color name="red_300">#e57373</color>
+    <color name="red_500">#f44336</color>
+    <color name="red_600">#e53935</color>
     <color name="red_800">#C62828</color>
+    <color name="indigo_transparent">#333f51b5</color>
+    <color name="white_transparent">#33ffffff</color>
 
+    <color name="colorBlue">#6f99ff</color>
+    <color name="colorYellow">#FFD54F</color>
 </resources>

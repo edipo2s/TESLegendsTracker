@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/match_statistics_cell_height"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/match_history_first"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:src="@drawable/ic_first" />
+
+    <ImageView
+        android:id="@+id/match_history_player_class_attr1"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/huge_margin"
+        android:src="@drawable/attr_strength" />
+
+    <ImageView
+        android:id="@+id/match_history_player_class_attr2"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/small_margin"
+        android:src="@drawable/attr_intelligence" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/default_margin"
+        android:text="@string/match_vs"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/match_history_opponent_class_attr1"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:src="@drawable/attr_strength" />
+
+    <ImageView
+        android:id="@+id/match_history_opponent_class_attr2"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/small_margin"
+        android:src="@drawable/attr_intelligence" />
+
+    <TextView
+        android:id="@+id/match_history_rank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/large_margin"
+        android:gravity="end"
+        android:padding="@dimen/default_margin"
+        android:textColor="@color/teal_100"
+        android:textStyle="bold"
+        tools:text="7" />
+
+    <ImageView
+        android:id="@+id/match_history_legend"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:src="@drawable/ic_rank_legend" />
+
+    <TextView
+        android:id="@+id/match_history_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:padding="@dimen/default_margin"
+        android:textColor="@color/green_200"
+        android:textStyle="bold"
+        tools:text="Win" />
+
+    <ImageView
+        android:id="@+id/match_history_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@drawable/ic_delete" />
+
+</LinearLayout>

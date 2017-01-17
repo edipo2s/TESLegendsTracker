@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context="com.ediposouza.teslesgendstracker.ui.DeckActivity">
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.decks.DeckActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -123,6 +123,18 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/include_deck_info" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/deck_ads_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:adSize="@string/app_ads_deck_full_size"
+                app:adUnitId="@string/app_ads_deck_full" />
 
         </FrameLayout>
 

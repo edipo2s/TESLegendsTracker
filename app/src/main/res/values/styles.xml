@@ -11,7 +11,9 @@
         <item name="android:textColorSecondary">@color/secondary_text</item>
         <item name="android:divider">@color/divider</item>
         <item name="android:windowBackground">@drawable/xml_bg</item>
+
         <item name="searchViewStyle">@style/SearchViewWithoutIcon</item>
+        <item name="android:spinnerStyle">@style/Spinner</item>
     </style>
 
     <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -24,6 +26,10 @@
 
     <style name="AppTheme" parent="BaseAppTheme" />
 
+    <style name="AppThemeAccentEqualsPrimaryDark" parent="AppTheme">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="AppThemeTransparent" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -31,6 +37,14 @@
 
     <style name="SearchViewWithoutIcon" parent="Widget.AppCompat.Light.SearchView">
         <item name="searchHintIcon">@null</item>
+    </style>
+
+    <style name="Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:backgroundTint">@color/grey_500</item>
+    </style>
+
+    <style name="SpinnerWhite" parent="Widget.AppCompat.Spinner">
+        <item name="android:backgroundTint">@android:color/white</item>
     </style>
 
     <style name="RarityItem">
@@ -72,6 +86,20 @@
         <item name="android:paddingBottom">@dimen/input_label_vertical_spacing</item>
         <item name="android:paddingLeft">@dimen/input_label_horizontal_spacing</item>
         <item name="android:paddingRight">@dimen/input_label_horizontal_spacing</item>
+    </style>
+
+    <style name="StatisticsSummaryItemsLabels">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:layout_marginTop">@dimen/medium_margin</item>
+        <item name="android:layout_below">@id/matches_statistics_summary</item>
+    </style>
+
+    <style name="StatisticsSummaryItems">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:layout_marginTop">@dimen/small_margin</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>
