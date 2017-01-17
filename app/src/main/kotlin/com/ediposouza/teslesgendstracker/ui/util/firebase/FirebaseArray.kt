@@ -29,6 +29,7 @@
 package com.ediposouza.teslesgendstracker.ui.util.firebase
 
 import com.google.firebase.database.*
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -166,13 +167,21 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
             return
         }
 
-        mSnapshots.add(index, Pair(snapshot.key, snapshot.getValue(mModel)))
+        try {
+            mSnapshots.add(index, Pair(snapshot.key, snapshot.getValue(mModel)))
+        } catch (e: Exception) {
+            Timber.d(e)
+        }
         notifyChangedListeners(EventType.Added, index)
     }
 
     override fun onChildChanged(snapshot: DataSnapshot, previousChildKey: String?) {
         val index = getIndexForKey(snapshot.key)
-        mSnapshots[index] = Pair(snapshot.key, snapshot.getValue(mModel))
+        try {
+            mSnapshots[index] = Pair(snapshot.key, snapshot.getValue(mModel))
+        } catch (e: Exception) {
+            Timber.d(e)
+        }
         notifyChangedListeners(EventType.Changed, index)
     }
 

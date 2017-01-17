@@ -70,10 +70,11 @@
 
     <TextView
         android:id="@+id/match_history_result"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         android:padding="@dimen/default_margin"
         android:textColor="@color/green_200"
         android:textStyle="bold"
