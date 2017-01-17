@@ -284,7 +284,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
         private fun bindResult(result: String?, selected: Boolean) {
             with(rootView) {
-                cell_text.text = if (result == "0/0" || result == "-1.0%") "-" else result
+                cell_text.text = if (result == "0/0" || result?.contains("-") ?: false) "-" else result
                 cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
                 cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
                 val cellColor = if (selected) R.color.colorAccent else android.R.color.transparent

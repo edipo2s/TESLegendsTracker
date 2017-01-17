@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_opt_type_spinner"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:text="@string/new_match_opt_name_label" />
 
             <EditText
