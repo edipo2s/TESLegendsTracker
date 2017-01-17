@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.BottomSheetBehavior
@@ -13,6 +14,8 @@ import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.webkit.CookieManager
+import android.webkit.CookieSyncManager
 import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -40,6 +43,7 @@ import org.jetbrains.anko.itemsSequence
 import org.jetbrains.anko.toast
 import timber.log.Timber
 
+
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
@@ -61,7 +65,9 @@ class DashActivity : BaseFilterActivity(),
         setContentView(R.layout.activity_dash)
         snackbarNeedMargin = false
         with(dash_navigation_view.getHeaderView(0)) {
-            profile_change_user.setOnClickListener { showLogin() }
+            profile_change_user.setOnClickListener {
+                showLogin()
+            }
             profile_image.setOnClickListener {
                 if (!App.hasUserLogged()) {
                     showLogin()
@@ -136,7 +142,11 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
-        iabHelper?.disposeWhenFinished()
+        try {
+            iabHelper?.disposeWhenFinished()
+        } catch (e: Exception) {
+            Timber.d(e)
+        }
         super.onDestroy()
     }
 
@@ -344,10 +354,23 @@ class DashActivity : BaseFilterActivity(),
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("UNUSED_PARAMETER", "DEPRECATION")
     fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         updateUserMenuInfo()
         updateCollectionStatistics()
+        dash_navigation_view.getHeaderView(0).profile_clear_cache_webview.clearCache(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().removeAllCookies(null)
+            CookieManager.getInstance().flush()
+        } else {
+            val cookieSyncMngr = CookieSyncManager.createInstance(this)
+            cookieSyncMngr.startSync()
+            val cookieManager = CookieManager.getInstance()
+            cookieManager.removeAllCookie()
+            cookieManager.removeSessionCookie()
+            cookieSyncMngr.stopSync()
+            cookieSyncMngr.sync()
+        }
     }
 
 }

@@ -99,7 +99,7 @@ class PrivateInteractor : BaseInteractor() {
                 @Suppress("UNCHECKED_CAST")
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children.flatMap { it.children }
-                            .filter { it.hasChild(KEY_CARD_QTD) }
+                            .filter { it.hasChild(KEY_CARD_QTD) && (it.child(KEY_CARD_QTD).value as Long) > 0 }
                             .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())
@@ -141,7 +141,7 @@ class PrivateInteractor : BaseInteractor() {
                 @Suppress("UNCHECKED_CAST")
                 override fun onDataChange(ds: DataSnapshot) {
                     val collection = ds.children
-                            .filter { it.hasChild(KEY_CARD_QTD) }
+                            .filter { it.hasChild(KEY_CARD_QTD) && (it.child(KEY_CARD_QTD).value as Long) > 0 }
                             .map({ it.key to (it.child(KEY_CARD_QTD).value as Long).toInt() })
                             .toMap()
                     Timber.d(collection.toString())

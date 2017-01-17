@@ -70,4 +70,10 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
+    <WebView
+        android:id="@+id/profile_clear_cache_webview"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:visibility="invisible" />
+
 </RelativeLayout>

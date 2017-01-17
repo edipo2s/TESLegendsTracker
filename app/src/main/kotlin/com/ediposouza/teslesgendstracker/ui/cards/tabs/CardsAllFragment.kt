@@ -48,6 +48,7 @@ open class CardsAllFragment : BaseFragment() {
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
 
+    val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
@@ -194,7 +195,7 @@ open class CardsAllFragment : BaseFragment() {
 
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
-        PublicInteractor().getCards(setFilter, attribute) {
+        publicInteractor.getCards(setFilter, attribute) {
             cardsLoaded = it
             showCards()
         }

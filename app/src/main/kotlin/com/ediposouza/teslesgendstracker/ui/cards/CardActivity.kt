@@ -25,7 +25,11 @@ class CardActivity : BaseActivity() {
         private val EXTRA_CARD = "cardExtra"
         private val EXTRA_FAVORITE = "favoriteExtra"
 
-        fun newIntent(context: Context, card: Card, favorite: Boolean = false): Intent {
+        fun newIntent(context: Context, card: Card): Intent {
+            return context.intentFor<CardActivity>(EXTRA_CARD to card)
+        }
+
+        fun newIntent(context: Context, card: Card, favorite: Boolean): Intent {
             return context.intentFor<CardActivity>(EXTRA_CARD to card, EXTRA_FAVORITE to favorite)
         }
 
@@ -41,6 +45,7 @@ class CardActivity : BaseActivity() {
         snackbarNeedMargin = false
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
+        card_favorite_btn.visibility = if (intent.hasExtra(EXTRA_FAVORITE)) View.VISIBLE else View.GONE
         card_all_image.setOnClickListener {
             ActivityCompat.finishAfterTransition(this)
             MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
