@@ -13,6 +13,15 @@ data class UserInfo(
 
 )
 
+data class CardCollection(
+
+        val cardShortName: String,
+        val cardAttr: Attribute,
+        val cardSet: CardSet,
+        val qtd: Int
+
+)
+
 data class CardSlot(
 
         val card: Card,

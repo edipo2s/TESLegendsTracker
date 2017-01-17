@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/default_margin"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:id="@+id/card_imported_attr"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/large_margin"
+        tools:src="@drawable/attr_strength" />
+
+    <TextView
+        android:id="@+id/card_imported_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/primary_text_dark"
+        tools:text="Improvised Weapon"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/card_imported_result"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:gravity="center_vertical"
+        android:textColor="@color/primary_text_dark"
+        tools:text="ADD"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/card_imported_qtd"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:gravity="center_vertical"
+        android:textColor="@color/primary_text_dark"
+        tools:text="3"
+        tools:textColor="@android:color/white" />
+
+</LinearLayout>

@@ -17,6 +17,29 @@ class PublicInteractor : BaseInteractor() {
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
+    fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
+        getListFromSets(set, onSuccess) { set, onEachSuccess ->
+            database.child(NODE_CARDS).child(set.db).orderByChild(KEY_CARD_COST)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                        override fun onDataChange(ds: DataSnapshot) {
+                            val cards = ds.children.map {
+                                val attr = Attribute.valueOf(it.key.toUpperCase())
+                                it.children.map {
+                                    it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                                }
+                            }.flatMap { it }
+                            onEachSuccess.invoke(cards)
+                        }
+
+                        override fun onCancelled(de: DatabaseError) {
+                            Timber.d("Fail: " + de.message)
+                        }
+
+                    })
+        }
+    }
+
     fun getCards(set: CardSet?, vararg attrs: Attribute, onSuccess: (List<Card>) -> Unit) {
         var attrIndex = 0
         val cards = arrayListOf<Card>()
