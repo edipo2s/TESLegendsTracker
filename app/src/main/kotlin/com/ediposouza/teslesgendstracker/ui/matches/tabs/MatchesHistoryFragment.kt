@@ -167,18 +167,22 @@ class MatchesHistoryFragment : BaseFragment() {
                 match_history_rank.text = context.getString(rankText, match.rank)
                 match_history_rank.visibility = if (match.mode == MatchMode.RANKED) View.VISIBLE else View.INVISIBLE
                 match_history_delete.setOnClickListener {
-                    val opponentClass = match.opponent.cls.name.toLowerCase().capitalize()
-                    val title = context.getString(R.string.match_history_delete, opponentClass)
-                    context.alertThemed(title, context.getString(R.string.confirm_message), R.style.AppDialog) {
-                        positiveButton(android.R.string.yes, {
-                            PrivateInteractor().deleteMatch(match) {
-                                onDelete.invoke()
-                            }
-                        })
-                        negativeButton(android.R.string.no, { })
-                    }.show()
+                    onHistoryClick(itemView, match, onDelete)
                 }
             }
+        }
+
+        private fun onHistoryClick(view: View, match: Match, onDelete: () -> Unit) {
+            val opponentClass = match.opponent.cls.name.toLowerCase().capitalize()
+            val title = view.context.getString(R.string.match_history_delete, opponentClass)
+            view.context.alertThemed(title, view.context.getString(R.string.confirm_message), R.style.AppDialog) {
+                positiveButton(android.R.string.yes, {
+                    PrivateInteractor().deleteMatch(match) {
+                        onDelete.invoke()
+                    }
+                })
+                negativeButton(android.R.string.no, { })
+            }.show()
         }
 
         fun bindSection(date: LocalDate) {
