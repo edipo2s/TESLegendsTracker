@@ -16,8 +16,9 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.CardActivity
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
+import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
@@ -77,19 +78,23 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck, showSoulCost: Boolean = true) {
+    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true, showQtd: Boolean = true) {
         decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
-        doAsync {
-            PublicInteractor().getDeckCards(deck) {
-                context.runOnUiThread {
-                    (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
-                    onCardListChange()
-                }
-                userFavorites.clear()
-                PrivateInteractor().getFavoriteCards(null, deck.cls.attr1) {
-                    userFavorites.addAll(it)
-                    PrivateInteractor().getFavoriteCards(null, deck.cls.attr2) {
+        decklist_costs.visibility = if (showMagikaCosts) View.VISIBLE else View.GONE
+        decklist_qtd.visibility = if (showQtd) View.VISIBLE else View.GONE
+        if (deck != null) {
+            doAsync {
+                PublicInteractor().getDeckCards(deck) {
+                    context.runOnUiThread {
+                        (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
+                        onCardListChange()
+                    }
+                    userFavorites.clear()
+                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
                         userFavorites.addAll(it)
+                        PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
+                            userFavorites.addAll(it)
+                        }
                     }
                 }
             }
@@ -117,12 +122,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun getCards(): List<CardSlot> = deckListAdapter.getCards()
 
-    fun getSoulCost(): Int = getCards().sumBy { (it.card.rarity.soulCost * it.qtd).toInt() }
+    fun getSoulCost(): Int = getCards().sumBy { it.card.rarity.soulCost * it.qtd }
 
     private fun onCardListChange() {
         val cards = getCards()
         decklist_costs.updateCosts(cards)
-        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd.toInt() })
+        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
     }
 
@@ -131,6 +136,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
         private val items = arrayListOf<CardSlot>()
         private var missingCards: List<CardMissing> = listOf()
+        private val eventBus by lazy { EventBus.getDefault() }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
             return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
@@ -171,6 +177,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 onAdd(cardIndex)
                 notifyItemChanged(cardIndex)
             }
+            eventBus.post(CmdUpdateCardSlot(items.find { it.card == card } ?: CardSlot(card, 0)))
         }
 
 
@@ -194,18 +201,25 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     notifyItemChanged(cardIndex)
                 }
             }
+            eventBus.post(CmdUpdateCardSlot(items.find { it.card == card } ?: CardSlot(card, 0)))
         }
 
         private fun notifyCardRemoved(card: Card) {
             when {
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.dualAttr1))
+                    eventBus.post(CmdRemAttr(card.dualAttr1))
+                    if (items.isEmpty()) {
+                        eventBus.post(CmdRemAttr(card.dualAttr2))
+                    }
                 }
                 card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.dualAttr2))
+                    eventBus.post(CmdRemAttr(card.dualAttr2))
+                    if (items.isEmpty()) {
+                        eventBus.post(CmdRemAttr(card.dualAttr1))
+                    }
                 }
                 items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty() -> {
-                    EventBus.getDefault().post(CmdRemAttr(card.attr))
+                    eventBus.post(CmdRemAttr(card.attr))
                 }
             }
         }

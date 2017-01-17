@@ -23,8 +23,8 @@ abstract class BaseAdsAdapter(val adsEachItems: Int, @LayoutRes val adsLayout: I
 
     }
 
-    constructor(adsEachItems: Int, layoutManager: GridLayoutManager,
-                @LayoutRes adsLayout: Int) : this(adsEachItems, adsLayout) {
+    constructor(adsEachItems: Int, @LayoutRes adsLayout: Int,
+                layoutManager: GridLayoutManager) : this(adsEachItems, adsLayout) {
         onRestoreState(layoutManager)
     }
 

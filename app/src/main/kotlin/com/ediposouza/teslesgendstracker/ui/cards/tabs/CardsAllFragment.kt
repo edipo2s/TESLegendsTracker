@@ -1,23 +1,18 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
 import android.os.Bundle
-import android.support.annotation.DimenRes
 import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.CardActivity
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
@@ -29,14 +24,16 @@ import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.itemsSequence
 import java.util.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
  */
 open class CardsAllFragment : BaseFragment() {
+
+    protected val KEY_CURRENT_ATTR = "currentClassKey"
 
     open val ADS_EACH_ITEMS = 21 //after 7 lines
     open val CARDS_PER_ROW = 3
@@ -49,15 +46,17 @@ open class CardsAllFragment : BaseFragment() {
     var classFilter: Class? = null
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
+    var menuSets: SubMenu? = null
 
+    val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
+    val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
 
     open protected val isCardsCollection: Boolean = false
 
     open val cardsAdapter by lazy {
-        val gridLayoutManager = cards_recycler_view.layoutManager as GridLayoutManager
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads, R.dimen.card_height,
+        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
                 { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
@@ -80,18 +79,38 @@ open class CardsAllFragment : BaseFragment() {
         configRecycleView()
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.apply {
+            putInt(KEY_CURRENT_ATTR, currentAttr.ordinal)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+        currentAttr = Attribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menuSets = menu?.findItem(R.id.menu_sets)?.subMenu
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menu_sets_all -> eventBus.post(CmdFilterSet(null))
-            R.id.menu_sets_core -> eventBus.post(CmdFilterSet(CardSet.CORE))
-            R.id.menu_sets_madhouse -> eventBus.post(CmdFilterSet(CardSet.MADHOUSE))
+            R.id.menu_sets_all -> filterSet(item, null)
+            R.id.menu_sets_core -> filterSet(item, CardSet.CORE)
+            R.id.menu_sets_madhouse -> filterSet(item, CardSet.MADHOUSE)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun filterSet(menuItem: MenuItem?, set: CardSet?) {
+        menuSets?.itemsSequence()?.forEach {
+            it.setIcon(if (it.itemId == menuItem?.itemId) R.drawable.ic_checked else 0)
+        }
+        eventBus.post(CmdFilterSet(set))
     }
 
     open fun configRecycleView() {
@@ -108,7 +127,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     fun configLoggedViews() {
-        signin_button.setOnClickListener { EventBus.getDefault().post(CmdShowLogin()) }
+        signin_button.setOnClickListener { showLogin() }
         signin_button.visibility = if (App.hasUserLogged()) View.INVISIBLE else View.VISIBLE
         cards_recycler_view.visibility = if (App.hasUserLogged()) View.VISIBLE else View.INVISIBLE
     }
@@ -121,6 +140,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
@@ -175,11 +195,11 @@ open class CardsAllFragment : BaseFragment() {
 
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
-        PublicInteractor().getCards(setFilter, attribute) {
+        publicInteractor.getCards(setFilter, attribute) {
             cardsLoaded = it
             showCards()
         }
-        privateInteractor.getFavoriteCards(setFilter, currentAttr) {
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
             userFavorites = it
         }
     }
@@ -241,14 +261,14 @@ open class CardsAllFragment : BaseFragment() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
-    class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, @LayoutRes adsLayout: Int,
-                          @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                          val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, layoutManager, adsLayout) {
+    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                               @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
+                               val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
         var items: List<Card> = ArrayList()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), cardHeight, itemClick, itemLongClick)
+            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
         override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -268,14 +288,15 @@ open class CardsAllFragment : BaseFragment() {
                 oldItem.shortName == newItem.shortName
             }).dispatchUpdatesTo(this)
         }
+
     }
 
-    class CardsAllViewHolder(val view: View, @DimenRes val cardHeight: Int, val itemClick: (View, Card) -> Unit,
-                             val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
+    open class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
+                                  val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         init {
             val cardLayoutParams = itemView.card_all_image.layoutParams
-            cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(cardHeight)
+            cardLayoutParams.height = itemView.context.resources.getDimensionPixelSize(R.dimen.card_height)
             itemView.card_all_image.layoutParams = cardLayoutParams
         }
 

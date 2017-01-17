@@ -21,6 +21,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,7 +31,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
@@ -93,14 +93,13 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         eventBus.register(this)
         ConfigManager.updateCaches {
             if (ConfigManager.isVersionUnsupported()) {
-                alert(getString(R.string.app_version_unsupported)) {
+                alertThemed(R.string.app_version_unsupported, theme = R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_VERSION_UNSUPPORTED())
                         startActivity(Intent(Intent.ACTION_VIEW)
                                 .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                         System.exit(0)
                     }
-                    setTheme(R.style.AppDialog)
                 }.show()
             }
         }
@@ -118,8 +117,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         super.onDestroy()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result.isSuccess) {
@@ -129,6 +127,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 hideLoading()
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -155,7 +154,25 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     protected fun showErrorUserNotLogged() {
         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth)
-                .withAction(R.string.action_login, { eventBus.post(CmdShowLogin()) }))
+                .withAction(R.string.action_login, { showLogin() }))
+    }
+
+    protected fun showLogin() {
+        eventBus.post(CmdShowLogin())
+    }
+
+    private fun showLoading() {
+        val progressBar = ProgressBar(this)
+        progressBar.isIndeterminate = true
+        val largeMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
+        progressBar.setPadding(0, largeMargin, 0, largeMargin)
+        loading = AlertDialog.Builder(this)
+                .setView(progressBar)
+                .show()
+    }
+
+    private fun hideLoading() {
+        loading?.dismiss()
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
@@ -174,7 +191,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                             toast("SignIn with " + currentUser?.displayName)
                         })
                         PrivateInteractor().setUserInfo()
-                        EventBus.getDefault().post(CmdLoginSuccess())
+                        eventBus.post(CmdLoginSuccess())
                     } else {
                         Timber.w("signInWithCredential", task.exception)
                         toast(getString(R.string.error_login))
@@ -182,20 +199,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     }
                     hideLoading()
                 }
-    }
-
-    private fun showLoading() {
-        val progressBar = ProgressBar(this)
-        progressBar.isIndeterminate = true
-        val largeMargin = resources.getDimensionPixelSize(R.dimen.large_margin)
-        progressBar.setPadding(0, largeMargin, 0, largeMargin)
-        loading = AlertDialog.Builder(this)
-                .setView(progressBar)
-                .show()
-    }
-
-    private fun hideLoading() {
-        loading?.dismiss()
     }
 
     @SuppressWarnings("ResourceType")
@@ -219,7 +222,9 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     @Subscribe
+    @Suppress("UNUSED_PARAMETER")
     fun onCmdShowLogin(showLogin: CmdShowLogin) {
+        googleApiClient?.clearDefaultAccountAndReconnect()
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

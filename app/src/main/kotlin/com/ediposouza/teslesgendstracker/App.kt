@@ -1,7 +1,8 @@
 package com.ediposouza.teslesgendstracker
 
-import android.app.Application
 import android.content.Context
+import android.preference.PreferenceManager
+import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
@@ -15,7 +16,7 @@ import timber.log.Timber
 /**
  * Created by EdipoSouza on 10/30/16.
  */
-class App : Application() {
+class App : MultiDexApplication() {
 
     companion object {
 
@@ -23,7 +24,9 @@ class App : Application() {
 
         var hasUserAlreadyLogged: Boolean = false
 
-        fun hasUserLogged(): Boolean = FirebaseAuth.getInstance().currentUser != null
+        fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null
+
+        fun hasUserDonate() = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
 
         fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 
@@ -46,6 +49,7 @@ class App : Application() {
                 val sync = !ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported()
                 reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
+                reference.child(BaseInteractor.NODE_SEASONS).keepSynced(sync)
             }
         }
     }

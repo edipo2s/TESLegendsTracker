@@ -48,6 +48,7 @@
         android:id="@+id/decklist_costs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
         android:layout_marginBottom="@dimen/nano_margin"
         android:layout_marginTop="@dimen/default_margin"
         tools:layout_marginBottom="@dimen/navigation_bar_height" />

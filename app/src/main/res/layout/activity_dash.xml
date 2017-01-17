@@ -5,7 +5,7 @@
     android:id="@+id/dash_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ediposouza.teslesgendstracker.ui.DashActivity">
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.DashActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             tools:targetApi="lollipop">
 
             <TextView
-                android:id="@+id/toolbar_title"
+                android:id="@+id/dash_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,70 +39,10 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/coordinatorLayout"
+        <FrameLayout
+            android:id="@+id/dash_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/dash_app_bar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null">
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/dash_tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="@dimen/cardview_default_elevation"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    app:tabBackground="@android:color/transparent"
-                    app:tabGravity="fill"
-                    tools:targetApi="lollipop" />
-
-            </android.support.design.widget.AppBarLayout>
-
-            <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
-                android:id="@+id/dash_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterRarity
-                android:id="@+id/filter_rarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:layout_margin="@dimen/large_margin" />
-
-            <com.ediposouza.teslesgendstracker.ui.widget.filter.FilterMagika
-                android:id="@+id/filter_magika"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/large_margin" />
-
-            <com.ediposouza.teslesgendstracker.ui.widget.CollectionStatistics
-                android:id="@+id/cards_collection_statistics"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:elevation="@dimen/statistics_elevation"
-                app:behavior_hideable="true"
-                app:behavior_peekHeight="@dimen/statistics_bottom_peek_height"
-                app:layout_behavior="@string/bottom_sheet_behavior" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/decks_fab_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/large_margin"
-                android:src="@drawable/ic_add"
-                app:backgroundTint="@color/colorPrimary"
-                app:fabSize="normal" />
-
-        </android.support.design.widget.CoordinatorLayout>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -118,6 +58,6 @@
         app:itemIconTint="@drawable/selector_menu_item"
         app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:itemTextColor="@drawable/selector_menu_item"
-        app:menu="@menu/menu_drawer" />
+        app:menu="@menu/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

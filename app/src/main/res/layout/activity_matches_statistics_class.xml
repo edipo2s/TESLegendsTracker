@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:paddingBottom="@dimen/navigation_bar_height"
+    tools:ctx="com.ediposouza.teslesgendstracker.ui.matches.MatchesStatisticsClassActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:statusBarScrim="@color/colorPrimary"
+            app:titleEnabled="false">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:gravity="center"
+                android:lines="1"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title=""
+                tools:layout_marginTop="@dimen/status_bar_height">
+
+                <TextView
+                    android:id="@+id/statistics_class_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lines="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_large"
+                    android:transitionName="@string/deck_name_transition_name"
+                    tools:text="Cycle Archer" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <ImageView
+                    android:id="@+id/statistics_class_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/deck_header_height"
+                    android:alpha="@dimen/deck_class_cover_alpha"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/deck_class_archer"
+                    android:transitionName="@string/deck_cover_transition_name" />
+
+                <ImageView
+                    android:id="@+id/statistics_class_attr1"
+                    android:layout_width="@dimen/deck_header_attr_icon_height"
+                    android:layout_height="@dimen/deck_header_attr_icon_height"
+                    android:layout_alignBottom="@id/statistics_class_cover"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:transitionName="@string/deck_attr1_transition_name"
+                    tools:src="@drawable/attr_strength" />
+
+                <ImageView
+                    android:id="@+id/statistics_class_attr2"
+                    android:layout_width="@dimen/deck_header_attr_icon_height"
+                    android:layout_height="@dimen/deck_header_attr_icon_height"
+                    android:layout_alignBottom="@id/statistics_class_attr1"
+                    android:layout_marginEnd="@dimen/large_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_toEndOf="@id/statistics_class_attr1"
+                    android:transitionName="@string/deck_attr2_transition_name"
+                    tools:src="@drawable/attr_agility" />
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.inqbarna.tablefixheaders.TableFixHeaders
+            android:id="@+id/matches_statistics_class_table"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:padding="@dimen/default_margin">
+
+            <TextView
+                android:id="@+id/matches_statistics_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_margin"
+                android:text="@string/match_statistics_summary_label"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/matches_statistics_win_rate_label"
+                style="@style/StatisticsSummaryItemsLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/huge_margin"
+                android:text="@string/match_statistics_win_rate_label" />
+
+            <TextView
+                android:id="@+id/matches_statistics_win_rate"
+                style="@style/StatisticsSummaryItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/matches_statistics_win_rate_label"
+                android:layout_alignStart="@id/matches_statistics_win_rate_label"
+                android:layout_below="@id/matches_statistics_win_rate_label"
+                tools:text="75%" />
+
+            <TextView
+                android:id="@+id/matches_statistics_losses_label"
+                style="@style/StatisticsSummaryItemsLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/huge_margin"
+                android:layout_toStartOf="@id/matches_statistics_win_rate_label"
+                android:text="@string/match_statistics_losses_label" />
+
+            <TextView
+                android:id="@+id/matches_statistics_losses"
+                style="@style/StatisticsSummaryItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/matches_statistics_losses_label"
+                android:layout_alignStart="@id/matches_statistics_losses_label"
+                android:layout_below="@id/matches_statistics_losses_label"
+                tools:text="33" />
+
+            <TextView
+                android:id="@+id/matches_statistics_wins_label"
+                style="@style/StatisticsSummaryItemsLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/huge_margin"
+                android:layout_toStartOf="@id/matches_statistics_losses_label"
+                android:text="@string/match_statistics_wins_label" />
+
+            <TextView
+                android:id="@+id/matches_statistics_wins"
+                style="@style/StatisticsSummaryItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/matches_statistics_wins_label"
+                android:layout_alignStart="@id/matches_statistics_wins_label"
+                android:layout_below="@id/matches_statistics_wins_label"
+                tools:text="55" />
+
+            <TextView
+                android:id="@+id/matches_statistics_games_label"
+                style="@style/StatisticsSummaryItemsLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/huge_margin"
+                android:layout_toStartOf="@id/matches_statistics_wins_label"
+                android:text="@string/match_statistics_games_label" />
+
+            <TextView
+                android:id="@+id/matches_statistics_games"
+                style="@style/StatisticsSummaryItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/matches_statistics_games_label"
+                android:layout_alignStart="@id/matches_statistics_games_label"
+                android:layout_below="@id/matches_statistics_games_label"
+                tools:text="88" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/matches_statistics_class_ads_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            app:adSize="BANNER"
+            app:adUnitId="@string/app_ads_match_statistics_class_full" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

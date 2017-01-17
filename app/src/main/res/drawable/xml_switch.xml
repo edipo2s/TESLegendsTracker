@@ -11,9 +11,7 @@
                 <shape android:shape="oval">
                     <solid android:color="@color/colorAccent" />
 
-                    <size
-                        android:width="@dimen/deck_private_switch_size"
-                        android:height="@dimen/deck_private_switch_size" />
+                    <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
                 </shape>
             </item>
             <item android:drawable="@drawable/ic_private_menu"
@@ -31,7 +29,7 @@
                 <shape android:shape="oval">
                     <solid android:color="@android:color/white" />
 
-                    <size android:width="@dimen/deck_private_switch_size" android:height="@dimen/deck_private_switch_size" />
+                    <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
                 </shape>
             </item>
             <item android:drawable="@drawable/ic_private_menu_checked" android:gravity="center" />

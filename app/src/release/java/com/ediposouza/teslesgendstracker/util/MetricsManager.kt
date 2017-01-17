@@ -56,6 +56,29 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATCH, action.patch)
                     putString(action.PARAM_PRIVATE, action.private.toString())
                 }
+                is MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE ->
+                    putBoolean(action.PARAM_CHECKED, action.checked)
+                is MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE ->
+                    putBoolean(action.PARAM_CHECKED, action.checked)
+                is MetricAction.ACTION_MATCH_STATISTICS_FILTER_MODE ->
+                    putString(action.PARAM_MODE, action.mode.name)
+                is MetricAction.ACTION_MATCH_STATISTICS_FILTER_SEASON ->
+                    putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
+                is MetricAction.ACTION_MATCH_STATISTICS_CLASS_FILTER_SEASON ->
+                    putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
+                is MetricAction.ACTION_MATCH_STATISTICS_CLASS ->
+                    putString(action.PARAM_CLASS, action.cls.name)
+                is MetricAction.ACTION_NEW_MATCH_START_WITH ->
+                    putString(action.PARAM_DECK, action.deck?.cls?.name ?: action.PARAM_DECK_VALUE_OTHER)
+                is MetricAction.ACTION_NEW_MATCH_SAVE -> {
+                    putString(action.PARAM_MY_CLS, action.myDeckCls.name)
+                    putString(action.PARAM_MY_TYPE, action.myDeckType.name)
+                    putString(action.PARAM_OPT_CLS, action.optDeckCls.name)
+                    putString(action.PARAM_OPT_TYPE, action.optDeckType.name)
+                    putString(action.PARAM_MODE, action.mode.name)
+                    putString(action.PARAM_SEASON, action.season)
+                    putBoolean(action.PARAM_LEGEND, action.legendRank)
+                }
             }
         }
         answers?.logCustom(CustomEvent(action.name))
