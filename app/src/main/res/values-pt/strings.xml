@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TESL Tracker</string>
     <string name="app_exit_confirm">Pressione novamente para sair</string>
     <string name="app_bd_under_updating">O banco de dados de TESL Tracker está em atualização. Você será notificado quando estiver concluído.</string>
     <string name="app_version_unsupported">Esta versão tornou-se não obsoleta. Por favor atualize para continuar usando o app.</string>

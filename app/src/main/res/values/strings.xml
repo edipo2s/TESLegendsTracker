@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">TESL Tracker</string>
-    <string name="app_name_full">TES Legends Tracker</string>
+    <string name="app_name" translatable="false">TESL Tracker</string>
+    <string name="app_name_full" translatable="false">TES Legends Tracker</string>
     <string name="app_ads_card_list" translatable="false">ca-app-pub-7881623561544201/7976661172</string>
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
     <string name="app_ads_card_full" translatable="false">ca-app-pub-7881623561544201/1511325179</string>
