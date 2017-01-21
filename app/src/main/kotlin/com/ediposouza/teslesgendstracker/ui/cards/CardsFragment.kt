@@ -150,9 +150,12 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_import, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
         menu?.findItem(R.id.menu_import)?.isVisible = false
-        with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.cards_search_hint)
-            setOnQueryTextListener(this@CardsFragment)
+        val actionView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search))
+        if (actionView is SearchView) {
+            with(actionView) {
+                queryHint = getString(R.string.cards_search_hint)
+                setOnQueryTextListener(this@CardsFragment)
+            }
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
