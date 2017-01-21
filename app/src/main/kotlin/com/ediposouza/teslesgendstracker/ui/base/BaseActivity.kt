@@ -120,7 +120,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            if (result.isSuccess) {
+            if (result?.isSuccess ?: false) {
                 val account = result.signInAccount
                 firebaseAuthWithGoogle(account)
             } else {
