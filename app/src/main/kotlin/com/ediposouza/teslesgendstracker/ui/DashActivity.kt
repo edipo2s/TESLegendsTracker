@@ -213,6 +213,11 @@ class DashActivity : BaseFilterActivity(),
     private fun showAboutDialog(): Boolean {
         val dialogView = View.inflate(this, R.layout.dialog_about, null).apply {
             about_dialog_version.text = packageManager.getPackageInfo(packageName, 0).versionName
+            about_dialog_developer.setOnClickListener {
+                val linkUri = Uri.parse(getString(R.string.about_info_developer_link))
+                startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DEVELOPER())
+            }
             about_dialog_thanks_cvh_text.setOnClickListener {
                 val linkUri = Uri.parse(getString(R.string.about_info_thanks_cvh_link))
                 startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
@@ -257,11 +262,9 @@ class DashActivity : BaseFilterActivity(),
         alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
             positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
                 processDonate(SKU_DONATE_BASIC)
-                MetricsManager.trackAction(MetricAction.ACTION_DONATE_BASIC())
             })
             negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
                 processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
-                MetricsManager.trackAction(MetricAction.ACTION_DONATE_PRO())
             })
             neutralButton(R.string.app_donate_dialog_not_now, {
                 MetricsManager.trackAction(MetricAction.ACTION_DONATE_NOT_NOW())
@@ -271,6 +274,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     private fun processDonate(skuItem: String) {
+        MetricsManager.trackAction(MetricAction.ACTION_START_DONATE())
         iabHelper?.launchPurchaseFlow(this@DashActivity, skuItem, RC_DONATE) { result, info ->
             if (result.isFailure) {
                 toast(R.string.app_donate_dialog_payment_fail)
@@ -279,6 +283,11 @@ class DashActivity : BaseFilterActivity(),
             if (info.sku == skuItem) {
                 handleDonation()
                 toast(R.string.app_donate_dialog_payment_success)
+                if (skuItem == SKU_DONATE_BASIC) {
+                    MetricsManager.trackAction(MetricAction.ACTION_DONATE_BASIC())
+                } else {
+                    MetricsManager.trackAction(MetricAction.ACTION_DONATE_PRO())
+                }
             }
         }
     }

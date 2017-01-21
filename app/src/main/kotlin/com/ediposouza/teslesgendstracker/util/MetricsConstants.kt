@@ -123,12 +123,14 @@ sealed class MetricAction(val name: String) {
         val PARAM_LEGEND = "Legend"
     }
 
+    class ACTION_START_DONATE : MetricAction("StartDonate")
     class ACTION_DONATE_BASIC : MetricAction("DonateBasic")
     class ACTION_DONATE_PRO : MetricAction("DonatePro")
     class ACTION_DONATE_NOT_NOW : MetricAction("DonateNotNow")
     class ACTION_NEW_VERSION_DETECTED : MetricAction("NewVersionDetected")
     class ACTION_NEW_VERSION_UPDATE_NOW : MetricAction("NewVersionUpdateNow")
     class ACTION_NEW_VERSION_UPDATE_LATER : MetricAction("NewVersionUpdateLater")
+    class ACTION_ABOUT_DEVELOPER : MetricAction("AboutDeveloper")
     class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
