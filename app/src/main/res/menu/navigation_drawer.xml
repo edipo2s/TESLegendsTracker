@@ -7,17 +7,17 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/menu_cards"
-            android:icon="@drawable/ic_cards"
+            android:icon="@drawable/ic_menu_cards"
             android:title="@string/menu_cards" />
 
         <item
             android:id="@+id/menu_decks"
-            android:icon="@drawable/ic_decks"
+            android:icon="@drawable/ic_menu_decks"
             android:title="@string/menu_decks" />
 
         <item
             android:id="@+id/menu_matches"
-            android:icon="@drawable/ic_matches"
+            android:icon="@drawable/ic_menu_matches"
             android:title="@string/menu_matches"
             android:visible="false"
             tools:visible="true" />
@@ -46,13 +46,19 @@
         <item
             android:id="@+id/menu_donate"
             android:checkable="false"
-            android:icon="@drawable/ic_ads"
+            android:icon="@drawable/ic_menu_ads"
             android:title="@string/menu_donate" />
+
+        <item
+            android:id="@+id/menu_share"
+            android:checkable="false"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/menu_share" />
 
         <item
             android:id="@+id/menu_about"
             android:checkable="false"
-            android:icon="@drawable/ic_about"
+            android:icon="@drawable/ic_menu_about"
             android:title="@string/menu_about" />
 
     </group>

@@ -137,6 +137,7 @@ sealed class MetricAction(val name: String) {
     class ACTION_NEW_VERSION_DETECTED : MetricAction("NewVersionDetected")
     class ACTION_NEW_VERSION_UPDATE_NOW : MetricAction("NewVersionUpdateNow")
     class ACTION_NEW_VERSION_UPDATE_LATER : MetricAction("NewVersionUpdateLater")
+    class ACTION_SHARE : MetricAction("Share")
     class ACTION_ABOUT_DEVELOPER : MetricAction("AboutDeveloper")
     class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")

@@ -19,8 +19,9 @@
     <string name="menu_matches">Partidas</string>
     <string name="menu_season">Temporada</string>
     <string name="menu_arena">Arena</string>
-    <string name="menu_donate">Versão Livre</string>
+    <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
+    <string name="menu_share">Indicar a um amigo</string>
     <string name="menu_about">Sobre</string>
     <string name="menu_search">Busca</string>
     <string name="menu_sets">Expanções</string>
@@ -38,6 +39,9 @@
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
+
+    <string name="share_with">Compartilhar usando…</string>
+    <string name="share_text">Gerencie sua coleção do TES Legends, busque e crie decks públicos ou privados para acompanhar suas partidas</string>
 
     <string name="about_title">Sobre TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker é um aplicativo assistente para jogo de cartas The Elder Scroll Legends desenvolvido pela Dire Wolf Digital e publicado pela Bethesda Softworks.</string>
