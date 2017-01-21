@@ -205,6 +205,16 @@ class DashActivity : BaseFilterActivity(),
                 true
             }
             R.id.menu_donate -> showDonateDialog()
+            R.id.menu_share -> {
+                val appLink = getString(R.string.playstore_url_format, packageName)
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/*"
+                    putExtra(Intent.EXTRA_TEXT, "${getString(R.string.share_text)}\n $appLink")
+                }
+                startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
+                MetricsManager.trackAction(MetricAction.ACTION_SHARE())
+                true
+            }
             R.id.menu_about -> showAboutDialog()
             else -> false
         }
