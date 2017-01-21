@@ -207,6 +207,7 @@ open class CardsAllFragment : BaseFragment() {
     open fun showCards() {
         cardsAdapter.showCards(filteredCards())
         cards_recycler_view?.scrollToPosition(0)
+        eventBus.post(CmdUpdateVisibility(true))
     }
 
     fun updateCardsList() {
