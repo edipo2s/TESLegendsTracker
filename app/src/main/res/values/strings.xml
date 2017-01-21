@@ -141,7 +141,6 @@
     <string name="deck_comment_new_hint_anonymous">Your comment! (Need login)</string>
     <string name="deck_comment_size_error">Message is too short!</string>
     <string name="deck_comment_date_format" translatable="false">%1$s\n%2$s</string>
-    <string name="deck_transition_name" translatable="false">deck_transition</string>
     <string name="deck_name_transition_name" translatable="false">deck_name_transition</string>
     <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>
     <string name="deck_attr1_transition_name" translatable="false">deck_attr1_transition</string>
