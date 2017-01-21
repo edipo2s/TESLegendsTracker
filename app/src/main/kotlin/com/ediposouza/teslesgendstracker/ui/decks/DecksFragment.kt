@@ -116,9 +116,12 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
-        with(MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as SearchView) {
-            queryHint = getString(R.string.decks_search_hint)
-            setOnQueryTextListener(this@DecksFragment)
+        val actionView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search))
+        if (actionView is SearchView) {
+            with(actionView) {
+                queryHint = getString(R.string.decks_search_hint)
+                setOnQueryTextListener(this@DecksFragment)
+            }
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
