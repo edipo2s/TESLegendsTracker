@@ -21,6 +21,7 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:transitionGroup="true"
                 app:statusBarScrim="@color/colorPrimary"
                 app:titleEnabled="false">
 

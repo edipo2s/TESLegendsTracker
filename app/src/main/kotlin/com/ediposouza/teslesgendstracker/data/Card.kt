@@ -3,7 +3,6 @@ package com.ediposouza.teslesgendstracker.data
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
@@ -71,13 +70,13 @@ enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL,
 
 }
 
-enum class CardRarity(val color: Int, val soulCost: Int, @IntegerRes val imageRes: Int) {
+enum class CardRarity(val soulCost: Int, @IntegerRes val imageRes: Int) {
 
-    COMMON(Color.WHITE, 50, R.drawable.ic_rarity_common),
-    RARE(Color.BLUE, 100, R.drawable.ic_rarity_rare),
-    EPIC(Color.parseColor("purple"), 400, R.drawable.ic_rarity_epic),
-    LEGENDARY(Color.YELLOW, 1200, R.drawable.ic_rarity_legendary),
-    UNKNOWN(Color.BLACK, 0, R.drawable.ic_rarity);
+    COMMON(50, R.drawable.ic_rarity_common),
+    RARE(100, R.drawable.ic_rarity_rare),
+    EPIC(400, R.drawable.ic_rarity_epic),
+    LEGENDARY(1200, R.drawable.ic_rarity_legendary),
+    UNKNOWN(0, R.drawable.ic_rarity);
 
     companion object {
 

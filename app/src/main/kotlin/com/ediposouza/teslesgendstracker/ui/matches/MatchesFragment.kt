@@ -188,6 +188,20 @@ class MatchesFragment : BaseFragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+        val modeClickListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                val isArenaMode = MatchMode.values()[pos] == MatchMode.ARENA
+                dialogView.new_match_dialog_deck_label.visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                with(dialogView.new_match_dialog_deck_spinner) {
+                    visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                    val shouldHideDeckInfo = isArenaMode || selectedItemPosition != (adapter?.count ?: 1) - 1
+                    dialogView.new_match_dialog_deck_info.visibility = if (shouldHideDeckInfo) View.GONE else View.VISIBLE
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
         AlertDialog.Builder(context)
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
@@ -226,9 +240,12 @@ class MatchesFragment : BaseFragment() {
                                             .map { it.name.toLowerCase().capitalize() })
                             limitHeight(4)
                         }
-                        dialogView.new_match_dialog_mode_spinner.adapter = ArrayAdapter<String>(context,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                MatchMode.values().map { it.name.toLowerCase().capitalize() })
+                        dialogView.new_match_dialog_mode_spinner.apply {
+                            adapter = ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    MatchMode.values().map { it.name.toLowerCase().capitalize() })
+                            onItemSelectedListener = modeClickListener
+                        }
                     }
                     show()
                 }
