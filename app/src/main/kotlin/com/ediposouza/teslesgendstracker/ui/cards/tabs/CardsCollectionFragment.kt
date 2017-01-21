@@ -1,11 +1,14 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.util.DiffUtil
@@ -48,6 +51,8 @@ import java.util.*
  * Created by EdipoSouza on 10/30/16.
  */
 class CardsCollectionFragment : CardsAllFragment() {
+
+    private val EXPAND_CODE = 123
 
     override val isCardsCollection: Boolean = true
 
@@ -118,6 +123,13 @@ class CardsCollectionFragment : CardsAllFragment() {
         super.onStop()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EXPAND_CODE && resultCode == Activity.RESULT_OK) {
+            updateCardsList()
+        }
+    }
+
     private fun showImportDialog() {
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
         importDialog = AlertDialog.Builder(context, R.style.AppDialog)
@@ -178,8 +190,14 @@ class CardsCollectionFragment : CardsAllFragment() {
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0) }
             cards_recycler_view?.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
-            cards_recycler_view?.scrollToPosition(0)
+            scrollToTop()
         }
+    }
+
+    override fun showCardExpanded(card: Card, view: View) {
+        val favorite = userFavorites.contains(card.shortName)
+        startActivityForResult(CardActivity.newIntent(context, card, favorite), EXPAND_CODE,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
@@ -314,7 +332,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                 return
             }
             DiffUtil.calculateDiff(SimpleDiffCallback(items, oldItems) { oldItem, newItem ->
-                oldItem.card.shortName == newItem.card.shortName
+                oldItem.card.shortName == newItem.card.shortName && oldItem.qtd == newItem.qtd
             }).dispatchUpdatesTo(this)
         }
 

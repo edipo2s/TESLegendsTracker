@@ -15,6 +15,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_card.*
+import kotlinx.android.synthetic.main.include_card_info.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
@@ -35,9 +36,11 @@ class CardActivity : BaseActivity() {
 
     }
 
+    private val privateInteractor by lazy { PrivateInteractor() }
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private var favorite: Boolean = false
+    private var userCardQtd = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +64,43 @@ class CardActivity : BaseActivity() {
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
         card_ads_view.load()
+        if (App.hasUserLogged()) {
+            showUserCardQtd()
+        }
+    }
+
+    private fun showUserCardQtd() {
+        card_collection_qtd_layout.visibility = View.VISIBLE
+        privateInteractor.getUserCollection(card.set, card.attr) {
+            userCardQtd = it[card.shortName] ?: 0
+            updateChangeCardQtdButtons()
+            card_collection_qtd_loading.visibility = View.GONE
+            card_collection_qtd.text = userCardQtd.toString()
+            card_collection_qtd.visibility = View.VISIBLE
+            with(card_collection_qtd_plus_btn) {
+                visibility = View.VISIBLE
+                setOnClickListener { updateCardQtd(userCardQtd.plus(1)) }
+            }
+            with(card_collection_qtd_minus_btn) {
+                visibility = View.VISIBLE
+                setOnClickListener { updateCardQtd(userCardQtd.minus(1)) }
+            }
+        }
+    }
+
+    private fun updateChangeCardQtdButtons() {
+        val cardMaxQtd = if (card.unique) 1 else 3
+        card_collection_qtd_plus_btn.isEnabled = userCardQtd < cardMaxQtd
+        card_collection_qtd_minus_btn.isEnabled = userCardQtd > 0
+    }
+
+    private fun updateCardQtd(newCardQtd: Int) {
+        privateInteractor.setUserCardQtd(card, newCardQtd) {
+            userCardQtd = newCardQtd
+            card_collection_qtd.text = newCardQtd.toString()
+            updateChangeCardQtdButtons()
+            setResult(Activity.RESULT_OK, Intent())
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
