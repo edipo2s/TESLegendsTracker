@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/deck_height"
     android:layout_marginTop="@dimen/default_margin"
+    android:transitionGroup="true"
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <ProgressBar
