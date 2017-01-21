@@ -19,6 +19,11 @@ abstract class MetricsConstants {
         const val PARAM_VIEW_CARD_NAME = "Name"
         const val PARAM_VIEW_CARD_ATTR = "Attr"
 
+        const val EVENT_VIEW_DECK = "ViewDeck"
+        const val PARAM_VIEW_DECK_ID = "ID"
+        const val PARAM_VIEW_DECK_NAME = "Name"
+        const val PARAM_VIEW_DECK_CLASS = "Class"
+
         const val EVENT_SEARCH = "Search"
 
         const val PARAM_CONTENT_VIEW_TYPE_CARD = "Card"
@@ -45,7 +50,8 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_STATISTICS_EXPAND : MetricAction("CollectionStatisticsExpand")
     class ACTION_COLLECTION_STATISTICS_COLLAPSE : MetricAction("CollectionStatisticsCollapse")
 
-    class ACTION_COLLECTION_CARD_QTD_CHANGE(val qtd: Int) : MetricAction("CollectionCardQtdChange") {
+    class ACTION_COLLECTION_CARD_QTD_CHANGE(val card: Card, val qtd: Int) : MetricAction("CollectionCardQtdChange") {
+        val PARAM_CARD = "Card"
         val PARAM_QTD = "Qtd"
     }
 
@@ -134,8 +140,11 @@ sealed class MetricAction(val name: String) {
     class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
-    class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("AboutImportCollectionCancelled")
-    class ACTION_IMPORT_COLLECTION_FINISH : MetricAction("AboutImportCollectionFinish")
+    class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("ImportCollectionCancelled")
+
+    class ACTION_IMPORT_COLLECTION_FINISH(val cardsImported: Int) : MetricAction("ImportCollectionFinish") {
+        val PARAM_CARDS_IMPORTED = "CardsImported"
+    }
 
 }
 

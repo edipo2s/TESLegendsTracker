@@ -332,15 +332,14 @@ class DashActivity : BaseFilterActivity(),
             profile_collection.visibility = View.INVISIBLE
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
-                publicInteractor.getCardsForStatistics(null) {
-                    val allAttrCards = it
+                publicInteractor.getCardsForStatistics(null) { allAttrCards ->
                     allCardsTotal += allAttrCards.filter { it.unique }.size
                     allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
-                    privateInteractor.getUserCollection(null) {
-                        userCardsTotal += it.filter {
+                    privateInteractor.getUserCollection(null) { userCards ->
+                        userCardsTotal += userCards.filter {
                             allAttrCards.map { it.shortName }.contains(it.key)
                         }.values.sum()
-                        Timber.d("Out: ${it.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
+                        Timber.d("Out: ${userCards.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
                         val stringPercent = getString(R.string.collection_statistics_percent,
                                 if (allCardsTotal > 0)
                                     userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f

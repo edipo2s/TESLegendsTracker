@@ -6,6 +6,7 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.BuildConfig
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.Deck
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
@@ -44,8 +45,10 @@ object MetricsManager : MetricsConstants() {
     fun trackAction(action: MetricAction) {
         val bundle = Bundle().apply {
             when (action) {
-                is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE ->
+                is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE -> {
+                    putString(action.PARAM_CARD, action.card.shortName)
                     putInt(action.PARAM_QTD, action.qtd)
+                }
                 is MetricAction.ACTION_CARD_FILTER_SET ->
                     putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_ATTR ->
@@ -100,6 +103,8 @@ object MetricsManager : MetricsConstants() {
                         put(FirebaseAnalytics.Param.ITEM_NAME, action.name)
                     }))
                 }
+                is MetricAction.ACTION_IMPORT_COLLECTION_FINISH ->
+                    putInt(action.PARAM_CARDS_IMPORTED, action.cardsImported)
             }
         }
         answers?.logCustom(CustomEvent(action.name))
@@ -138,7 +143,7 @@ object MetricsManager : MetricsConstants() {
 
     private fun identifyUser(user: FirebaseUser?) {
         val userId = user?.uid
-        if (Fabric.isInitialized() && BuildConfig.PREPARE_TO_RELEASE) {
+        if (Crashlytics.getInstance() != null && BuildConfig.PREPARE_TO_RELEASE) {
             Crashlytics.setUserIdentifier(userId)
             Crashlytics.setUserName(user?.displayName)
             Crashlytics.setUserEmail(user?.email)
@@ -179,6 +184,24 @@ object MetricsManager : MetricsConstants() {
                 PARAM_VIEW_CARD_ID to card.shortName,
                 PARAM_VIEW_CARD_NAME to card.name,
                 PARAM_VIEW_CARD_ATTR to card.attr.name))
+    }
+
+    fun trackDeckView(deck: Deck) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_CARD)
+            putString(FirebaseAnalytics.Param.ITEM_ID, deck.uuid)
+            putString(FirebaseAnalytics.Param.ITEM_NAME, deck.name)
+            putString(FirebaseAnalytics.Param.ITEM_CATEGORY, deck.cls.name)
+        }
+        answers?.logContentView(ContentViewEvent()
+                .putContentId(deck.uuid)
+                .putContentName(deck.name)
+                .putContentType(deck.cls.name))
+        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        mixpanelAnalytics?.trackMap(EVENT_VIEW_DECK, mapOf(
+                PARAM_VIEW_DECK_ID to deck.uuid,
+                PARAM_VIEW_DECK_NAME to deck.name,
+                PARAM_VIEW_DECK_CLASS to deck.cls.name))
     }
 
 }
