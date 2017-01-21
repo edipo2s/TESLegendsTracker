@@ -42,6 +42,7 @@ sealed class MetricAction(val name: String) {
         const val CLEAR = "Clear"
     }
 
+    class ACTION_APP_LAUNCH : MetricAction("AppLaunch")
     class ACTION_CARD_DETAILS_EXPAND : MetricAction("CardDetailsExpand")
     class ACTION_CARD_DETAILS_COLLAPSE : MetricAction("CardDetailsCollapse")
     class ACTION_CARD_DETAILS_CLOSE_TAP : MetricAction("CardDetailsCloseTap")

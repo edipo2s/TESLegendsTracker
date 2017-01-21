@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.ediposouza.teslesgendstracker.DECK_NAME_MIN_SIZE
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -209,9 +210,9 @@ class MatchesFragment : BaseFragment() {
                     val name = dialogView.new_match_dialog_deck_name.text.toString()
                     val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
-                    val deck = if (deckPosition >= 0) decks[deckPosition] else null
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    if (name.length < 5) {
+                    val deck = if (mode != MatchMode.ARENA && deckPosition >= 0) decks[deckPosition] else null
+                    if (mode != MatchMode.ARENA && name.length < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {
                         startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)

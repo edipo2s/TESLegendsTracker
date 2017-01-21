@@ -181,19 +181,21 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
-                    Timber.d("signInWithCredential:onComplete:" + task.isSuccessful)
+                    Timber.d("signWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
                         val currentUser = firebaseAuth.currentUser
-                        PublicInteractor().getUserInfo(currentUser?.uid ?: "", {
-                            toast("SignUp with " + currentUser?.displayName)
-                            MetricsManager.trackSignUp()
-                        }, {
-                            toast("SignIn with " + currentUser?.displayName)
-                        })
-                        PrivateInteractor().setUserInfo()
+                        PublicInteractor().getUserInfo(currentUser?.uid ?: "") {
+                            if (it.name.isEmpty()) {
+                                toast("SignUp with " + currentUser?.displayName)
+                                MetricsManager.trackSignUp()
+                            } else {
+                                toast("SignIn with " + currentUser?.displayName)
+                            }
+                            PrivateInteractor().setUserInfo()
+                        }
                         eventBus.post(CmdLoginSuccess())
                     } else {
-                        Timber.w("signInWithCredential", task.exception)
+                        Timber.w("signWithCredential", task.exception)
                         toast(getString(R.string.error_login))
                         MetricsManager.trackSignIn(null, false)
                     }
