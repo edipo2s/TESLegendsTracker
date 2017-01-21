@@ -175,6 +175,7 @@ class DeckActivity : BaseActivity() {
         }
         setResult(Activity.RESULT_OK, Intent())
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
+        MetricsManager.trackDeckView(deck)
     }
 
     override fun onBackPressed() {

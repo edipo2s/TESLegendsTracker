@@ -190,7 +190,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics.updateStatistics(currentAttr)
-            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(finalQtd))
+            MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(cardSlot.card, finalQtd))
         }
     }
 
@@ -283,7 +283,10 @@ class CardsCollectionFragment : CardsAllFragment() {
                         }, DateUtils.SECOND_IN_MILLIS / 2)
                     })
                     .show()
-            MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_FINISH())
+            val newCardsImported = legendsSlots.filter { onlyInLegendsDecks.map(Card::shortName).contains(it.key) }.values.sum()
+            val cardsQtdImported = legendsSlots.filter { legendsQtdGreater.map(Card::shortName).contains(it.key) }
+                    .map { it.key to it.value.minus(userSlots[it.key] ?: 0) }.sumBy { it.second }
+            MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_FINISH(newCardsImported + cardsQtdImported))
         }
     }
 
