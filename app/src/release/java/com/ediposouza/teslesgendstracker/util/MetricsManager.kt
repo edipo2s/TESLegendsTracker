@@ -11,7 +11,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.fabric.sdk.android.Fabric
+import org.json.JSONObject
 import timber.log.Timber
+import java.math.BigDecimal
+import java.util.*
 
 /**
  * Created by ediposouza on 08/12/16.
@@ -78,6 +81,24 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_MODE, action.mode.name)
                     putString(action.PARAM_SEASON, action.season)
                     putBoolean(action.PARAM_LEGEND, action.legendRank)
+                }
+                is MetricAction.ACTION_DONATE_BASIC,
+                is MetricAction.ACTION_DONATE_PRO -> {
+                    val value = if (action is MetricAction.ACTION_DONATE_BASIC) 6L else 13L
+                    val valueCurrency = "BRL"
+                    answers?.logPurchase(PurchaseEvent()
+                            .putItemName(action.name)
+                            .putItemPrice(BigDecimal.valueOf(value))
+                            .putCurrency(Currency.getInstance(valueCurrency))
+                            .putSuccess(true))
+                    firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, Bundle().apply {
+                        putString(FirebaseAnalytics.Param.ITEM_NAME, action.name)
+                        putString(FirebaseAnalytics.Param.CURRENCY, valueCurrency)
+                        putDouble(FirebaseAnalytics.Param.VALUE, value.toDouble())
+                    })
+                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(HashMap<String, Any>().apply {
+                        put(FirebaseAnalytics.Param.ITEM_NAME, action.name)
+                    }))
                 }
             }
         }

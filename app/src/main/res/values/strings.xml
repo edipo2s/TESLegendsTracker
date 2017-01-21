@@ -60,6 +60,7 @@
     <string name="about_info_version">App Version:</string>
     <string name="about_info_developer_label">Developer:</string>
     <string name="about_info_developer" translatable="false">Édipo Souza (edipo2s)</string>
+    <string name="about_info_developer_link" translatable="false">https://twitter.com/EdipoSilvaSouza</string>
     <string name="about_info_thanks_label">Special Thanks:</string>
     <string name="about_info_thanks_direwolf" translatable="false">Dire Wolf - </string>
     <string name="about_info_thanks_direwolf_text">TES Legends game</string>
