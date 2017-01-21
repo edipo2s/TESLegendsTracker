@@ -47,7 +47,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             updateActivityTitle(position)
-            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            val selectedAttr = cards_filter_attr.getSelectedAttrs().first()
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList(selectedAttr)
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 cards_collection_statistics.updateStatistics()

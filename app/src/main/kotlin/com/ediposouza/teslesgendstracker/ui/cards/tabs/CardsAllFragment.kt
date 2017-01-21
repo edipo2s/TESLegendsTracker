@@ -53,6 +53,8 @@ open class CardsAllFragment : BaseFragment() {
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
 
+    protected var shouldScrollToTop: Boolean = false
+
     open protected val isCardsCollection: Boolean = false
 
     open val cardsAdapter by lazy {
@@ -206,11 +208,21 @@ open class CardsAllFragment : BaseFragment() {
 
     open fun showCards() {
         cardsAdapter.showCards(filteredCards())
-        cards_recycler_view?.scrollToPosition(0)
         eventBus.post(CmdUpdateVisibility(true))
+        scrollToTop()
     }
 
-    fun updateCardsList() {
+    protected fun scrollToTop() {
+        if (shouldScrollToTop) {
+            cards_recycler_view?.scrollToPosition(0)
+        } else {
+            shouldScrollToTop = true
+        }
+    }
+
+    fun updateCardsList(selectedAttr: Attribute = currentAttr) {
+        currentAttr = selectedAttr
+        shouldScrollToTop = false
         if (cards_recycler_view != null) {
             loadCardsByAttr(currentAttr)
         }

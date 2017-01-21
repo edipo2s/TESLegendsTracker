@@ -111,7 +111,9 @@
     <string name="cards_sets_core" translatable="false">Core</string>
     <string name="cards_sets_madhouse" translatable="false">Madhouse</string>
 
+    <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>
+    <string name="card_collection_qtd_label">Collection Qtd:</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
