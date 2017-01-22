@@ -4939,6 +4939,25 @@
       }
     }
   },
+  "news": {
+    "2016_12_14": {
+      "cover": "https://content.bethsoft.com/bsw_cms_asset/94092_7_1.png",
+      "link": "https://legends.bethesda.net/articles/patch-notes-build-60-0?locale=en",
+      "title": "Game Update 1.60: Patch Notes",
+      "type": "ANNOUNCEMENTS"
+    },
+    "2016_12_13": {
+      "cover": "https://content.bethsoft.com/bsw_cms_asset/93913_7_1.png",
+      "title": "Exploring the Chaos Arena",
+      "link": "https://legends.bethesda.net/articles/exploring-the-chaos-arena?locale=en",
+      "type": "THE ARENA DISTRICT"
+    },
+    "2016_1_": {
+      "cover": "",
+      "title": "",
+      "link": ""
+    }
+  },
   "patches": {
     "2017_01_11": {
       "core": {

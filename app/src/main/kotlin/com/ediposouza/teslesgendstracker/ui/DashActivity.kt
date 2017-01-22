@@ -16,7 +16,6 @@ import android.view.MenuItem
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
-import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -27,11 +26,8 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
-import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.alertThemed
+import com.ediposouza.teslesgendstracker.ui.news.NewsFragment
+import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -47,6 +43,7 @@ import timber.log.Timber
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
+    private val KEY_TITLE = "titleKey"
     private val KEY_MENU_ITEM_SELECTED = "menuIndexKey"
     private val SKU_TEST = "android.test.purchased"
     private val SKU_DONATE_BASIC = "donate_basic"
@@ -124,13 +121,17 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected) }
+        outState?.apply {
+            putString(KEY_TITLE, dash_toolbar_title.text.toString())
+            putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected)
+        }
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState?.apply {
+            dash_toolbar_title.text = getString(KEY_TITLE)
             menuItemSelected = getInt(KEY_MENU_ITEM_SELECTED)
             dash_navigation_view.setCheckedItem(menuItemSelected)
         }
@@ -152,15 +153,13 @@ class DashActivity : BaseFilterActivity(),
 
     private fun updateUserMenuInfo() {
         val user = FirebaseAuth.getInstance().currentUser
-        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = App.hasUserLogged()
+        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
         with(dash_navigation_view.getHeaderView(0)) {
             profile_change_user.visibility = if (App.hasUserLogged()) View.VISIBLE else View.GONE
             profile_name.text = user?.displayName ?: getString(R.string.unknown)
             if (user != null) {
-                Glide.with(this@DashActivity)
-                        .load(user.photoUrl)
-                        .transform(CircleTransform(this@DashActivity))
-                        .into(profile_image)
+                val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
+                profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
     }
@@ -200,6 +199,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
+            R.id.menu_news -> showFragment(NewsFragment())
             R.id.menu_arena,
             R.id.menu_season -> {
                 true

@@ -3,6 +3,7 @@
     <item name="deck_cover_bg_alpha" type="dimen" format="float">0.3</item>
     <item name="deck_class_cover_alpha" type="dimen" format="float">0.7</item>
     <item name="deck_card_image_alpha" type="dimen" format="float">0.7</item>
+    <item name="news_image_image_alpha" type="dimen" format="float">0.8</item>
 
     <integer name="anim_slide_duration">500</integer>
     <integer name="decklist_slot_cover_left_crop_margin">50</integer>
