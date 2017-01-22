@@ -117,6 +117,10 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
         return mSnapshots.filter { cond.invoke(it.second) }[index]
     }
 
+    fun getItems(): List<Pair<String, T>> {
+        return mSnapshots
+    }
+
     private fun setup() {
         if (mQuery != null) {
             cleanup()

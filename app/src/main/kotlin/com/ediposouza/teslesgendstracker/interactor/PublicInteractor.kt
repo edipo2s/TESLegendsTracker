@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.interactor
 import com.ediposouza.teslesgendstracker.data.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import org.threeten.bp.Month
 import org.threeten.bp.format.TextStyle
@@ -264,23 +265,18 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
-    fun getNews(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<News>) -> Unit) {
-        database.child(NODE_NEWS).addListenerForSingleValueEvent(object : ValueEventListener {
+    fun getNewsRef(): DatabaseReference = database.child(NODE_NEWS)
 
-            override fun onDataChange(ds: DataSnapshot) {
-                val news = ds.children.map {
-                    it.getValue(FirebaseParsers.NewsParser::class.java).toNews(it.key)
+    fun saveNews(news: News, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+        getNewsRef().child(news.uuidDate)
+                .setValue(FirebaseParsers.NewsParser().fromNews(news))
+                .addOnCompleteListener {
+                    onSuccess.invoke()
                 }
-                Timber.d(news.toString())
-                onSuccess.invoke(news)
-            }
-
-            override fun onCancelled(de: DatabaseError) {
-                Timber.d("Fail: " + de.message)
-                onError?.invoke(de.toException())
-            }
-
-        })
+                .addOnFailureListener { e ->
+                    Timber.d("Fail: " + e.message)
+                    onError?.invoke(e)
+                }
     }
 
 }
