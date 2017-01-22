@@ -2,7 +2,9 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 
 /**
  * Created by EdipoSouza on 10/31/16.
@@ -59,14 +61,18 @@ data class Season(
 
 data class News(
 
-        val uuidDate: String,
         val title: String,
         val type: String,
         val cover: String,
         val link: String,
         val date: LocalDate
 
-)
+) : Comparable<News> {
+
+    val uuidDate: String = date.format(DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN))
+
+    override fun compareTo(other: News): Int = date.compareTo(other.date)
+}
 
 enum class MatchMode {
 
