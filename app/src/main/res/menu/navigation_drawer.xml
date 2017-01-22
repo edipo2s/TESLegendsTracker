@@ -29,9 +29,9 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/menu_news"
+            android:id="@+id/menu_articles"
             android:icon="@drawable/ic_news"
-            android:title="@string/menu_news" />
+            android:title="@string/menu_articles" />
 
     </group>
 

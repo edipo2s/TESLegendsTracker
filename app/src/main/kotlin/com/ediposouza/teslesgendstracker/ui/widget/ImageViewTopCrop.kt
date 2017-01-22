@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
+import com.ediposouza.teslesgendstracker.R
 
 /**
  * Created by EdipoSouza on 1/21/17.
@@ -10,7 +11,12 @@ import android.widget.ImageView
 class ImageViewTopCrop(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         ImageView(context, attrs, defStyleAttr) {
 
+    var imageTopMargin = 0f
+
     init {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ImageViewTopCrop)
+        imageTopMargin = a.getFloat(R.styleable.ImageViewTopCrop_imageTopMargin, 0f)
+        a.recycle()
         scaleType = ScaleType.MATRIX
     }
 
@@ -29,9 +35,7 @@ class ImageViewTopCrop(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     }
 
     private fun recomputeImgMatrix() {
-
         val drawable = drawable ?: return
-
         val matrix = imageMatrix
 
         val scale: Float
@@ -47,6 +51,10 @@ class ImageViewTopCrop(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         }
 
         matrix.setScale(scale, scale)
+        if (imageTopMargin > 0) {
+            matrix.postTranslate(0f, drawableHeight * -1 * imageTopMargin)
+        }
+
         imageMatrix = matrix
     }
 

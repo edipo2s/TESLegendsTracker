@@ -7,19 +7,19 @@
     android:orientation="vertical">
 
     <ProgressBar
-        android:id="@+id/news_loading"
+        android:id="@+id/articles_news_loading"
         android:layout_width="@dimen/size_normal"
         android:layout_height="@dimen/size_normal"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/news_refresh_layout"
+        android:id="@+id/articles_news_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/news_recycler_view"
+            android:id="@+id/articles_news_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/default_margin"
@@ -28,7 +28,7 @@
             android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
             android:scrollbars="vertical"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/itemlist_news" />
+            tools:listitem="@layout/itemlist_article_news" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

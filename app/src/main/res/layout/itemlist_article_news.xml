@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin"
+    android:transitionGroup="true"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <com.andexert.library.RippleView
+        android:id="@+id/article_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/article_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/article_news_height"
+            android:layout_margin="1dp"
+            tools:background="@android:color/black">
+
+            <com.ediposouza.teslesgendstracker.ui.widget.ImageViewTopCrop
+                android:id="@+id/article_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="@dimen/news_image_image_alpha"
+                app:imageTopMargin="0.1"
+                tools:src="@drawable/article_cover" />
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_large"
+                android:textStyle="bold"
+                tools:text="Chaos Arena Returns for Monthly Madness" />
+
+            <ProgressBar
+                android:id="@+id/article_cover_loading"
+                android:layout_width="@dimen/size_normal"
+                android:layout_height="@dimen/size_normal"
+                android:layout_below="@id/article_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/small_margin"
+                android:indeterminate="true" />
+
+            <TextView
+                android:id="@+id/article_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/medium_margin"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                tools:text="announcements" />
+
+            <TextView
+                android:id="@+id/article_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/medium_margin"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                tools:text="16/01/2017" />
+
+        </RelativeLayout>
+
+    </com.andexert.library.RippleView>
+
+</android.support.v7.widget.CardView>

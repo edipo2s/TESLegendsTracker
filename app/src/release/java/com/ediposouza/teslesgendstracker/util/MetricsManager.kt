@@ -104,6 +104,9 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_IMPORT_COLLECTION_FINISH ->
                     putInt(action.PARAM_CARDS_IMPORTED, action.cardsImported)
+                is MetricAction.ACTION_ARTICLES_VIEW_NEWS,
+                is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
+                    putInt(action.PARAM_ARTICLE, action.article.uuidDate)
             }
         }
         answers?.logCustom(CustomEvent(action.name))

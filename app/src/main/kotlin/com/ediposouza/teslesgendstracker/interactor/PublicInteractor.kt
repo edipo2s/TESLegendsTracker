@@ -267,7 +267,7 @@ class PublicInteractor : BaseInteractor() {
 
     fun getNewsRef(): DatabaseReference = database.child(NODE_NEWS)
 
-    fun saveNews(news: News, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
+    fun saveNews(news: Article, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         getNewsRef().child(news.uuidDate)
                 .setValue(FirebaseParsers.NewsParser().fromNews(news))
                 .addOnCompleteListener {

@@ -144,6 +144,7 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
             into(this@loadFromUrl)
         }
     } else {
-        setImageResource(R.drawable.news_cover)
+        setImageResource(R.drawable.article_cover)
     }
+
 }

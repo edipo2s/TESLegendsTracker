@@ -79,7 +79,8 @@
 
     <dimen name="new_match_class_icons_width">56dp</dimen>
 
-    <!-- News -->
-    <dimen name="news_height">120dp</dimen>
+    <!-- Article -->
+    <dimen name="article_news_height">120dp</dimen>
+    <dimen name="article_world_height">160dp</dimen>
 
 </resources>

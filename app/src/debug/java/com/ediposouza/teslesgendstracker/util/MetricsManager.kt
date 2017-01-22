@@ -18,8 +18,8 @@ object MetricsManager : MetricsConstants() {
     fun flush() {
     }
 
-    fun trackAction(action: MetricAction, vararg params: String) {
-        Timber.d(if (params.isEmpty()) action.name else "${action.name} with params: ${params.toSet()}")
+    fun trackAction(action: MetricAction) {
+        Timber.d(action.name)
     }
 
     fun trackScreen(screen: MetricScreen) {
