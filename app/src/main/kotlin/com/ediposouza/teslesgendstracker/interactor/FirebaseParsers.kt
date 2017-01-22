@@ -198,13 +198,13 @@ abstract class FirebaseParsers {
 
     ) {
 
-        fun toNews(uuidDate: String): News {
+        fun toNews(uuidDate: String): Article {
             val uuidDateFormatter = DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN)
-            return News(title, type, cover, link, LocalDate.parse(uuidDate, uuidDateFormatter))
+            return Article(title, type, cover, link, LocalDate.parse(uuidDate, uuidDateFormatter))
         }
 
-        fun fromNews(news: News): NewsParser {
-            return NewsParser(news.cover, news.link, news.title, news.type)
+        fun fromNews(article: Article): NewsParser {
+            return NewsParser(article.cover, article.link, article.title, article.type)
         }
 
     }

@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/deck_list_slot_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginEnd="@dimen/default_margin"
     android:layout_marginStart="@dimen/nano_margin"
     tools:layout_gravity="end"
     tools:layout_marginTop="@dimen/status_bar_height"
     tools:layout_width="200dp">
 
-    <ImageView
+    <com.ediposouza.teslesgendstracker.ui.widget.ImageViewTopCrop
         android:id="@+id/deckslot_card_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +18,7 @@
         android:layout_marginStart="@dimen/deck_list_slot_half_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
         android:alpha="@dimen/deck_card_image_alpha"
-        android:scaleType="centerCrop"
+        app:imageTopMargin="0.3"
         android:src="@drawable/card" />
 
     <ImageView

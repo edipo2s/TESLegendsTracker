@@ -143,9 +143,16 @@ sealed class MetricAction(val name: String) {
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
     class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("ImportCollectionCancelled")
-
     class ACTION_IMPORT_COLLECTION_FINISH(val cardsImported: Int) : MetricAction("ImportCollectionFinish") {
         val PARAM_CARDS_IMPORTED = "CardsImported"
+    }
+
+    class ACTION_ARTICLES_VIEW_NEWS(val article: Article) : MetricAction("ViewArticleNews") {
+        val PARAM_ARTICLE = "ArticleID"
+    }
+
+    class ACTION_ARTICLES_VIEW_WORLD(val article: Article) : MetricAction("ViewArticleWorld") {
+        val PARAM_ARTICLE = "ArticleID"
     }
 
 }
@@ -173,6 +180,8 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_MATCHES_STATISTICS_CLASS : MetricScreen("MatchesStatisticsClass")
     class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
+    class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
+    class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")
     class SCREEN_IMPORT_COLLECTION : MetricScreen("ImportCollection")

@@ -19,6 +19,7 @@ import android.webkit.CookieSyncManager
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.ui.articles.ArticlesFragment
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
@@ -26,7 +27,6 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
-import com.ediposouza.teslesgendstracker.ui.news.NewsFragment
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
@@ -199,7 +199,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
-            R.id.menu_news -> showFragment(NewsFragment())
+            R.id.menu_articles -> showFragment(ArticlesFragment())
             R.id.menu_arena,
             R.id.menu_season -> {
                 true

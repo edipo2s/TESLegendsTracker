@@ -236,7 +236,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         fun bind(slot: CardSlot, missingQtd: Int) {
             itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
             itemView.setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
-            itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))
+            itemView.deckslot_card_image.setImageBitmap(getCardImage(slot))
             itemView.decl_slot_card_name.text = slot.card.name
             itemView.deckslot_card_rarity.setImageResource(slot.card.rarity.imageRes)
             itemView.deckslot_card_magika.setImageResource(when (slot.card.cost) {
@@ -256,21 +256,14 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             itemView.deckslot_card_qtd_missing.visibility = if (missingQtd > 0) View.VISIBLE else View.INVISIBLE
         }
 
-        private fun getCroppedCardImage(slot: CardSlot): Bitmap {
-            val resources = itemView.resources
+        private fun getCardImage(slot: CardSlot): Bitmap {
             var cardBitmap: Bitmap
             try {
                 cardBitmap = slot.card.imageBitmap(itemView.context)
             } catch (e: Exception) {
-                cardBitmap = BitmapFactory.decodeResource(resources, R.drawable.card)
+                cardBitmap = BitmapFactory.decodeResource(itemView.resources, R.drawable.card)
             }
-            val bmpWidth = cardBitmap.width
-            val bmpHeight = cardBitmap.height
-            val leftCropMargin = resources.getInteger(R.integer.decklist_slot_cover_left_crop_margin)
-            val rightCropMargin = resources.getInteger(R.integer.decklist_slot_cover_right_crop_margin)
-            val cropWidth = bmpWidth - leftCropMargin - rightCropMargin
-            val cropeBitmap = Bitmap.createBitmap(cardBitmap, leftCropMargin, 0, cropWidth, bmpHeight * 2 / 3)
-            return cropeBitmap
+            return cardBitmap
         }
 
     }

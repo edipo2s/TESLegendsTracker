@@ -17,7 +17,7 @@
     <string name="menu_cards">Cartas</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
-    <string name="menu_news">TESL Notícias</string>
+    <string name="menu_articles">TESL Artigos</string>
     <string name="menu_season">Temporada</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
@@ -75,6 +75,8 @@
     <string name="tab_mode_ranked">Ranqueado</string>
     <string name="tab_mode_casual">Casual</string>
     <string name="tab_mode_arena">Arena</string>
+    <string name="tab_articles_news">Notícias</string>
+    <string name="tab_articles_world">Mundo</string>
 
     <string name="title_tab_cards_collection">Coleção de Cartas</string>
     <string name="title_tab_cards_favorites">Cartas Favoritas</string>
@@ -83,6 +85,9 @@
     <string name="title_tab_decks_favorites">Decks Favoritos</string>
     <string name="title_tab_matches_statistics">Statísticas de Partidas</string>
     <string name="title_tab_matches_history">Histórico de Partidas</string>
+
+    <string name="title_tab_articles_news">TES Legends Notícias</string>
+    <string name="title_tab_articles_world">TES Legends Mundo</string>
 
     <string name="cards_sets_all">Todos</string>
 
@@ -161,6 +166,10 @@
     <string name="new_match_save_rank_error">Partidas no Ranquedo precisam de um Ranque para serem salvas</string>
     <string name="new_match_saved">Nova Partida Salva!</string>
 
-    <string name="news_title">TES Legends Notícias</string>
+    <string name="article_news_title">Notícias</string>
+    <string name="article_world_title">Mundo</string>
+    <string name="article_world_races_title">Raças</string>
+    <string name="article_world_classes_title">Classes</string>
+    <string name="article_world_attributes_title">Atributos</string>
 
 </resources>

@@ -59,19 +59,19 @@ data class Season(
 
 )
 
-data class News(
+data class Article(
 
         val title: String,
         val type: String,
         val cover: String,
         val link: String,
-        val date: LocalDate
+        val date: LocalDate?
 
-) : Comparable<News> {
+) : Comparable<Article> {
 
-    val uuidDate: String = date.format(DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN))
+    val uuidDate: String = date?.format(DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN)) ?: title
 
-    override fun compareTo(other: News): Int = date.compareTo(other.date)
+    override fun compareTo(other: Article): Int = date?.compareTo(other.date) ?: title.compareTo(other.title)
 }
 
 enum class MatchMode {

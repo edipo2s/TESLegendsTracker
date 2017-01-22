@@ -38,7 +38,7 @@
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
     <string name="menu_arena">Arena</string>
-    <string name="menu_news">TESL News</string>
+    <string name="menu_articles">TESL Articles</string>
     <string name="menu_season">Season</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
@@ -103,6 +103,8 @@
     <string name="tab_mode_ranked">Ranked</string>
     <string name="tab_mode_casual">Casual</string>
     <string name="tab_mode_arena">Arena</string>
+    <string name="tab_articles_news">News</string>
+    <string name="tab_articles_world">World</string>
 
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
@@ -112,6 +114,9 @@
     <string name="title_tab_decks_favorites">Decks Favorites</string>
     <string name="title_tab_matches_statistics">Matches Statistics</string>
     <string name="title_tab_matches_history">Matches History</string>
+
+    <string name="title_tab_articles_news">TES Legends News</string>
+    <string name="title_tab_articles_world">TES Legends World</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_sets_core" translatable="false">Core</string>
@@ -209,8 +214,19 @@
     <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
     <string name="new_match_saved">New Match Saved!</string>
 
-    <string name="news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
-    <string name="news_base_link" translatable="false">https://legends.bethesda.net</string>
-    <string name="news_title">TES Legends News</string>
+    <string name="article_base_link" translatable="false">https://legends.bethesda.net</string>
+    <string name="article_news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
+    <string name="article_news_title">News</string>
+    <string name="article_world_title">World</string>
+    <string name="article_world_type" translatable="false">@string/tab_articles_world</string>
+    <string name="article_world_races_title">Races</string>
+    <string name="article_world_races_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83401_2_1.png</string>
+    <string name="article_world_races_link" translatable="false">https://legends.bethesda.net/world/races</string>
+    <string name="article_world_classes_title">Classes</string>
+    <string name="article_world_classes_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83857_2_1.jpg</string>
+    <string name="article_world_classes_link" translatable="false">https://legends.bethesda.net/world/classes</string>
+    <string name="article_world_attributes_title">Attributes</string>
+    <string name="article_world_attributes_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83115_2_1.png</string>
+    <string name="article_world_attributes_link" translatable="false">https://legends.bethesda.net/world/attributes</string>
 
 </resources>
