@@ -29,7 +29,10 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
+
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
+    <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
@@ -206,6 +209,8 @@
     <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
     <string name="new_match_saved">New Match Saved!</string>
 
+    <string name="news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
+    <string name="news_base_link" translatable="false">https://legends.bethesda.net</string>
     <string name="news_title">TES Legends News</string>
 
 </resources>

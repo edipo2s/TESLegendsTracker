@@ -49,10 +49,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/medium_margin"
+            android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_medium"
             android:textStyle="bold"
-            tools:text="ANNONCEMENTS" />
+            tools:text="announcements" />
 
         <TextView
             android:id="@+id/news_date"
