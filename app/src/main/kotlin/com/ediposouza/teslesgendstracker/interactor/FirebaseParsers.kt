@@ -1,8 +1,11 @@
 package com.ediposouza.teslesgendstracker.interactor
 
+import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 abstract class FirebaseParsers {
 
@@ -185,4 +188,25 @@ abstract class FirebaseParsers {
         }
 
     }
+
+    class NewsParser(
+
+            val cover: String = "",
+            val link: String = "",
+            val title: String = "",
+            val type: String = ""
+
+    ) {
+
+        fun toNews(uuidDate: String): News {
+            val uuidDateFormatter = DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN)
+            return News(uuidDate, title, type, cover, link, LocalDate.parse(uuidDate, uuidDateFormatter))
+        }
+
+        fun fromNews(news: News): NewsParser {
+            return NewsParser(news.cover, news.link, news.title, news.type)
+        }
+
+    }
+
 }

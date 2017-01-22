@@ -14,6 +14,7 @@
     <dimen name="font_micro">10sp</dimen>
     <dimen name="font_small">12sp</dimen>
     <dimen name="font_medium">16sp</dimen>
+    <dimen name="font_big">18sp</dimen>
     <dimen name="font_large">22sp</dimen>
     <dimen name="font_huge">26sp</dimen>
 
@@ -70,11 +71,15 @@
     <dimen name="deck_new_magika_costs_bar_min_height">48dp</dimen>
     <dimen name="deck_new_magika_costs_bar_width">8dp</dimen>
 
+    <!-- Matches -->
     <dimen name="match_statistics_cell_height">48dp</dimen>
     <dimen name="match_statistics_cell_width">72dp</dimen>
     <dimen name="match_statistics_header_width">88dp</dimen>
     <dimen name="match_statistics_class_header_width">120dp</dimen>
 
     <dimen name="new_match_class_icons_width">56dp</dimen>
+
+    <!-- News -->
+    <dimen name="news_height">120dp</dimen>
 
 </resources>

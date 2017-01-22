@@ -30,8 +30,7 @@ object MetricsManager : MetricsConstants() {
         if (BuildConfig.PREPARE_TO_RELEASE) {
             Fabric.with(context, Answers(), Crashlytics())
         } else {
-            Fabric.with(context, Answers())
-            Timber.w("Crashlytics not initialized")
+            Timber.w("Fabric not initialized")
         }
         answers = Answers.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)

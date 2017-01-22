@@ -19,8 +19,20 @@
             android:id="@+id/menu_matches"
             android:icon="@drawable/ic_menu_matches"
             android:title="@string/menu_matches"
-            android:visible="false"
-            tools:visible="true" />
+            android:enabled="false"
+            tools:enabled="true" />
+
+    </group>
+
+    <group
+        android:id="@+id/group_bethesda"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_news"
+            android:icon="@drawable/ic_news"
+            android:title="@string/menu_news" />
+
     </group>
 
     <group

@@ -17,6 +17,7 @@
     <string name="menu_cards">Cartas</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
+    <string name="menu_news">TESL Notícias</string>
     <string name="menu_season">Temporada</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
@@ -159,5 +160,7 @@
     <string name="new_match_rank_label">Ranque</string>
     <string name="new_match_save_rank_error">Partidas no Ranquedo precisam de um Ranque para serem salvas</string>
     <string name="new_match_saved">Nova Partida Salva!</string>
+
+    <string name="news_title">TES Legends Notícias</string>
 
 </resources>

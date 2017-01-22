@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin"
+    android:transitionGroup="true"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_height"
+        android:layout_margin="1dp"
+        tools:background="@android:color/black">
+
+        <com.ediposouza.teslesgendstracker.ui.widget.ImageViewTopCrop
+            android:id="@+id/news_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="@dimen/news_image_image_alpha"
+            android:scaleType="matrix"
+            tools:src="@drawable/news_cover" />
+
+        <TextView
+            android:id="@+id/news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            tools:text="Chaos Arena Returns for Monthly Madness" />
+
+        <ProgressBar
+            android:id="@+id/news_cover_loading"
+            android:layout_width="@dimen/size_normal"
+            android:layout_height="@dimen/size_normal"
+            android:layout_below="@id/news_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/small_margin"
+            android:indeterminate="true" />
+
+        <TextView
+            android:id="@+id/news_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/medium_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_medium"
+            android:textStyle="bold"
+            tools:text="ANNONCEMENTS" />
+
+        <TextView
+            android:id="@+id/news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/medium_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_medium"
+            android:textStyle="bold"
+            tools:text="16/01/2017" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

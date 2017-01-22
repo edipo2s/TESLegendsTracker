@@ -14,6 +14,8 @@
     <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
     <string name="app_ads_match_statistics_class_full" translatable="false">ca-app-pub-7881623561544201/8978508773</string>
     <string name="app_ads_new_matches_full" translatable="false">ca-app-pub-7881623561544201/1315641179</string>
+    <string name="app_ads_news_list" translatable="false">ca-app-pub-7881623561544201/8166949970</string>
+    <string name="app_ads_news_list_size" translatable="false">280x80</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
@@ -32,8 +34,9 @@
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
-    <string name="menu_season">Season</string>
     <string name="menu_arena">Arena</string>
+    <string name="menu_news">TESL News</string>
+    <string name="menu_season">Season</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
     <string name="menu_share">Invite a Friend</string>
@@ -202,5 +205,7 @@
     <string name="new_match_rank_label">Rank</string>
     <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
     <string name="new_match_saved">New Match Saved!</string>
+
+    <string name="news_title">TES Legends News</string>
 
 </resources>

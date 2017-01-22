@@ -264,5 +264,24 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
+    fun getNews(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<News>) -> Unit) {
+        database.child(NODE_NEWS).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val news = ds.children.map {
+                    it.getValue(FirebaseParsers.NewsParser::class.java).toNews(it.key)
+                }
+                Timber.d(news.toString())
+                onSuccess.invoke(news)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
 }
 

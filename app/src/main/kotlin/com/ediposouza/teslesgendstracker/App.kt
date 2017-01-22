@@ -52,6 +52,7 @@ class App : MultiDexApplication() {
                 reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_SEASONS).keepSynced(sync)
+                reference.child(BaseInteractor.NODE_NEWS).keepSynced(sync)
             }
         }
     }

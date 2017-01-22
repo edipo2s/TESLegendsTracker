@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import org.threeten.bp.LocalDate
 
 /**
  * Created by EdipoSouza on 10/31/16.
@@ -10,15 +11,6 @@ data class UserInfo(
 
         val name: String,
         val photoUrl: String
-
-)
-
-data class CardCollection(
-
-        val cardShortName: String,
-        val cardAttr: Attribute,
-        val cardSet: CardSet,
-        val qtd: Int
 
 )
 
@@ -62,6 +54,17 @@ data class Season(
         val uuid: String,
         val desc: String,
         val reward: String
+
+)
+
+data class News(
+
+        val uuidDate: String,
+        val title: String,
+        val type: String,
+        val cover: String,
+        val link: String,
+        val date: LocalDate
 
 )
 
