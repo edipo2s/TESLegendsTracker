@@ -44,6 +44,10 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
+    fun close() {
+        magika_filter.close(true)
+    }
+
     private fun magikaClick(magika: Int) {
         filterClick?.invoke(magika)
         val icon = if (magika == -1) R.drawable.ic_magika else R.drawable.ic_magika_clear

@@ -77,7 +77,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    private fun collapse() {
+    fun collapse() {
         with(rootView) {
             rarity_filter_common?.visibility = View.GONE
             rarity_filter_rare?.visibility = View.GONE
@@ -87,7 +87,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 reverse()
                 duration = ANIM_DURATION
                 addUpdateListener {
-                    rarity_filter_bg.layoutParams.width = it.animatedValue as Int
+                    rarity_filter_bg?.layoutParams?.width = it.animatedValue as Int
                 }
                 addListener(object : Animator.AnimatorListener {
                     override fun onAnimationStart(p0: Animator?) {
@@ -97,7 +97,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     }
 
                     override fun onAnimationEnd(p0: Animator?) {
-                        rarity_filter_bg.layoutParams.width = rarityBGMinWidth
+                        rarity_filter_bg?.layoutParams?.width = rarityBGMinWidth
                     }
 
                     override fun onAnimationCancel(p0: Animator?) {
