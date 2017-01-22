@@ -2,7 +2,9 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
+import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -62,7 +64,7 @@ data class Season(
 data class Article(
 
         val title: String,
-        val type: String,
+        val category: ArticleCategory,
         val cover: String,
         val link: String,
         val date: LocalDate?
@@ -72,6 +74,18 @@ data class Article(
     val uuidDate: String = date?.format(DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN)) ?: title
 
     override fun compareTo(other: Article): Int = date?.compareTo(other.date) ?: title.compareTo(other.title)
+}
+
+enum class ArticleCategory(@IntegerRes val text: Int) {
+
+    ANNOUNCEMENTS(R.string.article_news_category_announcements),
+    BATTLE_TACTICS(R.string.article_news_category_battle),
+    FORGING_LEGENDS(R.string.article_news_category_forging),
+    IMPERIAL_LIBRARY(R.string.article_news_category_imperial),
+    LEGENDARY_BEGINNINGS(R.string.article_news_category_legendary),
+    THE_ARENA_DISTRICT(R.string.article_news_category_arena),
+    WORLD(R.string.article_world_type)
+
 }
 
 enum class MatchMode {

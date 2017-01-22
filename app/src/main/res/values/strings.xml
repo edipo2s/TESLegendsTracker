@@ -40,6 +40,7 @@
     <string name="menu_arena">Arena</string>
     <string name="menu_articles">TESL Articles</string>
     <string name="menu_season">Season</string>
+    <string name="menu_filter">Filter</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
     <string name="menu_share">Invite a Friend</string>
@@ -217,6 +218,13 @@
     <string name="article_base_link" translatable="false">https://legends.bethesda.net</string>
     <string name="article_news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
     <string name="article_news_title">News</string>
+    <string name="article_news_category_all">All</string>
+    <string name="article_news_category_announcements">Announcements</string>
+    <string name="article_news_category_battle">Battle Tactics</string>
+    <string name="article_news_category_forging">Forging Legends</string>
+    <string name="article_news_category_imperial">Imperial Library</string>
+    <string name="article_news_category_legendary">Legendary Beginnings</string>
+    <string name="article_news_category_arena">The Arena District</string>
     <string name="article_world_title">World</string>
     <string name="article_world_type" translatable="false">@string/tab_articles_world</string>
     <string name="article_world_races_title">Races</string>

@@ -167,6 +167,13 @@
     <string name="new_match_saved">Nova Partida Salva!</string>
 
     <string name="article_news_title">Notícias</string>
+    <string name="article_news_category_all">All</string>
+    <string name="article_news_category_announcements">Anúncios</string>
+    <string name="article_news_category_battle">Táticas de Batalha</string>
+    <string name="article_news_category_forging">Forjando Lendas</string>
+    <string name="article_news_category_imperial">Biblioteca Imperial</string>
+    <string name="article_news_category_legendary">Início Legendário</string>
+    <string name="article_news_category_arena">O Distrito da Arena</string>
     <string name="article_world_title">Mundo</string>
     <string name="article_world_races_title">Raças</string>
     <string name="article_world_classes_title">Classes</string>
