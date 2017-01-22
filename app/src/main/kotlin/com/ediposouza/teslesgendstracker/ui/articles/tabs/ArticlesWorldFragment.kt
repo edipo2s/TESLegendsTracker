@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Article
+import com.ediposouza.teslesgendstracker.data.ArticleCategory
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
@@ -20,13 +21,13 @@ class ArticlesWorldFragment : BaseFragment() {
 
     private val worldAdapter by lazy {
         WorldAdapter(listOf(
-                Article(getString(R.string.article_world_races_title), "",
+                Article(getString(R.string.article_world_races_title), ArticleCategory.WORLD,
                         getString(R.string.article_world_races_cover),
                         getString(R.string.article_world_races_link), null),
-                Article(getString(R.string.article_world_classes_title), "",
+                Article(getString(R.string.article_world_classes_title), ArticleCategory.WORLD,
                         getString(R.string.article_world_classes_cover),
                         getString(R.string.article_world_classes_link), null),
-                Article(getString(R.string.article_world_attributes_title), "",
+                Article(getString(R.string.article_world_attributes_title), ArticleCategory.WORLD,
                         getString(R.string.article_world_attributes_cover),
                         getString(R.string.article_world_attributes_link), null)
         ))
