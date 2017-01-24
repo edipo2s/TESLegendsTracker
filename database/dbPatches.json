@@ -16,10 +16,12 @@
         }
       }
     },
-    "desc": "Soulrest Marshal Nerf"
+    "desc": "Soulrest Marshal Nerf",
+    "type": "balance"
   },
   "2016_09_01": {
-    "desc": "Smuggler's Haul"
+    "desc": "Smuggler's Haul",
+    "type": "reward"
   },
   "2016_09_20": {
     "core": {
@@ -32,7 +34,8 @@
         }
       }
     },
-    "desc": "Bone Colossus Nerf"
+    "desc": "Bone Colossus Nerf",
+    "type": "balance"
   },
   "2016_09_28": {
     "core": {
@@ -123,13 +126,16 @@
         }
       }
     },
-    "desc": "Mantikora Nerf"
+    "desc": "Mantikora Nerf",
+    "type": "balance"
   },
   "2016_10_01": {
-    "desc": "Hist Grove"
+    "desc": "Hist Grove",
+    "type": "reward"
   },
   "2016_11_01": {
-    "desc": "Mechanical Ally"
+    "desc": "Mechanical Ally",
+    "type": "reward"
   },
   "2016_11_03": {
     "core": {
@@ -240,10 +246,12 @@
         }
       }
     },
-    "desc": "Nahkriin Nerf"
+    "desc": "Nahkriin Nerf",
+    "type": "balance"
   },
   "2016_12_01": {
-    "desc": "Battlereeve Of Dusk"
+    "desc": "Battlereeve Of Dusk",
+    "type": "reward"
   },
   "2016_12_14": {
     "core": {
@@ -260,10 +268,12 @@
         }
       }
     },
-    "desc": "Madhouse Collection"
+    "desc": "Madhouse Collection",
+    "type": "set"
   },
   "2017_01_01": {
-    "desc": "Elsweyr Lookout"
+    "desc": "Elsweyr Lookout",
+    "type": "reward"
   },
   "2017_01_11": {
     "core": {
@@ -340,6 +350,7 @@
         }
       }
     },
-    "desc": "Slaughterfish Spawning Nerf"
+    "desc": "Slaughterfish Spawning Nerf",
+    "type": "balance"
   }
 }
