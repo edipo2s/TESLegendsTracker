@@ -352,5 +352,63 @@
     },
     "desc": "Slaughterfish Spawning Nerf",
     "type": "balance"
+  },
+  "2017_01_25": {
+    "core": {
+      "agility": {
+        "ungolimthelistener": {
+          "attack": {
+            "after": 1,
+            "before": 2
+          }
+        }
+      },
+      "endurance": {
+        "blackwormnecromancer": {
+          "cost": {
+            "after": 6,
+            "before": 5
+          }
+        }
+      },
+      "intelligence": {
+        "darkrift": {
+          "cost": {
+            "after": 3,
+            "before": 2
+          }
+        },
+        "shriekingharpy": {
+          "health": {
+            "after": 1,
+            "before": 2
+          }
+        }
+      },
+      "strength": {
+        "gladiatorarena": {
+          "cost": {
+            "after": 4,
+            "before": 3
+          }
+        },
+        "reiveblademaster": {
+          "attack": {
+            "after": 3,
+            "before": 2
+          }
+        }
+      },
+      "willpower": {
+        "dagirahtmystic": {
+          "health": {
+            "after": 5,
+            "before": 4
+          }
+        }
+      }
+    },
+    "desc": "Ungolim Nerf",
+    "type": "balance"
   }
 }
