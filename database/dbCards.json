@@ -307,7 +307,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy, Unsummon",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "fearlessnorthlander": {
         "name": "Fearless Northlander",
@@ -693,7 +693,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon, Guard",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "initiateofhircine": {
         "name": "Initiate of Hircine",
@@ -759,7 +759,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "reclusivegiant": {
         "name": "Reclusive Giant",
@@ -872,7 +872,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "abeceannavigator": {
         "name": "Abecean Navigator",
@@ -916,7 +916,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Poor"
       },
       "darkrift": {
         "name": "Dark Rift",
@@ -1378,7 +1378,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "wintersgrasp": {
         "name": "Winter's Grasp",
@@ -2053,7 +2053,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "auridonpaladin": {
         "name": "Auridon Paladin",
@@ -2197,7 +2197,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "imperialmight": {
         "name": "Imperial Might",
@@ -2252,7 +2252,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Drain",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "spitefuldremora": {
         "name": "Spiteful Dremora",
@@ -2442,7 +2442,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "ungolimthelistener": {
         "name": "Ungolim the Listener",
@@ -2608,7 +2608,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Drain",
-        "arenaTier": "Excellent"
+        "arenaTier": "Poor"
       },
       "thievesguildrecruit": {
         "name": "Thieves Guild Recruit",
@@ -2663,7 +2663,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "feastingvulture": {
         "name": "Feasting Vulture",
@@ -2762,7 +2762,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon, Lethal",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "swiftstrike": {
         "name": "Swift Strike",
@@ -2960,7 +2960,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Charge",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane"
       },
       "eldercentaur": {
         "name": "Elder Centaur",
@@ -3458,7 +3458,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "imperialarmor": {
         "name": "Imperial Armor",
@@ -4441,7 +4441,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "agelessautomaton": {
         "name": "Ageless Automaton",
@@ -4452,7 +4452,7 @@
         "health": "5",
         "rarity": "Rare",
         "keyword": "Guard, Breakthrough",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "dreughshellarmor": {
         "name": "Dreugh Shell Armor",
