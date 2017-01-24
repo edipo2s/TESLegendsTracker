@@ -1,0 +1,143 @@
+{
+  "public": {
+    "-K_-MCInX62rl826jQf1": {
+      "cards": {
+        "belligerentgiant": 2,
+        "blooddragon": 3,
+        "cliffracer": 2,
+        "daringcutpurse": 3,
+        "earthbonespinner": 3,
+        "fightersguildrecruit": 3,
+        "finishoff": 3,
+        "housekinsman": 3,
+        "leaflurker": 3,
+        "moonlightwerebat": 3,
+        "murkwaterwitch": 3,
+        "rapidshot": 3,
+        "skavenpyromancer": 3,
+        "snaketoothnecklace": 1,
+        "soulrestmarshal": 3,
+        "tazkadthepackmaster": 1,
+        "thievesguildrecruit": 3,
+        "triumphantjarl": 2,
+        "ungolimthelistener": 1,
+        "witheredhandcultist": 2
+      },
+      "cls": 0,
+      "comments": {
+        "-K_6sQmQSJYrQVKYojSJ": {
+          "comment": "Great deck, I just change Tazkar beacuse I don't have it",
+          "createdAt": "2016-12-28T22:01:32.864",
+          "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1"
+        }
+      },
+      "cost": 14400,
+      "createdAt": "2016-12-27T09:59:03.560",
+      "name": "Cycle Archer",
+      "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+      "patch": "2016_12_01",
+      "type": 4,
+      "updatedAt": "2016-12-27T09:59:03.561",
+      "views": 50
+    },
+    "-K_9ongYoCXYadur5EVZ": {
+      "cards": {
+        "blackwormnecromancer": 3,
+        "cliffracer": 3,
+        "daringcutpurse": 3,
+        "dunesmuggler": 3,
+        "fightersguildrecruit": 3,
+        "giantbat": 3,
+        "housekinsman": 3,
+        "illusorymimic": 3,
+        "moonlightwerebat": 3,
+        "mournholdtraitor": 3,
+        "murkwaterwitch": 3,
+        "nahagliiv": 1,
+        "shadowfenpriest": 2,
+        "soulrestmarshal": 3,
+        "tazkadthepackmaster": 1,
+        "territorialviper": 3,
+        "ungolimthelistener": 1,
+        "windkeepspellsword": 3,
+        "youngmammoth": 3
+      },
+      "cls": 6,
+      "cost": 11900,
+      "createdAt": "2016-12-29T11:44:33.906",
+      "likes": [
+        "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+        "h2KTcpHAnxRY0EaIM8KFKXVWz8L2"
+      ],
+      "name": "Mimic Scout",
+      "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+      "patch": "2016_12_14",
+      "type": 0,
+      "updatedAt": "2016-12-29T11:44:33.906",
+      "views": 33
+    },
+    "-K_iNXh_xHakLMUcDbMK": {
+      "cards": {
+        "blackwormnecromancer": 3,
+        "cursedspectre": 2,
+        "daggerfallmage": 3,
+        "darkrift": 3,
+        "firebolt": 3,
+        "hauntingspirit": 3,
+        "highkingemeric": 1,
+        "lightningbolt": 3,
+        "lurkingcrocodile": 3,
+        "midnightsweep": 3,
+        "mummify": 3,
+        "nahagliiv": 1,
+        "nightshadow": 2,
+        "royalsage": 2,
+        "shadowfenpriest": 2,
+        "shriekingharpy": 3,
+        "supremeatromancer": 1,
+        "wardcrafter": 3,
+        "windkeepspellsword": 3,
+        "youngmammoth": 3
+      },
+      "cls": 7,
+      "cost": 13000,
+      "createdAt": "2017-01-05T09:27:24.423",
+      "name": "Prophecy Sorcerer",
+      "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+      "patch": "2017_01_01",
+      "type": 0,
+      "updatedAt": "2017-01-05T09:27:24.424",
+      "views": 8
+    },
+    "-K_nqdgsJMWGGrLyGN9v": {
+      "cards": {
+        "afflictedalit": 3,
+        "castout": 3,
+        "darkrift": 3,
+        "earthbonespinner": 3,
+        "fateweaver": 3,
+        "gladiatorarena": 3,
+        "grahtwoodambusher": 3,
+        "graystoneravager": 3,
+        "lightningbolt": 3,
+        "morkulgatekeeper": 3,
+        "relentlessraider": 3,
+        "sentinelbattlemace": 3,
+        "sharpshooterscout": 3,
+        "shriekingharpy": 3,
+        "slaughterfishspawning": 3,
+        "triumphantjarl": 2,
+        "wardcrafter": 3
+      },
+      "cls": 2,
+      "cost": 12200,
+      "createdAt": "2017-01-06T10:57:03.207",
+      "name": "Prophecy battlemage",
+      "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+      "patch": "2017_01_01",
+      "type": 0,
+      "updatedAt": "2017-01-06T10:57:03.207",
+      "views": 1
+    }
+  }
+}

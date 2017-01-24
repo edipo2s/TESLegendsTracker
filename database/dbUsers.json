@@ -1,0 +1,455 @@
+{
+  "ZYO8GAaZfVYo2evDwPedYIFODcm1": {
+    "cards": {
+      "core": {
+        "agility": {
+          "anxileelinvader": {
+            "qtd": 3
+          },
+          "arrowintheknee": {
+            "qtd": 3
+          },
+          "baandaribruiser": {
+            "qtd": 3
+          },
+          "feastingvulture": {
+            "qtd": 0
+          },
+          "fightersguildrecruit": {
+            "qtd": 3
+          },
+          "finishoff": {
+            "qtd": 3
+          },
+          "murkwaterbutcher": {
+            "qtd": 3
+          },
+          "ransack": {
+            "qtd": 3
+          },
+          "shadowshift": {
+            "qtd": 3
+          },
+          "skoomaracketeer": {
+            "qtd": 3
+          },
+          "swiftstrike": {
+            "qtd": 3
+          },
+          "tazkadthepackmaster": {
+            "qtd": 1
+          },
+          "voraciousspriggan": {
+            "qtd": 3
+          },
+          "wildbeastcaller": {
+            "qtd": 2
+          }
+        },
+        "dual": {
+          "allenabenoch": {
+            "qtd": 1
+          },
+          "falinestireaver": {
+            "qtd": 1
+          },
+          "militantchieftain": {
+            "qtd": 1
+          },
+          "riftthane": {
+            "qtd": 1
+          },
+          "thornhistmage": {
+            "qtd": 1
+          },
+          "tyr": {
+            "qtd": 1
+          }
+        },
+        "endurance": {
+          "angrygrahl": {
+            "qtd": 1
+          },
+          "cursedspectre": {
+            "qtd": 3
+          },
+          "daedricdagger": {
+            "qtd": 3
+          },
+          "deadlydraugr": {
+            "qtd": 3
+          },
+          "fleshatronach": {
+            "qtd": 1
+          },
+          "frostbitespider": {
+            "qtd": 3
+          },
+          "hackwingfeather": {
+            "qtd": 1
+          },
+          "stampedingmammoth": {
+            "qtd": 2
+          },
+          "stonetoothscrapper": {
+            "qtd": 3
+          },
+          "wrothgarkingpin": {
+            "qtd": 1
+          },
+          "yewshield": {
+            "qtd": 1
+          },
+          "youngmammoth": {
+            "qtd": 3
+          }
+        },
+        "intelligence": {
+          "abeceannavigator": {
+            "qtd": 3
+          },
+          "ashservant": {
+            "qtd": 3
+          },
+          "crownquartermaster": {
+            "qtd": 3
+          },
+          "cruelfirebloom": {
+            "qtd": 3
+          },
+          "crystaltowercrafter": {
+            "qtd": 3
+          },
+          "drestormentor": {
+            "qtd": 3
+          },
+          "elixirofdeflection": {
+            "qtd": 3
+          },
+          "lesserward": {
+            "qtd": 3
+          },
+          "wardcrafter": {
+            "qtd": 2
+          },
+          "wintersgrasp": {
+            "qtd": 2
+          },
+          "wisdomofancients": {
+            "qtd": 1
+          }
+        },
+        "neutral": {
+          "adoringfan": {
+            "qtd": 1
+          },
+          "agelessautomaton": {
+            "qtd": 3
+          },
+          "dwarvenarmaments": {
+            "qtd": 2
+          },
+          "dwarvenballista": {
+            "qtd": 3
+          },
+          "frenziedwitchman": {
+            "qtd": 3
+          },
+          "strongholderadicator": {
+            "qtd": 2
+          },
+          "strongholdincubator": {
+            "qtd": 1
+          },
+          "viciousdreugh": {
+            "qtd": 3
+          }
+        },
+        "strength": {
+          "afflictedalit": {
+            "qtd": 3
+          },
+          "alikrsurvivalist": {
+            "qtd": 1
+          },
+          "assassinsbow": {
+            "qtd": 3
+          },
+          "castout": {
+            "qtd": 3
+          },
+          "childofhircine": {
+            "qtd": 1
+          },
+          "covenantmarauder": {
+            "qtd": 0
+          },
+          "rampagingminotaur": {
+            "qtd": 3
+          },
+          "rapidshot": {
+            "favorite": true,
+            "qtd": 3
+          },
+          "reclusivegiant": {
+            "qtd": 0
+          },
+          "reiveblademaster": {
+            "qtd": 0
+          },
+          "steelscimitar": {
+            "qtd": 3
+          },
+          "whiteruntrooper": {
+            "qtd": 2
+          },
+          "witheredhandcultist": {
+            "qtd": 3
+          },
+          "wrothgarforge": {
+            "qtd": 2
+          }
+        },
+        "willpower": {
+          "aldmeripatriot": {
+            "qtd": 2
+          },
+          "alphawolf": {
+            "qtd": 1
+          },
+          "execute": {
+            "qtd": 3
+          },
+          "imperiallegionnaire": {
+            "qtd": 3
+          },
+          "imprison": {
+            "qtd": 3
+          },
+          "kvatchsoldier": {
+            "qtd": 3
+          },
+          "rajhinihighwayman": {
+            "qtd": 3
+          },
+          "ravenoushunger": {
+            "qtd": 3
+          },
+          "renownedlegate": {
+            "qtd": 1
+          },
+          "resoluteally": {
+            "qtd": 3
+          },
+          "riverholdescort": {
+            "qtd": 3
+          },
+          "twomoonscontemplation": {
+            "qtd": 3
+          },
+          "warcry": {
+            "qtd": 3
+          }
+        }
+      },
+      "madhouse": {
+        "agility": {
+          "swindlersmarket": {
+            "qtd": 3
+          }
+        },
+        "strength": {
+          "stoneshardorc": {
+            "favorite": true,
+            "qtd": 3
+          }
+        },
+        "willpower": {
+          "shiveringapothecary": {
+            "qtd": 3
+          }
+        }
+      }
+    },
+    "decks": {
+      "favorite": {
+        "-KZwF4-30Ip7qC4wnMix": 1
+      },
+      "private": {
+        "-K_t7BMw5-q1sFGXCfoi": {
+          "cards": {
+            "camlornsentinel": 3,
+            "crownquartermaster": 3,
+            "cunningally": 3,
+            "daggerfallmage": 3,
+            "enchantedplate": 3,
+            "firebolt": 3,
+            "gardenerofswords": 3,
+            "highkingemeric": 1,
+            "lightningbolt": 3,
+            "maceofencumbrance": 3,
+            "masterofarms": 3,
+            "royalsage": 2,
+            "shriekingharpy": 3,
+            "skilledblacksmith": 3,
+            "steelsword": 2,
+            "wardcrafter": 3,
+            "windkeepspellsword": 3,
+            "youngmammoth": 3
+          },
+          "cls": 7,
+          "cost": 9150,
+          "createdAt": "2017-01-07T11:31:47.932",
+          "name": "Item Sorcerer",
+          "owner": "ZYO8GAaZfVYo2evDwPedYIFODcm1",
+          "patch": "2017_01_01",
+          "type": 0,
+          "updatedAt": "2017-01-07T11:31:47.932",
+          "views": 0
+        }
+      }
+    },
+    "info": {
+      "name": "Édipo da Silva Souza",
+      "photoUrl": "https://lh6.googleusercontent.com/-QVzUl1KSjiE/AAAAAAAAAAI/AAAAAAAAOSk/kMFAQSTtvcw/s96-c/photo.jpg"
+    },
+    "matches": {
+      "2016-11-30T08:22:34": {
+        "first": false,
+        "legend": false,
+        "player": {
+          "cls": 0,
+          "deck": "-KWYo4K8PDs_zO1q8aqh",
+          "name": "My Archer",
+          "type": 4,
+          "version": "v1 (2016-10-30)"
+        },
+        "opponent": {
+          "cls": 1,
+          "name": "Prophecy Assassin",
+          "type": 0
+        },
+        "type": 0,
+        "mode": 0,
+        "rank": 4,
+        "season": "2016_11",
+        "win": true
+      },
+      "2016-12-03T09:22:34": {
+        "first": true,
+        "legend": false,
+        "player": {
+          "cls": 0,
+          "deck": "-KWYo4K8PDs_zO1q8aqh",
+          "name": "My Archer",
+          "type": 4,
+          "version": "v1 (2016-10-30)"
+        },
+        "opponent": {
+          "cls": 0,
+          "name": "Cycle Archer",
+          "type": 0
+        },
+        "type": 1,
+        "mode": 0,
+        "rank": 4,
+        "season": "2016_12",
+        "win": false
+      },
+      "2017-01-03T10:22:34": {
+        "first": true,
+        "legend": false,
+        "player": {
+          "cls": 7,
+          "deck": "-K_t7BMw5-q1sFGXCfoi",
+          "name": "Item Sorcerer",
+          "type": 0,
+          "version": "v1 (2016-10-30)"
+        },
+        "opponent": {
+          "cls": 2,
+          "name": "Prophecy Assassin",
+          "type": 0
+        },
+        "type": 1,
+        "mode": 1,
+        "rank": 3,
+        "season": "2017_01",
+        "win": true
+      },
+      "2017-01-03T11:20:34": {
+        "first": false,
+        "legend": false,
+        "player": {
+          "cls": 7,
+          "deck": "-K_t7BMw5-q1sFGXCfoi",
+          "name": "Item Sorcerer",
+          "type": 0,
+          "version": "v1 (2016-10-30)"
+        },
+        "opponent": {
+          "cls": 6,
+          "name": "Mimic Scout",
+          "type": 0
+        },
+        "type": 1,
+        "mode": 1,
+        "rank": 3,
+        "season": "2017_01",
+        "win": true
+      },
+      "2017-01-03T12:20:34": {
+        "first": true,
+        "legend": false,
+        "player": {
+          "cls": 7,
+          "deck": "-K_t7BMw5-q1sFGXCfoi",
+          "name": "Item Sorcerer",
+          "type": 0,
+          "version": "v1 (2016-10-30)"
+        },
+        "opponent": {
+          "cls": 6,
+          "name": "Mimic Scout",
+          "type": 0
+        },
+        "type": 1,
+        "mode": 2,
+        "rank": 3,
+        "season": "2017_01",
+        "win": false
+      }
+    }
+  },
+  "h2KTcpHAnxRY0EaIM8KFKXVWz8L2": {
+    "cards": {
+      "core": {
+        "agility": {
+          "finishoff": {
+            "qtd": 1
+          },
+          "ungolimthelistener": {
+            "qtd": 1
+          }
+        },
+        "strength": {
+          "intimidate": {
+            "favorite": true
+          },
+          "rapidshot": {
+            "qtd": 2
+          }
+        }
+      }
+    },
+    "decks": {
+      "favorite": {
+        "-KWYo4Jw4Wd6nc8oaUeh": true
+      }
+    },
+    "info": {
+      "name": "Mackciane Bastos",
+      "photoUrl": "https://lh5.googleusercontent.com/-o2RlvOLMZ7Y/AAAAAAAAAAI/AAAAAAAAPAM/1pxgQ_u-41g/s96-c/photo.jpg"
+    }
+  }
+}
