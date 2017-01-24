@@ -22,6 +22,14 @@
             android:enabled="false"
             tools:enabled="true" />
 
+        <item
+            android:id="@+id/menu_arena"
+            android:icon="@drawable/ic_mode_arena"
+            android:title="@string/menu_arena"
+            android:enabled="false"
+            android:visible="false"
+            tools:visible="true" />
+
     </group>
 
     <group
@@ -33,24 +41,11 @@
             android:icon="@drawable/ic_news"
             android:title="@string/menu_articles" />
 
-    </group>
-
-    <group
-        android:id="@+id/group_tools"
-        android:checkableBehavior="single"
-        android:enabled="false"
-        android:visible="false"
-        tools:visible="true">
-
         <item
-            android:id="@+id/menu_arena"
-            android:icon="@drawable/ic_mode_arena"
-            android:title="@string/menu_arena" />
-
-        <item
-            android:id="@+id/menu_season"
+            android:id="@+id/menu_seasons"
             android:icon="@drawable/ic_season"
-            android:title="@string/menu_season" />
+            android:title="@string/menu_seasons" />
+
     </group>
 
     <group android:checkableBehavior="none">

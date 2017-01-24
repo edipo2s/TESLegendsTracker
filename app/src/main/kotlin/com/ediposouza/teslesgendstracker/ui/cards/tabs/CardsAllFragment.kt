@@ -314,9 +314,11 @@ open class CardsAllFragment : BaseFragment() {
         }
 
         fun bind(card: Card) {
-            itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
-            itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
-            itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
+            with(itemView) {
+                setOnClickListener { itemClick(card_all_image, card) }
+                setOnLongClickListener { itemLongClick(card_all_image, card) }
+                card_all_image.setImageBitmap(card.imageBitmap(context))
+            }
         }
 
     }

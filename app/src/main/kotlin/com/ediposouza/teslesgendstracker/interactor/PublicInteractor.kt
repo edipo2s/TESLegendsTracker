@@ -5,10 +5,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import org.threeten.bp.Month
-import org.threeten.bp.format.TextStyle
 import timber.log.Timber
-import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -17,6 +14,24 @@ class PublicInteractor : BaseInteractor() {
 
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
+
+    fun getCard(set: CardSet, attribute: Attribute, shortname: String, onSuccess: (Card) -> Unit) {
+        val attr = attribute.name.toLowerCase()
+        database.child(NODE_CARDS).child(set.db).child(attr)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val card = ds.getValue(FirebaseParsers.CardParser::class.java)
+                                .toCard(shortname, set, attribute)
+                        onSuccess.invoke(card)
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
 
     fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
         getListFromSets(set, onSuccess) { set, onEachSuccess ->
@@ -223,16 +238,16 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
+    fun getSeasonsRef() = database.child(NODE_SEASONS).apply {
+        keepSynced()
+    }
+
     fun getSeasons(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Season>) -> Unit) {
-        database.child(NODE_SEASONS).addListenerForSingleValueEvent(object : ValueEventListener {
+        getSeasonsRef().addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val seasons = ds.children.mapTo(arrayListOf()) {
-                    val id = it.key.replace("_", "").toInt()
-                    val date = it.key.split("_")
-                    val month = Month.of(date[1].toInt())
-                    val desc = "${month.getDisplayName(TextStyle.FULL, Locale.getDefault())}/${date[0].toInt()}"
-                    Season(id, it.key, desc, it.value.toString())
+                    it.getValue(FirebaseParsers.SeasonParser::class.java).toSeason(it.key)
                 }
                 Timber.d(seasons.toString())
                 onSuccess.invoke(seasons)
