@@ -27,15 +27,14 @@ class CardsFavoritesFragment : CardsAllFragment() {
     }
 
     override fun showCards() {
-        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
-            userFavorites = it
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
             cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
             scrollToTop()
         }
     }
 
     override fun showCardExpanded(card: Card, view: View) {
-        startActivityForResult(CardActivity.newIntent(context, card, true), EXPAND_CODE,
+        startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 

@@ -24,14 +24,9 @@ class CardActivity : BaseActivity() {
     companion object {
 
         private val EXTRA_CARD = "cardExtra"
-        private val EXTRA_FAVORITE = "favoriteExtra"
 
         fun newIntent(context: Context, card: Card): Intent {
             return context.intentFor<CardActivity>(EXTRA_CARD to card)
-        }
-
-        fun newIntent(context: Context, card: Card, favorite: Boolean): Intent {
-            return context.intentFor<CardActivity>(EXTRA_CARD to card, EXTRA_FAVORITE to favorite)
         }
 
     }
@@ -47,8 +42,6 @@ class CardActivity : BaseActivity() {
         setContentView(R.layout.activity_card)
         snackbarNeedMargin = false
 
-        favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
-        card_favorite_btn.visibility = if (intent.hasExtra(EXTRA_FAVORITE)) View.VISIBLE else View.GONE
         card_all_image.setOnClickListener {
             ActivityCompat.finishAfterTransition(this)
             MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
@@ -66,6 +59,11 @@ class CardActivity : BaseActivity() {
         card_ads_view.load()
         if (App.hasUserLogged()) {
             showUserCardQtd()
+        }
+        privateInteractor.isUserCardFavorite(card) {
+            favorite = it
+            val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
+            card_favorite_btn.setImageResource(drawableRes)
         }
     }
 
@@ -135,8 +133,6 @@ class CardActivity : BaseActivity() {
     }
 
     private fun loadCardInfo() {
-        val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
-        card_favorite_btn.setImageResource(drawableRes)
         card_set.text = card.set.name.toLowerCase().capitalize()
         card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
