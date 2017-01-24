@@ -5,7 +5,10 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Month
 import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.TextStyle
+import java.util.*
 
 abstract class FirebaseParsers {
 
@@ -185,6 +188,23 @@ abstract class FirebaseParsers {
 
         override fun toString(): String {
             return "MatchParser(first=$first, player=$player, opponent=$opponent, legend=$legend, mode=$mode, rank=$rank, win=$win)"
+        }
+
+    }
+
+    class SeasonParser {
+
+        val reward: Map<String, Any> = mapOf()
+
+        fun toSeason(key: String): Season {
+            val id = key.replace("_", "").toInt()
+            val date = key.split("_")
+            val year = date[0]
+            val month = Month.of(date[1].toInt())
+            val desc = "${month.getDisplayName(TextStyle.FULL, Locale.getDefault())}/${date[0].toInt()}"
+            val rewardInfo = reward.entries.first()
+            val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
+            return Season(id, key, year, desc, rewardInfo.key, rewardCardShortname as? String)
         }
 
     }

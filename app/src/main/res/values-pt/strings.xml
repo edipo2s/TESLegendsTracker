@@ -18,7 +18,8 @@
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
     <string name="menu_articles">TESL Artigos</string>
-    <string name="menu_season">Temporada</string>
+    <string name="menu_seasons">TESL Temporadas</string>
+    <string name="menu_season">Temporadas</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
@@ -178,5 +179,15 @@
     <string name="article_world_races_title">Raças</string>
     <string name="article_world_classes_title">Classes</string>
     <string name="article_world_attributes_title">Atributos</string>
+
+    <string name="season_reward">Recompensa</string>
+    <string name="season_matches_label">Partidas no Ranqueado</string>
+    <string name="season_opponent_label">Oponente</string>
+    <string name="season_matches_wins">Total de Vitórias:</string>
+    <string name="season_matches_losses">Total de Derrotas:</string>
+    <string name="season_matches_total">Total de Partidas:</string>
+    <string name="season_matches_class_most_seen">Mais vistos:</string>
+    <string name="season_matches_class_most_defeated">Mais derrotados:</string>
+    <string name="season_matches_class_less_defeated">Menos derrotados:</string>
 
 </resources>

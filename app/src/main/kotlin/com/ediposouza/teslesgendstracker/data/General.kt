@@ -56,8 +56,10 @@ data class Season(
 
         val id: Int,
         val uuid: String,
-        val desc: String,
-        val reward: String
+        val year: String,
+        val month: String,
+        val rewardCardAttr: String,
+        val rewardCardShortname: String?
 
 )
 

@@ -180,6 +180,23 @@ class PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun isUserCardFavorite(card: Card, onSuccess: (Boolean) -> Unit) {
+        dbUserCards(card.set, card.attr)?.child(card.shortName)?.
+                addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    @Suppress("UNCHECKED_CAST")
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val isFavorite = ds.child(KEY_CARD_FAVORITE)?.value as? Boolean ?: false
+                        onSuccess.invoke(isFavorite)
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
     fun getUserPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
             .orderByChild(KEY_DECK_OWNER).equalTo(getUserID())?.apply {
         keepSynced()

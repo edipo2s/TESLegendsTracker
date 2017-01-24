@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/default_margin"
+    android:background="@drawable/xml_button_white"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/small_margin"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <ImageView
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginStart="@dimen/default_margin"
+        android:src="@drawable/ic_deck_patch" />
+
+    <TextView
+        android:id="@+id/patch_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/small_margin"
+        android:gravity="center"
+        android:padding="@dimen/nano_margin"
+        android:textColor="@color/colorPrimary"
+        tools:text="Ungolin Nerf" />
+
+</LinearLayout>

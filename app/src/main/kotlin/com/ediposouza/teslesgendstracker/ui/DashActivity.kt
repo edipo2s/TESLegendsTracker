@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
+import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
@@ -200,10 +201,10 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
             R.id.menu_articles -> showFragment(ArticlesFragment())
-            R.id.menu_arena,
-            R.id.menu_season -> {
+            R.id.menu_arena -> {
                 true
             }
+            R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_donate -> showDonateDialog()
             R.id.menu_share -> {
                 val appLink = getString(R.string.playstore_url_format, packageName)

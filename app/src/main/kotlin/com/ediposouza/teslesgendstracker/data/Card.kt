@@ -7,6 +7,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import java.util.*
 
 /**
@@ -16,7 +17,8 @@ enum class CardSet(val db: String) {
 
     CORE("core"),
     MADHOUSE("madhouse"),
-    UNKNOWN("unknown");
+    REWARD("reward"),
+    UNKNOWN(TEXT_UNKNOWN);
 
     companion object {
 
@@ -285,6 +287,7 @@ data class Card(
     override fun describeContents() = 0
 
     fun imageBitmap(context: Context): Bitmap {
+        val set = if (set != CardSet.REWARD) set else CardSet.CORE
         val cardAttr = attr.name.toLowerCase().capitalize()
         val cardSet = set.name.toLowerCase().capitalize()
         val imagePath = "$CARD_PATH/$cardSet/$cardAttr/$shortName.png"
