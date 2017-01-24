@@ -322,7 +322,7 @@
       },
       "gladiatorarena": {
         "name": "Gladiator Arena",
-        "cost": "03",
+        "cost": "04",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -556,7 +556,7 @@
         "cost": "04",
         "type": "Creature",
         "race": "Daedra",
-        "attack": "2",
+        "attack": "3",
         "health": "5",
         "rarity": "Legendary",
         "unique": true,
@@ -920,7 +920,7 @@
       },
       "darkrift": {
         "name": "Dark Rift",
-        "cost": "02",
+        "cost": "03",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -1012,7 +1012,7 @@
         "type": "Creature",
         "race": "Harpy",
         "attack": "2",
-        "health": "2",
+        "health": "1",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon, Shackle",
         "arenaTier": "Excellent"
@@ -2172,7 +2172,7 @@
         "type": "Creature",
         "race": "Khajiit",
         "attack": "4",
-        "health": "4",
+        "health": "5",
         "rarity": "Epic",
         "keyword": "Pilfer",
         "arenaTier": "Poor"
@@ -2449,7 +2449,7 @@
         "cost": "01",
         "type": "Creature",
         "race": "Wood Elf",
-        "attack": "2",
+        "attack": "1",
         "health": "1",
         "rarity": "Legendary",
         "unique": true,
@@ -3749,7 +3749,7 @@
       },
       "blackwormnecromancer": {
         "name": "Black Worm Necromancer",
-        "cost": "05",
+        "cost": "06",
         "type": "Creature",
         "race": "Imperial",
         "attack": "4",
