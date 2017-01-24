@@ -77,10 +77,8 @@ class SeasonsFragment : BaseFragment() {
     }
 
     fun showCardExpanded(card: Card, view: View) {
-        privateInteractor.isUserCardFavorite(card) { isFavorite ->
-            ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, isFavorite),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
-        }
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
     class SeasonViewHolder(view: View, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {

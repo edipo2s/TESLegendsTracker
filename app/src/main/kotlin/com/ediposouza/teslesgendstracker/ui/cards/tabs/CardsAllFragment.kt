@@ -40,7 +40,6 @@ open class CardsAllFragment : BaseFragment() {
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
-    var userFavorites: List<String> = ArrayList()
     var magikaFilter: Int = -1
     var setFilter: CardSet? = null
     var classFilter: Class? = null
@@ -201,9 +200,6 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         }
-        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
-            userFavorites = it
-        }
     }
 
     open fun showCards() {
@@ -269,8 +265,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCardExpanded(card: Card, view: View) {
-        val favorite = userFavorites.contains(card.shortName)
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, favorite),
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 

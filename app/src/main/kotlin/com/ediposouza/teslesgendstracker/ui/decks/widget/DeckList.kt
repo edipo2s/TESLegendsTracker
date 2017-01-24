@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
-import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
@@ -34,13 +33,11 @@ import java.util.*
 class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
-    var userFavorites = arrayListOf<String>()
     var editMode = false
 
     private fun showExpandedCard(card: Card, view: View) {
-        val favorite = userFavorites.contains(card.shortName)
         val transitionName = context.getString(R.string.card_transition_name)
-        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card, favorite),
+        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
                 ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
     }
 
@@ -88,13 +85,6 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     context.runOnUiThread {
                         (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
                         onCardListChange()
-                    }
-                    userFavorites.clear()
-                    PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr1) {
-                        userFavorites.addAll(it)
-                        PrivateInteractor().getUserFavoriteCards(null, deck.cls.attr2) {
-                            userFavorites.addAll(it)
-                        }
                     }
                 }
             }
