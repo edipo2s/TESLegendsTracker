@@ -5,6 +5,7 @@ package com.ediposouza.teslesgendstracker
  */
 val TIME_PATTERN = "HH:mm"
 val SEASON_UUID_PATTERN = "yyyy_MM"
+val PATCH_UUID_PATTERN = "yyyy_MM_dd"
 val NEWS_UUID_PATTERN = "yyyy_MM_dd"
 val NEWS_DATE_PATTERN = "MMMM d, yyyy"
 

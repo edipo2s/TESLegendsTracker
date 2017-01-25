@@ -7,8 +7,7 @@
     android:background="@drawable/xml_button_white"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="@dimen/small_margin"
-    tools:layout_marginTop="@dimen/status_bar_height">
+    android:padding="@dimen/small_margin">
 
     <ImageView
         android:layout_width="@dimen/size_small"
