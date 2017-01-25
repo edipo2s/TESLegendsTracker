@@ -261,6 +261,25 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
+    fun getSets(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSet>) -> Unit) {
+        database.child(NODE_CARDS).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(ds: DataSnapshot) {
+                val seasons = ds.children.mapTo(arrayListOf()) {
+                    CardSet.of(it.key)
+                }
+                Timber.d(seasons.toString())
+                onSuccess.invoke(seasons)
+            }
+
+            override fun onCancelled(de: DatabaseError) {
+                Timber.d("Fail: " + de.message)
+                onError?.invoke(de.toException())
+            }
+
+        })
+    }
+
     fun getUserInfo(uuid: String, onError: ((e: Exception?) -> Unit)? = null,
                     onSuccess: (UserInfo) -> Unit) {
         dbUsers.child(uuid)?.child(NODE_USERS_INFO)?.addListenerForSingleValueEvent(object : ValueEventListener {

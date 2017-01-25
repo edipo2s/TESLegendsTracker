@@ -29,7 +29,6 @@ import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
 import timber.log.Timber
 
-
 /**
  * Created by EdipoSouza on 10/30/16.
  */
