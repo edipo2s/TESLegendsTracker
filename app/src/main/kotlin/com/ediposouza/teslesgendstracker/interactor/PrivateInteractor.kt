@@ -484,7 +484,7 @@ class PrivateInteractor : BaseInteractor() {
         keepSynced()
     }
 
-    fun getUserMatches(season: Season?, onSuccess: (List<Match>) -> Unit) {
+    fun getUserMatches(season: Season?, mode: MatchMode? = null, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Match>) -> Unit) {
         getUserMatchesRef()?.apply {
             val query = orderByChild(KEY_MATCH_SEASON).equalTo(season?.uuid)
             (if (season != null) query else this).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -492,17 +492,18 @@ class PrivateInteractor : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val matches = ds.children.mapTo(arrayListOf<Match>()) {
                         it.getValue(FirebaseParsers.MatchParser::class.java).toMatch(it.key)
-                    }
+                    }.filter { mode == null || it.mode == mode }
                     Timber.d(matches.toString())
                     onSuccess.invoke(matches)
                 }
 
                 override fun onCancelled(de: DatabaseError) {
                     Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
                 }
 
             })
-        }
+        } ?: onError?.invoke(null)
     }
 
     fun saveMatch(newMatch: Match, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {

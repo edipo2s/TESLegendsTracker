@@ -26,8 +26,8 @@
                 android:id="@+id/season_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 tools:text="1st" />
 
@@ -61,6 +61,28 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/season_best_rank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_matches_label"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_toStartOf="@id/season_card_reward"
+                android:gravity="center"
+                android:text="@string/season_matches_best_rank" />
+
+            <TextView
+                android:id="@+id/season_best_rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_best_rank_label"
+                android:layout_alignStart="@id/season_best_rank_label"
+                android:layout_below="@id/season_best_rank_label"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                tools:text="1" />
+
+            <TextView
                 android:id="@+id/season_no_matches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,8 +90,8 @@
                 android:layout_marginStart="@dimen/huge_margin"
                 android:paddingBottom="@dimen/huge_margin"
                 android:rotation="-45"
-                android:textSize="@dimen/font_huge"
                 android:text="@string/season_no_matches"
+                android:textSize="@dimen/font_huge"
                 android:textStyle="bold"
                 android:visibility="gone"
                 tools:visibility="visible"/>
