@@ -6,6 +6,7 @@ import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 
 /**
@@ -48,16 +49,35 @@ data class CardSlot(
 data class Patch(
 
         val uuidDate: String,
-        val desc: String
+        val date: LocalDate,
+        val desc: String,
+        val type: PatchType
 
 )
+
+enum class PatchType {
+
+    BALANCE,
+    REWARD,
+    SET,
+    UNKNOWN;
+
+    companion object {
+
+        fun of(value: String): PatchType {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
+
+}
 
 data class Season(
 
         val id: Int,
         val uuid: String,
-        val year: String,
-        val month: String,
+        val date: YearMonth,
         val rewardCardAttr: String,
         val rewardCardShortname: String?
 

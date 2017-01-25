@@ -1,14 +1,14 @@
 package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
+import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.format.TextStyle
-import java.util.*
 
 abstract class FirebaseParsers {
 
@@ -130,9 +130,11 @@ abstract class FirebaseParsers {
     class PatchParser {
 
         val desc: String = ""
+        val type: String = ""
 
         fun toPatch(uuidDate: String): Patch {
-            return Patch(uuidDate, desc)
+            val date = LocalDate.parse(uuidDate, DateTimeFormatter.ofPattern(PATCH_UUID_PATTERN))
+            return Patch(uuidDate, date, desc, PatchType.of(type))
         }
 
     }
@@ -198,14 +200,13 @@ abstract class FirebaseParsers {
         val reward: Map<String, Any> = mapOf()
 
         fun toSeason(key: String): Season {
-            val id = key.replace("_", "").toInt()
             val date = key.split("_")
-            val year = date[0]
+            val year = date[0].toInt()
             val month = Month.of(date[1].toInt())
-            val desc = month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+            val id = (year - 2016) * 12 + month.value - 7
             val rewardInfo = reward.entries.first()
             val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
-            return Season(id, key, year, desc, rewardInfo.key, rewardCardShortname as? String)
+            return Season(id, key, YearMonth.of(year, month), rewardInfo.key, rewardCardShortname as? String)
         }
 
     }

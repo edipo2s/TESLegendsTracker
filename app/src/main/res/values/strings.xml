@@ -241,6 +241,7 @@
     <string name="article_world_attributes_link" translatable="false">https://legends.bethesda.net/world/attributes</string>
 
     <string name="season_reward">Reward</string>
+    <string name="season_no_matches">No Matches Info</string>
     <string name="season_matches_label">Ranked Matches</string>
     <string name="season_opponent_label">Opponent</string>
     <string name="season_matches_wins">Total Wins:</string>

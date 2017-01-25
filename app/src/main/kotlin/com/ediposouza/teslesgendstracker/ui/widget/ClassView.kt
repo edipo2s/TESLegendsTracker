@@ -25,9 +25,9 @@ class ClassView(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun setClass(cls: Class) {
-        class_view_attr1.setImageResource(cls.attr1.imageRes)
-        class_view_attr2.setImageResource(cls.attr2.imageRes)
+    fun setClass(cls: Class?) {
+        class_view_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)
+        class_view_attr2.setImageResource(cls?.attr2?.imageRes ?: 0)
     }
 
 }

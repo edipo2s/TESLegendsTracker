@@ -23,6 +23,15 @@
             android:paddingTop="@dimen/default_margin">
 
             <TextView
+                android:id="@+id/season_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                tools:text="1st" />
+
+            <TextView
                 android:id="@+id/season_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,6 +59,20 @@
                 android:layout_marginTop="@dimen/default_margin"
                 android:text="@string/season_matches_label"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/season_no_matches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/huge_margin"
+                android:paddingBottom="@dimen/huge_margin"
+                android:rotation="-45"
+                android:textSize="@dimen/font_huge"
+                android:text="@string/season_no_matches"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <LinearLayout
                 android:id="@+id/season_matches_layout"
@@ -179,7 +202,7 @@
                 android:layout_marginTop="@dimen/small_margin" />
 
             <com.ediposouza.teslesgendstracker.ui.widget.ClassView
-                android:id="@+id/season_matches_best_less_defeated"
+                android:id="@+id/season_matches_less_defeated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/season_matches_most_defeated"
@@ -200,6 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/season_card_reward"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:fadeScrollbars="false"
                 android:orientation="horizontal"
                 android:padding="@dimen/default_margin"
