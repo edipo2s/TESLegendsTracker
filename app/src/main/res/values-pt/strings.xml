@@ -183,6 +183,7 @@
     <string name="season_reward">Recompensa</string>
     <string name="season_matches_label">Partidas no Ranqueado</string>
     <string name="season_opponent_label">Oponente</string>
+    <string name="season_matches_best_rank">Melhor\nRanque</string>
     <string name="season_matches_wins">Total de Vitórias:</string>
     <string name="season_matches_losses">Total de Derrotas:</string>
     <string name="season_matches_total">Total de Partidas:</string>

@@ -244,6 +244,7 @@
     <string name="season_no_matches">No Matches Info</string>
     <string name="season_matches_label">Ranked Matches</string>
     <string name="season_opponent_label">Opponent</string>
+    <string name="season_matches_best_rank">Best\nRank</string>
     <string name="season_matches_wins">Total Wins:</string>
     <string name="season_matches_losses">Total Losses:</string>
     <string name="season_matches_total">Total Matches:</string>

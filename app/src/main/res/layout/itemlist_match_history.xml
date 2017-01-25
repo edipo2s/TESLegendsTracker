@@ -11,7 +11,6 @@
         android:id="@+id/match_history_first"
         android:layout_width="@dimen/size_small"
         android:layout_height="@dimen/size_small"
-        android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginStart="@dimen/large_margin"
         android:src="@drawable/ic_first" />
 
@@ -19,7 +18,7 @@
         android:id="@+id/match_history_player_class_attr1"
         android:layout_width="@dimen/size_small"
         android:layout_height="@dimen/size_small"
-        android:layout_marginStart="@dimen/huge_margin"
+        android:layout_marginStart="@dimen/large_margin"
         android:src="@drawable/attr_strength" />
 
     <ImageView
@@ -56,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="@dimen/large_margin"
+        android:lines="1"
         android:gravity="end"
         android:padding="@dimen/default_margin"
         android:textColor="@color/teal_100"

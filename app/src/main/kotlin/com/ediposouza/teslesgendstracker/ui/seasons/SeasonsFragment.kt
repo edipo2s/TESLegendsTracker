@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.R.id.season_matches_less_defeated
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
@@ -128,9 +127,9 @@ class SeasonsFragment : BaseFragment() {
                             }
                         }
                     }
-                    privateInteractor.getUserMatches(season) {
+                    val onError: (Exception?) -> Unit = { updateMatchesInfo(listOf(), true) }
+                    privateInteractor.getUserMatches(season, MatchMode.RANKED, onError) { rankedMatches ->
                         val actualSeasonUuid = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
-                        val rankedMatches = it.filter { it.mode == MatchMode.RANKED }
                         val noMatches = rankedMatches.isEmpty() && season.uuid != actualSeasonUuid
                         updateMatchesInfo(rankedMatches, noMatches)
                     }
@@ -143,6 +142,14 @@ class SeasonsFragment : BaseFragment() {
                 season_no_matches.visibility = if (noMatches) View.VISIBLE else View.GONE
                 season_matches_label.visibility = if (noMatches) View.GONE else View.VISIBLE
                 season_matches_layout.visibility = if (noMatches) View.GONE else View.VISIBLE
+                season_best_rank_label.visibility = if (noMatches) View.GONE else View.VISIBLE
+                with(season_best_rank) {
+                    val rankedGroup = rankedMatches.groupBy { it.legend }
+                    text = (rankedGroup[true] ?: rankedGroup[false])?.minBy { it.rank }?.rank.toString()
+                    val legendIcon = if (rankedGroup[true] != null) R.drawable.ic_rank_legend else 0
+                    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, legendIcon)
+                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                }
                 with(season_matches_wins) {
                     text = rankedMatches.filter { it.win }.size.toString()
                     visibility = if (noMatches) View.GONE else View.VISIBLE
