@@ -17,7 +17,6 @@ enum class CardSet(val db: String) {
 
     CORE("core"),
     MADHOUSE("madhouse"),
-    REWARD("reward"),
     UNKNOWN(TEXT_UNKNOWN);
 
     companion object {
@@ -261,11 +260,11 @@ data class Card(
         val race: CardRace,
         val keywords: List<CardKeyword>,
         val arenaTier: CardArenaTier,
-        val evolves: Boolean
+        val evolves: Boolean,
+        val season: String
 
 ) : Comparable<Card>, Parcelable {
 
-    private val CARD_BACK = "card_back.png"
     private val CARD_PATH = "Cards"
 
     companion object {
@@ -273,6 +272,13 @@ data class Card(
             override fun createFromParcel(source: Parcel): Card = Card(source)
             override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
         }
+
+        private val CARD_BACK = "card_back.png"
+
+        fun getDefaultCardImage(context: Context): Bitmap {
+            return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+        }
+
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(),
@@ -282,19 +288,18 @@ data class Card(
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
-            CardArenaTier.values()[source.readInt()], 1 == source.readInt())
+            CardArenaTier.values()[source.readInt()], 1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0
 
     fun imageBitmap(context: Context): Bitmap {
-        val set = if (set != CardSet.REWARD) set else CardSet.CORE
         val cardAttr = attr.name.toLowerCase().capitalize()
         val cardSet = set.name.toLowerCase().capitalize()
         val imagePath = "$CARD_PATH/$cardSet/$cardAttr/$shortName.png"
         try {
             return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
         } catch (e: Exception) {
-            return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+            return getDefaultCardImage(context)
         }
     }
 
@@ -315,6 +320,7 @@ data class Card(
         dest?.writeList(keywords)
         dest?.writeInt(arenaTier.ordinal)
         dest?.writeInt((if (evolves) 1 else 0))
+        dest?.writeString(season)
     }
 
     override fun compareTo(other: Card): Int {

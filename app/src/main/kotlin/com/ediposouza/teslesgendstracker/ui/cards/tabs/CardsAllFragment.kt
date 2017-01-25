@@ -46,6 +46,7 @@ open class CardsAllFragment : BaseFragment() {
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
+    var sets: List<CardSet> = listOf()
 
     val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
@@ -96,15 +97,28 @@ open class CardsAllFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         menuSets = menu?.findItem(R.id.menu_sets)?.subMenu
+        getSets()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_sets_all -> filterSet(item, null)
-            R.id.menu_sets_core -> filterSet(item, CardSet.CORE)
-            R.id.menu_sets_madhouse -> filterSet(item, CardSet.MADHOUSE)
+            else -> sets.find { it.ordinal == item?.itemId }?.apply { filterSet(item, this) }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getSets() {
+        menuSets?.apply {
+            clear()
+            add(0, R.id.menu_sets_all, 0, getString(R.string.cards_sets_all)).setIcon(R.drawable.ic_checked)
+            PublicInteractor().getSets {
+                sets = it
+                sets.forEach {
+                    add(0, it.ordinal, 0, it.name.toLowerCase().capitalize())
+                }
+            }
+        }
     }
 
     private fun filterSet(menuItem: MenuItem?, set: CardSet?) {

@@ -62,8 +62,7 @@ class CardActivity : BaseActivity() {
         }
         privateInteractor.isUserCardFavorite(card) {
             favorite = it
-            val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
-            card_favorite_btn.setImageResource(drawableRes)
+            updateFavoriteButton()
         }
     }
 
@@ -133,6 +132,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun loadCardInfo() {
+        updateFavoriteButton()
         card_set.text = card.set.name.toLowerCase().capitalize()
         card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
@@ -141,13 +141,18 @@ class CardActivity : BaseActivity() {
         card_all_image.setImageBitmap(card.imageBitmap(this))
     }
 
+    private fun updateFavoriteButton() {
+        val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
+        card_favorite_btn.setImageResource(drawableRes)
+    }
+
     private fun onFavoriteClick() {
         if (App.hasUserLogged()) {
             PrivateInteractor().setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
                 val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
                 toast(getString(stringRes, card.name))
-                loadCardInfo()
+                updateFavoriteButton()
                 setResult(Activity.RESULT_OK, Intent())
                 MetricsManager.trackAction(if (favorite)
                     MetricAction.ACTION_CARD_DETAILS_FAVORITE() else MetricAction.ACTION_CARD_DETAILS_UNFAVORITE())

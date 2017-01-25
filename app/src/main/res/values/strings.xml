@@ -125,8 +125,6 @@
     <string name="title_tab_articles_world">TES Legends World</string>
 
     <string name="cards_sets_all">All</string>
-    <string name="cards_sets_core" translatable="false">Core</string>
-    <string name="cards_sets_madhouse" translatable="false">Madhouse</string>
 
     <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>

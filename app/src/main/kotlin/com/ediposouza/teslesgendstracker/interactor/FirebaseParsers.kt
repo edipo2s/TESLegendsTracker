@@ -27,6 +27,7 @@ abstract class FirebaseParsers {
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
+        val season: String = ""
 
         fun toCard(shortName: String, set: CardSet, attr: Attribute): Card {
             var clsAttr1 = attr
@@ -44,7 +45,7 @@ abstract class FirebaseParsers {
                                 CardKeyword.of(it)
                             },
                     CardArenaTier.of(arenaTier),
-                    evolves)
+                    evolves, season)
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {
@@ -201,7 +202,7 @@ abstract class FirebaseParsers {
             val date = key.split("_")
             val year = date[0]
             val month = Month.of(date[1].toInt())
-            val desc = "${month.getDisplayName(TextStyle.FULL, Locale.getDefault())}/${date[0].toInt()}"
+            val desc = month.getDisplayName(TextStyle.FULL, Locale.getDefault())
             val rewardInfo = reward.entries.first()
             val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
             return Season(id, key, year, desc, rewardInfo.key, rewardCardShortname as? String)
