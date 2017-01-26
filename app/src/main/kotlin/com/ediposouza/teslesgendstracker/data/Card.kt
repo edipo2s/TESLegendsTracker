@@ -265,14 +265,13 @@ data class Card(
 
 ) : Comparable<Card>, Parcelable {
 
-    private val CARD_PATH = "Cards"
-
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Card> = object : Parcelable.Creator<Card> {
             override fun createFromParcel(source: Parcel): Card = Card(source)
             override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
         }
 
+        val CARD_PATH = "Cards"
         private val CARD_BACK = "card_back.png"
 
         fun getDefaultCardImage(context: Context): Bitmap {

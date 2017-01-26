@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.util
 import android.content.Context
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.Patch
 import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber
 
@@ -44,6 +45,10 @@ object MetricsManager : MetricsConstants() {
 
     fun trackDeckView(deck: Deck) {
         Timber.d("Deck view: $deck")
+    }
+
+    fun trackPatchView(patch: Patch) {
+        Timber.d("Patch view: $patch")
     }
 
 }

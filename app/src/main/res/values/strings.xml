@@ -16,9 +16,8 @@
     <string name="app_ads_new_matches_full" translatable="false">ca-app-pub-7881623561544201/1315641179</string>
     <string name="app_ads_news_list" translatable="false">ca-app-pub-7881623561544201/8166949970</string>
     <string name="app_ads_news_list_size" translatable="false">280x80</string>
-    <!--Change-->
-    <string name="app_ads_season_list" translatable="false">ca-app-pub-7881623561544201/8166949970</string>
-
+    <string name="app_ads_season_list" translatable="false">ca-app-pub-7881623561544201/5214666772</string>
+    <string name="app_ads_patch_full" translatable="false">ca-app-pub-7881623561544201/6691399970</string>
     <string name="app_ads_season_list_size" translatable="false">280x80</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
@@ -251,5 +250,8 @@
     <string name="season_matches_class_most_seen">Most viewed:</string>
     <string name="season_matches_class_most_defeated">Most defeated:</string>
     <string name="season_matches_class_less_defeated">Less defeated:</string>
+
+    <string name="patch_transition_name" translatable="false">patch_name_transition</string>
+    <string name="patch_transition_container" translatable="false">patch_container_transition</string>
 
 </resources>
