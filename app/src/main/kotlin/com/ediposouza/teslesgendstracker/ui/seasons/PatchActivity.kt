@@ -19,7 +19,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Patch
 import com.ediposouza.teslesgendstracker.data.PatchChange
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
-import com.ediposouza.teslesgendstracker.ui.util.GUIUtils
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -75,10 +74,7 @@ class PatchActivity : BaseActivity() {
         patch_date_name.text = selectedPatch.desc
         patch_ads_view.visibility = View.GONE
         patch_cards_recycler_view.visibility = View.GONE
-        GUIUtils.animateRevealHide(this, patch_container_name, android.R.color.white,
-                patch_container_name.width / 2) {
-            ActivityCompat.finishAfterTransition(this@PatchActivity)
-        }
+        ActivityCompat.finishAfterTransition(this@PatchActivity)
     }
 
     private fun configureRecycleView() {
@@ -99,7 +95,7 @@ class PatchActivity : BaseActivity() {
         window.sharedElementEnterTransition = transition
         transition.addListener(object : Transition.TransitionListener {
             override fun onTransitionEnd(transition: Transition) {
-                animateRevealShow(patch_cards_recycler_view)
+                initViews()
             }
 
             override fun onTransitionResume(transition: Transition) {
@@ -132,15 +128,6 @@ class PatchActivity : BaseActivity() {
                 override fun onTransitionResume(transition: Transition) {}
             })
         }
-    }
-
-    private fun animateRevealShow(viewRoot: View) {
-//        val cx = (viewRoot.left + viewRoot.right) / 2
-//        val cy = (viewRoot.top + viewRoot.bottom) / 2
-//        GUIUtils.animateRevealShow(this, viewRoot, patch_container_name.width / 2,
-//                android.R.color.white, cx, cy) {
-        initViews()
-//        }
     }
 
     private fun initViews() {
