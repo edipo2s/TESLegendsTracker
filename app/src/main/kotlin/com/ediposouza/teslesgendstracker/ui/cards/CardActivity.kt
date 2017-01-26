@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView
 import android.view.View
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
@@ -18,6 +19,10 @@ import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.TextStyle
+import java.util.*
 
 class CardActivity : BaseActivity() {
 
@@ -134,6 +139,12 @@ class CardActivity : BaseActivity() {
     private fun loadCardInfo() {
         updateFavoriteButton()
         card_set.text = card.set.name.toLowerCase().capitalize()
+        if (card.season.isNotEmpty()) {
+            val yearMonth = YearMonth.parse(card.season, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
+            val month = yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+            card_reward.text = "$month/${yearMonth.year} ${getString(R.string.season_reward)}"
+            card_reward_label.visibility = View.VISIBLE
+        }
         card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE

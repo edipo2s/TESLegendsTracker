@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.interactor
 
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
+import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
 import org.threeten.bp.LocalDate
@@ -220,7 +221,8 @@ abstract class FirebaseParsers {
             val id = (year - 2016) * 12 + month.value - 7
             val rewardInfo = reward.entries.first()
             val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
-            return Season(id, key, YearMonth.of(year, month), rewardInfo.key, rewardCardShortname as? String)
+            val yearMonth = YearMonth.parse(key, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
+            return Season(id, key, yearMonth, rewardInfo.key, rewardCardShortname as? String)
         }
 
     }
