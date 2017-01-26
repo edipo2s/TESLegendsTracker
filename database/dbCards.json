@@ -1411,7 +1411,8 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "season": "2016_11"
       },
       "fateweaver": {
         "name": "Fate Weaver",
@@ -1943,7 +1944,8 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Pilfer",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "season": "2016_12"
       },
       "imperiallegionnaire": {
         "name": "Imperial Legionnaire",
@@ -3103,7 +3105,8 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "season": "2016_08"
       },
       "wildbeastcaller": {
         "name": "Wild Beastcaller",
@@ -3458,7 +3461,8 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "season": "2016_09"
       },
       "imperialarmor": {
         "name": "Imperial Armor",
@@ -4419,7 +4423,8 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "season": "2016_10"
       },
       "slaughterfish": {
         "name": "Slaughterfish",

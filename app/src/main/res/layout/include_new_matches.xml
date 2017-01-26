@@ -81,7 +81,7 @@
                 android:textColorHint="@color/grey_300" />
 
             <CheckBox
-                android:id="@+id/new_match_first"
+                android:id="@+id/new_matches_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_opt_name"
@@ -93,7 +93,7 @@
                 android:id="@+id/new_matches_legend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/new_match_first"
+                android:layout_below="@id/new_matches_first"
                 android:layout_marginTop="@dimen/nano_margin"
                 android:text="@string/new_match_legend_label"
                 android:textColor="@android:color/white" />

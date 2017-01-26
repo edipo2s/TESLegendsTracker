@@ -24,9 +24,14 @@ abstract class MetricsConstants {
         const val PARAM_VIEW_DECK_NAME = "Name"
         const val PARAM_VIEW_DECK_CLASS = "Class"
 
+        const val EVENT_VIEW_PATCH = "ViewPatch"
+        const val PARAM_VIEW_PATCH_ID = "ID"
+
         const val EVENT_SEARCH = "Search"
 
         const val PARAM_CONTENT_VIEW_TYPE_CARD = "Card"
+        const val PARAM_CONTENT_VIEW_TYPE_DECK = "Deck"
+        const val PARAM_CONTENT_VIEW_TYPE_PATCH = "Patch"
 
         const val PARAM_MIXPANEL_USER_ID = "User ID"
         const val PARAM_MIXPANEL_USER_NAME = "\$name"
@@ -182,6 +187,8 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
+    class SCREEN_SEASONS : MetricScreen("Seasons")
+    class SCREEN_PATCH_DETAILS : MetricScreen("PatchDetails")
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")
     class SCREEN_IMPORT_COLLECTION : MetricScreen("ImportCollection")
