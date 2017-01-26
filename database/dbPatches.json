@@ -1,19 +1,27 @@
 {
   "2016_08_25": {
-    "core": {
-      "agility": {
-        "murkwatersavage": {
-          "cost": {
+    "changes": {
+      "murkwatersavage": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "cost",
             "after": "3",
             "before": "2"
           }
-        },
-        "soulrestmarshal": {
-          "text": {
+        ]
+      },
+      "soulrestmarshal": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less.",
             "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less."
           }
-        }
+        ]
       }
     },
     "desc": "Soulrest Marshal Nerf",
@@ -24,106 +32,166 @@
     "type": "reward"
   },
   "2016_09_20": {
-    "core": {
-      "endurance": {
-        "bonecolossus": {
-          "text": {
+    "changes": {
+      "bonecolossus": {
+        "set": "core",
+        "attr": "endurance",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Skeleton have +1/+1.",
             "before": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1."
           }
-        }
+        ]
       }
     },
     "desc": "Bone Colossus Nerf",
     "type": "balance"
   },
   "2016_09_28": {
-    "core": {
-      "agility": {
-        "blacksapprotector": {
-          "rarity": {
+    "changes": {
+      "blacksapprotector": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "attack",
             "after": "Rare",
             "before": "Common"
           }
-        },
-        "voraciousspriggan": {
-          "rarity": {
-            "after": "Common",
-            "before": "Rare"
-          }
-        }
+        ]
       },
-      "intelligence": {
-        "evermoresteward": {
-          "rarity": {
+      "voraciousspriggan": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Common",
+            "before": "Rare"
+          }
+        ]
+      },
+      "evermoresteward": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": "Rare",
             "before": "Common"
           }
-        },
-        "farsightnereid": {
-          "rarity": {
+        ]
+      },
+      "farsightnereid": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": "Common",
             "before": "Rare"
           }
-        },
-        "nibenbaycutthroat": {
-          "rarity": {
+        ]
+      },
+      "nibenbaycutthroat": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": "Common",
             "before": "Rare"
           }
-        },
-        "shockingwamasu": {
-          "text": {
+        ]
+      },
+      "shockingwamasu": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: Deal 4 damage to a creature.",
             "before": "Summon: Deal 4 damage."
           }
-        },
-        "shriekingharpy": {
-          "rarity": {
-            "after": "Rare",
-            "before": "Common"
-          }
-        }
+        ]
       },
-      "strength": {
-        "fieryimp": {
-          "rarity": {
+      "shriekingharpy": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": "Rare",
             "before": "Common"
           }
-        },
-        "fortresswatchman": {
-          "rarity": {
-            "after": "Common",
-            "before": "Rare"
-          }
-        },
-        "intimidate": {
-          "rarity": {
-            "after": "Rare",
-            "before": "Common"
-          }
-        },
-        "valenwoodhuntsman": {
-          "rarity": {
-            "after": "Common",
-            "before": "Rare"
-          }
-        },
-        "valenwoodtrapper": {
-          "rarity": {
-            "after": "Common",
-            "before": "Rare"
-          }
-        }
+        ]
       },
-      "willpower": {
-        "mantikora": {
-          "text": {
+      "fieryimp": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Rare",
+            "before": "Common"
+          }
+        ]
+      },
+      "fortresswatchman": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Common",
+            "before": "Rare"
+          }
+        ]
+      },
+      "intimidate": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Rare",
+            "before": "Common"
+          }
+        ]
+      },
+      "valenwoodhuntsman": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Common",
+            "before": "Rare"
+          }
+        ]
+      },
+      "valenwoodtrapper": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
+            "after": "Common",
+            "before": "Rare"
+          }
+        ]
+      },
+      "mantikora": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "text",
             "after": "Guard. Summon: Destroy an enemy creature in this lane.",
             "before": "Guard. Summon: Destroy an enemy creature."
           }
-        }
+        ]
       }
     },
     "desc": "Mantikora Nerf",
@@ -138,112 +206,176 @@
     "type": "reward"
   },
   "2016_11_03": {
-    "core": {
-      "agility": {
-        "housekinsman": {
-          "health": {
+    "changes": {
+      "housekinsman": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "health",
             "after": 2,
             "before": 3
           }
-        },
-        "moonlightwerebat": {
-          "health": {
+        ]
+      },
+      "moonlightwerebat": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "health",
             "after": 2,
             "before": 3
           }
-        },
-        "tazkadthepackmaster": {
-          "cost": {
+        ]
+      },
+      "tazkadthepackmaster": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "cost",
             "after": "09",
             "before": "08"
           }
-        },
-        "twilightwerebat": {
-          "health": {
+        ]
+      },
+      "twilightwerebat": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "health",
             "after": 2,
             "before": 3
           }
-        }
+        ]
       },
-      "dual": {
-        "allenabenoch": {
-          "text": {
+      "allenabenoch": {
+        "set": "core",
+        "attr": "dual",
+        "change": [
+          {
+            "field": "text",
             "after": "Lethal. Summon: Deal 1 damage to an enemy.",
             "before": "Lethal. Summon: Deal 1 damage to an enemy creature."
           }
-        }
+        ]
       },
-      "endurance": {
-        "wrothgarartisan": {
-          "health": {
+      "wrothgarartisan": {
+        "set": "core",
+        "attr": "endurance",
+        "change": [
+          {
+            "field": "health",
             "after": 3,
             "before": 2
           }
-        }
+        ]
       },
-      "intelligence": {
-        "brilliantexperiment": {
-          "cost": {
+      "brilliantexperiment": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "cost",
             "after": "03",
             "before": "02"
           }
-        },
-        "dunmernightblade": {
-          "text": {
+        ]
+      },
+      "dunmernightblade": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "text",
             "after": "Last Gasp: Put a Iron Sword into your hand.",
             "before": "Last Gasp: Put a Steel Sword into your hand."
           }
-        },
-        "elusiveschemer": {
-          "attack": {
+        ]
+      },
+      "elusiveschemer": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": 3,
             "before": 4
           }
-        },
-        "nahkriindragonpriest": {
-          "cost": {
+        ]
+      },
+      "nahkriindragonpriest": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "cost",
             "after": "09",
             "before": "10"
           },
-          "text": {
+          {
+            "field": "text",
             "after": "Summon: Draw a card and reduce its cost to 0.",
             "before": "Summon: Draw a card. The next card you play this turn is free."
           }
-        }
+        ]
       },
-      "strength": {
-        "morkulgatekeeper": {
-          "keyword": {
+      "morkulgatekeeper": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "keyword",
             "after": "Prophecy, Guard, Summon",
             "before": "Guard, Summon"
           }
-        },
-        "volendrung": {
-          "text": {
+        ]
+      },
+      "volendrung": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "text",
             "after": "Uses: 2. Activate: Give a creature +4/+4.",
             "before": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough."
           }
-        }
+        ]
       },
-      "willpower": {
-        "apprenticespotion": {
-          "cost": {
+      "apprenticespotion": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "cost",
             "after": "02",
             "before": "01"
           }
-        },
-        "divinefervor": {
-          "cost": {
+        ]
+      },
+      "divinefervor": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "cost",
             "after": "05",
             "before": "04"
           }
-        },
-        "healingpotion": {
-          "cost": {
+        ]
+      },
+      "healingpotion": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "cost",
             "after": "02",
             "before": "01"
           }
-        }
+        ]
       }
     },
     "desc": "Nahkriin Nerf",
@@ -254,18 +386,22 @@
     "type": "reward"
   },
   "2016_12_14": {
-    "core": {
-      "strength": {
-        "burnandpillage": {
-          "cost": {
+    "changes": {
+      "burnandpillage": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "cost",
             "after": "5",
             "before": "6"
           },
-          "text": {
+          {
+            "field": "text",
             "after": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
             "before": "Deal 1 damage to all enemy creatures for each destroyed enemy rune."
           }
-        }
+        ]
       }
     },
     "desc": "Madhouse Collection",
@@ -276,136 +412,198 @@
     "type": "reward"
   },
   "2017_01_11": {
-    "core": {
-      "agility": {
-        "dunesmuggler": {
-          "text": {
+    "changes": {
+      "dunesmuggler": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: Move another friendly creature in this lane. When a friendly creature moves, give it +1/+1.",
             "before": "Summon: Move another friendly creature. When a friendly creature moves, give it +1/+1."
           }
-        },
-        "dunestalker": {
-          "text": {
+        ]
+      },
+      "dunestalker": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "text",
             "after": "Prophecy. Summon: Move another friendly creature in this lane.",
             "before": "Prophecy. Summon: Move another friendly creature."
           }
-        },
-        "snaketoothnecklace": {
-          "text": {
+        ]
+      },
+      "snaketoothnecklace": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "text",
             "after": "+1/+1. Summon: Give the wielder Drain this turn.",
             "before": "Drain. +1/+1"
           }
-        },
-        "soulrestmarshal": {
-          "cost": {
+        ]
+      },
+      "soulrestmarshal": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "cost",
             "after": 6,
             "before": 5
           },
-          "text": {
+          {
+            "field": "text",
             "after": "Summon: If you have more health than your opponent, the next card you play this turn costs 6 less.",
             "before": "Summon: If you have more health than your opponent, the next card you play this turn costs 5 less."
           }
-        }
+        ]
       },
-      "endurance": {
-        "histgrove": {
-          "text": {
+      "histgrove": {
+        "set": "core",
+        "attr": "endurance",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
             "before": "Summon: +1 max magicka. When you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane."
           }
-        }
+        ]
       },
-      "intelligence": {
-        "crystaltowercrafter": {
-          "attack": {
+      "crystaltowercrafter": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "attack",
             "after": 1,
             "before": 2
           },
-          "health": {
+          {
+            "field": "health",
             "after": 1,
             "before": 2
           }
-        }
+        ]
       },
-      "neutral": {
-        "slaughterfish": {
-          "cost": {
+      "slaughterfish": {
+        "set": "core",
+        "attr": "neutral",
+        "change": [
+          {
+            "field": "cost",
             "after": 4,
             "before": 3
           }
-        },
-        "slaughterfishspawning": {
-          "cost": {
+        ]
+      },
+      "slaughterfishspawning": {
+        "set": "core",
+        "attr": "neutral",
+        "change": [
+          {
+            "field": "cost",
             "after": 4,
             "before": 3
           }
-        }
+        ]
       },
-      "willpower": {
-        "pillagingtribune": {
-          "text": {
+      "pillagingtribune": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "text",
             "after": "Summon: Give a friendly creature Drain this turn.",
             "before": "Summon: Give other friendly creature Drain this turn."
           }
-        }
+        ]
       }
     },
-    "desc": "Slaughterfish Spawning Nerf",
+    "desc": "Hist Grove Nerf",
     "type": "balance"
   },
   "2017_01_25": {
-    "core": {
-      "agility": {
-        "ungolimthelistener": {
-          "attack": {
+    "changes": {
+      "ungolimthelistener": {
+        "set": "core",
+        "attr": "agility",
+        "change": [
+          {
+            "field": "attack",
             "after": 1,
             "before": 2
           }
-        }
+        ]
       },
-      "endurance": {
-        "blackwormnecromancer": {
-          "cost": {
+      "blackwormnecromancer": {
+        "set": "core",
+        "attr": "endurance",
+        "change": [
+          {
+            "field": "cost",
             "after": 6,
             "before": 5
           }
-        }
+        ]
       },
-      "intelligence": {
-        "darkrift": {
-          "cost": {
+      "darkrift": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "cost",
             "after": 3,
             "before": 2
           }
-        },
-        "shriekingharpy": {
-          "health": {
+        ]
+      },
+      "shriekingharpy": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": [
+          {
+            "field": "health",
             "after": 1,
             "before": 2
           }
-        }
+        ]
       },
-      "strength": {
-        "gladiatorarena": {
-          "cost": {
+      "gladiatorarena": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "cost",
             "after": 4,
             "before": 3
           }
-        },
-        "reiveblademaster": {
-          "attack": {
+        ]
+      },
+      "reiveblademaster": {
+        "set": "core",
+        "attr": "strength",
+        "change": [
+          {
+            "field": "attack",
             "after": 3,
             "before": 2
           }
-        }
+        ]
       },
-      "willpower": {
-        "dagirahtmystic": {
-          "health": {
+      "dagirahtmystic": {
+        "set": "core",
+        "attr": "willpower",
+        "change": [
+          {
+            "field": "health",
             "after": 5,
             "before": 4
           }
-        }
+        ]
       }
     },
     "desc": "Ungolim Nerf",
