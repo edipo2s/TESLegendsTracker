@@ -34,8 +34,7 @@ class PatchChange(
 
         val attr: String,
         val set: String,
-        val shortName: String,
-        val changes: List<PatchCardChange>
+        val shortName: String
 
 ) : Parcelable {
 
@@ -46,14 +45,12 @@ class PatchChange(
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),
-            ArrayList<PatchCardChange>().apply { source.readList(this, PatchCardChange::class.java.classLoader) })
+    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString())
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(attr)
         dest?.writeString(set)
         dest?.writeString(shortName)
-        dest?.writeList(changes)
     }
 
     override fun describeContents(): Int = 0
@@ -89,33 +86,6 @@ class PatchChange(
             return Card.getDefaultCardImage(context)
         }
     }
-
-}
-
-class PatchCardChange(
-
-        val field: String,
-        val after: String,
-        val before: String
-
-) : Parcelable {
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<PatchCardChange> = object : Parcelable.Creator<PatchCardChange> {
-            override fun createFromParcel(source: Parcel): PatchCardChange = PatchCardChange(source)
-            override fun newArray(size: Int): Array<PatchCardChange?> = arrayOfNulls(size)
-        }
-    }
-
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString())
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(field)
-        dest?.writeString(after)
-        dest?.writeString(before)
-    }
-
-    override fun describeContents(): Int = 0
 
 }
 
