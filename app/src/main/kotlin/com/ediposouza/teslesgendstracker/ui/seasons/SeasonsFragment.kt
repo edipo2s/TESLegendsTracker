@@ -17,6 +17,8 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.toYearMonth
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
@@ -38,11 +40,20 @@ class SeasonsFragment : BaseFragment() {
     private val ADS_EACH_ITEMS = 5
     private val SEASON_PAGE_SIZE = 8
 
-    private val patches = mutableListOf<Patch>()
+    private val patches = ArrayList<Patch>()
     private val publicInteractor by lazy { PublicInteractor() }
     private val privateInteractor by lazy { PrivateInteractor() }
     private val seasonRef = { publicInteractor.getSeasonsRef() }
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
+    private val patchTransitionName: String by lazy { getString(R.string.patch_transition_container) }
+
+    val onCardClick: (View, Card) -> Unit = { view, card -> showCardExpanded(card, view) }
+
+    val onPatchClick: (Patch, View) -> Unit = { patch, view ->
+        val intent = PatchActivity.newIntent(context, patch, patches)
+        ActivityCompat.startActivity(context, intent, ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, view, patchTransitionName).toBundle())
+    }
 
     private val seasonsAdapter by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.SeasonParser, SeasonViewHolder>(
@@ -50,10 +61,7 @@ class SeasonsFragment : BaseFragment() {
                 ADS_EACH_ITEMS, R.layout.itemlist_season_ads) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): SeasonViewHolder {
-                return SeasonViewHolder(parent.inflate(R.layout.itemlist_season)) {
-                    view, card ->
-                    showCardExpanded(card, view)
-                }
+                return SeasonViewHolder(parent.inflate(R.layout.itemlist_season), onCardClick, onPatchClick)
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.SeasonParser, viewHolder: SeasonViewHolder) {
@@ -77,6 +85,7 @@ class SeasonsFragment : BaseFragment() {
             patches.addAll(it.filter { it.type != PatchType.REWARD })
             configureRecycleView()
         }
+        MetricsManager.trackScreen(MetricScreen.SCREEN_SEASONS())
     }
 
     private fun configureRecycleView() {
@@ -95,7 +104,8 @@ class SeasonsFragment : BaseFragment() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
-    class SeasonViewHolder(view: View, val itemClick: (View, Card) -> Unit) : RecyclerView.ViewHolder(view) {
+    class SeasonViewHolder(view: View, val itemClick: (View, Card) -> Unit,
+                           val onPatchClick: (Patch, View) -> Unit) : RecyclerView.ViewHolder(view) {
 
         init {
             itemView.season_patches_recycler_view.layoutManager = LinearLayoutManager(itemView.context,
@@ -116,7 +126,7 @@ class SeasonsFragment : BaseFragment() {
                 season_card_reward.setImageBitmap(Card.getDefaultCardImage(context))
                 season_card_reward.setOnClickListener { }
                 val seasonPatches = patches.filter { it.date.toYearMonth() == season.date }
-                season_patches_recycler_view.adapter = PatchAdapter(seasonPatches)
+                season_patches_recycler_view.adapter = PatchAdapter(seasonPatches, onPatchClick)
                 doAsync {
                     if (season.rewardCardShortname != null) {
                         val rewardAttr = Attribute.valueOf(season.rewardCardAttr.toUpperCase())
@@ -181,14 +191,14 @@ class SeasonsFragment : BaseFragment() {
 
     }
 
-    class PatchAdapter(val items: List<Patch>) : RecyclerView.Adapter<PatchViewHolder>() {
+    class PatchAdapter(val items: List<Patch>, val onPatchClick: (Patch, View) -> Unit) : RecyclerView.Adapter<PatchViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PatchViewHolder {
             return PatchViewHolder(parent?.inflate(R.layout.itemlist_season_patch))
         }
 
         override fun onBindViewHolder(holder: PatchViewHolder?, position: Int) {
-            holder?.bind(items[position])
+            holder?.bind(items[position], onPatchClick)
         }
 
         override fun getItemCount() = items.size
@@ -197,9 +207,10 @@ class SeasonsFragment : BaseFragment() {
 
     class PatchViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
-        fun bind(patch: Patch) {
-            with(itemView){
+        fun bind(patch: Patch, onPatchClick: (Patch, View) -> Unit) {
+            with(itemView) {
                 patch_name.text = patch.desc
+                setOnClickListener { onPatchClick.invoke(patch, patch_container) }
             }
         }
 

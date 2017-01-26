@@ -46,33 +46,6 @@ data class CardSlot(
     }
 }
 
-data class Patch(
-
-        val uuidDate: String,
-        val date: LocalDate,
-        val desc: String,
-        val type: PatchType
-
-)
-
-enum class PatchType {
-
-    BALANCE,
-    REWARD,
-    SET,
-    UNKNOWN;
-
-    companion object {
-
-        fun of(value: String): PatchType {
-            val name = value.trim().toUpperCase().replace(" ", "_")
-            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
-        }
-
-    }
-
-}
-
 data class Season(
 
         val id: Int,
@@ -108,85 +81,4 @@ enum class ArticleCategory(@IntegerRes val text: Int) {
     THE_ARENA_DISTRICT(R.string.article_news_category_arena),
     WORLD(R.string.article_world_type)
 
-}
-
-enum class MatchMode {
-
-    RANKED,
-    CASUAL,
-    ARENA
-
-}
-
-data class MatchDeck(
-
-        val name: String,
-        val cls: Class,
-        val type: DeckType,
-        val deck: String? = null,
-        val version: String? = null
-
-) : Parcelable {
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<MatchDeck> = object : Parcelable.Creator<MatchDeck> {
-            override fun createFromParcel(source: Parcel): MatchDeck = MatchDeck(source)
-            override fun newArray(size: Int): Array<MatchDeck?> = arrayOfNulls(size)
-        }
-    }
-
-    constructor(source: Parcel) : this(source.readString(), Class.values()[source.readInt()],
-            DeckType.values()[source.readInt()], source.readString(), source.readString())
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(name)
-        dest?.writeInt(cls.ordinal)
-        dest?.writeInt(type.ordinal)
-        dest?.writeString(deck)
-        dest?.writeString(version)
-    }
-}
-
-data class Match(
-
-        val uuid: String,
-        val first: Boolean,
-        val player: MatchDeck,
-        val opponent: MatchDeck,
-        val mode: MatchMode,
-        val season: String,
-        val rank: Int,
-        val legend: Boolean,
-        val win: Boolean
-
-) : Parcelable {
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<Match> = object : Parcelable.Creator<Match> {
-            override fun createFromParcel(source: Parcel): Match = Match(source)
-            override fun newArray(size: Int): Array<Match?> = arrayOfNulls(size)
-        }
-    }
-
-    constructor(source: Parcel) : this(source.readString(), 1 == source.readInt(),
-            source.readParcelable<MatchDeck>(MatchDeck::class.java.classLoader),
-            source.readParcelable<MatchDeck>(MatchDeck::class.java.classLoader),
-            MatchMode.values()[source.readInt()], source.readString(), source.readInt(),
-            1 == source.readInt(), 1 == source.readInt())
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(uuid)
-        dest?.writeInt((if (first) 1 else 0))
-        dest?.writeParcelable(player, 0)
-        dest?.writeParcelable(opponent, 0)
-        dest?.writeInt(mode.ordinal)
-        dest?.writeString(season)
-        dest?.writeInt(rank)
-        dest?.writeInt((if (legend) 1 else 0))
-        dest?.writeInt((if (win) 1 else 0))
-    }
 }
