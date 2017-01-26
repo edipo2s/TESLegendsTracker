@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/card_patch_arrow"
+        android:layout_width="@dimen/size_medium"
+        android:layout_height="@dimen/size_medium"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_arrow_forward" />
+
+    <ImageView
+        android:id="@+id/card_patch_full_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingStart="@dimen/huge_margin"
+        app:layout_heightPercent="90%"
+        tools:showIn="@layout/activity_card"
+        tools:src="@drawable/card" />
+
+    <TextView
+        android:id="@+id/card_patch_desc_shadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_patch_full_image"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/text_shadow_padding"
+        android:paddingStart="@dimen/text_shadow_padding"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_medium"
+        tools:text="Version pre-Ungolim Nerf" />
+
+    <TextView
+        android:id="@+id/card_patch_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_patch_full_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_medium"
+        tools:text="Version pre-Ungolim Nerf" />
+
+</android.support.percent.PercentRelativeLayout>
+
+        

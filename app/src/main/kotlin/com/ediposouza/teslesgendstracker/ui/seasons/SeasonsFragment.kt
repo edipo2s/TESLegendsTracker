@@ -152,6 +152,7 @@ class SeasonsFragment : BaseFragment() {
         private fun updateMatchesInfo(rankedMatches: List<Match>, noMatches: Boolean) {
             with(itemView) {
                 season_no_matches.visibility = if (noMatches) View.VISIBLE else View.GONE
+                season_no_matches_shadow.visibility = if (noMatches) View.VISIBLE else View.GONE
                 season_matches_label.visibility = if (noMatches) View.GONE else View.VISIBLE
                 season_matches_layout.visibility = if (noMatches) View.GONE else View.VISIBLE
                 season_best_rank_label.visibility = if (noMatches) View.GONE else View.VISIBLE

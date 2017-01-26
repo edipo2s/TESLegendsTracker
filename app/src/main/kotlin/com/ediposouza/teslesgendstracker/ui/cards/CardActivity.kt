@@ -7,21 +7,31 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.CardView
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.CardBasicInfo
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
+import kotlinx.android.synthetic.main.itemlist_card_full.view.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.TextStyle
+import timber.log.Timber
 import java.util.*
 
 class CardActivity : BaseActivity() {
@@ -39,21 +49,28 @@ class CardActivity : BaseActivity() {
     private val privateInteractor by lazy { PrivateInteractor() }
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
+    private val cardVersions by lazy {
+        val cardBasicInfo = CardBasicInfo(card.shortName, card.set.name, card.attr.name)
+        mutableListOf(Pair(cardBasicInfo, getString(R.string.card_patch_current)))
+    }
+
     private var favorite: Boolean = false
     private var userCardQtd = 0
+    private val onCardClick = {
+        finishAndAnimateBack()
+        MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
+        ActivityCompat.postponeEnterTransition(this)
         snackbarNeedMargin = false
 
-        card_all_image.setOnClickListener {
-            ActivityCompat.finishAfterTransition(this)
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
-        }
-        card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        configureRecycleView()
         loadCardInfo()
         configureBottomSheet()
+        card_favorite_btn.setOnClickListener { onFavoriteClick() }
         setResult(Activity.RESULT_CANCELED, Intent())
     }
 
@@ -68,6 +85,27 @@ class CardActivity : BaseActivity() {
         privateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        ActivityCompat.finishAfterTransition(this)
+    }
+
+    override fun onBackPressed() {
+        if (cardInfoSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            cardInfoSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            finishAndAnimateBack()
+        }
+    }
+
+    private fun finishAndAnimateBack() {
+        cardVersions.removeAll { it.first.shortName != card.shortName }
+        with(card_recycler_view) {
+            adapter.notifyDataSetChanged()
+            post({ ActivityCompat.finishAfterTransition(this@CardActivity) })
         }
     }
 
@@ -105,19 +143,6 @@ class CardActivity : BaseActivity() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        ActivityCompat.finishAfterTransition(this)
-    }
-
-    override fun onBackPressed() {
-        if (cardInfoSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            cardInfoSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     private fun configureBottomSheet() {
         cardInfoSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -149,7 +174,44 @@ class CardActivity : BaseActivity() {
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
-        card_all_image.setImageBitmap(card.imageBitmap(this))
+    }
+
+    private fun configureRecycleView() {
+        with(card_recycler_view) {
+            layoutManager = LinearLayoutManager(this@CardActivity, LinearLayoutManager.HORIZONTAL, true)
+            adapter = CardAdapter(cardVersions, onCardClick)
+            setHasFixedSize(true)
+            LinearSnapHelper().attachToRecyclerView(this)
+            var listener: ViewTreeObserver.OnPreDrawListener? = null
+            listener = ViewTreeObserver.OnPreDrawListener {
+                card_recycler_view.viewTreeObserver.removeOnPreDrawListener(listener)
+                ActivityCompat.startPostponedEnterTransition(this@CardActivity)
+                getCardPatches()
+                true
+            }
+            viewTreeObserver.addOnPreDrawListener(listener)
+        }
+    }
+
+    private fun getCardPatches() {
+        PublicInteractor().getPatches {
+            val cardPatches = it.filter { it.changes.filter { it.shortName == card.shortName }.isNotEmpty() }
+            Timber.d(cardPatches.toString())
+            if (cardPatches.isNotEmpty()) {
+                cardPatches.sortedBy { it.date }.reversed().forEach {
+                    val cardPatchName = "${card.shortName}_${it.uuidDate}"
+                    val cardBasicInfo = CardBasicInfo(cardPatchName, card.set.name, card.attr.name)
+                    cardVersions.add(Pair(cardBasicInfo, getString(R.string.card_patch_pre, it.desc)))
+                }
+                with(card_recycler_view) {
+                    adapter.notifyDataSetChanged()
+                    postDelayed({
+                        smoothScrollBy(width * -1 / 3, 0)
+                    }, DateUtils.SECOND_IN_MILLIS / 2)
+                }
+            }
+
+        }
     }
 
     private fun updateFavoriteButton() {
@@ -171,6 +233,45 @@ class CardActivity : BaseActivity() {
         } else {
             showErrorUserNotLogged()
         }
+    }
+
+    class CardAdapter(val items: List<Pair<CardBasicInfo, String>>, val onCardClick: () -> Unit) : RecyclerView.Adapter<CardViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardViewHolder {
+            return CardViewHolder(parent?.inflate(R.layout.itemlist_card_full))
+        }
+
+        override fun onBindViewHolder(holder: CardViewHolder?, position: Int) {
+            val pair = items[position]
+            val isFirst = position == 0
+            val isLast = position == items.size - 1
+            val hasPatchVersion = itemCount > 1
+            holder?.bind(pair.first, pair.second, isFirst, isLast, hasPatchVersion, onCardClick)
+        }
+
+        override fun getItemCount(): Int = items.size
+
+    }
+
+    class CardViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+
+        fun bind(cardBasicInfo: CardBasicInfo, cardPatchDesc: String, isFirst: Boolean,
+                 isLast: Boolean, hasPatchVersion: Boolean, onCardClick: () -> Unit) {
+            with(itemView) {
+                with(card_patch_full_image) {
+                    setImageBitmap(Card.getCardImageBitmap(context, cardBasicInfo.set,
+                            cardBasicInfo.attr, cardBasicInfo.shortName))
+                    transitionName = if (isFirst) context.getString(R.string.card_transition_name) else ""
+                    setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
+                }
+                card_patch_desc.text = cardPatchDesc
+                card_patch_desc_shadow.text = cardPatchDesc
+                card_patch_desc.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
+                card_patch_desc_shadow.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
+                card_patch_arrow.visibility = if (isLast) View.GONE else View.VISIBLE
+                setOnClickListener { onCardClick() }
+            }
+        }
+
     }
 
 }
