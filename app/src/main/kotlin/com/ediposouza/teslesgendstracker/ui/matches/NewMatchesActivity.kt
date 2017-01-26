@@ -41,9 +41,10 @@ class NewMatchesActivity : BaseActivity() {
         private val EXTRA_DECK = "deckExtra"
         private val EXTRA_MATCH_MODE = "modeExtra"
 
-        fun newIntent(context: Context, deckName: String, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+        fun newIntent(context: Context, deckName: String?, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+            val name = deckName ?: deckCls.name.toLowerCase().capitalize()
             return context.intentFor<NewMatchesActivity>(
-                    EXTRA_DECK_NAME to deckName,
+                    EXTRA_DECK_NAME to name,
                     EXTRA_DECK_CLASS to deckCls.ordinal,
                     EXTRA_DECK_TYPE to deckType.ordinal,
                     EXTRA_MATCH_MODE to mode.ordinal).apply {

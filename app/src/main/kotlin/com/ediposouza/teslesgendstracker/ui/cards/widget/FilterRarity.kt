@@ -78,6 +78,9 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     fun collapse() {
+        if (rarity_filter_bg?.layoutParams?.width == rarityBGMinWidth) {
+            return
+        }
         with(rootView) {
             rarity_filter_common?.visibility = View.GONE
             rarity_filter_rare?.visibility = View.GONE

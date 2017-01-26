@@ -207,12 +207,13 @@ class MatchesFragment : BaseFragment() {
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                    val name = dialogView.new_match_dialog_deck_name.text.toString()
                     val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    val deck = if (mode != MatchMode.ARENA && deckPosition >= 0) decks[deckPosition] else null
-                    if (mode != MatchMode.ARENA && name.length < DECK_NAME_MIN_SIZE) {
+                    val isNotArena = mode != MatchMode.ARENA
+                    val name = if (isNotArena) dialogView.new_match_dialog_deck_name.text.toString() else null
+                    val deck = if (isNotArena && deckPosition >= 0) decks[deckPosition] else null
+                    if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {
                         startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)

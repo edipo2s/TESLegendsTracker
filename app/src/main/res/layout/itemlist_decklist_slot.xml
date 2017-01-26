@@ -14,11 +14,10 @@
         android:id="@+id/deckslot_card_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/deck_list_slot_half_height"
-        android:layout_marginStart="@dimen/deck_list_slot_half_height"
+        android:layout_marginEnd="@dimen/nano_margin"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
         android:alpha="@dimen/deck_card_image_alpha"
-        app:imageTopMargin="0.3"
+        app:imageTopMargin="0.35"
         android:src="@drawable/card" />
 
     <ImageView
@@ -26,6 +25,7 @@
         android:layout_width="@dimen/deck_list_slot_height"
         android:layout_height="@dimen/deck_list_slot_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
+        android:layout_marginStart="@dimen/small_margin"
         android:src="@drawable/ic_magika_0" />
 
     <ImageView
