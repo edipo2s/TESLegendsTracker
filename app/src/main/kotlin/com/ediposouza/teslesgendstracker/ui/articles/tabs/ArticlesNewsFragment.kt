@@ -37,6 +37,7 @@ class ArticlesNewsFragment : BaseFragment() {
     private val ADS_EACH_ITEMS = 8
     private val NEWS_PAGE_SIZE = 15
 
+    private val publicInteractor by lazy { PublicInteractor() }
     private val newsRef = { publicInteractor.getNewsRef() }
     private var currentType: ArticleCategory? = null
     private var menuCategory: MenuItem? = null
@@ -44,8 +45,6 @@ class ArticlesNewsFragment : BaseFragment() {
     private val dataFilter: (FirebaseParsers.NewsParser) -> Boolean = {
         currentType == null || it.category == currentType?.ordinal
     }
-
-    private val publicInteractor by lazy { PublicInteractor() }
 
     private val newsAdapter by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.NewsParser, ArticleViewHolder>(

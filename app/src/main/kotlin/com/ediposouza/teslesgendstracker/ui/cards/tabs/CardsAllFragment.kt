@@ -40,13 +40,13 @@ open class CardsAllFragment : BaseFragment() {
 
     var currentAttr: Attribute = Attribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
-    var userFavorites: List<String> = ArrayList()
     var magikaFilter: Int = -1
     var setFilter: CardSet? = null
     var classFilter: Class? = null
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
+    var sets: List<CardSet> = listOf()
 
     val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
     val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
@@ -97,15 +97,28 @@ open class CardsAllFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         menuSets = menu?.findItem(R.id.menu_sets)?.subMenu
+        getSets()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_sets_all -> filterSet(item, null)
-            R.id.menu_sets_core -> filterSet(item, CardSet.CORE)
-            R.id.menu_sets_madhouse -> filterSet(item, CardSet.MADHOUSE)
+            else -> sets.find { it.ordinal == item?.itemId }?.apply { filterSet(item, this) }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getSets() {
+        menuSets?.apply {
+            clear()
+            add(0, R.id.menu_sets_all, 0, getString(R.string.cards_sets_all)).setIcon(R.drawable.ic_checked)
+            PublicInteractor().getSets {
+                sets = it
+                sets.forEach {
+                    add(0, it.ordinal, 0, it.name.toLowerCase().capitalize())
+                }
+            }
+        }
     }
 
     private fun filterSet(menuItem: MenuItem?, set: CardSet?) {
@@ -201,9 +214,6 @@ open class CardsAllFragment : BaseFragment() {
             cardsLoaded = it
             showCards()
         }
-        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
-            userFavorites = it
-        }
     }
 
     open fun showCards() {
@@ -269,8 +279,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCardExpanded(card: Card, view: View) {
-        val favorite = userFavorites.contains(card.shortName)
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, favorite),
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
@@ -314,9 +323,11 @@ open class CardsAllFragment : BaseFragment() {
         }
 
         fun bind(card: Card) {
-            itemView.setOnClickListener { itemClick(itemView.card_all_image, card) }
-            itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, card) }
-            itemView.card_all_image.setImageBitmap(card.imageBitmap(itemView.context))
+            with(itemView) {
+                setOnClickListener { itemClick(card_all_image, card) }
+                setOnLongClickListener { itemLongClick(card_all_image, card) }
+                card_all_image.setImageBitmap(card.imageBitmap(context))
+            }
         }
 
     }

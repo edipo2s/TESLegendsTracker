@@ -143,7 +143,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             PublicInteractor().getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
-                    add(0, it.id, 0, it.desc)
+                    add(0, it.id, 0, "${it.date.month}/${it.date.year}")
                 }
                 currentSeason = seasons.find { it.id == intent.getIntExtra(EXTRA_SEASON_ID, 0) }
                 filterSeason(currentSeason)

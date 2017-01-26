@@ -16,6 +16,9 @@
     <string name="app_ads_new_matches_full" translatable="false">ca-app-pub-7881623561544201/1315641179</string>
     <string name="app_ads_news_list" translatable="false">ca-app-pub-7881623561544201/8166949970</string>
     <string name="app_ads_news_list_size" translatable="false">280x80</string>
+    <string name="app_ads_season_list" translatable="false">ca-app-pub-7881623561544201/5214666772</string>
+    <string name="app_ads_patch_full" translatable="false">ca-app-pub-7881623561544201/6691399970</string>
+    <string name="app_ads_season_list_size" translatable="false">280x80</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
@@ -39,7 +42,8 @@
     <string name="menu_matches">Matches</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_articles">TESL Articles</string>
-    <string name="menu_season">Season</string>
+    <string name="menu_seasons">TESL Seasons</string>
+    <string name="menu_season">Seasons</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
@@ -120,8 +124,6 @@
     <string name="title_tab_articles_world">TES Legends World</string>
 
     <string name="cards_sets_all">All</string>
-    <string name="cards_sets_core" translatable="false">Core</string>
-    <string name="cards_sets_madhouse" translatable="false">Madhouse</string>
 
     <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>
@@ -236,5 +238,20 @@
     <string name="article_world_attributes_title">Attributes</string>
     <string name="article_world_attributes_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83115_2_1.png</string>
     <string name="article_world_attributes_link" translatable="false">https://legends.bethesda.net/world/attributes</string>
+
+    <string name="season_reward">Reward</string>
+    <string name="season_no_matches">No Matches Info</string>
+    <string name="season_matches_label">Ranked Matches</string>
+    <string name="season_opponent_label">Opponent</string>
+    <string name="season_matches_best_rank">Best\nRank</string>
+    <string name="season_matches_wins">Total Wins:</string>
+    <string name="season_matches_losses">Total Losses:</string>
+    <string name="season_matches_total">Total Matches:</string>
+    <string name="season_matches_class_most_seen">Most viewed:</string>
+    <string name="season_matches_class_most_defeated">Most defeated:</string>
+    <string name="season_matches_class_less_defeated">Less defeated:</string>
+
+    <string name="patch_transition_name" translatable="false">patch_name_transition</string>
+    <string name="patch_transition_container" translatable="false">patch_container_transition</string>
 
 </resources>

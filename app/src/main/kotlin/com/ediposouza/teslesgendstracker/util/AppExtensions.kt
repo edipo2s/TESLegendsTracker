@@ -24,6 +24,8 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.jetbrains.anko.AlertDialogBuilder
+import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -148,3 +150,5 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
     }
 
 }
+
+fun LocalDate.toYearMonth(): YearMonth = YearMonth.of(year, month)

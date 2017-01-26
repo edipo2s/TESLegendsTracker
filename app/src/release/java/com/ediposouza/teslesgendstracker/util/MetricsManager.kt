@@ -7,6 +7,7 @@ import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.BuildConfig
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.Patch
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
@@ -104,9 +105,10 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_IMPORT_COLLECTION_FINISH ->
                     putInt(action.PARAM_CARDS_IMPORTED, action.cardsImported)
-                is MetricAction.ACTION_ARTICLES_VIEW_NEWS,
+                is MetricAction.ACTION_ARTICLES_VIEW_NEWS ->
+                    putString(action.PARAM_ARTICLE, action.article.uuidDate)
                 is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
-                    putInt(action.PARAM_ARTICLE, action.article.uuidDate)
+                    putString(action.PARAM_ARTICLE, action.article.uuidDate)
             }
         }
         answers?.logCustom(CustomEvent(action.name))
@@ -190,7 +192,7 @@ object MetricsManager : MetricsConstants() {
 
     fun trackDeckView(deck: Deck) {
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_CARD)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_DECK)
             putString(FirebaseAnalytics.Param.ITEM_ID, deck.uuid)
             putString(FirebaseAnalytics.Param.ITEM_NAME, deck.name)
             putString(FirebaseAnalytics.Param.ITEM_CATEGORY, deck.cls.name)
@@ -204,6 +206,21 @@ object MetricsManager : MetricsConstants() {
                 PARAM_VIEW_DECK_ID to deck.uuid,
                 PARAM_VIEW_DECK_NAME to deck.name,
                 PARAM_VIEW_DECK_CLASS to deck.cls.name))
+    }
+
+    fun trackPatchView(patch: Patch) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_PATCH)
+            putString(FirebaseAnalytics.Param.ITEM_ID, patch.uuidDate)
+            putString(FirebaseAnalytics.Param.ITEM_NAME, patch.desc)
+        }
+        answers?.logContentView(ContentViewEvent()
+                .putContentId(patch.uuidDate)
+                .putContentName(patch.desc))
+        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        mixpanelAnalytics?.trackMap(EVENT_VIEW_DECK, mapOf(
+                PARAM_VIEW_DECK_ID to patch.uuidDate,
+                PARAM_VIEW_DECK_NAME to patch.desc))
     }
 
 }

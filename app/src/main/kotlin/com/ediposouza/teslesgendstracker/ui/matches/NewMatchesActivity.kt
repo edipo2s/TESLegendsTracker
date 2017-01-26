@@ -184,12 +184,13 @@ class NewMatchesActivity : BaseActivity() {
             return
         }
         val legendRank = new_matches_legend.isChecked
-        val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_match_first.isChecked,
+        val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_matches_first.isChecked,
                 MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
                 MatchDeck(optDeckName, optDeckCls, optDeckType),
                 mode, currentSeason, currentRank.toInt(), legendRank, win)
         privateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
+            new_matches_first.isChecked = false
             new_matches_opt_name.setText("")
             new_matches_opt_class_spinner.setSelection(0)
             new_matches_opt_type_spinner.setSelection(0)

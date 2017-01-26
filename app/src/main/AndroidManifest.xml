@@ -51,6 +51,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeAccentEqualsPrimaryDark"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.seasons.PatchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeTransparent" />
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"

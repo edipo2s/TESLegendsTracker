@@ -195,8 +195,7 @@ class CardsCollectionFragment : CardsAllFragment() {
     }
 
     override fun showCardExpanded(card: Card, view: View) {
-        val favorite = userFavorites.contains(card.shortName)
-        startActivityForResult(CardActivity.newIntent(context, card, favorite), EXPAND_CODE,
+        startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 

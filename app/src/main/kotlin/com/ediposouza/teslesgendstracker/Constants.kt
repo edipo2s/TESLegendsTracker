@@ -5,10 +5,12 @@ package com.ediposouza.teslesgendstracker
  */
 val TIME_PATTERN = "HH:mm"
 val SEASON_UUID_PATTERN = "yyyy_MM"
+val PATCH_UUID_PATTERN = "yyyy_MM_dd"
 val NEWS_UUID_PATTERN = "yyyy_MM_dd"
 val NEWS_DATE_PATTERN = "MMMM d, yyyy"
 
 val DEFAULT_DELIMITER = ";"
+val TEXT_UNKNOWN = "unknown"
 val DECK_NAME_MIN_SIZE = 5
 
 val PREF_USER_DONATE = "ud"

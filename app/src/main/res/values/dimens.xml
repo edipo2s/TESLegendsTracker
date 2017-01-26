@@ -40,6 +40,7 @@
     <dimen name="statistics_bottom_sheet_margin">@dimen/medium_margin</dimen>
 
     <!-- Card View -->
+    <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_full_margin">24dp</dimen>
     <dimen name="card_card_margin_top">@dimen/status_bar_height</dimen>
     <!-- transparent navigation_bar_height + 36dp-->
