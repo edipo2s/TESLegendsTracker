@@ -2,11 +2,9 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Parcel
 import android.os.Parcelable
 import org.threeten.bp.LocalDate
-import timber.log.Timber
 import java.util.*
 
 /**
@@ -55,36 +53,16 @@ class PatchChange(
 
     override fun describeContents(): Int = 0
 
-    fun imageBitmap(context: Context): Bitmap {
-        val imagePath = "${Card.CARD_PATH}/${set.capitalize()}/${attr.capitalize()}/$shortName.png"
-        Timber.d(imagePath)
-        try {
-            return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-        } catch (e: Exception) {
-            return Card.getDefaultCardImage(context)
-        }
-    }
-
     fun newImageBitmap(context: Context, nextPatchUuid: String): Bitmap {
         val cardName = shortName + "_" + nextPatchUuid
-        val imagePath = "${Card.CARD_PATH}/${set.capitalize()}/${attr.capitalize()}/$cardName.png"
-        Timber.d(imagePath)
-        try {
-            return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-        } catch (e: Exception) {
-            return imageBitmap(context)
+        return Card.getCardImageBitmap(context, set.capitalize(), attr.capitalize(), cardName) {
+            Card.getCardImageBitmap(context, set.capitalize(), attr.capitalize(), shortName)
         }
     }
 
     fun oldImageBitmap(context: Context, patchUuid: String): Bitmap {
         val cardName = shortName + "_" + patchUuid
-        val imagePath = "${Card.CARD_PATH}/${set.capitalize()}/${attr.capitalize()}/$cardName.png"
-        Timber.d(imagePath)
-        try {
-            return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-        } catch (e: Exception) {
-            return Card.getDefaultCardImage(context)
-        }
+        return Card.getCardImageBitmap(context, set.capitalize(), attr.capitalize(), cardName)
     }
 
 }

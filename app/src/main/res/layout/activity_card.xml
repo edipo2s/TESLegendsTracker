@@ -28,15 +28,20 @@
                 app:adSize="BANNER"
                 app:adUnitId="@string/app_ads_card_full" />
 
-            <ImageView
-                android:id="@+id/card_all_image"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/card_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/card_full_margin"
-                android:layout_marginEnd="@dimen/card_full_margin"
-                android:layout_marginStart="@dimen/card_full_margin"
-                android:transitionName="@string/card_transition_name"
-                tools:src="@drawable/card" />
+                android:fadeScrollbars="false"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin"
+                android:scrollbarSize="@dimen/small_margin"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                android:scrollbars="horizontal"
+                android:visibility="visible"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/itemlist_card_full"
+                tools:visibility="gone" />
 
         </LinearLayout>
 

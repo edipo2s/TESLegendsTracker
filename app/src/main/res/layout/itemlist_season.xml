@@ -86,6 +86,23 @@
                 tools:text="1" />
 
             <TextView
+                android:id="@+id/season_no_matches_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/huge_margin"
+                android:paddingBottom="@dimen/huge_margin"
+                android:paddingStart="@dimen/text_shadow_padding"
+                android:paddingTop="@dimen/text_shadow_padding"
+                android:rotation="-45"
+                android:text="@string/season_no_matches"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/font_huge"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
                 android:id="@+id/season_no_matches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

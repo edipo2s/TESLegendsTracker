@@ -97,6 +97,8 @@
     <string name="card_collection_qtd_label">Coleção Qtd:</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_patch_current">Versão Atual</string>
+    <string name="card_patch_pre">Versão pre-%s</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>

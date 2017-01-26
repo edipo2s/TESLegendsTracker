@@ -8,6 +8,7 @@ import android.os.Parcelable
 import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -243,6 +244,13 @@ data class CardStatistic(
 
 )
 
+data class CardBasicInfo(
+
+        val shortName: String,
+        val set: String,
+        val attr: String
+)
+
 data class Card(
 
         val name: String,
@@ -271,11 +279,28 @@ data class Card(
             override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
         }
 
-        val CARD_PATH = "Cards"
+        private val CARD_PATH = "Cards"
         private val CARD_BACK = "card_back.png"
 
         fun getDefaultCardImage(context: Context): Bitmap {
             return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+        }
+
+        fun getCardImageBitmap(context: Context, cardSet: String, cardAttr: String,
+                               cardShortName: String, onError: (() -> Bitmap)? = null): Bitmap {
+            val setName = cardSet.toLowerCase().capitalize()
+            val attrName = cardAttr.toLowerCase().capitalize()
+            val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.png"
+            Timber.d(imagePath)
+            try {
+                return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+            } catch (e: Exception) {
+                if (onError != null) {
+                    return onError.invoke()
+                } else {
+                    return getDefaultCardImage(context)
+                }
+            }
         }
 
     }
@@ -294,12 +319,7 @@ data class Card(
     fun imageBitmap(context: Context): Bitmap {
         val cardAttr = attr.name.toLowerCase().capitalize()
         val cardSet = set.name.toLowerCase().capitalize()
-        val imagePath = "$CARD_PATH/$cardSet/$cardAttr/$shortName.png"
-        try {
-            return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-        } catch (e: Exception) {
-            return getDefaultCardImage(context)
-        }
+        return Card.getCardImageBitmap(context, cardSet, cardAttr, shortName)
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
