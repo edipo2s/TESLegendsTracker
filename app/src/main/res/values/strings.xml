@@ -94,8 +94,8 @@
     <string name="dialog_import_result_updated">UPDATED</string>
     <string name="dialog_import_result_you_have">YOU HAVE</string>
     <string name="dialog_import_result_has_more">HAS MORE</string>
-    <string name="dialog_import_legends_deck_link" translatable="false">http://www.legends-decks.com/collection-manager</string>
-    <string name="dialog_import_legends_deck_login_done_link" translatable="false">http://www.legends-decks.com/#</string>
+    <string name="dialog_import_legends_deck_link" translatable="false">https://www.legends-decks.com/collection-manager</string>
+    <string name="dialog_import_legends_deck_login_done_link" translatable="false">https://www.legends-decks.com/#</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>

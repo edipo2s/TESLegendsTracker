@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
+    app:cardCornerRadius="@dimen/small_margin"
+    app:cardElevation="@dimen/card_elevation"
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <com.andexert.library.RippleView

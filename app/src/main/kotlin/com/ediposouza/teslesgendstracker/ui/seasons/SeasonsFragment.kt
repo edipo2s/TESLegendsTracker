@@ -16,6 +16,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
@@ -81,6 +82,7 @@ class SeasonsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        eventBus.post(CmdUpdateTitle(R.string.menu_seasons))
         publicInteractor.getPatches {
             patches.addAll(it.filter { it.type != PatchType.REWARD })
             configureRecycleView()

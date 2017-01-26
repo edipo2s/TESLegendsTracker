@@ -7,8 +7,9 @@
     android:layout_height="match_parent"
     android:layout_marginEnd="@dimen/statistics_bottom_sheet_margin"
     android:layout_marginStart="@dimen/statistics_bottom_sheet_margin"
-    android:elevation="@dimen/statistics_elevation"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/default_margin"
+    app:cardElevation="@dimen/statistics_elevation">
 
     <ScrollView
         android:id="@+id/collection_statistics_container"

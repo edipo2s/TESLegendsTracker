@@ -8,6 +8,8 @@
     android:layout_marginEnd="@dimen/default_margin"
     android:layout_marginStart="@dimen/default_margin"
     android:layout_marginTop="@dimen/default_margin"
+    app:cardCornerRadius="@dimen/small_margin"
+    app:cardElevation="@dimen/card_elevation"
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <com.andexert.library.RippleView
@@ -46,8 +48,8 @@
                 android:layout_height="@dimen/card_height"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/season_month"
-                android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginStart="@dimen/small_margin"
                 app:layout_widthPercent="40%"
                 tools:src="@drawable/card" />
 
@@ -95,7 +97,7 @@
                 android:textSize="@dimen/font_huge"
                 android:textStyle="bold"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/season_matches_layout"
