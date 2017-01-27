@@ -30,6 +30,21 @@
                 tools:src="@drawable/article_cover" />
 
             <TextView
+                android:id="@+id/article_title_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingStart="@dimen/text_shadow_padding"
+                android:paddingTop="@dimen/text_shadow_padding"
+                android:gravity="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/font_huge"
+                android:textStyle="bold"
+                tools:text="Chaos Arena Returns for Monthly Madness" />
+
+            <TextView
                 android:id="@+id/article_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
