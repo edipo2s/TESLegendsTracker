@@ -7,12 +7,6 @@
         <item name="device_id_4">819B0D7E49567D0139704731892AC480</item>
     </array>
 
-    <array name="cards_sets">
-        <item name="cards_sets_all">@string/cards_sets_all</item>
-        <item name="cards_sets_core">@string/cards_sets_core</item>
-        <item name="cards_sets_madhouse">@string/cards_sets_madhouse</item>
-    </array>
-
     <array name="cards_tabs">
         <item name="tab_cards_all_all">@string/tab_cards_all</item>
         <item name="tab_cards_collection">@string/tab_cards_collection</item>
@@ -28,6 +22,11 @@
     <array name="matches_tabs">
         <item name="tab_matches_statistics">@string/tab_matches_statistics</item>
         <item name="tab_matches_history">@string/tab_matches_history</item>
+    </array>
+
+    <array name="articles_tabs">
+        <item name="tab_articles_news">@string/tab_articles_news</item>
+        <item name="tab_articles_world">@string/tab_articles_world</item>
     </array>
 
 </resources>

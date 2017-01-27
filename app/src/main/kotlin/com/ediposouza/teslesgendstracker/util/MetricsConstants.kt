@@ -19,9 +19,19 @@ abstract class MetricsConstants {
         const val PARAM_VIEW_CARD_NAME = "Name"
         const val PARAM_VIEW_CARD_ATTR = "Attr"
 
+        const val EVENT_VIEW_DECK = "ViewDeck"
+        const val PARAM_VIEW_DECK_ID = "ID"
+        const val PARAM_VIEW_DECK_NAME = "Name"
+        const val PARAM_VIEW_DECK_CLASS = "Class"
+
+        const val EVENT_VIEW_PATCH = "ViewPatch"
+        const val PARAM_VIEW_PATCH_ID = "ID"
+
         const val EVENT_SEARCH = "Search"
 
         const val PARAM_CONTENT_VIEW_TYPE_CARD = "Card"
+        const val PARAM_CONTENT_VIEW_TYPE_DECK = "Deck"
+        const val PARAM_CONTENT_VIEW_TYPE_PATCH = "Patch"
 
         const val PARAM_MIXPANEL_USER_ID = "User ID"
         const val PARAM_MIXPANEL_USER_NAME = "\$name"
@@ -37,6 +47,7 @@ sealed class MetricAction(val name: String) {
         const val CLEAR = "Clear"
     }
 
+    class ACTION_APP_LAUNCH : MetricAction("AppLaunch")
     class ACTION_CARD_DETAILS_EXPAND : MetricAction("CardDetailsExpand")
     class ACTION_CARD_DETAILS_COLLAPSE : MetricAction("CardDetailsCollapse")
     class ACTION_CARD_DETAILS_CLOSE_TAP : MetricAction("CardDetailsCloseTap")
@@ -45,7 +56,8 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_STATISTICS_EXPAND : MetricAction("CollectionStatisticsExpand")
     class ACTION_COLLECTION_STATISTICS_COLLAPSE : MetricAction("CollectionStatisticsCollapse")
 
-    class ACTION_COLLECTION_CARD_QTD_CHANGE(val qtd: Int) : MetricAction("CollectionCardQtdChange") {
+    class ACTION_COLLECTION_CARD_QTD_CHANGE(val card: Card, val qtd: Int) : MetricAction("CollectionCardQtdChange") {
+        val PARAM_CARD = "Card"
         val PARAM_QTD = "Qtd"
     }
 
@@ -123,17 +135,30 @@ sealed class MetricAction(val name: String) {
         val PARAM_LEGEND = "Legend"
     }
 
+    class ACTION_START_DONATE : MetricAction("StartDonate")
     class ACTION_DONATE_BASIC : MetricAction("DonateBasic")
     class ACTION_DONATE_PRO : MetricAction("DonatePro")
     class ACTION_DONATE_NOT_NOW : MetricAction("DonateNotNow")
     class ACTION_NEW_VERSION_DETECTED : MetricAction("NewVersionDetected")
     class ACTION_NEW_VERSION_UPDATE_NOW : MetricAction("NewVersionUpdateNow")
     class ACTION_NEW_VERSION_UPDATE_LATER : MetricAction("NewVersionUpdateLater")
+    class ACTION_SHARE : MetricAction("Share")
+    class ACTION_ABOUT_DEVELOPER : MetricAction("AboutDeveloper")
     class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
-    class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("AboutImportCollectionCancelled")
-    class ACTION_IMPORT_COLLECTION_FINISH : MetricAction("AboutImportCollectionFinish")
+    class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("ImportCollectionCancelled")
+    class ACTION_IMPORT_COLLECTION_FINISH(val cardsImported: Int) : MetricAction("ImportCollectionFinish") {
+        val PARAM_CARDS_IMPORTED = "CardsImported"
+    }
+
+    class ACTION_ARTICLES_VIEW_NEWS(val article: Article) : MetricAction("ViewArticleNews") {
+        val PARAM_ARTICLE = "ArticleID"
+    }
+
+    class ACTION_ARTICLES_VIEW_WORLD(val article: Article) : MetricAction("ViewArticleWorld") {
+        val PARAM_ARTICLE = "ArticleID"
+    }
 
 }
 
@@ -160,6 +185,10 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_MATCHES_STATISTICS_CLASS : MetricScreen("MatchesStatisticsClass")
     class SCREEN_MATCHES_HISTORY : MetricScreen("MatchesHistory")
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
+    class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
+    class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
+    class SCREEN_SEASONS : MetricScreen("Seasons")
+    class SCREEN_PATCH_DETAILS : MetricScreen("PatchDetails")
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")
     class SCREEN_IMPORT_COLLECTION : MetricScreen("ImportCollection")

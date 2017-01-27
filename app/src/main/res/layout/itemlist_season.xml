@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/default_margin"
+    android:layout_marginEnd="@dimen/default_margin"
+    android:layout_marginStart="@dimen/default_margin"
+    android:layout_marginTop="@dimen/default_margin"
+    app:cardCornerRadius="@dimen/small_margin"
+    app:cardElevation="@dimen/card_elevation"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingStart="@dimen/default_margin"
+            android:paddingTop="@dimen/default_margin">
+
+            <TextView
+                android:id="@+id/season_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                tools:text="1st" />
+
+            <TextView
+                android:id="@+id/season_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/font_large"
+                android:textStyle="bold"
+                tools:text="January" />
+
+            <ImageView
+                android:id="@+id/season_card_reward"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/card_height"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/season_month"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginStart="@dimen/small_margin"
+                app:layout_widthPercent="40%"
+                tools:src="@drawable/card" />
+
+            <TextView
+                android:id="@+id/season_matches_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_month"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/season_matches_label"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/season_best_rank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_matches_label"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_toStartOf="@id/season_card_reward"
+                android:gravity="center"
+                android:text="@string/season_matches_best_rank" />
+
+            <TextView
+                android:id="@+id/season_best_rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_best_rank_label"
+                android:layout_alignStart="@id/season_best_rank_label"
+                android:layout_below="@id/season_best_rank_label"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/season_no_matches_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/huge_margin"
+                android:paddingBottom="@dimen/huge_margin"
+                android:paddingStart="@dimen/text_shadow_padding"
+                android:paddingTop="@dimen/text_shadow_padding"
+                android:rotation="-45"
+                android:text="@string/season_no_matches"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/font_huge"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/season_no_matches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/huge_margin"
+                android:paddingBottom="@dimen/huge_margin"
+                android:rotation="-45"
+                android:text="@string/season_no_matches"
+                android:textSize="@dimen/font_huge"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/season_matches_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/season_matches_label"
+                android:layout_below="@id/season_matches_label"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/season_matches_wins_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/season_matches_wins" />
+
+                <TextView
+                    android:id="@+id/season_matches_losses_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/season_matches_losses" />
+
+                <TextView
+                    android:id="@+id/season_matches_total_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/season_matches_total" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/season_matches_wins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/season_matches_layout"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_toEndOf="@id/season_matches_layout"
+                android:textColor="@color/colorAccent"
+                tools:text="16" />
+
+            <TextView
+                android:id="@+id/season_matches_losses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_matches_wins"
+                android:layout_below="@id/season_matches_wins"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textColor="@color/colorAccent"
+                tools:text="7" />
+
+            <TextView
+                android:id="@+id/season_matches_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_matches_wins"
+                android:layout_below="@id/season_matches_losses"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textColor="@color/colorAccent"
+                tools:text="23" />
+
+            <TextView
+                android:id="@+id/season_opponent_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_matches_layout"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/season_opponent_label"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/season_opponent_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/season_matches_label"
+                android:layout_below="@id/season_opponent_label"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/season_matches_most_seen_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/season_matches_class_most_seen" />
+
+                <TextView
+                    android:id="@+id/season_matches_most_defeated_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:paddingTop="@dimen/nano_margin"
+                    android:text="@string/season_matches_class_most_defeated" />
+
+                <TextView
+                    android:id="@+id/season_matches_less_defeated_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:paddingTop="@dimen/nano_margin"
+                    android:text="@string/season_matches_class_less_defeated" />
+
+            </LinearLayout>
+
+            <com.ediposouza.teslesgendstracker.ui.widget.ClassView
+                android:id="@+id/season_matches_most_seen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_opponent_label"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_toEndOf="@id/season_opponent_layout" />
+
+            <com.ediposouza.teslesgendstracker.ui.widget.ClassView
+                android:id="@+id/season_matches_most_defeated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_matches_most_seen"
+                android:layout_below="@id/season_matches_most_seen"
+                android:layout_marginTop="@dimen/small_margin" />
+
+            <com.ediposouza.teslesgendstracker.ui.widget.ClassView
+                android:id="@+id/season_matches_less_defeated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/season_matches_most_defeated"
+                android:layout_below="@id/season_matches_most_defeated"
+                android:layout_marginTop="@dimen/small_margin" />
+
+            <TextView
+                android:id="@+id/season_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                tools:text="2017" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/season_patches_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/season_card_reward"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fadeScrollbars="false"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin"
+                android:scrollbarSize="@dimen/small_margin"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                android:scrollbars="horizontal"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/itemlist_season_patch" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+    </com.andexert.library.RippleView>
+
+</android.support.v7.widget.CardView>

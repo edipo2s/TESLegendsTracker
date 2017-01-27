@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.DECK_NAME_MIN_SIZE
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -186,7 +187,7 @@ class NewDeckActivity : BaseFilterActivity() {
         val deckPatchSelected = deckPatches.find { it.desc == deckPatchDesc } ?: deckPatches.last()
         val deckCards = new_deck_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deckPrivate = !view.new_deck_dialog_public.isChecked
-        if (deckName.length < 5) {
+        if (deckName.length < DECK_NAME_MIN_SIZE) {
             eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
             return
         }

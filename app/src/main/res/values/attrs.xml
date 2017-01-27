@@ -11,7 +11,12 @@
             <flag name="dual" value="6" />
         </attr>
     </declare-styleable>
+
     <declare-styleable name="FilterAttr">
         <attr name="deckMode" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ImageViewTopCrop">
+        <attr name="imageTopMargin" format="float" />
     </declare-styleable>
 </resources>

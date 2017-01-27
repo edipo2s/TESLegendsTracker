@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.LoggerManager
+import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -42,6 +43,7 @@ class App : MultiDexApplication() {
     private fun initializeDependencies() {
         Timber.plant(LoggerManager())
         MetricsManager.initialize(this)
+        MetricsManager.trackAction(MetricAction.ACTION_APP_LAUNCH())
         AndroidThreeTen.init(this)
         FirebaseDatabase.getInstance().apply {
             setPersistenceEnabled(true)
@@ -50,6 +52,7 @@ class App : MultiDexApplication() {
                 reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_SEASONS).keepSynced(sync)
+                reference.child(BaseInteractor.NODE_NEWS).keepSynced(sync)
             }
         }
     }

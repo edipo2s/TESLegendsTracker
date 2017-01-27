@@ -25,6 +25,7 @@
         android:layout_width="@dimen/deck_list_slot_height"
         android:layout_height="@dimen/deck_list_slot_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
+        android:layout_marginStart="@dimen/small_margin"
         android:src="@drawable/ic_magika_0" />
 
     <ImageView

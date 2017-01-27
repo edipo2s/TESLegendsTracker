@@ -29,7 +29,6 @@ import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
 import timber.log.Timber
 
-
 /**
  * Created by EdipoSouza on 10/30/16.
  */
@@ -47,7 +46,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     val pageChange = object : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
             updateActivityTitle(position)
-            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList()
+            val selectedAttr = cards_filter_attr.getSelectedAttrs().first()
+            (cards_view_pager.adapter as CardsPageAdapter).getItem(position).updateCardsList(selectedAttr)
             if (position == 1) {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 cards_collection_statistics.updateStatistics()
@@ -182,9 +182,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             try {
                 val pkg = context.packageName
                 val newer = Jsoup.connect(getString(R.string.playstore_url_format, pkg))
-                        .timeout(30000)
-                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-                        .referrer("http://www.google.com")
+                        .timeout(resources.getInteger(R.integer.jsoup_timeout))
+                        .userAgent(getString(R.string.jsoup_user_agent))
+                        .referrer(getString(R.string.jsoup_referrer))
                         .get()
                         .select("div[itemprop=softwareVersion]")
                         .first()

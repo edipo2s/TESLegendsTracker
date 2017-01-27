@@ -15,14 +15,6 @@
                 android:icon="@drawable/ic_checked"
                 android:title="@string/cards_sets_all" />
 
-            <item
-                android:id="@+id/menu_sets_core"
-                android:title="@string/cards_sets_core" />
-
-            <item
-                android:id="@+id/menu_sets_madhouse"
-                android:title="@string/cards_sets_madhouse" />
-
         </menu>
 
     </item>

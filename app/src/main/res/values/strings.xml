@@ -14,6 +14,11 @@
     <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
     <string name="app_ads_match_statistics_class_full" translatable="false">ca-app-pub-7881623561544201/8978508773</string>
     <string name="app_ads_new_matches_full" translatable="false">ca-app-pub-7881623561544201/1315641179</string>
+    <string name="app_ads_news_list" translatable="false">ca-app-pub-7881623561544201/8166949970</string>
+    <string name="app_ads_news_list_size" translatable="false">280x80</string>
+    <string name="app_ads_season_list" translatable="false">ca-app-pub-7881623561544201/5214666772</string>
+    <string name="app_ads_patch_full" translatable="false">ca-app-pub-7881623561544201/6691399970</string>
+    <string name="app_ads_season_list_size" translatable="false">280x80</string>
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
@@ -27,15 +32,22 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
+
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
+    <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
-    <string name="menu_season">Season</string>
     <string name="menu_arena">Arena</string>
-    <string name="menu_donate">Free Version</string>
+    <string name="menu_articles">TESL Articles</string>
+    <string name="menu_seasons">TESL Seasons</string>
+    <string name="menu_season">Seasons</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
+    <string name="menu_share">Invite a Friend</string>
     <string name="menu_about">About</string>
     <string name="menu_search">Search</string>
     <string name="menu_sets">Sets</string>
@@ -54,12 +66,16 @@
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
 
+    <string name="share_with">Share with…</string>
+    <string name="share_text">Manage your TES Legends collection, search and create public or private decks to track your matches</string>
+
     <string name="about_title">About TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker is a assistant app for card game The Elder Scroll Legends developed by Dire Wolf Digital and published by Bethesda Softworks.</string>
     <string name="about_text_bottom">Dire Wolf Digital has all rights reserved of all cards images and other game resource in this app.</string>
     <string name="about_info_version">App Version:</string>
     <string name="about_info_developer_label">Developer:</string>
     <string name="about_info_developer" translatable="false">Édipo Souza (edipo2s)</string>
+    <string name="about_info_developer_link" translatable="false">https://twitter.com/EdipoSilvaSouza</string>
     <string name="about_info_thanks_label">Special Thanks:</string>
     <string name="about_info_thanks_direwolf" translatable="false">Dire Wolf - </string>
     <string name="about_info_thanks_direwolf_text">TES Legends game</string>
@@ -78,8 +94,8 @@
     <string name="dialog_import_result_updated">UPDATED</string>
     <string name="dialog_import_result_you_have">YOU HAVE</string>
     <string name="dialog_import_result_has_more">HAS MORE</string>
-    <string name="dialog_import_legends_deck_link" translatable="false">http://www.legends-decks.com/collection-manager</string>
-    <string name="dialog_import_legends_deck_login_done_link" translatable="false">http://www.legends-decks.com/#</string>
+    <string name="dialog_import_legends_deck_link" translatable="false">https://www.legends-decks.com/collection-manager</string>
+    <string name="dialog_import_legends_deck_login_done_link" translatable="false">https://www.legends-decks.com/#</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
@@ -92,6 +108,8 @@
     <string name="tab_mode_ranked">Ranked</string>
     <string name="tab_mode_casual">Casual</string>
     <string name="tab_mode_arena">Arena</string>
+    <string name="tab_articles_news">News</string>
+    <string name="tab_articles_world">World</string>
 
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
@@ -102,13 +120,18 @@
     <string name="title_tab_matches_statistics">Matches Statistics</string>
     <string name="title_tab_matches_history">Matches History</string>
 
-    <string name="cards_sets_all">All</string>
-    <string name="cards_sets_core" translatable="false">Core</string>
-    <string name="cards_sets_madhouse" translatable="false">Madhouse</string>
+    <string name="title_tab_articles_news">TES Legends News</string>
+    <string name="title_tab_articles_world">TES Legends World</string>
 
+    <string name="cards_sets_all">All</string>
+
+    <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>
+    <string name="card_collection_qtd_label">Collection Qtd:</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
+    <string name="card_patch_current">Current Version</string>
+    <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
 
     <string name="action_login">Do Login</string>
@@ -195,5 +218,43 @@
     <string name="new_match_rank_label">Rank</string>
     <string name="new_match_save_rank_error">Ranked matches need a Rank to be saved</string>
     <string name="new_match_saved">New Match Saved!</string>
+
+    <string name="article_base_link" translatable="false">https://legends.bethesda.net</string>
+    <string name="article_news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
+    <string name="article_news_title">News</string>
+    <string name="article_news_category_all">All</string>
+    <string name="article_news_category_announcements">Announcements</string>
+    <string name="article_news_category_battle">Battle Tactics</string>
+    <string name="article_news_category_forging">Forging Legends</string>
+    <string name="article_news_category_imperial">Imperial Library</string>
+    <string name="article_news_category_legendary">Legendary Beginnings</string>
+    <string name="article_news_category_arena">The Arena District</string>
+    <string name="article_world_title">World</string>
+    <string name="article_world_type" translatable="false">@string/tab_articles_world</string>
+    <string name="article_world_races_title">Races</string>
+    <string name="article_world_races_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83401_2_1.png</string>
+    <string name="article_world_races_link" translatable="false">https://legends.bethesda.net/world/races</string>
+    <string name="article_world_classes_title">Classes</string>
+    <string name="article_world_classes_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83857_2_1.jpg</string>
+    <string name="article_world_classes_link" translatable="false">https://legends.bethesda.net/world/classes</string>
+    <string name="article_world_attributes_title">Attributes</string>
+    <string name="article_world_attributes_cover" translatable="false">https://content.bethsoft.com/bsw_cms_asset/83115_2_1.png</string>
+    <string name="article_world_attributes_link" translatable="false">https://legends.bethesda.net/world/attributes</string>
+
+    <string name="season_reward">Reward</string>
+    <string name="season_no_matches">No Matches Info</string>
+    <string name="season_matches_label">Ranked Matches</string>
+    <string name="season_opponent_label">Opponent</string>
+    <string name="season_matches_best_rank">Best\nRank</string>
+    <string name="season_matches_wins">Total Wins:</string>
+    <string name="season_matches_losses">Total Losses:</string>
+    <string name="season_matches_total">Total Matches:</string>
+    <string name="season_matches_class_most_seen">Most viewed:</string>
+    <string name="season_matches_class_most_defeated">Most defeated:</string>
+    <string name="season_matches_class_less_defeated">Less defeated:</string>
+
+    <string name="patch_change">%s\nChanged</string>
+    <string name="patch_transition_name" translatable="false">patch_name_transition</string>
+    <string name="patch_transition_container" translatable="false">patch_container_transition</string>
 
 </resources>

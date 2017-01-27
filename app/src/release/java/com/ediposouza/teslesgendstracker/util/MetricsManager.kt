@@ -6,12 +6,17 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.BuildConfig
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.Patch
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.fabric.sdk.android.Fabric
+import org.json.JSONObject
 import timber.log.Timber
+import java.math.BigDecimal
+import java.util.*
 
 /**
  * Created by ediposouza on 08/12/16.
@@ -26,8 +31,7 @@ object MetricsManager : MetricsConstants() {
         if (BuildConfig.PREPARE_TO_RELEASE) {
             Fabric.with(context, Answers(), Crashlytics())
         } else {
-            Fabric.with(context, Answers())
-            Timber.w("Crashlytics not initialized")
+            Timber.w("Fabric not initialized")
         }
         answers = Answers.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)
@@ -41,8 +45,10 @@ object MetricsManager : MetricsConstants() {
     fun trackAction(action: MetricAction) {
         val bundle = Bundle().apply {
             when (action) {
-                is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE ->
+                is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE -> {
+                    putString(action.PARAM_CARD, action.card.shortName)
                     putInt(action.PARAM_QTD, action.qtd)
+                }
                 is MetricAction.ACTION_CARD_FILTER_SET ->
                     putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_ATTR ->
@@ -79,6 +85,30 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_SEASON, action.season)
                     putBoolean(action.PARAM_LEGEND, action.legendRank)
                 }
+                is MetricAction.ACTION_DONATE_BASIC,
+                is MetricAction.ACTION_DONATE_PRO -> {
+                    val value = if (action is MetricAction.ACTION_DONATE_BASIC) 6L else 13L
+                    val valueCurrency = "BRL"
+                    answers?.logPurchase(PurchaseEvent()
+                            .putItemName(action.name)
+                            .putItemPrice(BigDecimal.valueOf(value))
+                            .putCurrency(Currency.getInstance(valueCurrency))
+                            .putSuccess(true))
+                    firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, Bundle().apply {
+                        putString(FirebaseAnalytics.Param.ITEM_NAME, action.name)
+                        putString(FirebaseAnalytics.Param.CURRENCY, valueCurrency)
+                        putDouble(FirebaseAnalytics.Param.VALUE, value.toDouble())
+                    })
+                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(HashMap<String, Any>().apply {
+                        put(FirebaseAnalytics.Param.ITEM_NAME, action.name)
+                    }))
+                }
+                is MetricAction.ACTION_IMPORT_COLLECTION_FINISH ->
+                    putInt(action.PARAM_CARDS_IMPORTED, action.cardsImported)
+                is MetricAction.ACTION_ARTICLES_VIEW_NEWS ->
+                    putString(action.PARAM_ARTICLE, action.article.uuidDate)
+                is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
+                    putString(action.PARAM_ARTICLE, action.article.uuidDate)
             }
         }
         answers?.logCustom(CustomEvent(action.name))
@@ -117,7 +147,7 @@ object MetricsManager : MetricsConstants() {
 
     private fun identifyUser(user: FirebaseUser?) {
         val userId = user?.uid
-        if (Fabric.isInitialized() && BuildConfig.PREPARE_TO_RELEASE) {
+        if (Crashlytics.getInstance() != null && BuildConfig.PREPARE_TO_RELEASE) {
             Crashlytics.setUserIdentifier(userId)
             Crashlytics.setUserName(user?.displayName)
             Crashlytics.setUserEmail(user?.email)
@@ -158,6 +188,39 @@ object MetricsManager : MetricsConstants() {
                 PARAM_VIEW_CARD_ID to card.shortName,
                 PARAM_VIEW_CARD_NAME to card.name,
                 PARAM_VIEW_CARD_ATTR to card.attr.name))
+    }
+
+    fun trackDeckView(deck: Deck) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_DECK)
+            putString(FirebaseAnalytics.Param.ITEM_ID, deck.uuid)
+            putString(FirebaseAnalytics.Param.ITEM_NAME, deck.name)
+            putString(FirebaseAnalytics.Param.ITEM_CATEGORY, deck.cls.name)
+        }
+        answers?.logContentView(ContentViewEvent()
+                .putContentId(deck.uuid)
+                .putContentName(deck.name)
+                .putContentType(deck.cls.name))
+        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        mixpanelAnalytics?.trackMap(EVENT_VIEW_DECK, mapOf(
+                PARAM_VIEW_DECK_ID to deck.uuid,
+                PARAM_VIEW_DECK_NAME to deck.name,
+                PARAM_VIEW_DECK_CLASS to deck.cls.name))
+    }
+
+    fun trackPatchView(patch: Patch) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, PARAM_CONTENT_VIEW_TYPE_PATCH)
+            putString(FirebaseAnalytics.Param.ITEM_ID, patch.uuidDate)
+            putString(FirebaseAnalytics.Param.ITEM_NAME, patch.desc)
+        }
+        answers?.logContentView(ContentViewEvent()
+                .putContentId(patch.uuidDate)
+                .putContentName(patch.desc))
+        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        mixpanelAnalytics?.trackMap(EVENT_VIEW_DECK, mapOf(
+                PARAM_VIEW_DECK_ID to patch.uuidDate,
+                PARAM_VIEW_DECK_NAME to patch.desc))
     }
 
 }
