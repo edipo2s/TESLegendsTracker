@@ -253,6 +253,7 @@
     <string name="season_matches_class_most_defeated">Most defeated:</string>
     <string name="season_matches_class_less_defeated">Less defeated:</string>
 
+    <string name="patch_change">%s\nChanged</string>
     <string name="patch_transition_name" translatable="false">patch_name_transition</string>
     <string name="patch_transition_container" translatable="false">patch_container_transition</string>
 

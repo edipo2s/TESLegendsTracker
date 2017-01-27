@@ -3,11 +3,13 @@
     "changes": {
       "murkwatersavage": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Cost"
       },
       "soulrestmarshal": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Text"
       }
     },
     "desc": "Soulrest Marshal Nerf",
@@ -21,7 +23,8 @@
     "changes": {
       "bonecolossus": {
         "set": "core",
-        "attr": "endurance"
+        "attr": "endurance",
+        "change": "Text"
       }
     },
     "desc": "Bone Colossus Nerf",
@@ -31,55 +34,68 @@
     "changes": {
       "blacksapprotector": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Rarity"
       },
       "voraciousspriggan": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Rarity"
       },
       "evermoresteward": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Rarity"
       },
       "farsightnereid": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Rarity"
       },
       "nibenbaycutthroat": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Rarity"
       },
       "shockingwamasu": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Text"
       },
       "shriekingharpy": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Rarity"
       },
       "fieryimp": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Rarity"
       },
       "fortresswatchman": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Rarity"
       },
       "intimidate": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Rarity"
       },
       "valenwoodhuntsman": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Rarity"
       },
       "valenwoodtrapper": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Rarity"
       },
       "mantikora": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Text"
       }
     },
     "desc": "Mantikora Nerf",
@@ -97,63 +113,78 @@
     "changes": {
       "housekinsman": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Health"
       },
       "moonlightwerebat": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Health"
       },
       "tazkadthepackmaster": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Cost"
       },
       "twilightwerebat": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Health"
       },
       "allenabenoch": {
         "set": "core",
-        "attr": "dual"
+        "attr": "dual",
+        "change": "Text"
       },
       "wrothgarartisan": {
         "set": "core",
-        "attr": "endurance"
+        "attr": "endurance",
+        "change": "Health"
       },
       "brilliantexperiment": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Cost"
       },
       "dunmernightblade": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Text"
       },
       "elusiveschemer": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Attack"
       },
       "nahkriindragonpriest": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Text"
       },
       "morkulgatekeeper": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Keyword"
       },
       "volendrung": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Text"
       },
       "apprenticespotion": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Cost"
       },
       "divinefervor": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Cost"
       },
       "healingpotion": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Cost"
       }
     },
     "desc": "Nahkriin Nerf",
@@ -167,7 +198,8 @@
     "changes": {
       "burnandpillage": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Cost/Text"
       }
     },
     "desc": "Madhouse Collection",
@@ -181,39 +213,48 @@
     "changes": {
       "dunesmuggler": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Text"
       },
       "dunestalker": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Text"
       },
       "snaketoothnecklace": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Text"
       },
       "soulrestmarshal": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Cost/Text"
       },
       "histgrove": {
         "set": "core",
-        "attr": "endurance"
+        "attr": "endurance",
+        "change": "Text"
       },
       "crystaltowercrafter": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Attack/Health"
       },
       "slaughterfish": {
         "set": "core",
-        "attr": "neutral"
+        "attr": "neutral",
+        "change": "Cost"
       },
       "slaughterfishspawning": {
         "set": "core",
-        "attr": "neutral"
+        "attr": "neutral",
+        "change": "Cost"
       },
       "pillagingtribune": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Text"
       }
     },
     "desc": "Hist Grove Nerf",
@@ -223,34 +264,45 @@
     "changes": {
       "ungolimthelistener": {
         "set": "core",
-        "attr": "agility"
+        "attr": "agility",
+        "change": "Attack"
       },
       "blackwormnecromancer": {
         "set": "core",
-        "attr": "endurance"
+        "attr": "endurance",
+        "change": "Cost"
       },
       "darkrift": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Cost"
       },
       "shriekingharpy": {
         "set": "core",
-        "attr": "intelligence"
+        "attr": "intelligence",
+        "change": "Health"
       },
       "gladiatorarena": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Cost"
       },
       "reiveblademaster": {
         "set": "core",
-        "attr": "strength"
+        "attr": "strength",
+        "change": "Attack"
       },
       "dagirahtmystic": {
         "set": "core",
-        "attr": "willpower"
+        "attr": "willpower",
+        "change": "Health"
       }
     },
     "desc": "Ungolim Nerf",
     "type": "balance"
+  },
+  "2017_02_01": {
+    "desc": "Stampede Sentinel",
+    "type": "reward"
   }
 }

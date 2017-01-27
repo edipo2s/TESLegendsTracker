@@ -134,6 +134,7 @@ abstract class FirebaseParsers {
 
             private const val KEY_PATCH_ATTR = "attr"
             private const val KEY_PATCH_SET = "set"
+            private const val KEY_PATCH_CHANGE = "change"
 
         }
 
@@ -147,7 +148,8 @@ abstract class FirebaseParsers {
             val patchCardChanges = changes.map {
                 val attr = it.value[KEY_PATCH_ATTR].toString()
                 val set = it.value[KEY_PATCH_SET].toString()
-                PatchChange(attr, set, it.key)
+                val change = it.value[KEY_PATCH_CHANGE].toString()
+                PatchChange(attr, set, it.key, change)
             }
             return Patch(uuidDate, date, desc, PatchType.of(type), patchCardChanges)
         }

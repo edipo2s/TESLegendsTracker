@@ -17,7 +17,7 @@ class PublicInteractor : BaseInteractor() {
 
     fun getCard(set: CardSet, attribute: Attribute, shortname: String, onSuccess: (Card) -> Unit) {
         val attr = attribute.name.toLowerCase()
-        database.child(NODE_CARDS).child(set.db).child(attr)
+        database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {

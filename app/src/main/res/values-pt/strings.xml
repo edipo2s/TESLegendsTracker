@@ -99,6 +99,7 @@
     <string name="card_race_label">Raça:</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
+    <string name="card_change">Alterou o\n%s</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>
@@ -192,5 +193,7 @@
     <string name="season_matches_class_most_seen">Mais vistos:</string>
     <string name="season_matches_class_most_defeated">Mais derrotados:</string>
     <string name="season_matches_class_less_defeated">Menos derrotados:</string>
+
+    <string name="patch_change">%s\nAlterado</string>
 
 </resources>
