@@ -21,6 +21,7 @@ class ArticleViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
     fun bind(article: Article) {
         with(itemView) {
             article_title.text = article.title
+            article_title_shadow.text = article.title
             article_type?.text = context.getString(article.category.text)
             article_date?.text = article.date?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
             article_cover_loading?.visibility = View.VISIBLE
