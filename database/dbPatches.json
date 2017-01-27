@@ -1,0 +1,308 @@
+{
+  "2016_08_25": {
+    "changes": {
+      "murkwatersavage": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Cost"
+      },
+      "soulrestmarshal": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      }
+    },
+    "desc": "Soulrest Marshal Nerf",
+    "type": "balance"
+  },
+  "2016_09_01": {
+    "desc": "Smuggler's Haul",
+    "type": "reward"
+  },
+  "2016_09_20": {
+    "changes": {
+      "bonecolossus": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      }
+    },
+    "desc": "Bone Colossus Nerf",
+    "type": "balance"
+  },
+  "2016_09_28": {
+    "changes": {
+      "blacksapprotector": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Rarity"
+      },
+      "voraciousspriggan": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Rarity"
+      },
+      "evermoresteward": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Rarity"
+      },
+      "farsightnereid": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Rarity"
+      },
+      "nibenbaycutthroat": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Rarity"
+      },
+      "shockingwamasu": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "shriekingharpy": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Rarity"
+      },
+      "fieryimp": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Rarity"
+      },
+      "fortresswatchman": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Rarity"
+      },
+      "intimidate": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Rarity"
+      },
+      "valenwoodhuntsman": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Rarity"
+      },
+      "valenwoodtrapper": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Rarity"
+      },
+      "mantikora": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Text"
+      }
+    },
+    "desc": "Mantikora Nerf",
+    "type": "balance"
+  },
+  "2016_10_01": {
+    "desc": "Hist Grove",
+    "type": "reward"
+  },
+  "2016_11_01": {
+    "desc": "Mechanical Ally",
+    "type": "reward"
+  },
+  "2016_11_03": {
+    "changes": {
+      "housekinsman": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Health"
+      },
+      "moonlightwerebat": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Health"
+      },
+      "tazkadthepackmaster": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Cost"
+      },
+      "twilightwerebat": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Health"
+      },
+      "allenabenoch": {
+        "set": "core",
+        "attr": "dual",
+        "change": "Text"
+      },
+      "wrothgarartisan": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Health"
+      },
+      "brilliantexperiment": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Cost"
+      },
+      "dunmernightblade": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "elusiveschemer": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Attack"
+      },
+      "nahkriindragonpriest": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "morkulgatekeeper": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Keyword"
+      },
+      "volendrung": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      },
+      "apprenticespotion": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Cost"
+      },
+      "divinefervor": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Cost"
+      },
+      "healingpotion": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Cost"
+      }
+    },
+    "desc": "Nahkriin Nerf",
+    "type": "balance"
+  },
+  "2016_12_01": {
+    "desc": "Battlereeve Of Dusk",
+    "type": "reward"
+  },
+  "2016_12_14": {
+    "changes": {
+      "burnandpillage": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Cost/Text"
+      }
+    },
+    "desc": "Madhouse Collection",
+    "type": "set"
+  },
+  "2017_01_01": {
+    "desc": "Elsweyr Lookout",
+    "type": "reward"
+  },
+  "2017_01_11": {
+    "changes": {
+      "dunesmuggler": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "dunestalker": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "snaketoothnecklace": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "soulrestmarshal": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Cost/Text"
+      },
+      "histgrove": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "crystaltowercrafter": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Attack/Health"
+      },
+      "slaughterfish": {
+        "set": "core",
+        "attr": "neutral",
+        "change": "Cost"
+      },
+      "slaughterfishspawning": {
+        "set": "core",
+        "attr": "neutral",
+        "change": "Cost"
+      },
+      "pillagingtribune": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Text"
+      }
+    },
+    "desc": "Hist Grove Nerf",
+    "type": "balance"
+  },
+  "2017_01_25": {
+    "changes": {
+      "ungolimthelistener": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Attack"
+      },
+      "blackwormnecromancer": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Cost"
+      },
+      "darkrift": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Cost"
+      },
+      "shriekingharpy": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Health"
+      },
+      "gladiatorarena": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Cost"
+      },
+      "reiveblademaster": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Attack"
+      },
+      "dagirahtmystic": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Health"
+      }
+    },
+    "desc": "Ungolim Nerf",
+    "type": "balance"
+  },
+  "2017_02_01": {
+    "desc": "Stampede Sentinel",
+    "type": "reward"
+  }
+}

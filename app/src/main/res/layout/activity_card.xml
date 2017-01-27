@@ -28,115 +28,24 @@
                 app:adSize="BANNER"
                 app:adUnitId="@string/app_ads_card_full" />
 
-            <ImageView
-                android:id="@+id/card_all_image"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/card_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/card_full_margin"
-                android:layout_marginEnd="@dimen/card_full_margin"
-                android:layout_marginStart="@dimen/card_full_margin"
-                android:transitionName="@string/card_transition_name"
-                tools:src="@drawable/card" />
+                android:fadeScrollbars="false"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin"
+                android:scrollbarSize="@dimen/small_margin"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                android:scrollbars="horizontal"
+                android:visibility="visible"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/itemlist_card_full"
+                tools:visibility="gone" />
 
         </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/large_margin"
-            android:layout_marginStart="@dimen/large_margin"
-            android:clickable="true"
-            android:elevation="@dimen/cardview_default_elevation"
-            android:foreground="?attr/selectableItemBackground"
-            app:behavior_hideable="true"
-            app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_height"
-            app:layout_behavior="@string/bottom_sheet_behavior">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginStart="@dimen/large_margin"
-                android:layout_marginEnd="@dimen/large_margin"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
-
-                <ImageView
-                    android:id="@+id/card_favorite_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:clickable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_favorite_unchecked" />
-
-                <TextView
-                    android:id="@+id/card_set_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_set_label"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/card_set"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_toEndOf="@id/card_set_label"
-                    tools:text="None" />
-
-                <TextView
-                    android:id="@+id/card_race_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/card_set"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:text="@string/card_race_label"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/card_race"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/card_set"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:layout_toEndOf="@id/card_race_label"
-                    tools:text="None" />
-
-                <TextView
-                    android:id="@+id/card_race_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/card_race"
-                    android:layout_below="@id/card_race"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:layout_toStartOf="@id/card_favorite_btn"
-                    tools:text="None" />
-
-                <TextView
-                    android:id="@+id/card_arena_tier_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/card_race_desc"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:text="@string/card_arena_tier_label"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/card_arena_tier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/card_arena_tier_label"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_toEndOf="@id/card_arena_tier_label"
-                    tools:text="Poor" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
+        <include layout="@layout/include_card_info" />
 
     </android.support.design.widget.CoordinatorLayout>
 

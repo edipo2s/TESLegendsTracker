@@ -149,6 +149,8 @@
             android:elevation="@dimen/cardview_default_elevation"
             android:fitsSystemWindows="false"
             android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/default_margin"
+            app:cardElevation="@dimen/card_elevation"
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/deck_comment_bottom_sheet_peek_height"
             app:layout_behavior="@string/bottom_sheet_behavior">

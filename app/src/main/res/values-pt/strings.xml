@@ -17,10 +17,14 @@
     <string name="menu_cards">Cartas</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
-    <string name="menu_season">Temporada</string>
+    <string name="menu_articles">TESL Artigos</string>
+    <string name="menu_seasons">TESL Temporadas</string>
+    <string name="menu_season">Temporadas</string>
+    <string name="menu_filter">Filtrar</string>
     <string name="menu_arena">Arena</string>
-    <string name="menu_donate">Versão Livre</string>
+    <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
+    <string name="menu_share">Indicar a um amigo</string>
     <string name="menu_about">Sobre</string>
     <string name="menu_search">Busca</string>
     <string name="menu_sets">Expanções</string>
@@ -38,6 +42,9 @@
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
+
+    <string name="share_with">Compartilhar usando…</string>
+    <string name="share_text">Gerencie sua coleção do TES Legends, busque e crie decks públicos ou privados para acompanhar suas partidas</string>
 
     <string name="about_title">Sobre TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker é um aplicativo assistente para jogo de cartas The Elder Scroll Legends desenvolvido pela Dire Wolf Digital e publicado pela Bethesda Softworks.</string>
@@ -70,6 +77,8 @@
     <string name="tab_mode_ranked">Ranqueado</string>
     <string name="tab_mode_casual">Casual</string>
     <string name="tab_mode_arena">Arena</string>
+    <string name="tab_articles_news">Notícias</string>
+    <string name="tab_articles_world">Mundo</string>
 
     <string name="title_tab_cards_collection">Coleção de Cartas</string>
     <string name="title_tab_cards_favorites">Cartas Favoritas</string>
@@ -79,11 +88,18 @@
     <string name="title_tab_matches_statistics">Statísticas de Partidas</string>
     <string name="title_tab_matches_history">Histórico de Partidas</string>
 
+    <string name="title_tab_articles_news">TES Legends Notícias</string>
+    <string name="title_tab_articles_world">TES Legends Mundo</string>
+
     <string name="cards_sets_all">Todos</string>
 
+    <string name="card_more_info_label">Mais Informações</string>
     <string name="card_arena_tier_label">Arena Nível:</string>
+    <string name="card_collection_qtd_label">Coleção Qtd:</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_patch_current">Versão Atual</string>
+    <string name="card_patch_pre">Versão pre-%s</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>
@@ -153,5 +169,32 @@
     <string name="new_match_rank_label">Ranque</string>
     <string name="new_match_save_rank_error">Partidas no Ranquedo precisam de um Ranque para serem salvas</string>
     <string name="new_match_saved">Nova Partida Salva!</string>
+
+    <string name="article_news_title">Notícias</string>
+    <string name="article_news_category_all">All</string>
+    <string name="article_news_category_announcements">Anúncios</string>
+    <string name="article_news_category_battle">Táticas de Batalha</string>
+    <string name="article_news_category_forging">Forjando Lendas</string>
+    <string name="article_news_category_imperial">Biblioteca Imperial</string>
+    <string name="article_news_category_legendary">Início Legendário</string>
+    <string name="article_news_category_arena">O Distrito da Arena</string>
+    <string name="article_world_title">Mundo</string>
+    <string name="article_world_races_title">Raças</string>
+    <string name="article_world_classes_title">Classes</string>
+    <string name="article_world_attributes_title">Atributos</string>
+
+    <string name="season_reward">Recompensa</string>
+    <string name="season_no_matches">Sem informações de partidas</string>
+    <string name="season_matches_label">Partidas no Ranqueado</string>
+    <string name="season_opponent_label">Oponente</string>
+    <string name="season_matches_best_rank">Melhor\nRanque</string>
+    <string name="season_matches_wins">Total de Vitórias:</string>
+    <string name="season_matches_losses">Total de Derrotas:</string>
+    <string name="season_matches_total">Total de Partidas:</string>
+    <string name="season_matches_class_most_seen">Mais vistos:</string>
+    <string name="season_matches_class_most_defeated">Mais derrotados:</string>
+    <string name="season_matches_class_less_defeated">Menos derrotados:</string>
+
+    <string name="patch_change">%s\nAlterado</string>
 
 </resources>

@@ -16,10 +16,10 @@ import android.view.MenuItem
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
-import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
+import com.ediposouza.teslesgendstracker.ui.articles.ArticlesFragment
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
@@ -27,11 +27,8 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
-import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.alertThemed
+import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
+import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -47,6 +44,7 @@ import timber.log.Timber
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
+    private val KEY_TITLE = "titleKey"
     private val KEY_MENU_ITEM_SELECTED = "menuIndexKey"
     private val SKU_TEST = "android.test.purchased"
     private val SKU_DONATE_BASIC = "donate_basic"
@@ -124,13 +122,17 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected) }
+        outState?.apply {
+            putString(KEY_TITLE, dash_toolbar_title.text.toString())
+            putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected)
+        }
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState?.apply {
+            dash_toolbar_title.text = getString(KEY_TITLE)
             menuItemSelected = getInt(KEY_MENU_ITEM_SELECTED)
             dash_navigation_view.setCheckedItem(menuItemSelected)
         }
@@ -152,15 +154,13 @@ class DashActivity : BaseFilterActivity(),
 
     private fun updateUserMenuInfo() {
         val user = FirebaseAuth.getInstance().currentUser
-        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isVisible = App.hasUserLogged()
+        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
         with(dash_navigation_view.getHeaderView(0)) {
             profile_change_user.visibility = if (App.hasUserLogged()) View.VISIBLE else View.GONE
             profile_name.text = user?.displayName ?: getString(R.string.unknown)
             if (user != null) {
-                Glide.with(this@DashActivity)
-                        .load(user.photoUrl)
-                        .transform(CircleTransform(this@DashActivity))
-                        .into(profile_image)
+                val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
+                profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
     }
@@ -200,11 +200,22 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
-            R.id.menu_arena,
-            R.id.menu_season -> {
+            R.id.menu_articles -> showFragment(ArticlesFragment())
+            R.id.menu_arena -> {
                 true
             }
+            R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_donate -> showDonateDialog()
+            R.id.menu_share -> {
+                val appLink = getString(R.string.playstore_url_format, packageName)
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/*"
+                    putExtra(Intent.EXTRA_TEXT, "${getString(R.string.share_text)}\n $appLink")
+                }
+                startActivity(Intent.createChooser(intent, getString(R.string.share_with)))
+                MetricsManager.trackAction(MetricAction.ACTION_SHARE())
+                true
+            }
             R.id.menu_about -> showAboutDialog()
             else -> false
         }
@@ -213,6 +224,11 @@ class DashActivity : BaseFilterActivity(),
     private fun showAboutDialog(): Boolean {
         val dialogView = View.inflate(this, R.layout.dialog_about, null).apply {
             about_dialog_version.text = packageManager.getPackageInfo(packageName, 0).versionName
+            about_dialog_developer.setOnClickListener {
+                val linkUri = Uri.parse(getString(R.string.about_info_developer_link))
+                startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DEVELOPER())
+            }
             about_dialog_thanks_cvh_text.setOnClickListener {
                 val linkUri = Uri.parse(getString(R.string.about_info_thanks_cvh_link))
                 startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
@@ -257,11 +273,9 @@ class DashActivity : BaseFilterActivity(),
         alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
             positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
                 processDonate(SKU_DONATE_BASIC)
-                MetricsManager.trackAction(MetricAction.ACTION_DONATE_BASIC())
             })
             negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
                 processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
-                MetricsManager.trackAction(MetricAction.ACTION_DONATE_PRO())
             })
             neutralButton(R.string.app_donate_dialog_not_now, {
                 MetricsManager.trackAction(MetricAction.ACTION_DONATE_NOT_NOW())
@@ -271,6 +285,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     private fun processDonate(skuItem: String) {
+        MetricsManager.trackAction(MetricAction.ACTION_START_DONATE())
         iabHelper?.launchPurchaseFlow(this@DashActivity, skuItem, RC_DONATE) { result, info ->
             if (result.isFailure) {
                 toast(R.string.app_donate_dialog_payment_fail)
@@ -279,6 +294,11 @@ class DashActivity : BaseFilterActivity(),
             if (info.sku == skuItem) {
                 handleDonation()
                 toast(R.string.app_donate_dialog_payment_success)
+                if (skuItem == SKU_DONATE_BASIC) {
+                    MetricsManager.trackAction(MetricAction.ACTION_DONATE_BASIC())
+                } else {
+                    MetricsManager.trackAction(MetricAction.ACTION_DONATE_PRO())
+                }
             }
         }
     }
@@ -323,15 +343,14 @@ class DashActivity : BaseFilterActivity(),
             profile_collection.visibility = View.INVISIBLE
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
-                publicInteractor.getCardsForStatistics(null) {
-                    val allAttrCards = it
+                publicInteractor.getCardsForStatistics(null) { allAttrCards ->
                     allCardsTotal += allAttrCards.filter { it.unique }.size
                     allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
-                    privateInteractor.getUserCollection(null) {
-                        userCardsTotal += it.filter {
+                    privateInteractor.getUserCollection(null) { userCards ->
+                        userCardsTotal += userCards.filter {
                             allAttrCards.map { it.shortName }.contains(it.key)
                         }.values.sum()
-                        Timber.d("Out: ${it.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
+                        Timber.d("Out: ${userCards.filter { !allAttrCards.map { it.shortName }.contains(it.key) }}")
                         val stringPercent = getString(R.string.collection_statistics_percent,
                                 if (allCardsTotal > 0)
                                     userCardsTotal.toFloat() / allCardsTotal.toFloat() * 100f

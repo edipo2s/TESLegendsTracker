@@ -156,6 +156,7 @@ open class DecksPublicFragment : BaseFragment() {
     open fun showDecks() {
         decksAdapter.reset()
         decksAdapter.notifyDataSetChanged()
+        eventBus.post(CmdUpdateVisibility(true))
     }
 
     class DecksAllViewHolder(view: View, val itemClick: (View, Deck) -> Unit,

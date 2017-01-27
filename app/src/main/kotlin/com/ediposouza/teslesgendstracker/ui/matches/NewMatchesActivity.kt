@@ -41,9 +41,10 @@ class NewMatchesActivity : BaseActivity() {
         private val EXTRA_DECK = "deckExtra"
         private val EXTRA_MATCH_MODE = "modeExtra"
 
-        fun newIntent(context: Context, deckName: String, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+        fun newIntent(context: Context, deckName: String?, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+            val name = deckName ?: deckCls.name.toLowerCase().capitalize()
             return context.intentFor<NewMatchesActivity>(
-                    EXTRA_DECK_NAME to deckName,
+                    EXTRA_DECK_NAME to name,
                     EXTRA_DECK_CLASS to deckCls.ordinal,
                     EXTRA_DECK_TYPE to deckType.ordinal,
                     EXTRA_MATCH_MODE to mode.ordinal).apply {
@@ -184,12 +185,13 @@ class NewMatchesActivity : BaseActivity() {
             return
         }
         val legendRank = new_matches_legend.isChecked
-        val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_match_first.isChecked,
+        val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_matches_first.isChecked,
                 MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
                 MatchDeck(optDeckName, optDeckCls, optDeckType),
                 mode, currentSeason, currentRank.toInt(), legendRank, win)
         privateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
+            new_matches_first.isChecked = false
             new_matches_opt_name.setText("")
             new_matches_opt_class_spinner.setSelection(0)
             new_matches_opt_type_spinner.setSelection(0)

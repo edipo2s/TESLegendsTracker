@@ -8,6 +8,7 @@
     <dimen name="huge_margin">22dp</dimen>
 
     <dimen name="size_micro">10dp</dimen>
+    <dimen name="size_tiny">16dp</dimen>
     <dimen name="size_small">22dp</dimen>
     <dimen name="size_normal">32dp</dimen>
     <dimen name="size_medium">44dp</dimen>

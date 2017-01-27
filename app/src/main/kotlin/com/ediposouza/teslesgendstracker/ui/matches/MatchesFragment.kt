@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.ediposouza.teslesgendstracker.DECK_NAME_MIN_SIZE
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -155,7 +156,7 @@ class MatchesFragment : BaseFragment() {
             PublicInteractor().getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
-                    add(0, it.id, 0, it.desc)
+                    add(0, it.id, 0, "${it.date.month}/${it.date.year}")
                 }
             }
         }
@@ -206,12 +207,13 @@ class MatchesFragment : BaseFragment() {
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                    val name = dialogView.new_match_dialog_deck_name.text.toString()
                     val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
-                    val deck = if (deckPosition >= 0) decks[deckPosition] else null
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    if (name.length < 5) {
+                    val isNotArena = mode != MatchMode.ARENA
+                    val name = if (isNotArena) dialogView.new_match_dialog_deck_name.text.toString() else null
+                    val deck = if (isNotArena && deckPosition >= 0) decks[deckPosition] else null
+                    if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {
                         startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)

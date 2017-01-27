@@ -6,7 +6,6 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
-import kotlinx.android.synthetic.main.fragment_cards_list.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -28,15 +27,14 @@ class CardsFavoritesFragment : CardsAllFragment() {
     }
 
     override fun showCards() {
-        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) {
-            userFavorites = it
+        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
             cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
-            cards_recycler_view?.scrollToPosition(0)
+            scrollToTop()
         }
     }
 
     override fun showCardExpanded(card: Card, view: View) {
-        startActivityForResult(CardActivity.newIntent(context, card, true), EXPAND_CODE,
+        startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 

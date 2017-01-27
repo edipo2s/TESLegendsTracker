@@ -1,0 +1,32 @@
+{
+  "2016_08": {
+    "reward": {
+      "agility": "smugglershaul"
+    }
+  },
+  "2016_09": {
+    "reward": {
+      "endurance": "histgrove"
+    }
+  },
+  "2016_10": {
+    "reward": {
+      "neutral": "mechanicalally"
+    }
+  },
+  "2016_11": {
+    "reward": {
+      "intelligence": "battlereeveofdusk"
+    }
+  },
+  "2016_12": {
+    "reward": {
+      "willpower": "elsweyrlookout"
+    }
+  },
+  "2017_01": {
+    "reward": {
+      "strength": "stampedesentinel"
+    }
+  }
+}

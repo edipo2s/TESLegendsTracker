@@ -1,8 +1,15 @@
 package com.ediposouza.teslesgendstracker.interactor
 
+import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
+import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
+import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.DateTimeFormatter
 
 abstract class FirebaseParsers {
 
@@ -21,6 +28,7 @@ abstract class FirebaseParsers {
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
+        val season: String = ""
 
         fun toCard(shortName: String, set: CardSet, attr: Attribute): Card {
             var clsAttr1 = attr
@@ -38,7 +46,7 @@ abstract class FirebaseParsers {
                                 CardKeyword.of(it)
                             },
                     CardArenaTier.of(arenaTier),
-                    evolves)
+                    evolves, season)
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {
@@ -122,10 +130,28 @@ abstract class FirebaseParsers {
 
     class PatchParser {
 
-        val desc: String = ""
+        companion object {
 
+            private const val KEY_PATCH_ATTR = "attr"
+            private const val KEY_PATCH_SET = "set"
+            private const val KEY_PATCH_CHANGE = "change"
+
+        }
+
+        val changes: Map<String, Map<String, Any>> = mapOf()
+        val desc: String = ""
+        val type: String = ""
+
+        @Suppress("UNCHECKED_CAST")
         fun toPatch(uuidDate: String): Patch {
-            return Patch(uuidDate, desc)
+            val date = LocalDate.parse(uuidDate, DateTimeFormatter.ofPattern(PATCH_UUID_PATTERN))
+            val patchCardChanges = changes.map {
+                val attr = it.value[KEY_PATCH_ATTR].toString()
+                val set = it.value[KEY_PATCH_SET].toString()
+                val change = it.value[KEY_PATCH_CHANGE].toString()
+                PatchChange(attr, set, it.key, change)
+            }
+            return Patch(uuidDate, date, desc, PatchType.of(type), patchCardChanges)
         }
 
     }
@@ -185,4 +211,43 @@ abstract class FirebaseParsers {
         }
 
     }
+
+    class SeasonParser {
+
+        val reward: Map<String, Any> = mapOf()
+
+        fun toSeason(key: String): Season {
+            val date = key.split("_")
+            val year = date[0].toInt()
+            val month = Month.of(date[1].toInt())
+            val id = (year - 2016) * 12 + month.value - 7
+            val rewardInfo = reward.entries.first()
+            val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
+            val yearMonth = YearMonth.parse(key, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
+            return Season(id, key, yearMonth, rewardInfo.key, rewardCardShortname as? String)
+        }
+
+    }
+
+    class NewsParser(
+
+            val category: Int = 0,
+            val cover: String = "",
+            val link: String = "",
+            val title: String = ""
+
+    ) {
+
+        fun toNews(uuidDate: String): Article {
+            val uuidDateFormatter = DateTimeFormatter.ofPattern(NEWS_UUID_PATTERN)
+            val articleDate = LocalDate.parse(uuidDate, uuidDateFormatter)
+            return Article(title, ArticleCategory.values()[category], cover, link, articleDate)
+        }
+
+        fun fromNews(article: Article): NewsParser {
+            return NewsParser(article.category.ordinal, article.cover, article.link, article.title)
+        }
+
+    }
+
 }

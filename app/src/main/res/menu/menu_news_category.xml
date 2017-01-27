@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_news_category"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/menu_filter"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/menu_news_category_all"
+                android:title="@string/article_news_category_all"
+                android:icon="@drawable/ic_checked"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_announcements"
+                android:title="@string/article_news_category_announcements"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_battle"
+                android:title="@string/article_news_category_battle"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_forging"
+                android:title="@string/article_news_category_forging"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_imperial"
+                android:title="@string/article_news_category_imperial"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_legendary"
+                android:title="@string/article_news_category_legendary"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_news_category_arena"
+                android:title="@string/article_news_category_arena"
+                app:showAsAction="always" />
+
+        </menu>
+
+    </item>
+
+</menu>

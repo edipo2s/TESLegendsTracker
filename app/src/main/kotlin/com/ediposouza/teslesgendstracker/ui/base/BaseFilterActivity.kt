@@ -7,6 +7,8 @@ import android.support.design.widget.CoordinatorLayout
 import android.text.format.DateUtils
 import android.view.View
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
 import org.greenrobot.eventbus.Subscribe
 
 /**
@@ -53,6 +55,10 @@ open class BaseFilterActivity : BaseActivity() {
         if (show && filterMagikaLP?.bottomMargin == showBottomMargin ||
                 !show && filterMagikaLP?.bottomMargin == hideBottomMargin) {
             return
+        }
+        if (!show && fab_filter_magika != null && fab_filter_rarity != null) {
+            (fab_filter_magika as FilterMagika).close()
+            (fab_filter_rarity as FilterRarity).collapse()
         }
         val animFrom = if (show) hideBottomMargin else showBottomMargin
         val animTo = if (show) showBottomMargin else hideBottomMargin
