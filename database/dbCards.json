@@ -397,6 +397,18 @@
         "keyword": "Summon",
         "arenaTier": "Excellent"
       },
+      "stampedesentinel": {
+        "name": "Stampede Sentinel",
+        "cost": "06",
+        "type": "Creature",
+        "race": "Giant",
+        "attack": "7",
+        "health": "7",
+        "rarity": "Epic",
+        "keyword": "Breakthrough",
+        "arenaTier": "Unknown",
+        "season": "2017_01"
+      },
       "stonethrow": {
         "name": "Stone Throw",
         "cost": "03",
