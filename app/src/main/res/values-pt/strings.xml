@@ -20,6 +20,7 @@
     <string name="menu_articles">TESL Artigos</string>
     <string name="menu_seasons">TESL Temporadas</string>
     <string name="menu_season">Temporadas</string>
+    <string name="menu_filter">Filtrar</string>
     <string name="menu_arena">Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
@@ -99,7 +100,6 @@
     <string name="card_race_label">Raça:</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
-    <string name="card_change">Alterou o\n%s</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>
@@ -184,6 +184,7 @@
     <string name="article_world_attributes_title">Atributos</string>
 
     <string name="season_reward">Recompensa</string>
+    <string name="season_no_matches">Sem informações de partidas</string>
     <string name="season_matches_label">Partidas no Ranqueado</string>
     <string name="season_opponent_label">Oponente</string>
     <string name="season_matches_best_rank">Melhor\nRanque</string>
