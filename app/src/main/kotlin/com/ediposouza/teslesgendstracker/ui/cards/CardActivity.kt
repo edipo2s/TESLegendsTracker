@@ -195,10 +195,12 @@ class CardActivity : BaseActivity() {
 
     private fun getCardPatches() {
         PublicInteractor().getPatches {
-            val cardPatches = it.filter { it.changes.filter { it.shortName == card.shortName }.isNotEmpty() }
+            val cardPatches = it.filter {
+                it.changes.filter { it.shortName == card.shortName }.isNotEmpty()
+            }.sortedBy { it.date }.reversed()
             Timber.d(cardPatches.toString())
             if (cardPatches.isNotEmpty()) {
-                cardPatches.sortedBy { it.date }.reversed().forEach {
+                cardPatches.forEach {
                     val cardPatchName = "${card.shortName}_${it.uuidDate}"
                     val cardBasicInfo = CardBasicInfo(cardPatchName, card.set.name, card.attr.name)
                     cardVersions.add(Pair(cardBasicInfo, getString(R.string.card_patch_pre, it.desc)))

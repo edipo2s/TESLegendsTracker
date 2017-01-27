@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.Fade
@@ -16,9 +17,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Patch
-import com.ediposouza.teslesgendstracker.data.PatchChange
+import com.ediposouza.teslesgendstracker.data.*
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -45,8 +47,15 @@ class PatchActivity : BaseActivity() {
 
     }
 
+    private val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
+    private val transitionName: String by lazy { getString(R.string.card_transition_name) }
     private val selectedPatch: Patch by lazy { intent.getParcelableExtra<Patch>(EXTRA_PATCH) }
     private val patches: ArrayList<Patch> by lazy { intent.getParcelableArrayListExtra<Patch>(EXTRA_NEXT_PATCH_UUID) }
+
+    private val onCardClick: (View, Card) -> Unit = { view, card ->
+        ActivityCompat.startActivity(this, CardActivity.newIntent(this, card),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, transitionName).toBundle())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +92,7 @@ class PatchActivity : BaseActivity() {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
             val nextPatches = patches.filter { it.date.isAfter(selectedPatch.date) }
-            adapter = PatchAdapter(selectedPatch.uuidDate, nextPatches, selectedPatch.changes)
+            adapter = PatchAdapter(selectedPatch, nextPatches, publicInteractor, onCardClick)
             itemAnimator = SlideInRightAnimator()
             setHasFixedSize(true)
         }
@@ -141,8 +150,10 @@ class PatchActivity : BaseActivity() {
         })
     }
 
-    class PatchAdapter(val patchUuid: String, val nextPatches: List<Patch>,
-                       val items: List<PatchChange>) : RecyclerView.Adapter<PatchViewHolder>() {
+    class PatchAdapter(val patch: Patch, val nextPatches: List<Patch>, val publicInteractor: PublicInteractor,
+                       val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<PatchViewHolder>() {
+
+        val items: List<PatchChange> = patch.changes
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PatchViewHolder {
             return PatchViewHolder(parent?.inflate(R.layout.itemlist_patch_cards))
@@ -153,7 +164,7 @@ class PatchActivity : BaseActivity() {
             val nextPatchWithCard = nextPatches.filter {
                 it.changes.filter { it.shortName == patchChange.shortName }.isNotEmpty()
             }.minBy { it.date }
-            holder?.bind(patchUuid, nextPatchWithCard?.uuidDate ?: "", patchChange)
+            holder?.bind(patch.uuidDate, nextPatchWithCard?.uuidDate ?: "", patchChange, publicInteractor, itemClick)
         }
 
         override fun getItemCount(): Int = items.size
@@ -162,10 +173,20 @@ class PatchActivity : BaseActivity() {
 
     class PatchViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
-        fun bind(patchUuid: String, nextPatchUuid: String, patchChange: PatchChange) {
+        fun bind(patchUuid: String, nextPatchUuid: String, patchChange: PatchChange,
+                 publicInteractor: PublicInteractor, itemClick: (View, Card) -> Unit) {
             with(itemView) {
+                patch_card_change.text = context.getString(R.string.patch_change, patchChange.change)
                 patch_card_old_image.setImageBitmap(patchChange.oldImageBitmap(context, patchUuid))
                 patch_card_new_image.setImageBitmap(patchChange.newImageBitmap(context, nextPatchUuid))
+                val set = CardSet.of(patchChange.set)
+                val attr = Attribute.valueOf(patchChange.attr.toUpperCase())
+                publicInteractor.getCard(set, attr, patchChange.shortName) { card ->
+                    val cardOld = card.patchVersion(context, patchUuid)
+                    val cardNew = card.patchVersion(context, nextPatchUuid)
+                    patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, cardOld) }
+                    patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, cardNew) }
+                }
             }
         }
 

@@ -32,7 +32,8 @@ class PatchChange(
 
         val attr: String,
         val set: String,
-        val shortName: String
+        val shortName: String,
+        val change: String
 
 ) : Parcelable {
 
@@ -43,12 +44,13 @@ class PatchChange(
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString())
+    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(), source.readString())
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(attr)
         dest?.writeString(set)
         dest?.writeString(shortName)
+        dest?.writeString(change)
     }
 
     override fun describeContents(): Int = 0

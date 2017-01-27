@@ -27,12 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/card_patch_full_image"
         android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/text_shadow_padding"
-        android:paddingStart="@dimen/text_shadow_padding"
         android:layout_marginBottom="@dimen/default_margin"
+        android:paddingStart="@dimen/text_shadow_padding"
+        android:paddingTop="@dimen/text_shadow_padding"
         android:textColor="@android:color/darker_gray"
-        android:textStyle="bold"
         android:textSize="@dimen/font_medium"
+        android:textStyle="bold"
         tools:text="Version pre-Ungolim Nerf" />
 
     <TextView
@@ -42,9 +42,10 @@
         android:layout_below="@id/card_patch_full_image"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/default_margin"
+        android:gravity="center"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
         android:textSize="@dimen/font_medium"
+        android:textStyle="bold"
         tools:text="Version pre-Ungolim Nerf" />
 
 </android.support.percent.PercentRelativeLayout>

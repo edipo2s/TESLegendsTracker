@@ -322,6 +322,16 @@ data class Card(
         return Card.getCardImageBitmap(context, cardSet, cardAttr, shortName)
     }
 
+    fun patchVersion(context: Context, patchUuid: String): Card {
+        var patchShortName = "${shortName}_$patchUuid"
+        getCardImageBitmap(context, set.name, attr.name, patchShortName) {
+            patchShortName = shortName
+            getDefaultCardImage(context)
+        }
+        return Card(name, patchShortName, set, attr, dualAttr1, dualAttr2, rarity, unique, cost,
+                attack, health, type, race, keywords, arenaTier, evolves, season)
+    }
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(name)
         dest?.writeString(shortName)
