@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
 import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 
@@ -15,36 +15,36 @@ import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         FilterAttr(ctx, attrs, defStyleAttr) {
 
-    var lockAttr1: Attribute? = null
-    var lockAttr2: Attribute? = null
+    var lockAttr1: CardAttribute? = null
+    var lockAttr2: CardAttribute? = null
 
-    var onAttrLock: ((Attribute, Attribute) -> Unit)? = null
+    var onAttrLock: ((CardAttribute, CardAttribute) -> Unit)? = null
     var onAttrUnlock: (() -> Unit)? = null
 
     constructor(ctx: Context?) : this(ctx, null, 0)
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    override fun attrClick(attr: Attribute, lockable: Boolean) {
+    override fun attrClick(attr: CardAttribute, lockable: Boolean) {
         if (isLocked() && isAttrBasic(attr) && lockable) {
             return
         }
         filterClick?.invoke(attr)
     }
 
-    override fun selectAttr(attr: Attribute, only: Boolean) {
-        val strengthVisibility = (isLocked() && attr == lockAttr1) || isAttrEquals(attr, Attribute.STRENGTH)
-        val intelligenceVisibility = (isLocked() && attr == lockAttr2) || isAttrEquals(attr, Attribute.INTELLIGENCE)
+    override fun selectAttr(attr: CardAttribute, only: Boolean) {
+        val strengthVisibility = (isLocked() && attr == lockAttr1) || isAttrEquals(attr, CardAttribute.STRENGTH)
+        val intelligenceVisibility = (isLocked() && attr == lockAttr2) || isAttrEquals(attr, CardAttribute.INTELLIGENCE)
         updateVisibility(rootView.attr_filter_strength_indicator, strengthVisibility, only)
         updateVisibility(rootView.attr_filter_intelligence_indicator, intelligenceVisibility, only)
-        updateVisibility(rootView.attr_filter_willpower_indicator, isAttrEquals(attr, Attribute.WILLPOWER), only)
-        updateVisibility(rootView.attr_filter_agility_indicator, isAttrEquals(attr, Attribute.AGILITY), only)
-        updateVisibility(rootView.attr_filter_endurance_indicator, isAttrEquals(attr, Attribute.ENDURANCE), only)
-        updateVisibility(rootView.attr_filter_dual_indicator, isAttrEquals(attr, Attribute.DUAL), only)
-        updateVisibility(rootView.attr_filter_neutral_indicator, isAttrEquals(attr, Attribute.NEUTRAL), only)
+        updateVisibility(rootView.attr_filter_willpower_indicator, isAttrEquals(attr, CardAttribute.WILLPOWER), only)
+        updateVisibility(rootView.attr_filter_agility_indicator, isAttrEquals(attr, CardAttribute.AGILITY), only)
+        updateVisibility(rootView.attr_filter_endurance_indicator, isAttrEquals(attr, CardAttribute.ENDURANCE), only)
+        updateVisibility(rootView.attr_filter_dual_indicator, isAttrEquals(attr, CardAttribute.DUAL), only)
+        updateVisibility(rootView.attr_filter_neutral_indicator, isAttrEquals(attr, CardAttribute.NEUTRAL), only)
     }
 
-    private fun isAttrEquals(attr: Attribute, attrPos: Attribute): Boolean {
+    private fun isAttrEquals(attr: CardAttribute, attrPos: CardAttribute): Boolean {
         if (isLocked()) {
             return attr == attrPos && attr != lockAttr1 && attr != lockAttr2
         } else {
@@ -52,7 +52,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         }
     }
 
-    override fun unSelectAttr(attr: Attribute) {
+    override fun unSelectAttr(attr: CardAttribute) {
         when (attr) {
             lockAttr1 -> rootView.attr_filter_strength_indicator.visibility = View.INVISIBLE
             lockAttr2 -> rootView.attr_filter_intelligence_indicator.visibility = View.INVISIBLE
@@ -60,7 +60,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         }
     }
 
-    override fun isAttrSelected(attr: Attribute): Boolean {
+    override fun isAttrSelected(attr: CardAttribute): Boolean {
         return if (isLocked()) when (attr) {
             lockAttr1 -> rootView.attr_filter_strength_indicator.visibility == View.VISIBLE
             lockAttr2 -> rootView.attr_filter_intelligence_indicator.visibility == View.VISIBLE
@@ -69,11 +69,11 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         else super.isAttrSelected(attr)
     }
 
-    private fun isAttrBasic(attr: Attribute) = attr != Attribute.DUAL && attr != Attribute.NEUTRAL
+    private fun isAttrBasic(attr: CardAttribute) = attr != CardAttribute.DUAL && attr != CardAttribute.NEUTRAL
 
     private fun isLocked() = lockAttr1 != null && lockAttr2 != null && lockAttr1 != lockAttr2
 
-    fun lockAttr(attr: Attribute) {
+    fun lockAttr(attr: CardAttribute) {
         if (lockAttr1 == null && attr != lockAttr2 && isAttrBasic(attr)) {
             lockAttr1 = attr
             return
@@ -84,7 +84,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         }
     }
 
-    fun lockAttrs(dualAttr1: Attribute, dualAttr2: Attribute, reselectBasicAttr: Boolean = true) {
+    fun lockAttrs(dualAttr1: CardAttribute, dualAttr2: CardAttribute, reselectBasicAttr: Boolean = true) {
         if (isLocked()) {
             return
         }
@@ -99,7 +99,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         }
     }
 
-    fun unlockAttr(attr: Attribute) {
+    fun unlockAttr(attr: CardAttribute) {
         if (lockAttr1 == attr || lockAttr2 == attr) {
             if (lockAttr1 == attr) {
                 lockAttr1 = null
@@ -134,8 +134,8 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         rootView.attr_filter_intelligence?.setImageResource(lockAttr2?.imageRes ?: R.drawable.attr_intelligence)
         rootView.attr_filter_strength?.startAnimation(scaleUpAnimation)
         rootView.attr_filter_intelligence?.startAnimation(scaleUpAnimation)
-        rootView.attr_filter_strength?.setOnClickListener { attrClick(lockAttr1 ?: Attribute.STRENGTH, false) }
-        rootView.attr_filter_intelligence?.setOnClickListener { attrClick(lockAttr2 ?: Attribute.INTELLIGENCE, false) }
+        rootView.attr_filter_strength?.setOnClickListener { attrClick(lockAttr1 ?: CardAttribute.STRENGTH, false) }
+        rootView.attr_filter_intelligence?.setOnClickListener { attrClick(lockAttr2 ?: CardAttribute.INTELLIGENCE, false) }
     }
 
     private fun startAnimUnlock() {
@@ -152,8 +152,8 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         rootView.attr_filter_willpower?.startAnimation(scaleUpAnimation)
         rootView.attr_filter_agility?.startAnimation(scaleUpAnimation)
         rootView.attr_filter_endurance?.startAnimation(scaleUpAnimation)
-        rootView.attr_filter_strength?.setOnClickListener { attrClick(Attribute.STRENGTH, false) }
-        rootView.attr_filter_intelligence?.setOnClickListener { attrClick(Attribute.INTELLIGENCE, false) }
+        rootView.attr_filter_strength?.setOnClickListener { attrClick(CardAttribute.STRENGTH, false) }
+        rootView.attr_filter_intelligence?.setOnClickListener { attrClick(CardAttribute.INTELLIGENCE, false) }
     }
 
 }

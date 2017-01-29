@@ -30,12 +30,12 @@ abstract class FirebaseParsers {
         val attr2: String = ""
         val season: String = ""
 
-        fun toCard(shortName: String, set: CardSet, attr: Attribute): Card {
+        fun toCard(shortName: String, set: CardSet, attr: CardAttribute): Card {
             var clsAttr1 = attr
             var clsAttr2 = attr
-            if (attr == Attribute.DUAL) {
-                clsAttr1 = Attribute.valueOf(attr1.trim().toUpperCase())
-                clsAttr2 = Attribute.valueOf(attr2.trim().toUpperCase())
+            if (attr == CardAttribute.DUAL) {
+                clsAttr1 = CardAttribute.valueOf(attr1.trim().toUpperCase())
+                clsAttr2 = CardAttribute.valueOf(attr2.trim().toUpperCase())
             }
             return Card(name, shortName, set, attr, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
                     cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
@@ -89,7 +89,7 @@ abstract class FirebaseParsers {
         }
 
         fun toDeck(uuid: String, private: Boolean): Deck {
-            return Deck(uuid, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
+            return Deck(uuid, name, owner, private, DeckType.values()[type], DeckClass.values()[cls], cost,
                     LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
                     updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                     comments.map {
@@ -181,12 +181,12 @@ abstract class FirebaseParsers {
 
         fun toMatch(uuid: String): Match {
             val playerDeck = MatchDeck(player[KEY_MATCH_DECK_NAME].toString(),
-                    Class.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckClass.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[player[KEY_MATCH_DECK_TYPE].toString().toInt()],
                     player[KEY_MATCH_DECK_DECK_UUID].toString(),
                     player[KEY_MATCH_DECK_VERSION].toString())
             val opponentDeck = MatchDeck(opponent[KEY_MATCH_DECK_NAME].toString(),
-                    Class.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckClass.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
             val matchMode = MatchMode.values()[mode]
             return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)

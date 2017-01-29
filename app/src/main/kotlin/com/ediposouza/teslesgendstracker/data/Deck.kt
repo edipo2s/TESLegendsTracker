@@ -2,8 +2,39 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.annotation.IntegerRes
+import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
 import java.util.*
+
+enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL, @IntegerRes val imageRes: Int) {
+
+    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer),
+    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin),
+    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, R.drawable.deck_class_battlemage),
+    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, R.drawable.deck_class_crusader),
+    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, R.drawable.deck_class_mage),
+    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY, R.drawable.deck_class_monk),
+    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE, R.drawable.deck_class_scout),
+    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE, R.drawable.deck_class_sorcerer),
+    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE, R.drawable.deck_class_spellsword),
+    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE, R.drawable.deck_class_warrior),
+    STRENGTH(CardAttribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
+    INTELLIGENCE(CardAttribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
+    AGILITY(CardAttribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
+    WILLPOWER(CardAttribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
+    ENDURANCE(CardAttribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
+    NEUTRAL(CardAttribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral);
+
+    companion object {
+
+        fun getClasses(attr: List<CardAttribute>): List<DeckClass> {
+            return values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
+        }
+
+    }
+
+}
 
 enum class DeckType {
 
@@ -78,7 +109,7 @@ data class Deck(
         val owner: String,
         val private: Boolean,
         val type: DeckType,
-        val cls: Class,
+        val cls: DeckClass,
         val cost: Int,
         val createdAt: LocalDateTime,
         val updatedAt: LocalDateTime,
@@ -91,7 +122,7 @@ data class Deck(
 
 ) : Parcelable {
 
-    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now().withNano(0),
+    constructor() : this("", "", "", false, DeckType.OTHER, DeckClass.NEUTRAL, 0, LocalDateTime.now().withNano(0),
             LocalDateTime.now().withNano(0), "", listOf(), 0, mapOf(), listOf(), listOf())
 
     companion object {
@@ -102,7 +133,7 @@ data class Deck(
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),
-            1 == source.readInt(), DeckType.values()[source.readInt()], Class.values()[source.readInt()],
+            1 == source.readInt(), DeckType.values()[source.readInt()], DeckClass.values()[source.readInt()],
             source.readInt(), source.readSerializable() as LocalDateTime, source.readSerializable() as LocalDateTime,
             source.readString(), source.createStringArrayList(), source.readInt(),
             hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) },

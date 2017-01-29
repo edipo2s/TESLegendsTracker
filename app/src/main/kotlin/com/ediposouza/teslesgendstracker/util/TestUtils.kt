@@ -16,22 +16,22 @@ object TestUtils {
 
     fun getTestMatches(): List<Match> {
         val decks = listOf(
-                MatchDeck("", Class.ARCHER, DeckType.AGGRO, ""),
-                MatchDeck("", Class.ASSASSIN, DeckType.AGGRO, ""),
-                MatchDeck("", Class.BATTLEMAGE, DeckType.AGGRO, ""),
-                MatchDeck("", Class.CRUSADER, DeckType.AGGRO, ""),
-                MatchDeck("", Class.MAGE, DeckType.COMBO, ""),
-                MatchDeck("", Class.MONK, DeckType.COMBO, ""),
-                MatchDeck("", Class.SCOUT, DeckType.COMBO, ""),
-                MatchDeck("", Class.SORCERER, DeckType.COMBO, ""),
-                MatchDeck("", Class.SPELLSWORD, DeckType.CONTROL, ""),
-                MatchDeck("", Class.WARRIOR, DeckType.CONTROL, ""),
-                MatchDeck("", Class.STRENGTH, DeckType.CONTROL, ""),
-                MatchDeck("", Class.INTELLIGENCE, DeckType.CONTROL, ""),
-                MatchDeck("", Class.AGILITY, DeckType.MIDRANGE, ""),
-                MatchDeck("", Class.WILLPOWER, DeckType.MIDRANGE, ""),
-                MatchDeck("", Class.ENDURANCE, DeckType.MIDRANGE, ""),
-                MatchDeck("", Class.NEUTRAL, DeckType.MIDRANGE, "")
+                MatchDeck("", DeckClass.ARCHER, DeckType.AGGRO, ""),
+                MatchDeck("", DeckClass.ASSASSIN, DeckType.AGGRO, ""),
+                MatchDeck("", DeckClass.BATTLEMAGE, DeckType.AGGRO, ""),
+                MatchDeck("", DeckClass.CRUSADER, DeckType.AGGRO, ""),
+                MatchDeck("", DeckClass.MAGE, DeckType.COMBO, ""),
+                MatchDeck("", DeckClass.MONK, DeckType.COMBO, ""),
+                MatchDeck("", DeckClass.SCOUT, DeckType.COMBO, ""),
+                MatchDeck("", DeckClass.SORCERER, DeckType.COMBO, ""),
+                MatchDeck("", DeckClass.SPELLSWORD, DeckType.CONTROL, ""),
+                MatchDeck("", DeckClass.WARRIOR, DeckType.CONTROL, ""),
+                MatchDeck("", DeckClass.STRENGTH, DeckType.CONTROL, ""),
+                MatchDeck("", DeckClass.INTELLIGENCE, DeckType.CONTROL, ""),
+                MatchDeck("", DeckClass.AGILITY, DeckType.MIDRANGE, ""),
+                MatchDeck("", DeckClass.WILLPOWER, DeckType.MIDRANGE, ""),
+                MatchDeck("", DeckClass.ENDURANCE, DeckType.MIDRANGE, ""),
+                MatchDeck("", DeckClass.NEUTRAL, DeckType.MIDRANGE, "")
         )
         return mutableListOf<Match>().apply {
             for ((indexPlayer, playerDeck) in decks.withIndex()) {

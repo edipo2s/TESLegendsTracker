@@ -128,7 +128,7 @@ class SeasonsFragment : BaseFragment() {
                 season_patches_recycler_view.adapter = PatchAdapter(seasonPatches, onPatchClick)
                 doAsync {
                     if (season.rewardCardShortname != null) {
-                        val rewardAttr = Attribute.valueOf(season.rewardCardAttr.toUpperCase())
+                        val rewardAttr = CardAttribute.valueOf(season.rewardCardAttr.toUpperCase())
                         PublicInteractor.getCard(CardSet.CORE, rewardAttr, season.rewardCardShortname) { card ->
                             context.runOnUiThread {
                                 season_card_reward.setImageBitmap(card.imageBitmap(context))

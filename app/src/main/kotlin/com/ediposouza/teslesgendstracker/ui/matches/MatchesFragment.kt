@@ -167,7 +167,7 @@ class MatchesFragment : BaseFragment() {
         var decks = listOf<Deck?>(null)
         val classClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                PrivateInteractor.getUserDecks(Class.values()[pos]) { myDecks ->
+                PrivateInteractor.getUserDecks(DeckClass.values()[pos]) { myDecks ->
                     decks = (myDecks as List<Deck?>).sortedBy { it?.name }.plusElement(null)
                     dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -207,7 +207,7 @@ class MatchesFragment : BaseFragment() {
                 .setView(dialogView)
                 .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                    val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                    val cls = DeckClass.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
                     val isNotArena = mode != MatchMode.ARENA
@@ -287,14 +287,14 @@ class MatchesFragment : BaseFragment() {
 
     class ClassAdapter(ctx: Context, @IntegerRes layout: Int = R.layout.itemlist_class,
                        @IntegerRes val textColor: Int = R.color.primary_text_dark) :
-            ArrayAdapter<Class>(ctx, layout, R.id.class_name, Class.values()) {
+            ArrayAdapter<DeckClass>(ctx, layout, R.id.class_name, DeckClass.values()) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
             return super.getDropDownView(position, convertView, parent).apply {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = if (attr2 != CardAttribute.NEUTRAL) View.VISIBLE else View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                 }
             }
@@ -305,7 +305,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = if (attr2 != CardAttribute.NEUTRAL) View.VISIBLE else View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                     class_name.setTextColor(ContextCompat.getColor(context, textColor))
                 }

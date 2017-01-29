@@ -41,7 +41,7 @@ class NewMatchesActivity : BaseActivity() {
         private val EXTRA_DECK = "deckExtra"
         private val EXTRA_MATCH_MODE = "modeExtra"
 
-        fun newIntent(context: Context, deckName: String?, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+        fun newIntent(context: Context, deckName: String?, deckCls: DeckClass, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
             val name = deckName ?: deckCls.name.toLowerCase().capitalize()
             return context.intentFor<NewMatchesActivity>(
                     EXTRA_DECK_NAME to name,
@@ -57,7 +57,7 @@ class NewMatchesActivity : BaseActivity() {
     }
 
     private val deckName by lazy { intent.getStringExtra(EXTRA_DECK_NAME) }
-    private val deckCls by lazy { Class.values()[intent.getIntExtra(EXTRA_DECK_CLASS, 0)] }
+    private val deckCls by lazy { DeckClass.values()[intent.getIntExtra(EXTRA_DECK_CLASS, 0)] }
     private val deckType by lazy { DeckType.values()[intent.getIntExtra(EXTRA_DECK_TYPE, 0)] }
     private val mode by lazy { MatchMode.values()[intent.getIntExtra(EXTRA_MATCH_MODE, 0)] }
     private val deck: Deck? by lazy {
@@ -174,7 +174,7 @@ class NewMatchesActivity : BaseActivity() {
         val myDeckVersion = if (myDeckUpdates.isEmpty()) "v1 (${deck?.createdAt})" else
             "v${myDeckUpdates.size + 1} (${myDeckUpdates.last().date.toLocalDate()}"
         val optDeckName = new_matches_opt_name.text.toString()
-        val optDeckCls = Class.values()[new_matches_opt_class_spinner.selectedItemPosition]
+        val optDeckCls = DeckClass.values()[new_matches_opt_class_spinner.selectedItemPosition]
         val optDeckType = DeckType.values()[new_matches_opt_type_spinner.selectedItemPosition]
         val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
         val currentRank = new_matches_rank.text.toString()
