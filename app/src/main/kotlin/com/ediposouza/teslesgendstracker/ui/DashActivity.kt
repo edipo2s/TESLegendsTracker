@@ -52,8 +52,6 @@ class DashActivity : BaseFilterActivity(),
     private val RC_DONATE = 221
 
     private var menuItemSelected = 0
-    private val publicInteractor = PublicInteractor()
-    private val privateInteractor = PrivateInteractor()
 
     private var iabHelper: IabHelper? = null
     private var iabHelperStarted: Boolean = false
@@ -343,10 +341,10 @@ class DashActivity : BaseFilterActivity(),
             profile_collection.visibility = View.INVISIBLE
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
-                publicInteractor.getCardsForStatistics(null) { allAttrCards ->
+                PublicInteractor.getCardsForStatistics(null) { allAttrCards ->
                     allCardsTotal += allAttrCards.filter { it.unique }.size
                     allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
-                    privateInteractor.getUserCollection(null) { userCards ->
+                    PrivateInteractor.getUserCollection(null) { userCards ->
                         userCardsTotal += userCards.filter {
                             allAttrCards.map { it.shortName }.contains(it.key)
                         }.values.sum()

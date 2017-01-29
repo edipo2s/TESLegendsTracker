@@ -10,7 +10,7 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PublicInteractor : BaseInteractor() {
+object PublicInteractor : BaseInteractor() {
 
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"

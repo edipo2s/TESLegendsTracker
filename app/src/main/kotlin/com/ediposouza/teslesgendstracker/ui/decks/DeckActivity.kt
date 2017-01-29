@@ -64,8 +64,6 @@ class DeckActivity : BaseActivity() {
 
     }
 
-    private val publicInteractor by lazy { PublicInteractor() }
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val keyboardUtil by lazy { KeyboardUtil(this, contentView) }
     private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
     private val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
@@ -107,7 +105,7 @@ class DeckActivity : BaseActivity() {
         }
         deck_fab_favorite.setOnClickListener {
             if (App.hasUserLogged()) {
-                privateInteractor.setUserDeckFavorite(deck, !favorite) {
+                PrivateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
                     val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
                     toast(getString(stringRes, deck.name))
@@ -140,7 +138,7 @@ class DeckActivity : BaseActivity() {
                     eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.deck_comment_size_error)
                             .withAction(android.R.string.ok, {}))
                 } else {
-                    PrivateInteractor().addDeckComment(deck, deck_comment_new.text.toString()) {
+                    PrivateInteractor.addDeckComment(deck, deck_comment_new.text.toString()) {
                         deck_comment_new.setText("")
                         addComment(it)
                         MetricsManager.trackAction(MetricAction.ACTION_DECK_COMMENTS_SEND())
@@ -214,7 +212,7 @@ class DeckActivity : BaseActivity() {
                     showErrorUserNotLogged()
                     return false
                 }
-                privateInteractor.setUserDeckLike(deck, !like) {
+                PrivateInteractor.setUserDeckLike(deck, !like) {
                     like = !like
                     updateLikeItem()
                     val deckLikes = Integer.parseInt(deck_details_likes.text.toString())
@@ -228,7 +226,7 @@ class DeckActivity : BaseActivity() {
                 alertThemed(R.string.confirm_message, theme = R.style.AppDialog) {
                     negativeButton(android.R.string.no, {})
                     positiveButton(android.R.string.yes, {
-                        privateInteractor.deleteDeck(deck, deck.private) {
+                        PrivateInteractor.deleteDeck(deck, deck.private) {
                             toast(R.string.deck_deleted)
                             ActivityCompat.finishAfterTransition(this@DeckActivity)
                             MetricsManager.trackAction(MetricAction.ACTION_DECK_DETAILS_DELETE())
@@ -273,8 +271,8 @@ class DeckActivity : BaseActivity() {
 
     private fun configDeckComments() {
         with(deck_comment_recycle_view) {
-            adapter = DeckCommentAdapter(deck.comments, publicInteractor) {
-                privateInteractor.remDeckComment(deck, it) {
+            adapter = DeckCommentAdapter(deck.comments) {
+                PrivateInteractor.remDeckComment(deck, it) {
                     remComment(it)
                 }
             }
@@ -298,19 +296,19 @@ class DeckActivity : BaseActivity() {
 
     private fun loadDeckRemoteInfo() {
         doAsync {
-            calculateMissingSoul(deck, privateInteractor)
+            calculateMissingSoul(deck)
             if (!deckOwned) {
-                publicInteractor.incDeckView(deck) {
+                PublicInteractor.incDeckView(deck) {
                     deck_details_views.text = it.toString()
                 }
             }
-            publicInteractor.getPatches {
+            PublicInteractor.getPatches {
                 val patch = it.find { it.uuidDate == deck.patch }
                 runOnUiThread {
                     deck_details_patch.text = patch?.desc ?: ""
                 }
             }
-            publicInteractor.getUserInfo(deck.owner) {
+            PublicInteractor.getUserInfo(deck.owner) {
                 val ownerUser = it
                 runOnUiThread {
                     deck_details_create_by.text = ownerUser.name
@@ -323,11 +321,11 @@ class DeckActivity : BaseActivity() {
         }
     }
 
-    fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {
+    fun calculateMissingSoul(deck: Deck) {
         with(deck_details_soul_missing) {
             visibility = View.INVISIBLE
             deck_details_soul_missing_loading.visibility = View.VISIBLE
-            privateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
+            PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
                 deck_details_soul_missing_loading.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                 Timber.d("Missing %d", missingSoul)
@@ -351,8 +349,8 @@ class DeckActivity : BaseActivity() {
         deck_comment_recycle_view.requestLayout()
     }
 
-    class DeckCommentAdapter(val items: List<DeckComment>, val publicInteractor: PublicInteractor,
-                             val onRemComment: (commentId: String) -> Unit) : RecyclerView.Adapter<DeckCommentViewHolder>() {
+    class DeckCommentAdapter(val items: List<DeckComment>, val onRemComment: (commentId: String) -> Unit) :
+            RecyclerView.Adapter<DeckCommentViewHolder>() {
 
         init {
             sortDeckComments()
@@ -363,7 +361,7 @@ class DeckActivity : BaseActivity() {
         }
 
         override fun onBindViewHolder(holder: DeckCommentViewHolder?, position: Int) {
-            holder?.bind(items[position], publicInteractor)
+            holder?.bind(items[position])
         }
 
         override fun getItemCount() = items.size
@@ -388,13 +386,13 @@ class DeckActivity : BaseActivity() {
 
     class DeckCommentViewHolder(view: View?, val onRemComment: (commentId: String) -> Unit) : RecyclerView.ViewHolder(view) {
 
-        fun bind(comment: DeckComment, publicInteractor: PublicInteractor) {
+        fun bind(comment: DeckComment) {
             val timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN)
             itemView.deck_comment_msg.text = comment.comment
             itemView.deck_comment_date.text = itemView.context.getString(R.string.deck_comment_date_format,
                     comment.date.toLocalDate(), comment.date.toLocalTime().format(timeFormatter))
             doAsync {
-                publicInteractor.getUserInfo(comment.owner) {
+                PublicInteractor.getUserInfo(comment.owner) {
                     val ownerUser = it
                     itemView.post {
                         itemView.deck_comment_owner.text = ownerUser.name

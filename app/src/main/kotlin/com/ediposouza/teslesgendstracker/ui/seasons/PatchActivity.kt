@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.ui.seasons
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -47,7 +48,6 @@ class PatchActivity : BaseActivity() {
 
     }
 
-    private val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
     private val selectedPatch: Patch by lazy { intent.getParcelableExtra<Patch>(EXTRA_PATCH) }
     private val patches: ArrayList<Patch> by lazy { intent.getParcelableArrayListExtra<Patch>(EXTRA_NEXT_PATCH_UUID) }
@@ -92,12 +92,13 @@ class PatchActivity : BaseActivity() {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
             val nextPatches = patches.filter { it.date.isAfter(selectedPatch.date) }
-            adapter = PatchAdapter(selectedPatch, nextPatches, publicInteractor, onCardClick)
+            adapter = PatchAdapter(selectedPatch, nextPatches, onCardClick)
             itemAnimator = SlideInRightAnimator()
             setHasFixedSize(true)
         }
     }
 
+    @SuppressLint("NewApi")
     private fun setupEnterAnimation() {
         val transition = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion)
         transition.duration = 300
@@ -122,6 +123,7 @@ class PatchActivity : BaseActivity() {
         })
     }
 
+    @SuppressLint("NewApi")
     private fun setupExitAnimation() {
         window.returnTransition = Fade().apply {
             duration = resources.getInteger(R.integer.anim_slide_duration).toLong()
@@ -150,7 +152,7 @@ class PatchActivity : BaseActivity() {
         })
     }
 
-    class PatchAdapter(val patch: Patch, val nextPatches: List<Patch>, val publicInteractor: PublicInteractor,
+    class PatchAdapter(val patch: Patch, val nextPatches: List<Patch>,
                        val itemClick: (View, Card) -> Unit) : RecyclerView.Adapter<PatchViewHolder>() {
 
         val items: List<PatchChange> = patch.changes
@@ -164,7 +166,7 @@ class PatchActivity : BaseActivity() {
             val nextPatchWithCard = nextPatches.filter {
                 it.changes.filter { it.shortName == patchChange.shortName }.isNotEmpty()
             }.minBy { it.date }
-            holder?.bind(patch.uuidDate, nextPatchWithCard?.uuidDate ?: "", patchChange, publicInteractor, itemClick)
+            holder?.bind(patch.uuidDate, nextPatchWithCard?.uuidDate ?: "", patchChange, itemClick)
         }
 
         override fun getItemCount(): Int = items.size
@@ -174,14 +176,14 @@ class PatchActivity : BaseActivity() {
     class PatchViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
         fun bind(patchUuid: String, nextPatchUuid: String, patchChange: PatchChange,
-                 publicInteractor: PublicInteractor, itemClick: (View, Card) -> Unit) {
+                 itemClick: (View, Card) -> Unit) {
             with(itemView) {
                 patch_card_change.text = context.getString(R.string.patch_change, patchChange.change)
                 patch_card_old_image.setImageBitmap(patchChange.oldImageBitmap(context, patchUuid))
                 patch_card_new_image.setImageBitmap(patchChange.newImageBitmap(context, nextPatchUuid))
                 val set = CardSet.of(patchChange.set)
                 val attr = Attribute.valueOf(patchChange.attr.toUpperCase())
-                publicInteractor.getCard(set, attr, patchChange.shortName) { card ->
+                PublicInteractor.getCard(set, attr, patchChange.shortName) { card ->
                     val cardOld = card.patchVersion(context, patchUuid)
                     val cardNew = card.patchVersion(context, nextPatchUuid)
                     patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, cardOld) }

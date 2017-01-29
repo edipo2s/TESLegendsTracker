@@ -20,9 +20,6 @@ import java.text.NumberFormat
 class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         FrameLayout(ctx, attrs, defStyleAttr) {
 
-    val privateInteractor by lazy { PrivateInteractor() }
-    val publicInteractor by lazy { PublicInteractor() }
-
     init {
         inflate(context, R.layout.widget_collection_statistics, this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -84,10 +81,10 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     }
 
     private fun updateAttributeStatistics(attr: Attribute) {
-        publicInteractor.getCardsForStatistics(null, attr) {
+        PublicInteractor.getCardsForStatistics(null, attr) {
             val allAttrCards = it.groupBy { it.rarity }
             Timber.d(attr.name + allAttrCards.toString())
-            privateInteractor.getUserCollection(null, attr) { collection: Map<String, Int> ->
+            PrivateInteractor.getUserCollection(null, attr) { collection: Map<String, Int> ->
                 val userAttrCards = allAttrCards.map {
                     it.key to it.value.filter { collection.containsKey(it.shortName) }
                             .map { it to collection[it.shortName] }

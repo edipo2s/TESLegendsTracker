@@ -42,9 +42,7 @@ class SeasonsFragment : BaseFragment() {
     private val SEASON_PAGE_SIZE = 8
 
     private val patches = ArrayList<Patch>()
-    private val publicInteractor by lazy { PublicInteractor() }
-    private val privateInteractor by lazy { PrivateInteractor() }
-    private val seasonRef = { publicInteractor.getSeasonsRef() }
+    private val seasonRef = { PublicInteractor.getSeasonsRef() }
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
     private val patchTransitionName: String by lazy { getString(R.string.patch_transition_container) }
 
@@ -66,7 +64,7 @@ class SeasonsFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.SeasonParser, viewHolder: SeasonViewHolder) {
-                viewHolder.bind(model.toSeason(itemKey), patches, publicInteractor, privateInteractor)
+                viewHolder.bind(model.toSeason(itemKey), patches)
             }
 
             override fun onSyncEnd() {
@@ -83,7 +81,7 @@ class SeasonsFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventBus.post(CmdUpdateTitle(R.string.menu_seasons))
-        publicInteractor.getPatches {
+        PublicInteractor.getPatches {
             patches.addAll(it.filter { it.type != PatchType.REWARD })
             configureRecycleView()
         }
@@ -114,8 +112,7 @@ class SeasonsFragment : BaseFragment() {
                     LinearLayoutManager.HORIZONTAL, true)
         }
 
-        fun bind(season: Season, patches: List<Patch>, publicInteractor: PublicInteractor,
-                 privateInteractor: PrivateInteractor) {
+        fun bind(season: Season, patches: List<Patch>) {
             with(itemView) {
                 season_number.text = when (season.id) {
                     1 -> "1st"
@@ -132,7 +129,7 @@ class SeasonsFragment : BaseFragment() {
                 doAsync {
                     if (season.rewardCardShortname != null) {
                         val rewardAttr = Attribute.valueOf(season.rewardCardAttr.toUpperCase())
-                        publicInteractor.getCard(CardSet.CORE, rewardAttr, season.rewardCardShortname) { card ->
+                        PublicInteractor.getCard(CardSet.CORE, rewardAttr, season.rewardCardShortname) { card ->
                             context.runOnUiThread {
                                 season_card_reward.setImageBitmap(card.imageBitmap(context))
                                 season_card_reward.setOnClickListener { itemClick(season_card_reward, card) }
@@ -140,7 +137,7 @@ class SeasonsFragment : BaseFragment() {
                         }
                     }
                     val onError: (Exception?) -> Unit = { updateMatchesInfo(listOf(), true) }
-                    privateInteractor.getUserMatches(season, MatchMode.RANKED, onError) { rankedMatches ->
+                    PrivateInteractor.getUserMatches(season, MatchMode.RANKED, onError) { rankedMatches ->
                         val actualSeasonUuid = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
                         val noMatches = rankedMatches.isEmpty() && season.uuid != actualSeasonUuid
                         updateMatchesInfo(rankedMatches, noMatches)

@@ -46,7 +46,6 @@ class CardActivity : BaseActivity() {
 
     }
 
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
@@ -82,7 +81,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged()) {
             showUserCardQtd()
         }
-        privateInteractor.isUserCardFavorite(card) {
+        PrivateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()
         }
@@ -111,7 +110,7 @@ class CardActivity : BaseActivity() {
 
     private fun showUserCardQtd() {
         card_collection_qtd_layout.visibility = View.VISIBLE
-        privateInteractor.getUserCollection(card.set, card.attr) {
+        PrivateInteractor.getUserCollection(card.set, card.attr) {
             userCardQtd = it[card.shortName] ?: 0
             updateChangeCardQtdButtons()
             card_collection_qtd_loading.visibility = View.GONE
@@ -135,7 +134,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun updateCardQtd(newCardQtd: Int) {
-        privateInteractor.setUserCardQtd(card, newCardQtd) {
+        PrivateInteractor.setUserCardQtd(card, newCardQtd) {
             userCardQtd = newCardQtd
             card_collection_qtd.text = newCardQtd.toString()
             updateChangeCardQtdButtons()
@@ -194,7 +193,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun getCardPatches() {
-        PublicInteractor().getPatches {
+        PublicInteractor.getPatches {
             val cardPatches = it.filter {
                 it.changes.filter { it.shortName == card.shortName }.isNotEmpty()
             }.sortedBy { it.date }.reversed()
@@ -223,7 +222,7 @@ class CardActivity : BaseActivity() {
 
     private fun onFavoriteClick() {
         if (App.hasUserLogged()) {
-            PrivateInteractor().setUserCardFavorite(card, !favorite) {
+            PrivateInteractor.setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
                 val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
                 toast(getString(stringRes, card.name))

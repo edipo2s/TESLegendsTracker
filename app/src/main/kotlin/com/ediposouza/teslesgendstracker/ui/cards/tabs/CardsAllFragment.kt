@@ -11,7 +11,6 @@ import android.view.*
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
-import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
@@ -48,8 +47,6 @@ open class CardsAllFragment : BaseFragment() {
     var menuSets: SubMenu? = null
     var sets: List<CardSet> = listOf()
 
-    val publicInteractor: PublicInteractor by lazy { PublicInteractor() }
-    val privateInteractor: PrivateInteractor by lazy { PrivateInteractor() }
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
 
@@ -112,7 +109,7 @@ open class CardsAllFragment : BaseFragment() {
         menuSets?.apply {
             clear()
             add(0, R.id.menu_sets_all, 0, getString(R.string.cards_sets_all)).setIcon(R.drawable.ic_checked)
-            PublicInteractor().getSets {
+            PublicInteractor.getSets {
                 sets = it
                 sets.forEach {
                     add(0, it.ordinal, 0, it.name.toLowerCase().capitalize())
@@ -210,7 +207,7 @@ open class CardsAllFragment : BaseFragment() {
 
     private fun loadCardsByAttr(attribute: Attribute) {
         currentAttr = attribute
-        publicInteractor.getCards(setFilter, attribute) {
+        PublicInteractor.getCards(setFilter, attribute) {
             cardsLoaded = it
             showCards()
         }
