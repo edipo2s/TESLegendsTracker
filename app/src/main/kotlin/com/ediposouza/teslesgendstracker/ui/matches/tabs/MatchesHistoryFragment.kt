@@ -48,7 +48,7 @@ class MatchesHistoryFragment : BaseFragment() {
 
     private val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
-                FirebaseParsers.MatchParser::class.java, { PrivateInteractor().getUserMatchesRef() },
+                FirebaseParsers.MatchParser::class.java, { PrivateInteractor.getUserMatchesRef() },
                 MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter),
                 StickyRecyclerHeadersAdapter<MatchViewHolder> {
 
@@ -177,7 +177,7 @@ class MatchesHistoryFragment : BaseFragment() {
             val title = view.context.getString(R.string.match_history_delete, opponentClass)
             view.context.alertThemed(title, view.context.getString(R.string.confirm_message), R.style.AppDialog) {
                 positiveButton(android.R.string.yes, {
-                    PrivateInteractor().deleteMatch(match) {
+                    PrivateInteractor.deleteMatch(match) {
                         onDelete.invoke()
                     }
                 })

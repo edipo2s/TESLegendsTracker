@@ -40,8 +40,6 @@ open class DecksPublicFragment : BaseFragment() {
 
     protected var searchFilter: String? = null
     protected var currentClasses = Class.values()
-    protected val publicInteractor = PublicInteractor()
-    protected val privateInteractor = PrivateInteractor()
 
     private val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
     private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
@@ -51,7 +49,7 @@ open class DecksPublicFragment : BaseFragment() {
     open protected val isDeckPrivate: Boolean = false
 
     open protected val dataRef = {
-        publicInteractor.getPublicDecksRef()
+        PublicInteractor.getPublicDecksRef()
     }
 
     private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
@@ -60,7 +58,7 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     val itemClick = { view: View, deck: Deck ->
-        PrivateInteractor().getUserFavoriteDecks(deck.cls) {
+        PrivateInteractor.getUserFavoriteDecks(deck.cls) {
             val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
@@ -88,7 +86,7 @@ open class DecksPublicFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
-                viewHolder.bind(model.toDeck(itemKey, isDeckPrivate), privateInteractor)
+                viewHolder.bind(model.toDeck(itemKey, isDeckPrivate))
             }
 
             override fun onSyncEnd() {
@@ -164,16 +162,16 @@ open class DecksPublicFragment : BaseFragment() {
 
         constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
 
-        fun bind(itemKey: String, publicInteractor: PublicInteractor, privateInteractor: PrivateInteractor) {
+        fun bind(itemKey: String) {
             itemView.deck_loading.visibility = View.VISIBLE
             itemView.deck_cover.visibility = View.GONE
             itemView.deck_info.visibility = View.GONE
-            publicInteractor.getPublicDeck(itemKey) {
-                bind(it, privateInteractor)
+            PublicInteractor.getPublicDeck(itemKey) {
+                bind(it)
             }
         }
 
-        fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
+        fun bind(deck: Deck) {
             with(itemView) {
                 deck_loading.visibility = View.GONE
                 deck_cover.visibility = View.VISIBLE
@@ -207,15 +205,15 @@ open class DecksPublicFragment : BaseFragment() {
                 deck_likes.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
                 deck_views.text = numberInstance.format(deck.views)
                 deck_views.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
-                calculateMissingSoul(deck, privateInteractor)
+                calculateMissingSoul(deck)
             }
         }
 
-        fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {
+        fun calculateMissingSoul(deck: Deck) {
             with(itemView.deck_soul_missing) {
                 visibility = View.INVISIBLE
                 itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-                privateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                PrivateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
                     itemView.deck_soul_missing_loading.visibility = View.GONE
                     val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                     Timber.d("Missing %d", missingSoul)

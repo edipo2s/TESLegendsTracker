@@ -81,7 +81,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_qtd.visibility = if (showQtd) View.VISIBLE else View.GONE
         if (deck != null) {
             doAsync {
-                PublicInteractor().getDeckCards(deck) {
+                PublicInteractor.getDeckCards(deck) {
                     context.runOnUiThread {
                         (decklist_recycle_view.adapter as DeckListAdapter).showDeck(it)
                         onCardListChange()

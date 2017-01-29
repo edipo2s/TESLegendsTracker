@@ -56,7 +56,6 @@ class NewMatchesActivity : BaseActivity() {
 
     }
 
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val deckName by lazy { intent.getStringExtra(EXTRA_DECK_NAME) }
     private val deckCls by lazy { Class.values()[intent.getIntExtra(EXTRA_DECK_CLASS, 0)] }
     private val deckType by lazy { DeckType.values()[intent.getIntExtra(EXTRA_DECK_TYPE, 0)] }
@@ -189,7 +188,7 @@ class NewMatchesActivity : BaseActivity() {
                 MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
                 MatchDeck(optDeckName, optDeckCls, optDeckType),
                 mode, currentSeason, currentRank.toInt(), legendRank, win)
-        privateInteractor.saveMatch(newMatch) {
+        PrivateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
             new_matches_first.isChecked = false
             new_matches_opt_name.setText("")

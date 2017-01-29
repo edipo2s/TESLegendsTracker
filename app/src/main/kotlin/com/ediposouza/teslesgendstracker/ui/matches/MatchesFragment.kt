@@ -153,7 +153,7 @@ class MatchesFragment : BaseFragment() {
         menuSeasons?.apply {
             clear()
             add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all)).setIcon(R.drawable.ic_checked)
-            PublicInteractor().getSeasons {
+            PublicInteractor.getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
                     add(0, it.id, 0, "${it.date.month}/${it.date.year}")
@@ -167,7 +167,7 @@ class MatchesFragment : BaseFragment() {
         var decks = listOf<Deck?>(null)
         val classClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                PrivateInteractor().getUserDecks(Class.values()[pos]) { myDecks ->
+                PrivateInteractor.getUserDecks(Class.values()[pos]) { myDecks ->
                     decks = (myDecks as List<Deck?>).sortedBy { it?.name }.plusElement(null)
                     dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_dropdown_item,

@@ -184,14 +184,14 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     Timber.d("signWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
                         val currentUser = firebaseAuth.currentUser
-                        PublicInteractor().getUserInfo(currentUser?.uid ?: "") {
+                        PublicInteractor.getUserInfo(currentUser?.uid ?: "") {
                             if (it.name.isEmpty()) {
                                 toast("SignUp with " + currentUser?.displayName)
                                 MetricsManager.trackSignUp()
                             } else {
                                 toast("SignIn with " + currentUser?.displayName)
                             }
-                            PrivateInteractor().setUserInfo()
+                            PrivateInteractor.setUserInfo()
                         }
                         eventBus.post(CmdLoginSuccess())
                     } else {

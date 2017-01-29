@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 
 /**
@@ -27,7 +28,7 @@ class CardsFavoritesFragment : CardsAllFragment() {
     }
 
     override fun showCards() {
-        privateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
+        PrivateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
             cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
             scrollToTop()
         }

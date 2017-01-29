@@ -140,7 +140,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         menuSeasons?.apply {
             clear()
             add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all)).setIcon(R.drawable.ic_checked)
-            PublicInteractor().getSeasons {
+            PublicInteractor.getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
                     add(0, it.id, 0, "${it.date.month}/${it.date.year}")
@@ -153,7 +153,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
     private fun getMatches() {
         loadingStatisticsData()
-        PrivateInteractor().getUserMatches(currentSeason) {
+        PrivateInteractor.getUserMatches(currentSeason) {
             results.clear()
             val classMatches = it.filter { it.player.cls == playerClass }
             classMatches.filter { it.mode == matchMode }.groupBy { it.player }.forEach {
@@ -180,13 +180,13 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     private fun updateStatisticsData() {
         doAsync {
             val data = mutableListOf<List<BodyItem>>().apply {
-                results.forEach { myDeck, matches ->
+                results.forEach { result ->
                     add(mutableListOf<BodyItem>().apply {
                         Class.values().forEach { opponentCls ->
-                            val matchesVsOpponent = matches.filter { it.opponent.cls == opponentCls }
+                            val matchesVsOpponent = result.value.filter { it.opponent.cls == opponentCls }
                             add(getResultBodyItem(matchesVsOpponent))
                         }
-                        add(getResultBodyItem(matches))
+                        add(getResultBodyItem(result.value))
                     })
                 }
             }

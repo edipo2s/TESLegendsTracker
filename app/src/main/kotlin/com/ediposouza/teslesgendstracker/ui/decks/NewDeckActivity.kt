@@ -164,7 +164,7 @@ class NewDeckActivity : BaseFilterActivity() {
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
         var deckPatches = listOf<Patch>()
-        PublicInteractor().getPatches {
+        PublicInteractor.getPatches {
             deckPatches = it
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
@@ -191,7 +191,7 @@ class NewDeckActivity : BaseFilterActivity() {
             eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
             return
         }
-        PrivateInteractor().saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
+        PrivateInteractor.saveDeck(deckName, deckCls, deckTypeSelected, new_deck_cardlist.getSoulCost(),
                 deckPatchSelected.uuidDate, deckCards, deckPrivate) {
             toast(if (deckPrivate) R.string.new_deck_save_as_private else R.string.new_deck_save_as_public)
             val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)

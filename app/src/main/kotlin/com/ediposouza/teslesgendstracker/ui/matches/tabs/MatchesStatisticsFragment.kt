@@ -104,7 +104,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private fun getMatches() {
         loadingStatisticsData()
-        PrivateInteractor().getUserMatches(currentSeason) {
+        PrivateInteractor.getUserMatches(currentSeason) {
             it.filter { it.mode == currentMatchMode }.groupBy { it.player.cls }.forEach {
                 results[it.key]?.addAll(it.value)
             }

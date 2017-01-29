@@ -23,6 +23,8 @@ import android.webkit.WebViewClient
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
@@ -185,7 +187,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        privateInteractor.getUserCollection(setFilter, currentAttr) {
+        PrivateInteractor.getUserCollection(setFilter, currentAttr) {
             val userCards = it
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0) }
             cards_recycler_view?.itemAnimator = ScaleInAnimator()
@@ -203,7 +205,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         val newQtd = cardSlot.qtd.inc()
         val cardMaxQtd = if (cardSlot.card.unique) 1 else 3
         val finalQtd = if (newQtd <= cardMaxQtd) newQtd else 0
-        privateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
+        PrivateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics.updateStatistics(currentAttr)
@@ -229,9 +231,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
 
         private fun importLegendDecksCards(legendsSlots: Map<String, Int>) {
-            publicInteractor.getCards(null) { allCards ->
+            PublicInteractor.getCards(null) { allCards ->
                 val legendsDecksCards = allCards.filter { legendsSlots.keys.contains(it.shortName) }.toMutableList()
-                privateInteractor.getUserCollection(null) { userSlots ->
+                PrivateInteractor.getUserCollection(null) { userSlots ->
                     val userCards = allCards.filter { userSlots.keys.contains(it.shortName) }.toMutableList()
                     val onlyInLegendsDecks = legendsDecksCards.filter { !userSlots.keys.contains(it.shortName) }
                     val onlyInUserCollection = userCards.filter { !legendsSlots.keys.contains(it.shortName) }
@@ -244,13 +246,13 @@ class CardsCollectionFragment : CardsAllFragment() {
                     }
                     onlyInLegendsDecks.forEach {
                         val qtd = legendsSlots[it.shortName] ?: 0
-                        privateInteractor.setUserCardQtd(it, qtd) {
+                        PrivateInteractor.setUserCardQtd(it, qtd) {
                             Timber.d("$qtd ${it.name} card added")
                         }
                     }
                     legendsQtdGreater.forEach {
                         val qtd = legendsSlots[it.shortName] ?: 0
-                        privateInteractor.setUserCardQtd(it, qtd) {
+                        PrivateInteractor.setUserCardQtd(it, qtd) {
                             Timber.d("${it.name} qtd updated to $qtd")
                         }
                     }

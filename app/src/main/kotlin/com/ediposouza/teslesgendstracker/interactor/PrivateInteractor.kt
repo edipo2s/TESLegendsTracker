@@ -16,7 +16,7 @@ import java.util.*
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PrivateInteractor : BaseInteractor() {
+object PrivateInteractor : BaseInteractor() {
 
     private val NODE_DECKS_PRIVATE = "private"
     private val NODE_FAVORITE = "favorite"
@@ -257,7 +257,7 @@ class PrivateInteractor : BaseInteractor() {
     }
 
     fun getUserFavoriteDecks(cls: Class?, onSuccess: (List<Deck>?) -> Unit) {
-        PublicInteractor().getPublicDecks(cls) { publicDecks ->
+        PublicInteractor.getPublicDecks(cls) { publicDecks ->
             getUserFavoriteDecksRef()?.apply {
                 addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -336,10 +336,9 @@ class PrivateInteractor : BaseInteractor() {
     }
 
     fun getDeckMissingCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardMissing>) -> Unit) {
-        val publicInteractor = PublicInteractor()
         val attr1 = deck.cls.attr1
         val attr2 = deck.cls.attr2
-        publicInteractor.getCards(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+        PublicInteractor.getCards(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
             val cards = it.map { it.shortName to it.rarity }.toMap()
             getUserCollection(null, attr1, attr2, Attribute.DUAL, Attribute.NEUTRAL) {
                 val userCards = it
