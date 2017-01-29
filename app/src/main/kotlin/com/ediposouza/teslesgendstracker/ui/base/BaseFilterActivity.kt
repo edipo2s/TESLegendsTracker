@@ -86,6 +86,7 @@ open class BaseFilterActivity : BaseActivity() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateRarityMagikaFiltersPosition(update: CmdUpdateRarityMagikaFiltersPosition) {
         filterGreatMargin = update.high
         val endMargin = if (filterGreatMargin) R.dimen.filter_great_margin_bottom else R.dimen.large_margin

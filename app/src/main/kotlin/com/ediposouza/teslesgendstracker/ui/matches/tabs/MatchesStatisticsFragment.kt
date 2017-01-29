@@ -174,7 +174,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterMode(cmdFilterMode: CmdFilterMode) {
+    @Suppress("unused")
+    fun onCmdFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
         if (isFragmentSelected) {
             getMatches()
@@ -182,7 +183,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
+    @Suppress("unused")
+    fun onCmdFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
         if (isFragmentSelected) {
             getMatches()
@@ -190,7 +192,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
+    @Suppress("unused")
+    fun onCmdUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         if (isFragmentSelected) {
             getMatches()
         }

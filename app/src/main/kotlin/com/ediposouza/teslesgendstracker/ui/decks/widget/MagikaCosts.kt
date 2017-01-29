@@ -110,7 +110,7 @@ class MagikaCosts(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val factor: Float = if (maxMagikaCostQtd == 0) 0f else magikaCostQtd / maxMagikaCostQtd.toFloat()
         val topMargin = (zeroMargin - zeroMargin * factor).toInt()
         magikaCostViewLP.topMargin = if (topMargin == zeroMargin) topMargin - 5 else topMargin
-        magikaCostView?.layoutParams = magikaCostViewLP
+        magikaCostView.layoutParams = magikaCostViewLP
     }
 
 }

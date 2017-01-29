@@ -124,25 +124,27 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         showDecks()
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
         showDecks()
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
         searchFilter = filterSearch.search?.toLowerCase()?.trim()
         decksAdapter.reset()
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
         currentClasses = cmdShowDecksByClasses.classes.toTypedArray()
         showDecks()

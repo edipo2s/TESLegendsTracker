@@ -144,6 +144,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateRarityMagikaFiltersVisibility(update: CmdUpdateVisibility) {
         if (isFragmentSelected) {
             (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(update.show)
@@ -151,13 +152,14 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdShowCardsByAttr(showCardsByAttr: CmdShowCardsByAttr) {
         loadCardsByAttr(showCardsByAttr.attr)
         if (isFragmentSelected) {
@@ -166,12 +168,14 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterSet(filterSet: CmdFilterSet) {
         setFilter = filterSet.set
         loadCardsByAttr(currentAttr)
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterClass(filterClass: CmdFilterClass) {
         classFilter = filterClass.cls
         showCards()
@@ -181,12 +185,14 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
         searchFilter = filterSearch.search
         showCards()
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterRarity(filterRarity: CmdFilterRarity) {
         rarityFilter = filterRarity.rarity
         showCards()
@@ -196,6 +202,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterMagika(filterMagika: CmdFilterMagika) {
         magikaFilter = filterMagika.magika
         showCards()

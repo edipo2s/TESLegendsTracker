@@ -366,13 +366,14 @@ class DashActivity : BaseFilterActivity(),
     }
 
     @Subscribe
-    fun onUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
+    @Suppress("unused")
+    fun onCmdUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
         dash_toolbar_title.setText(cmdUpdateTitle.title)
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+    @Suppress("unused", "UNUSED_PARAMETER", "DEPRECATION")
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         updateUserMenuInfo()
         updateCollectionStatistics()
         dash_navigation_view.getHeaderView(0).profile_clear_cache_webview.clearCache(true)

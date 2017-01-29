@@ -148,6 +148,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
             decks_fab_add.show()

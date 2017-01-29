@@ -254,6 +254,7 @@ class MatchesFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
             matches_fab_add.show()

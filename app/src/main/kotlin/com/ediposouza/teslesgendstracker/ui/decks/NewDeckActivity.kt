@@ -162,7 +162,7 @@ class NewDeckActivity : BaseFilterActivity() {
         val deckTypes = DeckType.values().filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
-        var deckPatches = listOf<Patch>()
+        val deckPatches = listOf<Patch>()
         PublicInteractor.getPatches { deckPatches ->
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
@@ -208,6 +208,7 @@ class NewDeckActivity : BaseFilterActivity() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
         new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
@@ -215,6 +216,7 @@ class NewDeckActivity : BaseFilterActivity() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdRemAttr(cmdRemAttr: CmdRemAttr) {
         new_deck_attr_filter.unlockAttr(cmdRemAttr.attr)
         updateDualFilter()
