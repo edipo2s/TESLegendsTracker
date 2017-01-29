@@ -37,11 +37,11 @@ open class CardsAllFragment : BaseFragment() {
     open val ADS_EACH_ITEMS = 21 //after 7 lines
     open val CARDS_PER_ROW = 3
 
-    var currentAttr: Attribute = Attribute.STRENGTH
+    var currentAttr: CardAttribute = CardAttribute.STRENGTH
     var cardsLoaded: List<Card> = ArrayList()
     var magikaFilter: Int = -1
     var setFilter: CardSet? = null
-    var classFilter: Class? = null
+    var classFilter: DeckClass? = null
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
@@ -88,7 +88,7 @@ open class CardsAllFragment : BaseFragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
-        currentAttr = Attribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
+        currentAttr = CardAttribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -205,7 +205,7 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    private fun loadCardsByAttr(attribute: Attribute) {
+    private fun loadCardsByAttr(attribute: CardAttribute) {
         currentAttr = attribute
         PublicInteractor.getCards(setFilter, attribute) {
             cardsLoaded = it
@@ -227,7 +227,7 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    fun updateCardsList(selectedAttr: Attribute = currentAttr) {
+    fun updateCardsList(selectedAttr: CardAttribute = currentAttr) {
         currentAttr = selectedAttr
         shouldScrollToTop = false
         if (cards_recycler_view != null) {
@@ -264,13 +264,13 @@ open class CardsAllFragment : BaseFragment() {
                 }
                 .filter {
                     when {
-                        classFilter != null && currentAttr == Attribute.DUAL ->
-                            if (classFilter?.attr2 == Attribute.NEUTRAL)
+                        classFilter != null && currentAttr == CardAttribute.DUAL ->
+                            if (classFilter?.attr2 == CardAttribute.NEUTRAL)
                                 it.dualAttr1 == classFilter?.attr1 || it.dualAttr2 == classFilter?.attr1
                             else
                                 (it.dualAttr1 == classFilter?.attr1 && it.dualAttr2 == classFilter?.attr2) ||
                                         (it.dualAttr1 == classFilter?.attr2 && it.dualAttr2 == classFilter?.attr1)
-                        else -> it.attr is Attribute
+                        else -> it.attr is CardAttribute
                     }
                 }
     }

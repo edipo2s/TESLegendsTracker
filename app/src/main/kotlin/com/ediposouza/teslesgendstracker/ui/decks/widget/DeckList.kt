@@ -63,8 +63,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_recycle_view.layoutManager = LinearLayoutManager(context)
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
-            val card = Card("Tyr", "tyr", CardSet.CORE, Attribute.DUAL, Attribute.STRENGTH,
-                    Attribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
+            val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
+                    CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                     CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false, "")
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
@@ -196,13 +196,13 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
         private fun notifyCardRemoved(card: Card) {
             when {
-                card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
+                card.attr == CardAttribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
                     eventBus.post(CmdRemAttr(card.dualAttr1))
                     if (items.isEmpty()) {
                         eventBus.post(CmdRemAttr(card.dualAttr2))
                     }
                 }
-                card.attr == Attribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
+                card.attr == CardAttribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
                     eventBus.post(CmdRemAttr(card.dualAttr2))
                     if (items.isEmpty()) {
                         eventBus.post(CmdRemAttr(card.dualAttr1))

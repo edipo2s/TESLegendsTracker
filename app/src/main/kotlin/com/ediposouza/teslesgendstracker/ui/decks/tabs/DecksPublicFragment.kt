@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -39,7 +39,7 @@ open class DecksPublicFragment : BaseFragment() {
     val DECK_PAGE_SIZE = 8
 
     protected var searchFilter: String? = null
-    protected var currentClasses = Class.values()
+    protected var currentClasses = DeckClass.values()
 
     private val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
     private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }

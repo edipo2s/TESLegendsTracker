@@ -40,7 +40,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         private val EXTRA_SEASON_ID = "SeasonIdExtra"
         private val EXTRA_MATCH_MODE = "MatchModeExtra"
 
-        fun newIntent(context: Context, mode: MatchMode, season: Season?, cls: Class): Intent {
+        fun newIntent(context: Context, mode: MatchMode, season: Season?, cls: DeckClass): Intent {
             return context.intentFor<MatchesStatisticsClassActivity>(
                     EXTRA_MATCH_MODE to mode.ordinal,
                     EXTRA_SEASON_ID to (season?.id ?: 0),
@@ -51,7 +51,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
     private val HEADER_FIRST by lazy { getString(R.string.match_vs) }
 
-    private val playerClass by lazy { Class.values()[intent.getIntExtra(EXTRA_CLASS, 0)] }
+    private val playerClass by lazy { DeckClass.values()[intent.getIntExtra(EXTRA_CLASS, 0)] }
     private val matchMode by lazy { MatchMode.values()[intent.getIntExtra(EXTRA_MATCH_MODE, 0)] }
     private var seasons = listOf<Season>()
     private var currentSeason: Season? = null
@@ -83,9 +83,9 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         statisticsClassTableAdapter = StatisticsTableAdapter(this).apply {
             setFirstHeader(HEADER_FIRST)
-            val classTotal: Class? = null
-            header = Class.values().asList().plus(classTotal)
-            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) })
+            val classTotal: DeckClass? = null
+            header = DeckClass.values().asList().plus(classTotal)
+            setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) })
             loadingStatisticsData(this)
             setSection(listOf())
         }
@@ -164,11 +164,11 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsClassTableAdapter) {
-        tableAdapter?.setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) })
+        tableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) })
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            Class.values().forEach { myCls ->
+            DeckClass.values().forEach { myCls ->
                 add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach { opponentCls ->
+                    DeckClass.values().forEach { opponentCls ->
                         add(BodyItem())
                     }
                     add(BodyItem())
@@ -182,7 +182,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             val data = mutableListOf<List<BodyItem>>().apply {
                 results.forEach { result ->
                     add(mutableListOf<BodyItem>().apply {
-                        Class.values().forEach { opponentCls ->
+                        DeckClass.values().forEach { opponentCls ->
                             val matchesVsOpponent = result.value.filter { it.opponent.cls == opponentCls }
                             add(getResultBodyItem(matchesVsOpponent))
                         }
@@ -219,10 +219,10 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         return if (total == 0f) -1f else 100 / total * wins
     }
 
-    class BodyItem(val result: String? = null, val cls: Class? = null)
+    class BodyItem(val result: String? = null, val cls: DeckClass? = null)
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
-            Class, CellClass, List<BodyItem>, CellTextCenter, CellTextCenter, CellTextCenter>(context) {
+            DeckClass, CellClass, List<BodyItem>, CellTextCenter, CellTextCenter, CellTextCenter>(context) {
 
         override fun inflateFirstHeader() = CellTextCenter(context)
 
@@ -240,7 +240,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             val headerWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_class_header_width)
             val cellWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_width)
             val colWidths = mutableListOf(headerWidth)
-            Class.values().forEach { colWidths.add(cellWidth) }
+            DeckClass.values().forEach { colWidths.add(cellWidth) }
             colWidths.add(headerWidth)
             return colWidths
         }
@@ -254,20 +254,20 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     }
 
     class CellClass(context: Context) : FrameLayout(context),
-            TableFixHeaderAdapter.HeaderBinder<Class> {
+            TableFixHeaderAdapter.HeaderBinder<DeckClass> {
 
         init {
             LayoutInflater.from(context).inflate(R.layout.itemcell_class, this, true)
         }
 
-        override fun bindHeader(cls: Class?, col: Int) {
+        override fun bindHeader(cls: DeckClass?, col: Int) {
             bindClass(cls)
         }
 
-        private fun bindClass(cls: Class?) {
+        private fun bindClass(cls: DeckClass?) {
             with(rootView) {
                 val attr1Visibility = if (cls != null) View.VISIBLE else View.GONE
-                val attr2Visibility = if (cls?.attr2 != Attribute.NEUTRAL) attr1Visibility else View.GONE
+                val attr2Visibility = if (cls?.attr2 != CardAttribute.NEUTRAL) attr1Visibility else View.GONE
                 cell_class_attr1.visibility = attr1Visibility
                 cell_class_attr2.visibility = attr2Visibility
                 cell_class_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)

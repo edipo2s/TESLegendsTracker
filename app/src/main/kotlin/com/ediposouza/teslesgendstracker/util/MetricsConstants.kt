@@ -65,7 +65,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_SET = "Set"
     }
 
-    class ACTION_CARD_FILTER_ATTR(val attr: Attribute?) : MetricAction("FilterCardAttr") {
+    class ACTION_CARD_FILTER_ATTR(val attr: CardAttribute?) : MetricAction("FilterCardAttr") {
         val PARAM_ATTR = "Attr"
     }
 
@@ -114,7 +114,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_SEASON = "Season"
     }
 
-    class ACTION_MATCH_STATISTICS_CLASS(val cls: Class) : MetricAction("MatchStatisticsClass") {
+    class ACTION_MATCH_STATISTICS_CLASS(val cls: DeckClass) : MetricAction("MatchStatisticsClass") {
         val PARAM_CLASS = "Class"
     }
 
@@ -123,7 +123,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_DECK_VALUE_OTHER = "Other"
     }
 
-    class ACTION_NEW_MATCH_SAVE(val myDeckCls: Class, val myDeckType: DeckType, val optDeckCls: Class,
+    class ACTION_NEW_MATCH_SAVE(val myDeckCls: DeckClass, val myDeckType: DeckType, val optDeckCls: DeckClass,
                                 val optDeckType: DeckType, val mode: MatchMode, val season: String?,
                                 val legendRank: Boolean, val deckTrackerUsed: Boolean) : MetricAction("MatchNew") {
         val PARAM_MY_CLS = "MyClass"

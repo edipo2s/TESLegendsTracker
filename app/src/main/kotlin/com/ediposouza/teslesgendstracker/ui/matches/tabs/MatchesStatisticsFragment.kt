@@ -40,11 +40,11 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private var currentMatchMode = MatchMode.RANKED
     private var currentSeason: Season? = null
-    private var selectedClass: Class? = null
+    private var selectedClass: DeckClass? = null
     private var showPercent: CompoundButton? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
-    var results: HashMap<Class, ArrayList<Match>> = HashMap()
+    var results: HashMap<DeckClass, ArrayList<Match>> = HashMap()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_statistics)
@@ -55,9 +55,9 @@ class MatchesStatisticsFragment : BaseFragment() {
         setHasOptionsMenu(true)
         statisticsTableAdapter = StatisticsTableAdapter(context).apply {
             setFirstHeader(HEADER_FIRST)
-            val classTotal: Class? = null
-            header = Class.values().asList().plus(classTotal)
-            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
+            val classTotal: DeckClass? = null
+            header = DeckClass.values().asList().plus(classTotal)
+            setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
             loadingStatisticsData(this)
             setSection(listOf())
             setClickListenerFirstBody { rowItems, view, row, col -> selectRow(row) }
@@ -84,9 +84,9 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun selectRow(row: Int) {
-        selectedClass = if (row >= 0 && row < Class.values().size) Class.values()[row] else null
+        selectedClass = if (row >= 0 && row < DeckClass.values().size) DeckClass.values()[row] else null
         updateStatisticsData()
-        statisticsTableAdapter?.setFirstBody(Class.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
+        statisticsTableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
                 .plus(listOf(listOf(BodyItem()))))
         if (selectedClass != null) {
             val classView = matches_statistics_table.childrenSequence()
@@ -113,18 +113,18 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
-        results = HashMap(Class.values().map { it to ArrayList<Match>() }.toMap())
+        results = HashMap(DeckClass.values().map { it to ArrayList<Match>() }.toMap())
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            Class.values().forEach { myCls ->
+            DeckClass.values().forEach { myCls ->
                 add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach { opponentCls ->
+                    DeckClass.values().forEach { opponentCls ->
                         add(BodyItem())
                     }
                     add(BodyItem())
                 })
             }
             add(mutableListOf<BodyItem>().apply {
-                Class.values().forEach {
+                DeckClass.values().forEach {
                     add(BodyItem())
                 }
                 add(BodyItem())
@@ -135,10 +135,10 @@ class MatchesStatisticsFragment : BaseFragment() {
     private fun updateStatisticsData() {
         doAsync {
             val data = mutableListOf<List<BodyItem>>().apply {
-                Class.values().forEach { myCls ->
+                DeckClass.values().forEach { myCls ->
                     add(mutableListOf<BodyItem>().apply {
                         val resByMyCls = results[myCls]!!
-                        Class.values().forEach { opponentCls ->
+                        DeckClass.values().forEach { opponentCls ->
                             val matchesVsOpponent = resByMyCls.filter { it.opponent.cls == opponentCls }
                             add(getResultBodyItem(matchesVsOpponent, myCls == selectedClass))
                         }
@@ -147,7 +147,7 @@ class MatchesStatisticsFragment : BaseFragment() {
                 }
                 val allMatches = results.flatMap { it.value }
                 add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach {
+                    DeckClass.values().forEach {
                         val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
                         add(getResultBodyItem(resByOpponent, false))
                     }
@@ -197,10 +197,10 @@ class MatchesStatisticsFragment : BaseFragment() {
         }
     }
 
-    class BodyItem(val result: String? = null, val cls: Class? = null, val selected: Boolean = false)
+    class BodyItem(val result: String? = null, val cls: DeckClass? = null, val selected: Boolean = false)
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
-            Class, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
+            DeckClass, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
 
         override fun inflateFirstHeader() = CellTextCenter(context)
 
@@ -218,7 +218,7 @@ class MatchesStatisticsFragment : BaseFragment() {
             val headerWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_header_width)
             val cellWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_width)
             val colWidths = mutableListOf(headerWidth)
-            Class.values().forEach { colWidths.add(cellWidth) }
+            DeckClass.values().forEach { colWidths.add(cellWidth) }
             colWidths.add(headerWidth)
             return colWidths
         }
@@ -232,14 +232,14 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     class CellClass(context: Context) : FrameLayout(context),
-            TableFixHeaderAdapter.HeaderBinder<Class>,
+            TableFixHeaderAdapter.HeaderBinder<DeckClass>,
             TableFixHeaderAdapter.FirstBodyBinder<List<BodyItem>> {
 
         init {
             LayoutInflater.from(context).inflate(R.layout.itemcell_class, this, true)
         }
 
-        override fun bindHeader(cls: Class?, col: Int) {
+        override fun bindHeader(cls: DeckClass?, col: Int) {
             bindClass(cls, false)
         }
 
@@ -248,10 +248,10 @@ class MatchesStatisticsFragment : BaseFragment() {
             bindClass(bodyItem.cls, bodyItem.selected)
         }
 
-        private fun bindClass(cls: Class?, selected: Boolean) {
+        private fun bindClass(cls: DeckClass?, selected: Boolean) {
             with(rootView) {
                 val attr1Visibility = if (cls != null) View.VISIBLE else View.GONE
-                val attr2Visibility = if (cls?.attr2 != Attribute.NEUTRAL) attr1Visibility else View.GONE
+                val attr2Visibility = if (cls?.attr2 != CardAttribute.NEUTRAL) attr1Visibility else View.GONE
                 cell_class_attr1.visibility = attr1Visibility
                 cell_class_attr2.visibility = attr2Visibility
                 cell_class_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)

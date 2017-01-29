@@ -182,7 +182,7 @@ class PatchActivity : BaseActivity() {
                 patch_card_old_image.setImageBitmap(patchChange.oldImageBitmap(context, patchUuid))
                 patch_card_new_image.setImageBitmap(patchChange.newImageBitmap(context, nextPatchUuid))
                 val set = CardSet.of(patchChange.set)
-                val attr = Attribute.valueOf(patchChange.attr.toUpperCase())
+                val attr = CardAttribute.valueOf(patchChange.attr.toUpperCase())
                 PublicInteractor.getCard(set, attr, patchChange.shortName) { card ->
                     val cardOld = card.patchVersion(context, patchUuid)
                     val cardNew = card.patchVersion(context, nextPatchUuid)

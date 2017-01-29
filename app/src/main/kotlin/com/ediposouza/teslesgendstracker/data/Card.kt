@@ -31,7 +31,7 @@ enum class CardSet(val db: String) {
 
 }
 
-enum class Attribute(@IntegerRes val imageRes: Int) {
+enum class CardAttribute(@IntegerRes val imageRes: Int) {
 
     STRENGTH(R.drawable.attr_strength),
     INTELLIGENCE(R.drawable.attr_intelligence),
@@ -40,35 +40,6 @@ enum class Attribute(@IntegerRes val imageRes: Int) {
     ENDURANCE(R.drawable.attr_endurance),
     NEUTRAL(R.drawable.attr_neutral),
     DUAL(R.drawable.attr_dual)
-
-}
-
-enum class Class(val attr1: Attribute, val attr2: Attribute = Attribute.NEUTRAL, @IntegerRes val imageRes: Int) {
-
-    ARCHER(Attribute.STRENGTH, Attribute.AGILITY, R.drawable.deck_class_archer),
-    ASSASSIN(Attribute.INTELLIGENCE, Attribute.AGILITY, R.drawable.deck_class_assassin),
-    BATTLEMAGE(Attribute.STRENGTH, Attribute.INTELLIGENCE, R.drawable.deck_class_battlemage),
-    CRUSADER(Attribute.STRENGTH, Attribute.WILLPOWER, R.drawable.deck_class_crusader),
-    MAGE(Attribute.INTELLIGENCE, Attribute.WILLPOWER, R.drawable.deck_class_mage),
-    MONK(Attribute.WILLPOWER, Attribute.AGILITY, R.drawable.deck_class_monk),
-    SCOUT(Attribute.AGILITY, Attribute.ENDURANCE, R.drawable.deck_class_scout),
-    SORCERER(Attribute.INTELLIGENCE, Attribute.ENDURANCE, R.drawable.deck_class_sorcerer),
-    SPELLSWORD(Attribute.WILLPOWER, Attribute.ENDURANCE, R.drawable.deck_class_spellsword),
-    WARRIOR(Attribute.STRENGTH, Attribute.ENDURANCE, R.drawable.deck_class_warrior),
-    STRENGTH(Attribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
-    INTELLIGENCE(Attribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
-    AGILITY(Attribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
-    WILLPOWER(Attribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
-    ENDURANCE(Attribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
-    NEUTRAL(Attribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral);
-
-    companion object {
-
-        fun getClasses(attr: List<Attribute>): List<Class> {
-            return Class.values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
-        }
-
-    }
 
 }
 
@@ -251,14 +222,41 @@ data class CardBasicInfo(
         val attr: String
 )
 
+data class CardSlot(
+
+        val card: Card,
+        val qtd: Int
+
+) : Comparable<CardSlot>, Parcelable {
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<CardSlot> = object : Parcelable.Creator<CardSlot> {
+            override fun createFromParcel(source: Parcel): CardSlot = CardSlot(source)
+            override fun newArray(size: Int): Array<CardSlot?> = arrayOfNulls(size)
+        }
+    }
+
+    constructor(source: Parcel) : this(source.readParcelable<Card>(Card::class.java.classLoader),
+            source.readInt())
+
+    override fun compareTo(other: CardSlot): Int = card.compareTo(other.card)
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeParcelable(card, 0)
+        dest?.writeInt(qtd)
+    }
+}
+
 data class Card(
 
         val name: String,
         val shortName: String,
         val set: CardSet,
-        val attr: Attribute,
-        val dualAttr1: Attribute,
-        val dualAttr2: Attribute,
+        val attr: CardAttribute,
+        val dualAttr1: CardAttribute,
+        val dualAttr2: CardAttribute,
         val rarity: CardRarity,
         val unique: Boolean,
         val cost: Int,
@@ -307,8 +305,8 @@ data class Card(
 
     constructor(source: Parcel) : this(source.readString(), source.readString(),
             CardSet.values()[source.readInt()],
-            Attribute.values()[source.readInt()], Attribute.values()[source.readInt()],
-            Attribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
+            CardAttribute.values()[source.readInt()], CardAttribute.values()[source.readInt()],
+            CardAttribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },

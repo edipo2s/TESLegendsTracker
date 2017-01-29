@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -44,17 +44,17 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     }
 
     fun updateStatistics() {
-        updateAttributeStatistics(Attribute.STRENGTH)
-        updateAttributeStatistics(Attribute.INTELLIGENCE)
-        updateAttributeStatistics(Attribute.WILLPOWER)
-        updateAttributeStatistics(Attribute.AGILITY)
-        updateAttributeStatistics(Attribute.ENDURANCE)
-        updateAttributeStatistics(Attribute.DUAL)
-        updateAttributeStatistics(Attribute.NEUTRAL)
+        updateAttributeStatistics(CardAttribute.STRENGTH)
+        updateAttributeStatistics(CardAttribute.INTELLIGENCE)
+        updateAttributeStatistics(CardAttribute.WILLPOWER)
+        updateAttributeStatistics(CardAttribute.AGILITY)
+        updateAttributeStatistics(CardAttribute.ENDURANCE)
+        updateAttributeStatistics(CardAttribute.DUAL)
+        updateAttributeStatistics(CardAttribute.NEUTRAL)
         updateStatisticsTotal()
     }
 
-    fun updateStatistics(attr: Attribute) {
+    fun updateStatistics(attr: CardAttribute) {
         updateAttributeStatistics(attr)
         updateStatisticsTotal()
     }
@@ -80,7 +80,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         }
     }
 
-    private fun updateAttributeStatistics(attr: Attribute) {
+    private fun updateAttributeStatistics(attr: CardAttribute) {
         PublicInteractor.getCardsForStatistics(null, attr) {
             val allAttrCards = it.groupBy { it.rarity }
             Timber.d(attr.name + allAttrCards.toString())
@@ -110,14 +110,14 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         }
     }
 
-    private fun statisticsAttr(attr: Attribute) = when (attr) {
-        Attribute.STRENGTH -> rootView.rarity_statistics_strength
-        Attribute.INTELLIGENCE -> rootView.rarity_statistics_intelligence
-        Attribute.WILLPOWER -> rootView.rarity_statistics_willpower
-        Attribute.AGILITY -> rootView.rarity_statistics_agility
-        Attribute.ENDURANCE -> rootView.rarity_statistics_endurance
-        Attribute.NEUTRAL -> rootView.rarity_statistics_neutral
-        Attribute.DUAL -> rootView.rarity_statistics_dual
+    private fun statisticsAttr(attr: CardAttribute) = when (attr) {
+        CardAttribute.STRENGTH -> rootView.rarity_statistics_strength
+        CardAttribute.INTELLIGENCE -> rootView.rarity_statistics_intelligence
+        CardAttribute.WILLPOWER -> rootView.rarity_statistics_willpower
+        CardAttribute.AGILITY -> rootView.rarity_statistics_agility
+        CardAttribute.ENDURANCE -> rootView.rarity_statistics_endurance
+        CardAttribute.NEUTRAL -> rootView.rarity_statistics_neutral
+        CardAttribute.DUAL -> rootView.rarity_statistics_dual
     }
 
 }

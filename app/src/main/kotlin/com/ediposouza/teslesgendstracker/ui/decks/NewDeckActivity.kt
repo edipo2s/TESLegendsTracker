@@ -47,7 +47,7 @@ class NewDeckActivity : BaseFilterActivity() {
     private val EXIT_CONFIRM_MIN_CARDS = 3
     private val KEY_DECK_CARDS = "deckCardsKey"
 
-    private val attrFilterClick: (Attribute) -> Unit = {
+    private val attrFilterClick: (CardAttribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
         new_deck_attr_filter.selectAttr(it, true)
         new_deck_attr_filter.lastAttrSelected = it
@@ -141,8 +141,8 @@ class NewDeckActivity : BaseFilterActivity() {
     private fun configDeckFilters() {
         with(new_deck_attr_filter) {
             filterClick = attrFilterClick
-            onAttrLock = { attr1: Attribute, attr2: Attribute ->
-                val deckCls = Class.getClasses(listOf(attr1, attr2)).first()
+            onAttrLock = { attr1: CardAttribute, attr2: CardAttribute ->
+                val deckCls = DeckClass.getClasses(listOf(attr1, attr2)).first()
                 new_deck_class_cover.setImageResource(deckCls.imageRes)
                 new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
                 val outValue = TypedValue()
@@ -179,8 +179,8 @@ class NewDeckActivity : BaseFilterActivity() {
 
     private fun saveDeck(view: View, deckPatches: List<Patch>) {
         val deckName = view.new_deck_dialog_name.text.toString()
-        val deckCls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
-                new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).first()
+        val deckCls = DeckClass.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: CardAttribute.NEUTRAL,
+                new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL)).first()
         val deckTypeText = view.new_deck_dialog_type_spinner.selectedItem as String
         val deckTypeSelected = DeckType.valueOf(deckTypeText.toUpperCase())
         val deckPatchDesc = view.new_deck_dialog_patch_spinner.selectedItem as String
@@ -202,9 +202,9 @@ class NewDeckActivity : BaseFilterActivity() {
     }
 
     private fun updateDualFilter() {
-        if (new_deck_attr_filter.lastAttrSelected == Attribute.DUAL) {
-            val cls = Class.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: Attribute.NEUTRAL,
-                    new_deck_attr_filter.lockAttr2 ?: Attribute.NEUTRAL)).filter { it != Class.NEUTRAL }
+        if (new_deck_attr_filter.lastAttrSelected == CardAttribute.DUAL) {
+            val cls = DeckClass.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: CardAttribute.NEUTRAL,
+                    new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL)).filter { it != DeckClass.NEUTRAL }
             eventBus.post(CmdFilterClass(cls.firstOrNull()))
         }
     }
