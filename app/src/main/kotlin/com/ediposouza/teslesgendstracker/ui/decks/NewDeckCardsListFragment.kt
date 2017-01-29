@@ -44,7 +44,8 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     }
 
     @Subscribe
-    fun onUpdateCardSlot(cmdUpdateCardSlot: CmdUpdateCardSlot) {
+    @Suppress("unused")
+    fun onCmdUpdateCardSlot(cmdUpdateCardSlot: CmdUpdateCardSlot) {
         cardsAdapter.updateCardSlot(cmdUpdateCardSlot.cardSlot)
     }
 

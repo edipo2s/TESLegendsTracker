@@ -238,12 +238,12 @@ object PublicInteractor : BaseInteractor() {
         })
     }
 
-    fun getSeasonsRef() = database.child(NODE_SEASONS).apply {
+    fun getSeasonsRef() = database.child(NODE_SEASONS)?.apply {
         keepSynced()
     }
 
     fun getSeasons(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Season>) -> Unit) {
-        getSeasonsRef().addListenerForSingleValueEvent(object : ValueEventListener {
+        getSeasonsRef()?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val seasons = ds.children.mapTo(arrayListOf()) {

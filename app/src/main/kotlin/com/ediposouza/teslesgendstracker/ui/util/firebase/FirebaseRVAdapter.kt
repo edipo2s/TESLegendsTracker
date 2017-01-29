@@ -73,17 +73,17 @@ import com.google.firebase.database.Query
  * </VH></T>
  *
  * CONSTRUCTOR
- * @param modelLayout This is the layout used to represent a single item in the list. You will be responsible for populating an
+ * @param mModel This is the layout used to represent a single item in the list. You will be responsible for populating an
  * *                    instance of the corresponding view with the data from an instance of modelClass.
  * *
- * @param viewHolderClass The class that hold references to all sub-views in an instance modelLayout.
+ * @param VH The class that hold references to all sub-views in an instance modelLayout.
  * *
  * @param ref        The Firebase location to watch for data changes.
  * *
  * @param pageSize   initial page size. set 0 for no limit.
  */
 abstract class FirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(
-        var mModel: Class<T>,
+        mModel: Class<T>,
         ref: () -> Query?,
         pageSize: Int = 0,
         orderASC: Boolean = false,
