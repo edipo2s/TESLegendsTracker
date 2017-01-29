@@ -27,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.util.*
 
 /**
  * Created by EdipoSouza on 1/3/17.
@@ -44,7 +43,7 @@ class MatchesStatisticsFragment : BaseFragment() {
     private var showPercent: CompoundButton? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
-    var results: HashMap<DeckClass, ArrayList<Match>> = HashMap()
+    var results: Map<DeckClass, MutableList<Match>> = mutableMapOf()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_statistics)
@@ -113,7 +112,7 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
-        results = HashMap(DeckClass.values().map { it to ArrayList<Match>() }.toMap())
+        results = DeckClass.values().map { it to mutableListOf<Match>() }.toMap()
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
             DeckClass.values().forEach { myCls ->
                 add(mutableListOf<BodyItem>().apply {

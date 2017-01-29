@@ -59,7 +59,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     private var showPercent: CompoundButton? = null
 
     var statisticsClassTableAdapter: StatisticsTableAdapter? = null
-    var results: HashMap<MatchDeck, ArrayList<Match>> = HashMap()
+    var results: MutableMap<MatchDeck, MutableList<Match>> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

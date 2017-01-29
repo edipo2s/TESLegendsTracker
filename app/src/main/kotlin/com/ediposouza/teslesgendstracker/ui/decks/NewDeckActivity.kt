@@ -79,8 +79,7 @@ class NewDeckActivity : BaseFilterActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.apply {
-            val cardsArrayList = ArrayList<CardSlot>()
-            cardsArrayList.addAll(new_deck_cardlist?.getCards() ?: listOf())
+            val cardsArrayList = ArrayList<CardSlot>(new_deck_cardlist?.getCards() ?: listOf())
             putParcelableArrayList(KEY_DECK_CARDS, cardsArrayList)
         }
         super.onSaveInstanceState(outState)
@@ -164,8 +163,7 @@ class NewDeckActivity : BaseFilterActivity() {
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
         var deckPatches = listOf<Patch>()
-        PublicInteractor.getPatches {
-            deckPatches = it
+        PublicInteractor.getPatches { deckPatches ->
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item, deckPatchesDesc)

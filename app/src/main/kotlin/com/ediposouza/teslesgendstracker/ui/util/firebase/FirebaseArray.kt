@@ -30,7 +30,6 @@ package com.ediposouza.teslesgendstracker.ui.util.firebase
 
 import com.google.firebase.database.*
 import timber.log.Timber
-import java.util.*
 
 /**
  * This class implements an array-like collection on top of a Firebase location.
@@ -59,7 +58,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     }
 
     private var mQuery: Query? = null
-    private val mSnapshots: ArrayList<Pair<String, T>> = ArrayList()
+    private val mSnapshots: MutableList<Pair<String, T>> = mutableListOf()
     private val mPageSize: Int
     private var mCurrentSize: Int = 0
     private var isSyncing: Boolean = false

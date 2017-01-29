@@ -5,7 +5,6 @@ import android.os.Parcelable
 import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
-import java.util.*
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL, @IntegerRes val imageRes: Int) {
 
@@ -137,8 +136,8 @@ data class Deck(
             source.readInt(), source.readSerializable() as LocalDateTime, source.readSerializable() as LocalDateTime,
             source.readString(), source.createStringArrayList(), source.readInt(),
             hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) },
-            ArrayList<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
-            ArrayList<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
+            listOf<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
+            listOf<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
 
     override fun describeContents() = 0
 

@@ -99,7 +99,7 @@ object MetricsManager : MetricsConstants() {
                         putString(FirebaseAnalytics.Param.CURRENCY, valueCurrency)
                         putDouble(FirebaseAnalytics.Param.VALUE, value.toDouble())
                     })
-                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(HashMap<String, Any>().apply {
+                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(mutableMapOf<String, Any>().apply {
                         put(FirebaseAnalytics.Param.ITEM_NAME, action.name)
                     }))
                 }

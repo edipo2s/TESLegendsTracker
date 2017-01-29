@@ -187,8 +187,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        PrivateInteractor.getUserCollection(setFilter, currentAttr) {
-            val userCards = it
+        PrivateInteractor.getUserCollection(setFilter, currentAttr) { userCards ->
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0) }
             cards_recycler_view?.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
@@ -313,7 +312,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                                  @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
                                  val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
-        var items: ArrayList<CardSlot> = ArrayList()
+        var items: MutableList<CardSlot> = mutableListOf()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
@@ -325,7 +324,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
         override fun getDefaultItemCount(): Int = items.size
 
-        fun showCards(cardSlots: ArrayList<CardSlot>) {
+        fun showCards(cardSlots: MutableList<CardSlot>) {
             val oldItems = items
             items = cardSlots
             if (items.isEmpty() || items.minus(oldItems).isEmpty()) {

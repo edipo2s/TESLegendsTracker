@@ -41,7 +41,7 @@ class SeasonsFragment : BaseFragment() {
     private val ADS_EACH_ITEMS = 5
     private val SEASON_PAGE_SIZE = 8
 
-    private val patches = ArrayList<Patch>()
+    private val patches = mutableListOf<Patch>()
     private val seasonRef = { PublicInteractor.getSeasonsRef() }
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
     private val patchTransitionName: String by lazy { getString(R.string.patch_transition_container) }
