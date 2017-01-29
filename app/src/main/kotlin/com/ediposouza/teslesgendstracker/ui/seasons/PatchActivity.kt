@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.itemlist_patch_cards.view.*
 import org.jetbrains.anko.intentFor
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
-import java.util.*
 
 class PatchActivity : BaseActivity() {
 
@@ -50,7 +49,7 @@ class PatchActivity : BaseActivity() {
 
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
     private val selectedPatch: Patch by lazy { intent.getParcelableExtra<Patch>(EXTRA_PATCH) }
-    private val patches: ArrayList<Patch> by lazy { intent.getParcelableArrayListExtra<Patch>(EXTRA_NEXT_PATCH_UUID) }
+    private val patches: List<Patch> by lazy { intent.getParcelableArrayListExtra<Patch>(EXTRA_NEXT_PATCH_UUID) }
 
     private val onCardClick: (View, Card) -> Unit = { view, card ->
         ActivityCompat.startActivity(this, CardActivity.newIntent(this, card),

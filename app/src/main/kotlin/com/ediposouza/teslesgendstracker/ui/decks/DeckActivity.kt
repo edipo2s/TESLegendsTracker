@@ -308,8 +308,7 @@ class DeckActivity : BaseActivity() {
                     deck_details_patch.text = patch?.desc ?: ""
                 }
             }
-            PublicInteractor.getUserInfo(deck.owner) {
-                val ownerUser = it
+            PublicInteractor.getUserInfo(deck.owner) { ownerUser ->
                 runOnUiThread {
                     deck_details_create_by.text = ownerUser.name
                     Glide.with(this@DeckActivity)
@@ -392,8 +391,7 @@ class DeckActivity : BaseActivity() {
             itemView.deck_comment_date.text = itemView.context.getString(R.string.deck_comment_date_format,
                     comment.date.toLocalDate(), comment.date.toLocalTime().format(timeFormatter))
             doAsync {
-                PublicInteractor.getUserInfo(comment.owner) {
-                    val ownerUser = it
+                PublicInteractor.getUserInfo(comment.owner) { ownerUser ->
                     itemView.post {
                         itemView.deck_comment_owner.text = ownerUser.name
                         with(itemView.deck_comment_delete) {

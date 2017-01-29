@@ -9,7 +9,6 @@ import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import timber.log.Timber
-import java.util.*
 
 /**
  * Created by ediposouza on 10/31/16.
@@ -309,7 +308,7 @@ data class Card(
             CardAttribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
-            ArrayList<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
+            listOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             CardArenaTier.values()[source.readInt()], 1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0

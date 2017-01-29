@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.itemsSequence
-import java.util.*
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -38,7 +37,7 @@ open class CardsAllFragment : BaseFragment() {
     open val CARDS_PER_ROW = 3
 
     var currentAttr: CardAttribute = CardAttribute.STRENGTH
-    var cardsLoaded: List<Card> = ArrayList()
+    var cardsLoaded: List<Card> = listOf()
     var magikaFilter: Int = -1
     var setFilter: CardSet? = null
     var classFilter: DeckClass? = null
@@ -284,7 +283,7 @@ open class CardsAllFragment : BaseFragment() {
                                @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
                                val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
-        var items: List<Card> = ArrayList()
+        var items: List<Card> = listOf()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)

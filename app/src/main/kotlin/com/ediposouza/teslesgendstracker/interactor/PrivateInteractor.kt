@@ -11,7 +11,6 @@ import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.EventBus
 import org.threeten.bp.LocalDateTime
 import timber.log.Timber
-import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -340,8 +339,7 @@ object PrivateInteractor : BaseInteractor() {
         val attr2 = deck.cls.attr2
         PublicInteractor.getCards(null, attr1, attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
             val cards = it.map { it.shortName to it.rarity }.toMap()
-            getUserCollection(null, attr1, attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
-                val userCards = it
+            getUserCollection(null, attr1, attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { userCards ->
                 val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
                         .filter { it.second > 0 }
                         .map { CardMissing(it.first, cards[it.first]!!, it.second) }
@@ -357,7 +355,7 @@ object PrivateInteractor : BaseInteractor() {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now().withNano(0),
-                        LocalDateTime.now().withNano(0), patch, ArrayList(), 0, cards, ArrayList(), ArrayList())
+                        LocalDateTime.now().withNano(0), patch, listOf(), 0, cards, listOf(), listOf())
                 val childEventListener = object : SimpleChildEventListener() {
                     override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
                         Timber.d(snapshot.toString())
