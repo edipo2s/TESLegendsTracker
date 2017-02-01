@@ -32,13 +32,13 @@ class KeyboardUtil(act: Activity, private val contentView: View?) {
         if (diff != 0) {
             // if the use-able screen height differs from the total screen height we assume that it shows a keyboard now
             //check if the padding is 0 (if yes set the padding for the keyboard)
-            if (contentView?.paddingBottom !== diff) {
+            if (contentView?.paddingBottom != diff) {
                 //set the padding of the contentView for the keyboard
                 contentView?.setPadding(0, 0, 0, diff)
             }
         } else {
             //check if the padding is != 0 (if yes reset the padding)
-            if (contentView?.paddingBottom !== 0) {
+            if (contentView?.paddingBottom != 0) {
                 //reset the padding of the contentView
                 contentView?.setPadding(0, 0, 0, 0)
             }

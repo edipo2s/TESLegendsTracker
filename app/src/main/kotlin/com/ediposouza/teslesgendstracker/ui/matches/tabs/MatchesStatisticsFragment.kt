@@ -59,8 +59,8 @@ class MatchesStatisticsFragment : BaseFragment() {
             setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
             loadingStatisticsData(this)
             setSection(listOf())
-            setClickListenerFirstBody { rowItems, view, row, col -> selectRow(row) }
-            setClickListenerBody { rowItems, view, row, col -> selectRow(row) }
+            setClickListenerFirstBody { _, _, row, _ -> selectRow(row) }
+            setClickListenerBody { _, _, row, _ -> selectRow(row) }
         }
         matches_statistics_table.adapter = statisticsTableAdapter
         getMatches()
@@ -70,7 +70,7 @@ class MatchesStatisticsFragment : BaseFragment() {
         val menuPercent = menu?.findItem(R.id.menu_percent)
         menuPercent?.isVisible = true
         showPercent = menuPercent?.actionView as CompoundButton
-        showPercent?.setOnCheckedChangeListener { button, checked ->
+        showPercent?.setOnCheckedChangeListener { _, checked ->
             updateStatisticsData()
             MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE(checked))
         }
@@ -114,9 +114,9 @@ class MatchesStatisticsFragment : BaseFragment() {
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
         results = DeckClass.values().map { it to mutableListOf<Match>() }.toMap()
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            DeckClass.values().forEach { myCls ->
+            DeckClass.values().forEach {
                 add(mutableListOf<BodyItem>().apply {
-                    DeckClass.values().forEach { opponentCls ->
+                    DeckClass.values().forEach {
                         add(BodyItem())
                     }
                     add(BodyItem())
@@ -192,7 +192,7 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    @Suppress("unused")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         if (isFragmentSelected) {
             getMatches()

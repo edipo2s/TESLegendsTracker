@@ -106,7 +106,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         getSeasons(menu?.findItem(R.id.menu_season))
         val menuPercent = menu?.findItem(R.id.menu_percent)
         showPercent = menuPercent?.actionView as CompoundButton
-        showPercent?.setOnCheckedChangeListener { button, checked ->
+        showPercent?.setOnCheckedChangeListener { _, checked ->
             updateStatisticsData()
             MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(checked))
         }
@@ -166,9 +166,9 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsClassTableAdapter) {
         tableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) })
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            DeckClass.values().forEach { myCls ->
+            DeckClass.values().forEach {
                 add(mutableListOf<BodyItem>().apply {
-                    DeckClass.values().forEach { opponentCls ->
+                    DeckClass.values().forEach {
                         add(BodyItem())
                     }
                     add(BodyItem())

@@ -53,6 +53,7 @@ data class DeckUpdate(
 
 ) : Parcelable {
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<DeckUpdate> = object : Parcelable.Creator<DeckUpdate> {
             override fun createFromParcel(source: Parcel): DeckUpdate = DeckUpdate(source)
             override fun newArray(size: Int): Array<DeckUpdate?> = arrayOfNulls(size)
@@ -79,6 +80,7 @@ data class DeckComment(
 
 ) : Parcelable {
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<DeckComment> = object : Parcelable.Creator<DeckComment> {
             override fun createFromParcel(source: Parcel): DeckComment = DeckComment(source)
             override fun newArray(size: Int): Array<DeckComment?> = arrayOfNulls(size)
@@ -125,6 +127,7 @@ data class Deck(
             LocalDateTime.now().withNano(0), "", listOf(), 0, mapOf(), listOf(), listOf())
 
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<Deck> = object : Parcelable.Creator<Deck> {
             override fun createFromParcel(source: Parcel): Deck = Deck(source)
             override fun newArray(size: Int): Array<Deck?> = arrayOfNulls(size)
@@ -136,8 +139,8 @@ data class Deck(
             source.readInt(), source.readSerializable() as LocalDateTime, source.readSerializable() as LocalDateTime,
             source.readString(), source.createStringArrayList(), source.readInt(),
             hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) },
-            listOf<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
-            listOf<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
+            mutableListOf<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
+            mutableListOf<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
 
     override fun describeContents() = 0
 

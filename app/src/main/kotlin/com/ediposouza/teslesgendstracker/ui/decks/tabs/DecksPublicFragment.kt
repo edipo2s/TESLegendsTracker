@@ -72,7 +72,7 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     val itemLongClick = {
-        view: View, deck: Deck ->
+        _: View, _: Deck ->
         true
     }
 
@@ -161,8 +161,6 @@ open class DecksPublicFragment : BaseFragment() {
 
     class DecksAllViewHolder(view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
-
-        constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
 
         fun bind(itemKey: String) {
             itemView.deck_loading.visibility = View.VISIBLE

@@ -75,7 +75,7 @@ class DashActivity : BaseFilterActivity(),
             startSetup {
                 if (it.isSuccess) {
                     iabHelperStarted = true
-                    queryInventoryAsync { iabResult, inventory ->
+                    queryInventoryAsync { _, inventory ->
                         if (inventory != null) {
                             if (inventory.hasPurchase(SKU_DONATE_BASIC) || inventory.hasPurchase(SKU_DONATE_PRO)) {
                                 handleDonation()
@@ -240,7 +240,7 @@ class DashActivity : BaseFilterActivity(),
         }
         AlertDialog.Builder(this, R.style.AppDialog)
                 .setView(dialogView)
-                .setPositiveButton(R.string.about_rate_app, { di, which ->
+                .setPositiveButton(R.string.about_rate_app, { _, _ ->
                     startActivity(Intent(Intent.ACTION_VIEW)
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
@@ -252,7 +252,7 @@ class DashActivity : BaseFilterActivity(),
 
     private fun showDonateDialog(): Boolean {
         if (iabHelperStarted) {
-            iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { iabResult, inventory ->
+            iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { _, inventory ->
                 if (inventory != null) {
                     val skuBasic = inventory.getSkuDetails(SKU_DONATE_BASIC)
                     val skuPro = inventory.getSkuDetails(SKU_DONATE_PRO)

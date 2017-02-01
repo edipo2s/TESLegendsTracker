@@ -51,6 +51,7 @@ object TestUtils {
         }
     }
 
+    @Suppress("unused")
     fun getTestMatchesHistoryAdapter() = TestMatchesHistoryAdapter()
 
     class TestMatchesHistoryAdapter : RecyclerView.Adapter<MatchesHistoryFragment.MatchViewHolder>(),
@@ -81,11 +82,13 @@ object TestUtils {
             return date.year + date.monthValue + date.dayOfMonth.toLong()
         }
 
-        fun getContentCount(): Int = items.size
-        fun more() {
+        @Suppress("unused") fun getContentCount(): Int = items.size
+
+        @Suppress("unused") fun more() {
             Timber.d("More")
         }
-        fun reset() {
+
+        @Suppress("unused") fun reset() {
             Timber.d("Reset")
             notifyDataSetChanged()
         }

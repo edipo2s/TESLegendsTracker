@@ -145,7 +145,7 @@ class MatchesHistoryFragment : BaseFragment() {
     }
 
     @Subscribe
-    @Suppress("unused")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         if (isFragmentSelected) {
             matchesAdapter.reset()

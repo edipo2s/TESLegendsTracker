@@ -62,7 +62,7 @@ ext {
     okIOVersion = "1.10.+"
     okHttpVersion = "3.4.+"
     playServicesVersion = prepareToRelease ? "10.0.1" : "9.8.0"
-    supportLibraryVersion = "25.1.0"
+    supportLibraryVersion = "25.1.1"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.1.+"

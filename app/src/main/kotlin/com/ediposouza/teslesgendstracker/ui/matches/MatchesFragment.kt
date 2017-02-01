@@ -205,7 +205,7 @@ class MatchesFragment : BaseFragment() {
         }
         AlertDialog.Builder(context)
                 .setView(dialogView)
-                .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
+                .setPositiveButton(R.string.new_match_dialog_start, { _, _ ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
                     val cls = DeckClass.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
@@ -220,7 +220,7 @@ class MatchesFragment : BaseFragment() {
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
                 })
-                .setNegativeButton(android.R.string.cancel, { dialog, which -> })
+                .setNegativeButton(android.R.string.cancel, { _, _ -> })
                 .create()
                 .apply {
                     setOnShowListener {

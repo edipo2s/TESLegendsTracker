@@ -5,6 +5,7 @@ import com.ediposouza.teslesgendstracker.data.*
 /**
  * Created by ediposouza on 08/12/16.
  */
+@Suppress("unused")
 abstract class MetricsConstants {
 
     companion object {

@@ -396,7 +396,7 @@ class DeckActivity : BaseActivity() {
                         itemView.deck_comment_owner.text = ownerUser.name
                         with(itemView.deck_comment_delete) {
                             val owner = comment.owner == FirebaseAuth.getInstance().currentUser?.uid
-                            visibility = View.VISIBLE.takeIf { owner } else View.GONE
+                            visibility = View.VISIBLE.takeIf { owner } ?: View.GONE
                             setOnClickListener { onRemComment(comment.uuid) }
                         }
                         Glide.with(itemView.context)

@@ -20,7 +20,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     override val ADS_EACH_ITEMS = 20 //after 10 lines
     override val CARDS_PER_ROW = 2
 
-    private val onItemClick = { view: View, card: Card ->
+    private val onItemClick = { _: View, card: Card ->
         eventBus.post(CmdAddCard(card))
     }
 

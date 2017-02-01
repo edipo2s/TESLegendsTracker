@@ -131,6 +131,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
 
         companion object {
+            @Suppress("unused")
             @JvmField val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
                 override fun createFromParcel(source: Parcel): SavedState = SavedState(source)
                 override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
