@@ -197,7 +197,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     override fun onChildMoved(snapshot: DataSnapshot, previousChildKey: String?) {
         val oldIndex = getIndexForKey(snapshot.key)
         mSnapshots.removeAt(oldIndex)
-        val newIndex = 0.takeIf { previousChildKey == null } ?: getIndexForKey(previousChildKey) + 1
+        val newIndex = 0.takeIf { previousChildKey == null } ?: getIndexForKey(previousChildKey!!) + 1
         mSnapshots.add(newIndex, Pair(snapshot.key, snapshot.getValue(mModel)))
         notifyChangedListeners(EventType.Moved, newIndex, oldIndex)
     }

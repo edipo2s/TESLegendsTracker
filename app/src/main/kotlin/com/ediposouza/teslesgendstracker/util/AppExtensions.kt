@@ -102,6 +102,7 @@ private fun createAdRequest(context: Context): AdRequest {
     return adRequestBuilder.build()
 }
 
+@Suppress("unused")
 fun MixpanelAPI.trackBundle(eventName: String, bundle: Bundle) {
     trackMap(eventName, bundle.keySet().map { it to bundle[it] }.toMap())
 }

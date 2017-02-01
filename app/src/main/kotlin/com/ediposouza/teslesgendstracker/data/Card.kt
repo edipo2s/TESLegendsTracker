@@ -308,7 +308,7 @@ data class Card(
             CardAttribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
-            listOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
+            mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             CardArenaTier.values()[source.readInt()], 1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0

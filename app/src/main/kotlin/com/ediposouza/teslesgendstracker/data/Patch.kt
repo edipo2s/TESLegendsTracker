@@ -87,7 +87,7 @@ data class Patch(
 
     constructor(source: Parcel) : this(source.readString(), LocalDate.ofEpochDay(source.readLong()),
             source.readString(), PatchType.values()[source.readInt()],
-            listOf<PatchChange>().apply { source.readList(this, PatchChange::class.java.classLoader) })
+            mutableListOf<PatchChange>().apply { source.readList(this, PatchChange::class.java.classLoader) })
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(uuidDate)

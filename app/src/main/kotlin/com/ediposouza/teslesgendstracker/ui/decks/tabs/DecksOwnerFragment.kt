@@ -36,7 +36,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         inflater?.inflate(R.menu.menu_private, menu)
         inflater?.inflate(R.menu.menu_search, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as CompoundButton
-        onlyPrivate?.setOnCheckedChangeListener { button, checked ->
+        onlyPrivate?.setOnCheckedChangeListener { _, _ ->
             showDecks()
         }
         super.onCreateOptionsMenu(menu, inflater)

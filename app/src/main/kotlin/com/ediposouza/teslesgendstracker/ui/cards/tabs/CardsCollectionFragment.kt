@@ -136,7 +136,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
         importDialog = AlertDialog.Builder(context, R.style.AppDialog)
                 .setView(dialogView)
-                .setNegativeButton(android.R.string.cancel, { d, i ->
+                .setNegativeButton(android.R.string.cancel, { _, _ ->
                     dialogView.import_dialog_webview.stopLoading()
                     MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_CANCELLED())
                 })
@@ -214,6 +214,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     inner class HTMLViewerInterface {
 
+        @Suppress("unused")
         @JavascriptInterface
         fun showHTML(html: String) {
             doAsync {
@@ -295,7 +296,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             }
             AlertDialog.Builder(context, R.style.AppDialog)
                     .setView(dialogView)
-                    .setPositiveButton(android.R.string.ok, { d, i ->
+                    .setPositiveButton(android.R.string.ok, { _, _ ->
                         Handler().postDelayed({
                             eventBus.post(CmdShowCardsByAttr(currentAttr))
                         }, DateUtils.SECOND_IN_MILLIS / 2)
