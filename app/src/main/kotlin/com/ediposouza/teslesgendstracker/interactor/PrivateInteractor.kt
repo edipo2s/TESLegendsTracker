@@ -315,7 +315,7 @@ object PrivateInteractor : BaseInteractor() {
     fun setUserDeckLike(deck: Deck, like: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deckLikesUpdated = if (like) deck.likes.plus(getUserID()) else deck.likes.minus(getUserID())
+                val deckLikesUpdated = deck.likes.plus(getUserID()).takeIf { like } ?: deck.likes.minus(getUserID())
                 val childEventListener = object : SimpleChildEventListener() {
                     override fun onChildChanged(snapshot: DataSnapshot?, previousChildName: String?) {
                         Timber.d(snapshot.toString())

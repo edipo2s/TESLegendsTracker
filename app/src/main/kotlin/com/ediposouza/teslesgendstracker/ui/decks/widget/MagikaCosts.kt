@@ -107,9 +107,9 @@ class MagikaCosts(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val resources = rootView.context.resources
         val zeroMargin = resources.getDimensionPixelSize(R.dimen.deck_new_magika_costs_bar_min_height)
         val magikaCostViewLP = magikaCostView?.layoutParams as RelativeLayout.LayoutParams
-        val factor: Float = if (maxMagikaCostQtd == 0) 0f else magikaCostQtd / maxMagikaCostQtd.toFloat()
+        val factor: Float = 0f.takeIf { maxMagikaCostQtd == 0 } ?: magikaCostQtd / maxMagikaCostQtd.toFloat()
         val topMargin = (zeroMargin - zeroMargin * factor).toInt()
-        magikaCostViewLP.topMargin = if (topMargin == zeroMargin) topMargin - 5 else topMargin
+        magikaCostViewLP.topMargin = (topMargin - 5).takeIf { topMargin == zeroMargin } ?: topMargin
         magikaCostView.layoutParams = magikaCostViewLP
     }
 

@@ -73,8 +73,8 @@ fun ViewGroup.inflate(@IntegerRes resource: Int): View {
 }
 
 fun BottomSheetBehavior<*>.toggleExpanded() {
-    this.state = if (this.state == BottomSheetBehavior.STATE_COLLAPSED)
-        BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
+    this.state = BottomSheetBehavior.STATE_EXPANDED
+            .takeIf { this.state == BottomSheetBehavior.STATE_COLLAPSED } ?: BottomSheetBehavior.STATE_COLLAPSED
 }
 
 fun AdView.load() {
@@ -116,7 +116,8 @@ fun Spinner.limitHeight(lines: Int? = null) {
                 IntArray(2).apply {
                     getLocationOnScreen(this)
                     val listPopupWindow = this@popup as ListPopupWindow
-                    listPopupWindow.height = if (lines != null) lines * itemHeight else displayHeight - get(1)
+                    val ln = lines ?: 0
+                    listPopupWindow.height = (ln * itemHeight).takeIf { lines != null } ?: displayHeight - get(1)
                 }
             }
 }

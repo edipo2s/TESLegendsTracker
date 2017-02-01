@@ -181,7 +181,7 @@ class MatchesFragment : BaseFragment() {
         val deckClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val lastItem = pos == parent.count - 1
-                dialogView.new_match_dialog_deck_info.visibility = if (lastItem) View.VISIBLE else View.GONE
+                dialogView.new_match_dialog_deck_info.visibility = View.VISIBLE.takeIf { lastItem } ?: View.GONE
                 dialogView.new_match_dialog_deck_name.setText(decks[pos]?.name ?: "")
                 dialogView.new_match_dialog_deck_type_spinner.setSelection(decks[pos]?.type?.ordinal ?: 0)
             }
@@ -192,11 +192,11 @@ class MatchesFragment : BaseFragment() {
         val modeClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val isArenaMode = MatchMode.values()[pos] == MatchMode.ARENA
-                dialogView.new_match_dialog_deck_label.visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                dialogView.new_match_dialog_deck_label.visibility = View.GONE.takeIf { isArenaMode } ?: View.VISIBLE
                 with(dialogView.new_match_dialog_deck_spinner) {
-                    visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { isArenaMode } ?: View.VISIBLE
                     val shouldHideDeckInfo = isArenaMode || selectedItemPosition != (adapter?.count ?: 1) - 1
-                    dialogView.new_match_dialog_deck_info.visibility = if (shouldHideDeckInfo) View.GONE else View.VISIBLE
+                    dialogView.new_match_dialog_deck_info.visibility = View.GONE.takeIf { shouldHideDeckInfo } ?: View.VISIBLE
                 }
             }
 
@@ -211,8 +211,8 @@ class MatchesFragment : BaseFragment() {
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
                     val isNotArena = mode != MatchMode.ARENA
-                    val name = if (isNotArena) dialogView.new_match_dialog_deck_name.text.toString() else null
-                    val deck = if (isNotArena && deckPosition >= 0) decks[deckPosition] else null
+                    val name = dialogView.new_match_dialog_deck_name.text.toString().takeIf { isNotArena }
+                    val deck = decks[deckPosition].takeIf { isNotArena && deckPosition >= 0 }
                     if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {
@@ -295,7 +295,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != CardAttribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = View.VISIBLE.takeIf { attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                 }
             }
@@ -306,7 +306,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != CardAttribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = View.VISIBLE.takeIf { attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                     class_name.setTextColor(ContextCompat.getColor(context, textColor))
                 }

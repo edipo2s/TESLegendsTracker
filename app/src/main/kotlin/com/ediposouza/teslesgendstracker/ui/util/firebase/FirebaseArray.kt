@@ -151,7 +151,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     // Start of ChildEventListener and ValueEventListener methods
 
     override fun onChildAdded(snapshot: DataSnapshot, previousChildKey: String?) {
-        var index = if (mOrderASC) 0 else count
+        var index = 0.takeIf { mOrderASC } ?: count
         if (previousChildKey != null) {
             if (mOrderASC) {
                 index = getIndexForKey(previousChildKey) + 1
@@ -197,7 +197,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     override fun onChildMoved(snapshot: DataSnapshot, previousChildKey: String?) {
         val oldIndex = getIndexForKey(snapshot.key)
         mSnapshots.removeAt(oldIndex)
-        val newIndex = if (previousChildKey == null) 0 else getIndexForKey(previousChildKey) + 1
+        val newIndex = 0.takeIf { previousChildKey == null } ?: getIndexForKey(previousChildKey) + 1
         mSnapshots.add(newIndex, Pair(snapshot.key, snapshot.getValue(mModel)))
         notifyChangedListeners(EventType.Moved, newIndex, oldIndex)
     }

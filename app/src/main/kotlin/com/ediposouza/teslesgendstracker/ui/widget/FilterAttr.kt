@@ -26,10 +26,10 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             if (!value) {
                 selectAttr(lastAttrSelected, true)
             } else {
-                rootView.attr_filter_dual.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_dual_indicator.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_neutral.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_neutral_indicator.visibility = if (value) View.GONE else View.VISIBLE
+                rootView.attr_filter_dual.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_dual_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_neutral.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_neutral_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
             }
         }
 
@@ -115,7 +115,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     protected fun updateVisibility(v: View, show: Boolean, only: Boolean) {
-        v.visibility = if (show) View.VISIBLE else if (only) View.INVISIBLE else v.visibility
+        v.visibility = View.VISIBLE.takeIf { show } ?: View.INVISIBLE.takeIf { only } ?: v.visibility
     }
 
     class SavedState : BaseSavedState {

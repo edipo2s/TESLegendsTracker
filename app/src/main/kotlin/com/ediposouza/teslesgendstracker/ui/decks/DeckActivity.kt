@@ -107,7 +107,7 @@ class DeckActivity : BaseActivity() {
             if (App.hasUserLogged()) {
                 PrivateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
-                    val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
+                    val stringRes = R.string.action_favorited.takeIf { favorite } ?: R.string.action_unfavorited
                     toast(getString(stringRes, deck.name))
                     updateFavoriteItem()
                     MetricsManager.trackAction(if (favorite)
@@ -240,15 +240,15 @@ class DeckActivity : BaseActivity() {
     }
 
     private fun updateLikeItem() {
-        val icon = if (like) R.drawable.ic_like_checked else R.drawable.ic_like_unchecked
-        menuLike?.icon = ContextCompat.getDrawable(this, icon)
-        menuLike?.title = getString(if (like) R.string.menu_unlike else R.string.menu_like)
+        menuLike?.icon = ContextCompat.getDrawable(this,
+                R.drawable.ic_like_checked.takeIf { like } ?: R.drawable.ic_like_unchecked)
+        menuLike?.title = getString(R.string.menu_unlike.takeIf { like } ?: R.string.menu_like)
     }
 
     private fun updateFavoriteItem() {
-        val icon = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
-        deck_fab_favorite.setImageDrawable(ContextCompat.getDrawable(this, icon))
-        val contentDescription = if (favorite) R.string.menu_unfavorite else R.string.menu_favorite
+        deck_fab_favorite.setImageDrawable(ContextCompat.getDrawable(this,
+                R.drawable.ic_favorite_checked.takeIf { favorite } ?: R.drawable.ic_favorite_unchecked))
+        val contentDescription = R.string.menu_unfavorite.takeIf { favorite } ?: R.string.menu_favorite
         deck_fab_favorite.contentDescription = getString(contentDescription)
     }
 
@@ -285,7 +285,7 @@ class DeckActivity : BaseActivity() {
                     super.setMeasuredDimension(childrenBounds, wSpec, hSpec)
                 }
 
-                private fun getVisiblePercent(): Float = if (keyboardVisible) 0.2f else 0.6f
+                private fun getVisiblePercent(): Float = 0.2f.takeIf { keyboardVisible } ?: 0.6f
 
             }
             itemAnimator = SlideInLeftAnimator()
@@ -396,7 +396,7 @@ class DeckActivity : BaseActivity() {
                         itemView.deck_comment_owner.text = ownerUser.name
                         with(itemView.deck_comment_delete) {
                             val owner = comment.owner == FirebaseAuth.getInstance().currentUser?.uid
-                            visibility = if (owner) View.VISIBLE else View.GONE
+                            visibility = View.VISIBLE.takeIf { owner } else View.GONE
                             setOnClickListener { onRemComment(comment.uuid) }
                         }
                         Glide.with(itemView.context)

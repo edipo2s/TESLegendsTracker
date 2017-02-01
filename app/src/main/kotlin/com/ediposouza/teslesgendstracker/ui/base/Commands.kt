@@ -60,7 +60,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
         private set
 
     init {
-        duration = if (type == TYPE_INFO) Snackbar.LENGTH_LONG else Snackbar.LENGTH_INDEFINITE
+        duration = Snackbar.LENGTH_LONG.takeIf { type == TYPE_INFO } ?: Snackbar.LENGTH_INDEFINITE
         if (type == TYPE_ERROR) {
             actionTextRes = R.string.ok
             action = { }

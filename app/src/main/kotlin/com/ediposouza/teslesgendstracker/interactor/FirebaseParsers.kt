@@ -222,7 +222,7 @@ abstract class FirebaseParsers {
             val month = Month.of(date[1].toInt())
             val id = (year - 2016) * 12 + month.value - 7
             val rewardInfo = reward.entries.first()
-            val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
+            val rewardCardShortname = rewardInfo.value.takeIf { rewardInfo.value is String }
             val yearMonth = YearMonth.parse(key, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
             return Season(id, key, yearMonth, rewardInfo.key, rewardCardShortname as? String)
         }

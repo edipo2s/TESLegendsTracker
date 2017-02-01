@@ -130,7 +130,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_NEW_DECK && resultCode == Activity.RESULT_OK) {
             val privateExtra = data?.getBooleanExtra(NewDeckActivity.DECK_PRIVATE_EXTRA, false) ?: false
-            decks_view_pager.currentItem = if (privateExtra) 1 else 0
+            decks_view_pager.currentItem = 1.takeIf { privateExtra } ?: 0
             Handler().postDelayed({ eventBus.post(CmdUpdateDeckAndShowDeck()) }, DateUtils.SECOND_IN_MILLIS / 2)
         }
     }

@@ -148,43 +148,43 @@ class SeasonsFragment : BaseFragment() {
 
         private fun updateMatchesInfo(rankedMatches: List<Match>, noMatches: Boolean) {
             with(itemView) {
-                season_no_matches.visibility = if (noMatches) View.VISIBLE else View.GONE
-                season_no_matches_shadow.visibility = if (noMatches) View.VISIBLE else View.GONE
-                season_matches_label.visibility = if (noMatches) View.GONE else View.VISIBLE
-                season_matches_layout.visibility = if (noMatches) View.GONE else View.VISIBLE
-                season_best_rank_label.visibility = if (noMatches) View.GONE else View.VISIBLE
+                season_no_matches.visibility = View.VISIBLE.takeIf { noMatches } ?: View.GONE
+                season_no_matches_shadow.visibility = View.VISIBLE.takeIf { noMatches } ?: View.GONE
+                season_matches_label.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
+                season_matches_layout.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
+                season_best_rank_label.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 with(season_best_rank) {
                     val rankedGroup = rankedMatches.groupBy { it.legend }
                     text = (rankedGroup[true] ?: rankedGroup[false])?.minBy { it.rank }?.rank.toString()
-                    val legendIcon = if (rankedGroup[true] != null) R.drawable.ic_rank_legend else 0
+                    val legendIcon = R.drawable.ic_rank_legend.takeIf { rankedGroup[true] != null } ?: 0
                     setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, legendIcon)
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
                 with(season_matches_wins) {
                     text = rankedMatches.filter { it.win }.size.toString()
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
                 with(season_matches_losses) {
                     text = rankedMatches.filter { !it.win }.size.toString()
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
                 with(season_matches_total) {
                     text = rankedMatches.size.toString()
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
-                season_opponent_label.visibility = if (noMatches) View.GONE else View.VISIBLE
-                season_opponent_layout.visibility = if (noMatches) View.GONE else View.VISIBLE
+                season_opponent_label.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
+                season_opponent_layout.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 with(season_matches_most_seen) {
                     setClass(rankedMatches.groupBy { it.opponent.cls }.maxBy { it.value.size }?.key)
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
                 with(season_matches_most_defeated) {
                     setClass(rankedMatches.filter { it.win }.groupBy { it.opponent.cls }.maxBy { it.value.size }?.key)
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
                 with(season_matches_less_defeated) {
                     setClass(rankedMatches.filter { !it.win }.groupBy { it.opponent.cls }.maxBy { it.value.size }?.key)
-                    visibility = if (noMatches) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 }
             }
         }

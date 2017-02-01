@@ -50,7 +50,7 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     private fun magikaClick(magika: Int) {
         filterClick?.invoke(magika)
-        val icon = if (magika == -1) R.drawable.ic_magika else R.drawable.ic_magika_clear
+        val icon = R.drawable.ic_magika.takeIf { magika == -1 } ?: R.drawable.ic_magika_clear
         rootView.magika_filter.apply {
             tag = magika != -1
             close(true)

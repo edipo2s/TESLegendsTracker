@@ -119,8 +119,8 @@ open class DecksPublicFragment : BaseFragment() {
 
     fun configLoggedViews() {
         signin_button.setOnClickListener { showLogin() }
-        signin_button.visibility = if (App.hasUserLogged()) View.INVISIBLE else View.VISIBLE
-        decks_recycler_view.visibility = if (App.hasUserLogged()) View.VISIBLE else View.INVISIBLE
+        signin_button.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+        decks_recycler_view.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.INVISIBLE
     }
 
     @Subscribe
@@ -181,7 +181,7 @@ open class DecksPublicFragment : BaseFragment() {
                 setOnClickListener { itemClick(itemView, deck) }
                 setOnLongClickListener { itemLongClick(itemView, deck) }
                 deck_cover.setImageResource(deck.cls.imageRes)
-                deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
+                deck_private.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT.takeIf { deck.private } ?: 0
                 deck_name.text = deck.name
                 deck_attr1.setImageResource(deck.cls.attr1.imageRes)
                 deck_attr2.setImageResource(deck.cls.attr2.imageRes)
@@ -202,11 +202,11 @@ open class DecksPublicFragment : BaseFragment() {
                 val numberInstance = NumberFormat.getNumberInstance()
                 deck_soul_cost.text = numberInstance.format(deck.cost)
                 deck_comments.text = numberInstance.format(deck.comments.size)
-                deck_comments.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_comments.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 deck_likes.text = numberInstance.format(deck.likes.size)
-                deck_likes.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_likes.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 deck_views.text = numberInstance.format(deck.views)
-                deck_views.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_views.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 calculateMissingSoul(deck)
             }
         }
