@@ -87,7 +87,7 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_DONATE_BASIC,
                 is MetricAction.ACTION_DONATE_PRO -> {
-                    val value = if (action is MetricAction.ACTION_DONATE_BASIC) 6L else 13L
+                    val value = 6L.takeIf { action is MetricAction.ACTION_DONATE_BASIC } ?: 13L
                     val valueCurrency = "BRL"
                     answers?.logPurchase(PurchaseEvent()
                             .putItemName(action.name)

@@ -114,7 +114,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun rarityClick(rarity: CardRarity?) {
         filterClick?.invoke(rarity)
         collapse()
-        val icon = if (rarity == null) R.drawable.ic_rarity else R.drawable.ic_rarity_clear
+        val icon = R.drawable.ic_rarity.takeIf { rarity == null } ?: R.drawable.ic_rarity_clear
         rootView.rarity_filter.apply {
             tag = rarity != null
             setImageResource(icon)

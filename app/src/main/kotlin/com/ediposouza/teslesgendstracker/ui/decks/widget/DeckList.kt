@@ -76,9 +76,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true, showQtd: Boolean = true) {
-        decklist_soul.visibility = if (showSoulCost) View.VISIBLE else View.GONE
-        decklist_costs.visibility = if (showMagikaCosts) View.VISIBLE else View.GONE
-        decklist_qtd.visibility = if (showQtd) View.VISIBLE else View.GONE
+        decklist_soul.visibility = View.VISIBLE.takeIf { showSoulCost } ?: View.GONE
+        decklist_costs.visibility = View.VISIBLE.takeIf { showMagikaCosts } ?: View.GONE
+        decklist_qtd.visibility = View.VISIBLE.takeIf { showQtd } ?: View.GONE
         if (deck != null) {
             doAsync {
                 PublicInteractor.getDeckCards(deck) {
@@ -161,7 +161,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 onAdd(newCardIndex)
                 notifyItemInserted(newCardIndex)
             } else {
-                val newQtd = if (cardSlot.qtd < 3) cardSlot.qtd.inc() else 3
+                val newQtd = cardSlot.qtd.inc().takeIf { cardSlot.qtd < 3 } ?: 3
                 val cardIndex = items.indexOf(cardSlot)
                 items[cardIndex] = CardSlot(card, if (card.unique) 1 else newQtd)
                 onAdd(cardIndex)
@@ -240,10 +240,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 else -> R.drawable.ic_magika_7plus
             })
             itemView.deckslot_card_qtd.text = slot.qtd.toString()
-            itemView.deckslot_card_qtd.visibility = if (slot.qtd > 0) View.VISIBLE else View.INVISIBLE
-            itemView.deckslot_card_qtd_layout.visibility = if (slot.qtd > 0) View.VISIBLE else View.INVISIBLE
+            itemView.deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd > 0 } ?: View.INVISIBLE
+            itemView.deckslot_card_qtd_layout.visibility = View.VISIBLE.takeIf { slot.qtd > 0 } ?: View.INVISIBLE
             itemView.deckslot_card_qtd_missing.text = "-$missingQtd"
-            itemView.deckslot_card_qtd_missing.visibility = if (missingQtd > 0) View.VISIBLE else View.INVISIBLE
+            itemView.deckslot_card_qtd_missing.visibility = View.VISIBLE.takeIf { missingQtd > 0 } ?: View.INVISIBLE
         }
 
         private fun getCroppedCardImage(slot: CardSlot): Bitmap {

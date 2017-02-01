@@ -266,13 +266,13 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
         private fun bindClass(cls: DeckClass?) {
             with(rootView) {
-                val attr1Visibility = if (cls != null) View.VISIBLE else View.GONE
-                val attr2Visibility = if (cls?.attr2 != CardAttribute.NEUTRAL) attr1Visibility else View.GONE
+                val attr1Visibility = View.VISIBLE.takeIf { cls != null } ?: View.GONE
+                val attr2Visibility = attr1Visibility.takeIf { cls?.attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                 cell_class_attr1.visibility = attr1Visibility
                 cell_class_attr2.visibility = attr2Visibility
                 cell_class_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)
                 cell_class_attr2.setImageResource(cls?.attr2?.imageRes ?: 0)
-                cell_total.visibility = if (cls == null) View.VISIBLE else View.GONE
+                cell_total.visibility = View.VISIBLE.takeIf { cls == null } ?: View.GONE
             }
         }
 
@@ -302,9 +302,9 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
         private fun bindResult(result: String?) {
             with(rootView) {
-                cell_text.text = if (result == "0/0" || result?.contains("-") ?: false) "-" else result
-                cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
-                cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
+                cell_text.text = "-".takeIf { result == "0/0" || result?.contains("-") ?: false } ?: result
+                cell_text.visibility = View.GONE.takeIf { result == null } ?: View.VISIBLE
+                cell_progress.visibility = View.VISIBLE.takeIf { result == null } ?: View.GONE
             }
         }
 

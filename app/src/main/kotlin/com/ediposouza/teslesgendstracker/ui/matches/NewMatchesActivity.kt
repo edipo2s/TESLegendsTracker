@@ -121,14 +121,14 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_class_attr2.setImageResource(deckCls.attr2.imageRes)
         new_matches_deck_cardlist.editMode = true
         new_matches_deck_cardlist.showDeck(deck, false, false, false)
-        new_matches_deck_cardlist.visibility = if (deck != null) View.VISIBLE else View.GONE
-        new_matches_space_start.visibility = if (deck != null) View.GONE else View.VISIBLE
-        new_matches_space_end.visibility = if (deck != null) View.GONE else View.VISIBLE
-        new_matches_cards_remains.visibility = if (deck != null) View.VISIBLE else View.GONE
-        new_matches_legend.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank_label.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank.setText(if (mode == MatchMode.RANKED) "" else "0")
+        new_matches_deck_cardlist.visibility = View.VISIBLE.takeIf { deck != null } ?: View.GONE
+        new_matches_space_start.visibility = View.GONE.takeIf { deck != null } ?: View.VISIBLE
+        new_matches_space_end.visibility = View.GONE.takeIf { deck != null } ?: View.VISIBLE
+        new_matches_cards_remains.visibility = View.VISIBLE.takeIf { deck != null } ?: View.GONE
+        new_matches_legend.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank_label.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank.setText("".takeIf { mode == MatchMode.RANKED } ?: "0")
         new_matches_opt_type_spinner.adapter = ArrayAdapter<String>(this,
                 R.layout.widget_spinner_white_text, DeckType.values()
                 .filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }).apply {
@@ -171,7 +171,7 @@ class NewMatchesActivity : BaseActivity() {
         val myDeckCls = deck?.cls ?: deckCls
         val myDeckType = deck?.type ?: deckType
         val myDeckUpdates = deck?.updates ?: listOf()
-        val myDeckVersion = if (myDeckUpdates.isEmpty()) "v1 (${deck?.createdAt})" else
+        val myDeckVersion = "v1 (${deck?.createdAt})".takeIf { myDeckUpdates.isEmpty() } ?:
             "v${myDeckUpdates.size + 1} (${myDeckUpdates.last().date.toLocalDate()}"
         val optDeckName = new_matches_opt_name.text.toString()
         val optDeckCls = DeckClass.values()[new_matches_opt_class_spinner.selectedItemPosition]

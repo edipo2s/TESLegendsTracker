@@ -208,11 +208,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     fun onCmdShowSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
-        val msg = if (msgRes > 0) getString(msgRes) else cmdShowSnackbarMsg.msg
+        val msg = getString(msgRes).takeIf { msgRes > 0 } ?: cmdShowSnackbarMsg.msg
         snackbar = Snackbar.make(find<View>(R.id.coordinatorLayout), msg, cmdShowSnackbarMsg.duration)
         if (cmdShowSnackbarMsg.action != null) {
             val actionTextRes = cmdShowSnackbarMsg.actionTextRes
-            val actionText = if (actionTextRes > 0) getString(actionTextRes) else cmdShowSnackbarMsg.actionText
+            val actionText = getString(actionTextRes).takeIf { actionTextRes > 0 } ?: cmdShowSnackbarMsg.actionText
             snackbar?.setAction(actionText, { cmdShowSnackbarMsg.action?.invoke() })
         }
         if (snackbarNeedMargin) {

@@ -83,7 +83,7 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun selectRow(row: Int) {
-        selectedClass = if (row >= 0 && row < DeckClass.values().size) DeckClass.values()[row] else null
+        selectedClass = DeckClass.values()[row].takeIf { row >= 0 && row < DeckClass.values().size }
         updateStatisticsData()
         statisticsTableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
                 .plus(listOf(listOf(BodyItem()))))
@@ -163,7 +163,7 @@ class MatchesStatisticsFragment : BaseFragment() {
         val result = matches.groupBy { it.win }
         val wins = result[true]?.size ?: 0
         val losses = result[false]?.size ?: 0
-        val resultText = if (!(showPercent?.isChecked ?: false)) "$wins/$losses" else
+        val resultText = "$wins/$losses".takeIf { !(showPercent?.isChecked ?: false) } ?:
             getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat()))
         return BodyItem(resultText, selected = cellSelected)
     }
@@ -252,14 +252,14 @@ class MatchesStatisticsFragment : BaseFragment() {
 
         private fun bindClass(cls: DeckClass?, selected: Boolean) {
             with(rootView) {
-                val attr1Visibility = if (cls != null) View.VISIBLE else View.GONE
-                val attr2Visibility = if (cls?.attr2 != CardAttribute.NEUTRAL) attr1Visibility else View.GONE
+                val attr1Visibility = View.VISIBLE.takeIf { cls != null } ?: View.GONE
+                val attr2Visibility = attr1Visibility.takeIf { cls?.attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                 cell_class_attr1.visibility = attr1Visibility
                 cell_class_attr2.visibility = attr2Visibility
                 cell_class_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)
                 cell_class_attr2.setImageResource(cls?.attr2?.imageRes ?: 0)
-                cell_total.visibility = if (cls == null) View.VISIBLE else View.GONE
-                val cellColor = if (selected) R.color.colorAccent else android.R.color.transparent
+                cell_total.visibility = View.VISIBLE.takeIf { cls == null } ?: View.GONE
+                val cellColor = R.color.colorAccent.takeIf { selected } ?: android.R.color.transparent
                 setBackgroundColor(ContextCompat.getColor(context, cellColor))
             }
         }
@@ -286,10 +286,10 @@ class MatchesStatisticsFragment : BaseFragment() {
 
         private fun bindResult(result: String?, selected: Boolean) {
             with(rootView) {
-                cell_text.text = if (result == "0/0" || result?.contains("-") ?: false) "-" else result
-                cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
-                cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
-                val cellColor = if (selected) R.color.colorAccent else android.R.color.transparent
+                cell_text.text = "-".takeIf { result == "0/0" || result?.contains("-") ?: false } ?: result
+                cell_text.visibility = View.GONE.takeIf { result == null } ?: View.VISIBLE
+                cell_progress.visibility = View.VISIBLE.takeIf { result == null } ?: View.GONE
+                val cellColor = R.color.colorAccent.takeIf { selected } ?: android.R.color.transparent
                 setBackgroundColor(ContextCompat.getColor(context, cellColor))
             }
         }

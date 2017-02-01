@@ -128,7 +128,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun updateChangeCardQtdButtons() {
-        val cardMaxQtd = if (card.unique) 1 else 3
+        val cardMaxQtd = 1.takeIf { card.unique } ?: 3
         card_collection_qtd_plus_btn.isEnabled = userCardQtd < cardMaxQtd
         card_collection_qtd_minus_btn.isEnabled = userCardQtd > 0
     }
@@ -171,7 +171,7 @@ class CardActivity : BaseActivity() {
         }
         card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
-        card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE
+        card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
     }
 
@@ -216,7 +216,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun updateFavoriteButton() {
-        val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
+        val drawableRes = R.drawable.ic_favorite_checked.takeIf { favorite } ?: R.drawable.ic_favorite_unchecked
         card_favorite_btn.setImageResource(drawableRes)
     }
 
@@ -224,7 +224,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged()) {
             PrivateInteractor.setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
-                val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
+                val stringRes = R.string.action_favorited.takeIf { favorite } ?: R.string.action_unfavorited
                 toast(getString(stringRes, card.name))
                 updateFavoriteButton()
                 setResult(Activity.RESULT_OK, Intent())
@@ -261,14 +261,14 @@ class CardActivity : BaseActivity() {
                 with(card_patch_full_image) {
                     setImageBitmap(Card.getCardImageBitmap(context, cardBasicInfo.set,
                             cardBasicInfo.attr, cardBasicInfo.shortName))
-                    transitionName = if (isFirst) context.getString(R.string.card_transition_name) else ""
+                    transitionName = context.getString(R.string.card_transition_name).takeIf { isFirst } ?: ""
                     setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
                 }
                 card_patch_desc.text = cardPatchDesc
                 card_patch_desc_shadow.text = cardPatchDesc
-                card_patch_desc.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
-                card_patch_desc_shadow.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
-                card_patch_arrow.visibility = if (isLast) View.GONE else View.VISIBLE
+                card_patch_desc.visibility = View.VISIBLE.takeIf { hasPatchVersion } ?: View.GONE
+                card_patch_desc_shadow.visibility = View.VISIBLE.takeIf { hasPatchVersion } ?: View.GONE
+                card_patch_arrow.visibility = View.GONE.takeIf { isLast } ?: View.VISIBLE
                 setOnClickListener { onCardClick() }
             }
         }

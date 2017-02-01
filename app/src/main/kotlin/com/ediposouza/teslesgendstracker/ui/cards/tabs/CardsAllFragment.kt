@@ -139,8 +139,8 @@ open class CardsAllFragment : BaseFragment() {
 
     fun configLoggedViews() {
         signin_button.setOnClickListener { showLogin() }
-        signin_button.visibility = if (App.hasUserLogged()) View.INVISIBLE else View.VISIBLE
-        cards_recycler_view.visibility = if (App.hasUserLogged()) View.VISIBLE else View.INVISIBLE
+        signin_button.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+        cards_recycler_view.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.INVISIBLE
     }
 
     @Subscribe

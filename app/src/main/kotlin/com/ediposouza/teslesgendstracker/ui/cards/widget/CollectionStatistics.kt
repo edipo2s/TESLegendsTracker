@@ -73,7 +73,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                     rarity_statistics_willpower.soulMissing + rarity_statistics_agility.soulMissing +
                     rarity_statistics_endurance.soulMissing + rarity_statistics_dual.soulMissing +
                     rarity_statistics_neutral.soulMissing
-            val percent = if (total > 0) owned.toFloat() / total.toFloat() * 100f else 0f
+            val percent = (owned.toFloat() / total.toFloat() * 100f).takeIf { total > 0 } ?: 0f
             collection_statistics_total.text = context.getString(R.string.collection_statistics_total, owned, total)
             collection_statistics_percent.text = context.getString(R.string.collection_statistics_percent, percent)
             collection_statistics_soul.text = NumberFormat.getNumberInstance().format(soulMissing)

@@ -154,7 +154,7 @@ class DashActivity : BaseFilterActivity(),
         val user = FirebaseAuth.getInstance().currentUser
         dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
         with(dash_navigation_view.getHeaderView(0)) {
-            profile_change_user.visibility = if (App.hasUserLogged()) View.VISIBLE else View.GONE
+            profile_change_user.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.GONE
             profile_name.text = user?.displayName ?: getString(R.string.unknown)
             if (user != null) {
                 val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)

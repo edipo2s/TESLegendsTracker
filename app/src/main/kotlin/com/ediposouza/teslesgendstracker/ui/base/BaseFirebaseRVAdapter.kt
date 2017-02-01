@@ -50,7 +50,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
         when (viewType) {
             VIEW_TYPE_CONTENT -> return onCreateDefaultViewHolder(parent)
             else -> {
-                val view = if (viewType == VIEW_TYPE_LOADING) parent.inflate(R.layout.itemlist_loading) else
+                val view = parent.inflate(R.layout.itemlist_loading).takeIf { viewType == VIEW_TYPE_LOADING } ?:
                     LinearLayout(parent.context).apply { minimumHeight = 1 }
                 return object : RecyclerView.ViewHolder(view) {}
             }
@@ -62,7 +62,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
         if (itemKey != null && model != null) {
             onBindContentHolder(itemKey, model, viewHolder as VH)
         } else {
-            viewHolder.itemView.loadingBar?.visibility = if (synced) View.GONE else View.VISIBLE
+            viewHolder.itemView.loadingBar?.visibility = View.GONE.takeIf { synced } ?: View.VISIBLE
         }
     }
 

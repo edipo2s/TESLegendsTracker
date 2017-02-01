@@ -151,10 +151,10 @@ class CardsCollectionFragment : CardsAllFragment() {
                         Timber.d("onPageStarted: $url")
                         val isCollectionPage = url == getString(R.string.dialog_import_legends_deck_link)
                         settings.loadsImagesAutomatically = !isCollectionPage
-                        dialogView.import_dialog_loading.visibility = if (isCollectionPage) View.VISIBLE else View.GONE
+                        dialogView.import_dialog_loading.visibility = View.VISIBLE.takeIf { isCollectionPage } ?: View.GONE
                         with(dialogView.import_dialog_webview) {
                             layoutParams = layoutParams.apply {
-                                height = if (isCollectionPage) 1 else ViewGroup.LayoutParams.WRAP_CONTENT
+                                height = 1.takeIf { isCollectionPage } ?: ViewGroup.LayoutParams.WRAP_CONTENT
                             }
                         }
                     }
@@ -202,8 +202,8 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
         val newQtd = cardSlot.qtd.inc()
-        val cardMaxQtd = if (cardSlot.card.unique) 1 else 3
-        val finalQtd = if (newQtd <= cardMaxQtd) newQtd else 0
+        val cardMaxQtd = 1.takeIf { cardSlot.card.unique } ?: 3
+        val finalQtd = newQtd.takeIf { newQtd <= cardMaxQtd } ?: 0
         PrivateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
@@ -366,7 +366,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                 2 -> R.drawable.ic_qtd_two
                 else -> R.drawable.ic_qtd_three
             })
-            itemView.card_collection_qtd.visibility = if (cardSlot.qtd == 1) View.GONE else View.VISIBLE
+            itemView.card_collection_qtd.visibility = View.GONE.takeIf { cardSlot.qtd == 1 } ?: View.VISIBLE
         }
 
     }

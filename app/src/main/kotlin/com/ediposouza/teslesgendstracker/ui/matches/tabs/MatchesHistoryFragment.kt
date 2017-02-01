@@ -156,19 +156,19 @@ class MatchesHistoryFragment : BaseFragment() {
 
         fun bind(match: Match, onDelete: () -> Unit) {
             with(itemView) {
-                match_history_first.visibility = if (match.first) View.VISIBLE else View.INVISIBLE
+                match_history_first.visibility = View.VISIBLE.takeIf { match.first } ?: View.INVISIBLE
                 match_history_player_class_attr1.setImageResource(match.player.cls.attr1.imageRes)
                 match_history_player_class_attr2.setImageResource(match.player.cls.attr2.imageRes)
                 match_history_opponent_class_attr1.setImageResource(match.opponent.cls.attr1.imageRes)
                 match_history_opponent_class_attr2.setImageResource(match.opponent.cls.attr2.imageRes)
-                val resultColor = if (match.win) R.color.green_200 else R.color.red_100
-                val resultText = if (match.win) R.string.match_win else R.string.match_loss
+                val resultColor = R.color.green_200.takeIf { match.win } ?: R.color.red_100
+                val resultText = R.string.match_win.takeIf { match.win } ?: R.string.match_loss
                 match_history_result.setTextColor(ContextCompat.getColor(context, resultColor))
                 match_history_result.text = context.getString(resultText)
-                match_history_legend.visibility = if (match.legend) View.VISIBLE else View.INVISIBLE
-                val rankText = if (match.legend) R.string.match_rank_legend else R.string.match_rank_normal
+                match_history_legend.visibility = View.VISIBLE.takeIf { match.legend } ?: View.INVISIBLE
+                val rankText = R.string.match_rank_legend.takeIf { match.legend } ?: R.string.match_rank_normal
                 match_history_rank.text = context.getString(rankText, match.rank)
-                match_history_rank.visibility = if (match.mode == MatchMode.RANKED) View.VISIBLE else View.INVISIBLE
+                match_history_rank.visibility = View.VISIBLE.takeIf { match.mode == MatchMode.RANKED } ?: View.INVISIBLE
                 match_history_delete.setOnClickListener {
                     onHistoryClick(itemView, match, onDelete)
                 }
