@@ -2,27 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_vertical|start"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/arena_draft_card_recycler_view"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/arena_draft_card_iv"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:fadeScrollbars="false"
-        android:scrollbarSize="@dimen/small_margin"
-        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-        android:scrollbars="horizontal"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/itemlist_card" />
+        android:layout_marginStart="@dimen/huge_margin"
+        tools:src="@drawable/card" />
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large_margin">
+        android:layout_marginStart="@dimen/huge_margin">
 
         <TextView
             android:id="@+id/arena_draft_card_value_shadow"
@@ -38,9 +34,10 @@
             android:id="@+id/arena_draft_card_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_arrow_forward"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_huge"
-            android:text="-" />
+            android:text="56" />
 
     </FrameLayout>
 

@@ -67,6 +67,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
     }
 
     override fun onSyncStatusChanged(synced: Boolean) {
+        super.onSyncStatusChanged(synced)
         this.synced = synced
         notifyItemChanged(itemCount - 1)
         if (synced) {
@@ -75,6 +76,7 @@ abstract class BaseFirebaseRVAdapter<T, VH : RecyclerView.ViewHolder>(model: Cla
     }
 
     override fun onArrayError(firebaseError: DatabaseError) {
+        super.onArrayError(firebaseError)
         Timber.d(firebaseError.toException(), firebaseError.toString())
     }
 

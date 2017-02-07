@@ -4,7 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    tools:layout_marginBottom="@dimen/navigation_bar_height"
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <LinearLayout
