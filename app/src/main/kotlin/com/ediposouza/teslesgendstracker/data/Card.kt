@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import timber.log.Timber
 
@@ -230,7 +231,21 @@ enum class CardArenaTierPlusOperator {
 
     EQUALS,
     GREAT,
-    MINOR
+    MINOR,
+    UNKNOWN;
+
+    companion object {
+
+        fun of(value: String): CardArenaTierPlusOperator {
+            return when (value) {
+                "=" -> EQUALS
+                ">" -> GREAT
+                "<" -> MINOR
+                else -> UNKNOWN
+            }
+        }
+
+    }
 
 }
 
@@ -338,7 +353,7 @@ data class Card(
         }
 
         private val CARD_PATH = "Cards"
-        private val CARD_BACK = "card_back.png"
+        private val CARD_BACK = "card_back.webp"
 
         fun getDefaultCardImage(context: Context): Bitmap {
             return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
@@ -348,7 +363,7 @@ data class Card(
                                cardShortName: String, onError: (() -> Bitmap)? = null): Bitmap {
             val setName = cardSet.toLowerCase().capitalize()
             val attrName = cardAttr.toLowerCase().capitalize()
-            val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.png"
+            val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.webp"
             Timber.d(imagePath)
             try {
                 return BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
