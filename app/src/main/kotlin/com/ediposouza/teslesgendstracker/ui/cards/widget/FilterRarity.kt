@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import kotlinx.android.synthetic.main.widget_rarity_filter.view.*
 
@@ -90,6 +91,9 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     fun collapse() {
+        if (rootView.rarity_filter.visibility == View.GONE) {
+            return
+        }
         if (rarity_filter_bg?.layoutParams?.width == rarityBGMinWidth) {
             return
         }

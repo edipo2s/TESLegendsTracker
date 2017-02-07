@@ -13,6 +13,7 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     var filterClick: ((Int) -> Unit)? = null
+    var closeable: Boolean = true
 
     init {
         inflate(context, R.layout.widget_magika_filter, this)
@@ -29,12 +30,12 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             }
             magika_filter.setOnMenuButtonClickListener {
                 when (magika_filter.isOpened) {
-                    true -> magika_filter.close(true)
+                    true -> close()
                     false ->
                         if (magika_filter.tag == true)
                             magikaClick(-1)
                         else
-                            magika_filter.open(true)
+                            open()
                 }
             }
         }
@@ -44,8 +45,14 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
+    fun open() {
+        rootView.magika_filter.open(true)
+    }
+
     fun close() {
-        magika_filter.close(true)
+        if (closeable) {
+            magika_filter.close(true)
+        }
     }
 
     private fun magikaClick(magika: Int) {
@@ -53,7 +60,7 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val icon = R.drawable.ic_magika.takeIf { magika == -1 } ?: R.drawable.ic_magika_clear
         rootView.magika_filter.apply {
             tag = magika != -1
-            close(true)
+            close()
             menuIconView.setImageResource(icon)
         }
     }

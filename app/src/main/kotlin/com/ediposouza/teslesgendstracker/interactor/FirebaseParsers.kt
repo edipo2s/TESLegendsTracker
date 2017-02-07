@@ -26,7 +26,7 @@ abstract class FirebaseParsers {
         val race: String = CardRace.NONE.name
         val keyword: String = ""
         val arenaTier: String = CardArenaTier.NONE.name
-        val arenaTierPlus: Pair<String, String>? = null
+        val arenaTierPlus: Map<String, String> = mapOf()
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
@@ -51,20 +51,20 @@ abstract class FirebaseParsers {
         }
 
         private fun getCardArenaTierPlus(): CardArenaTierPlus? {
-            if (arenaTierPlus == null) {
+            if (arenaTierPlus.keys.isEmpty()) {
                 return null
             }
-            val cardArenaTierPlusType = CardArenaTierPlusType.of(arenaTierPlus.first)
+            val cardArenaTierPlusType = CardArenaTierPlusType.of(arenaTierPlus.keys.first())
             var operator: CardArenaTierPlusOperator? = null
             var value = when (cardArenaTierPlusType) {
                 CardArenaTierPlusType.ATTACK,
                 CardArenaTierPlusType.COST,
                 CardArenaTierPlusType.HEALTH ->
-                    with(arenaTierPlus.second.partition { it == ARENA_TIER_PLUS_VALUE_DELIMITER }) {
-                        operator = CardArenaTierPlusOperator.valueOf(first)
-                        second
+                    with(arenaTierPlus.values.first().split(ARENA_TIER_PLUS_VALUE_DELIMITER)) {
+                        operator = CardArenaTierPlusOperator.of(get(0))
+                        get(1)
                     }
-                else -> arenaTierPlus.second
+                else -> arenaTierPlus.values.first()
             }
             return CardArenaTierPlus(cardArenaTierPlusType, operator, value)
         }

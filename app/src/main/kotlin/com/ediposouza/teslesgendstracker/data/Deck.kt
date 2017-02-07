@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.data
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
+import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,

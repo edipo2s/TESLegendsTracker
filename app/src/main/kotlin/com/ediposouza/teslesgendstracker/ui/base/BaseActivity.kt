@@ -15,6 +15,7 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager

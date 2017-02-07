@@ -10,6 +10,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Breakthrough",
+        "text": "Breakthrough, +1/+1",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "attack": ">_4"
@@ -24,6 +25,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Charge",
+        "text": "Charge",
         "arenaTier": "Average"
       },
       "covenantmarauder": {
@@ -35,6 +37,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
+        "text": "+2/+0 while you have no cards in hand.",
         "arenaTier": "Average"
       },
       "fieryimp": {
@@ -46,6 +49,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When Fiery Imp attacks, deal 2 damage to your opponent.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -60,6 +64,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Enemy creatures lose Guard.",
         "arenaTier": "Terrible"
       },
       "morthalwatchman": {
@@ -71,6 +76,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "rapidshot": {
@@ -82,6 +88,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Deal 1 damage to a creature. If it survives, draw a card.",
         "arenaTier": "Good"
       },
       "relentlessraider": {
@@ -93,6 +100,7 @@
         "health": "1",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "When an enemy rune is destroyed, deal 1 damage to your opponent.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -107,6 +115,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Poor"
       },
       "sharpshooterscout": {
@@ -118,6 +127,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Deal 1 damage.",
         "arenaTier": "Good"
       },
       "steelscimitar": {
@@ -129,6 +139,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "+2/+2",
         "arenaTier": "Excellent"
       },
       "afflictedalit": {
@@ -140,6 +151,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Deal 2 damage to each player.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -154,6 +166,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon, Silence",
+        "text": "+1/+0. Summon: Silence another creature.",
         "arenaTier": "Average"
       },
       "graystoneravager": {
@@ -165,6 +178,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Prophecy",
+        "text": "Prophecy",
         "arenaTier": "Good"
       },
       "jerallforager": {
@@ -176,6 +190,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Terrible"
       },
       "mageslayer": {
@@ -187,6 +202,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Mage Slayer can't be damaged by actions.",
         "arenaTier": "Excellent"
       },
       "northwindoutpost": {
@@ -198,6 +214,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Friendly (Strength) creatures have +1/+0.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "attr": "strength"
@@ -212,6 +229,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Other friendly creatures in this lane have +1/+0.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -226,6 +244,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Breakthrough",
+        "text": "Breakthrough. Other friendly Orcs in this lane have Breakthrough.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "race": "Orc"
@@ -240,6 +259,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon, Evolves",
+        "text": "Summon: Give a creature +1/+0.",
         "evolves": true
       },
       "plunder": {
@@ -251,6 +271,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Draw two random items.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "text": "equip"
@@ -265,6 +286,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Breakthrough",
+        "text": "Rihad Horseman has +3/+0 and Breakthrough while equipped with an item.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
@@ -279,6 +301,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "silvenartracker": {
@@ -290,6 +313,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon, Charge",
+        "text": "Summon: If there is a wounded enemy creature in this lane, give Silvenar Tracker Charge.",
         "arenaTier": "Average"
       },
       "assassinsbow": {
@@ -301,6 +325,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon, Cover",
+        "text": "+3/+0. Summon: Give the wielder Cover at the end of turn.",
         "arenaTier": "Average"
       },
       "battlerageorc": {
@@ -312,6 +337,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Charge",
+        "text": "Charge",
         "arenaTier": "Excellent"
       },
       "blightedalit": {
@@ -323,6 +349,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, Blighted Alit deals 2 damage to you.",
         "arenaTier": "Average"
       },
       "castout": {
@@ -334,6 +361,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy, Unsummon",
+        "text": "Prophecy. Unsummon a creature",
         "arenaTier": "Good"
       },
       "fearlessnorthlander": {
@@ -345,6 +373,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Breakthrough",
+        "text": "Breakthrough. When Fearless Northlander takes damage, he gains +2/+0.",
         "arenaTier": "Good"
       },
       "gladiatorarena": {
@@ -370,6 +399,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon, Breakthrough",
+        "text": "Summon: +3/+0 and breakthrough if the top card of your deck is (Strength).",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "attr": "strength"
@@ -384,6 +414,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
+        "text": "Prophecy, Guard. Summon: Give a creature +2/+0.",
         "arenaTier": "Insane"
       },
       "raidingparty": {
@@ -395,6 +426,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Charge",
+        "text": "Put two 1/1 Nord Firebrands with Charge into your hand.",
         "arenaTier": "Good"
       },
       "riftenpillager": {
@@ -406,6 +438,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: +1/+1 for each destroyed enemy rune.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -420,6 +453,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Rihad Battlemage has +0/+3 and Guard while equipped with an item.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "type": "Item"
@@ -434,19 +468,8 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Deal 1 damage to all other creatures in this lane.",
         "arenaTier": "Excellent"
-      },
-      "stampedesentinel": {
-        "name": "Stampede Sentinel",
-        "cost": "06",
-        "type": "Creature",
-        "race": "Giant",
-        "attack": "7",
-        "health": "7",
-        "rarity": "Epic",
-        "keyword": "Breakthrough",
-        "arenaTier": "Unknown",
-        "season": "2017_01"
       },
       "stonethrow": {
         "name": "Stone Throw",
@@ -457,6 +480,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Destroy an enemy creature if you have a creature with higher power.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "attack": ">_4"
@@ -471,6 +495,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Deal 1 damage.",
         "arenaTier": "Good"
       },
       "valenwoodtrapper": {
@@ -482,6 +507,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "witheredhandcultist": {
@@ -493,6 +519,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "All actions cost 2 more.",
         "arenaTier": "Good"
       },
       "alikrbandit": {
@@ -504,6 +531,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Evolves",
+        "text": "When Alik'r Bandit equips an item, he gains +1/+1.",
         "evolves": true
       },
       "alikrsurvivalist": {
@@ -515,6 +543,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Put a Steel Dagger into your hand. When Alik'r Survivalist equips an item, he gains +1/+1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
@@ -529,6 +558,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: +2/+2 if you another friendly Orc.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "race": "Orc"
@@ -543,6 +573,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
+        "text": "",
         "arenaTier": "Poor"
       },
       "earthbonespinner": {
@@ -554,6 +585,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon, Silence",
+        "text": "Summon: Silence another creature, then deal 1 damage to it.",
         "arenaTier": "Insane"
       },
       "fireball": {
@@ -565,7 +597,23 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Deal 1 damage to all enemies.",
         "arenaTier": "Average"
+      },
+      "gladiatorarena": {
+        "name": "Gladiator Arena",
+        "cost": "04",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "At the start of each player's turn, deal 2 damage to that player.",
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "heavybattleaxe": {
         "name": "Heavy Battleaxe",
@@ -576,6 +624,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "+4/+1",
         "arenaTier": "Average"
       },
       "lumberingogrim": {
@@ -587,6 +636,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Lumbering Ogrim can't gain Cover.",
         "arenaTier": "Excellent"
       },
       "orcishwarhammer": {
@@ -598,6 +648,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Breakthrough",
+        "text": "Breakthrough, +3/+3",
         "arenaTier": "Good"
       },
       "rampagingminotaur": {
@@ -609,6 +660,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Breakthrough, Charge",
+        "text": "Breakthrough, Charge",
         "arenaTier": "Average"
       },
       "reiveblademaster": {
@@ -621,6 +673,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "",
+        "text": "When Reive attacks, deal 2 damage to the enemy player, then increase the damage from this ability by 2.",
         "arenaTier": "Good"
       },
       "skirmisherselixir": {
@@ -632,6 +685,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate, Breakthrough",
+        "text": "Uses: 3. Activate: Give a creature +2/+0 and Breakthrough.",
         "arenaTier": "Terrible"
       },
       "trebuchet": {
@@ -643,6 +697,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, deal 4 damage to a random enemy.",
         "arenaTier": "Terrible"
       },
       "whiterunrecruit": {
@@ -665,6 +720,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Poor"
       },
       "blooddragon": {
@@ -676,6 +732,19 @@
         "health": "7",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "Blood Dragon ignores Guards and can attack creatures in any lane.",
+        "arenaTier": "Insane"
+      },
+      "burnandpillage": {
+        "name": "Burn and Pillage",
+        "cost": "05",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
         "arenaTier": "Insane"
       },
       "fortresswatchman": {
@@ -687,6 +756,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Average"
       },
       "grahtwoodambusher": {
@@ -698,6 +768,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Deal 1 damage to all enemy creatures in this lane.",
         "arenaTier": "Good"
       },
       "markarthbannerman": {
@@ -709,6 +780,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Charge",
+        "text": "When Markarth Bannerman attacks, put two 1/1 Nord Firebrands with Charge into your hand.",
         "arenaTier": "Excellent"
       },
       "woodorcheadhunter": {
@@ -720,21 +792,11 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Charge",
+        "text": "Breakthrough. Summon: Give Wood Orc Headhunter Charge if you have another friendly Orc.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "race": "Orc"
         }
-      },
-      "burnandpillage": {
-        "name": "Burn and Pillage",
-        "cost": "05",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "",
-        "arenaTier": "Insane"
       },
       "childofhircine": {
         "name": "Child of Hircine",
@@ -745,6 +807,7 @@
         "health": "7",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When Child of Hircine attacks and destroys a creature, it may attack again this turn.",
         "arenaTier": "Good"
       },
       "dreadclannfear": {
@@ -756,6 +819,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon, Guard",
+        "text": "Summon: All enemy creatures lose Guard.",
         "arenaTier": "Poor"
       },
       "initiateofhircine": {
@@ -767,7 +831,21 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Evolves",
+        "text": "When Initiate of Hircine attacks and destroys a creature, she may attack again this turn.",
         "evolves": true
+      },
+      "stampedesentinel": {
+        "name": "Stampede Sentinel",
+        "cost": "06",
+        "type": "Creature",
+        "race": "Giant",
+        "attack": "7",
+        "health": "7",
+        "rarity": "Epic",
+        "keyword": "Breakthrough",
+        "text": "Breakthrough, You can't be damaged by actions or supports.",
+        "arenaTier": "Unknown",
+        "season": "2017_01"
       },
       "triumphantjarl": {
         "name": "Triumphant Jarl",
@@ -778,6 +856,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: If you have more health than your opponent, draw two cards.",
         "arenaTier": "Excellent"
       },
       "whirlingduelist": {
@@ -789,6 +868,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When Whirling Duelist equips an item, deal 1 damage to each enemy creature in this lane.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
@@ -803,6 +883,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Breakthrough, Summon",
+        "text": "Breakthrough. Summon: Return an enemy creature to your opponent's hand or destroy an enemy support.",
         "arenaTier": "Good"
       },
       "savageogre": {
@@ -814,6 +895,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give a creature +5/+0 this turn.",
         "arenaTier": "Excellent"
       },
       "wrothgarforge": {
@@ -825,6 +907,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "The first time you summon a creature each turn, equip it with a random item.",
         "arenaTier": "Average"
       },
       "reclusivegiant": {
@@ -836,6 +919,7 @@
         "health": "8",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Evolves",
+        "text": "Breakthrough",
         "evolves": true
       },
       "vigilantgiant": {
@@ -847,6 +931,7 @@
         "health": "8",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Guard, Summon",
+        "text": "Breakthrough, Guard. Summon: Draw a card.",
         "arenaTier": "Excellent"
       },
       "volendrung": {
@@ -859,6 +944,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Activate",
+        "text": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough.",
         "arenaTier": "Good"
       },
       "dremoramarkynaz": {
@@ -870,6 +956,7 @@
         "health": "5",
         "rarity": "Legendary",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Double a creature's power and health.",
         "arenaTier": "Poor"
       }
     },
@@ -883,6 +970,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Sacrifice a creature to deal 5 damage to a random enemy creature.",
         "arenaTier": "Poor"
       },
       "lesserward": {
@@ -894,6 +982,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Ward",
+        "text": "Give a creature a Ward.",
         "arenaTier": "Average"
       },
       "brutalashlander": {
@@ -905,6 +994,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Deal 3 damage to a random enemy.",
         "arenaTier": "Good"
       },
       "crownquartermaster": {
@@ -916,6 +1006,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Put a Steel Dagger into your hand.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "equip"
@@ -930,6 +1021,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Deal 2 damage to a creature.",
         "arenaTier": "Excellent"
       },
       "nibenbaycutthroat": {
@@ -941,6 +1033,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
+        "text": "+2/+0 when there are no enemy creatures in this lane.",
         "arenaTier": "Terrible"
       },
       "abeceannavigator": {
@@ -952,6 +1045,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: If the top card of your deck is an action, draw it. Otherwise, put it on the bottom.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Action"
@@ -966,17 +1060,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Last Gasp",
-        "arenaTier": "Poor"
-      },
-      "brilliantexperiment": {
-        "name": "Brilliant Experiment",
-        "cost": "03",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "",
+        "text": "Last Gasp: Summon a random creature with cost less than or equal to your max magicka.",
         "arenaTier": "Poor"
       },
       "crystaltowercrafter": {
@@ -988,21 +1072,11 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
+        "text": "When you play an action, Crystal Tower Crafter gets +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
         }
-      },
-      "darkrift": {
-        "name": "Dark Rift",
-        "cost": "03",
-        "type": "Support",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "Activate",
-        "arenaTier": "Excellent"
       },
       "dunmernightblade": {
         "name": "Dunmer Nightblade",
@@ -1013,6 +1087,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Put an Iron Sword into your hand.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "equip"
@@ -1027,6 +1102,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Guard, Ward",
+        "text": "Guard, Ward",
         "arenaTier": "Average"
       },
       "highrocksummoner": {
@@ -1038,6 +1114,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Put a random Atronach into your hand.",
         "arenaTier": "Excellent"
       },
       "icespike": {
@@ -1049,6 +1126,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Deal 2 damage to your opponent. Draw a card.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -1062,7 +1140,8 @@
         "attack": "",
         "health": "",
         "rarity": "Epic",
-        "keyword": "",
+        "keyword": "Reveal three random cards, then choose one to put into your hand.",
+        "text": "",
         "arenaTier": "Good"
       },
       "redoranenforcer": {
@@ -1074,6 +1153,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "shimmerenepeddler": {
@@ -1085,6 +1165,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the end of each turn, if you played two actions, draw a card.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "type": "Action"
@@ -1099,6 +1180,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon, Shackle",
+        "text": "Prophecy. Summon: Shackle an enemy creature.",
         "arenaTier": "Excellent"
       },
       "skilledblacksmith": {
@@ -1110,6 +1192,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Your items cost 1 less",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "type": "Item"
@@ -1124,6 +1207,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Sacrifice a creature to summon a 3/2 Sundered Shade in each lane.",
         "arenaTier": "Good"
       },
       "steelsword": {
@@ -1135,6 +1219,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "+3/+0",
         "arenaTier": "Poor"
       },
       "wardcrafter": {
@@ -1146,6 +1231,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon, Ward",
+        "text": "Summon: Give a creature a Ward.",
         "arenaTier": "Excellent"
       },
       "wisdomofancients": {
@@ -1157,7 +1243,20 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Prophecy",
+        "text": "Prophecy. Give all friendly creatures a random keyword.",
         "arenaTier": "Average"
+      },
+      "brilliantexperiment": {
+        "name": "Brilliant Experiment",
+        "cost": "03",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "Draw a copy of a friendly creature.",
+        "arenaTier": "Poor"
       },
       "camlornadventurer": {
         "name": "Camlorn Adventurer",
@@ -1168,6 +1267,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Guard, Evolves",
+        "text": "Guard",
         "evolves": true
       },
       "camlornhero": {
@@ -1179,6 +1279,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Deal 2 damage to your opponent.",
         "arenaTier": "Average"
       },
       "camlornsentinel": {
@@ -1190,6 +1291,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy, Guard",
         "arenaTier": "Good"
       },
       "craglornscavenger": {
@@ -1201,6 +1303,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When you play or activate a support, give Craglorn Scavenger +1/+1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Support"
@@ -1215,6 +1318,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Put a Firebolt into your hand if the top card of your deck is (Intelligence).",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "attr": "intelligence"
@@ -1229,6 +1333,19 @@
         "health": "2",
         "rarity": "Legendary",
         "keyword": "Ward",
+        "text": "Ward. After Daggerfall Mage loses a Ward, put a Tome of Alteration into your hand.",
+        "arenaTier": "Excellent"
+      },
+      "darkrift": {
+        "name": "Dark Rift",
+        "cost": "03",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "Activate",
+        "text": "Uses: 5. Activate: Deal 1 damage to your opponent. If Dark Rift has dealt 5 damage, sacrifice it to summon a Storm Atronach.",
         "arenaTier": "Excellent"
       },
       "desperateconjuring": {
@@ -1240,6 +1357,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Sacrifice a creature to summon a random creature that costs 2 more.",
         "arenaTier": "Good"
       },
       "farsightnereid": {
@@ -1251,6 +1369,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Reveal the top card of the opponent's deck.",
         "arenaTier": "Poor"
       },
       "keeperofwhispers": {
@@ -1262,6 +1381,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Other friendly creatures can't be Silenced.",
         "arenaTier": "Good"
       },
       "maceofencumbrance": {
@@ -1273,6 +1393,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon, Shackle",
+        "text": "+2/+1. Summon: Shackle an enemy creature.",
         "arenaTier": "Good"
       },
       "telvanniarcanist": {
@@ -1284,6 +1405,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Put a random action into your hand.",
         "arenaTier": "Good"
       },
       "ashservant": {
@@ -1295,6 +1417,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Deal 2 damage to an enemy creature.",
         "arenaTier": "Good"
       },
       "baronoftear": {
@@ -1306,6 +1429,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Summon, Guard",
+        "text": "Summon: Give other friendly (Intelligence) creatures +1/+0 and Guard.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "intelligence"
@@ -1320,6 +1444,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Ward, Guard",
+        "text": "Ward. After Breton Conjurer loses a Ward, summon a 5/5 Frost Atronach with Guard.",
         "arenaTier": "Excellent"
       },
       "dresguard": {
@@ -1331,6 +1456,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Evolves",
+        "text": "Guard",
         "evolves": true
       },
       "dresrenegade": {
@@ -1342,6 +1468,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Guard. Other friendly creatures can't be Shackled.",
         "arenaTier": "Average"
       },
       "drestormentor": {
@@ -1353,6 +1480,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When an enemy becomes Shackled, deal 3 damage to it.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Shackle"
@@ -1367,6 +1495,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon, Last Gasp",
+        "text": "Summon: Draw a card. Last Gasp: Shuffle a 0-cost Elusive Schemer into your deck.",
         "arenaTier": "Excellent"
       },
       "firestorm": {
@@ -1378,6 +1507,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy",
+        "text": "Prophecy. Deal 2 damage to all creatures in one lane.",
         "arenaTier": "Good"
       },
       "icewraith": {
@@ -1389,6 +1519,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, draw an Ice Spike.",
         "arenaTier": "Poor"
       },
       "lightningbolt": {
@@ -1400,6 +1531,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Prophecy",
+        "text": "Prophecy. Deal 4 damage.",
         "arenaTier": "Insane"
       },
       "royalsage": {
@@ -1411,6 +1543,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: If you have more health than your opponent, give all friendly creatures a random keyword.",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -1425,6 +1558,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "+2/+2. Summon: Draw a card.",
         "arenaTier": "Good"
       },
       "dragonstarrider": {
@@ -1436,6 +1570,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When Dragonstar Rider equips an item, draw a card.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -1450,6 +1585,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate, Ward",
+        "text": "Uses: 3. Activate: Give a creature Ward.",
         "arenaTier": "Good"
       },
       "glenumbrasorceress": {
@@ -1461,6 +1597,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Ward",
+        "text": "Ward",
         "arenaTier": "Average"
       },
       "lillandrilhexmage": {
@@ -1472,6 +1609,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "",
+        "text": "When you play an action, deal 2 damage to your opponent.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Action"
@@ -1486,6 +1624,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Summon",
+        "text": "+3/+3. Summon: Give all your other creatures the keywords of this creature.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -1500,6 +1639,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Shackle",
+        "text": "Shackle all enemy creatures.",
         "arenaTier": "Average"
       },
       "winterstouch": {
@@ -1511,6 +1651,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Shackle, Evolves",
+        "text": "Shackle all enemy creatures in a lane.",
         "evolves": true
       },
       "battlereeveofdusk": {
@@ -1522,6 +1663,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Friendly creatures get +1/+1 for each keyword they have.",
         "arenaTier": "Unknown",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -1537,6 +1679,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Draw a card. If it has Prophecy you may play it for free.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "keyword": "Prophecy"
@@ -1551,6 +1694,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon, Evolves",
+        "text": "Prophecy. Summon: Draw a card.",
         "evolves": true
       },
       "heirloomgreatsword": {
@@ -1562,6 +1706,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Last Gasp",
+        "text": "+5/+0. Last Gasp: Return Heirloom Greatsword to your hand.",
         "arenaTier": "Excellent"
       },
       "icestorm": {
@@ -1573,6 +1718,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Deal 3 damage to all creatures.",
         "arenaTier": "Excellent"
       },
       "masterofarms": {
@@ -1584,6 +1730,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Master of Arms equips the two highest cost items in your discard pile.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
@@ -1598,6 +1745,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "+3/+0. When the wielder attacks, it deals 1 damage to all enemy creatures in this lane.",
         "arenaTier": "Poor"
       },
       "studentofarms": {
@@ -1609,6 +1757,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Evolves",
+        "text": "Summon: Equip Student of Arms with the highest cost item from your discard pile.",
         "evolves": true
       },
       "studiumheadmaster": {
@@ -1620,6 +1769,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Each player draws two cards.",
         "arenaTier": "Terrible"
       },
       "summersetorrery": {
@@ -1631,6 +1781,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Activate, Prophecy",
+        "text": "Uses: 3. Activate: Shuffle all cards in your hand with Prophecy into your deck and draw that many cards.",
         "arenaTier": "Terrible"
       },
       "magesguildretreat": {
@@ -1642,6 +1793,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the end of each turn, if you played two actions, summon a random Atronach.",
         "arenaTier": "Terrible"
       },
       "wispmother": {
@@ -1653,6 +1805,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When you summon a creature that costs 2 or less, summon a copy of that creature in the other lane.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "cost": "<_3"
@@ -1667,6 +1820,7 @@
         "health": "6",
         "rarity": "Legendary",
         "keyword": "Guard, Last Gasp",
+        "text": "Guard. Last Gasp: Indoril Archmage deals 6 damage to all enemy creatures in this lane.",
         "arenaTier": "Excellent"
       },
       "shockingwamasu": {
@@ -1678,6 +1832,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Deal 4 damage to a creature.",
         "arenaTier": "Good"
       },
       "expertatromancer": {
@@ -1689,18 +1844,8 @@
         "health": "3",
         "rarity": "Legendary",
         "keyword": "Summon, Breakthrough, Evolves",
+        "text": "Summon: Summon a 5/3 Flame Atronach with Breakthrough in each lane.",
         "evolves": true
-      },
-      "supremeatromancer": {
-        "name": "Supreme Atromancer",
-        "cost": "09",
-        "type": "Creature",
-        "race": "Breton",
-        "attack": "3",
-        "health": "3",
-        "rarity": "Legendary",
-        "keyword": "Summon",
-        "arenaTier": "Insane"
       },
       "nahkriindragonpriest": {
         "name": "Nahkriin, Dragon Priest",
@@ -1712,7 +1857,20 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Draw a card and reduce its cost to 0.",
         "arenaTier": "Average"
+      },
+      "supremeatromancer": {
+        "name": "Supreme Atromancer",
+        "cost": "09",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Summon a Flame Atronach in each lane. When you summon another creature, deal 2 damage to your opponent.",
+        "arenaTier": "Insane"
       },
       "divaythfyr": {
         "name": "Divayth Fyr",
@@ -1724,6 +1882,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Deal 6 damage to a random enemy. At the start of your turn, Divayth Fyr summons a Daughter of Fyr.",
         "arenaTier": "Good"
       }
     },
@@ -1737,6 +1896,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Give a creature -4/-0 this turn.",
         "arenaTier": "Poor"
       },
       "septimguardsman": {
@@ -1748,6 +1908,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Poor"
       },
       "aldmeripatriot": {
@@ -1759,21 +1920,11 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: +1/+1 if you have an action in your hand.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
         }
-      },
-      "apprenticespotion": {
-        "name": "Apprentices Potion",
-        "cost": "02",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Common",
-        "keyword": "Evolves",
-        "evolves": true
       },
       "blackmail": {
         "name": "Blackmail",
@@ -1784,6 +1935,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Draw a copy of a random creature from your opponent's deck.",
         "arenaTier": "Poor"
       },
       "cheydinhalsapper": {
@@ -1795,6 +1947,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Drain",
+        "text": "Drain",
         "arenaTier": "Average"
       },
       "descendantofalkosh": {
@@ -1806,6 +1959,7 @@
         "health": "1",
         "rarity": "Legendary",
         "keyword": "Pilfer",
+        "text": "Pilfer: Descendant of Alkosh gains +1/+1 and a random keyword.",
         "arenaTier": "Good"
       },
       "detain": {
@@ -1817,6 +1971,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Shackle, Evolves",
+        "text": "Shackle a creature.",
         "evolves": true
       },
       "execute": {
@@ -1828,18 +1983,8 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Destroy a creature with 2 power or less.",
         "arenaTier": "Excellent"
-      },
-      "healingpotion": {
-        "name": "Healing Potion",
-        "cost": "02",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Common",
-        "keyword": "Prophecy",
-        "arenaTier": "Terrible"
       },
       "imprison": {
         "name": "Imprison",
@@ -1850,6 +1995,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Shackle",
+        "text": "Shackle a creature. If you have four or more (Willpower) creatures, destroy it instead.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "attr": "willpower"
@@ -1864,6 +2010,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Summon a 1/1 Imperial Grunt in each lane.",
         "arenaTier": "Excellent"
       },
       "sunholdmedic": {
@@ -1875,7 +2022,20 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give a creature +0/+2.",
         "arenaTier": "Poor"
+      },
+      "apprenticespotion": {
+        "name": "Apprentices Potion",
+        "cost": "02",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "Evolves",
+        "text": "Gain 5 health.",
+        "evolves": true
       },
       "brumaprofiteer": {
         "name": "Bruma Profiteer",
@@ -1886,6 +2046,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When you summon another creature gain 1 health.",
         "arenaTier": "Excellent"
       },
       "cathayrahtveteran": {
@@ -1897,6 +2058,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "elixirofthedefender": {
@@ -1908,6 +2070,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate, Guard",
+        "text": "Uses: 3. Activate: Give a friendly creature Guard.",
         "arenaTier": "Terrible"
       },
       "fifthlegiontrainer": {
@@ -1919,7 +2082,20 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When you summon another creature, give it +1/+0.",
         "arenaTier": "Good"
+      },
+      "healingpotion": {
+        "name": "Healing Potion",
+        "cost": "02",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "Prophecy",
+        "text": "Prophecy. Gain 5 health.",
+        "arenaTier": "Terrible"
       },
       "helgensquadleader": {
         "name": "Helgen Squad Leader",
@@ -1930,6 +2106,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When another friendly creature attacks, Helgen Squad Leader gains +1/+0.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -1944,6 +2121,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Excellent"
       },
       "legionshield": {
@@ -1955,6 +2133,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Guard, +1/+3",
         "arenaTier": "Average"
       },
       "priestofthemoons": {
@@ -1966,6 +2145,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Gain 2 health.",
         "arenaTier": "Average"
       },
       "ravenoushunger": {
@@ -1977,6 +2157,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon, Drain",
+        "text": "Summon: Give Ravenous Hunger Drain if there is an enemy creature in this lane.",
         "arenaTier": "Average"
       },
       "skingradpatroller": {
@@ -1988,6 +2169,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "snowwolf": {
@@ -1999,6 +2181,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "+2/+0 while you have the most creatures in this lane.",
         "arenaTier": "Good"
       },
       "starvedhunger": {
@@ -2010,6 +2193,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "summersetshieldmage": {
@@ -2021,6 +2205,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "Other friendly creatures in this lane have +0/+1.",
         "arenaTier": "Average"
       },
       "arrowstorm": {
@@ -2032,6 +2217,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Destroy all creatures with 2 power or less in one lane.",
         "arenaTier": "Good"
       },
       "artaeumsavant": {
@@ -2043,6 +2229,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When you play an action, a random friendly creature gets +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
@@ -2057,6 +2244,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When an enemy rune is destroyed, gain 3 health.",
         "arenaTier": "Good"
       },
       "eastmarchcrusader": {
@@ -2068,6 +2256,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Draw a card if an enemy rune has been destroyed this game.",
         "arenaTier": "Good"
       },
       "elsweyrlookout": {
@@ -2079,6 +2268,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Pilfer",
+        "text": "Pilfer: Double Elsweyr Lookout's power and health.",
         "arenaTier": "Unknown",
         "season": "2016_12"
       },
@@ -2091,6 +2281,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Good"
       },
       "morthalexecutioner": {
@@ -2102,6 +2293,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When an enemy rune is destroyed, Morthal Executioner gains +2/+0.",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -2116,6 +2308,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Summon a 1/1 Young Wolf in the other lane.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -2130,6 +2323,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Pit Lion can't be summoned unless there's a friendly unit in each lane.",
         "arenaTier": "Good"
       },
       "rajhinihighwayman": {
@@ -2141,6 +2335,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Pilfer",
+        "text": "Pilfer: Draw a card.",
         "arenaTier": "Good"
       },
       "resoluteally": {
@@ -2152,6 +2347,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give other friendly creatures in this lane +1/+1 if the top card of your deck is (Willpower).",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "attr": "willpower"
@@ -2166,6 +2362,7 @@
         "health": "6",
         "rarity": "Rare",
         "keyword": "Guard, Pilfer",
+        "text": "Guard. Pilfer: Move Riverhold Escort to the other lane.",
         "arenaTier": "Average"
       },
       "toweralchemist": {
@@ -2177,6 +2374,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Activate",
+        "text": "Your support cards with Activate abilities have unlimited uses.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Support"
@@ -2191,6 +2389,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "If your opponent doesn't damage you on their turn, sacrifice this and summon a Priest of the Moons in each lane.",
         "arenaTier": "Poor"
       },
       "alphawolf": {
@@ -2202,6 +2401,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Other friendly Wolves have +2/+0.",
         "arenaTier": "Terrible"
       },
       "auridonpaladin": {
@@ -2213,6 +2413,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Drain",
+        "text": "When you play an action, give Auridon Paladin Drain this turn.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "type": "Action"
@@ -2227,6 +2428,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Give a creature -4/-0 this turn.",
         "arenaTier": "Excellent"
       },
       "dawnbreaker": {
@@ -2239,6 +2441,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "+4/+4. Summon: Destroy an enemy Undead.",
         "arenaTier": "Excellent"
       },
       "divineconviction": {
@@ -2250,21 +2453,8 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Evolves",
+        "text": "Friendly creatures have +0/+1.",
         "evolves": true
-      },
-      "divinefervor": {
-        "name": "Divine Fervor",
-        "cost": "05",
-        "type": "Support",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
       },
       "hivedefender": {
         "name": "Hive Defender",
@@ -2275,6 +2465,7 @@
         "health": "6",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Excellent"
       },
       "hivewarrior": {
@@ -2286,6 +2477,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Breakthrough",
+        "text": "Breakthrough",
         "arenaTier": "Average"
       },
       "hiveworker": {
@@ -2308,6 +2500,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Fill a lane with 1/1 Imperial Grunts.",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -2322,6 +2515,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Give friendly creatures in one lane +2/+0 this turn.",
         "arenaTier": "Average"
       },
       "dagirahtmystic": {
@@ -2333,7 +2527,23 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Pilfer",
+        "text": "Pilfer: Draw a random support from your deck.",
         "arenaTier": "Poor"
+      },
+      "divinefervor": {
+        "name": "Divine Fervor",
+        "cost": "05",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "Friendly creatures have +1/+1.",
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "haafingarmarauder": {
         "name": "Haafingar Marauder",
@@ -2344,6 +2554,7 @@
         "health": "3",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "When a friendly creature destroys an enemy rune, equip it with a random item.",
         "arenaTier": "Excellent"
       },
       "heroofanvil": {
@@ -2355,6 +2566,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Hero of Anvil costs 1 less for each creature summoned this turn.",
         "arenaTier": "Poor"
       },
       "imperialmight": {
@@ -2366,6 +2578,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the end of your turn, summon a 1/1 Imperial Grunt in a random lane.",
         "arenaTier": "Average"
       },
       "imperialsiegeengine": {
@@ -2377,6 +2590,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: +1/+1 for each other friendly creature.",
         "arenaTier": "Average"
       },
       "loyalhousecarl": {
@@ -2388,6 +2602,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Prophecy, Summon, Guard",
+        "text": "Prophecy. Summon: Give a creature +2/+2 and Guard.",
         "arenaTier": "Excellent"
       },
       "piercingjavelin": {
@@ -2399,6 +2614,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Prophecy",
+        "text": "Prophecy. Destroy a creature.",
         "arenaTier": "Insane"
       },
       "pillagingtribune": {
@@ -2410,6 +2626,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Drain",
+        "text": "Summon: Give a friendly creature Drain this turn.",
         "arenaTier": "Good"
       },
       "spitefuldremora": {
@@ -2421,6 +2638,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Destroy an enemy creature with 2 power or less.",
         "arenaTier": "Good"
       },
       "tuskedbristleback": {
@@ -2432,6 +2650,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "goldensaint": {
@@ -2443,6 +2662,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: If you have more health than your opponent, summon a copy of Golden Saint in the other lane.",
         "arenaTier": "Insane"
       },
       "immolatingblast": {
@@ -2454,6 +2674,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Randomly destroy all but one creature on both sides of each lane.",
         "arenaTier": "Average"
       },
       "senchetiger": {
@@ -2465,6 +2686,7 @@
         "health": "7",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Excellent"
       },
       "legionpraefect": {
@@ -2476,6 +2698,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Other friendly creatures get +1/+1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -2490,6 +2713,7 @@
         "health": "5",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon",
+        "text": "Breakthrough. Summon: Summon a 1/1 Imperial Grunt, then gain 1 health for each friendly creature.",
         "arenaTier": "Average"
       },
       "risinglegate": {
@@ -2501,6 +2725,7 @@
         "health": "5",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Evolves",
+        "text": "Breakthrough. Summon: Summon a 1/1 Imperial Grunt.",
         "evolves": true
       },
       "auroransentry": {
@@ -2512,6 +2737,7 @@
         "health": "7",
         "rarity": "Legendary",
         "keyword": "Guard",
+        "text": "   Guard. When Auroran Sentry is dealt damage, you gain that much health.",
         "arenaTier": "Good"
       },
       "dawnswrath": {
@@ -2523,6 +2749,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "Destroy all creatures in a lane.",
         "arenaTier": "Good"
       },
       "mantikora": {
@@ -2534,6 +2761,7 @@
         "health": "6",
         "rarity": "Epic",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Destroy an enemy creature in this lane.",
         "arenaTier": "Good"
       },
       "miraakdragonborn": {
@@ -2546,6 +2774,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Steal an enemy creature.",
         "arenaTier": "Good"
       }
     },
@@ -2559,6 +2788,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Give a creature -1/-1.",
         "arenaTier": "Poor"
       },
       "murkwatergoblin": {
@@ -2570,6 +2800,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
+        "text": "Murkwater Goblin has +2/+0 on your turn.",
         "arenaTier": "Poor"
       },
       "arrowintheknee": {
@@ -2581,6 +2812,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Shackle",
+        "text": "Shackle a creature and deal 1 damage to it.",
         "arenaTier": "Poor"
       },
       "mournholdguardian": {
@@ -2592,6 +2824,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Poor"
       },
       "shadowshift": {
@@ -2603,6 +2836,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Move a friendly creature. Draw a card.",
         "arenaTier": "Good"
       },
       "ungolimthelistener": {
@@ -2615,6 +2849,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Shuffle three Brotherhood Assassins into your deck.",
         "arenaTier": "Insane"
       },
       "voraciousspriggan": {
@@ -2626,6 +2861,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Drain",
+        "text": "Drain",
         "arenaTier": "Average"
       },
       "daringcutpurse": {
@@ -2637,6 +2873,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy, Pilfer",
+        "text": "Prophecy, Pilfer: +1/+1",
         "arenaTier": "Excellent"
       },
       "dunerogue": {
@@ -2648,6 +2885,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Prophecy, Evolves",
+        "text": "Prophecy",
         "evolves": true
       },
       "dunestalker": {
@@ -2659,6 +2897,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon",
+        "text": "Prophecy. Summon: Move another friendly creature in this lane.",
         "arenaTier": "Good"
       },
       "elixiroflightfeet": {
@@ -2670,6 +2909,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate, Cover",
+        "text": "Uses: 3. Activate: Give a creature Cover.",
         "arenaTier": "Poor"
       },
       "fightersguildrecruit": {
@@ -2681,6 +2921,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Lethal",
+        "text": "Prophecy, Guard, Lethal",
         "arenaTier": "Insane"
       },
       "finishoff": {
@@ -2692,6 +2933,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Destroy a wounded enemy creature.",
         "arenaTier": "Good"
       },
       "goblinskulk": {
@@ -2703,6 +2945,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Pilfer",
+        "text": "Pilfer: Draw a random card from your deck that costs 0.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "cost": "=_0"
@@ -2717,6 +2960,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Lethal, Evolves",
+        "text": "Lethal",
         "evolves": true
       },
       "helstromfootpad": {
@@ -2728,6 +2972,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "leafwaterblessing": {
@@ -2739,6 +2984,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Give a creature +1/+1. When you gain health draw Leafwater Blessing from your discard pile.",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "keyword": "Drain"
@@ -2753,6 +2999,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Last Gasp, Guard",
+        "text": "Last Gasp: Your opponent summons a 2/1 Mournhold Guardian with Guard.",
         "arenaTier": "Average"
       },
       "murkwaterwitch": {
@@ -2764,6 +3011,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Give an enemy creature -1/-1.",
         "arenaTier": "Excellent"
       },
       "snaketoothnecklace": {
@@ -2775,6 +3023,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Drain",
+        "text": "+1/+1. Summon: Give the wielder Drain this turn.",
         "arenaTier": "Poor"
       },
       "thievesguildrecruit": {
@@ -2786,6 +3035,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "   Summon: Draw a card. If it costs 7 or more, reduce its cost by 2.",
         "arenaTier": "Good"
       },
       "arenthiaswindler": {
@@ -2797,6 +3047,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Steal all items from an enemy creature.",
         "arenaTier": "Poor"
       },
       "baandaribruiser": {
@@ -2808,6 +3059,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Pilfer",
+        "text": "Pilfer: +3/+0.",
         "arenaTier": "Average"
       },
       "blacksapprotector": {
@@ -2819,6 +3071,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy, Guard",
         "arenaTier": "Excellent"
       },
       "dunesmuggler": {
@@ -2830,6 +3083,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Move another friendly creature in this lane. When a friendly creature moves, give it +1/+1.",
         "arenaTier": "Good"
       },
       "feastingvulture": {
@@ -2841,6 +3095,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: +2/+2 if a creature died this turn.",
         "arenaTier": "Good"
       },
       "giantbat": {
@@ -2852,6 +3107,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Charge, Drain",
+        "text": "Charge, Drain",
         "arenaTier": "Average"
       },
       "greenheartknight": {
@@ -2863,6 +3119,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "Charge",
+        "text": "Charge",
         "arenaTier": "Poor"
       },
       "housekinsman": {
@@ -2874,6 +3131,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Deal 3 damage to your opponent and gain 3 health",
         "arenaTier": "Excellent"
       },
       "maleficwreath": {
@@ -2885,6 +3143,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Give a creature -2/-2.",
         "arenaTier": "Average"
       },
       "murkwaterbutcher": {
@@ -2896,6 +3155,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "If Murkwater Butcher is in your hand during your first turn, reduce his cost to 1.",
         "arenaTier": "Poor"
       },
       "murkwatersavage": {
@@ -2907,6 +3167,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When you summon another (Agility) creature, Murkwater Savage gains +1/+1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "agility"
@@ -2921,6 +3182,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "",
+        "text": "Summon: +1/+1 and Lethal if the top card of your deck is (Agility).",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "attr": "agility"
@@ -2935,6 +3197,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon, Lethal",
+        "text": "Summon: Give a creature Lethal.",
         "arenaTier": "Average"
       },
       "swiftstrike": {
@@ -2946,6 +3209,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Give a creature an extra attack this turn.",
         "arenaTier": "Poor"
       },
       "thievery": {
@@ -2957,6 +3221,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Deal 3 damage to your opponent and gain 3 health.",
         "arenaTier": "Terrible"
       },
       "varaniscourier": {
@@ -2968,6 +3233,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard, Last Gasp",
+        "text": "Guard. Last Gasp: Draw a card.",
         "arenaTier": "Average"
       },
       "anxileelinvader": {
@@ -2979,6 +3245,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "deshaanavenger": {
@@ -2990,6 +3257,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Summon a 3/3 Deshaan Sneak.",
         "arenaTier": "Excellent"
       },
       "deshaansneak": {
@@ -3001,6 +3269,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "greenpactstalker": {
@@ -3012,6 +3281,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: +2/+2 if there is a wounded enemy creature in this lane.",
         "arenaTier": "Good"
       },
       "hiddentrail": {
@@ -3023,6 +3293,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "All lanes become Shadow lanes. Friendly creatures have +1/+0.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -3037,6 +3308,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Prophecy, Drain",
+        "text": "Prophecy, Drain",
         "arenaTier": "Excellent"
       },
       "murkwatershaman": {
@@ -3048,6 +3320,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, put a Curse into your hand.",
         "arenaTier": "Good"
       },
       "murkwaterskirmisher": {
@@ -3059,6 +3332,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Give all other friendly Goblins +2/+2.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "race": "Goblin"
@@ -3073,6 +3347,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Pilfer",
+        "text": "Pilfer: +1/+1. Can attack an additional time each turn.",
         "arenaTier": "Average"
       },
       "territorialviper": {
@@ -3084,6 +3359,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Charge, Lethal",
+        "text": "Charge, Lethal",
         "arenaTier": "Good"
       },
       "thievesden": {
@@ -3095,6 +3371,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Pilfer",
+        "text": "Friendly creatures have Pilfer: +1/+1.",
         "arenaTier": "Average"
       },
       "torvalcrook": {
@@ -3106,6 +3383,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Charge, Pilfer",
+        "text": "Charge. Pilfer: Gain 2 magicka.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3120,6 +3398,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Prophecy, Evolves",
+        "text": "Prophecy",
         "evolves": true
       },
       "camoranscoutleader": {
@@ -3131,6 +3410,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon, Charge",
+        "text": "Summon: Summon a 2/2 Wood Elf Scout with Charge in each lane with a wounded enemy creature.",
         "arenaTier": "Poor"
       },
       "cliffracer": {
@@ -3142,6 +3422,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Charge",
+        "text": "Charge",
         "arenaTier": "Insane"
       },
       "eldercentaur": {
@@ -3153,6 +3434,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Cover",
+        "text": "After Elder Centaur attacks, give it Cover.",
         "arenaTier": "Average"
       },
       "giantsnake": {
@@ -3164,6 +3446,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon, Shackle",
+        "text": "Summon: Shackle all enemy creatures in this lane.",
         "arenaTier": "Average"
       },
       "greentouchedspriggan": {
@@ -3175,6 +3458,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When you gain health, Green-Touched Spriggan gains that much power.",
         "arenaTier": "Poor"
       },
       "leaflurker": {
@@ -3186,6 +3470,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Destroy a wounded enemy creature.",
         "arenaTier": "Insane"
       },
       "necrommastermind": {
@@ -3197,6 +3482,7 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Summon, Last Gasp",
+        "text": "Summon: Trigger the Last Gasp of each friendly creature.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Last Gasp"
@@ -3211,6 +3497,7 @@
         "health": "6",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When Pahmar-raht Renegade attacks and destroys a creature, draw a card.",
         "arenaTier": "Good"
       },
       "snowysabrecat": {
@@ -3222,18 +3509,8 @@
         "health": "7",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Can attack an additional time on each turn.",
         "arenaTier": "Excellent"
-      },
-      "soulrestmarshal": {
-        "name": "Soulrest Marshal",
-        "cost": "06",
-        "type": "Creature",
-        "race": "Argonian",
-        "attack": "4",
-        "health": "4",
-        "rarity": "Rare",
-        "keyword": "Summon",
-        "arenaTier": "Insane"
       },
       "highlandlurcher": {
         "name": "Highland Lurcher",
@@ -3244,6 +3521,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "quinrawlburglar": {
@@ -3255,6 +3533,7 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Drain, Pilfer",
+        "text": "Drain. Pilfer: +4/+4",
         "arenaTier": "Good"
       },
       "quinrawlskulker": {
@@ -3266,6 +3545,7 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Pilfer, Evolves",
+        "text": "Pilfer: +4/+4",
         "evolves": true
       },
       "ransack": {
@@ -3277,6 +3557,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy",
+        "text": "Prophecy. Deal 3 damage and gain 3 health.",
         "arenaTier": "Average"
       },
       "smugglershaul": {
@@ -3288,8 +3569,21 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Draw four random 0-cost cards.",
         "arenaTier": "Good",
         "season": "2016_08"
+      },
+      "soulrestmarshal": {
+        "name": "Soulrest Marshal",
+        "cost": "06",
+        "type": "Creature",
+        "race": "Argonian",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "   Summon: If you have more health than your opponent, the next card you play this turn costs 6 less.",
+        "arenaTier": "Insane"
       },
       "wildbeastcaller": {
         "name": "Wild Beastcaller",
@@ -3300,6 +3594,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Summon a random Animal.",
         "arenaTier": "Excellent"
       },
       "wildspriggan": {
@@ -3311,6 +3606,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Evolves",
+        "text": "Summon: Summon a 2/3 Snow Fox.",
         "evolves": true
       },
       "chaurusreaper": {
@@ -3322,6 +3618,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give all enemy creatures in this lane -1/-1.",
         "arenaTier": "Good"
       },
       "spiderlair": {
@@ -3333,6 +3630,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, summon a random Spider.",
         "arenaTier": "Terrible"
       },
       "spiderdaedra": {
@@ -3344,6 +3642,7 @@
         "health": "2",
         "rarity": "Legendary",
         "keyword": "Summon",
+        "text": "Summon: Fill your lanes with 2/1 Spiderlings. Last Gasp: Destroy all friendly Spiderlings.",
         "arenaTier": "Poor"
       },
       "tazkadthepackmaster": {
@@ -3356,6 +3655,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Breakthrough, Charge, Last Gasp",
+        "text": "   Breakthrough, Charge. Last Gasp: Summon a 4/4 Durzog.",
         "arenaTier": "Excellent"
       },
       "nestofvipers": {
@@ -3367,6 +3667,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "Fill a lane with territorial Vipers.",
         "arenaTier": "Average"
       }
     },
@@ -3380,6 +3681,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Heal a creature, then give it +1/+1.",
         "arenaTier": "Poor"
       },
       "suppress": {
@@ -3391,6 +3693,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Silence",
+        "text": "Silence a creature.",
         "arenaTier": "Poor"
       },
       "deadlydraugr": {
@@ -3402,6 +3705,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Lethal",
+        "text": "Lethal",
         "arenaTier": "Average"
       },
       "deathlessdraugr": {
@@ -3413,6 +3717,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Last Gasp",
+        "text": "Last Gasp; Summon a 1/1 Skeleton.",
         "arenaTier": "Good"
       },
       "iliacsorcerer": {
@@ -3424,6 +3729,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Ward",
+        "text": "Ward. After Iliac Sorcerer loses a Ward, double his power.",
         "arenaTier": "Good"
       },
       "rottingdraugr": {
@@ -3435,6 +3741,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "daedricdagger": {
@@ -3446,6 +3753,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Lethal",
+        "text": "Lethal. +1/+1",
         "arenaTier": "Good"
       },
       "dragontailsavior": {
@@ -3457,6 +3765,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: +1/+0 for each enemy creature in this lane.",
         "arenaTier": "Excellent"
       },
       "elixirofvigor": {
@@ -3468,6 +3777,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate",
+        "text": "Uses: 3. Activate: Give a creature +0/+1.",
         "arenaTier": "Poor"
       },
       "enchantedplate": {
@@ -3479,6 +3789,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "+0/+3. Summon: Draw a card.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Guard"
@@ -3493,6 +3804,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy, Guard",
         "arenaTier": "Average"
       },
       "histspeaker": {
@@ -3504,6 +3816,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "While Hist Speaker is in play, your max magicka is increased by 1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3518,6 +3831,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "Guard, Regenerate",
+        "text": "Guard, Regenerate",
         "arenaTier": "Poor"
       },
       "siegecatapult": {
@@ -3529,6 +3843,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Siege Catapult can't attack unless your side of its lane is full.",
         "arenaTier": "Poor"
       },
       "stormholdhenchman": {
@@ -3540,6 +3855,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "While you have 7 or more max magicka, Stormhold Henchman has +2/+2.",
         "arenaTier": "Average"
       },
       "windkeepspellsword": {
@@ -3551,6 +3867,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Ward",
+        "text": "Ward",
         "arenaTier": "Insane"
       },
       "wrothgarkingpin": {
@@ -3562,6 +3879,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When you summon another Orc, Wrothgar Kingpin gains +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Orc"
@@ -3576,6 +3894,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: +1/+1 for each enemy creature in this lane.",
         "arenaTier": "Terrible"
       },
       "blackroseherbalist": {
@@ -3587,6 +3906,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
+        "text": "At the start of your turn, heal another random friendly creature.",
         "arenaTier": "Average"
       },
       "brumaarmorer": {
@@ -3598,6 +3918,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
+        "text": "When you summon another, give it +0/+2.",
         "arenaTier": "Poor"
       },
       "chieftainsbanner": {
@@ -3609,6 +3930,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Friendly Orcs have +0/+2.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Orc"
@@ -3623,6 +3945,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Prophecy, Lethal",
+        "text": "Prophecy, Lethal",
         "arenaTier": "Good"
       },
       "hackwingfeather": {
@@ -3634,6 +3957,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Regenerate",
+        "text": "Regenerate, +1/+3",
         "arenaTier": "Average"
       },
       "hauntingspirit": {
@@ -3645,6 +3969,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Give a random friendly creature +3/+3.",
         "arenaTier": "Excellent"
       },
       "histgrove": {
@@ -3656,6 +3981,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
         "arenaTier": "Poor",
         "season": "2016_09"
       },
@@ -3668,6 +3994,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "+0/+6",
         "arenaTier": "Poor"
       },
       "mummify": {
@@ -3679,6 +4006,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy",
+        "text": "Prophecy. Transform a creature into a 2/2 Shriveled Mummy.",
         "arenaTier": "Good"
       },
       "necromancersamulet": {
@@ -3690,6 +4018,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When a friendly creature is destroyed, gain 1 health.",
         "arenaTier": "Terrible"
       },
       "pleatokynareth": {
@@ -3701,6 +4030,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Heal all friendly creatures in a lane, then give them all +1/+1.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -3715,6 +4045,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon, Guard",
+        "text": "Summon: +0/+2 and Guard if the top card of your deck is (Endurance).",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "attr": "endurance"
@@ -3729,6 +4060,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Guard, Summon",
+        "text": "Guard, Summon: Gain +1 max magicka.",
         "arenaTier": "Average"
       },
       "wrothgarartisan": {
@@ -3740,6 +4072,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give a creature +1/+1.",
         "arenaTier": "Excellent"
       },
       "youngmammoth": {
@@ -3751,6 +4084,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Breakthrough",
+        "text": "Breakthrough",
         "arenaTier": "Excellent"
       },
       "angrygrahl": {
@@ -3762,6 +4096,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Regenerate, Summon",
+        "text": "Regenerate. Summon: +2/+2 if your opponent has more cards in hands.",
         "arenaTier": "Poor"
       },
       "archeinelite": {
@@ -3773,6 +4108,7 @@
         "health": "5",
         "rarity": "Rare",
         "keyword": "Lethal",
+        "text": "Lethal",
         "arenaTier": "Excellent"
       },
       "archeinguerrilla": {
@@ -3784,6 +4120,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Lethal, Evolves",
+        "text": "Lethal",
         "evolves": true
       },
       "archeinvenomtongue": {
@@ -3795,6 +4132,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Lethal",
+        "text": "Lethal. When Archein Venomtongue attacks and destroys a creature, gain +1 max magicka.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3809,6 +4147,7 @@
         "health": "2",
         "rarity": "Legendary",
         "keyword": "",
+        "text": "At the end of your turn, summon a 1/1 Argonian Recruit. If you have 7 or more max magicka, summon a 3/3 Argonian Veteran instead.",
         "arenaTier": "Good"
       },
       "cavegrahl": {
@@ -3820,6 +4159,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Regenerate, Evolves",
+        "text": "Regenerate",
         "evolves": true
       },
       "cursedspectre": {
@@ -3831,6 +4171,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy, Summon, Silence",
+        "text": "Prophecy. Summon: Silence another creature.",
         "arenaTier": "Average"
       },
       "gloomwraith": {
@@ -3842,6 +4183,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Breakthrough, Summon",
+        "text": "Breakthrough. Summon: +1/+1 for each other friendly (Endurance) creature.",
         "arenaTier": "Average"
       },
       "grimchampion": {
@@ -3853,6 +4195,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When a creature in this lane is destroyed, Grim Champion gains +1/+1.",
         "arenaTier": "Poor"
       },
       "imprisoneddeathlord": {
@@ -3864,6 +4207,7 @@
         "health": "7",
         "rarity": "Epic",
         "keyword": "Shackle",
+        "text": "When an enemy creature is summoned, Shackle Imprisoned Deathlord.",
         "arenaTier": "Terrible"
       },
       "lionguardstrategist": {
@@ -3875,6 +4219,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Ward",
+        "text": "When you summon another creature in this lane, give it a Ward.",
         "arenaTier": "Good"
       },
       "lucienlachance": {
@@ -3887,6 +4232,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Lethal",
+        "text": "Lethal. When another friendly creature attacks and destroys a creature, give it +2/+2.",
         "arenaTier": "Excellent"
       },
       "midnightsweep": {
@@ -3898,6 +4244,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy. Summon a 2/2 Colovian Trooper with Guard in each lane.",
         "arenaTier": "Excellent"
       },
       "northpointcaptain": {
@@ -3909,6 +4256,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon, Guard",
+        "text": "Summon: Summon a 0/4 Northpoint Herald with Guard.",
         "arenaTier": "Average"
       },
       "northpointlieutenant": {
@@ -3920,6 +4268,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "preserveroftheroot": {
@@ -3931,6 +4280,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Guard",
+        "text": "While you have 7 or more magicka, Preserver of the Root has +2/+2 and Guard.",
         "arenaTier": "Excellent"
       },
       "restlesstemplar": {
@@ -3942,6 +4292,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Gain 5 health.",
         "arenaTier": "Good"
       },
       "stonetoothscrapper": {
@@ -3953,6 +4304,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Good"
       },
       "blackwormnecromancer": {
@@ -3978,6 +4330,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
+        "text": "When another friendly creature in this lane is destroyed, draw a card.",
         "arenaTier": "Average"
       },
       "lurkingmummy": {
@@ -3989,6 +4342,7 @@
         "health": "6",
         "rarity": "Common",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy, Guard",
         "arenaTier": "Excellent"
       },
       "shadowfenpriest": {
@@ -4000,6 +4354,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Silence",
+        "text": "Summon: Silence another creature or destroy an enemy support card.",
         "arenaTier": "Insane"
       },
       "stampedingmammoth": {
@@ -4011,6 +4366,7 @@
         "health": "6",
         "rarity": "Epic",
         "keyword": "Breakthrough",
+        "text": "Breakthrough. Stampeding Mammoth has +2/+0 for each other friendly creature with breakthrough.",
         "arenaTier": "Average"
       },
       "watchcommander": {
@@ -4022,9 +4378,25 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Give all friendly Guards +1/+2.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Guard"
+        }
+      },
+      "blackwormnecromancer": {
+        "name": "Black Worm Necromancer",
+        "cost": "06",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: If you have more health than your opponent, summon a random creature card from your discard pile.",
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
         }
       },
       "doomcragvampire": {
@@ -4036,6 +4408,7 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Lethal",
+        "text": "Friendly creatures in this lane have Lethal.",
         "arenaTier": "Average"
       },
       "fleshatronach": {
@@ -4047,6 +4420,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: +1/+1 for each creature in your discard pile.",
         "arenaTier": "Good"
       },
       "mountaintyrant": {
@@ -4058,6 +4432,7 @@
         "health": "6",
         "rarity": "Rare",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Good"
       },
       "nightpatrol": {
@@ -4069,6 +4444,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Breakthrough, Evolves",
+        "text": "Breakthrough",
         "evolves": true
       },
       "nightpredator": {
@@ -4080,6 +4456,7 @@
         "health": "6",
         "rarity": "Epic",
         "keyword": "Breakthrough, Regenerate",
+        "text": "Breakthrough, Regenerate",
         "arenaTier": "Average"
       },
       "nightshadow": {
@@ -4091,6 +4468,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Breakthrough, Drain",
+        "text": "Breakthrough, Drain",
         "arenaTier": "Excellent"
       },
       "bonecolossus": {
@@ -4102,6 +4480,7 @@
         "health": "5",
         "rarity": "Legendary",
         "keyword": "Summon",
+        "text": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1.",
         "arenaTier": "Good"
       },
       "lowlandtroll": {
@@ -4113,6 +4492,7 @@
         "health": "8",
         "rarity": "Rare",
         "keyword": "Regenerate",
+        "text": "Regenerate",
         "arenaTier": "Average"
       },
       "nahagliiv": {
@@ -4125,6 +4505,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Guard",
+        "text": "Guard. Your opponent can't target Nahagliiv with actions.",
         "arenaTier": "Insane"
       },
       "swampleviathan": {
@@ -4136,6 +4517,7 @@
         "health": "8",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Excellent"
       },
       "bloodmagiclord": {
@@ -4147,6 +4529,7 @@
         "health": "6",
         "rarity": "Legendary",
         "keyword": "Summon",
+        "text": "Summon: Draw a Blood Magic Spell. When Blood Magic Lord attacks and destroys a creature, draw a Blood Magic Spell.",
         "arenaTier": "Excellent"
       },
       "nighttalonlord": {
@@ -4158,6 +4541,7 @@
         "health": "8",
         "rarity": "Legendary",
         "keyword": "Drain",
+        "text": "Drain. When Night Talon Lord attacks and destroys a creature, summon that creature.",
         "arenaTier": "Good"
       },
       "volkiharlord": {
@@ -4169,6 +4553,7 @@
         "health": "7",
         "rarity": "Legendary",
         "keyword": "Drain, Evolves",
+        "text": "Drain",
         "evolves": true
       },
       "ironatronach": {
@@ -4180,6 +4565,7 @@
         "health": "12",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Guard, Regenerate",
+        "text": "Breakthrough, Guard, Regenerate. Your opponent can't target Iron Atronach with actions.",
         "arenaTier": "Average"
       }
     },
@@ -4193,6 +4579,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Summon, Breakthrough",
+        "text": "Summon: If you have less health than your opponent, +0/+2 and Guard. Otherwise, +2/+0 and Breakthrough.",
         "arenaTier": "Excellent",
         "attr1": "strength",
         "attr2": "willpower",
@@ -4209,6 +4596,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
+        "text": "Destroy an enemy creature or support card.",
         "arenaTier": "Insane",
         "attr1": "willpower",
         "attr2": "endurance"
@@ -4222,6 +4610,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Pilfer",
+        "text": "Friendly creatures with Pilfer can attack an additional time each turn.",
         "arenaTier": "Good",
         "attr1": "willpower",
         "attr2": "agility",
@@ -4239,6 +4628,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Drain, Summon, Guard",
+        "text": "Drain. Summon: Give all other friendly creatures in this lane Guard.",
         "arenaTier": "Good",
         "attr1": "intelligence",
         "attr2": "agility"
@@ -4252,6 +4642,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "Guard, Last Gasp",
+        "text": "   Guard. Last Gasp: Summon a 2/1 Mournhold Guardian with Guard.",
         "arenaTier": "Good",
         "attr1": "intelligence",
         "attr2": "agility"
@@ -4265,6 +4656,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Ward",
+        "text": "Ward, +4/+0",
         "arenaTier": "Excellent",
         "attr1": "strength",
         "attr2": "intelligence"
@@ -4279,6 +4671,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Prophecy, Breakthrough, Guard",
+        "text": "Prophecy, Breakthrough, Guard",
         "arenaTier": "Good",
         "attr1": "strength",
         "attr2": "willpower"
@@ -4293,6 +4686,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Ahnassi steals all keywords from enemy creatures.",
         "arenaTier": "Excellent",
         "attr1": "willpower",
         "attr2": "agility"
@@ -4307,6 +4701,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "   Summon: Draw a random action from your discard pile. Your actions cost 1 less.",
         "arenaTier": "Excellent",
         "attr1": "intelligence",
         "attr2": "willpower",
@@ -4323,6 +4718,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Draw a random Orc from your discard pile. Other friendly Orcs have +1/+1.",
         "arenaTier": "Average",
         "attr1": "strength",
         "attr2": "endurance",
@@ -4339,6 +4735,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Breakthrough, Ward",
+        "text": "Breakthrough, Ward. After Shornhelm Champion loses a Ward, he gains +3/+3.",
         "arenaTier": "Excellent",
         "attr1": "intelligence",
         "attr2": "endurance"
@@ -4352,6 +4749,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Gain +1 max magicka. When your magicka increases Thorn Histmage gains +1/+0.",
         "arenaTier": "Insane",
         "attr1": "agility",
         "attr2": "endurance"
@@ -4366,6 +4764,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Lethal, Summon",
+        "text": "Lethal. Summon: Deal 1 damage.",
         "arenaTier": "Excellent",
         "attr1": "strength",
         "attr2": "agility"
@@ -4380,6 +4779,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Summon a 2/2 Colovian Trooper with Guard in each lane. When a friendly creature is destroyed, General Tullius gains +1/+1.",
         "arenaTier": "Excellent",
         "attr1": "willpower",
         "attr2": "endurance"
@@ -4394,6 +4794,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "",
+        "text": "At the start of your turn, summon a random creature from your deck to a random lane.",
         "arenaTier": "Good",
         "attr1": "strength",
         "attr2": "endurance"
@@ -4408,6 +4809,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Ward, Summon",
+        "text": "Ward. Summon: Deal 2 damage for each Ward your creatures have.",
         "arenaTier": "Insane",
         "attr1": "intelligence",
         "attr2": "endurance",
@@ -4424,6 +4826,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Deal 2 damage to an enemy creature or give a friendly creature +2/+2.",
         "arenaTier": "Good",
         "attr1": "intelligence",
         "attr2": "willpower"
@@ -4438,6 +4841,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "   Summon: Equip all friendly creatures in this lane with a random item.",
         "arenaTier": "Good",
         "attr1": "strength",
         "attr2": "intelligence",
@@ -4454,6 +4858,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Destroy all wounded enemy creatures in this lane.",
         "arenaTier": "Average",
         "attr1": "strength",
         "attr2": "agility"
@@ -4468,6 +4873,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon, Silence, Shackle",
+        "text": "Summon: Silence and Shackle all enemy creatures in this lane.",
         "arenaTier": "Excellent",
         "attr1": "agility",
         "attr2": "endurance"
@@ -4483,6 +4889,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard",
+        "text": "Guard",
         "arenaTier": "Terrible"
       },
       "mapleshield": {
@@ -4494,6 +4901,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "+0/+3",
         "arenaTier": "Terrible"
       },
       "enragedmudcrab": {
@@ -4505,6 +4913,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Poor"
       },
       "lurkingcrocodile": {
@@ -4516,6 +4925,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Prophecy",
+        "text": "Prophecy",
         "arenaTier": "Excellent"
       },
       "ravenouscrocodile": {
@@ -4527,6 +4937,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Deal 2 damage to a friendly creature.",
         "arenaTier": "Good"
       },
       "reachmanshaman": {
@@ -4538,6 +4949,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
+        "text": "At the start of your turn, give another random friendly creature +1/+1.",
         "arenaTier": "Poor"
       },
       "spiderworker": {
@@ -4549,6 +4961,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Prophecy",
+        "text": "Prophecy. Summon: Draw a card.",
         "arenaTier": "Terrible"
       },
       "stalkingcrocodile": {
@@ -4560,6 +4973,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "adoringfan": {
@@ -4572,6 +4986,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Guard, Last Gasp, Prophecy",
+        "text": "Prophecy, Guard. Last Gasp: Adoring Fan will return. Adoring Fan can't be Silenced.",
         "arenaTier": "Unknown"
       },
       "bardedguar": {
@@ -4583,6 +4998,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard, Summon",
+        "text": "Summon: Give a creature Guard.",
         "arenaTier": "Average"
       },
       "crushingblow": {
@@ -4594,6 +5010,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
+        "text": "Deal 3 damage.",
         "arenaTier": "Insane"
       },
       "dwarvensphere": {
@@ -4605,6 +5022,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon, Shackle",
+        "text": "Summon: Shackle an enemy creature.",
         "arenaTier": "Average"
       },
       "elixirofconflict": {
@@ -4616,6 +5034,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Activate",
+        "text": "Uses: 3. Activate: Give a creature +1/+1.",
         "arenaTier": "Poor"
       },
       "forswornguide": {
@@ -4627,6 +5046,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Return another friendly creature to your hand to give Forsworn Guide +2/+2.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Summon"
@@ -4641,6 +5061,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Give a creature +2/+1.",
         "arenaTier": "Good"
       },
       "mechanicalally": {
@@ -4652,33 +5073,12 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Summon a Spider Worker if the top card of your deck is (Neutral).",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "neutral"
         },
         "season": "2016_10"
-      },
-      "slaughterfish": {
-        "name": "Slaughterfish",
-        "cost": "04",
-        "type": "Creature",
-        "race": "Fish",
-        "attack": "1",
-        "health": "1",
-        "rarity": "Rare",
-        "keyword": "Evolves",
-        "evolves": true
-      },
-      "slaughterfishspawning": {
-        "name": "Slaughterfish Spawning",
-        "cost": "04",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Rare",
-        "keyword": "",
-        "arenaTier": "Good"
       },
       "agelessautomaton": {
         "name": "Ageless Automaton",
@@ -4689,6 +5089,7 @@
         "health": "5",
         "rarity": "Rare",
         "keyword": "Guard, Breakthrough",
+        "text": "When Ageless Automaton attacks a Guard, it gains +3/+0 and Breakthrough until end of turn.",
         "arenaTier": "Average"
       },
       "dreughshellarmor": {
@@ -4700,6 +5101,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "+3/+3",
         "arenaTier": "Average"
       },
       "ferociousdreugh": {
@@ -4711,6 +5113,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "",
+        "text": "",
         "arenaTier": "Average"
       },
       "mundusstone": {
@@ -4723,7 +5126,32 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "",
+        "text": "   When you summon a creature, give it a random keyword.",
         "arenaTier": "Insane"
+      },
+      "slaughterfish": {
+        "name": "Slaughterfish",
+        "cost": "04",
+        "type": "Creature",
+        "race": "Fish",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Rare",
+        "keyword": "Evolves",
+        "text": "Slaughterfish gains +2/+0 at the start of your turn.",
+        "evolves": true
+      },
+      "slaughterfishspawning": {
+        "name": "Slaughterfish Spawning",
+        "cost": "04",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "Summon a Slaughterfish in each lane.",
+        "arenaTier": "Good"
       },
       "snappingdreugh": {
         "name": "Snapping Dreugh",
@@ -4734,6 +5162,7 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Evolves",
+        "text": "",
         "evolves": true
       },
       "sparkingspider": {
@@ -4745,6 +5174,7 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Prophecy, Guard",
+        "text": "Prophecy, Guard",
         "arenaTier": "Average"
       },
       "viciousdreugh": {
@@ -4756,6 +5186,7 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Destroy an enemy support card.",
         "arenaTier": "Good"
       },
       "portcullis": {
@@ -4767,6 +5198,7 @@
         "health": "9",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Prophecy, Guard",
         "arenaTier": "Poor"
       },
       "strongholderadicator": {
@@ -4778,6 +5210,7 @@
         "health": "6",
         "rarity": "Epic",
         "keyword": "Summon, Guard",
+        "text": "Summon: Give all enemy creatures in this lane Guard.",
         "arenaTier": "Good"
       },
       "strongholdincubator": {
@@ -4789,6 +5222,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Last Gasp",
+        "text": "Last Gasp: Put two random Dwemer into your hand.",
         "arenaTier": "Average"
       },
       "strongholdprototype": {
@@ -4800,6 +5234,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Last Gasp, Evolves",
+        "text": "Last Gasp: Put a random Dwemer into your hand.",
         "evolves": true
       },
       "wabbajack": {
@@ -4812,6 +5247,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Activate",
+        "text": "Uses: 3. Activate: Transform a creature into a random creature.",
         "arenaTier": "Good"
       },
       "dwarvenarmaments": {
@@ -4822,7 +5258,8 @@
         "attack": "",
         "health": "",
         "rarity": "Epic",
-        "keyword": "",
+        "keyword": "+5/+5",
+        "text": "",
         "arenaTier": "Average"
       },
       "dwarvenballista": {
@@ -4834,6 +5271,7 @@
         "health": "5",
         "rarity": "Common",
         "keyword": "Breakthrough",
+        "text": "Breakthrough",
         "arenaTier": "Poor"
       },
       "hallsofthedwemer": {
@@ -4845,6 +5283,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Summon, Guard",
+        "text": "Summon: Put a 0/3 Dwarven Spider with Guard into your hand. Friendly Dwemer have +3/+0.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Dwemer"
@@ -4860,6 +5299,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Activate",
+        "text": "Uses: 3. Activate: Put a copy of a random card from your opponent's deck into your hand.",
         "arenaTier": "Poor"
       },
       "darkharvester": {
@@ -4871,6 +5311,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
+        "text": "Prophecy, Guard. Summon: Gain 4 health.",
         "arenaTier": "Average"
       },
       "dwarvencenturion": {
@@ -4882,6 +5323,7 @@
         "health": "8",
         "rarity": "Epic",
         "keyword": "Breakthrough, Guard",
+        "text": "Brekathrough. When Dwarven Centurion is dealt damage, draw a 0/3 Dwarven Spider with Guard.",
         "arenaTier": "Excellent"
       },
       "goldbrand": {
@@ -4894,6 +5336,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Activate",
+        "text": "Activate: Deal 2 damage to a creature, then increase the damage Goldbrand deals by 2.",
         "arenaTier": "Average"
       },
       "odahviing": {
@@ -4906,6 +5349,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
+        "text": "Summon: Deal 4 damage to each enemy creature.",
         "arenaTier": "Good"
       }
     }
@@ -4921,6 +5365,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Deal 1 damage to an enemy creature for each friendly Orc.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "race": "Orc"
@@ -4937,6 +5382,7 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
+        "text": "This card belongs to the Madhouse Collection and cannot be Soul Summoned.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -4953,6 +5399,7 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "Summon: Summon a random elixir.",
         "arenaTier": "Good"
       }
     },
@@ -4966,6 +5413,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
+        "text": "Ongoing. When you play a 0-cost card, deal 1 damage to your opponent and gain 1 health.",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "cost": "=_0"
@@ -4982,6 +5430,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon",
+        "text": "+0/+2. Summon: The wielder's power becomes equal to its health.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "health": ">_4"
@@ -4998,6 +5447,7 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Unsummon",
+        "text": "Unsummon a friendly creature.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Summon"
@@ -5012,6 +5462,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
+        "text": "Summon: Look at the top three cards of your deck. Put one into your hand and discard the others.",
         "arenaTier": "Average"
       },
       "forsakenchampion": {
@@ -5023,6 +5474,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Choose a friendly creature. Friendly creatures of the chosen type have +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Race"
@@ -5037,6 +5489,7 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Activate",
+        "text": "Uses: 12. Activate: Sacrifice a creature to summon a creature from your deck that costs 1, then increase the cost of creatures this summons by 1.",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "keyword": "Last Gasp"
@@ -5051,6 +5504,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Summon",
+        "text": "Summon: Illusory Mimic gains all Keywords on the top three cards of your deck.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "keyword"

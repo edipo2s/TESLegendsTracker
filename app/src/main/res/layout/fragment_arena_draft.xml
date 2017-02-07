@@ -47,6 +47,28 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:paddingStart="@dimen/text_shadow_padding"
+            android:paddingTop="@dimen/text_shadow_padding"
+            android:text="@string/new_arena_draft_tip"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_big" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center"
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/new_arena_draft_tip"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_big" />
+
     </FrameLayout>
 
     <LinearLayout
@@ -54,15 +76,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_below="@id/arena_draft_class_cover_layout"
+        android:layout_marginBottom="@dimen/medium_margin"
         android:orientation="vertical"
         app:layout_widthPercent="65%">
-
-        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
-            android:id="@+id/arena_draft_rarity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/default_margin" />
 
         <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
             android:id="@+id/arena_draft_cards1"
