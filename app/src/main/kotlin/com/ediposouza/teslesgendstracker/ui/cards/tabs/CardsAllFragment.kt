@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ediposouza.teslesgendstracker.App
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.*
@@ -316,7 +315,7 @@ open class CardsAllFragment : BaseFragment() {
 
     }
 
-    open class CardsAllViewHolder(val view: View, val itemClick: (View, Card) -> Unit,
+    open class CardsAllViewHolder(val view: View?, val itemClick: (View, Card) -> Unit,
                                   val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         init {

@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
@@ -33,6 +32,7 @@ import java.util.*
 class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
+    var arenaMode = false
     var editMode = false
 
     private fun showExpandedCard(card: Card, view: View) {
@@ -44,7 +44,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     val deckListAdapter by lazy {
         DeckListAdapter({ index -> decklist_recycle_view.scrollToPosition(index) },
                 itemClick = { view, card ->
-                    if (editMode) {
+                    if (editMode || arenaMode) {
                         remCard(card)
                     } else {
                         showExpandedCard(card, view)
@@ -65,7 +65,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         if (isInEditMode) {
             val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                     CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
-                    CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE, false, "")
+                    CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE,
+                    CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
         }
@@ -96,7 +97,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     fun addCard(card: Card) {
-        deckListAdapter.addCard(card)
+        deckListAdapter.addCard(card, arenaMode)
         onCardListChange()
     }
 
@@ -151,7 +152,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             notifyDataSetChanged()
         }
 
-        fun addCard(card: Card) {
+        fun addCard(card: Card, arenaMode: Boolean) {
             val cardSlot = items.find { it.card == card }
             if (cardSlot == null) {
                 val newCardSlot = CardSlot(card, 1)
@@ -161,7 +162,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 onAdd(newCardIndex)
                 notifyItemInserted(newCardIndex)
             } else {
-                val newQtd = cardSlot.qtd.inc().takeIf { cardSlot.qtd < 3 } ?: 3
+                val deckQtdLimit = 3.takeIf { !arenaMode } ?: 30
+                val newQtd = cardSlot.qtd.inc().takeIf { cardSlot.qtd < deckQtdLimit } ?: 3
                 val cardIndex = items.indexOf(cardSlot)
                 items[cardIndex] = CardSlot(card, if (card.unique) 1 else newQtd)
                 onAdd(cardIndex)

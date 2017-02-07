@@ -21,7 +21,7 @@
     <string name="menu_seasons">TESL Temporadas</string>
     <string name="menu_season">Temporadas</string>
     <string name="menu_filter">Filtrar</string>
-    <string name="menu_arena">Arena</string>
+    <string name="menu_arena">Draft de Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
     <string name="menu_share">Indicar a um amigo</string>
@@ -38,6 +38,7 @@
     <string name="menu_done">Concluir</string>
     <string name="menu_percent">Porcento</string>
     <string name="menu_import">Importar do Legends-Decks</string>
+    <string name="menu_start">Iniciar Draft</string>
 
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
@@ -87,7 +88,6 @@
     <string name="title_tab_decks_favorites">Decks Favoritos</string>
     <string name="title_tab_matches_statistics">Statísticas de Partidas</string>
     <string name="title_tab_matches_history">Histórico de Partidas</string>
-
     <string name="title_tab_articles_news">TES Legends Notícias</string>
     <string name="title_tab_articles_world">TES Legends Mundo</string>
 
@@ -196,5 +196,8 @@
     <string name="season_matches_class_less_defeated">Menos derrotados:</string>
 
     <string name="patch_change">%s\nAlterado</string>
+
+    <string name="arena_title">Escolha uma class para iniciar um novo draft de Arena!</string>
+    <string name="new_arena_title">Novo Draft de Arena</string>
 
 </resources>

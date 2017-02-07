@@ -8,7 +8,6 @@ import android.support.v4.util.Pair
 import android.view.*
 import android.widget.CompoundButton
 import android.widget.FrameLayout
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
@@ -83,7 +82,7 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun selectRow(row: Int) {
-        selectedClass = DeckClass.values()[row].takeIf { row >= 0 && row < DeckClass.values().size }
+        selectedClass = if (row >= 0 && row < DeckClass.values().size) DeckClass.values()[row] else null
         updateStatisticsData()
         statisticsTableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
                 .plus(listOf(listOf(BodyItem()))))

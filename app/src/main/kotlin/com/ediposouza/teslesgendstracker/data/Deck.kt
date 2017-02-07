@@ -3,21 +3,21 @@ package com.ediposouza.teslesgendstracker.data
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
-import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
 
-enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL, @IntegerRes val imageRes: Int) {
+enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
+                     @IntegerRes val imageRes: Int, @IntegerRes val arenaImageRes: Int? = null) {
 
-    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer),
-    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin),
-    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, R.drawable.deck_class_battlemage),
-    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, R.drawable.deck_class_crusader),
-    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, R.drawable.deck_class_mage),
-    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY, R.drawable.deck_class_monk),
-    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE, R.drawable.deck_class_scout),
-    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE, R.drawable.deck_class_sorcerer),
-    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE, R.drawable.deck_class_spellsword),
-    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE, R.drawable.deck_class_warrior),
+    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer, R.drawable.arena_archer),
+    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin, R.drawable.arena_assassin),
+    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, R.drawable.deck_class_battlemage, R.drawable.arena_battlemage),
+    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, R.drawable.deck_class_crusader, R.drawable.arena_crusader),
+    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, R.drawable.deck_class_mage, R.drawable.arena_mage),
+    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY, R.drawable.deck_class_monk, R.drawable.arena_monk),
+    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE, R.drawable.deck_class_scout, R.drawable.arena_scout),
+    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE, R.drawable.deck_class_sorcerer, R.drawable.arena_sorcerer),
+    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE, R.drawable.deck_class_spellsword, R.drawable.arena_spellsword),
+    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE, R.drawable.deck_class_warrior, R.drawable.arena_warrior),
     STRENGTH(CardAttribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
     INTELLIGENCE(CardAttribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
     AGILITY(CardAttribute.AGILITY, imageRes = R.drawable.deck_attr_agility),

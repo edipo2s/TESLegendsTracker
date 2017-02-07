@@ -40,7 +40,7 @@
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
-    <string name="menu_arena">Arena</string>
+    <string name="menu_arena">Arena Draft</string>
     <string name="menu_articles">TESL Articles</string>
     <string name="menu_seasons">TESL Seasons</string>
     <string name="menu_season">Seasons</string>
@@ -61,6 +61,7 @@
     <string name="menu_done">Done</string>
     <string name="menu_percent">Percent</string>
     <string name="menu_import">Import from Legends-Decks</string>
+    <string name="menu_start">Start Draft</string>
 
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
@@ -119,7 +120,6 @@
     <string name="title_tab_decks_favorites">Decks Favorites</string>
     <string name="title_tab_matches_statistics">Matches Statistics</string>
     <string name="title_tab_matches_history">Matches History</string>
-
     <string name="title_tab_articles_news">TES Legends News</string>
     <string name="title_tab_articles_world">TES Legends World</string>
 
@@ -256,5 +256,8 @@
     <string name="patch_change">%s\nChanged</string>
     <string name="patch_transition_name" translatable="false">patch_name_transition</string>
     <string name="patch_transition_container" translatable="false">patch_container_transition</string>
+
+    <string name="arena_title">Choose a class to start a new Arena draft!</string>
+    <string name="new_arena_title">New Arena Draft</string>
 
 </resources>

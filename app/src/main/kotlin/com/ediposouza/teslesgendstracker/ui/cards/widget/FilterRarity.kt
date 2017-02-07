@@ -6,7 +6,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import kotlinx.android.synthetic.main.widget_rarity_filter.view.*
 
@@ -21,6 +20,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     val rarityBGMaxWidth by lazy { resources.getDimensionPixelSize(R.dimen.rarity_bg_max_width) }
 
     var filterClick: ((CardRarity?) -> Unit)? = null
+    var collapseOnClick: Boolean = true
 
     init {
         inflate(context, R.layout.widget_rarity_filter, this)
@@ -48,7 +48,19 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    private fun expand() {
+    private fun rarityClick(rarity: CardRarity?) {
+        filterClick?.invoke(rarity)
+        if (collapseOnClick) {
+            collapse()
+        }
+        val icon = R.drawable.ic_rarity.takeIf { rarity == null } ?: R.drawable.ic_rarity_clear
+        rootView.rarity_filter.apply {
+            tag = rarity != null
+            setImageResource(icon)
+        }
+    }
+
+    fun expand() {
         with(rootView) {
             with(ValueAnimator.ofInt(rarityBGMinWidth, rarityBGMaxWidth)) {
                 duration = ANIM_DURATION
@@ -111,14 +123,12 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    private fun rarityClick(rarity: CardRarity?) {
-        filterClick?.invoke(rarity)
-        collapse()
-        val icon = R.drawable.ic_rarity.takeIf { rarity == null } ?: R.drawable.ic_rarity_clear
-        rootView.rarity_filter.apply {
-            tag = rarity != null
-            setImageResource(icon)
-        }
+    fun showMainButton() {
+        rootView.rarity_filter.visibility = View.VISIBLE
+    }
+
+    fun hideMainButton() {
+        rootView.rarity_filter.visibility = View.GONE
     }
 
 }

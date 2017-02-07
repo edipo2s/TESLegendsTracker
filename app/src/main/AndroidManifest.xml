@@ -56,6 +56,9 @@
             android:name=".ui.seasons.PatchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparent" />
+        <activity
+            android:name=".ui.arena.NewArenaActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name="com.mixpanel.android.mpmetrics.GCMReceiver"

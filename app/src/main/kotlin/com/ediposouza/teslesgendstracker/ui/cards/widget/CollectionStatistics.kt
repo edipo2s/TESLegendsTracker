@@ -5,7 +5,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -73,7 +72,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                     rarity_statistics_willpower.soulMissing + rarity_statistics_agility.soulMissing +
                     rarity_statistics_endurance.soulMissing + rarity_statistics_dual.soulMissing +
                     rarity_statistics_neutral.soulMissing
-            val percent = (owned.toFloat() / total.toFloat() * 100f).takeIf { total > 0 } ?: 0f
+            val percent = 0f.takeIf { total == 0 } ?: owned.toFloat() / total.toFloat() * 100f
             collection_statistics_total.text = context.getString(R.string.collection_statistics_total, owned, total)
             collection_statistics_percent.text = context.getString(R.string.collection_statistics_percent, percent)
             collection_statistics_soul.text = NumberFormat.getNumberInstance().format(soulMissing)

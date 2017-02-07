@@ -10,7 +10,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Breakthrough",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attack": ">_4"
+        }
       },
       "nordfirebrand": {
         "name": "Nord Firebrand",
@@ -43,7 +46,10 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "intimidate": {
         "name": "Intimidate",
@@ -87,7 +93,10 @@
         "health": "1",
         "rarity": "Legendary",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "scuttler": {
         "name": "Scuttler",
@@ -131,7 +140,10 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "bonebow": {
         "name": "Bone Bow",
@@ -186,7 +198,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "strength"
+        }
       },
       "orcclancaptain": {
         "name": "Orc Clan Captain",
@@ -197,7 +212,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "orcclanshaman": {
         "name": "Orc Clan Shaman",
@@ -208,7 +226,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Breakthrough",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "orcclansman": {
         "name": "Orc Clansman",
@@ -230,7 +251,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "text": "equip"
+        }
       },
       "rihadhorseman": {
         "name": "Rihad Horseman",
@@ -241,7 +265,10 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Breakthrough",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "rihadnomad": {
         "name": "Rihad Nomad",
@@ -329,7 +356,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "mightyally": {
         "name": "Mighty Ally",
@@ -340,7 +370,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon, Breakthrough",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attr": "strength"
+        }
       },
       "morkulgatekeeper": {
         "name": "Morkul Gatekeeper",
@@ -373,7 +406,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "rihadbattlemage": {
         "name": "Rihad Battlemage",
@@ -384,7 +420,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Guard",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "skavenpyromancer": {
         "name": "Skaven Pyromancer",
@@ -418,7 +457,10 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attack": ">_4"
+        }
       },
       "valenwoodhuntsman": {
         "name": "Valenwood Huntsman",
@@ -473,7 +515,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "bangkoraibutcher": {
         "name": "Bangkorai Butcher",
@@ -484,7 +529,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "boglurcher": {
         "name": "Bog Lurcher",
@@ -672,7 +720,10 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Charge",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "burnandpillage": {
         "name": "Burn and Pillage",
@@ -738,7 +789,10 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "belligerentgiant": {
         "name": "Belligerent Giant",
@@ -862,7 +916,10 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "text": "equip"
+        }
       },
       "firebolt": {
         "name": "Firebolt",
@@ -895,7 +952,10 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "balmoraspymaster": {
         "name": "Balmora Spymaster",
@@ -928,7 +988,10 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "darkrift": {
         "name": "Dark Rift",
@@ -950,7 +1013,10 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Last Gasp",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "text": "equip"
+        }
       },
       "evermoresteward": {
         "name": "Evermore Steward",
@@ -983,7 +1049,10 @@
         "health": "",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "momentofclarity": {
         "name": "Moment of Clarity",
@@ -1016,7 +1085,10 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "shriekingharpy": {
         "name": "Shrieking Harpy",
@@ -1038,7 +1110,10 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "soulsplit": {
         "name": "Soul Split",
@@ -1126,7 +1201,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Support"
+        }
       },
       "cunningally": {
         "name": "Cunning Ally",
@@ -1137,7 +1215,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "attr": "intelligence"
+        }
       },
       "daggerfallmage": {
         "name": "Daggerfall Mage",
@@ -1225,7 +1306,10 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Summon, Guard",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "intelligence"
+        }
       },
       "bretonconjurer": {
         "name": "Breton Conjurer",
@@ -1269,7 +1353,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Shackle"
+        }
       },
       "elusiveschemer": {
         "name": "Elusive Schemer",
@@ -1324,7 +1411,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "tomeofalteration": {
         "name": "Tome of Alteration",
@@ -1346,7 +1436,10 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "elixirofdeflection": {
         "name": "Elixir of Deflection",
@@ -1379,7 +1472,10 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "mentorsring": {
         "name": "Mentor's Ring",
@@ -1390,7 +1486,10 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "strategy": "keyword"
+        }
       },
       "wintersgrasp": {
         "name": "Winter's Grasp",
@@ -1424,6 +1523,9 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "arenaTier": "Unknown",
+        "arenaTierPlus": {
+          "strategy": "keyword"
+        },
         "season": "2016_11"
       },
       "fateweaver": {
@@ -1435,7 +1537,10 @@
         "health": "3",
         "rarity": "Rare",
         "keyword": "Prophecy, Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Prophecy"
+        }
       },
       "fateswitness": {
         "name": "Fate's Witness",
@@ -1479,7 +1584,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "staffofsparks": {
         "name": "Staff of Sparks",
@@ -1545,7 +1653,10 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "cost": "<_3"
+        }
       },
       "indorilarchmage": {
         "name": "Indoril Archmage",
@@ -1648,7 +1759,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "apprenticespotion": {
         "name": "Apprentices Potion",
@@ -1736,7 +1850,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Shackle",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "willpower"
+        }
       },
       "scoutingpatrol": {
         "name": "Scouting Patrol",
@@ -1813,7 +1930,10 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "kvatchsoldier": {
         "name": "Kvatch Soldier",
@@ -1923,7 +2043,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "dawnstarhealer": {
         "name": "Dawnstar healer",
@@ -1979,7 +2102,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "packwolf": {
         "name": "Pack Wolf",
@@ -1990,7 +2116,10 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "pitlion": {
         "name": "Pit Lion",
@@ -2023,7 +2152,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attr": "willpower"
+        }
       },
       "riverholdescort": {
         "name": "Riverhold Escort",
@@ -2045,7 +2177,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Activate",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Support"
+        }
       },
       "twomoonscontemplation": {
         "name": "Two-Moons Contemplation",
@@ -2078,7 +2213,10 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Drain",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "cloudrestillusionist": {
         "name": "Cloudrest Illusionist",
@@ -2123,7 +2261,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "hivedefender": {
         "name": "Hive Defender",
@@ -2167,7 +2308,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "warcry": {
         "name": "War Cry",
@@ -2332,7 +2476,10 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "renownedlegate": {
         "name": "Renowned Legate",
@@ -2556,7 +2703,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Pilfer",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "cost": "=_0"
+        }
       },
       "guildrecruit": {
         "name": "Guild Recruit",
@@ -2589,7 +2739,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "keyword": "Drain"
+        }
       },
       "mournholdtraitor": {
         "name": "Mournhold Traitor",
@@ -2754,7 +2907,10 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "agility"
+        }
       },
       "nimbleally": {
         "name": "Nimble Ally",
@@ -2765,7 +2921,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attr": "agility"
+        }
       },
       "skoomaracketeer": {
         "name": "Skooma Racketeer",
@@ -2864,7 +3023,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "moonlightwerebat": {
         "name": "Moonlight Werebat",
@@ -2897,7 +3059,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "race": "Goblin"
+        }
       },
       "tenmarswiftclaw": {
         "name": "Tenmar Swiftclaw",
@@ -2941,7 +3106,10 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Charge, Pilfer",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       },
       "twilightwerebat": {
         "name": "Twilight Werebat",
@@ -3029,7 +3197,10 @@
         "health": "4",
         "rarity": "Legendary",
         "keyword": "Summon, Last Gasp",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Last Gasp"
+        }
       },
       "pahmarrahtrenegade": {
         "name": "Pahmar-raht Renegade",
@@ -3308,7 +3479,10 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Guard"
+        }
       },
       "fharundefender": {
         "name": "Fharun Defender",
@@ -3330,7 +3504,10 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       },
       "oldgatewarden": {
         "name": "Oldgate Warden",
@@ -3385,7 +3562,10 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "yewshield": {
         "name": "Yew Shield",
@@ -3429,7 +3609,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "frostbitespider": {
         "name": "Frostbite Spider",
@@ -3518,7 +3701,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "stalwartally": {
         "name": "Stalwart Ally",
@@ -3529,7 +3715,10 @@
         "health": "3",
         "rarity": "Common",
         "keyword": "Summon, Guard",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attr": "endurance"
+        }
       },
       "treeminder": {
         "name": "Tree Minder",
@@ -3606,7 +3795,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Lethal",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       },
       "blackmarshwarden": {
         "name": "Black Marsh Warden",
@@ -3772,7 +3964,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "discipleofnamira": {
         "name": "Disciple of Namira",
@@ -3827,7 +4022,10 @@
         "health": "4",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Guard"
+        }
       },
       "doomcragvampire": {
         "name": "Doomcrag Vampire",
@@ -3997,7 +4195,10 @@
         "keyword": "Summon, Breakthrough",
         "arenaTier": "Excellent",
         "attr1": "strength",
-        "attr2": "willpower"
+        "attr2": "willpower",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "edictofazura": {
         "name": "Edict of Azura",
@@ -4023,7 +4224,10 @@
         "keyword": "Pilfer",
         "arenaTier": "Good",
         "attr1": "willpower",
-        "attr2": "agility"
+        "attr2": "agility",
+        "arenaTierPlus": {
+          "keyword": "Pilfer"
+        }
       },
       "queenbarenziah": {
         "name": "Queen Barenziah",
@@ -4105,7 +4309,10 @@
         "keyword": "Summon",
         "arenaTier": "Excellent",
         "attr1": "intelligence",
-        "attr2": "willpower"
+        "attr2": "willpower",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "militantchieftain": {
         "name": "Militant Chieftain",
@@ -4118,7 +4325,10 @@
         "keyword": "Summon",
         "arenaTier": "Average",
         "attr1": "strength",
-        "attr2": "endurance"
+        "attr2": "endurance",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       },
       "shornhelmchampion": {
         "name": "Shornhelm Champion",
@@ -4200,7 +4410,10 @@
         "keyword": "Ward, Summon",
         "arenaTier": "Insane",
         "attr1": "intelligence",
-        "attr2": "endurance"
+        "attr2": "endurance",
+        "arenaTierPlus": {
+          "keyword": "Ward"
+        }
       },
       "skywatchvindicator": {
         "name": "Skywatch Vindicator",
@@ -4227,7 +4440,10 @@
         "keyword": "Summon",
         "arenaTier": "Good",
         "attr1": "strength",
-        "attr2": "intelligence"
+        "attr2": "intelligence",
+        "arenaTierPlus": {
+          "strategy": "Aggro"
+        }
       },
       "falinestireaver": {
         "name": "Falinesti Reaver",
@@ -4411,7 +4627,10 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "frenziedwitchman": {
         "name": "Frenzied Witchman",
@@ -4434,6 +4653,9 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        },
         "season": "2016_10"
       },
       "slaughterfish": {
@@ -4623,7 +4845,10 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Summon, Guard",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "race": "Dwemer"
+        }
       },
       "orbofvaermina": {
         "name": "Orb of Vaermina",
@@ -4696,7 +4921,10 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "race": "Orc"
+        }
       }
     },
     "intelligence": {
@@ -4709,7 +4937,10 @@
         "health": "1",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       }
     },
     "willpower": {
@@ -4735,7 +4966,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "cost": "=_0"
+        }
       }
     },
     "endurance": {
@@ -4748,7 +4982,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "health": ">_4"
+        }
       }
     },
     "neutral": {
@@ -4761,7 +4998,10 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Unsummon",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "merchantscamel": {
         "name": "Merchant's Camel",
@@ -4783,7 +5023,10 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "strategy": "Race"
+        }
       },
       "altarofdespair": {
         "name": "Altar of Despair",
@@ -4794,7 +5037,10 @@
         "health": "",
         "rarity": "Legendary",
         "keyword": "Activate",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "keyword": "Last Gasp"
+        }
       },
       "illusorymimic": {
         "name": "Illusory Mimic",
@@ -4805,7 +5051,10 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Summon",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "strategy": "keyword"
+        }
       }
     }
   }
