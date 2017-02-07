@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.*
@@ -124,15 +125,17 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun configRecycleView() {
-        cards_recycler_view.layoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
-            override fun supportsPredictiveItemAnimations(): Boolean = false
-        }
-        cards_recycler_view.itemAnimator = ScaleInAnimator()
-        cards_recycler_view.adapter = cardsAdapter
-        cards_recycler_view.addItemDecoration(itemDecoration)
-        cards_refresh_layout.setOnRefreshListener {
-            cards_refresh_layout.isRefreshing = false
-            loadCardsByAttr(currentAttr)
+        with(cards_recycler_view) {
+            layoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
+                override fun supportsPredictiveItemAnimations(): Boolean = false
+            }
+            itemAnimator = ScaleInAnimator()
+            adapter = cardsAdapter
+            addItemDecoration(itemDecoration)
+            cards_refresh_layout.setOnRefreshListener {
+                cards_refresh_layout.isRefreshing = false
+                loadCardsByAttr(currentAttr)
+            }
         }
     }
 

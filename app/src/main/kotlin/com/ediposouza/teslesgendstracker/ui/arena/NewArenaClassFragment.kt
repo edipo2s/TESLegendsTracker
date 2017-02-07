@@ -1,13 +1,12 @@
 package com.ediposouza.teslesgendstracker.ui.decks.tabs
 
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import android.widget.RelativeLayout
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -26,11 +25,10 @@ class NewArenaClassFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val layoutParams = toolbar.layoutParams as RelativeLayout.LayoutParams
-            layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
-            toolbar.layoutParams = layoutParams
+        with(activity as AppCompatActivity) {
+            setSupportActionBar(toolbar)
+            supportActionBar?.title = ""
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         with(arena_class_recycler_view) {
             adapter = ClassAdapter() {
@@ -48,19 +46,23 @@ class NewArenaClassFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menu_start) {
-            with(arena_class_recycler_view) {
-                val lm = layoutManager as LinearLayoutManager
-                val clsAdapter = adapter as ClassAdapter
-                startDraft(clsAdapter.items[lm.findFirstCompletelyVisibleItemPosition()])
+        when (item?.itemId) {
+            R.id.menu_start -> {
+                with(arena_class_recycler_view) {
+                    val lm = layoutManager as LinearLayoutManager
+                    val clsAdapter = adapter as ClassAdapter
+                    startDraft(clsAdapter.items[lm.findFirstCompletelyVisibleItemPosition()])
+                }
+                return true
             }
-            return true
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun startDraft(it: DeckClass) {
         fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                        R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.new_arena_content, NewArenaDraftFragment.newFragment(it))
                 .commit()
     }

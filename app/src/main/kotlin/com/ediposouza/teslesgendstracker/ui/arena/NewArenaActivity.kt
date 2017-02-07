@@ -1,7 +1,10 @@
 package com.ediposouza.teslesgendstracker.ui.arena
 
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
+import android.view.MenuItem
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSet
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.NewArenaClassFragment
@@ -17,7 +20,6 @@ class NewArenaActivity : BaseFilterActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.new_arena_content, NewArenaClassFragment())
@@ -35,6 +37,13 @@ class NewArenaActivity : BaseFilterActivity() {
         } else {
             showExitConfirm(R.string.deck_exit_confirm)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> ActivityCompat.finishAfterTransition(this)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
