@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/arena_draft_card_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/small_margin"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+        android:scrollbars="horizontal"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/itemlist_card" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_margin">
+
+        <TextView
+            android:id="@+id/arena_draft_card_value_shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/text_shadow_padding"
+            android:paddingTop="@dimen/text_shadow_padding"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_huge"
+            tools:text="56" />
+
+        <TextView
+            android:id="@+id/arena_draft_card_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_huge"
+            android:text="-" />
+
+    </FrameLayout>
+
+</LinearLayout>

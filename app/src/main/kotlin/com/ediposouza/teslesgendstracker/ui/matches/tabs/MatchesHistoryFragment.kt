@@ -5,7 +5,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Match
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
@@ -34,19 +33,20 @@ import org.threeten.bp.format.FormatStyle
 /**
  * Created by EdipoSouza on 1/3/17.
  */
-class MatchesHistoryFragment : BaseFragment() {
+open class MatchesHistoryFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 20 //after 10 lines
     val MATCH_PAGE_SIZE = 15
 
-    private var currentMatchMode = MatchMode.RANKED
-    private var currentSeason: Season? = null
+    protected var currentMatchMode = MatchMode.RANKED
+
+    protected var currentSeason: Season? = null
 
     private val dataFilter: (FirebaseParsers.MatchParser) -> Boolean = {
         it.mode == currentMatchMode.ordinal && (it.season == currentSeason?.uuid || currentSeason == null)
     }
 
-    private val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
+    protected val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
                 FirebaseParsers.MatchParser::class.java, { PrivateInteractor.getUserMatchesRef() },
                 MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter),
@@ -129,8 +129,7 @@ class MatchesHistoryFragment : BaseFragment() {
     fun onCmdFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
         if (isFragmentSelected) {
-            matchesAdapter.reset()
-            matches_recycler_view.scrollToPosition(0)
+            updateMatchList()
         }
     }
 
@@ -139,8 +138,7 @@ class MatchesHistoryFragment : BaseFragment() {
     fun onCmdFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
         if (isFragmentSelected) {
-            matchesAdapter.reset()
-            matches_recycler_view.scrollToPosition(0)
+            updateMatchList()
         }
     }
 
@@ -150,6 +148,11 @@ class MatchesHistoryFragment : BaseFragment() {
         if (isFragmentSelected) {
             matchesAdapter.reset()
         }
+    }
+
+    protected fun updateMatchList() {
+        matchesAdapter.reset()
+        matches_recycler_view.scrollToPosition(0)
     }
 
     class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {

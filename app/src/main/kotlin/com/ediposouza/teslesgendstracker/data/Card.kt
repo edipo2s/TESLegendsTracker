@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import timber.log.Timber
 
@@ -176,20 +175,81 @@ enum class CardKeyword {
     }
 }
 
-enum class CardArenaTier {
+enum class CardArenaTier(val value: Int = 0) {
 
-    TERRIBLE,
-    POOR,
-    AVERAGE,
-    GOOD,
-    EXCELLENT,
-    INSANE,
-    UNKNOWN,
-    NONE;
+    TERRIBLE(10),
+    POOR(20),
+    AVERAGE(30),
+    GOOD(50),
+    EXCELLENT(70),
+    INSANE(90),
+    UNKNOWN(),
+    NONE();
 
     companion object {
 
         fun of(value: String): CardArenaTier {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
+
+}
+
+data class CardArenaTierPlus(
+
+        val type: CardArenaTierPlusType,
+        val operator: CardArenaTierPlusOperator?,
+        val value: String
+
+) : Parcelable {
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<CardArenaTierPlus> = object : Parcelable.Creator<CardArenaTierPlus> {
+            override fun createFromParcel(source: Parcel): CardArenaTierPlus = CardArenaTierPlus(source)
+            override fun newArray(size: Int): Array<CardArenaTierPlus?> = arrayOfNulls(size)
+        }
+    }
+
+    constructor(source: Parcel) : this(CardArenaTierPlusType.values()[source.readInt()],
+            with(source.readInt()) { if (this > -1) CardArenaTierPlusOperator.values()[this] else null },
+            source.readString())
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeInt(type.ordinal)
+        dest?.writeInt(operator?.ordinal ?: -1)
+        dest?.writeString(value)
+    }
+
+    override fun describeContents(): Int = 0
+
+}
+
+enum class CardArenaTierPlusOperator {
+
+    EQUALS,
+    GREAT,
+    MINOR
+
+}
+
+enum class CardArenaTierPlusType(val extraPoints: Int = 5) {
+
+    ATTACK(),
+    ATTR(2),
+    COST(),
+    HEALTH(),
+    KEYWORD(),
+    RACE(),
+    STRATEGY(),
+    TEXT(),
+    TYPE(),
+    UNKNOWN();
+
+    companion object {
+
+        fun of(value: String): CardArenaTierPlusType {
             val name = value.trim().toUpperCase().replace(" ", "_")
             return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
         }
@@ -265,6 +325,7 @@ data class Card(
         val race: CardRace,
         val keywords: List<CardKeyword>,
         val arenaTier: CardArenaTier,
+        val arenaTierPlus: CardArenaTierPlus?,
         val evolves: Boolean,
         val season: String
 
@@ -309,7 +370,9 @@ data class Card(
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
-            CardArenaTier.values()[source.readInt()], 1 == source.readInt(), source.readString())
+            CardArenaTier.values()[source.readInt()],
+            source.readParcelable<CardArenaTierPlus>(CardArenaTierPlus::class.java.classLoader),
+            1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0
 
@@ -326,7 +389,7 @@ data class Card(
             getDefaultCardImage(context)
         }
         return Card(name, patchShortName, set, attr, dualAttr1, dualAttr2, rarity, unique, cost,
-                attack, health, type, race, keywords, arenaTier, evolves, season)
+                attack, health, type, race, keywords, arenaTier, arenaTierPlus, evolves, season)
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
@@ -345,6 +408,7 @@ data class Card(
         dest?.writeInt(race.ordinal)
         dest?.writeList(keywords)
         dest?.writeInt(arenaTier.ordinal)
+        dest?.writeParcelable(arenaTierPlus, 0)
         dest?.writeInt((if (evolves) 1 else 0))
         dest?.writeString(season)
     }

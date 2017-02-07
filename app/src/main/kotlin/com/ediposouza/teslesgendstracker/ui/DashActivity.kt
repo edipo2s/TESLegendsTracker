@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
+import com.ediposouza.teslesgendstracker.ui.matches.tabs.ArenaFragment
 import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
@@ -153,6 +154,7 @@ class DashActivity : BaseFilterActivity(),
     private fun updateUserMenuInfo() {
         val user = FirebaseAuth.getInstance().currentUser
         dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
+        dash_navigation_view.menu.findItem(R.id.menu_arena)?.isEnabled = App.hasUserLogged()
         with(dash_navigation_view.getHeaderView(0)) {
             profile_change_user.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.GONE
             profile_name.text = user?.displayName ?: getString(R.string.unknown)
@@ -199,9 +201,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
             R.id.menu_articles -> showFragment(ArticlesFragment())
-            R.id.menu_arena -> {
-                true
-            }
+            R.id.menu_arena -> showFragment(ArenaFragment())
             R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_donate -> showDonateDialog()
             R.id.menu_share -> {

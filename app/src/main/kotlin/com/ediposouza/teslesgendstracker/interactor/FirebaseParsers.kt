@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.interactor
 
+import com.ediposouza.teslesgendstracker.ARENA_TIER_PLUS_VALUE_DELIMITER
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
@@ -25,6 +26,7 @@ abstract class FirebaseParsers {
         val race: String = CardRace.NONE.name
         val keyword: String = ""
         val arenaTier: String = CardArenaTier.NONE.name
+        val arenaTierPlus: Pair<String, String>? = null
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
@@ -45,8 +47,26 @@ abstract class FirebaseParsers {
                             .mapTo(arrayListOf<CardKeyword>()) {
                                 CardKeyword.of(it)
                             },
-                    CardArenaTier.of(arenaTier),
-                    evolves, season)
+                    CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season)
+        }
+
+        private fun getCardArenaTierPlus(): CardArenaTierPlus? {
+            if (arenaTierPlus == null) {
+                return null
+            }
+            val cardArenaTierPlusType = CardArenaTierPlusType.of(arenaTierPlus.first)
+            var operator: CardArenaTierPlusOperator? = null
+            var value = when (cardArenaTierPlusType) {
+                CardArenaTierPlusType.ATTACK,
+                CardArenaTierPlusType.COST,
+                CardArenaTierPlusType.HEALTH ->
+                    with(arenaTierPlus.second.partition { it == ARENA_TIER_PLUS_VALUE_DELIMITER }) {
+                        operator = CardArenaTierPlusOperator.valueOf(first)
+                        second
+                    }
+                else -> arenaTierPlus.second
+            }
+            return CardArenaTierPlus(cardArenaTierPlusType, operator, value)
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {

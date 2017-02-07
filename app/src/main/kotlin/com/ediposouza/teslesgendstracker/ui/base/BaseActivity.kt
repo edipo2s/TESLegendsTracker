@@ -15,7 +15,6 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.util.ConfigManager
@@ -208,11 +207,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     fun onCmdShowSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
-        val msg = getString(msgRes).takeIf { msgRes > 0 } ?: cmdShowSnackbarMsg.msg
+        val msg = if (msgRes > 0) getString(msgRes) else cmdShowSnackbarMsg.msg
         snackbar = Snackbar.make(find<View>(R.id.coordinatorLayout), msg, cmdShowSnackbarMsg.duration)
         if (cmdShowSnackbarMsg.action != null) {
             val actionTextRes = cmdShowSnackbarMsg.actionTextRes
-            val actionText = getString(actionTextRes).takeIf { actionTextRes > 0 } ?: cmdShowSnackbarMsg.actionText
+            val actionText = if (actionTextRes > 0) getString(actionTextRes) else cmdShowSnackbarMsg.actionText
             snackbar?.setAction(actionText, { cmdShowSnackbarMsg.action?.invoke() })
         }
         if (snackbarNeedMargin) {
