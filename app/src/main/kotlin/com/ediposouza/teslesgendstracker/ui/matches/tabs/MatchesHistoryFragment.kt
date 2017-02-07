@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Match
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season

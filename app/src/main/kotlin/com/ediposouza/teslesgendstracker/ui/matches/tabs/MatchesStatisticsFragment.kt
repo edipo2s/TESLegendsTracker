@@ -8,6 +8,7 @@ import android.support.v4.util.Pair
 import android.view.*
 import android.widget.CompoundButton
 import android.widget.FrameLayout
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment

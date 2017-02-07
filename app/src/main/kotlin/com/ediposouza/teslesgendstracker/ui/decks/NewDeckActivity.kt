@@ -162,15 +162,16 @@ class NewDeckActivity : BaseFilterActivity() {
         val deckTypes = DeckType.values().filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }
         view.new_deck_dialog_type_spinner.adapter = ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, deckTypes)
-        val deckPatches = listOf<Patch>()
+        val allPatches = mutableListOf<Patch>()
         PublicInteractor.getPatches { deckPatches ->
+            allPatches.addAll(deckPatches)
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item, deckPatchesDesc)
         }
         alert {
             customView(view)
-            positiveButton(R.string.new_deck_save_dialog_save) { saveDeck(view, deckPatches) }
+            positiveButton(R.string.new_deck_save_dialog_save) { saveDeck(view, allPatches) }
             cancelButton { }
         }.show()
     }

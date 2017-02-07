@@ -5,7 +5,7 @@ buildscript {
         appVersionName = "0.3.3"
         appVersionCode = 10
 
-        kotlin_version = "1.1.0-beta-22"
+        kotlin_version = "1.1.0-beta-38"
         prepareToRelease = false
     }
 

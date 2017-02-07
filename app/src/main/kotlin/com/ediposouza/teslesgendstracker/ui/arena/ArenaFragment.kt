@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.matches.tabs
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.view.*
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
