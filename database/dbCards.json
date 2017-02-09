@@ -3036,7 +3036,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "   Summon: Draw a card. If it costs 7 or more, reduce its cost by 2.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       },
       "arenthiaswindler": {
         "name": "Arenthia Swindler",

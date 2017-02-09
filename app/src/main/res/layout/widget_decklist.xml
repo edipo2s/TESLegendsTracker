@@ -7,13 +7,50 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/decklist_qtd"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        tools:text="0/50" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/decklist_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            tools:text="0/50" />
+
+        <ImageView
+            android:id="@+id/decklist_class_attr1"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginStart="@dimen/medium_margin"
+            tools:src="@drawable/attr_strength" />
+
+        <TextView
+            android:id="@+id/decklist_class_attr1_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="9" />
+
+        <ImageView
+            android:id="@+id/decklist_class_attr2"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginStart="@dimen/small_margin"
+            tools:src="@drawable/attr_intelligence" />
+
+        <TextView
+            android:id="@+id/decklist_class_attr2_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="7" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/decklist_recycle_view"

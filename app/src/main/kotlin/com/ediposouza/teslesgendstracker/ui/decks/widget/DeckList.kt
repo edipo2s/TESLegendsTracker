@@ -121,6 +121,28 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_costs.updateCosts(cards)
         decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
+        val attrGroup = cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap()
+        cards.filter { it.card.attr == CardAttribute.DUAL }.forEach {
+            val mergeList = { t: List<CardSlot>, u: List<CardSlot> -> t.toMutableList().apply { addAll(u) } }
+            attrGroup.merge(it.card.dualAttr1, listOf(it), mergeList)
+            attrGroup.merge(it.card.dualAttr2, listOf(it), mergeList)
+        }
+        decklist_class_attr1.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
+        decklist_class_attr1_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
+        decklist_class_attr2.visibility = View.VISIBLE.takeIf { attrGroup.size > 1 } ?: View.GONE
+        decklist_class_attr2_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 1 } ?: View.GONE
+        when (attrGroup.size) {
+            1 -> {
+                decklist_class_attr1.setImageResource(attrGroup.keys.first().imageRes)
+                decklist_class_attr1_qtd.text = "${attrGroup.values.first().sumBy { it.qtd }}"
+            }
+            2 -> {
+                decklist_class_attr1.setImageResource(attrGroup.keys.first().imageRes)
+                decklist_class_attr1_qtd.text = "${attrGroup.values.first().sumBy { it.qtd }}"
+                decklist_class_attr2.setImageResource(attrGroup.keys.last().imageRes)
+                decklist_class_attr2_qtd.text = "${attrGroup.values.last().sumBy { it.qtd }}"
+            }
+        }
     }
 
     class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,
