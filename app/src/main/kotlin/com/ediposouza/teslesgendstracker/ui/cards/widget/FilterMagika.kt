@@ -13,7 +13,7 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     var filterClick: ((Int) -> Unit)? = null
-    var closeable: Boolean = true
+    var collapseOnClick: Boolean = true
 
     init {
         inflate(context, R.layout.widget_magika_filter, this)
@@ -30,12 +30,8 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             }
             magika_filter.setOnMenuButtonClickListener {
                 when (magika_filter.isOpened) {
-                    true -> close()
-                    false ->
-                        if (magika_filter.tag == true)
-                            magikaClick(-1)
-                        else
-                            open()
+                    true -> magikaMenuOpenedClick()
+                    false -> magikaMenuClosedClick()
                 }
             }
         }
@@ -50,9 +46,22 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     fun close() {
-        if (closeable) {
-            magika_filter.close(true)
+        magika_filter.close(true)
+    }
+
+    private fun magikaMenuOpenedClick() {
+        if (collapseOnClick) {
+            close()
+        } else {
+            magikaClick(-1)
         }
+    }
+
+    private fun magikaMenuClosedClick() {
+        if (magika_filter.tag == true)
+            magikaClick(-1)
+        else
+            open()
     }
 
     private fun magikaClick(magika: Int) {
@@ -60,7 +69,9 @@ class FilterMagika(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val icon = R.drawable.ic_magika.takeIf { magika == -1 } ?: R.drawable.ic_magika_clear
         rootView.magika_filter.apply {
             tag = magika != -1
-            close()
+            if (collapseOnClick) {
+                close()
+            }
             menuIconView.setImageResource(icon)
         }
     }

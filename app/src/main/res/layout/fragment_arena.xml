@@ -7,7 +7,14 @@
     android:layout_height="match_parent"
     tools:layout_marginTop="@dimen/status_bar_height">
 
-    <include layout="@layout/fragment_matches_history" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+
+        <include layout="@layout/fragment_matches_history" />
+
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/arena_fab_add"

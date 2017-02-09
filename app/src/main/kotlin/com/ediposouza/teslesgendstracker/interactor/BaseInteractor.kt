@@ -16,6 +16,7 @@ open class BaseInteractor {
         val NODE_PATCHES = "patches"
         val NODE_SEASONS = "seasons"
         val NODE_NEWS = "news"
+        val NODE_MATCHES_MODE = "mode"
 
     }
 
