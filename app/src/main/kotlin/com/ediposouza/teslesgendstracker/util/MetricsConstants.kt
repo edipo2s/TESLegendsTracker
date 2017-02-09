@@ -161,6 +161,19 @@ sealed class MetricAction(val name: String) {
         val PARAM_ARTICLE = "ArticleID"
     }
 
+    class ACTION_ARENA_FILTER_SEASON(val season: Season?) : MetricAction("FilterArenaSeason") {
+        val PARAM_SEASON = "Season"
+    }
+
+    class ACTION_ARENA_START(val cls: DeckClass, val fromStartMenu: Boolean) : MetricAction("ArenaStart") {
+        val PARAM_CLASS = "Class"
+        val PARAM_FROM_START_MENU = "FromStartMenu"
+    }
+
+    class ACTION_ARENA_PICK(val card: Card) : MetricAction("ArenaPick") {
+        val PARAM_CARD = "Card"
+    }
+
 }
 
 sealed class MetricScreen(val name: String) {
@@ -189,6 +202,9 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
     class SCREEN_SEASONS : MetricScreen("Seasons")
+    class SCREEN_ARENA : MetricScreen("Arena")
+    class SCREEN_NEW_ARENA : MetricScreen("NewArena")
+    class SCREEN_NEW_ARENA_DRAFT : MetricScreen("NewArenaDraft")
     class SCREEN_PATCH_DETAILS : MetricScreen("PatchDetails")
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")

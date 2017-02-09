@@ -61,7 +61,8 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         arena_draft_card_value.setOnClickListener {
             val cardSynergy = arena_draft_card_value.tag?.toString() ?: ""
             if (cardSynergy.isNotBlank()) {
-                Toast.makeText(context, cardSynergy, Toast.LENGTH_LONG).show()
+                val synergyMsg = context.getString(R.string.new_arena_draft_synergy, cardSynergy)
+                Toast.makeText(context, synergyMsg, Toast.LENGTH_LONG).show()
             }
         }
         arena_draft_card_value_shadow.setOnClickListener { arena_draft_card_value.callOnClick() }
@@ -153,11 +154,10 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         selectedCard = card
         selectDialog?.dismiss()
         arena_draft_card_iv.setImageBitmap(card.imageBitmap(context))
-        val calcArenaValue = calcArenaValue(card.arenaTier, card.arenaTierPlus)
+        val calcArenaValue = calcArenaValue(card)
         val arenaValue = (calcArenaValue.first.takeIf { it > 0 } ?: INVALID_TEXT_VALUE).toString()
         arena_draft_card_value.text = "$arenaValue" + ("*".takeIf { calcArenaValue.second.isNotEmpty() } ?: "")
-        arena_draft_card_value.tag = context.getString(R.string.new_arena_draft_synergy,
-                calcArenaValue.second.joinToString("\n") { "* ${it.name}" })
+        arena_draft_card_value.tag = calcArenaValue.second.joinToString("\n") { "* ${it.name}" }
         arena_draft_card_value.setTextColor(ContextCompat.getColor(context, when (calcArenaValue.first) {
             in 0..CardArenaTier.AVERAGE.value.minus(1) -> R.color.red_500
             in CardArenaTier.AVERAGE.value..CardArenaTier.EXCELLENT.value.minus(1) -> android.R.color.white
@@ -167,48 +167,51 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         arena_draft_card_value_shadow.text = arena_draft_card_value.text
     }
 
-    private fun calcArenaValue(arenaTier: CardArenaTier, arenaTierPlus: CardArenaTierPlus?): Pair<Int, List<Card>> {
+    private fun calcArenaValue(card: Card): Pair<Int, List<Card>> {
+        val arenaTier: CardArenaTier = card.arenaTier
         val cardsSynergy = mutableListOf<Card>()
-        if (arenaTier == CardArenaTier.UNKNOWN || arenaTier == CardArenaTier.NONE) {
-            return Pair(0, cardsSynergy)
-        }
         val value = arenaTier.value
-        if (arenaTierPlus == null) {
-            return Pair(value, cardsSynergy)
-        }
         var totalValueExtra = 0
-        val extraPoints = arenaTierPlus.type.extraPoints
-        draftCardlist?.getCards()?.forEach { (card, _) ->
-            val extraValue = when (arenaTierPlus.type) {
-                CardArenaTierPlusType.ATTACK -> getExtraPointsForIntValue(arenaTierPlus, card.attack)
-                CardArenaTierPlusType.COST -> getExtraPointsForIntValue(arenaTierPlus, card.cost)
-                CardArenaTierPlusType.HEALTH -> getExtraPointsForIntValue(arenaTierPlus, card.health)
-                CardArenaTierPlusType.ATTR -> extraPoints.takeIf {
-                    card.attr == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
-                            card.dualAttr1 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
-                            card.dualAttr2 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase())
-                } ?: 0
-                CardArenaTierPlusType.KEYWORD -> extraPoints.takeIf {
-                    card.keywords.filter { it.name == arenaTierPlus.value.toUpperCase() }.isNotEmpty()
-                } ?: 0
-                CardArenaTierPlusType.RACE -> extraPoints.takeIf {
-                    card.race.name == arenaTierPlus.value.toUpperCase()
-                } ?: 0
-                CardArenaTierPlusType.STRATEGY -> 0
-                CardArenaTierPlusType.TEXT -> extraPoints.takeIf {
-                    card.name.contains(arenaTierPlus.value)
-                } ?: 0
-                CardArenaTierPlusType.TYPE -> extraPoints.takeIf {
-                    card.type.name == arenaTierPlus.value.toUpperCase()
-                } ?: 0
-                else -> 0
-            }
+        draftCardlist?.getCards()?.forEach { (draftedCard, _) ->
+            var extraValue = calcCardSynergyPoints(card.arenaTierPlus, draftedCard)
+            extraValue += calcCardSynergyPoints(draftedCard.arenaTierPlus, card, true)
             if (extraValue > 0) {
                 totalValueExtra += extraValue
-                cardsSynergy.add(card)
+                cardsSynergy.add(draftedCard)
             }
         }
         return Pair(value + totalValueExtra, cardsSynergy)
+    }
+
+    private fun calcCardSynergyPoints(arenaTierPlus: CardArenaTierPlus?, draftedCard: Card, reverseCalc: Boolean = false): Int {
+        if (arenaTierPlus == null) {
+            return 0
+        }
+        val extraPoints = arenaTierPlus.type.extraPoints
+        return when (arenaTierPlus.type) {
+            CardArenaTierPlusType.ATTACK -> getExtraPointsForIntValue(arenaTierPlus, draftedCard.attack)
+            CardArenaTierPlusType.COST -> getExtraPointsForIntValue(arenaTierPlus, draftedCard.cost)
+            CardArenaTierPlusType.HEALTH -> getExtraPointsForIntValue(arenaTierPlus, draftedCard.health)
+            CardArenaTierPlusType.ATTR -> extraPoints.takeIf {
+                !reverseCalc && (draftedCard.attr == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
+                        draftedCard.dualAttr1 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
+                        draftedCard.dualAttr2 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()))
+            } ?: 0
+            CardArenaTierPlusType.KEYWORD -> extraPoints.takeIf {
+                draftedCard.keywords.filter { it.name == arenaTierPlus.value.toUpperCase() }.isNotEmpty()
+            } ?: 0
+            CardArenaTierPlusType.RACE -> extraPoints.takeIf {
+                draftedCard.race.name == arenaTierPlus.value.toUpperCase()
+            } ?: 0
+            CardArenaTierPlusType.STRATEGY -> 0
+            CardArenaTierPlusType.TEXT -> extraPoints.takeIf {
+                draftedCard.name.contains(arenaTierPlus.value)
+            } ?: 0
+            CardArenaTierPlusType.TYPE -> extraPoints.takeIf {
+                draftedCard.type.name == arenaTierPlus.value.toUpperCase()
+            } ?: 0
+            else -> 0
+        }
     }
 
     private fun getExtraPointsForIntValue(arenaTierPlus: CardArenaTierPlus, numberField: Int): Int {
