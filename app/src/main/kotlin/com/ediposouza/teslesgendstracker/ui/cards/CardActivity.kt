@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -261,7 +262,7 @@ class CardActivity : BaseActivity() {
                 with(card_patch_full_image) {
                     setImageBitmap(Card.getCardImageBitmap(context, cardBasicInfo.set,
                             cardBasicInfo.attr, cardBasicInfo.shortName))
-                    transitionName = context.getString(R.string.card_transition_name).takeIf { isFirst } ?: ""
+                    ViewCompat.setTransitionName(this, context.getString(R.string.card_transition_name).takeIf { isFirst } ?: "")
                     setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
                 }
                 card_patch_desc.text = cardPatchDesc
