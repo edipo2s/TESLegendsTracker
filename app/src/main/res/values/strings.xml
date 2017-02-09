@@ -128,6 +128,8 @@
     <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_collection_qtd_label">Collection Qtd:</string>
+    <string name="card_collection_edit_confirm">Enable collection edit?</string>
+    <string name="card_collection_edit_success">Collection edit enabled!</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
     <string name="card_patch_current">Current Version</string>

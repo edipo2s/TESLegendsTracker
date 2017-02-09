@@ -20,6 +20,7 @@ import android.view.*
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
@@ -30,10 +31,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.dialog_import.view.*
 import kotlinx.android.synthetic.main.dialog_import_result.view.*
@@ -57,6 +55,8 @@ class CardsCollectionFragment : CardsAllFragment() {
     private val EXPAND_CODE = 123
 
     override val isCardsCollection: Boolean = true
+
+    var isEditStarted: Boolean = false
 
     val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
@@ -116,6 +116,11 @@ class CardsCollectionFragment : CardsAllFragment() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isEditStarted = false
     }
 
     override fun onStop() {
@@ -201,6 +206,16 @@ class CardsCollectionFragment : CardsAllFragment() {
     }
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
+        if (!isEditStarted) {
+            context.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
+                positiveButton(android.R.string.yes, {
+                    isEditStarted = true
+                    Toast.makeText(context, R.string.card_collection_edit_success, Toast.LENGTH_SHORT).show()
+                })
+                negativeButton(android.R.string.no, {})
+            }.show()
+            return
+        }
         val newQtd = cardSlot.qtd.inc()
         val cardMaxQtd = 1.takeIf { cardSlot.card.unique } ?: 3
         val finalQtd = newQtd.takeIf { newQtd <= cardMaxQtd } ?: 0

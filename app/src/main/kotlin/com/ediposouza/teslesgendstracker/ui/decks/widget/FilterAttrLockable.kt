@@ -26,7 +26,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     override fun attrClick(attr: CardAttribute, lockable: Boolean) {
-        if (isLocked() && isAttrBasic(attr) && lockable) {
+        if (isLocked() && attr.isBasic && lockable) {
             return
         }
         filterClick?.invoke(attr)
@@ -69,16 +69,14 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         else super.isAttrSelected(attr)
     }
 
-    private fun isAttrBasic(attr: CardAttribute) = attr != CardAttribute.DUAL && attr != CardAttribute.NEUTRAL
-
     private fun isLocked() = lockAttr1 != null && lockAttr2 != null && lockAttr1 != lockAttr2
 
     fun lockAttr(attr: CardAttribute) {
-        if (lockAttr1 == null && attr != lockAttr2 && isAttrBasic(attr)) {
+        if (lockAttr1 == null && attr != lockAttr2 && attr.isBasic) {
             lockAttr1 = attr
             return
         }
-        if (lockAttr2 == null && attr != lockAttr1 && isAttrBasic(attr)) {
+        if (lockAttr2 == null && attr != lockAttr1 && attr.isBasic) {
             lockAttr2 = attr
             return
         }
@@ -92,7 +90,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
         lockAttr(dualAttr2)
         if (isLocked()) {
             startAnimLock()
-            if (reselectBasicAttr && isAttrBasic(lastAttrSelected)) {
+            if (reselectBasicAttr && lastAttrSelected.isBasic) {
                 selectAttr(dualAttr2, true)
             }
             onAttrLock?.invoke(lockAttr1!!, lockAttr2!!)
@@ -108,7 +106,7 @@ class FilterAttrLockable(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int)
                 lockAttr2 = null
             }
             startAnimUnlock()
-            if (isAttrBasic(lastAttrSelected)) {
+            if (lastAttrSelected.isBasic) {
                 selectAttr(lastAttrSelected, true)
             }
             onAttrUnlock?.invoke()

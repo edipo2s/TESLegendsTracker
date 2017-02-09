@@ -30,15 +30,15 @@ enum class CardSet(val db: String) {
 
 }
 
-enum class CardAttribute(@IntegerRes val imageRes: Int) {
+enum class CardAttribute(@IntegerRes val imageRes: Int, val isBasic: Boolean = true) {
 
     STRENGTH(R.drawable.attr_strength),
     INTELLIGENCE(R.drawable.attr_intelligence),
     WILLPOWER(R.drawable.attr_willpower),
     AGILITY(R.drawable.attr_agility),
     ENDURANCE(R.drawable.attr_endurance),
-    NEUTRAL(R.drawable.attr_neutral),
-    DUAL(R.drawable.attr_dual)
+    NEUTRAL(R.drawable.attr_neutral, false),
+    DUAL(R.drawable.attr_dual, false)
 
 }
 

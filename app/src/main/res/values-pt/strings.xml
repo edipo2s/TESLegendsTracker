@@ -96,6 +96,8 @@
     <string name="card_more_info_label">Mais Informações</string>
     <string name="card_arena_tier_label">Arena Nível:</string>
     <string name="card_collection_qtd_label">Coleção Qtd:</string>
+    <string name="card_collection_edit_confirm">Habilitar edição da coleção?</string>
+    <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
     <string name="card_patch_current">Versão Atual</string>
