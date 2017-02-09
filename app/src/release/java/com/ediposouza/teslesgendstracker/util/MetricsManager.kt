@@ -109,6 +109,14 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_ARTICLE, action.article.uuidDate)
                 is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
                     putString(action.PARAM_ARTICLE, action.article.uuidDate)
+                is MetricAction.ACTION_ARENA_FILTER_SEASON ->
+                    putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
+                is MetricAction.ACTION_ARENA_START -> {
+                    putString(action.PARAM_CLASS, action.cls.name)
+                    putBoolean(action.PARAM_FROM_START_MENU, action.fromStartMenu)
+                }
+                is MetricAction.ACTION_ARENA_PICK ->
+                    putString(action.PARAM_CARD, action.card.shortName)
             }
         }
         answers?.logCustom(CustomEvent(action.name))

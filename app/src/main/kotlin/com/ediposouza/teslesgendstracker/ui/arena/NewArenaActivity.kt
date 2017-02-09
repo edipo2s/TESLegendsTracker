@@ -28,7 +28,7 @@ class NewArenaActivity : BaseFilterActivity() {
         handler.postDelayed({
             eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
-        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_ARENA())
     }
 
     override fun onBackPressed() {

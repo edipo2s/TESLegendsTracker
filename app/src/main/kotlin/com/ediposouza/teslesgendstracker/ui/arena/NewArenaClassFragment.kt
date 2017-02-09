@@ -9,6 +9,8 @@ import android.view.*
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena_class.*
 import kotlinx.android.synthetic.main.itemlist_arena_class.view.*
@@ -33,6 +35,7 @@ class NewArenaClassFragment : BaseFragment() {
         with(arena_class_recycler_view) {
             adapter = ClassAdapter() {
                 startDraft(it)
+                MetricsManager.trackAction(MetricAction.ACTION_ARENA_START(it, false))
             }
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             LinearSnapHelper().attachToRecyclerView(this)
@@ -51,7 +54,9 @@ class NewArenaClassFragment : BaseFragment() {
                 with(arena_class_recycler_view) {
                     val lm = layoutManager as LinearLayoutManager
                     val clsAdapter = adapter as ClassAdapter
-                    startDraft(clsAdapter.items[lm.findFirstCompletelyVisibleItemPosition()])
+                    val deckClass = clsAdapter.items[lm.findFirstCompletelyVisibleItemPosition()]
+                    startDraft(deckClass)
+                    MetricsManager.trackAction(MetricAction.ACTION_ARENA_START(deckClass, true))
                 }
                 return true
             }

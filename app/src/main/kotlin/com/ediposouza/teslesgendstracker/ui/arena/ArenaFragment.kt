@@ -10,6 +10,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.arena.NewArenaActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena.*
@@ -36,6 +37,7 @@ class ArenaFragment : MatchesHistoryFragment() {
             val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
             startActivity(context.intentFor<NewArenaActivity>(), anim.toBundle())
         }
+        MetricsManager.trackScreen(MetricScreen.SCREEN_ARENA())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -73,7 +75,7 @@ class ArenaFragment : MatchesHistoryFragment() {
         }
         currentSeason = season
         updateMatchList()
-        MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_FILTER_SEASON(season))
+        MetricsManager.trackAction(MetricAction.ACTION_ARENA_FILTER_SEASON(season))
     }
 
     @Subscribe

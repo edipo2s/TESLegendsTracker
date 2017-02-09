@@ -15,6 +15,9 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.matches.NewMatchesActivity
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricScreen
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena_draft.*
 import org.greenrobot.eventbus.Subscribe
@@ -57,6 +60,7 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_cards1.reset()
         arena_draft_cards2.reset()
         arena_draft_cards3.reset()
+        MetricsManager.trackAction(MetricAction.ACTION_ARENA_PICK(card))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -89,6 +93,7 @@ class NewArenaDraftFragment : BaseFragment() {
             arena_draft_cards2.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
             arena_draft_cards3.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
         }
+        MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_ARENA_DRAFT())
     }
 
     @Subscribe
