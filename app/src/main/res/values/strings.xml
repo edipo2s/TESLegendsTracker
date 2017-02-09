@@ -259,7 +259,8 @@
 
     <string name="arena_title">Choose a class to start a new Arena draft!</string>
     <string name="new_arena_title">New Arena Draft</string>
-    <string name="new_arena_draft_tip">Long tap on Card or tap on Value to choose your Pick</string>
+    <string name="new_arena_draft_tip">Long tap on Card or tap on Arrow to choose your Pick</string>
     <string name="new_arena_draft_pick">Select a Card</string>
+    <string name="new_arena_draft_synergy">Synergy with: \n%s</string>
 
 </resources>

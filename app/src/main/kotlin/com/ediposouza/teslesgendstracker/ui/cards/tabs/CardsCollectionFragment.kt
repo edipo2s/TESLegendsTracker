@@ -221,7 +221,8 @@ class CardsCollectionFragment : CardsAllFragment() {
                 val legendsSlots = Jsoup.parse(html).select("#table_view tr")?.map {
                     val cardName = it.select(".td_title_card_collection").text()
                     val cardQtd = it.select(".td_total_card_collection").text().toInt()
-                    val cardShortName = cardName.replace(" ", "").replace("-", "").replace("'", "").toLowerCase()
+                    val cardShortName = cardName.replace(" ", "").replace("-", "")
+                            .replace("'", "").replace(",", "").toLowerCase().toLowerCase()
                     cardShortName to cardQtd
                 }?.filter { it.second > 0 }?.toMap() ?: mapOf()
                 if (legendsSlots.isNotEmpty()) {

@@ -882,8 +882,8 @@
         "attack": "7",
         "health": "4",
         "rarity": "Epic",
-        "keyword": "Breakthrough, Summon",
-        "text": "Breakthrough. Summon: Return an enemy creature to your opponent's hand or destroy an enemy support.",
+        "keyword": "Breakthrough, Summon, Unsummon",
+        "text": "Breakthrough. Summon: Unsummon a enemy creature or destroy an enemy support.",
         "arenaTier": "Good"
       },
       "savageogre": {
@@ -5045,8 +5045,8 @@
         "attack": "1",
         "health": "1",
         "rarity": "Rare",
-        "keyword": "Summon",
-        "text": "Summon: Return another friendly creature to your hand to give Forsworn Guide +2/+2.",
+        "keyword": "Summon, Unsummon",
+        "text": "Summon: Unsummon another friendly creature to give Forsworn Guide +2/+2.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Summon"

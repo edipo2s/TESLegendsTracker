@@ -12,6 +12,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.matches.NewMatchesActivity
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -78,10 +79,24 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_toolbar_title.text = selectedClass.name.toLowerCase().capitalize()
         arena_draft_cardlist.arenaMode = true
         PublicInteractor.getCards(null) {
-            arena_draft_cards1.config(activity, it, cardListOnClick)
-            arena_draft_cards2.config(activity, it, cardListOnClick)
-            arena_draft_cards3.config(activity, it, cardListOnClick)
+            val cards = it.filter {
+                it.attr == CardAttribute.NEUTRAL
+                        || (it.attr == selectedClass.attr1 || it.attr == selectedClass.attr2)
+                        || (it.dualAttr1 == selectedClass.attr1 && it.dualAttr2 == selectedClass.attr2)
+                        || (it.dualAttr1 == selectedClass.attr2 && it.dualAttr2 == selectedClass.attr1)
+            }
+            arena_draft_cards1.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
+            arena_draft_cards2.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
+            arena_draft_cards3.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
         }
+    }
+
+    @Subscribe
+    @Suppress("unused")
+    fun onCmdFilterAttr(filterAttr: CmdFilterAttr) {
+        arena_draft_cards1.currentAttr = filterAttr.attr
+        arena_draft_cards2.currentAttr = filterAttr.attr
+        arena_draft_cards3.currentAttr = filterAttr.attr
     }
 
     @Subscribe

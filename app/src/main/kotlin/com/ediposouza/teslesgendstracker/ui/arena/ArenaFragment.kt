@@ -8,10 +8,12 @@ import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.arena.NewArenaActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.itemsSequence
 
@@ -72,6 +74,16 @@ class ArenaFragment : MatchesHistoryFragment() {
         currentSeason = season
         updateMatchList()
         MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_FILTER_SEASON(season))
+    }
+
+    @Subscribe
+    @Suppress("unused")
+    fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
+        if (update.show) {
+            arena_fab_add.show()
+        } else {
+            arena_fab_add.hide()
+        }
     }
 
 }

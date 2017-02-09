@@ -22,6 +22,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     var filterClick: ((CardRarity?) -> Unit)? = null
     var collapseOnClick: Boolean = true
+    var closeable: Boolean = true
 
     init {
         inflate(context, R.layout.widget_rarity_filter, this)
@@ -33,12 +34,8 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 rarity_filter_legendary.setOnClickListener { rarityClick(CardRarity.LEGENDARY) }
                 rarity_filter.setOnClickListener {
                     when (rootView.rarity_filter_common.visibility) {
-                        View.VISIBLE -> collapse()
-                        View.GONE ->
-                            if (rarity_filter.tag == true)
-                                rarityClick(null)
-                            else
-                                expand()
+                        View.VISIBLE -> rarityMenuOpenedClick()
+                        View.GONE -> rarityMenuClosedClick()
                     }
                 }
             }
@@ -91,9 +88,6 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     fun collapse() {
-        if (rootView.rarity_filter.visibility == View.GONE) {
-            return
-        }
         if (rarity_filter_bg?.layoutParams?.width == rarityBGMinWidth) {
             return
         }
@@ -127,12 +121,19 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    fun showMainButton() {
-        rootView.rarity_filter.visibility = View.VISIBLE
+    private fun rarityMenuOpenedClick() {
+        if (collapseOnClick) {
+            collapse()
+        } else {
+            rarityClick(null)
+        }
     }
 
-    fun hideMainButton() {
-        rootView.rarity_filter.visibility = View.GONE
+    private fun rarityMenuClosedClick() {
+        if (rarity_filter.tag == true)
+            rarityClick(null)
+        else
+            expand()
     }
 
 }

@@ -51,7 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:layout_marginStart="@dimen/huge_margin"
             android:gravity="center"
             android:paddingStart="@dimen/text_shadow_padding"
             android:paddingTop="@dimen/text_shadow_padding"
@@ -63,8 +65,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:layout_marginStart="@dimen/huge_margin"
             android:gravity="center"
-            android:layout_margin="@dimen/default_margin"
             android:text="@string/new_arena_draft_tip"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_big" />
@@ -84,6 +88,7 @@
             android:id="@+id/arena_draft_cards1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_weight="1" />
 
         <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
