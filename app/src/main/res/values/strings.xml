@@ -213,9 +213,7 @@
     <string name="new_match_dialog_start_error_name">Name must be at least 5 characters</string>
     <string name="new_match_opt_class_label">Opponent Deck Class</string>
     <string name="new_match_opt_type_label">Opponent Deck Type</string>
-    <string name="new_match_opt_name_label">Opponent Deck Name</string>
     <string name="new_match_cards_remains_label">Cards Remains</string>
-    <string name="new_match_name_label">(Optional)</string>
     <string name="new_match_first_label">Going First</string>
     <string name="new_match_legend_label">Rank Legend</string>
     <string name="new_match_rank_label">Rank</string>

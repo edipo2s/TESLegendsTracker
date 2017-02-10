@@ -215,13 +215,12 @@ abstract class FirebaseParsers {
 
         fun fromMatch(match: Match): MatchParser {
             val player = with(match.player) {
-                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                mapOf(KEY_MATCH_DECK_NAME to (name ?: ""), KEY_MATCH_DECK_CLASS to cls.ordinal,
                         KEY_MATCH_DECK_TYPE to type.ordinal, KEY_MATCH_DECK_DECK_UUID to (deck ?: ""),
                         KEY_MATCH_DECK_VERSION to (version ?: ""))
             }
             val opponent = with(match.opponent) {
-                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
-                        KEY_MATCH_DECK_TYPE to type.ordinal)
+                mapOf(KEY_MATCH_DECK_CLASS to cls.ordinal, KEY_MATCH_DECK_TYPE to type.ordinal)
             }
             return MatchParser(match.first, player, opponent, match.legend, match.mode.ordinal,
                     match.rank, match.season, match.win)
