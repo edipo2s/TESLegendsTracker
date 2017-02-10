@@ -20,6 +20,7 @@ import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena_draft.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.threeten.bp.LocalDateTime
 
@@ -60,6 +61,7 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_cards1.reset()
         arena_draft_cards2.reset()
         arena_draft_cards3.reset()
+        arena_draft_rarity.expand()
         MetricsManager.trackAction(MetricAction.ACTION_ARENA_PICK(card))
     }
 
@@ -82,6 +84,13 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_class_cover.setImageResource(selectedClass.imageRes)
         arena_draft_toolbar_title.text = selectedClass.name.toLowerCase().capitalize()
         arena_draft_cardlist.arenaMode = true
+        with(arena_draft_rarity) {
+            expand()
+            showSelectedRarity = true
+            filterClick = { rarity ->
+                EventBus.getDefault().post(CmdFilterRarity(rarity))
+            }
+        }
         PublicInteractor.getCards(null) {
             val cards = it.filter {
                 it.attr == CardAttribute.NEUTRAL
@@ -110,6 +119,9 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_cards1.currentRarity = filterRarity.rarity
         arena_draft_cards2.currentRarity = filterRarity.rarity
         arena_draft_cards3.currentRarity = filterRarity.rarity
+        if (filterRarity.rarity == null) {
+            arena_draft_rarity.expand()
+        }
     }
 
     private fun showTrackMatches() {
