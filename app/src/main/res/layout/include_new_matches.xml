@@ -34,7 +34,7 @@
                 style="@style/InputLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginTop="@dimen/large_margin"
                 android:layout_below="@id/new_match_dialog_title"
                 android:text="@string/new_match_opt_class_label" />
 
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_opt_class_spinner"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/new_match_opt_type_label" />
 
             <Spinner
@@ -62,30 +62,12 @@
                 android:layout_below="@id/new_match_opt_type_label"
                 android:inputType="none" />
 
-            <TextView
-                android:id="@+id/new_match_opt_name_label"
-                style="@style/InputLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/new_matches_opt_type_spinner"
-                android:layout_marginTop="@dimen/default_margin"
-                android:text="@string/new_match_opt_name_label" />
-
-            <EditText
-                android:id="@+id/new_matches_opt_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/new_match_opt_name_label"
-                android:hint="@string/new_match_name_label"
-                android:inputType="text"
-                android:textColorHint="@color/grey_300" />
-
             <CheckBox
                 android:id="@+id/new_matches_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/new_matches_opt_name"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_below="@id/new_matches_opt_type_spinner"
+                android:layout_marginTop="@dimen/huge_margin"
                 android:text="@string/new_match_first_label"
                 android:textColor="@android:color/white" />
 
@@ -94,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_first"
-                android:layout_marginTop="@dimen/nano_margin"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/new_match_legend_label"
                 android:textColor="@android:color/white" />
 
@@ -126,7 +108,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_matches_legend"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="@dimen/huge_margin"
+                android:layout_marginBottom="@dimen/huge_margin"
                 app:layout_widthPercent="49%">
 
                 <Button
@@ -143,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/new_matches_legend"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="@dimen/huge_margin"
                 app:layout_widthPercent="49%">
 
                 <Button

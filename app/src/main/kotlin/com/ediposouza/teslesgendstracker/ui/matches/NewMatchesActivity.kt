@@ -173,7 +173,6 @@ class NewMatchesActivity : BaseActivity() {
         val myDeckUpdates = deck?.updates ?: listOf()
         val myDeckVersion = "v1 (${deck?.createdAt})".takeIf { myDeckUpdates.isEmpty() } ?:
             "v${myDeckUpdates.size + 1} (${myDeckUpdates.last().date.toLocalDate()}"
-        val optDeckName = new_matches_opt_name.text.toString()
         val optDeckCls = DeckClass.values()[new_matches_opt_class_spinner.selectedItemPosition]
         val optDeckType = DeckType.values()[new_matches_opt_type_spinner.selectedItemPosition]
         val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
@@ -186,12 +185,11 @@ class NewMatchesActivity : BaseActivity() {
         val legendRank = new_matches_legend.isChecked
         val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_matches_first.isChecked,
                 MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
-                MatchDeck(optDeckName, optDeckCls, optDeckType),
+                MatchDeck(cls = optDeckCls, type = optDeckType),
                 mode, currentSeason, currentRank.toInt(), legendRank, win)
         PrivateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
             new_matches_first.isChecked = false
-            new_matches_opt_name.setText("")
             new_matches_opt_class_spinner.setSelection(0)
             new_matches_opt_type_spinner.setSelection(0)
             new_matches_deck_cardlist.showDeck(deck, false, false, false)

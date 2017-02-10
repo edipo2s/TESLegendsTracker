@@ -16,7 +16,7 @@ enum class MatchMode {
 
 data class MatchDeck(
 
-        val name: String,
+        val name: String? = null,
         val cls: DeckClass,
         val type: DeckType,
         val deck: String? = null,

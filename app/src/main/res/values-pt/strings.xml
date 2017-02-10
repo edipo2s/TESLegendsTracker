@@ -163,9 +163,7 @@
     <string name="new_match_dialog_start_error_name">O nome precisa ter ao menos 5 caracteres</string>
     <string name="new_match_opt_class_label">Classe do Deck do Oponente</string>
     <string name="new_match_opt_type_label">Tipo do Deck do Oponente</string>
-    <string name="new_match_opt_name_label">Nome do Deck do Oponente</string>
     <string name="new_match_cards_remains_label">Cartas Restantes</string>
-    <string name="new_match_name_label">(Opcional)</string>
     <string name="new_match_first_label">Começei Primeiro</string>
     <string name="new_match_legend_label">Ranque Lendário</string>
     <string name="new_match_rank_label">Ranque</string>
