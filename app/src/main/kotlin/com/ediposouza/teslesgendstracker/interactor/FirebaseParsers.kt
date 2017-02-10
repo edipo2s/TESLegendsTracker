@@ -25,6 +25,7 @@ abstract class FirebaseParsers {
         val type: String = ""
         val race: String = CardRace.NONE.name
         val keyword: String = ""
+        val text: String = ""
         val arenaTier: String = CardArenaTier.NONE.name
         val arenaTierPlus: Map<String, String> = mapOf()
         val evolves: Boolean = false
@@ -47,7 +48,7 @@ abstract class FirebaseParsers {
                             .mapTo(arrayListOf<CardKeyword>()) {
                                 CardKeyword.of(it)
                             },
-                    CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season)
+                    text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season)
         }
 
         private fun getCardArenaTierPlus(): CardArenaTierPlus? {

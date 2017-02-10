@@ -339,6 +339,7 @@ data class Card(
         val type: CardType,
         val race: CardRace,
         val keywords: List<CardKeyword>,
+        val text: String,
         val arenaTier: CardArenaTier,
         val arenaTierPlus: CardArenaTierPlus?,
         val evolves: Boolean,
@@ -385,7 +386,7 @@ data class Card(
             1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
-            CardArenaTier.values()[source.readInt()],
+            source.readString(), CardArenaTier.values()[source.readInt()],
             source.readParcelable<CardArenaTierPlus>(CardArenaTierPlus::class.java.classLoader),
             1 == source.readInt(), source.readString())
 
@@ -404,7 +405,7 @@ data class Card(
             getDefaultCardImage(context)
         }
         return Card(name, patchShortName, set, attr, dualAttr1, dualAttr2, rarity, unique, cost,
-                attack, health, type, race, keywords, arenaTier, arenaTierPlus, evolves, season)
+                attack, health, type, race, keywords, text, arenaTier, arenaTierPlus, evolves, season)
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
@@ -422,6 +423,7 @@ data class Card(
         dest?.writeInt(type.ordinal)
         dest?.writeInt(race.ordinal)
         dest?.writeList(keywords)
+        dest?.writeString(text)
         dest?.writeInt(arenaTier.ordinal)
         dest?.writeParcelable(arenaTierPlus, 0)
         dest?.writeInt((if (evolves) 1 else 0))

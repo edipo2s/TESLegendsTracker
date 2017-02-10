@@ -174,6 +174,7 @@
     <string name="new_deck_title">New Deck</string>
     <string name="new_deck_class_title">New %s Deck</string>
     <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
+    <string name="new_deck_card_list_arena_qtd" translatable="false">%1$02d/30</string>
     <string name="new_deck_save_dialog_title">Deck Info</string>
     <string name="new_deck_save_dialog_name_label">Name</string>
     <string name="new_deck_save_dialog_type_label">Type</string>
@@ -260,7 +261,7 @@
     <string name="patch_transition_container" translatable="false">patch_container_transition</string>
 
     <string name="arena_title">Choose a class to start a new Arena draft!</string>
-    <string name="new_arena_title">New Arena Draft</string>
+    <string name="new_arena_title">Arena Draft - %s</string>
     <string name="new_arena_draft_tip">Long tap on Card or tap on Arrow to choose your Pick</string>
     <string name="new_arena_draft_pick">Select a Card</string>
     <string name="new_arena_draft_synergy">Synergy with: \n%s</string>

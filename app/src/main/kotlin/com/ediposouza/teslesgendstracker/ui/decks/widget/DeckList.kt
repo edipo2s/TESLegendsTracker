@@ -34,6 +34,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     var arenaMode = false
+        set(value) {
+            field = value
+            decklist_soul.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+        }
     var editMode = false
 
     private fun showExpandedCard(card: Card, view: View) {
@@ -66,7 +70,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         if (isInEditMode) {
             val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                     CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
-                    CardRace.ARGONIAN, emptyList<CardKeyword>(), CardArenaTier.AVERAGE,
+                    CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
                     CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
@@ -119,7 +123,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun onCardListChange() {
         val cards = getCards()
         decklist_costs.updateCosts(cards)
-        decklist_qtd.text = context.getString(R.string.new_deck_card_list_qtd, cards.sumBy { it.qtd })
+        val qtdFormat = R.string.new_deck_card_list_arena_qtd.takeIf { arenaMode } ?: R.string.new_deck_card_list_qtd
+        decklist_qtd.text = context.getString(qtdFormat, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
         val attrGroup = cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap()
         cards.filter { it.card.attr == CardAttribute.DUAL }.forEach {
