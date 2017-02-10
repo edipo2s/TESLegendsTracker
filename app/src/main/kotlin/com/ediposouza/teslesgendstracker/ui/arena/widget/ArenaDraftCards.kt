@@ -16,7 +16,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterAttr
-import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
@@ -41,6 +40,17 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var currentAttr: CardAttribute? = CardAttribute.STRENGTH
     var currentMagika: Int = -1
     var currentRarity: CardRarity? = null
+        set(value) {
+            field = value
+            with(arena_draft_card_iv) {
+                isEnabled = field != null
+                if (isEnabled) {
+                    clearColorFilter()
+                } else {
+                    setColorFilter(ContextCompat.getColor(context, R.color.card_zero_qtd))
+                }
+            }
+        }
     var draftCardlist: DeckList? = null
 
     init {
@@ -55,7 +65,11 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     fun config(activity: Activity, cls: DeckClass, cards: List<Card>, cardOnLongOnClick: (Card) -> Unit, arena_draft_cardlist: DeckList) {
         draftCardlist = arena_draft_cardlist
         with(arena_draft_card_iv) {
-            setOnClickListener { showSelectCardDialog(activity, cls, cards) }
+            setOnClickListener {
+                if (isEnabled) {
+                    showSelectCardDialog(activity, cls, cards)
+                }
+            }
             setOnLongClickListener { chooseCard(cardOnLongOnClick) }
         }
         arena_draft_card_value.setOnClickListener {
@@ -107,14 +121,6 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 updateCardList(cards, cardsAdapter)
             }
         }
-        with(dialogView.select_card_dialog_rarity) {
-            collapseOnClick = false
-            filterClick = { rarity ->
-                currentRarity = rarity
-                EventBus.getDefault().post(CmdFilterRarity(rarity))
-                updateCardList(cards, cardsAdapter)
-            }
-        }
         with(dialogView.select_card_dialog_recycler_view) {
             layoutManager = gridLayoutManager
             itemAnimator = ScaleInAnimator()
@@ -129,7 +135,6 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             setOnShowListener {
                 dialogView.select_card_dialog_attr.filterClick?.invoke(currentAttr ?: cls.attr1)
                 dialogView.select_card_dialog_magika.open()
-                dialogView.select_card_dialog_rarity.expand()
             }
             show()
         }

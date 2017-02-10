@@ -29,18 +29,10 @@
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/default_margin" />
 
-        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
-            android:id="@+id/select_card_dialog_rarity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/select_card_dialog_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/select_card_dialog_rarity"
             android:layout_alignParentStart="true"
             android:layout_below="@id/select_card_dialog_attr"
             android:layout_marginBottom="@dimen/small_margin"

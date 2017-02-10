@@ -84,6 +84,14 @@
         android:orientation="vertical"
         app:layout_widthPercent="65%">
 
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
+            android:id="@+id/arena_draft_rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true" />
+
         <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
             android:id="@+id/arena_draft_cards1"
             android:layout_width="match_parent"

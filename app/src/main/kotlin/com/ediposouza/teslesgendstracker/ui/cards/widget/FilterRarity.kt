@@ -23,6 +23,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var filterClick: ((CardRarity?) -> Unit)? = null
     var collapseOnClick: Boolean = true
     var closeable: Boolean = true
+    var showSelectedRarity: Boolean = false
 
     init {
         inflate(context, R.layout.widget_rarity_filter, this)
@@ -51,7 +52,8 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         if (collapseOnClick) {
             collapse()
         }
-        val icon = R.drawable.ic_rarity.takeIf { rarity == null } ?: R.drawable.ic_rarity_clear
+        val icon = R.drawable.ic_rarity.takeIf { rarity == null } ?:
+                rarity?.imageRes.takeIf { showSelectedRarity } ?: R.drawable.ic_rarity_clear
         rootView.rarity_filter.apply {
             tag = rarity != null
             setImageResource(icon)
@@ -77,6 +79,9 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                         rarity_filter_rare?.visibility = View.VISIBLE
                         rarity_filter_epic?.visibility = View.VISIBLE
                         rarity_filter_legendary?.visibility = View.VISIBLE
+                        if (showSelectedRarity) {
+                            rarity_filter.setImageResource(R.drawable.ic_rarity)
+                        }
                     }
 
                     override fun onAnimationCancel(p0: Animator?) {
