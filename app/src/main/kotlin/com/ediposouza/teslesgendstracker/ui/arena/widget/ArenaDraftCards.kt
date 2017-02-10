@@ -166,7 +166,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         arena_draft_card_value.setTextColor(ContextCompat.getColor(context, when (calcArenaValue.first) {
             in 0..CardArenaTier.AVERAGE.value.minus(1) -> R.color.red_500
             in CardArenaTier.AVERAGE.value..CardArenaTier.EXCELLENT.value.minus(1) -> android.R.color.white
-            else -> R.color.colorAccent
+            else -> R.color.teal_100
         })
         )
         arena_draft_card_value_shadow.text = arena_draft_card_value.text
@@ -210,7 +210,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             } ?: 0
             CardArenaTierPlusType.STRATEGY -> 0
             CardArenaTierPlusType.TEXT -> extraPoints.takeIf {
-                draftedCard.name.contains(arenaTierPlus.value)
+                draftedCard.text.contains(arenaTierPlus.value)
             } ?: 0
             CardArenaTierPlusType.TYPE -> extraPoints.takeIf {
                 draftedCard.type.name == arenaTierPlus.value.toUpperCase()

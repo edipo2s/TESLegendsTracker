@@ -58,10 +58,7 @@ class NewArenaDraftFragment : BaseFragment() {
 
     private fun chooseCard(card: Card) {
         arena_draft_cardlist.addCard(card)
-        arena_draft_cards1.reset()
-        arena_draft_cards2.reset()
-        arena_draft_cards3.reset()
-        arena_draft_rarity.expand()
+        resetChoice()
         MetricsManager.trackAction(MetricAction.ACTION_ARENA_PICK(card))
     }
 
@@ -76,13 +73,13 @@ class NewArenaDraftFragment : BaseFragment() {
             supportActionBar?.title = ""
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val layoutParams = toolbar.layoutParams as FrameLayout.LayoutParams
             layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.status_bar_height)
             toolbar.layoutParams = layoutParams
         }
         arena_draft_class_cover.setImageResource(selectedClass.imageRes)
-        arena_draft_toolbar_title.text = selectedClass.name.toLowerCase().capitalize()
+        arena_draft_toolbar_title.text = getString(R.string.new_arena_title, selectedClass.name.toLowerCase().capitalize())
         arena_draft_cardlist.arenaMode = true
         with(arena_draft_rarity) {
             expand()
@@ -120,8 +117,15 @@ class NewArenaDraftFragment : BaseFragment() {
         arena_draft_cards2.currentRarity = filterRarity.rarity
         arena_draft_cards3.currentRarity = filterRarity.rarity
         if (filterRarity.rarity == null) {
-            arena_draft_rarity.expand()
+            resetChoice()
         }
+    }
+
+    private fun resetChoice() {
+        arena_draft_cards1.reset()
+        arena_draft_cards2.reset()
+        arena_draft_cards3.reset()
+        arena_draft_rarity.expand()
     }
 
     private fun showTrackMatches() {
