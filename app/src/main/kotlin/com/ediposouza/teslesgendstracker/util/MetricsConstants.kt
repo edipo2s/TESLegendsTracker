@@ -95,6 +95,12 @@ sealed class MetricAction(val name: String) {
         val PARAM_PRIVATE = "Private"
     }
 
+    class ACTION_NEW_DECK_UPDATE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckUpdated") {
+        val PARAM_TYPE = "Type"
+        val PARAM_PATCH = "Patch"
+        val PARAM_PRIVATE = "Private"
+    }
+
     class ACTION_MATCH_STATISTICS_WIN_RATE(val checked: Boolean) : MetricAction("MatchStatisticsWinRate") {
         val PARAM_CHECKED = "Checked"
     }

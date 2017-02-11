@@ -157,6 +157,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         private var missingCards: List<CardMissing> = listOf()
         private val eventBus by lazy { EventBus.getDefault() }
 
+        var updateMode = false
+
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
             return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
         }
@@ -164,7 +166,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         override fun onBindViewHolder(holder: DeckListViewHolder?, position: Int) {
             val cardSlot = items[position]
             val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
-            holder?.bind(cardSlot, cardMissing?.qtd ?: 0)
+            holder?.bind(cardSlot, cardMissing?.qtd ?: 0, updateMode)
         }
 
         override fun getItemCount(): Int = items.size
@@ -253,7 +255,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     class DeckListViewHolder(view: View?, val itemClick: (View, Card) -> Unit,
                              val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-        fun bind(slot: CardSlot, missingQtd: Int) {
+        fun bind(slot: CardSlot, missingQtd: Int, updateMode: Boolean) {
             itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
             itemView.setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
             itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))
@@ -269,9 +271,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 6 -> R.drawable.ic_magika_6
                 else -> R.drawable.ic_magika_7plus
             })
-            itemView.deckslot_card_qtd.text = slot.qtd.toString()
-            itemView.deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd > 0 } ?: View.INVISIBLE
-            itemView.deckslot_card_qtd_layout.visibility = View.VISIBLE.takeIf { slot.qtd > 0 } ?: View.INVISIBLE
+            itemView.deckslot_card_qtd.text = "+${slot.qtd}".takeIf { updateMode && slot.qtd > 0 } ?: "${slot.qtd}"
+            itemView.deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
+            itemView.deckslot_card_qtd_layout.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
             itemView.deckslot_card_qtd_missing.text = "-$missingQtd"
             itemView.deckslot_card_qtd_missing.visibility = View.VISIBLE.takeIf { missingQtd > 0 } ?: View.INVISIBLE
         }

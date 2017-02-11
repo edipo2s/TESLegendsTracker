@@ -94,10 +94,11 @@ abstract class FirebaseParsers {
 
         companion object {
 
-            private const val KEY_DECK_NAME = "owner"
+            private const val KEY_DECK_NAME = "name"
             private const val KEY_DECK_TYPE = "type"
             private const val KEY_DECK_CLASS = "cls"
             private const val KEY_DECK_PATCH = "patch"
+            private const val KEY_DECK_UPDATE_AT = "updatedAt"
             private const val KEY_DECK_COMMENT_OWNER = "owner"
             private const val KEY_DECK_COMMENT_MSG = "comment"
             private const val KEY_DECK_COMMENT_CREATE_AT = "createdAt"
@@ -133,7 +134,8 @@ abstract class FirebaseParsers {
         }
 
         fun toDeckUpdateMap(): Map<String, Any> {
-            return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls, KEY_DECK_PATCH to patch)
+            return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls,
+                    KEY_DECK_PATCH to patch, KEY_DECK_UPDATE_AT to updatedAt)
         }
 
         override fun toString(): String {
