@@ -62,7 +62,7 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATCH, action.patch)
                     putString(action.PARAM_PRIVATE, action.private.toString())
                 }
-                is MetricAction.ACTION_NEW_DECK_UPDATE -> {
+                is MetricAction.ACTION_DECK_UPDATE -> {
                     putString(action.PARAM_TYPE, action.type)
                     putString(action.PARAM_PATCH, action.patch)
                     putString(action.PARAM_PRIVATE, action.private.toString())
@@ -79,9 +79,10 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
                 is MetricAction.ACTION_MATCH_STATISTICS_CLASS ->
                     putString(action.PARAM_CLASS, action.cls.name)
-                is MetricAction.ACTION_NEW_MATCH_START_WITH ->
+                is MetricAction.ACTION_NEW_MATCH_START_WITH -> {
                     putString(action.PARAM_DECK, action.deck?.cls?.name ?: action.PARAM_DECK_VALUE_OTHER)
-                putBoolean(action.PARAM_FROM_ARENA, fromArena)
+                    putBoolean(action.PARAM_FROM_ARENA, action.fromArena)
+                }
                 is MetricAction.ACTION_NEW_MATCH_SAVE -> {
                     putString(action.PARAM_MY_CLS, action.myDeckCls.name)
                     putString(action.PARAM_MY_TYPE, action.myDeckType.name)
