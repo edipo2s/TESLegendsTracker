@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+
+    <FrameLayout
+        android:id="@+id/arena_draft_class_cover_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/arena_draft_class_cover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/deck_header_height"
+            android:alpha="@dimen/deck_class_cover_alpha"
+            android:scaleType="centerCrop"
+            android:src="@drawable/deck_class_archer" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:fitsSystemWindows="true"
+            android:lines="1"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:title=""
+            tools:targetApi="lollipop">
+
+            <TextView
+                android:id="@+id/arena_draft_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                tools:text="@string/app_name_full" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:gravity="center"
+            android:paddingStart="@dimen/text_shadow_padding"
+            android:paddingTop="@dimen/text_shadow_padding"
+            android:text="@string/new_arena_draft_tip"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_big" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:gravity="center"
+            android:text="@string/new_arena_draft_tip"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_big" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/arena_draft_fragment_cards"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/arena_draft_class_cover_layout"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:orientation="vertical"
+        app:layout_widthPercent="65%">
+
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
+            android:id="@+id/arena_draft_rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true" />
+
+        <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
+            android:id="@+id/arena_draft_cards1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_weight="1" />
+
+        <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
+            android:id="@+id/arena_draft_cards2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.ediposouza.teslesgendstracker.ui.widget.ArenaDraftCards
+            android:id="@+id/arena_draft_cards3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
+        android:id="@+id/arena_draft_cardlist"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/arena_draft_class_cover_layout"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_toEndOf="@id/arena_draft_fragment_cards"
+        app:layout_widthPercent="35%" />
+
+</android.support.percent.PercentRelativeLayout>

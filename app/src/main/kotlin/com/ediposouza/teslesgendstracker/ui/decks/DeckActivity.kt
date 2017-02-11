@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
@@ -24,12 +25,12 @@ import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
-import com.ediposouza.teslesgendstracker.data.Deck
-import com.ediposouza.teslesgendstracker.data.DeckComment
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
@@ -39,6 +40,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
+import kotlinx.android.synthetic.main.itemlist_deck_update.view.*
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -64,8 +66,6 @@ class DeckActivity : BaseActivity() {
 
     }
 
-    private val publicInteractor by lazy { PublicInteractor() }
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val keyboardUtil by lazy { KeyboardUtil(this, contentView) }
     private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
     private val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
@@ -107,9 +107,9 @@ class DeckActivity : BaseActivity() {
         }
         deck_fab_favorite.setOnClickListener {
             if (App.hasUserLogged()) {
-                privateInteractor.setUserDeckFavorite(deck, !favorite) {
+                PrivateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
-                    val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
+                    val stringRes = R.string.action_favorited.takeIf { favorite } ?: R.string.action_unfavorited
                     toast(getString(stringRes, deck.name))
                     updateFavoriteItem()
                     MetricsManager.trackAction(if (favorite)
@@ -140,7 +140,7 @@ class DeckActivity : BaseActivity() {
                     eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.deck_comment_size_error)
                             .withAction(android.R.string.ok, {}))
                 } else {
-                    PrivateInteractor().addDeckComment(deck, deck_comment_new.text.toString()) {
+                    PrivateInteractor.addDeckComment(deck, deck_comment_new.text.toString()) {
                         deck_comment_new.setText("")
                         addComment(it)
                         MetricsManager.trackAction(MetricAction.ACTION_DECK_COMMENTS_SEND())
@@ -197,7 +197,7 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(if (deckOwned) R.menu.menu_delete else R.menu.menu_like, menu)
+        menuInflater.inflate(if (deckOwned) R.menu.menu_edit_delete else R.menu.menu_like, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
@@ -214,7 +214,7 @@ class DeckActivity : BaseActivity() {
                     showErrorUserNotLogged()
                     return false
                 }
-                privateInteractor.setUserDeckLike(deck, !like) {
+                PrivateInteractor.setUserDeckLike(deck, !like) {
                     like = !like
                     updateLikeItem()
                     val deckLikes = Integer.parseInt(deck_details_likes.text.toString())
@@ -228,7 +228,7 @@ class DeckActivity : BaseActivity() {
                 alertThemed(R.string.confirm_message, theme = R.style.AppDialog) {
                     negativeButton(android.R.string.no, {})
                     positiveButton(android.R.string.yes, {
-                        privateInteractor.deleteDeck(deck, deck.private) {
+                        PrivateInteractor.deleteDeck(deck, deck.private) {
                             toast(R.string.deck_deleted)
                             ActivityCompat.finishAfterTransition(this@DeckActivity)
                             MetricsManager.trackAction(MetricAction.ACTION_DECK_DETAILS_DELETE())
@@ -237,20 +237,26 @@ class DeckActivity : BaseActivity() {
                 }.show()
                 return true
             }
+            R.id.menu_edit -> {
+                val anim = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+                startActivity(intentFor<NewDeckActivity>(NewDeckActivity.DECK_EXTRA to deck), anim.toBundle())
+                finish()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun updateLikeItem() {
-        val icon = if (like) R.drawable.ic_like_checked else R.drawable.ic_like_unchecked
-        menuLike?.icon = ContextCompat.getDrawable(this, icon)
-        menuLike?.title = getString(if (like) R.string.menu_unlike else R.string.menu_like)
+        menuLike?.icon = ContextCompat.getDrawable(this,
+                R.drawable.ic_like_checked.takeIf { like } ?: R.drawable.ic_like_unchecked)
+        menuLike?.title = getString(R.string.menu_unlike.takeIf { like } ?: R.string.menu_like)
     }
 
     private fun updateFavoriteItem() {
-        val icon = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
-        deck_fab_favorite.setImageDrawable(ContextCompat.getDrawable(this, icon))
-        val contentDescription = if (favorite) R.string.menu_unfavorite else R.string.menu_favorite
+        deck_fab_favorite.setImageDrawable(ContextCompat.getDrawable(this,
+                R.drawable.ic_favorite_checked.takeIf { favorite } ?: R.drawable.ic_favorite_unchecked))
+        val contentDescription = R.string.menu_unfavorite.takeIf { favorite } ?: R.string.menu_favorite
         deck_fab_favorite.contentDescription = getString(contentDescription)
     }
 
@@ -269,12 +275,13 @@ class DeckActivity : BaseActivity() {
         deck_details_update_at.text = getString(R.string.deck_details_last_update_format, updateDate, updateTime)
         deck_details_cardlist.showDeck(deck, false)
         configDeckComments()
+        configDeckUpdates()
     }
 
     private fun configDeckComments() {
         with(deck_comment_recycle_view) {
-            adapter = DeckCommentAdapter(deck.comments, publicInteractor) {
-                privateInteractor.remDeckComment(deck, it) {
+            adapter = DeckCommentAdapter(deck.comments) {
+                PrivateInteractor.remDeckComment(deck, it) {
                     remComment(it)
                 }
             }
@@ -287,7 +294,7 @@ class DeckActivity : BaseActivity() {
                     super.setMeasuredDimension(childrenBounds, wSpec, hSpec)
                 }
 
-                private fun getVisiblePercent(): Float = if (keyboardVisible) 0.2f else 0.6f
+                private fun getVisiblePercent(): Float = 0.2f.takeIf { keyboardVisible } ?: 0.6f
 
             }
             itemAnimator = SlideInLeftAnimator()
@@ -296,22 +303,33 @@ class DeckActivity : BaseActivity() {
         deck_comment_qtd.text = numberInstance.format(deck.comments.size)
     }
 
+    private fun configDeckUpdates() {
+        deck_details_updates_label.visibility = View.VISIBLE.takeIf { deck.updates.isNotEmpty() } ?: View.GONE
+        if (deck.updates.isNotEmpty()) {
+            with(deck_details_updates) {
+                adapter = DeckUpdateAdapter(deck.updates.reversed(), deck.cls)
+                layoutManager = LinearLayoutManager(this@DeckActivity)
+                setHasFixedSize(true)
+                postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
+            }
+        }
+    }
+
     private fun loadDeckRemoteInfo() {
         doAsync {
-            calculateMissingSoul(deck, privateInteractor)
+            calculateMissingSoul(deck)
             if (!deckOwned) {
-                publicInteractor.incDeckView(deck) {
+                PublicInteractor.incDeckView(deck) {
                     deck_details_views.text = it.toString()
                 }
             }
-            publicInteractor.getPatches {
+            PublicInteractor.getPatches {
                 val patch = it.find { it.uuidDate == deck.patch }
                 runOnUiThread {
                     deck_details_patch.text = patch?.desc ?: ""
                 }
             }
-            publicInteractor.getUserInfo(deck.owner) {
-                val ownerUser = it
+            PublicInteractor.getUserInfo(deck.owner) { ownerUser ->
                 runOnUiThread {
                     deck_details_create_by.text = ownerUser.name
                     Glide.with(this@DeckActivity)
@@ -323,11 +341,11 @@ class DeckActivity : BaseActivity() {
         }
     }
 
-    fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {
+    fun calculateMissingSoul(deck: Deck) {
         with(deck_details_soul_missing) {
             visibility = View.INVISIBLE
             deck_details_soul_missing_loading.visibility = View.VISIBLE
-            privateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
+            PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
                 deck_details_soul_missing_loading.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                 Timber.d("Missing %d", missingSoul)
@@ -351,8 +369,8 @@ class DeckActivity : BaseActivity() {
         deck_comment_recycle_view.requestLayout()
     }
 
-    class DeckCommentAdapter(val items: List<DeckComment>, val publicInteractor: PublicInteractor,
-                             val onRemComment: (commentId: String) -> Unit) : RecyclerView.Adapter<DeckCommentViewHolder>() {
+    class DeckCommentAdapter(val items: List<DeckComment>, val onRemComment: (commentId: String) -> Unit) :
+            RecyclerView.Adapter<DeckCommentViewHolder>() {
 
         init {
             sortDeckComments()
@@ -363,7 +381,7 @@ class DeckActivity : BaseActivity() {
         }
 
         override fun onBindViewHolder(holder: DeckCommentViewHolder?, position: Int) {
-            holder?.bind(items[position], publicInteractor)
+            holder?.bind(items[position])
         }
 
         override fun getItemCount() = items.size
@@ -388,19 +406,18 @@ class DeckActivity : BaseActivity() {
 
     class DeckCommentViewHolder(view: View?, val onRemComment: (commentId: String) -> Unit) : RecyclerView.ViewHolder(view) {
 
-        fun bind(comment: DeckComment, publicInteractor: PublicInteractor) {
+        fun bind(comment: DeckComment) {
             val timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN)
             itemView.deck_comment_msg.text = comment.comment
             itemView.deck_comment_date.text = itemView.context.getString(R.string.deck_comment_date_format,
                     comment.date.toLocalDate(), comment.date.toLocalTime().format(timeFormatter))
             doAsync {
-                publicInteractor.getUserInfo(comment.owner) {
-                    val ownerUser = it
+                PublicInteractor.getUserInfo(comment.owner) { ownerUser ->
                     itemView.post {
                         itemView.deck_comment_owner.text = ownerUser.name
                         with(itemView.deck_comment_delete) {
                             val owner = comment.owner == FirebaseAuth.getInstance().currentUser?.uid
-                            visibility = if (owner) View.VISIBLE else View.GONE
+                            visibility = View.VISIBLE.takeIf { owner } ?: View.GONE
                             setOnClickListener { onRemComment(comment.uuid) }
                         }
                         Glide.with(itemView.context)
@@ -411,6 +428,56 @@ class DeckActivity : BaseActivity() {
                     }
                 }
             }
+        }
+
+    }
+
+    class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckUpdateViewHolder {
+            return DeckUpdateViewHolder(parent?.inflate(R.layout.itemlist_deck_update))
+        }
+
+        override fun onBindViewHolder(holder: DeckUpdateViewHolder?, position: Int) {
+            holder?.bind(items[position], cls)
+        }
+
+        override fun getItemCount(): Int = items.size
+
+    }
+
+    class DeckUpdateViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+
+        fun bind(deckUpdate: DeckUpdate, cls: DeckClass) {
+            with(itemView) {
+                val updateDate = deckUpdate.date.toLocalDate()
+                val updateTime = deckUpdate.date.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
+                deck_update_title.text = context.getString(R.string.deck_details_last_update_format, updateDate, updateTime)
+                PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
+                    configUpdateCardsChanges(cards, deckUpdate)
+                }
+            }
+        }
+
+        private fun DeckUpdateViewHolder.configUpdateCardsChanges(cards: List<Card>, deckUpdate: DeckUpdate) {
+            with(itemView.deck_update_changes) {
+                val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
+                adapter = com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
+                    updateMode = true
+                    showDeck(deckUpdate.changes.map {
+                        val cardQtd = it
+                        com.ediposouza.teslesgendstracker.data.CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
+                    })
+                }
+                layoutManager = android.support.v7.widget.LinearLayoutManager(context)
+                setHasFixedSize(true)
+            }
+        }
+
+        private fun showExpandedCard(context: Context, card: Card, view: View) {
+            val transitionName = context.getString(R.string.card_transition_name)
+            ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
         }
 
     }

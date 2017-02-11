@@ -21,7 +21,7 @@
     <string name="menu_seasons">TESL Temporadas</string>
     <string name="menu_season">Temporadas</string>
     <string name="menu_filter">Filtrar</string>
-    <string name="menu_arena">Arena</string>
+    <string name="menu_arena">Draft de Arena</string>
     <string name="menu_donate">Versão com Anúncios</string>
     <string name="menu_donate_done">Versão sem Anúncios</string>
     <string name="menu_share">Indicar a um amigo</string>
@@ -35,9 +35,11 @@
     <string name="menu_like">Curtir</string>
     <string name="menu_unlike">Descurtir</string>
     <string name="menu_delete">Deletar</string>
+    <string name="menu_edit">Editar</string>
     <string name="menu_done">Concluir</string>
     <string name="menu_percent">Porcento</string>
     <string name="menu_import">Importar do Legends-Decks</string>
+    <string name="menu_start">Iniciar</string>
 
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
@@ -87,7 +89,6 @@
     <string name="title_tab_decks_favorites">Decks Favoritos</string>
     <string name="title_tab_matches_statistics">Statísticas de Partidas</string>
     <string name="title_tab_matches_history">Histórico de Partidas</string>
-
     <string name="title_tab_articles_news">TES Legends Notícias</string>
     <string name="title_tab_articles_world">TES Legends Mundo</string>
 
@@ -96,6 +97,8 @@
     <string name="card_more_info_label">Mais Informações</string>
     <string name="card_arena_tier_label">Arena Nível:</string>
     <string name="card_collection_qtd_label">Coleção Qtd:</string>
+    <string name="card_collection_edit_confirm">Habilitar edição da coleção?</string>
+    <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
     <string name="card_patch_current">Versão Atual</string>
@@ -119,6 +122,7 @@
     <string name="deck_details_create_at">Criado em</string>
     <string name="deck_details_last_update">Última atualização</string>
     <string name="deck_details_last_update_format">%1$s às %2$s</string>
+    <string name="deck_details_updates">Atualizações</string>
     <string name="deck_deleted">Deck deletado!</string>
     <string name="deck_exit_confirm">Pressione novamente para sair sem salvar</string>
     <string name="deck_comments_text">Comentários</string>
@@ -129,12 +133,16 @@
     <string name="new_deck_title">Novo Deck</string>
     <string name="new_deck_class_title">Novo Deck %s</string>
     <string name="new_deck_save_dialog_title">Informações do Deck</string>
+    <string name="new_deck_update_dialog_title">Salvar Mudanças no Deck?</string>
     <string name="new_deck_save_dialog_name_label">Nome</string>
     <string name="new_deck_save_dialog_type_label">Tipo</string>
     <string name="new_deck_save_dialog_public_label">Tornar deck público</string>
     <string name="new_deck_save_dialog_save">Salvar</string>
+    <string name="new_deck_save_dialog_update">Atualizar</string>
     <string name="new_deck_save_as_public">Deck salvo como Público</string>
     <string name="new_deck_save_as_private">Deck salvo as Privado</string>
+    <string name="new_deck_updated_as_public">Deck atualizado como Público</string>
+    <string name="new_deck_updated_as_private">Deck atualizado as Privado</string>
     <string name="new_deck_save_error_incomplete">Por favor complete seu deck antes de salvá-lo</string>
 
     <string name="match_win">Ganhei</string>
@@ -161,9 +169,7 @@
     <string name="new_match_dialog_start_error_name">O nome precisa ter ao menos 5 caracteres</string>
     <string name="new_match_opt_class_label">Classe do Deck do Oponente</string>
     <string name="new_match_opt_type_label">Tipo do Deck do Oponente</string>
-    <string name="new_match_opt_name_label">Nome do Deck do Oponente</string>
     <string name="new_match_cards_remains_label">Cartas Restantes</string>
-    <string name="new_match_name_label">(Opcional)</string>
     <string name="new_match_first_label">Começei Primeiro</string>
     <string name="new_match_legend_label">Ranque Lendário</string>
     <string name="new_match_rank_label">Ranque</string>
@@ -196,5 +202,12 @@
     <string name="season_matches_class_less_defeated">Menos derrotados:</string>
 
     <string name="patch_change">%s\nAlterado</string>
+
+    <string name="arena_title">Escolha uma class para iniciar um novo draft de Arena!</string>
+    <string name="new_arena_title">Draft de Arena - %s</string>
+    <string name="new_arena_draft_tip">Toque longo na Carta ou toque na Seta para indicar sua Escolha</string>
+    <string name="new_arena_draft_pick">Selecione uma Carta</string>
+    <string name="new_arena_draft_synergy">Sinergia com: \n%s</string>
+    <string name="new_arena_draft_remove_card">Remover Carta?</string>
 
 </resources>

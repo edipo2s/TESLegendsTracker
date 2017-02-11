@@ -9,11 +9,68 @@
 
     <TextView
         android:id="@+id/decklist_qtd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        tools:text="0/50" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
         android:gravity="center"
-        android:text="0/50"
-        android:textColor="@android:color/white" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/decklist_class_attr1"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            tools:src="@drawable/attr_strength" />
+
+        <TextView
+            android:id="@+id/decklist_class_attr1_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="9" />
+
+        <ImageView
+            android:id="@+id/decklist_class_attr2"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginStart="@dimen/small_margin"
+            tools:src="@drawable/attr_intelligence" />
+
+        <TextView
+            android:id="@+id/decklist_class_attr2_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="7" />
+
+        <TextView
+            android:id="@+id/decklist_class_prophecy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_big"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="P" />
+
+        <TextView
+            android:id="@+id/decklist_class_prophecy_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="5" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/decklist_recycle_view"
@@ -23,8 +80,8 @@
         android:layout_weight="1"
         android:background="@drawable/xml_cards_bg"
         android:fadeScrollbars="false"
-        android:paddingTop="@dimen/nano_margin"
         android:paddingBottom="@dimen/nano_margin"
+        android:paddingTop="@dimen/nano_margin"
         android:scrollbarSize="@dimen/small_margin"
         android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
         android:scrollbars="vertical"
@@ -41,15 +98,15 @@
         android:drawablePadding="@dimen/large_margin"
         android:drawableStart="@drawable/ic_soul"
         android:gravity="center"
-        android:text="0"
+        tools:text="0"
         android:textColor="@android:color/white" />
 
     <com.ediposouza.teslesgendstracker.ui.decks.widget.MagikaCosts
         android:id="@+id/decklist_costs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_marginBottom="@dimen/nano_margin"
+        android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/default_margin"
         tools:layout_marginBottom="@dimen/navigation_bar_height" />
 

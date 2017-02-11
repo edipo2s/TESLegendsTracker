@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -46,7 +47,6 @@ class CardActivity : BaseActivity() {
 
     }
 
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
@@ -82,7 +82,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged()) {
             showUserCardQtd()
         }
-        privateInteractor.isUserCardFavorite(card) {
+        PrivateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()
         }
@@ -111,7 +111,7 @@ class CardActivity : BaseActivity() {
 
     private fun showUserCardQtd() {
         card_collection_qtd_layout.visibility = View.VISIBLE
-        privateInteractor.getUserCollection(card.set, card.attr) {
+        PrivateInteractor.getUserCollection(card.set, card.attr) {
             userCardQtd = it[card.shortName] ?: 0
             updateChangeCardQtdButtons()
             card_collection_qtd_loading.visibility = View.GONE
@@ -129,13 +129,13 @@ class CardActivity : BaseActivity() {
     }
 
     private fun updateChangeCardQtdButtons() {
-        val cardMaxQtd = if (card.unique) 1 else 3
+        val cardMaxQtd = 1.takeIf { card.unique } ?: 3
         card_collection_qtd_plus_btn.isEnabled = userCardQtd < cardMaxQtd
         card_collection_qtd_minus_btn.isEnabled = userCardQtd > 0
     }
 
     private fun updateCardQtd(newCardQtd: Int) {
-        privateInteractor.setUserCardQtd(card, newCardQtd) {
+        PrivateInteractor.setUserCardQtd(card, newCardQtd) {
             userCardQtd = newCardQtd
             card_collection_qtd.text = newCardQtd.toString()
             updateChangeCardQtdButtons()
@@ -172,7 +172,7 @@ class CardActivity : BaseActivity() {
         }
         card_race.text = card.race.name.toLowerCase().capitalize()
         card_race_desc.text = card.race.desc
-        card_race_desc.visibility = if (card.race.desc.isEmpty()) View.GONE else View.VISIBLE
+        card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
     }
 
@@ -194,7 +194,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun getCardPatches() {
-        PublicInteractor().getPatches {
+        PublicInteractor.getPatches {
             val cardPatches = it.filter {
                 it.changes.filter { it.shortName == card.shortName }.isNotEmpty()
             }.sortedBy { it.date }.reversed()
@@ -217,15 +217,15 @@ class CardActivity : BaseActivity() {
     }
 
     private fun updateFavoriteButton() {
-        val drawableRes = if (favorite) R.drawable.ic_favorite_checked else R.drawable.ic_favorite_unchecked
+        val drawableRes = R.drawable.ic_favorite_checked.takeIf { favorite } ?: R.drawable.ic_favorite_unchecked
         card_favorite_btn.setImageResource(drawableRes)
     }
 
     private fun onFavoriteClick() {
         if (App.hasUserLogged()) {
-            PrivateInteractor().setUserCardFavorite(card, !favorite) {
+            PrivateInteractor.setUserCardFavorite(card, !favorite) {
                 favorite = !favorite
-                val stringRes = if (favorite) R.string.action_favorited else R.string.action_unfavorited
+                val stringRes = R.string.action_favorited.takeIf { favorite } ?: R.string.action_unfavorited
                 toast(getString(stringRes, card.name))
                 updateFavoriteButton()
                 setResult(Activity.RESULT_OK, Intent())
@@ -262,14 +262,14 @@ class CardActivity : BaseActivity() {
                 with(card_patch_full_image) {
                     setImageBitmap(Card.getCardImageBitmap(context, cardBasicInfo.set,
                             cardBasicInfo.attr, cardBasicInfo.shortName))
-                    transitionName = if (isFirst) context.getString(R.string.card_transition_name) else ""
+                    ViewCompat.setTransitionName(this, context.getString(R.string.card_transition_name).takeIf { isFirst } ?: "")
                     setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
                 }
                 card_patch_desc.text = cardPatchDesc
                 card_patch_desc_shadow.text = cardPatchDesc
-                card_patch_desc.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
-                card_patch_desc_shadow.visibility = if (hasPatchVersion) View.VISIBLE else View.GONE
-                card_patch_arrow.visibility = if (isLast) View.GONE else View.VISIBLE
+                card_patch_desc.visibility = View.VISIBLE.takeIf { hasPatchVersion } ?: View.GONE
+                card_patch_desc_shadow.visibility = View.VISIBLE.takeIf { hasPatchVersion } ?: View.GONE
+                card_patch_arrow.visibility = View.GONE.takeIf { isLast } ?: View.VISIBLE
                 setOnClickListener { onCardClick() }
             }
         }

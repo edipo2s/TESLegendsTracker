@@ -6,8 +6,8 @@ import android.support.annotation.IntegerRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
-import com.ediposouza.teslesgendstracker.data.Attribute
-import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.data.CardAttribute
+import com.ediposouza.teslesgendstracker.data.DeckClass
 
 /**
  * Created by EdipoSouza on 11/6/16.
@@ -20,9 +20,9 @@ class CmdUpdateDeckAndShowDeck
 
 data class CmdUpdateTitle(@IntegerRes val title: Int)
 
-data class CmdShowCardsByAttr(val attr: Attribute)
+data class CmdShowCardsByAttr(val attr: CardAttribute)
 
-data class CmdShowDecksByClasses(val classes: List<Class>)
+data class CmdShowDecksByClasses(val classes: List<DeckClass>)
 
 data class CmdUpdateRarityMagikaFiltersPosition(val high: Boolean)
 
@@ -60,7 +60,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
         private set
 
     init {
-        duration = if (type == TYPE_INFO) Snackbar.LENGTH_LONG else Snackbar.LENGTH_INDEFINITE
+        duration = Snackbar.LENGTH_LONG.takeIf { type == TYPE_INFO } ?: Snackbar.LENGTH_INDEFINITE
         if (type == TYPE_ERROR) {
             actionTextRes = R.string.ok
             action = { }

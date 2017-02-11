@@ -10,12 +10,12 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 01/11/16.
  */
-class PublicInteractor : BaseInteractor() {
+object PublicInteractor : BaseInteractor() {
 
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
-    fun getCard(set: CardSet, attribute: Attribute, shortname: String, onSuccess: (Card) -> Unit) {
+    fun getCard(set: CardSet, attribute: CardAttribute, shortname: String, onSuccess: (Card) -> Unit) {
         val attr = attribute.name.toLowerCase()
         database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -40,7 +40,7 @@ class PublicInteractor : BaseInteractor() {
 
                         override fun onDataChange(ds: DataSnapshot) {
                             val cards = ds.children.map {
-                                val attr = Attribute.valueOf(it.key.toUpperCase())
+                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
                                 it.children.map {
                                     it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
                                 }
@@ -56,7 +56,7 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getCards(set: CardSet?, vararg attrs: Attribute, onSuccess: (List<Card>) -> Unit) {
+    fun getCards(set: CardSet?, vararg attrs: CardAttribute, onSuccess: (List<Card>) -> Unit) {
         var attrIndex = 0
         val cards = arrayListOf<Card>()
         if (attrs.size == 1) {
@@ -76,7 +76,7 @@ class PublicInteractor : BaseInteractor() {
         getCards(set, attrs[attrIndex], getCardsOnSuccess(onSuccess))
     }
 
-    private fun getCards(set: CardSet?, attr: Attribute, onSuccess: (List<Card>) -> Unit) {
+    private fun getCards(set: CardSet?, attr: CardAttribute, onSuccess: (List<Card>) -> Unit) {
         val onFinalSuccess: (List<Card>) -> Unit = { onSuccess(it.sorted()) }
         getListFromSets(set, attr, onFinalSuccess) { set, attr, onEachSuccess ->
             val node_attr = attr.name.toLowerCase()
@@ -122,7 +122,7 @@ class PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getCardsForStatistics(set: CardSet?, attr: Attribute, onSuccess: (List<CardStatistic>) -> Unit) {
+    fun getCardsForStatistics(set: CardSet?, attr: CardAttribute, onSuccess: (List<CardStatistic>) -> Unit) {
         getListFromSets(set, attr, onSuccess) { set, attr, onEachSuccess ->
             val node_attr = attr.name.toLowerCase()
             database.child(NODE_CARDS).child(set.db).child(node_attr).orderByChild(KEY_CARD_COST)
@@ -173,7 +173,7 @@ class PublicInteractor : BaseInteractor() {
         keepSynced()
     }
 
-    fun getPublicDecks(cls: Class?, onSuccess: (List<Deck>) -> Unit) {
+    fun getPublicDecks(cls: DeckClass?, onSuccess: (List<Deck>) -> Unit) {
         val dbPublicDeck = dbDecks.child(NODE_DECKS_PUBLIC)
         dbPublicDeck.keepSynced()
         var query = dbPublicDeck.orderByChild(KEY_DECK_UPDATE_AT)
@@ -210,7 +210,7 @@ class PublicInteractor : BaseInteractor() {
 
     fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
         with(database.child(NODE_CARDS)) {
-            getCards(null, deck.cls.attr1, deck.cls.attr2, Attribute.DUAL, Attribute.NEUTRAL) {
+            getCards(null, deck.cls.attr1, deck.cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
                 val deckCards = it.map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
                         .filter { it.qtd > 0 }
                 Timber.d(deckCards.toString())
@@ -238,12 +238,12 @@ class PublicInteractor : BaseInteractor() {
         })
     }
 
-    fun getSeasonsRef() = database.child(NODE_SEASONS).apply {
+    fun getSeasonsRef() = database.child(NODE_SEASONS)?.apply {
         keepSynced()
     }
 
     fun getSeasons(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Season>) -> Unit) {
-        getSeasonsRef().addListenerForSingleValueEvent(object : ValueEventListener {
+        getSeasonsRef()?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val seasons = ds.children.mapTo(arrayListOf()) {

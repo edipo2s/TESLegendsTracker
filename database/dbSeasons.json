@@ -28,5 +28,10 @@
     "reward": {
       "strength": "stampedesentinel"
     }
+  },
+  "2017_02": {
+    "reward": {
+      "unknown": true
+    }
   }
 }

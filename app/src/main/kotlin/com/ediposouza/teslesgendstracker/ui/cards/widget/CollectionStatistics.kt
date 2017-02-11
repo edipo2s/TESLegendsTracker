@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -19,9 +19,6 @@ import java.text.NumberFormat
  */
 class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         FrameLayout(ctx, attrs, defStyleAttr) {
-
-    val privateInteractor by lazy { PrivateInteractor() }
-    val publicInteractor by lazy { PublicInteractor() }
 
     init {
         inflate(context, R.layout.widget_collection_statistics, this)
@@ -47,17 +44,17 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
     }
 
     fun updateStatistics() {
-        updateAttributeStatistics(Attribute.STRENGTH)
-        updateAttributeStatistics(Attribute.INTELLIGENCE)
-        updateAttributeStatistics(Attribute.WILLPOWER)
-        updateAttributeStatistics(Attribute.AGILITY)
-        updateAttributeStatistics(Attribute.ENDURANCE)
-        updateAttributeStatistics(Attribute.DUAL)
-        updateAttributeStatistics(Attribute.NEUTRAL)
+        updateAttributeStatistics(CardAttribute.STRENGTH)
+        updateAttributeStatistics(CardAttribute.INTELLIGENCE)
+        updateAttributeStatistics(CardAttribute.WILLPOWER)
+        updateAttributeStatistics(CardAttribute.AGILITY)
+        updateAttributeStatistics(CardAttribute.ENDURANCE)
+        updateAttributeStatistics(CardAttribute.DUAL)
+        updateAttributeStatistics(CardAttribute.NEUTRAL)
         updateStatisticsTotal()
     }
 
-    fun updateStatistics(attr: Attribute) {
+    fun updateStatistics(attr: CardAttribute) {
         updateAttributeStatistics(attr)
         updateStatisticsTotal()
     }
@@ -76,18 +73,18 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                     rarity_statistics_willpower.soulMissing + rarity_statistics_agility.soulMissing +
                     rarity_statistics_endurance.soulMissing + rarity_statistics_dual.soulMissing +
                     rarity_statistics_neutral.soulMissing
-            val percent = if (total > 0) owned.toFloat() / total.toFloat() * 100f else 0f
+            val percent = 0f.takeIf { total == 0 } ?: owned.toFloat() / total.toFloat() * 100f
             collection_statistics_total.text = context.getString(R.string.collection_statistics_total, owned, total)
             collection_statistics_percent.text = context.getString(R.string.collection_statistics_percent, percent)
             collection_statistics_soul.text = NumberFormat.getNumberInstance().format(soulMissing)
         }
     }
 
-    private fun updateAttributeStatistics(attr: Attribute) {
-        publicInteractor.getCardsForStatistics(null, attr) {
+    private fun updateAttributeStatistics(attr: CardAttribute) {
+        PublicInteractor.getCardsForStatistics(null, attr) {
             val allAttrCards = it.groupBy { it.rarity }
             Timber.d(attr.name + allAttrCards.toString())
-            privateInteractor.getUserCollection(null, attr) { collection: Map<String, Int> ->
+            PrivateInteractor.getUserCollection(null, attr) { collection: Map<String, Int> ->
                 val userAttrCards = allAttrCards.map {
                     it.key to it.value.filter { collection.containsKey(it.shortName) }
                             .map { it to collection[it.shortName] }
@@ -113,14 +110,14 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         }
     }
 
-    private fun statisticsAttr(attr: Attribute) = when (attr) {
-        Attribute.STRENGTH -> rootView.rarity_statistics_strength
-        Attribute.INTELLIGENCE -> rootView.rarity_statistics_intelligence
-        Attribute.WILLPOWER -> rootView.rarity_statistics_willpower
-        Attribute.AGILITY -> rootView.rarity_statistics_agility
-        Attribute.ENDURANCE -> rootView.rarity_statistics_endurance
-        Attribute.NEUTRAL -> rootView.rarity_statistics_neutral
-        Attribute.DUAL -> rootView.rarity_statistics_dual
+    private fun statisticsAttr(attr: CardAttribute) = when (attr) {
+        CardAttribute.STRENGTH -> rootView.rarity_statistics_strength
+        CardAttribute.INTELLIGENCE -> rootView.rarity_statistics_intelligence
+        CardAttribute.WILLPOWER -> rootView.rarity_statistics_willpower
+        CardAttribute.AGILITY -> rootView.rarity_statistics_agility
+        CardAttribute.ENDURANCE -> rootView.rarity_statistics_endurance
+        CardAttribute.NEUTRAL -> rootView.rarity_statistics_neutral
+        CardAttribute.DUAL -> rootView.rarity_statistics_dual
     }
 
 }

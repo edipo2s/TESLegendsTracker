@@ -10,7 +10,8 @@
         android:layout_width="@dimen/deck_new_magika_costs_bar_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="0" />
+        android:text="0"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_0"
@@ -28,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_0_label"
-        android:text="1" />
+        android:text="1"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_1"
@@ -45,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_1_label"
-        android:text="2" />
+        android:text="2"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_2"
@@ -62,7 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_2_label"
-        android:text="3" />
+        android:text="3"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_3"
@@ -79,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_3_label"
-        android:text="4" />
+        android:text="4"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_4"
@@ -96,7 +101,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_4_label"
-        android:text="5" />
+        android:text="5"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_5"
@@ -113,7 +119,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_5_label"
-        android:text="6" />
+        android:text="6"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_6"
@@ -130,7 +137,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_toEndOf="@id/magika_costs_6_label"
-        android:text="7+" />
+        android:text="7+"
+        tools:ignore="HardcodedText" />
 
     <View
         android:id="@+id/magika_costs_7_plus"

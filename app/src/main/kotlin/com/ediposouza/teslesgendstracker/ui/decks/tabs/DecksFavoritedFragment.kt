@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_decks_list.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_decks_list.*
 class DecksFavoritedFragment : DecksPublicFragment() {
 
     override val dataRef = {
-        privateInteractor.getUserFavoriteDecksRef()
+        PrivateInteractor.getUserFavoriteDecksRef()
     }
 
     private val dataFilter: (FirebaseParsers.DeckFavoriteParser) -> Boolean = {
@@ -36,7 +37,7 @@ class DecksFavoritedFragment : DecksPublicFragment() {
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckFavoriteParser, viewHolder: DecksAllViewHolder) {
                 if (!TextUtils.isEmpty(itemKey)) {
-                    viewHolder.bind(itemKey, publicInteractor, privateInteractor)
+                    viewHolder.bind(itemKey)
                 }
             }
 

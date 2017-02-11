@@ -2,10 +2,10 @@
 
 buildscript {
     ext {
-        appVersionName = "0.3.3"
-        appVersionCode = 10
+        appVersionName = "0.4.0"
+        appVersionCode = 11
 
-        kotlin_version = "1.0.6"
+        kotlin_version = "1.1.0-beta-38"
         prepareToRelease = true
     }
 
@@ -19,9 +19,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0-beta4'
         classpath "com.google.gms:google-services:3.0.0"
-        classpath "com.google.firebase:firebase-plugins:1.0.4"
+        classpath "com.google.firebase:firebase-plugins:1.0.5"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.fabric.tools:gradle:1.22.0"
 

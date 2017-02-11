@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -17,10 +20,16 @@ import org.greenrobot.eventbus.Subscribe
 
 class NewDeckCardsListFragment : CardsAllFragment() {
 
+    companion object {
+
+        val EXTRA_DECK = "deckExtra"
+
+    }
+
     override val ADS_EACH_ITEMS = 20 //after 10 lines
     override val CARDS_PER_ROW = 2
 
-    private val onItemClick = { view: View, card: Card ->
+    private val onItemClick = { _: View, card: Card ->
         eventBus.post(CmdAddCard(card))
     }
 
@@ -41,10 +50,21 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         super.configRecycleView()
         cards_recycler_view.setPadding(0, 0, 0, 0)
         isFragmentSelected = true
+        arguments.getParcelable<Deck>(EXTRA_DECK)?.apply {
+            PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
+                cards.forEach { cardShortName, qtd ->
+                    val card = it.find { it.shortName == cardShortName }
+                    if (card != null) {
+                        cardsAdapter.updateCardSlot(CardSlot(card, qtd))
+                    }
+                }
+            }
+        }
     }
 
     @Subscribe
-    fun onUpdateCardSlot(cmdUpdateCardSlot: CmdUpdateCardSlot) {
+    @Suppress("unused")
+    fun onCmdUpdateCardSlot(cmdUpdateCardSlot: CmdUpdateCardSlot) {
         cardsAdapter.updateCardSlot(cmdUpdateCardSlot.cardSlot)
     }
 

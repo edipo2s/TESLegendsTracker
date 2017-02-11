@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
+import com.ediposouza.teslesgendstracker.ui.matches.tabs.ArenaFragment
 import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
@@ -52,8 +53,6 @@ class DashActivity : BaseFilterActivity(),
     private val RC_DONATE = 221
 
     private var menuItemSelected = 0
-    private val publicInteractor = PublicInteractor()
-    private val privateInteractor = PrivateInteractor()
 
     private var iabHelper: IabHelper? = null
     private var iabHelperStarted: Boolean = false
@@ -77,7 +76,7 @@ class DashActivity : BaseFilterActivity(),
             startSetup {
                 if (it.isSuccess) {
                     iabHelperStarted = true
-                    queryInventoryAsync { iabResult, inventory ->
+                    queryInventoryAsync { _, inventory ->
                         if (inventory != null) {
                             if (inventory.hasPurchase(SKU_DONATE_BASIC) || inventory.hasPurchase(SKU_DONATE_PRO)) {
                                 handleDonation()
@@ -155,8 +154,9 @@ class DashActivity : BaseFilterActivity(),
     private fun updateUserMenuInfo() {
         val user = FirebaseAuth.getInstance().currentUser
         dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
+        dash_navigation_view.menu.findItem(R.id.menu_arena)?.isEnabled = App.hasUserLogged()
         with(dash_navigation_view.getHeaderView(0)) {
-            profile_change_user.visibility = if (App.hasUserLogged()) View.VISIBLE else View.GONE
+            profile_change_user.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.GONE
             profile_name.text = user?.displayName ?: getString(R.string.unknown)
             if (user != null) {
                 val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
@@ -201,9 +201,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
             R.id.menu_articles -> showFragment(ArticlesFragment())
-            R.id.menu_arena -> {
-                true
-            }
+            R.id.menu_arena -> showFragment(ArenaFragment())
             R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_donate -> showDonateDialog()
             R.id.menu_share -> {
@@ -242,7 +240,7 @@ class DashActivity : BaseFilterActivity(),
         }
         AlertDialog.Builder(this, R.style.AppDialog)
                 .setView(dialogView)
-                .setPositiveButton(R.string.about_rate_app, { di, which ->
+                .setPositiveButton(R.string.about_rate_app, { _, _ ->
                     startActivity(Intent(Intent.ACTION_VIEW)
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
@@ -254,7 +252,7 @@ class DashActivity : BaseFilterActivity(),
 
     private fun showDonateDialog(): Boolean {
         if (iabHelperStarted) {
-            iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { iabResult, inventory ->
+            iabHelper?.queryInventoryAsync(true, listOf(SKU_DONATE_BASIC, SKU_DONATE_PRO), listOf()) { _, inventory ->
                 if (inventory != null) {
                     val skuBasic = inventory.getSkuDetails(SKU_DONATE_BASIC)
                     val skuPro = inventory.getSkuDetails(SKU_DONATE_PRO)
@@ -343,10 +341,10 @@ class DashActivity : BaseFilterActivity(),
             profile_collection.visibility = View.INVISIBLE
             profile_collection_loading.visibility = View.VISIBLE
             doAsync {
-                publicInteractor.getCardsForStatistics(null) { allAttrCards ->
+                PublicInteractor.getCardsForStatistics(null) { allAttrCards ->
                     allCardsTotal += allAttrCards.filter { it.unique }.size
                     allCardsTotal += allAttrCards.filter { !it.unique }.size * 3
-                    privateInteractor.getUserCollection(null) { userCards ->
+                    PrivateInteractor.getUserCollection(null) { userCards ->
                         userCardsTotal += userCards.filter {
                             allAttrCards.map { it.shortName }.contains(it.key)
                         }.values.sum()
@@ -368,13 +366,14 @@ class DashActivity : BaseFilterActivity(),
     }
 
     @Subscribe
-    fun onUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
+    @Suppress("unused")
+    fun onCmdUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
         dash_toolbar_title.setText(cmdUpdateTitle.title)
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-    fun onLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
+    @Suppress("unused", "UNUSED_PARAMETER", "DEPRECATION")
+    fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         updateUserMenuInfo()
         updateCollectionStatistics()
         dash_navigation_view.getHeaderView(0).profile_clear_cache_webview.clearCache(true)

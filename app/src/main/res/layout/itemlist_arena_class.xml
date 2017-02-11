@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.andexert.library.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/arena_class_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp">
+
+        <TextView
+            android:id="@+id/arena_class_name_shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:paddingStart="@dimen/text_shadow_padding"
+            android:paddingTop="@dimen/text_shadow_padding"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            tools:text="Archer" />
+
+        <TextView
+            android:id="@+id/arena_class_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            tools:text="Archer" />
+
+        <ImageView
+            android:id="@+id/arena_class_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_above="@id/arena_class_name"
+            tools:src="@drawable/arena_class_cover" />
+
+    </RelativeLayout>
+
+</com.andexert.library.RippleView>

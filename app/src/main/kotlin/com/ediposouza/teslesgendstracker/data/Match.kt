@@ -16,8 +16,8 @@ enum class MatchMode {
 
 data class MatchDeck(
 
-        val name: String,
-        val cls: Class,
+        val name: String? = null,
+        val cls: DeckClass,
         val type: DeckType,
         val deck: String? = null,
         val version: String? = null
@@ -31,7 +31,7 @@ data class MatchDeck(
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), Class.values()[source.readInt()],
+    constructor(source: Parcel) : this(source.readString(), DeckClass.values()[source.readInt()],
             DeckType.values()[source.readInt()], source.readString(), source.readString())
 
     override fun describeContents() = 0

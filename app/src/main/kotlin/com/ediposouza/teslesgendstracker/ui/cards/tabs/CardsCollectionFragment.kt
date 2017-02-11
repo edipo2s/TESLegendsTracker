@@ -20,18 +20,18 @@ import android.view.*
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.dialog_import.view.*
 import kotlinx.android.synthetic.main.dialog_import_result.view.*
@@ -55,6 +55,8 @@ class CardsCollectionFragment : CardsAllFragment() {
     private val EXPAND_CODE = 123
 
     override val isCardsCollection: Boolean = true
+
+    var isEditStarted: Boolean = false
 
     val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
@@ -116,6 +118,11 @@ class CardsCollectionFragment : CardsAllFragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() {
+        super.onResume()
+        isEditStarted = false
+    }
+
     override fun onStop() {
         if (importDialog?.isShowing ?: false) {
             importDialog?.dismiss()
@@ -134,7 +141,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
         importDialog = AlertDialog.Builder(context, R.style.AppDialog)
                 .setView(dialogView)
-                .setNegativeButton(android.R.string.cancel, { d, i ->
+                .setNegativeButton(android.R.string.cancel, { _, _ ->
                     dialogView.import_dialog_webview.stopLoading()
                     MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_CANCELLED())
                 })
@@ -149,10 +156,10 @@ class CardsCollectionFragment : CardsAllFragment() {
                         Timber.d("onPageStarted: $url")
                         val isCollectionPage = url == getString(R.string.dialog_import_legends_deck_link)
                         settings.loadsImagesAutomatically = !isCollectionPage
-                        dialogView.import_dialog_loading.visibility = if (isCollectionPage) View.VISIBLE else View.GONE
+                        dialogView.import_dialog_loading.visibility = View.VISIBLE.takeIf { isCollectionPage } ?: View.GONE
                         with(dialogView.import_dialog_webview) {
                             layoutParams = layoutParams.apply {
-                                height = if (isCollectionPage) 1 else ViewGroup.LayoutParams.WRAP_CONTENT
+                                height = 1.takeIf { isCollectionPage } ?: ViewGroup.LayoutParams.WRAP_CONTENT
                             }
                         }
                     }
@@ -185,8 +192,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun showCards() {
         val cards = filteredCards()
-        privateInteractor.getUserCollection(setFilter, currentAttr) {
-            val userCards = it
+        PrivateInteractor.getUserCollection(setFilter, currentAttr) { userCards ->
             val slots = cards.map { CardSlot(it, userCards[it.shortName] ?: 0) }
             cards_recycler_view?.itemAnimator = ScaleInAnimator()
             cardsCollectionAdapter.showCards(slots as ArrayList)
@@ -200,10 +206,20 @@ class CardsCollectionFragment : CardsAllFragment() {
     }
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
+        if (!isEditStarted) {
+            context.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
+                positiveButton(android.R.string.yes, {
+                    isEditStarted = true
+                    Toast.makeText(context, R.string.card_collection_edit_success, Toast.LENGTH_SHORT).show()
+                })
+                negativeButton(android.R.string.no, {})
+            }.show()
+            return
+        }
         val newQtd = cardSlot.qtd.inc()
-        val cardMaxQtd = if (cardSlot.card.unique) 1 else 3
-        val finalQtd = if (newQtd <= cardMaxQtd) newQtd else 0
-        privateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
+        val cardMaxQtd = 1.takeIf { cardSlot.card.unique } ?: 3
+        val finalQtd = newQtd.takeIf { newQtd <= cardMaxQtd } ?: 0
+        PrivateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
             view_statistics.updateStatistics(currentAttr)
@@ -213,13 +229,15 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     inner class HTMLViewerInterface {
 
+        @Suppress("unused")
         @JavascriptInterface
         fun showHTML(html: String) {
             doAsync {
                 val legendsSlots = Jsoup.parse(html).select("#table_view tr")?.map {
                     val cardName = it.select(".td_title_card_collection").text()
                     val cardQtd = it.select(".td_total_card_collection").text().toInt()
-                    val cardShortName = cardName.replace(" ", "").replace("-", "").replace("'", "").toLowerCase()
+                    val cardShortName = cardName.replace(" ", "").replace("-", "")
+                            .replace("'", "").replace(",", "").toLowerCase().toLowerCase()
                     cardShortName to cardQtd
                 }?.filter { it.second > 0 }?.toMap() ?: mapOf()
                 if (legendsSlots.isNotEmpty()) {
@@ -229,9 +247,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
 
         private fun importLegendDecksCards(legendsSlots: Map<String, Int>) {
-            publicInteractor.getCards(null) { allCards ->
+            PublicInteractor.getCards(null) { allCards ->
                 val legendsDecksCards = allCards.filter { legendsSlots.keys.contains(it.shortName) }.toMutableList()
-                privateInteractor.getUserCollection(null) { userSlots ->
+                PrivateInteractor.getUserCollection(null) { userSlots ->
                     val userCards = allCards.filter { userSlots.keys.contains(it.shortName) }.toMutableList()
                     val onlyInLegendsDecks = legendsDecksCards.filter { !userSlots.keys.contains(it.shortName) }
                     val onlyInUserCollection = userCards.filter { !legendsSlots.keys.contains(it.shortName) }
@@ -244,13 +262,13 @@ class CardsCollectionFragment : CardsAllFragment() {
                     }
                     onlyInLegendsDecks.forEach {
                         val qtd = legendsSlots[it.shortName] ?: 0
-                        privateInteractor.setUserCardQtd(it, qtd) {
+                        PrivateInteractor.setUserCardQtd(it, qtd) {
                             Timber.d("$qtd ${it.name} card added")
                         }
                     }
                     legendsQtdGreater.forEach {
                         val qtd = legendsSlots[it.shortName] ?: 0
-                        privateInteractor.setUserCardQtd(it, qtd) {
+                        PrivateInteractor.setUserCardQtd(it, qtd) {
                             Timber.d("${it.name} qtd updated to $qtd")
                         }
                     }
@@ -294,7 +312,7 @@ class CardsCollectionFragment : CardsAllFragment() {
             }
             AlertDialog.Builder(context, R.style.AppDialog)
                     .setView(dialogView)
-                    .setPositiveButton(android.R.string.ok, { d, i ->
+                    .setPositiveButton(android.R.string.ok, { _, _ ->
                         Handler().postDelayed({
                             eventBus.post(CmdShowCardsByAttr(currentAttr))
                         }, DateUtils.SECOND_IN_MILLIS / 2)
@@ -311,7 +329,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                                  @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
                                  val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
-        var items: ArrayList<CardSlot> = ArrayList()
+        var items: MutableList<CardSlot> = mutableListOf()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
@@ -323,7 +341,7 @@ class CardsCollectionFragment : CardsAllFragment() {
 
         override fun getDefaultItemCount(): Int = items.size
 
-        fun showCards(cardSlots: ArrayList<CardSlot>) {
+        fun showCards(cardSlots: MutableList<CardSlot>) {
             val oldItems = items
             items = cardSlots
             if (items.isEmpty() || items.minus(oldItems).isEmpty()) {
@@ -365,7 +383,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                 2 -> R.drawable.ic_qtd_two
                 else -> R.drawable.ic_qtd_three
             })
-            itemView.card_collection_qtd.visibility = if (cardSlot.qtd == 1) View.GONE else View.VISIBLE
+            itemView.card_collection_qtd.visibility = View.GONE.takeIf { cardSlot.qtd == 1 } ?: View.VISIBLE
         }
 
     }

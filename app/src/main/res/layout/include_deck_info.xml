@@ -8,6 +8,7 @@
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <ScrollView
+        android:id="@+id/deck_details_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -139,6 +140,29 @@
                 android:layout_below="@id/deck_details_last_update_label"
                 android:drawableStart="@drawable/ic_updated_at"
                 tools:text="28/11/2016 13:55" />
+
+            <TextView
+                android:id="@+id/deck_details_updates_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deck_details_update_at"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/deck_details_updates"
+                android:textColor="@android:color/white" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/deck_details_updates"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/deck_details_updates_label"
+                android:padding="@dimen/default_margin"
+                android:fadeScrollbars="false"
+                android:scrollbarSize="@dimen/small_margin"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/itemlist_deck_update" />
 
         </RelativeLayout>
 

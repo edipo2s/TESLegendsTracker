@@ -37,8 +37,7 @@ class ArticlesNewsFragment : BaseFragment() {
     private val ADS_EACH_ITEMS = 8
     private val NEWS_PAGE_SIZE = 15
 
-    private val publicInteractor by lazy { PublicInteractor() }
-    private val newsRef = { publicInteractor.getNewsRef() }
+    private val newsRef = { PublicInteractor.getNewsRef() }
     private var currentType: ArticleCategory? = null
     private var menuCategory: MenuItem? = null
 
@@ -150,7 +149,7 @@ class ArticlesNewsFragment : BaseFragment() {
             context.runOnUiThread {
                 val savedNewsUuids = newsAdapter.mSnapshots.getItems().map { it.first }
                 latestNews.filter { !savedNewsUuids.contains(it.uuidDate) }.forEach {
-                    publicInteractor.saveNews(it) {
+                    PublicInteractor.saveNews(it) {
                         Timber.i("Latest news ${it.uuidDate} saved")
                     }
                 }

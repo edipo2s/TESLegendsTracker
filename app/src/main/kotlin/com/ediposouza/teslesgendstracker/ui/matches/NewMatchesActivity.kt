@@ -41,7 +41,7 @@ class NewMatchesActivity : BaseActivity() {
         private val EXTRA_DECK = "deckExtra"
         private val EXTRA_MATCH_MODE = "modeExtra"
 
-        fun newIntent(context: Context, deckName: String?, deckCls: Class, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
+        fun newIntent(context: Context, deckName: String?, deckCls: DeckClass, deckType: DeckType, mode: MatchMode, deck: Deck?): Intent {
             val name = deckName ?: deckCls.name.toLowerCase().capitalize()
             return context.intentFor<NewMatchesActivity>(
                     EXTRA_DECK_NAME to name,
@@ -56,9 +56,8 @@ class NewMatchesActivity : BaseActivity() {
 
     }
 
-    private val privateInteractor by lazy { PrivateInteractor() }
     private val deckName by lazy { intent.getStringExtra(EXTRA_DECK_NAME) }
-    private val deckCls by lazy { Class.values()[intent.getIntExtra(EXTRA_DECK_CLASS, 0)] }
+    private val deckCls by lazy { DeckClass.values()[intent.getIntExtra(EXTRA_DECK_CLASS, 0)] }
     private val deckType by lazy { DeckType.values()[intent.getIntExtra(EXTRA_DECK_TYPE, 0)] }
     private val mode by lazy { MatchMode.values()[intent.getIntExtra(EXTRA_MATCH_MODE, 0)] }
     private val deck: Deck? by lazy {
@@ -122,14 +121,14 @@ class NewMatchesActivity : BaseActivity() {
         new_matches_class_attr2.setImageResource(deckCls.attr2.imageRes)
         new_matches_deck_cardlist.editMode = true
         new_matches_deck_cardlist.showDeck(deck, false, false, false)
-        new_matches_deck_cardlist.visibility = if (deck != null) View.VISIBLE else View.GONE
-        new_matches_space_start.visibility = if (deck != null) View.GONE else View.VISIBLE
-        new_matches_space_end.visibility = if (deck != null) View.GONE else View.VISIBLE
-        new_matches_cards_remains.visibility = if (deck != null) View.VISIBLE else View.GONE
-        new_matches_legend.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank_label.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank.visibility = if (mode == MatchMode.RANKED) View.VISIBLE else View.GONE
-        new_matches_rank.setText(if (mode == MatchMode.RANKED) "" else "0")
+        new_matches_deck_cardlist.visibility = View.VISIBLE.takeIf { deck != null } ?: View.GONE
+        new_matches_space_start.visibility = View.GONE.takeIf { deck != null } ?: View.VISIBLE
+        new_matches_space_end.visibility = View.GONE.takeIf { deck != null } ?: View.VISIBLE
+        new_matches_cards_remains.visibility = View.VISIBLE.takeIf { deck != null } ?: View.GONE
+        new_matches_legend.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank_label.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank.visibility = View.VISIBLE.takeIf { mode == MatchMode.RANKED } ?: View.GONE
+        new_matches_rank.setText("".takeIf { mode == MatchMode.RANKED } ?: "0")
         new_matches_opt_type_spinner.adapter = ArrayAdapter<String>(this,
                 R.layout.widget_spinner_white_text, DeckType.values()
                 .filter { it != DeckType.ARENA }.map { it.name.toLowerCase().capitalize() }).apply {
@@ -172,10 +171,9 @@ class NewMatchesActivity : BaseActivity() {
         val myDeckCls = deck?.cls ?: deckCls
         val myDeckType = deck?.type ?: deckType
         val myDeckUpdates = deck?.updates ?: listOf()
-        val myDeckVersion = if (myDeckUpdates.isEmpty()) "v1 (${deck?.createdAt})" else
+        val myDeckVersion = "v1 (${deck?.createdAt})".takeIf { myDeckUpdates.isEmpty() } ?:
             "v${myDeckUpdates.size + 1} (${myDeckUpdates.last().date.toLocalDate()}"
-        val optDeckName = new_matches_opt_name.text.toString()
-        val optDeckCls = Class.values()[new_matches_opt_class_spinner.selectedItemPosition]
+        val optDeckCls = DeckClass.values()[new_matches_opt_class_spinner.selectedItemPosition]
         val optDeckType = DeckType.values()[new_matches_opt_type_spinner.selectedItemPosition]
         val currentSeason = LocalDate.now().format(DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
         val currentRank = new_matches_rank.text.toString()
@@ -187,12 +185,11 @@ class NewMatchesActivity : BaseActivity() {
         val legendRank = new_matches_legend.isChecked
         val newMatch = Match(LocalDateTime.now().withNano(0).toString(), new_matches_first.isChecked,
                 MatchDeck(deck?.name ?: deckName, myDeckCls, myDeckType, deck?.uuid, myDeckVersion),
-                MatchDeck(optDeckName, optDeckCls, optDeckType),
+                MatchDeck(cls = optDeckCls, type = optDeckType),
                 mode, currentSeason, currentRank.toInt(), legendRank, win)
-        privateInteractor.saveMatch(newMatch) {
+        PrivateInteractor.saveMatch(newMatch) {
             setResult(Activity.RESULT_OK)
             new_matches_first.isChecked = false
-            new_matches_opt_name.setText("")
             new_matches_opt_class_spinner.setSelection(0)
             new_matches_opt_type_spinner.setSelection(0)
             new_matches_deck_cardlist.showDeck(deck, false, false, false)
