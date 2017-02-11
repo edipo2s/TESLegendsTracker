@@ -31,9 +31,10 @@
     <string name="menu_only_private">Solo privado</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_unfavorite">Desfavorable</string>
-    <string name="menu_like">Me gusta</string>
-    <string name="menu_unlike">Me no gusta</string>
+    <string name="menu_like">Gusta</string>
+    <string name="menu_unlike">No gusta</string>
     <string name="menu_delete">Borrar</string>
+    <string name="menu_edit">Editar</string>
     <string name="menu_done">Hecho</string>
     <string name="menu_percent">Por ciento</string>
     <string name="menu_import">Importar de Legends-Decks</string>
@@ -120,6 +121,7 @@
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
     <string name="deck_details_last_update_format">%1$s at %2$s</string>
+    <string name="deck_details_updates">Actualizaciones</string>
     <string name="deck_deleted">Barajo deleted!</string>
     <string name="deck_exit_confirm">Press back again to exit without save</string>
     <string name="deck_comments_text">Comments</string>
@@ -130,12 +132,16 @@
     <string name="new_deck_title">New Barajo</string>
     <string name="new_deck_class_title">New %s Barajo</string>
     <string name="new_deck_save_dialog_title">Barajo Info</string>
+    <string name="new_deck_update_dialog_title">¿Guardar cambios en la Barajo?</string>
     <string name="new_deck_save_dialog_name_label">Nombre</string>
     <string name="new_deck_save_dialog_type_label">Tipo</string>
     <string name="new_deck_save_dialog_public_label">Hacer la barajo público</string>
     <string name="new_deck_save_dialog_save">Salvar</string>
+    <string name="new_deck_save_dialog_update">Actualizar</string>
     <string name="new_deck_save_as_public">Barajo salvo como público</string>
     <string name="new_deck_save_as_private">Barajo salvo como privado</string>
+    <string name="new_deck_updated_as_public">Barajo actualizado como público</string>
+    <string name="new_deck_updated_as_private">Barajo actualizado como privado</string>
     <string name="new_deck_save_error_incomplete">Completa tu cubierta antes de guardarla</string>
 
     <string name="match_win">Venceu</string>

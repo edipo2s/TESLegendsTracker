@@ -62,6 +62,11 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATCH, action.patch)
                     putString(action.PARAM_PRIVATE, action.private.toString())
                 }
+                is MetricAction.ACTION_NEW_DECK_UPDATE -> {
+                    putString(action.PARAM_TYPE, action.type)
+                    putString(action.PARAM_PATCH, action.patch)
+                    putString(action.PARAM_PRIVATE, action.private.toString())
+                }
                 is MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE ->
                     putBoolean(action.PARAM_CHECKED, action.checked)
                 is MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE ->

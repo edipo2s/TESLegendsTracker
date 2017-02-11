@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.DividerItemDecoration
@@ -24,12 +25,13 @@ import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
-import com.ediposouza.teslesgendstracker.data.Deck
-import com.ediposouza.teslesgendstracker.data.DeckComment
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
+import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
@@ -39,6 +41,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.include_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
+import kotlinx.android.synthetic.main.itemlist_deck_update.view.*
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -195,7 +198,7 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(if (deckOwned) R.menu.menu_delete else R.menu.menu_like, menu)
+        menuInflater.inflate(if (deckOwned) R.menu.menu_edit_delete else R.menu.menu_like, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
         return super.onCreateOptionsMenu(menu)
@@ -235,6 +238,12 @@ class DeckActivity : BaseActivity() {
                 }.show()
                 return true
             }
+            R.id.menu_edit -> {
+                val anim = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+                startActivity(intentFor<NewDeckActivity>(NewDeckActivity.DECK_EXTRA to deck), anim.toBundle())
+                finish()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -267,6 +276,7 @@ class DeckActivity : BaseActivity() {
         deck_details_update_at.text = getString(R.string.deck_details_last_update_format, updateDate, updateTime)
         deck_details_cardlist.showDeck(deck, false)
         configDeckComments()
+        configDeckUpdates()
     }
 
     private fun configDeckComments() {
@@ -292,6 +302,18 @@ class DeckActivity : BaseActivity() {
             addItemDecoration(DividerItemDecoration(this@DeckActivity, DividerItemDecoration.VERTICAL))
         }
         deck_comment_qtd.text = numberInstance.format(deck.comments.size)
+    }
+
+    private fun configDeckUpdates() {
+        deck_details_updates_label.visibility = View.VISIBLE.takeIf { deck.updates.isNotEmpty() } ?: View.GONE
+        if (deck.updates.isNotEmpty()) {
+            with(deck_details_updates) {
+                adapter = DeckUpdateAdapter(deck.updates.reversed(), deck.cls)
+                layoutManager = LinearLayoutManager(this@DeckActivity)
+                setHasFixedSize(true)
+                postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
+            }
+        }
     }
 
     private fun loadDeckRemoteInfo() {
@@ -407,6 +429,52 @@ class DeckActivity : BaseActivity() {
                     }
                 }
             }
+        }
+
+    }
+
+    class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckUpdateViewHolder {
+            return DeckUpdateViewHolder(parent?.inflate(R.layout.itemlist_deck_update))
+        }
+
+        override fun onBindViewHolder(holder: DeckUpdateViewHolder?, position: Int) {
+            holder?.bind(items[position], cls)
+        }
+
+        override fun getItemCount(): Int = items.size
+
+    }
+
+    class DeckUpdateViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+
+        fun bind(deckUpdate: DeckUpdate, cls: DeckClass) {
+            with(itemView) {
+                val updateDate = deckUpdate.date.toLocalDate()
+                val updateTime = deckUpdate.date.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
+                deck_update_title.text = context.getString(R.string.deck_details_last_update_format, updateDate, updateTime)
+                PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
+                    with(deck_update_changes) {
+                        val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
+                        adapter = DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
+                            updateMode = true
+                            showDeck(deckUpdate.changes.map {
+                                val cardQtd = it
+                                CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
+                            })
+                        }
+                        layoutManager = LinearLayoutManager(context)
+                        setHasFixedSize(true)
+                    }
+                }
+            }
+        }
+
+        private fun showExpandedCard(context: Context, card: Card, view: View) {
+            val transitionName = context.getString(R.string.card_transition_name)
+            ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
         }
 
     }

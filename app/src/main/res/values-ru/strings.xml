@@ -34,6 +34,7 @@
     <string name="menu_like">подобно</string>
     <string name="menu_unlike">В отличие от</string>
     <string name="menu_delete">Удалить</string>
+    <string name="menu_edit">редактировать</string>
     <string name="menu_done">Готово</string>
     <string name="menu_percent">Процент</string>
     <string name="menu_import">Импорт из Legends-Decks</string>
@@ -120,6 +121,7 @@
     <string name="deck_details_create_at">Создать в</string>
     <string name="deck_details_last_update">Последнее обновление</string>
     <string name="deck_details_last_update_format">%1$s в %2$s</string>
+    <string name="deck_details_updates">Обновления</string>
     <string name="deck_deleted">Палуба удален!</string>
     <string name="deck_exit_confirm">Нажмите снова, чтобы выйти без сохранения</string>
     <string name="deck_comments_text">Комментарии</string>
@@ -130,12 +132,16 @@
     <string name="new_deck_title">Новая палуба</string>
     <string name="new_deck_class_title">Новая %s палуба</string>
     <string name="new_deck_save_dialog_title">Палуба информация</string>
+    <string name="new_deck_update_dialog_title">Сохранить изменения палубе?</string>
     <string name="new_deck_save_dialog_name_label">имя</string>
     <string name="new_deck_save_dialog_type_label">Тип</string>
     <string name="new_deck_save_dialog_public_label">Сделать палубе общественности</string>
     <string name="new_deck_save_dialog_save">Сохранить</string>
+    <string name="new_deck_save_dialog_update">Обновить</string>
     <string name="new_deck_save_as_public">Палуба сохранены как общественного</string>
     <string name="new_deck_save_as_private">Палуба сохранены как частные</string>
+    <string name="new_deck_updated_as_public">Палуба обновляется общественности</string>
+    <string name="new_deck_updated_as_private">Палуба обновление как частные</string>
     <string name="new_deck_save_error_incomplete">Заполните, пожалуйста, вашу палубу, прежде чем сохранить его</string>
 
     <string name="match_win">Выиграть</string>

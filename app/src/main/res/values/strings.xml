@@ -58,6 +58,7 @@
     <string name="menu_like">Like</string>
     <string name="menu_unlike">Unlike</string>
     <string name="menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
     <string name="menu_done">Done</string>
     <string name="menu_percent">Percent</string>
     <string name="menu_import">Import from Legends-Decks</string>
@@ -159,6 +160,7 @@
     <string name="deck_details_create_at">Create at</string>
     <string name="deck_details_last_update">Last update</string>
     <string name="deck_details_last_update_format">%1$s at %2$s</string>
+    <string name="deck_details_updates">Updates</string>
     <string name="deck_deleted">Deck deleted!</string>
     <string name="deck_exit_confirm">Press back again to exit without save</string>
     <string name="deck_comments_text">Comments</string>
@@ -176,13 +178,17 @@
     <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
     <string name="new_deck_card_list_arena_qtd" translatable="false">%1$02d/30</string>
     <string name="new_deck_save_dialog_title">Deck Info</string>
+    <string name="new_deck_update_dialog_title">Save Deck Changes?</string>
     <string name="new_deck_save_dialog_name_label">Name</string>
     <string name="new_deck_save_dialog_type_label">Type</string>
     <string name="new_deck_save_dialog_patch_label" translatable="false">Patch</string>
     <string name="new_deck_save_dialog_public_label">Make deck public</string>
     <string name="new_deck_save_dialog_save">Save</string>
+    <string name="new_deck_save_dialog_update">Update</string>
     <string name="new_deck_save_as_public">Deck saved as Public</string>
     <string name="new_deck_save_as_private">Deck saved as Private</string>
+    <string name="new_deck_updated_as_public">Deck updated as Public</string>
+    <string name="new_deck_updated_as_private">Deck updated as Private</string>
     <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
 
     <string name="match_vs" translatable="false">Vs</string>

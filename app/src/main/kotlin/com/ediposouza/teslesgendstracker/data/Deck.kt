@@ -163,6 +163,12 @@ data class Deck(
         dest?.writeList(comments)
     }
 
+    fun update(deckName: String, deckPrivate: Boolean, deckTypeSelected: DeckType, deckCls: DeckClass,
+               deckSoulCost: Int, deckPatchUuid: String, deckCards: Map<String, Int>): Deck {
+        return Deck(uuid, deckName, owner, deckPrivate, deckTypeSelected, deckCls, deckSoulCost,
+                createdAt, LocalDateTime.now(), deckPatchUuid, likes, views, deckCards, updates, comments)
+    }
+
     override fun toString(): String {
         return "Deck(id='$uuid', name='$name', owner='$owner', private=$private, type=$type, cls=$cls, cost=$cost, createdAt=$createdAt, updatedAt=$updatedAt, patch='$patch', likes=$likes, views=$views, cards=$cards, updates=$updates, comments=$comments)"
     }

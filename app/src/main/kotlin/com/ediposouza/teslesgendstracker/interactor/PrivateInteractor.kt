@@ -26,6 +26,7 @@ object PrivateInteractor : BaseInteractor() {
 
     private val KEY_DECK_OWNER = "owner"
     private val KEY_DECK_LIKES = "likes"
+    private val KEY_DECK_CARDS = "cards"
     private val KEY_DECK_COST = "cost"
     private val KEY_DECK_UPDATES = "updates"
     private val KEY_DECK_COMMENTS = "comments"
@@ -382,7 +383,8 @@ object PrivateInteractor : BaseInteractor() {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 if (deck.private == oldPrivate)
-                    child(deck.uuid).updateChildren(FirebaseParsers.DeckParser().fromDeck(deck).toDeckUpdateMap()).addOnCompleteListener({
+                    child(deck.uuid).updateChildren(FirebaseParsers.DeckParser().fromDeck(deck)
+                            .toDeckUpdateMap()).addOnCompleteListener({
                         Timber.d(it.toString())
                         if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
                     })
@@ -395,17 +397,19 @@ object PrivateInteractor : BaseInteractor() {
         }
     }
 
-    fun updateDeckCards(deck: Deck, oldCards: Map<String, Int>, cost: Int, onSuccess: () -> Unit,
-                        onError: ((e: Exception?) -> Unit)? = null) {
+    fun updateDeckCards(deck: Deck, oldCards: Map<String, Int>, cost: Int, onError: ((e: Exception?) -> Unit)? = null,
+                        onSuccess: () -> Unit) {
         dbUser()?.apply {
             with(if (deck.private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
                 val updateKey = LocalDateTime.now().withNano(0).toString()
-                val cardsRem = oldCards.filter { !deck.cards.keys.contains(it.key) }.mapValues { it.key to it.value * -1 }
-                val cardsDiff = deck.cards.mapValues { it.key to it.value.minus(oldCards[it.key] ?: 0) }.plus(cardsRem)
+                val cardsRem = oldCards.filter { !deck.cards.keys.contains(it.key) }.mapValues { it.value * -1 }
+                val cardsDiff = deck.cards.mapValues { it.value.minus(oldCards[it.key] ?: 0) }
+                        .filter { it.value != 0 }.plus(cardsRem)
                 child(deck.uuid).child(KEY_DECK_UPDATES).child(updateKey).setValue(cardsDiff).addOnCompleteListener({
                     Timber.d(it.toString())
                     if (it.isSuccessful) onSuccess.invoke() else onError?.invoke(it.exception)
                 })
+                child(deck.uuid).child(KEY_DECK_CARDS).setValue(deck.cards)
                 child(deck.uuid).child(KEY_DECK_COST).setValue(cost)
             }
         }
