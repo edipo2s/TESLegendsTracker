@@ -31,7 +31,6 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
-import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
@@ -455,19 +454,23 @@ class DeckActivity : BaseActivity() {
                 val updateTime = deckUpdate.date.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
                 deck_update_title.text = context.getString(R.string.deck_details_last_update_format, updateDate, updateTime)
                 PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
-                    with(deck_update_changes) {
-                        val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
-                        adapter = DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
-                            updateMode = true
-                            showDeck(deckUpdate.changes.map {
-                                val cardQtd = it
-                                CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
-                            })
-                        }
-                        layoutManager = LinearLayoutManager(context)
-                        setHasFixedSize(true)
-                    }
+                    configUpdateCardsChanges(cards, deckUpdate)
                 }
+            }
+        }
+
+        private fun DeckUpdateViewHolder.configUpdateCardsChanges(cards: List<Card>, deckUpdate: DeckUpdate) {
+            with(itemView.deck_update_changes) {
+                val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
+                adapter = com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
+                    updateMode = true
+                    showDeck(deckUpdate.changes.map {
+                        val cardQtd = it
+                        com.ediposouza.teslesgendstracker.data.CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
+                    })
+                }
+                layoutManager = android.support.v7.widget.LinearLayoutManager(context)
+                setHasFixedSize(true)
             }
         }
 
