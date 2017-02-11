@@ -194,7 +194,7 @@ abstract class FirebaseParsers {
 
         companion object {
 
-            private const val KEY_MATCH_DECK_CLASS = "cls"
+            public const val KEY_MATCH_DECK_CLASS = "cls"
             private const val KEY_MATCH_DECK_DECK_UUID = "deck"
             private const val KEY_MATCH_DECK_NAME = "name"
             private const val KEY_MATCH_DECK_TYPE = "type"

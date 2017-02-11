@@ -207,5 +207,6 @@
     <string name="new_arena_draft_tip">Toque largo en la tarjeta o toque en Flecha para elegir su selección</string>
     <string name="new_arena_draft_pick">Seleccione una Carta</string>
     <string name="new_arena_draft_synergy">Sinergia con: \n%s</string>
+    <string name="new_arena_draft_remove_card">Retirar Carta?</string>
 
 </resources>

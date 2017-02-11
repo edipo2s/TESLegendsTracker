@@ -134,7 +134,7 @@ class NewArenaDraftFragment : BaseFragment() {
                 LocalDateTime.now(), "", listOf(), 0, draftCards, listOf(), listOf())
         startActivity(NewMatchesActivity.newIntent(context, null, selectedClass, DeckType.OTHER, MatchMode.ARENA, deck))
         ActivityCompat.finishAfterTransition(activity)
-//        MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
+        MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck, true))
     }
 
 }

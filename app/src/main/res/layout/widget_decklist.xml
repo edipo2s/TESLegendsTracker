@@ -50,6 +50,26 @@
             android:textColor="@android:color/white"
             tools:text="7" />
 
+        <TextView
+            android:id="@+id/decklist_class_prophecy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_big"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="P" />
+
+        <TextView
+            android:id="@+id/decklist_class_prophecy_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="5" />
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

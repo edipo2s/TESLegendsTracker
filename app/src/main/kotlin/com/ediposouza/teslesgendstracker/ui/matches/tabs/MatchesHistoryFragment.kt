@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.data.Match
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
@@ -27,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_matches_history.*
 import kotlinx.android.synthetic.main.itemlist_match_history.view.*
 import kotlinx.android.synthetic.main.itemlist_match_history_section.view.*
 import org.greenrobot.eventbus.Subscribe
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
@@ -79,7 +79,10 @@ open class MatchesHistoryFragment : BaseFragment() {
 
             override fun onBindHeaderViewHolder(holder: MatchViewHolder?, position: Int) {
                 if (position <= getContentCount()) {
-                    holder?.bindSection(LocalDateTime.parse(getItemKey(position)).toLocalDate())
+                    val header = LocalDateTime.parse(getItemKey(position)).toLocalDate()
+                            .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
+                    holder?.bindSection(header.takeIf { currentMatchMode != MatchMode.ARENA } ?:
+                            "${getPlayerClassName(position).name.toLowerCase().capitalize()} - $header")
                 }
             }
 
@@ -88,11 +91,18 @@ open class MatchesHistoryFragment : BaseFragment() {
                     return -1
                 }
                 val date = LocalDateTime.parse(getItemKey(position)).toLocalDate()
-                return date.year + date.monthValue + date.dayOfMonth.toLong()
+                val headerValue = date.year + date.monthValue + date.dayOfMonth.toLong()
+                return headerValue.takeIf { currentMatchMode != MatchMode.ARENA } ?:
+                        headerValue + getPlayerClassName(position).ordinal
+            }
+
+            fun getPlayerClassName(position: Int): DeckClass {
+                val clsPos = getItem(position).player.get(FirebaseParsers.MatchParser.KEY_MATCH_DECK_CLASS)
+                return DeckClass.values()[clsPos.toString().toInt()]
             }
 
         }.apply {
-            registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+            registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                 override fun onChanged() {
                     sectionDecoration.invalidateHeaders()
                 }
@@ -197,8 +207,8 @@ open class MatchesHistoryFragment : BaseFragment() {
             }.show()
         }
 
-        fun bindSection(date: LocalDate) {
-            itemView.match_history_date.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
+        fun bindSection(header: String) {
+            itemView.match_history_date.text = header
         }
 
     }

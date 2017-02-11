@@ -95,7 +95,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_PRIVATE = "Private"
     }
 
-    class ACTION_NEW_DECK_UPDATE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckUpdated") {
+    class ACTION_DECK_UPDATE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckUpdate") {
         val PARAM_TYPE = "Type"
         val PARAM_PATCH = "Patch"
         val PARAM_PRIVATE = "Private"
@@ -125,9 +125,10 @@ sealed class MetricAction(val name: String) {
         val PARAM_CLASS = "Class"
     }
 
-    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?) : MetricAction("MatchStatisticsClass") {
+    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?, val fromArena: Boolean = false) : MetricAction("NewMatch") {
         val PARAM_DECK = "Deck"
         val PARAM_DECK_VALUE_OTHER = "Other"
+        val PARAM_FROM_ARENA = "FromArena"
     }
 
     class ACTION_NEW_MATCH_SAVE(val myDeckCls: DeckClass, val myDeckType: DeckType, val optDeckCls: DeckClass,

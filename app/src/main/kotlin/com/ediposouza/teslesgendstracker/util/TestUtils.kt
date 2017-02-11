@@ -7,6 +7,8 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.FormatStyle
 import timber.log.Timber
 
 /**
@@ -74,7 +76,8 @@ object TestUtils {
         }
 
         override fun onBindHeaderViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
-            holder?.bindSection(LocalDateTime.parse(items[position].uuid).toLocalDate())
+            holder?.bindSection(LocalDateTime.parse(items[position].uuid).toLocalDate()
+                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)))
         }
 
         override fun getHeaderId(position: Int): Long {
