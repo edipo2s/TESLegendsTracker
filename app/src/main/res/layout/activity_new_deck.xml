@@ -80,7 +80,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/new_deck_attr_filter"
                 android:layout_marginEnd="@dimen/small_margin"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="@dimen/large_margin"
                 android:layout_toEndOf="@id/new_deck_fragment_cards"
                 app:layout_widthPercent="35%" />
 

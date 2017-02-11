@@ -6,9 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.data.Match
 import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
+import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
@@ -26,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_matches_history.*
 import kotlinx.android.synthetic.main.itemlist_match_history.view.*
 import kotlinx.android.synthetic.main.itemlist_match_history_section.view.*
 import org.greenrobot.eventbus.Subscribe
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
@@ -34,21 +35,26 @@ import org.threeten.bp.format.FormatStyle
 /**
  * Created by EdipoSouza on 1/3/17.
  */
-class MatchesHistoryFragment : BaseFragment() {
+open class MatchesHistoryFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 20 //after 10 lines
     val MATCH_PAGE_SIZE = 15
 
-    private var currentMatchMode = MatchMode.RANKED
-    private var currentSeason: Season? = null
+    protected var currentMatchMode = MatchMode.RANKED
 
+    protected var currentSeason: Season? = null
+
+    private val dataRef = {
+        PrivateInteractor.getUserMatchesRef()?.
+                orderByChild(BaseInteractor.NODE_MATCHES_MODE)?.equalTo(currentMatchMode.ordinal.toDouble())
+    }
     private val dataFilter: (FirebaseParsers.MatchParser) -> Boolean = {
-        it.mode == currentMatchMode.ordinal && (it.season == currentSeason?.uuid || currentSeason == null)
+        it.season == currentSeason?.uuid || currentSeason == null
     }
 
-    private val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
+    protected val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
         object : BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
-                FirebaseParsers.MatchParser::class.java, { PrivateInteractor().getUserMatchesRef() },
+                FirebaseParsers.MatchParser::class.java, dataRef,
                 MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter),
                 StickyRecyclerHeadersAdapter<MatchViewHolder> {
 
@@ -73,7 +79,10 @@ class MatchesHistoryFragment : BaseFragment() {
 
             override fun onBindHeaderViewHolder(holder: MatchViewHolder?, position: Int) {
                 if (position <= getContentCount()) {
-                    holder?.bindSection(LocalDateTime.parse(getItemKey(position)).toLocalDate())
+                    val header = LocalDateTime.parse(getItemKey(position)).toLocalDate()
+                            .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
+                    holder?.bindSection(header.takeIf { currentMatchMode != MatchMode.ARENA } ?:
+                            "${getPlayerClassName(position).name.toLowerCase().capitalize()} - $header")
                 }
             }
 
@@ -82,11 +91,18 @@ class MatchesHistoryFragment : BaseFragment() {
                     return -1
                 }
                 val date = LocalDateTime.parse(getItemKey(position)).toLocalDate()
-                return date.year + date.monthValue + date.dayOfMonth.toLong()
+                val headerValue = date.year + date.monthValue + date.dayOfMonth.toLong()
+                return headerValue.takeIf { currentMatchMode != MatchMode.ARENA } ?:
+                        headerValue + getPlayerClassName(position).ordinal
+            }
+
+            fun getPlayerClassName(position: Int): DeckClass {
+                val clsPos = getItem(position).player.get(FirebaseParsers.MatchParser.KEY_MATCH_DECK_CLASS)
+                return DeckClass.values()[clsPos.toString().toInt()]
             }
 
         }.apply {
-            registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+            registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                 override fun onChanged() {
                     sectionDecoration.invalidateHeaders()
                 }
@@ -125,47 +141,53 @@ class MatchesHistoryFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterMode(cmdFilterMode: CmdFilterMode) {
+    @Suppress("unused")
+    fun onCmdFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
         if (isFragmentSelected) {
-            matchesAdapter.reset()
-            matches_recycler_view.scrollToPosition(0)
+            updateMatchList()
         }
     }
 
     @Subscribe
-    fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
+    @Suppress("unused")
+    fun onCmdFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
         if (isFragmentSelected) {
-            matchesAdapter.reset()
-            matches_recycler_view.scrollToPosition(0)
+            updateMatchList()
         }
     }
 
     @Subscribe
-    fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
+    @Suppress("unused", "UNUSED_PARAMETER")
+    fun onCmdUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         if (isFragmentSelected) {
             matchesAdapter.reset()
         }
+    }
+
+    protected fun updateMatchList() {
+        matchesAdapter.reset()
+        matches_recycler_view.scrollToPosition(0)
     }
 
     class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(match: Match, onDelete: () -> Unit) {
             with(itemView) {
-                match_history_first.visibility = if (match.first) View.VISIBLE else View.INVISIBLE
+                match_history_first.visibility = View.VISIBLE.takeIf { match.first } ?: View.INVISIBLE
                 match_history_player_class_attr1.setImageResource(match.player.cls.attr1.imageRes)
                 match_history_player_class_attr2.setImageResource(match.player.cls.attr2.imageRes)
                 match_history_opponent_class_attr1.setImageResource(match.opponent.cls.attr1.imageRes)
                 match_history_opponent_class_attr2.setImageResource(match.opponent.cls.attr2.imageRes)
-                val resultColor = if (match.win) R.color.green_200 else R.color.red_100
-                val resultText = if (match.win) R.string.match_win else R.string.match_loss
+                val resultColor = R.color.green_200.takeIf { match.win } ?: R.color.red_100
+                val resultText = R.string.match_win.takeIf { match.win } ?: R.string.match_loss
                 match_history_result.setTextColor(ContextCompat.getColor(context, resultColor))
                 match_history_result.text = context.getString(resultText)
-                match_history_legend.visibility = if (match.legend) View.VISIBLE else View.INVISIBLE
-                val rankText = if (match.legend) R.string.match_rank_legend else R.string.match_rank_normal
+                match_history_legend.visibility = View.VISIBLE.takeIf { match.legend } ?: View.INVISIBLE
+                val rankText = R.string.match_rank_legend.takeIf { match.legend } ?: R.string.match_rank_normal
                 match_history_rank.text = context.getString(rankText, match.rank)
-                match_history_rank.visibility = if (match.mode == MatchMode.RANKED) View.VISIBLE else View.INVISIBLE
+                match_history_rank.visibility = View.VISIBLE.takeIf { match.mode == MatchMode.RANKED } ?: View.INVISIBLE
                 match_history_delete.setOnClickListener {
                     onHistoryClick(itemView, match, onDelete)
                 }
@@ -177,7 +199,7 @@ class MatchesHistoryFragment : BaseFragment() {
             val title = view.context.getString(R.string.match_history_delete, opponentClass)
             view.context.alertThemed(title, view.context.getString(R.string.confirm_message), R.style.AppDialog) {
                 positiveButton(android.R.string.yes, {
-                    PrivateInteractor().deleteMatch(match) {
+                    PrivateInteractor.deleteMatch(match) {
                         onDelete.invoke()
                     }
                 })
@@ -185,8 +207,8 @@ class MatchesHistoryFragment : BaseFragment() {
             }.show()
         }
 
-        fun bindSection(date: LocalDate) {
-            itemView.match_history_date.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
+        fun bindSection(header: String) {
+            itemView.match_history_date.text = header
         }
 
     }

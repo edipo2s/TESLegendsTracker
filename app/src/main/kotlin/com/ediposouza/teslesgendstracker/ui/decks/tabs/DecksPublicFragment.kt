@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
 import com.ediposouza.teslesgendstracker.data.Deck
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -39,9 +39,7 @@ open class DecksPublicFragment : BaseFragment() {
     val DECK_PAGE_SIZE = 8
 
     protected var searchFilter: String? = null
-    protected var currentClasses = Class.values()
-    protected val publicInteractor = PublicInteractor()
-    protected val privateInteractor = PrivateInteractor()
+    protected var currentClasses = DeckClass.values()
 
     private val nameTransitionName: String by lazy { getString(R.string.deck_name_transition_name) }
     private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
@@ -51,7 +49,7 @@ open class DecksPublicFragment : BaseFragment() {
     open protected val isDeckPrivate: Boolean = false
 
     open protected val dataRef = {
-        publicInteractor.getPublicDecksRef()
+        PublicInteractor.getPublicDecksRef()
     }
 
     private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
@@ -60,7 +58,7 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     val itemClick = { view: View, deck: Deck ->
-        PrivateInteractor().getUserFavoriteDecks(deck.cls) {
+        PrivateInteractor.getUserFavoriteDecks(deck.cls) {
             val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
@@ -74,7 +72,7 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     val itemLongClick = {
-        view: View, deck: Deck ->
+        _: View, _: Deck ->
         true
     }
 
@@ -88,7 +86,7 @@ open class DecksPublicFragment : BaseFragment() {
             }
 
             override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.DeckParser, viewHolder: DecksAllViewHolder) {
-                viewHolder.bind(model.toDeck(itemKey, isDeckPrivate), privateInteractor)
+                viewHolder.bind(model.toDeck(itemKey, isDeckPrivate))
             }
 
             override fun onSyncEnd() {
@@ -121,30 +119,32 @@ open class DecksPublicFragment : BaseFragment() {
 
     fun configLoggedViews() {
         signin_button.setOnClickListener { showLogin() }
-        signin_button.visibility = if (App.hasUserLogged()) View.INVISIBLE else View.VISIBLE
-        decks_recycler_view.visibility = if (App.hasUserLogged()) View.VISIBLE else View.INVISIBLE
+        signin_button.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+        decks_recycler_view.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.INVISIBLE
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
         showDecks()
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdUpdateDeckAndShowDeck(cmdUpdateDeckAndShowDeck: CmdUpdateDeckAndShowDeck) {
         showDecks()
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdFilterSearch(filterSearch: CmdFilterSearch) {
         searchFilter = filterSearch.search?.toLowerCase()?.trim()
         decksAdapter.reset()
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
         currentClasses = cmdShowDecksByClasses.classes.toTypedArray()
         showDecks()
@@ -162,18 +162,16 @@ open class DecksPublicFragment : BaseFragment() {
     class DecksAllViewHolder(view: View, val itemClick: (View, Deck) -> Unit,
                              val itemLongClick: (View, Deck) -> Boolean) : RecyclerView.ViewHolder(view) {
 
-        constructor(view: View) : this(view, { view, deck -> }, { view, deck -> true })
-
-        fun bind(itemKey: String, publicInteractor: PublicInteractor, privateInteractor: PrivateInteractor) {
+        fun bind(itemKey: String) {
             itemView.deck_loading.visibility = View.VISIBLE
             itemView.deck_cover.visibility = View.GONE
             itemView.deck_info.visibility = View.GONE
-            publicInteractor.getPublicDeck(itemKey) {
-                bind(it, privateInteractor)
+            PublicInteractor.getPublicDeck(itemKey) {
+                bind(it)
             }
         }
 
-        fun bind(deck: Deck, privateInteractor: PrivateInteractor) {
+        fun bind(deck: Deck) {
             with(itemView) {
                 deck_loading.visibility = View.GONE
                 deck_cover.visibility = View.VISIBLE
@@ -181,7 +179,7 @@ open class DecksPublicFragment : BaseFragment() {
                 setOnClickListener { itemClick(itemView, deck) }
                 setOnLongClickListener { itemLongClick(itemView, deck) }
                 deck_cover.setImageResource(deck.cls.imageRes)
-                deck_private.layoutParams.width = if (deck.private) ViewGroup.LayoutParams.WRAP_CONTENT else 0
+                deck_private.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT.takeIf { deck.private } ?: 0
                 deck_name.text = deck.name
                 deck_attr1.setImageResource(deck.cls.attr1.imageRes)
                 deck_attr2.setImageResource(deck.cls.attr2.imageRes)
@@ -202,20 +200,20 @@ open class DecksPublicFragment : BaseFragment() {
                 val numberInstance = NumberFormat.getNumberInstance()
                 deck_soul_cost.text = numberInstance.format(deck.cost)
                 deck_comments.text = numberInstance.format(deck.comments.size)
-                deck_comments.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_comments.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 deck_likes.text = numberInstance.format(deck.likes.size)
-                deck_likes.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
+                deck_likes.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 deck_views.text = numberInstance.format(deck.views)
-                deck_views.visibility = if (deck.private) View.INVISIBLE else View.VISIBLE
-                calculateMissingSoul(deck, privateInteractor)
+                deck_views.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
+                calculateMissingSoul(deck)
             }
         }
 
-        fun calculateMissingSoul(deck: Deck, privateInteractor: PrivateInteractor) {
+        fun calculateMissingSoul(deck: Deck) {
             with(itemView.deck_soul_missing) {
                 visibility = View.INVISIBLE
                 itemView.deck_soul_missing_loading.visibility = View.VISIBLE
-                privateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
+                PrivateInteractor.getDeckMissingCards(deck, { itemView.deck_soul_missing_loading.visibility = View.VISIBLE }) {
                     itemView.deck_soul_missing_loading.visibility = View.GONE
                     val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                     Timber.d("Missing %d", missingSoul)

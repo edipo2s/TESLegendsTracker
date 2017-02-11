@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.CompoundButton
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.util.inflate
 
 /**
@@ -17,7 +18,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         get() = onlyPrivate?.isChecked ?: false
 
     override val dataRef = {
-        if (isDeckPrivate) privateInteractor.getUserPrivateDecksRef() else privateInteractor.getUserPublicDecksRef()
+        if (isDeckPrivate) PrivateInteractor.getUserPrivateDecksRef() else PrivateInteractor.getUserPublicDecksRef()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,7 +36,7 @@ class DecksOwnerFragment : DecksPublicFragment() {
         inflater?.inflate(R.menu.menu_private, menu)
         inflater?.inflate(R.menu.menu_search, menu)
         onlyPrivate = menu?.findItem(R.id.menu_only_private)?.actionView as CompoundButton
-        onlyPrivate?.setOnCheckedChangeListener { button, checked ->
+        onlyPrivate?.setOnCheckedChangeListener { _, _ ->
             showDecks()
         }
         super.onCreateOptionsMenu(menu, inflater)

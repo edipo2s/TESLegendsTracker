@@ -49,7 +49,7 @@ open class BaseFilterActivity : BaseActivity() {
     }
 
     @Synchronized fun updateRarityMagikaFiltersVisibility(show: Boolean) {
-        val margin = if (filterGreatMargin) R.dimen.filter_great_margin_bottom else R.dimen.large_margin
+        val margin = R.dimen.filter_great_margin_bottom.takeIf { filterGreatMargin } ?: R.dimen.large_margin
         val showBottomMargin = resources.getDimensionPixelSize(margin)
         val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
         if (show && filterMagikaLP?.bottomMargin == showBottomMargin ||
@@ -60,8 +60,8 @@ open class BaseFilterActivity : BaseActivity() {
             (fab_filter_magika as FilterMagika).close()
             (fab_filter_rarity as FilterRarity).collapse()
         }
-        val animFrom = if (show) hideBottomMargin else showBottomMargin
-        val animTo = if (show) showBottomMargin else hideBottomMargin
+        val animFrom = hideBottomMargin.takeIf { show } ?: showBottomMargin
+        val animTo = showBottomMargin.takeIf { show } ?: hideBottomMargin
         with(ValueAnimator.ofInt(animFrom, animTo)) {
             duration = UPDATE_FILTERS_VISIBILITY_DURATION
             addUpdateListener {
@@ -86,9 +86,10 @@ open class BaseFilterActivity : BaseActivity() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateRarityMagikaFiltersPosition(update: CmdUpdateRarityMagikaFiltersPosition) {
         filterGreatMargin = update.high
-        val endMargin = if (filterGreatMargin) R.dimen.filter_great_margin_bottom else R.dimen.large_margin
+        val endMargin = R.dimen.filter_great_margin_bottom.takeIf { filterGreatMargin } ?: R.dimen.large_margin
         with(ValueAnimator.ofInt(filterMagikaLP?.bottomMargin ?: 0, resources.getDimensionPixelSize(endMargin))) {
             duration = UPDATE_FILTERS_POSITION_DURATION
             addUpdateListener {

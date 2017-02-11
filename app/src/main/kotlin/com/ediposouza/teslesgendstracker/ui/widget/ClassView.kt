@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import kotlinx.android.synthetic.main.widget_class_view.view.*
 
 /**
@@ -17,7 +17,7 @@ class ClassView(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     init {
         inflate(context, R.layout.widget_class_view, rootView as ViewGroup)
         if (isInEditMode) {
-            setClass(Class.SPELLSWORD)
+            setClass(DeckClass.SPELLSWORD)
         }
     }
 
@@ -25,7 +25,7 @@ class ClassView(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun setClass(cls: Class?) {
+    fun setClass(cls: DeckClass?) {
         class_view_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)
         class_view_attr2.setImageResource(cls?.attr2?.imageRes ?: 0)
     }

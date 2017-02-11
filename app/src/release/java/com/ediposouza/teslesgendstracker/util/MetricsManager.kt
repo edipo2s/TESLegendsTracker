@@ -62,6 +62,11 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATCH, action.patch)
                     putString(action.PARAM_PRIVATE, action.private.toString())
                 }
+                is MetricAction.ACTION_DECK_UPDATE -> {
+                    putString(action.PARAM_TYPE, action.type)
+                    putString(action.PARAM_PATCH, action.patch)
+                    putString(action.PARAM_PRIVATE, action.private.toString())
+                }
                 is MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE ->
                     putBoolean(action.PARAM_CHECKED, action.checked)
                 is MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE ->
@@ -74,8 +79,10 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
                 is MetricAction.ACTION_MATCH_STATISTICS_CLASS ->
                     putString(action.PARAM_CLASS, action.cls.name)
-                is MetricAction.ACTION_NEW_MATCH_START_WITH ->
+                is MetricAction.ACTION_NEW_MATCH_START_WITH -> {
                     putString(action.PARAM_DECK, action.deck?.cls?.name ?: action.PARAM_DECK_VALUE_OTHER)
+                    putBoolean(action.PARAM_FROM_ARENA, action.fromArena)
+                }
                 is MetricAction.ACTION_NEW_MATCH_SAVE -> {
                     putString(action.PARAM_MY_CLS, action.myDeckCls.name)
                     putString(action.PARAM_MY_TYPE, action.myDeckType.name)
@@ -87,7 +94,7 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_DONATE_BASIC,
                 is MetricAction.ACTION_DONATE_PRO -> {
-                    val value = if (action is MetricAction.ACTION_DONATE_BASIC) 6L else 13L
+                    val value = 6L.takeIf { action is MetricAction.ACTION_DONATE_BASIC } ?: 13L
                     val valueCurrency = "BRL"
                     answers?.logPurchase(PurchaseEvent()
                             .putItemName(action.name)
@@ -99,7 +106,7 @@ object MetricsManager : MetricsConstants() {
                         putString(FirebaseAnalytics.Param.CURRENCY, valueCurrency)
                         putDouble(FirebaseAnalytics.Param.VALUE, value.toDouble())
                     })
-                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(HashMap<String, Any>().apply {
+                    mixpanelAnalytics?.people?.trackCharge(value.toDouble(), JSONObject(mutableMapOf<String, Any>().apply {
                         put(FirebaseAnalytics.Param.ITEM_NAME, action.name)
                     }))
                 }
@@ -109,6 +116,14 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_ARTICLE, action.article.uuidDate)
                 is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
                     putString(action.PARAM_ARTICLE, action.article.uuidDate)
+                is MetricAction.ACTION_ARENA_FILTER_SEASON ->
+                    putString(action.PARAM_SEASON, action.season?.uuid ?: MetricAction.ALL)
+                is MetricAction.ACTION_ARENA_START -> {
+                    putString(action.PARAM_CLASS, action.cls.name)
+                    putBoolean(action.PARAM_FROM_START_MENU, action.fromStartMenu)
+                }
+                is MetricAction.ACTION_ARENA_PICK ->
+                    putString(action.PARAM_CARD, action.card.shortName)
             }
         }
         answers?.logCustom(CustomEvent(action.name))

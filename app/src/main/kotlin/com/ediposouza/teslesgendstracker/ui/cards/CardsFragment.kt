@@ -213,7 +213,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
         override fun getItem(position: Int): CardsAllFragment {
             return when (position) {
-                1 -> cardsCollectionFragment
+                1 -> cardsCollectionFragment.apply { isEditStarted = false }
                 2 -> cardsFavoritesFragment
                 else -> cardsAllFragment
             }

@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
 import org.threeten.bp.LocalDate
-import java.util.*
 
 /**
  * Created by ediposouza on 25/01/17.
@@ -88,7 +87,7 @@ data class Patch(
 
     constructor(source: Parcel) : this(source.readString(), LocalDate.ofEpochDay(source.readLong()),
             source.readString(), PatchType.values()[source.readInt()],
-            ArrayList<PatchChange>().apply { source.readList(this, PatchChange::class.java.classLoader) })
+            mutableListOf<PatchChange>().apply { source.readList(this, PatchChange::class.java.classLoader) })
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(uuidDate)

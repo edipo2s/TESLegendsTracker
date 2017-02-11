@@ -27,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.util.*
 
 /**
  * Created by EdipoSouza on 1/3/17.
@@ -40,11 +39,11 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private var currentMatchMode = MatchMode.RANKED
     private var currentSeason: Season? = null
-    private var selectedClass: Class? = null
+    private var selectedClass: DeckClass? = null
     private var showPercent: CompoundButton? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
-    var results: HashMap<Class, ArrayList<Match>> = HashMap()
+    var results: Map<DeckClass, MutableList<Match>> = mutableMapOf()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_statistics)
@@ -55,13 +54,13 @@ class MatchesStatisticsFragment : BaseFragment() {
         setHasOptionsMenu(true)
         statisticsTableAdapter = StatisticsTableAdapter(context).apply {
             setFirstHeader(HEADER_FIRST)
-            val classTotal: Class? = null
-            header = Class.values().asList().plus(classTotal)
-            setFirstBody(Class.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
+            val classTotal: DeckClass? = null
+            header = DeckClass.values().asList().plus(classTotal)
+            setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) }.plus(listOf(listOf(BodyItem()))))
             loadingStatisticsData(this)
             setSection(listOf())
-            setClickListenerFirstBody { rowItems, view, row, col -> selectRow(row) }
-            setClickListenerBody { rowItems, view, row, col -> selectRow(row) }
+            setClickListenerFirstBody { _, _, row, _ -> selectRow(row) }
+            setClickListenerBody { _, _, row, _ -> selectRow(row) }
         }
         matches_statistics_table.adapter = statisticsTableAdapter
         getMatches()
@@ -71,7 +70,7 @@ class MatchesStatisticsFragment : BaseFragment() {
         val menuPercent = menu?.findItem(R.id.menu_percent)
         menuPercent?.isVisible = true
         showPercent = menuPercent?.actionView as CompoundButton
-        showPercent?.setOnCheckedChangeListener { button, checked ->
+        showPercent?.setOnCheckedChangeListener { _, checked ->
             updateStatisticsData()
             MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE(checked))
         }
@@ -84,9 +83,9 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun selectRow(row: Int) {
-        selectedClass = if (row >= 0 && row < Class.values().size) Class.values()[row] else null
+        selectedClass = if (row >= 0 && row < DeckClass.values().size) DeckClass.values()[row] else null
         updateStatisticsData()
-        statisticsTableAdapter?.setFirstBody(Class.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
+        statisticsTableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(null, it, it == selectedClass)) }
                 .plus(listOf(listOf(BodyItem()))))
         if (selectedClass != null) {
             val classView = matches_statistics_table.childrenSequence()
@@ -104,7 +103,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private fun getMatches() {
         loadingStatisticsData()
-        PrivateInteractor().getUserMatches(currentSeason) {
+        PrivateInteractor.getUserMatches(currentSeason) {
             it.filter { it.mode == currentMatchMode }.groupBy { it.player.cls }.forEach {
                 results[it.key]?.addAll(it.value)
             }
@@ -113,18 +112,18 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
-        results = HashMap(Class.values().map { it to ArrayList<Match>() }.toMap())
+        results = DeckClass.values().map { it to mutableListOf<Match>() }.toMap()
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
-            Class.values().forEach { myCls ->
+            DeckClass.values().forEach {
                 add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach { opponentCls ->
+                    DeckClass.values().forEach {
                         add(BodyItem())
                     }
                     add(BodyItem())
                 })
             }
             add(mutableListOf<BodyItem>().apply {
-                Class.values().forEach {
+                DeckClass.values().forEach {
                     add(BodyItem())
                 }
                 add(BodyItem())
@@ -135,10 +134,10 @@ class MatchesStatisticsFragment : BaseFragment() {
     private fun updateStatisticsData() {
         doAsync {
             val data = mutableListOf<List<BodyItem>>().apply {
-                Class.values().forEach { myCls ->
+                DeckClass.values().forEach { myCls ->
                     add(mutableListOf<BodyItem>().apply {
                         val resByMyCls = results[myCls]!!
-                        Class.values().forEach { opponentCls ->
+                        DeckClass.values().forEach { opponentCls ->
                             val matchesVsOpponent = resByMyCls.filter { it.opponent.cls == opponentCls }
                             add(getResultBodyItem(matchesVsOpponent, myCls == selectedClass))
                         }
@@ -147,7 +146,7 @@ class MatchesStatisticsFragment : BaseFragment() {
                 }
                 val allMatches = results.flatMap { it.value }
                 add(mutableListOf<BodyItem>().apply {
-                    Class.values().forEach {
+                    DeckClass.values().forEach {
                         val resByOpponent = allMatches.groupBy { it.opponent.cls }[it] ?: listOf()
                         add(getResultBodyItem(resByOpponent, false))
                     }
@@ -164,7 +163,7 @@ class MatchesStatisticsFragment : BaseFragment() {
         val result = matches.groupBy { it.win }
         val wins = result[true]?.size ?: 0
         val losses = result[false]?.size ?: 0
-        val resultText = if (!(showPercent?.isChecked ?: false)) "$wins/$losses" else
+        val resultText = "$wins/$losses".takeIf { !(showPercent?.isChecked ?: false) } ?:
             getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat()))
         return BodyItem(resultText, selected = cellSelected)
     }
@@ -175,7 +174,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterMode(cmdFilterMode: CmdFilterMode) {
+    @Suppress("unused")
+    fun onCmdFilterMode(cmdFilterMode: CmdFilterMode) {
         currentMatchMode = cmdFilterMode.mode
         if (isFragmentSelected) {
             getMatches()
@@ -183,7 +183,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onFilterSeason(cmdFilterSeason: CmdFilterSeason) {
+    @Suppress("unused")
+    fun onCmdFilterSeason(cmdFilterSeason: CmdFilterSeason) {
         currentSeason = cmdFilterSeason.season
         if (isFragmentSelected) {
             getMatches()
@@ -191,16 +192,17 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     @Subscribe
-    fun onUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
+    @Suppress("unused", "UNUSED_PARAMETER")
+    fun onCmdUpdateMatches(cmdUpdateMatches: CmdUpdateMatches) {
         if (isFragmentSelected) {
             getMatches()
         }
     }
 
-    class BodyItem(val result: String? = null, val cls: Class? = null, val selected: Boolean = false)
+    class BodyItem(val result: String? = null, val cls: DeckClass? = null, val selected: Boolean = false)
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
-            Class, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
+            DeckClass, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
 
         override fun inflateFirstHeader() = CellTextCenter(context)
 
@@ -218,7 +220,7 @@ class MatchesStatisticsFragment : BaseFragment() {
             val headerWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_header_width)
             val cellWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_width)
             val colWidths = mutableListOf(headerWidth)
-            Class.values().forEach { colWidths.add(cellWidth) }
+            DeckClass.values().forEach { colWidths.add(cellWidth) }
             colWidths.add(headerWidth)
             return colWidths
         }
@@ -232,14 +234,14 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     class CellClass(context: Context) : FrameLayout(context),
-            TableFixHeaderAdapter.HeaderBinder<Class>,
+            TableFixHeaderAdapter.HeaderBinder<DeckClass>,
             TableFixHeaderAdapter.FirstBodyBinder<List<BodyItem>> {
 
         init {
             LayoutInflater.from(context).inflate(R.layout.itemcell_class, this, true)
         }
 
-        override fun bindHeader(cls: Class?, col: Int) {
+        override fun bindHeader(cls: DeckClass?, col: Int) {
             bindClass(cls, false)
         }
 
@@ -248,16 +250,16 @@ class MatchesStatisticsFragment : BaseFragment() {
             bindClass(bodyItem.cls, bodyItem.selected)
         }
 
-        private fun bindClass(cls: Class?, selected: Boolean) {
+        private fun bindClass(cls: DeckClass?, selected: Boolean) {
             with(rootView) {
-                val attr1Visibility = if (cls != null) View.VISIBLE else View.GONE
-                val attr2Visibility = if (cls?.attr2 != Attribute.NEUTRAL) attr1Visibility else View.GONE
+                val attr1Visibility = View.VISIBLE.takeIf { cls != null } ?: View.GONE
+                val attr2Visibility = attr1Visibility.takeIf { cls?.attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                 cell_class_attr1.visibility = attr1Visibility
                 cell_class_attr2.visibility = attr2Visibility
                 cell_class_attr1.setImageResource(cls?.attr1?.imageRes ?: 0)
                 cell_class_attr2.setImageResource(cls?.attr2?.imageRes ?: 0)
-                cell_total.visibility = if (cls == null) View.VISIBLE else View.GONE
-                val cellColor = if (selected) R.color.colorAccent else android.R.color.transparent
+                cell_total.visibility = View.VISIBLE.takeIf { cls == null } ?: View.GONE
+                val cellColor = R.color.colorAccent.takeIf { selected } ?: android.R.color.transparent
                 setBackgroundColor(ContextCompat.getColor(context, cellColor))
             }
         }
@@ -284,10 +286,10 @@ class MatchesStatisticsFragment : BaseFragment() {
 
         private fun bindResult(result: String?, selected: Boolean) {
             with(rootView) {
-                cell_text.text = if (result == "0/0" || result?.contains("-") ?: false) "-" else result
-                cell_text.visibility = if (result == null) View.GONE else View.VISIBLE
-                cell_progress.visibility = if (result == null) View.VISIBLE else View.GONE
-                val cellColor = if (selected) R.color.colorAccent else android.R.color.transparent
+                cell_text.text = "-".takeIf { result == "0/0" || result?.contains("-") ?: false } ?: result
+                cell_text.visibility = View.GONE.takeIf { result == null } ?: View.VISIBLE
+                cell_progress.visibility = View.VISIBLE.takeIf { result == null } ?: View.GONE
+                val cellColor = R.color.colorAccent.takeIf { selected } ?: android.R.color.transparent
                 setBackgroundColor(ContextCompat.getColor(context, cellColor))
             }
         }

@@ -30,7 +30,6 @@ package com.ediposouza.teslesgendstracker.ui.util.firebase
 
 import com.google.firebase.database.*
 import timber.log.Timber
-import java.util.*
 
 /**
  * This class implements an array-like collection on top of a Firebase location.
@@ -59,7 +58,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     }
 
     private var mQuery: Query? = null
-    private val mSnapshots: ArrayList<Pair<String, T>> = ArrayList()
+    private val mSnapshots: MutableList<Pair<String, T>> = mutableListOf()
     private val mPageSize: Int
     private var mCurrentSize: Int = 0
     private var isSyncing: Boolean = false
@@ -152,7 +151,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     // Start of ChildEventListener and ValueEventListener methods
 
     override fun onChildAdded(snapshot: DataSnapshot, previousChildKey: String?) {
-        var index = if (mOrderASC) 0 else count
+        var index = 0.takeIf { mOrderASC } ?: count
         if (previousChildKey != null) {
             if (mOrderASC) {
                 index = getIndexForKey(previousChildKey) + 1
@@ -198,7 +197,7 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     override fun onChildMoved(snapshot: DataSnapshot, previousChildKey: String?) {
         val oldIndex = getIndexForKey(snapshot.key)
         mSnapshots.removeAt(oldIndex)
-        val newIndex = if (previousChildKey == null) 0 else getIndexForKey(previousChildKey) + 1
+        val newIndex = 0.takeIf { previousChildKey == null } ?: getIndexForKey(previousChildKey!!) + 1
         mSnapshots.add(newIndex, Pair(snapshot.key, snapshot.getValue(mModel)))
         notifyChangedListeners(EventType.Moved, newIndex, oldIndex)
     }

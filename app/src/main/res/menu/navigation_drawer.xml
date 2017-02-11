@@ -26,9 +26,8 @@
             android:id="@+id/menu_arena"
             android:icon="@drawable/ic_mode_arena"
             android:title="@string/menu_arena"
-            android:enabled="false"
-            android:visible="false"
-            tools:visible="true" />
+            android:enabled="false" />
+        true:enabled="true" />
 
     </group>
 

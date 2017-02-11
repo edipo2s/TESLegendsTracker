@@ -153,7 +153,7 @@ class MatchesFragment : BaseFragment() {
         menuSeasons?.apply {
             clear()
             add(0, R.id.menu_season_all, 0, getString(R.string.matches_seasons_all)).setIcon(R.drawable.ic_checked)
-            PublicInteractor().getSeasons {
+            PublicInteractor.getSeasons {
                 seasons = it.reversed()
                 seasons.forEach {
                     add(0, it.id, 0, "${it.date.month}/${it.date.year}")
@@ -167,7 +167,7 @@ class MatchesFragment : BaseFragment() {
         var decks = listOf<Deck?>(null)
         val classClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                PrivateInteractor().getUserDecks(Class.values()[pos]) { myDecks ->
+                PrivateInteractor.getUserDecks(DeckClass.values()[pos]) { myDecks ->
                     decks = (myDecks as List<Deck?>).sortedBy { it?.name }.plusElement(null)
                     dialogView.new_match_dialog_deck_spinner.adapter = ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -181,7 +181,7 @@ class MatchesFragment : BaseFragment() {
         val deckClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val lastItem = pos == parent.count - 1
-                dialogView.new_match_dialog_deck_info.visibility = if (lastItem) View.VISIBLE else View.GONE
+                dialogView.new_match_dialog_deck_info.visibility = View.VISIBLE.takeIf { lastItem } ?: View.GONE
                 dialogView.new_match_dialog_deck_name.setText(decks[pos]?.name ?: "")
                 dialogView.new_match_dialog_deck_type_spinner.setSelection(decks[pos]?.type?.ordinal ?: 0)
             }
@@ -192,11 +192,11 @@ class MatchesFragment : BaseFragment() {
         val modeClickListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val isArenaMode = MatchMode.values()[pos] == MatchMode.ARENA
-                dialogView.new_match_dialog_deck_label.visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                dialogView.new_match_dialog_deck_label.visibility = View.GONE.takeIf { isArenaMode } ?: View.VISIBLE
                 with(dialogView.new_match_dialog_deck_spinner) {
-                    visibility = if (isArenaMode) View.GONE else View.VISIBLE
+                    visibility = View.GONE.takeIf { isArenaMode } ?: View.VISIBLE
                     val shouldHideDeckInfo = isArenaMode || selectedItemPosition != (adapter?.count ?: 1) - 1
-                    dialogView.new_match_dialog_deck_info.visibility = if (shouldHideDeckInfo) View.GONE else View.VISIBLE
+                    dialogView.new_match_dialog_deck_info.visibility = View.GONE.takeIf { shouldHideDeckInfo } ?: View.VISIBLE
                 }
             }
 
@@ -205,14 +205,14 @@ class MatchesFragment : BaseFragment() {
         }
         AlertDialog.Builder(context)
                 .setView(dialogView)
-                .setPositiveButton(R.string.new_match_dialog_start, { dialog, which ->
+                .setPositiveButton(R.string.new_match_dialog_start, { _, _ ->
                     val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                    val cls = Class.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                    val cls = DeckClass.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
                     val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
                     val isNotArena = mode != MatchMode.ARENA
-                    val name = if (isNotArena) dialogView.new_match_dialog_deck_name.text.toString() else null
-                    val deck = if (isNotArena && deckPosition >= 0) decks[deckPosition] else null
+                    val name = dialogView.new_match_dialog_deck_name.text.toString().takeIf { isNotArena }
+                    val deck = decks[deckPosition].takeIf { isNotArena && deckPosition >= 0 }
                     if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {
@@ -220,7 +220,7 @@ class MatchesFragment : BaseFragment() {
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
                 })
-                .setNegativeButton(android.R.string.cancel, { dialog, which -> })
+                .setNegativeButton(android.R.string.cancel, { _, _ -> })
                 .create()
                 .apply {
                     setOnShowListener {
@@ -254,6 +254,7 @@ class MatchesFragment : BaseFragment() {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
             matches_fab_add.show()
@@ -287,14 +288,14 @@ class MatchesFragment : BaseFragment() {
 
     class ClassAdapter(ctx: Context, @IntegerRes layout: Int = R.layout.itemlist_class,
                        @IntegerRes val textColor: Int = R.color.primary_text_dark) :
-            ArrayAdapter<Class>(ctx, layout, R.id.class_name, Class.values()) {
+            ArrayAdapter<DeckClass>(ctx, layout, R.id.class_name, DeckClass.values()) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
             return super.getDropDownView(position, convertView, parent).apply {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = View.VISIBLE.takeIf { attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                 }
             }
@@ -305,7 +306,7 @@ class MatchesFragment : BaseFragment() {
                 with(getItem(position)) {
                     class_attr1.setImageResource(attr1.imageRes)
                     class_attr2.setImageResource(attr2.imageRes)
-                    class_attr2.visibility = if (attr2 != Attribute.NEUTRAL) View.VISIBLE else View.GONE
+                    class_attr2.visibility = View.VISIBLE.takeIf { attr2 != CardAttribute.NEUTRAL } ?: View.GONE
                     class_name.text = name.toLowerCase().capitalize()
                     class_name.setTextColor(ContextCompat.getColor(context, textColor))
                 }

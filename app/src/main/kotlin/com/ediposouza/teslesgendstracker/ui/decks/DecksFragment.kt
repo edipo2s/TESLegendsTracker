@@ -15,7 +15,7 @@ import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Class
+import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.tabs.DecksFavoritedFragment
@@ -78,7 +78,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             } else {
                 decks_attr_filter.selectAttr(it, false)
             }
-            eventBus.post(CmdShowDecksByClasses(Class.getClasses(decks_attr_filter.getSelectedAttrs())))
+            eventBus.post(CmdShowDecksByClasses(DeckClass.getClasses(decks_attr_filter.getSelectedAttrs())))
         }
         decks_fab_add.setOnClickListener {
             val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
@@ -130,7 +130,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_NEW_DECK && resultCode == Activity.RESULT_OK) {
             val privateExtra = data?.getBooleanExtra(NewDeckActivity.DECK_PRIVATE_EXTRA, false) ?: false
-            decks_view_pager.currentItem = if (privateExtra) 1 else 0
+            decks_view_pager.currentItem = 1.takeIf { privateExtra } ?: 0
             Handler().postDelayed({ eventBus.post(CmdUpdateDeckAndShowDeck()) }, DateUtils.SECOND_IN_MILLIS / 2)
         }
     }
@@ -148,6 +148,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     @Subscribe
+    @Suppress("unused")
     fun onCmdUpdateVisibility(update: CmdUpdateVisibility) {
         if (update.show) {
             decks_fab_add.show()

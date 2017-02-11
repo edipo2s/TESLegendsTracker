@@ -2,8 +2,39 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.annotation.IntegerRes
+import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
-import java.util.*
+
+enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
+                     @IntegerRes val imageRes: Int, @IntegerRes val arenaImageRes: Int? = null) {
+
+    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer, R.drawable.arena_archer),
+    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin, R.drawable.arena_assassin),
+    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, R.drawable.deck_class_battlemage, R.drawable.arena_battlemage),
+    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, R.drawable.deck_class_crusader, R.drawable.arena_crusader),
+    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, R.drawable.deck_class_mage, R.drawable.arena_mage),
+    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY, R.drawable.deck_class_monk, R.drawable.arena_monk),
+    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE, R.drawable.deck_class_scout, R.drawable.arena_scout),
+    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE, R.drawable.deck_class_sorcerer, R.drawable.arena_sorcerer),
+    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE, R.drawable.deck_class_spellsword, R.drawable.arena_spellsword),
+    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE, R.drawable.deck_class_warrior, R.drawable.arena_warrior),
+    STRENGTH(CardAttribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
+    INTELLIGENCE(CardAttribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
+    AGILITY(CardAttribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
+    WILLPOWER(CardAttribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
+    ENDURANCE(CardAttribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
+    NEUTRAL(CardAttribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral);
+
+    companion object {
+
+        fun getClasses(attr: List<CardAttribute>): List<DeckClass> {
+            return values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
+        }
+
+    }
+
+}
 
 enum class DeckType {
 
@@ -23,6 +54,7 @@ data class DeckUpdate(
 
 ) : Parcelable {
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<DeckUpdate> = object : Parcelable.Creator<DeckUpdate> {
             override fun createFromParcel(source: Parcel): DeckUpdate = DeckUpdate(source)
             override fun newArray(size: Int): Array<DeckUpdate?> = arrayOfNulls(size)
@@ -49,6 +81,7 @@ data class DeckComment(
 
 ) : Parcelable {
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<DeckComment> = object : Parcelable.Creator<DeckComment> {
             override fun createFromParcel(source: Parcel): DeckComment = DeckComment(source)
             override fun newArray(size: Int): Array<DeckComment?> = arrayOfNulls(size)
@@ -78,7 +111,7 @@ data class Deck(
         val owner: String,
         val private: Boolean,
         val type: DeckType,
-        val cls: Class,
+        val cls: DeckClass,
         val cost: Int,
         val createdAt: LocalDateTime,
         val updatedAt: LocalDateTime,
@@ -91,10 +124,11 @@ data class Deck(
 
 ) : Parcelable {
 
-    constructor() : this("", "", "", false, DeckType.OTHER, Class.NEUTRAL, 0, LocalDateTime.now().withNano(0),
+    constructor() : this("", "", "", false, DeckType.OTHER, DeckClass.NEUTRAL, 0, LocalDateTime.now().withNano(0),
             LocalDateTime.now().withNano(0), "", listOf(), 0, mapOf(), listOf(), listOf())
 
     companion object {
+        @Suppress("unused")
         @JvmField val CREATOR: Parcelable.Creator<Deck> = object : Parcelable.Creator<Deck> {
             override fun createFromParcel(source: Parcel): Deck = Deck(source)
             override fun newArray(size: Int): Array<Deck?> = arrayOfNulls(size)
@@ -102,12 +136,12 @@ data class Deck(
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),
-            1 == source.readInt(), DeckType.values()[source.readInt()], Class.values()[source.readInt()],
+            1 == source.readInt(), DeckType.values()[source.readInt()], DeckClass.values()[source.readInt()],
             source.readInt(), source.readSerializable() as LocalDateTime, source.readSerializable() as LocalDateTime,
             source.readString(), source.createStringArrayList(), source.readInt(),
             hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) },
-            ArrayList<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
-            ArrayList<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
+            mutableListOf<DeckUpdate>().apply { source.readList(this, DeckUpdate::class.java.classLoader) },
+            mutableListOf<DeckComment>().apply { source.readList(this, DeckComment::class.java.classLoader) })
 
     override fun describeContents() = 0
 
@@ -127,6 +161,12 @@ data class Deck(
         dest?.writeMap(cards)
         dest?.writeList(updates)
         dest?.writeList(comments)
+    }
+
+    fun update(deckName: String, deckPrivate: Boolean, deckTypeSelected: DeckType, deckCls: DeckClass,
+               deckSoulCost: Int, deckPatchUuid: String, deckCards: Map<String, Int>): Deck {
+        return Deck(uuid, deckName, owner, deckPrivate, deckTypeSelected, deckCls, deckSoulCost,
+                createdAt, LocalDateTime.now(), deckPatchUuid, likes, views, deckCards, updates, comments)
     }
 
     override fun toString(): String {

@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.interactor
 
+import com.ediposouza.teslesgendstracker.ARENA_TIER_PLUS_VALUE_DELIMITER
 import com.ediposouza.teslesgendstracker.NEWS_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
@@ -24,18 +25,20 @@ abstract class FirebaseParsers {
         val type: String = ""
         val race: String = CardRace.NONE.name
         val keyword: String = ""
+        val text: String = ""
         val arenaTier: String = CardArenaTier.NONE.name
+        val arenaTierPlus: Map<String, String> = mapOf()
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
         val season: String = ""
 
-        fun toCard(shortName: String, set: CardSet, attr: Attribute): Card {
+        fun toCard(shortName: String, set: CardSet, attr: CardAttribute): Card {
             var clsAttr1 = attr
             var clsAttr2 = attr
-            if (attr == Attribute.DUAL) {
-                clsAttr1 = Attribute.valueOf(attr1.trim().toUpperCase())
-                clsAttr2 = Attribute.valueOf(attr2.trim().toUpperCase())
+            if (attr == CardAttribute.DUAL) {
+                clsAttr1 = CardAttribute.valueOf(attr1.trim().toUpperCase())
+                clsAttr2 = CardAttribute.valueOf(attr2.trim().toUpperCase())
             }
             return Card(name, shortName, set, attr, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
                     cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
@@ -45,8 +48,26 @@ abstract class FirebaseParsers {
                             .mapTo(arrayListOf<CardKeyword>()) {
                                 CardKeyword.of(it)
                             },
-                    CardArenaTier.of(arenaTier),
-                    evolves, season)
+                    text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season)
+        }
+
+        private fun getCardArenaTierPlus(): CardArenaTierPlus? {
+            if (arenaTierPlus.keys.isEmpty()) {
+                return null
+            }
+            val cardArenaTierPlusType = CardArenaTierPlusType.of(arenaTierPlus.keys.first())
+            var operator: CardArenaTierPlusOperator? = null
+            var value = when (cardArenaTierPlusType) {
+                CardArenaTierPlusType.ATTACK,
+                CardArenaTierPlusType.COST,
+                CardArenaTierPlusType.HEALTH ->
+                    with(arenaTierPlus.values.first().split(ARENA_TIER_PLUS_VALUE_DELIMITER)) {
+                        operator = CardArenaTierPlusOperator.of(get(0))
+                        get(1)
+                    }
+                else -> arenaTierPlus.values.first()
+            }
+            return CardArenaTierPlus(cardArenaTierPlusType, operator, value)
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {
@@ -73,10 +94,11 @@ abstract class FirebaseParsers {
 
         companion object {
 
-            private const val KEY_DECK_NAME = "owner"
+            private const val KEY_DECK_NAME = "name"
             private const val KEY_DECK_TYPE = "type"
             private const val KEY_DECK_CLASS = "cls"
             private const val KEY_DECK_PATCH = "patch"
+            private const val KEY_DECK_UPDATE_AT = "updatedAt"
             private const val KEY_DECK_COMMENT_OWNER = "owner"
             private const val KEY_DECK_COMMENT_MSG = "comment"
             private const val KEY_DECK_COMMENT_CREATE_AT = "createdAt"
@@ -89,7 +111,7 @@ abstract class FirebaseParsers {
         }
 
         fun toDeck(uuid: String, private: Boolean): Deck {
-            return Deck(uuid, name, owner, private, DeckType.values()[type], Class.values()[cls], cost,
+            return Deck(uuid, name, owner, private, DeckType.values()[type], DeckClass.values()[cls], cost,
                     LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
                     updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                     comments.map {
@@ -112,7 +134,8 @@ abstract class FirebaseParsers {
         }
 
         fun toDeckUpdateMap(): Map<String, Any> {
-            return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls, KEY_DECK_PATCH to patch)
+            return mapOf(KEY_DECK_NAME to name, KEY_DECK_TYPE to type, KEY_DECK_CLASS to cls,
+                    KEY_DECK_PATCH to patch, KEY_DECK_UPDATE_AT to updatedAt)
         }
 
         override fun toString(): String {
@@ -171,7 +194,7 @@ abstract class FirebaseParsers {
 
         companion object {
 
-            private const val KEY_MATCH_DECK_CLASS = "cls"
+            public const val KEY_MATCH_DECK_CLASS = "cls"
             private const val KEY_MATCH_DECK_DECK_UUID = "deck"
             private const val KEY_MATCH_DECK_NAME = "name"
             private const val KEY_MATCH_DECK_TYPE = "type"
@@ -181,12 +204,12 @@ abstract class FirebaseParsers {
 
         fun toMatch(uuid: String): Match {
             val playerDeck = MatchDeck(player[KEY_MATCH_DECK_NAME].toString(),
-                    Class.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckClass.values()[player[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[player[KEY_MATCH_DECK_TYPE].toString().toInt()],
                     player[KEY_MATCH_DECK_DECK_UUID].toString(),
                     player[KEY_MATCH_DECK_VERSION].toString())
             val opponentDeck = MatchDeck(opponent[KEY_MATCH_DECK_NAME].toString(),
-                    Class.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
+                    DeckClass.values()[opponent[KEY_MATCH_DECK_CLASS].toString().toInt()],
                     DeckType.values()[opponent[KEY_MATCH_DECK_TYPE].toString().toInt()])
             val matchMode = MatchMode.values()[mode]
             return Match(uuid, first, playerDeck, opponentDeck, matchMode, season, rank, legend, win)
@@ -194,13 +217,12 @@ abstract class FirebaseParsers {
 
         fun fromMatch(match: Match): MatchParser {
             val player = with(match.player) {
-                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
+                mapOf(KEY_MATCH_DECK_NAME to (name ?: ""), KEY_MATCH_DECK_CLASS to cls.ordinal,
                         KEY_MATCH_DECK_TYPE to type.ordinal, KEY_MATCH_DECK_DECK_UUID to (deck ?: ""),
                         KEY_MATCH_DECK_VERSION to (version ?: ""))
             }
             val opponent = with(match.opponent) {
-                mapOf(KEY_MATCH_DECK_NAME to name, KEY_MATCH_DECK_CLASS to cls.ordinal,
-                        KEY_MATCH_DECK_TYPE to type.ordinal)
+                mapOf(KEY_MATCH_DECK_CLASS to cls.ordinal, KEY_MATCH_DECK_TYPE to type.ordinal)
             }
             return MatchParser(match.first, player, opponent, match.legend, match.mode.ordinal,
                     match.rank, match.season, match.win)
@@ -222,7 +244,7 @@ abstract class FirebaseParsers {
             val month = Month.of(date[1].toInt())
             val id = (year - 2016) * 12 + month.value - 7
             val rewardInfo = reward.entries.first()
-            val rewardCardShortname = if (rewardInfo.value is String) rewardInfo.value else null
+            val rewardCardShortname = rewardInfo.value.takeIf { rewardInfo.value is String }
             val yearMonth = YearMonth.parse(key, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
             return Season(id, key, yearMonth, rewardInfo.key, rewardCardShortname as? String)
         }

@@ -1,7 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.decks
 
-import com.ediposouza.teslesgendstracker.data.Attribute
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardSlot
 
 /**
@@ -15,7 +15,7 @@ data class CmdAddCard(
 
 data class CmdRemAttr(
 
-        val attr: Attribute
+        val attr: CardAttribute
 
 )
 

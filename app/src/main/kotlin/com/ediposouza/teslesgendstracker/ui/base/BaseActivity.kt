@@ -63,7 +63,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         val keypadHeight = screenHeight - r.bottom
         val newKeyboardVisible = keypadHeight > (screenHeight * 0.15) // 0.15 ratio is perhaps enough to determine keypad height.
         if (keyboardVisible != newKeyboardVisible) {
-            keyboardVisible == newKeyboardVisible
+            keyboardVisible = newKeyboardVisible
             onKeyboardVisibilityChange?.invoke()
         }
     }
@@ -184,14 +184,14 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     Timber.d("signWithCredential:onComplete:" + task.isSuccessful)
                     if (task.isSuccessful) {
                         val currentUser = firebaseAuth.currentUser
-                        PublicInteractor().getUserInfo(currentUser?.uid ?: "") {
+                        PublicInteractor.getUserInfo(currentUser?.uid ?: "") {
                             if (it.name.isEmpty()) {
                                 toast("SignUp with " + currentUser?.displayName)
                                 MetricsManager.trackSignUp()
                             } else {
                                 toast("SignIn with " + currentUser?.displayName)
                             }
-                            PrivateInteractor().setUserInfo()
+                            PrivateInteractor.setUserInfo()
                         }
                         eventBus.post(CmdLoginSuccess())
                     } else {
@@ -203,8 +203,8 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                 }
     }
 
-    @SuppressWarnings("ResourceType")
     @Subscribe
+    @SuppressWarnings("unused", "ResourceType")
     fun onCmdShowSnackMsg(cmdShowSnackbarMsg: CmdShowSnackbarMsg) {
         snackbar?.dismiss()
         val msgRes = cmdShowSnackbarMsg.msgRes
@@ -224,7 +224,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     @Subscribe
-    @Suppress("UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdShowLogin(showLogin: CmdShowLogin) {
         googleApiClient?.clearDefaultAccountAndReconnect()
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)

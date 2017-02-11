@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 
 /**
@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.widget_attributes_filter.view.*
 open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
-    var filterClick: ((Attribute) -> Unit)? = null
-    var lastAttrSelected: Attribute = Attribute.STRENGTH
+    var filterClick: ((CardAttribute) -> Unit)? = null
+    var lastAttrSelected: CardAttribute = CardAttribute.STRENGTH
 
     var deckMode: Boolean = false
         set(value) {
@@ -26,10 +26,10 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             if (!value) {
                 selectAttr(lastAttrSelected, true)
             } else {
-                rootView.attr_filter_dual.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_dual_indicator.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_neutral.visibility = if (value) View.GONE else View.VISIBLE
-                rootView.attr_filter_neutral_indicator.visibility = if (value) View.GONE else View.VISIBLE
+                rootView.attr_filter_dual.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_dual_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_neutral.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                rootView.attr_filter_neutral_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
             }
         }
 
@@ -39,13 +39,13 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         deckMode = a.getBoolean(R.styleable.FilterAttr_deckMode, false)
         a.recycle()
         if (!isInEditMode) {
-            rootView.attr_filter_strength?.setOnClickListener { attrClick(Attribute.STRENGTH, false) }
-            rootView.attr_filter_intelligence?.setOnClickListener { attrClick(Attribute.INTELLIGENCE, false) }
-            rootView.attr_filter_willpower?.setOnClickListener { attrClick(Attribute.WILLPOWER, true) }
-            rootView.attr_filter_agility?.setOnClickListener { attrClick(Attribute.AGILITY, true) }
-            rootView.attr_filter_endurance?.setOnClickListener { attrClick(Attribute.ENDURANCE, true) }
-            rootView.attr_filter_dual?.setOnClickListener { attrClick(Attribute.DUAL, false) }
-            rootView.attr_filter_neutral?.setOnClickListener { attrClick(Attribute.NEUTRAL, false) }
+            rootView.attr_filter_strength?.setOnClickListener { attrClick(CardAttribute.STRENGTH, false) }
+            rootView.attr_filter_intelligence?.setOnClickListener { attrClick(CardAttribute.INTELLIGENCE, false) }
+            rootView.attr_filter_willpower?.setOnClickListener { attrClick(CardAttribute.WILLPOWER, true) }
+            rootView.attr_filter_agility?.setOnClickListener { attrClick(CardAttribute.AGILITY, true) }
+            rootView.attr_filter_endurance?.setOnClickListener { attrClick(CardAttribute.ENDURANCE, true) }
+            rootView.attr_filter_dual?.setOnClickListener { attrClick(CardAttribute.DUAL, false) }
+            rootView.attr_filter_neutral?.setOnClickListener { attrClick(CardAttribute.NEUTRAL, false) }
         }
     }
 
@@ -53,7 +53,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    open protected fun attrClick(attr: Attribute, lockable: Boolean) {
+    open protected fun attrClick(attr: CardAttribute, lockable: Boolean) {
         filterClick?.invoke(attr)
     }
 
@@ -73,64 +73,65 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     }
 
-    open fun selectAttr(attr: Attribute, only: Boolean) {
+    open fun selectAttr(attr: CardAttribute, only: Boolean) {
         lastAttrSelected = attr
-        updateVisibility(rootView.attr_filter_strength_indicator, attr == Attribute.STRENGTH, only)
-        updateVisibility(rootView.attr_filter_intelligence_indicator, attr == Attribute.INTELLIGENCE, only)
-        updateVisibility(rootView.attr_filter_willpower_indicator, attr == Attribute.WILLPOWER, only)
-        updateVisibility(rootView.attr_filter_agility_indicator, attr == Attribute.AGILITY, only)
-        updateVisibility(rootView.attr_filter_endurance_indicator, attr == Attribute.ENDURANCE, only)
-        updateVisibility(rootView.attr_filter_dual_indicator, attr == Attribute.DUAL, only)
-        updateVisibility(rootView.attr_filter_neutral_indicator, attr == Attribute.NEUTRAL, only)
+        updateVisibility(rootView.attr_filter_strength_indicator, attr == CardAttribute.STRENGTH, only)
+        updateVisibility(rootView.attr_filter_intelligence_indicator, attr == CardAttribute.INTELLIGENCE, only)
+        updateVisibility(rootView.attr_filter_willpower_indicator, attr == CardAttribute.WILLPOWER, only)
+        updateVisibility(rootView.attr_filter_agility_indicator, attr == CardAttribute.AGILITY, only)
+        updateVisibility(rootView.attr_filter_endurance_indicator, attr == CardAttribute.ENDURANCE, only)
+        updateVisibility(rootView.attr_filter_dual_indicator, attr == CardAttribute.DUAL, only)
+        updateVisibility(rootView.attr_filter_neutral_indicator, attr == CardAttribute.NEUTRAL, only)
     }
 
-    open fun unSelectAttr(attr: Attribute) {
+    open fun unSelectAttr(attr: CardAttribute) {
         when (attr) {
-            Attribute.STRENGTH -> rootView.attr_filter_strength_indicator.visibility = View.INVISIBLE
-            Attribute.INTELLIGENCE -> rootView.attr_filter_intelligence_indicator.visibility = View.INVISIBLE
-            Attribute.WILLPOWER -> rootView.attr_filter_willpower_indicator.visibility = View.INVISIBLE
-            Attribute.AGILITY -> rootView.attr_filter_agility_indicator.visibility = View.INVISIBLE
-            Attribute.ENDURANCE -> rootView.attr_filter_endurance_indicator.visibility = View.INVISIBLE
-            Attribute.DUAL -> rootView.attr_filter_dual_indicator.visibility = View.INVISIBLE
-            Attribute.NEUTRAL -> rootView.attr_filter_neutral_indicator.visibility = View.INVISIBLE
+            CardAttribute.STRENGTH -> rootView.attr_filter_strength_indicator.visibility = View.INVISIBLE
+            CardAttribute.INTELLIGENCE -> rootView.attr_filter_intelligence_indicator.visibility = View.INVISIBLE
+            CardAttribute.WILLPOWER -> rootView.attr_filter_willpower_indicator.visibility = View.INVISIBLE
+            CardAttribute.AGILITY -> rootView.attr_filter_agility_indicator.visibility = View.INVISIBLE
+            CardAttribute.ENDURANCE -> rootView.attr_filter_endurance_indicator.visibility = View.INVISIBLE
+            CardAttribute.DUAL -> rootView.attr_filter_dual_indicator.visibility = View.INVISIBLE
+            CardAttribute.NEUTRAL -> rootView.attr_filter_neutral_indicator.visibility = View.INVISIBLE
         }
     }
 
-    open fun isAttrSelected(attr: Attribute): Boolean {
+    open fun isAttrSelected(attr: CardAttribute): Boolean {
         return when (attr) {
-            Attribute.STRENGTH -> rootView.attr_filter_strength_indicator.visibility == View.VISIBLE
-            Attribute.INTELLIGENCE -> rootView.attr_filter_intelligence_indicator.visibility == View.VISIBLE
-            Attribute.WILLPOWER -> rootView.attr_filter_willpower_indicator.visibility == View.VISIBLE
-            Attribute.AGILITY -> rootView.attr_filter_agility_indicator.visibility == View.VISIBLE
-            Attribute.ENDURANCE -> rootView.attr_filter_endurance_indicator.visibility == View.VISIBLE
-            Attribute.DUAL -> rootView.attr_filter_dual_indicator.visibility == View.VISIBLE
-            Attribute.NEUTRAL -> rootView.attr_filter_neutral_indicator.visibility == View.VISIBLE
+            CardAttribute.STRENGTH -> rootView.attr_filter_strength_indicator.visibility == View.VISIBLE
+            CardAttribute.INTELLIGENCE -> rootView.attr_filter_intelligence_indicator.visibility == View.VISIBLE
+            CardAttribute.WILLPOWER -> rootView.attr_filter_willpower_indicator.visibility == View.VISIBLE
+            CardAttribute.AGILITY -> rootView.attr_filter_agility_indicator.visibility == View.VISIBLE
+            CardAttribute.ENDURANCE -> rootView.attr_filter_endurance_indicator.visibility == View.VISIBLE
+            CardAttribute.DUAL -> rootView.attr_filter_dual_indicator.visibility == View.VISIBLE
+            CardAttribute.NEUTRAL -> rootView.attr_filter_neutral_indicator.visibility == View.VISIBLE
             else -> false
         }
     }
 
-    fun getSelectedAttrs(): List<Attribute> {
-        val attrs = Attribute.values().filter { isAttrSelected(it) }
-        return if (deckMode) attrs.plus(Attribute.NEUTRAL) else attrs
+    fun getSelectedAttrs(): List<CardAttribute> {
+        val attrs = CardAttribute.values().filter { isAttrSelected(it) }
+        return if (deckMode) attrs.plus(CardAttribute.NEUTRAL) else attrs
     }
 
     protected fun updateVisibility(v: View, show: Boolean, only: Boolean) {
-        v.visibility = if (show) View.VISIBLE else if (only) View.INVISIBLE else v.visibility
+        v.visibility = View.VISIBLE.takeIf { show } ?: View.INVISIBLE.takeIf { only } ?: v.visibility
     }
 
     class SavedState : BaseSavedState {
 
-        var attrSelected: Attribute = Attribute.STRENGTH
+        var attrSelected: CardAttribute = CardAttribute.STRENGTH
 
         constructor(source: Parcel?) : super(source) {
-            this.attrSelected = Attribute.values()[source?.readInt() ?: 0]
+            this.attrSelected = CardAttribute.values()[source?.readInt() ?: 0]
         }
 
-        constructor(source: Parcelable, attrSelected: Attribute) : super(source) {
+        constructor(source: Parcelable, attrSelected: CardAttribute) : super(source) {
             this.attrSelected = attrSelected
         }
 
         companion object {
+            @Suppress("unused")
             @JvmField val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
                 override fun createFromParcel(source: Parcel): SavedState = SavedState(source)
                 override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)

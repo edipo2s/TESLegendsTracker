@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.Attribute
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardRarity
 import kotlinx.android.synthetic.main.widget_collection_statistics_attr.view.*
 
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.widget_collection_statistics_attr.view.*
 class CollectionStatisticsAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
-    private var attribute = Attribute.STRENGTH
+    private var attribute = CardAttribute.STRENGTH
     private val cards = hashMapOf(CardRarity.COMMON to Pair(0, 0), CardRarity.RARE to Pair(0, 0),
             CardRarity.EPIC to Pair(0, 0), CardRarity.LEGENDARY to Pair(0, 0))
 
@@ -25,7 +25,7 @@ class CollectionStatisticsAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr
     init {
         inflate(context, R.layout.widget_collection_statistics_attr, this)
         val a = context.obtainStyledAttributes(attrs, R.styleable.CollectionStatisticsAttr)
-        attribute = Attribute.values()[a.getInteger(R.styleable.CollectionStatisticsAttr_attribute, 0)]
+        attribute = CardAttribute.values()[a.getInteger(R.styleable.CollectionStatisticsAttr_attribute, 0)]
         a.recycle()
         attr_statistics_attr.setImageResource(attribute.imageRes)
         if (!isInEditMode) {

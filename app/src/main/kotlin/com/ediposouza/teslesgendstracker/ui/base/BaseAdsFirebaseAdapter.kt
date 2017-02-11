@@ -77,7 +77,7 @@ abstract class BaseAdsFirebaseAdapter<T, VH : RecyclerView.ViewHolder>(model: Cl
         if (viewType == VIEW_TYPE_CONTENT) {
             val qtdAdsBefore = getAdsQtdBeforePosition(position)
             val nextEachItems = adsEachItems * (qtdAdsBefore + 1) + qtdAdsBefore
-            viewType = if (position == nextEachItems) VIEW_TYPE_ADS else VIEW_TYPE_CONTENT
+            viewType = VIEW_TYPE_ADS.takeIf { position == nextEachItems } ?: VIEW_TYPE_CONTENT
         }
         return viewType
     }

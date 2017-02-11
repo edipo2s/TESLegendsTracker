@@ -5,6 +5,7 @@ import com.ediposouza.teslesgendstracker.data.*
 /**
  * Created by ediposouza on 08/12/16.
  */
+@Suppress("unused")
 abstract class MetricsConstants {
 
     companion object {
@@ -65,7 +66,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_SET = "Set"
     }
 
-    class ACTION_CARD_FILTER_ATTR(val attr: Attribute?) : MetricAction("FilterCardAttr") {
+    class ACTION_CARD_FILTER_ATTR(val attr: CardAttribute?) : MetricAction("FilterCardAttr") {
         val PARAM_ATTR = "Attr"
     }
 
@@ -94,6 +95,12 @@ sealed class MetricAction(val name: String) {
         val PARAM_PRIVATE = "Private"
     }
 
+    class ACTION_DECK_UPDATE(val type: String, val patch: String, val private: Boolean) : MetricAction("DeckUpdate") {
+        val PARAM_TYPE = "Type"
+        val PARAM_PATCH = "Patch"
+        val PARAM_PRIVATE = "Private"
+    }
+
     class ACTION_MATCH_STATISTICS_WIN_RATE(val checked: Boolean) : MetricAction("MatchStatisticsWinRate") {
         val PARAM_CHECKED = "Checked"
     }
@@ -114,16 +121,17 @@ sealed class MetricAction(val name: String) {
         val PARAM_SEASON = "Season"
     }
 
-    class ACTION_MATCH_STATISTICS_CLASS(val cls: Class) : MetricAction("MatchStatisticsClass") {
+    class ACTION_MATCH_STATISTICS_CLASS(val cls: DeckClass) : MetricAction("MatchStatisticsClass") {
         val PARAM_CLASS = "Class"
     }
 
-    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?) : MetricAction("MatchStatisticsClass") {
+    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?, val fromArena: Boolean = false) : MetricAction("NewMatch") {
         val PARAM_DECK = "Deck"
         val PARAM_DECK_VALUE_OTHER = "Other"
+        val PARAM_FROM_ARENA = "FromArena"
     }
 
-    class ACTION_NEW_MATCH_SAVE(val myDeckCls: Class, val myDeckType: DeckType, val optDeckCls: Class,
+    class ACTION_NEW_MATCH_SAVE(val myDeckCls: DeckClass, val myDeckType: DeckType, val optDeckCls: DeckClass,
                                 val optDeckType: DeckType, val mode: MatchMode, val season: String?,
                                 val legendRank: Boolean, val deckTrackerUsed: Boolean) : MetricAction("MatchNew") {
         val PARAM_MY_CLS = "MyClass"
@@ -160,6 +168,19 @@ sealed class MetricAction(val name: String) {
         val PARAM_ARTICLE = "ArticleID"
     }
 
+    class ACTION_ARENA_FILTER_SEASON(val season: Season?) : MetricAction("FilterArenaSeason") {
+        val PARAM_SEASON = "Season"
+    }
+
+    class ACTION_ARENA_START(val cls: DeckClass, val fromStartMenu: Boolean) : MetricAction("ArenaStart") {
+        val PARAM_CLASS = "Class"
+        val PARAM_FROM_START_MENU = "FromStartMenu"
+    }
+
+    class ACTION_ARENA_PICK(val card: Card) : MetricAction("ArenaPick") {
+        val PARAM_CARD = "Card"
+    }
+
 }
 
 sealed class MetricScreen(val name: String) {
@@ -188,6 +209,9 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
     class SCREEN_SEASONS : MetricScreen("Seasons")
+    class SCREEN_ARENA : MetricScreen("Arena")
+    class SCREEN_NEW_ARENA : MetricScreen("NewArena")
+    class SCREEN_NEW_ARENA_DRAFT : MetricScreen("NewArenaDraft")
     class SCREEN_PATCH_DETAILS : MetricScreen("PatchDetails")
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")
