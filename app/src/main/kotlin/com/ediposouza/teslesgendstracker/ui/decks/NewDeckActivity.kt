@@ -225,7 +225,7 @@ class NewDeckActivity : BaseFilterActivity() {
                     val data = intentFor<NewDeckActivity>(DECK_PRIVATE_EXTRA to deckPrivate)
                     setResult(Activity.RESULT_OK, data)
                     ActivityCompat.finishAfterTransition(this@NewDeckActivity)
-                    MetricsManager.trackAction(MetricAction.ACTION_NEW_DECK_UPDATE(deckTypeText, deckPatchDesc, deckPrivate))
+                    MetricsManager.trackAction(MetricAction.ACTION_DECK_UPDATE(deckTypeText, deckPatchDesc, deckPrivate))
                 }
             }
         } else {

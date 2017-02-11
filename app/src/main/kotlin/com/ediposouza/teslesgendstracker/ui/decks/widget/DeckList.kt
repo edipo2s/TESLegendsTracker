@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
+import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
@@ -49,16 +50,23 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     val deckListAdapter by lazy {
         DeckListAdapter({ index -> decklist_recycle_view.scrollToPosition(index) },
                 itemClick = { view, card ->
-                    if (editMode || arenaMode) {
+                    if (editMode) {
                         remCard(card)
                     } else {
                         showExpandedCard(card, view)
                     }
-                }) {
-            view, card ->
-            showExpandedCard(card, view)
-            true
-        }
+                },
+                itemLongClick = { view, card ->
+                    if (arenaMode) {
+                        context.alertThemed(R.string.new_arena_draft_remove_card, theme = R.style.AppDialog) {
+                            positiveButton(android.R.string.yes, { remCard(card) })
+                            negativeButton(android.R.string.no, {})
+                        }.show()
+                    } else {
+                        showExpandedCard(card, view)
+                    }
+                    true
+                })
     }
 
     init {
@@ -148,6 +156,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 decklist_class_attr2_qtd.text = "${attrGroup.values.last().sumBy { it.qtd }}"
             }
         }
+        val prophecyCardSlots = cards.filter { it.card.keywords.contains(CardKeyword.PROPHECY) }
+        decklist_class_prophecy.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
+        decklist_class_prophecy_qtd.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
+        decklist_class_prophecy_qtd.text = "${prophecyCardSlots.sumBy { it.qtd }}"
     }
 
     class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,
