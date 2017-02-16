@@ -2,11 +2,11 @@
 
 buildscript {
     ext {
-        appVersionName = "0.4.0"
-        appVersionCode = 11
+        appVersionName = "0.4.1"
+        appVersionCode = 12
 
         kotlin_version = "1.1.0-beta-38"
-        prepareToRelease = true
+        prepareToRelease = false
     }
 
     repositories {

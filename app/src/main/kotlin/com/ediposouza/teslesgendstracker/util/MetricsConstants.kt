@@ -125,7 +125,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_CLASS = "Class"
     }
 
-    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?, val fromArena: Boolean = false) : MetricAction("NewMatch") {
+    class ACTION_NEW_MATCH_START_WITH(val deck: Deck?, val fromArena: Boolean = false) : MetricAction("MatchStart") {
         val PARAM_DECK = "Deck"
         val PARAM_DECK_VALUE_OTHER = "Other"
         val PARAM_FROM_ARENA = "FromArena"
