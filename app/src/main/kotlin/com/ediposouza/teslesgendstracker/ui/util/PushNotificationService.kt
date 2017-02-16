@@ -34,7 +34,7 @@ class PushNotificationService : FirebaseMessagingService() {
 
         remoteMessage.notification?.apply {
             Log.d(TAG, "Firebase Notification Message: " + body)
-            showNotification(getString(R.string.app_name), body, bundleData)
+            showNotification(getString(R.string.app_name), body ?: "", bundleData)
             return
         }
     }
