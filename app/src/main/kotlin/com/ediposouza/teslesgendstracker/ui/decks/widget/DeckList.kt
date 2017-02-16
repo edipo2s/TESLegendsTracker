@@ -138,8 +138,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         var attrGroup = HashMap<CardAttribute, List<CardSlot>>()
         attrGroup.putAll(cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap())
         cards.filter { it.card.attr == CardAttribute.DUAL }.forEach {
-            attrGroup.put(it.card.dualAttr1, listOf(it))
-            attrGroup.put(it.card.dualAttr2, listOf(it))
+            val attr1List = attrGroup[it.card.dualAttr1] ?: listOf<CardSlot>()
+            val attr2List = attrGroup[it.card.dualAttr2] ?: listOf<CardSlot>()
+            attrGroup.put(it.card.dualAttr1, attr1List.plus(it))
+            attrGroup.put(it.card.dualAttr2, attr2List.plus(it))
         }
         decklist_class_attr1.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
         decklist_class_attr1_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
