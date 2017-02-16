@@ -1,6 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.matches.tabs
 
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.view.*
 import com.ediposouza.teslesgendstracker.R
@@ -35,7 +36,7 @@ class ArenaFragment : MatchesHistoryFragment() {
         super.onViewCreated(view, savedInstanceState)
         arena_fab_add.setOnClickListener {
             val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-            startActivity(context.intentFor<NewArenaActivity>(), anim.toBundle())
+            ActivityCompat.startActivity(activity, context.intentFor<NewArenaActivity>(), anim.toBundle())
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARENA())
     }
