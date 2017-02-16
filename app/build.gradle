@@ -68,7 +68,7 @@ ext {
     icePickVersion = "3.2.+"
     okIOVersion = "1.11.+"
     okHttpVersion = "3.6.+"
-    playServicesVersion = prepareToRelease ? "10.0.1" : "9.8.0"
+    playServicesVersion = prepareToRelease ? "10.2.0" : "9.8.0"
     supportLibraryVersion = "25.1.1"
     threetenabpVersion = "1.0.+"
 

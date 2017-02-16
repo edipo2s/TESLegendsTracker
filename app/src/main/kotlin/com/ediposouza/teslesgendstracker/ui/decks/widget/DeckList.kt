@@ -27,6 +27,7 @@ import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Created by EdipoSouza on 11/2/16.
@@ -134,11 +135,11 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val qtdFormat = R.string.new_deck_card_list_arena_qtd.takeIf { arenaMode } ?: R.string.new_deck_card_list_qtd
         decklist_qtd.text = context.getString(qtdFormat, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
-        val attrGroup = cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap()
+        var attrGroup = HashMap<CardAttribute, List<CardSlot>>()
+        attrGroup.putAll(cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap())
         cards.filter { it.card.attr == CardAttribute.DUAL }.forEach {
-            val mergeList = { t: List<CardSlot>, u: List<CardSlot> -> t.toMutableList().apply { addAll(u) } }
-            attrGroup.merge(it.card.dualAttr1, listOf(it), mergeList)
-            attrGroup.merge(it.card.dualAttr2, listOf(it), mergeList)
+            attrGroup.put(it.card.dualAttr1, listOf(it))
+            attrGroup.put(it.card.dualAttr2, listOf(it))
         }
         decklist_class_attr1.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
         decklist_class_attr1_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
@@ -160,6 +161,13 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_class_prophecy.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
         decklist_class_prophecy_qtd.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
         decklist_class_prophecy_qtd.text = "${prophecyCardSlots.sumBy { it.qtd }}"
+    }
+
+    fun <K, V> Map<K, V>.mergeReduce(other: Map<K, V>, reduce: (V, V) -> V = { a, b -> b }): Map<K, V> {
+        val result = LinkedHashMap<K, V>(this.size + other.size)
+        result.putAll(this)
+        other.forEach { e -> result[e.key] = result[e.key]?.let { reduce(e.value, it) } ?: e.value }
+        return result
     }
 
     class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,
