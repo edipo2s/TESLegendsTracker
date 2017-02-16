@@ -6,9 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.IntegerRes
 import android.support.design.widget.BottomSheetBehavior
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.ListPopupWindow
 import android.widget.Spinner
@@ -154,3 +152,18 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
 }
 
 fun LocalDate.toYearMonth(): YearMonth = YearMonth.of(year, month)
+
+fun Context.hasNavigationBar(): Boolean {
+    val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+    val hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
+    return (!(hasBackKey && hasHomeKey))
+}
+
+fun View.setBottomPaddingForNavigationBar() {
+    var result = 0
+    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    setPadding(paddingLeft, paddingTop, paddingRight, result)
+}

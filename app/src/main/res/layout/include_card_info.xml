@@ -18,13 +18,13 @@
     tools:showIn="@layout/activity_card">
 
     <RelativeLayout
+        android:id="@+id/card_info_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginEnd="@dimen/large_margin"
         android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="@dimen/default_margin"
-        android:paddingBottom="@dimen/card_bottom_sheet_margin_bottom">
+        android:layout_marginTop="@dimen/default_margin">
 
         <ImageView
             android:id="@+id/card_favorite_btn"

@@ -155,7 +155,7 @@ class SeasonsFragment : BaseFragment() {
                 season_best_rank_label.visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
                 with(season_best_rank) {
                     val rankedGroup = rankedMatches.groupBy { it.legend }
-                    text = (rankedGroup[true] ?: rankedGroup[false])?.minBy { it.rank }?.rank.toString()
+                    text = "${(rankedGroup[true] ?: rankedGroup[false])?.minBy { it.rank }?.rank ?: 0}"
                     val legendIcon = R.drawable.ic_rank_legend.takeIf { rankedGroup[true] != null } ?: 0
                     setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, legendIcon)
                     visibility = View.GONE.takeIf { noMatches } ?: View.VISIBLE
