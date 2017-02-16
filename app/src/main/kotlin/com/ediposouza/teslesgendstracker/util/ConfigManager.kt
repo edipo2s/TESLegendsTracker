@@ -14,6 +14,7 @@ object ConfigManager {
     val DB_UPDATE_CONFIG = "db_update"
     val SHOW_DECK_ADS_CONFIG = "showDeckAds"
     val VERSION_UNSUPPORTED_CONFIG = "version_unsupported"
+    val ASUS_ZENPHONE_SINGLE_ANIM_CONFIG = "asusZenPhoneSingleAnim"
 
     val remoteConfig: FirebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
 
@@ -24,7 +25,8 @@ object ConfigManager {
                     .build())
             setDefaults(mapOf(DB_UPDATE_CONFIG to false,
                     SHOW_DECK_ADS_CONFIG to false,
-                    VERSION_UNSUPPORTED_CONFIG to ""))
+                    VERSION_UNSUPPORTED_CONFIG to "",
+                    ASUS_ZENPHONE_SINGLE_ANIM_CONFIG to false))
         }
         updateCaches {}
     }
@@ -43,6 +45,8 @@ object ConfigManager {
     fun isDBUpdating() = remoteConfig.getBoolean(DB_UPDATE_CONFIG)
 
     fun isShowDeckAds() = remoteConfig.getBoolean(SHOW_DECK_ADS_CONFIG)
+
+    fun isAsusZenPhoneSingleAnim() = remoteConfig.getBoolean(ASUS_ZENPHONE_SINGLE_ANIM_CONFIG)
 
     fun isVersionUnsupported(): Boolean {
         val unsupportedVersions = remoteConfig.getString(VERSION_UNSUPPORTED_CONFIG)

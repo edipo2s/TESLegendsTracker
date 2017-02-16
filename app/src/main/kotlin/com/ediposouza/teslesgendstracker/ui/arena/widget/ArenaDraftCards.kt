@@ -149,7 +149,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     private fun updateCardList(cards: List<Card>, cardsAdapter: CardsAllFragment.CardsAllAdapter) {
         cardsAdapter.showCards(cards.filter { it.attr == currentAttr }
-                .filter { currentMagika == -1 || it.cost == currentMagika }
+                .filter { currentMagika == -1 || (if (currentMagika < 7) it.cost == currentMagika else it.cost >= currentMagika) }
                 .filter { currentRarity == null || it.rarity == currentRarity }
                 .filter { !it.evolves }
                 .sortedBy { it.cost })
