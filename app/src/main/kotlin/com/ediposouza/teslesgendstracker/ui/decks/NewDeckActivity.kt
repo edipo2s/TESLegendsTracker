@@ -152,13 +152,17 @@ class NewDeckActivity : BaseFilterActivity() {
             onAttrLock = { attr1: CardAttribute, attr2: CardAttribute ->
                 val deckCls = DeckClass.getClasses(listOf(attr1, attr2)).first()
                 new_deck_class_cover.setImageResource(deckCls.imageRes)
-                new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
+                if (deckToEdit == null) {
+                    new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
+                }
                 val outValue = TypedValue()
                 resources.getValue(R.dimen.deck_class_cover_alpha, outValue, true)
                 new_deck_class_cover.animate().alpha(outValue.float).setDuration(ANIM_DURATION).start()
             }
             onAttrUnlock = {
-                new_deck_toolbar_title.text = getString(R.string.new_deck_title)
+                if (deckToEdit == null) {
+                    new_deck_toolbar_title.text = getString(R.string.new_deck_title)
+                }
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
             if (deckToEdit != null) {

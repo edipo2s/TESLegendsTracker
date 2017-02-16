@@ -16,6 +16,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
+import android.transition.Transition
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -163,7 +164,6 @@ class DeckActivity : BaseActivity() {
             deck_comment_send?.isEnabled = false
             deck_comment_new?.hint = getText(R.string.deck_comment_new_hint_anonymous)
         }
-        loadDeckRemoteInfo()
         if (savedInstanceState != null) {
             deck_comment_new.postDelayed({
                 CommonUtils.hideKeyboard(this, deck_comment_new)
@@ -176,6 +176,32 @@ class DeckActivity : BaseActivity() {
         setResult(Activity.RESULT_OK, Intent())
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECK_DETAILS())
         MetricsManager.trackDeckView(deck)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.sharedElementEnterTransition?.apply {
+                addListener(object : Transition.TransitionListener {
+                    override fun onTransitionEnd(transition: Transition?) {
+                        removeListener(this)
+                        loadDeckRemoteInfo()
+                    }
+
+                    override fun onTransitionResume(transition: Transition?) {
+                    }
+
+                    override fun onTransitionPause(transition: Transition?) {
+                    }
+
+                    override fun onTransitionCancel(transition: Transition?) {
+                        removeListener(this)
+                    }
+
+                    override fun onTransitionStart(transition: Transition?) {
+                    }
+
+                })
+            }
+        } else {
+            loadDeckRemoteInfo()
+        }
     }
 
     override fun onBackPressed() {
