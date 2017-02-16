@@ -41,11 +41,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
     var editMode = false
 
-    private fun showExpandedCard(card: Card, view: View) {
-        val transitionName = context.getString(R.string.card_transition_name)
-        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, view, transitionName).toBundle())
-    }
+    val cardTransitionName by lazy { context.getString(R.string.card_transition_name) }
 
     val deckListAdapter by lazy {
         DeckListAdapter({ index -> decklist_recycle_view.scrollToPosition(index) },
@@ -53,7 +49,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     if (editMode) {
                         remCard(card)
                     } else {
-                        showExpandedCard(card, view)
+                        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity,
+                                        view, cardTransitionName).toBundle())
                     }
                 },
                 itemLongClick = { view, card ->
@@ -63,7 +61,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                             negativeButton(android.R.string.no, {})
                         }.show()
                     } else {
-                        showExpandedCard(card, view)
+                        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity,
+                                        view, cardTransitionName).toBundle())
                     }
                     true
                 })

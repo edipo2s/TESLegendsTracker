@@ -38,6 +38,12 @@ android {
                 println(e.message)
             }
         }
+        release {
+            storeFile file('debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
     }
     buildTypes {
         debug {
@@ -46,7 +52,7 @@ android {
         }
         release {
             debuggable false
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -54,10 +60,11 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
 }
 
 ext {
-    anko_version = "0.9"
+    anko_version = "0.9.1a"
     icePickVersion = "3.2.+"
     okIOVersion = "1.11.+"
     okHttpVersion = "3.6.+"
@@ -65,8 +72,8 @@ ext {
     supportLibraryVersion = "25.1.1"
     threetenabpVersion = "1.0.+"
 
-    testMockitoVersion = "2.1.+"
-    testRoboletricVersion = "3.1.+"
+    testMockitoVersion = "2.7.+"
+    testRoboletricVersion = "3.2.+"
 }
 
 configurations.all {

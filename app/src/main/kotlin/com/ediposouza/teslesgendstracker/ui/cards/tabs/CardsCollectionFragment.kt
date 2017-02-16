@@ -58,7 +58,9 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     var isEditStarted: Boolean = false
 
-    val view_statistics by lazy { activity.find<CollectionStatistics>(R.id.cards_collection_statistics) }
+    val view_statistics: CollectionStatistics
+        get() = activity.find<CollectionStatistics>(R.id.cards_collection_statistics)
+
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
         get() = BottomSheetBehavior.from(view_statistics)
 

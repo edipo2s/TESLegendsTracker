@@ -1,6 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.decks.tabs
 
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterSearch
 import com.ediposouza.teslesgendstracker.ui.decks.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
+import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
@@ -35,6 +38,7 @@ import java.text.NumberFormat
  */
 open class DecksPublicFragment : BaseFragment() {
 
+    val ASUS_CREATE_LAYER_ERROR = "Z00AD"
     val ADS_EACH_ITEMS = 10 //after 10 lines
     val DECK_PAGE_SIZE = 8
 
@@ -62,12 +66,18 @@ open class DecksPublicFragment : BaseFragment() {
             val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
-            startActivity(DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                            Pair(view.deck_name as View, nameTransitionName),
-                            Pair(view.deck_cover as View, coverTransitionName),
-                            Pair(view.deck_attr1 as View, attr1TransitionName),
-                            Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+            val deckIntent = DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId)
+            if (ConfigManager.isAsusZenPhoneSingleAnim() && Build.MODEL.contains(ASUS_CREATE_LAYER_ERROR)) {
+                ActivityCompat.startActivity(activity, deckIntent, ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(activity, view.deck_cover, coverTransitionName).toBundle())
+            } else {
+                ActivityCompat.startActivity(activity, deckIntent, ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(activity,
+                                Pair(view.deck_name as View, nameTransitionName),
+                                Pair(view.deck_cover as View, coverTransitionName),
+                                Pair(view.deck_attr1 as View, attr1TransitionName),
+                                Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+            }
         }
     }
 

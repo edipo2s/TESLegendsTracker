@@ -2,6 +2,7 @@ package com.ediposouza.teslesgendstracker.ui.matches.tabs
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
@@ -93,7 +94,7 @@ class MatchesStatisticsFragment : BaseFragment() {
                         it.getTag(com.inqbarna.tablefixheaders.R.id.tag_row) == row &&
                                 it.getTag(com.inqbarna.tablefixheaders.R.id.tag_type_view) == 2
                     }.first()
-            startActivity(MatchesStatisticsClassActivity.newIntent(context, currentMatchMode, currentSeason,
+            ActivityCompat.startActivity(activity, MatchesStatisticsClassActivity.newIntent(context, currentMatchMode, currentSeason,
                     selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     Pair(classView.cell_class_attr1 as View, attr1TransitionName),
                     Pair(classView.cell_class_attr2 as View, attr2TransitionName)).toBundle())
