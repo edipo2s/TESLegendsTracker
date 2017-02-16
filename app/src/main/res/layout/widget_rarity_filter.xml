@@ -24,8 +24,9 @@
     <ImageView
         android:id="@+id/rarity_filter_common"
         style="@style/RarityItem"
-        android:layout_width="@dimen/size_medium"
-        android:layout_height="@dimen/size_medium"
+        android:layout_width="@dimen/rarity_icon_size"
+        android:layout_height="@dimen/rarity_icon_size"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/rarity_filter"
         android:src="@drawable/ic_rarity_common"
         tools:visibility="visible" />
@@ -33,8 +34,9 @@
     <ImageView
         android:id="@+id/rarity_filter_rare"
         style="@style/RarityItem"
-        android:layout_width="@dimen/size_medium"
-        android:layout_height="@dimen/size_medium"
+        android:layout_width="@dimen/rarity_icon_size"
+        android:layout_height="@dimen/rarity_icon_size"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/rarity_filter_common"
         android:src="@drawable/ic_rarity_rare"
         tools:visibility="visible" />
@@ -42,8 +44,9 @@
     <ImageView
         android:id="@+id/rarity_filter_epic"
         style="@style/RarityItem"
-        android:layout_width="@dimen/size_medium"
-        android:layout_height="@dimen/size_medium"
+        android:layout_width="@dimen/rarity_icon_size"
+        android:layout_height="@dimen/rarity_icon_size"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/rarity_filter_rare"
         android:src="@drawable/ic_rarity_epic"
         tools:visibility="visible" />
@@ -51,8 +54,9 @@
     <ImageView
         android:id="@+id/rarity_filter_legendary"
         style="@style/RarityItem"
-        android:layout_width="@dimen/size_medium"
-        android:layout_height="@dimen/size_medium"
+        android:layout_width="@dimen/rarity_icon_size"
+        android:layout_height="@dimen/rarity_icon_size"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/rarity_filter_epic"
         android:src="@drawable/ic_rarity_legendary"
         tools:visibility="visible" />

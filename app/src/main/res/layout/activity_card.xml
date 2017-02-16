@@ -9,9 +9,9 @@
     tools:ctx="com.ediposouza.teslesgendstracker.ui.cards.CardActivity">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/card_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/navigation_bar_height">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"

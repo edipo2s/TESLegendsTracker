@@ -18,7 +18,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     val ANIM_DURATION: Long = 200
     val rarityBGMinWidth by lazy { resources.getDimensionPixelSize(R.dimen.size_medium) }
-    val rarityBGMaxWidth by lazy { resources.getDimensionPixelSize(R.dimen.rarity_bg_max_width) }
+    val rarityBGMaxWidth by lazy { resources.getDimensionPixelSize(R.dimen.size_medium) * 5 }
 
     var filterClick: ((CardRarity?) -> Unit)? = null
     var collapseOnClick: Boolean = true

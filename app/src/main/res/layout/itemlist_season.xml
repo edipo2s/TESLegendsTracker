@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:paddingBottom="@dimen/default_margin"
-            android:paddingStart="@dimen/default_margin"
+            android:paddingStart="@dimen/small_margin"
             android:paddingTop="@dimen/default_margin">
 
             <TextView
@@ -90,14 +90,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:paddingBottom="@dimen/huge_margin"
                 android:paddingStart="@dimen/text_shadow_padding"
                 android:paddingTop="@dimen/text_shadow_padding"
                 android:rotation="-45"
                 android:text="@string/season_no_matches"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/font_huge"
+                android:textSize="@dimen/font_large"
                 android:textStyle="bold"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -107,11 +107,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:paddingBottom="@dimen/huge_margin"
                 android:rotation="-45"
                 android:text="@string/season_no_matches"
-                android:textSize="@dimen/font_huge"
+                android:textSize="@dimen/font_large"
                 android:textStyle="bold"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/season_matches_label"
                 android:layout_below="@id/season_matches_label"
-                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:orientation="vertical">
 
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/season_matches_layout"
-                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_toEndOf="@id/season_matches_layout"
                 android:textColor="@color/colorAccent"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/season_matches_label"
                 android:layout_below="@id/season_opponent_label"
-                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:orientation="vertical">
 

@@ -6,6 +6,6 @@
         android:id="@+id/menu_import"
         android:icon="@drawable/ic_import"
         android:title="@string/menu_import"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

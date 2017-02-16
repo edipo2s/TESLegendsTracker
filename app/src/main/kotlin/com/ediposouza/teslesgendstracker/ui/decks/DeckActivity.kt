@@ -91,6 +91,12 @@ class DeckActivity : BaseActivity() {
             layoutParams.topMargin = statusBarHeight
             toolbar.layoutParams = layoutParams
         }
+        if (hasNavigationBar()) {
+            deck_content.setBottomPaddingForNavigationBar()
+            deck_comment_content.setBottomPaddingForNavigationBar()
+            commentsSheetBehavior.peekHeight = resources.getDimensionPixelOffset(R.dimen.deck_comment_bottom_sheet_peek_height) +
+                    resources.getDimensionPixelOffset(R.dimen.navigation_bar_height)
+        }
 
         favorite = intent.getBooleanExtra(EXTRA_FAVORITE, false)
         like = intent.getBooleanExtra(EXTRA_LIKE, false)

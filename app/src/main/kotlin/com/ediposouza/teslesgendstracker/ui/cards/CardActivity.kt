@@ -66,6 +66,12 @@ class CardActivity : BaseActivity() {
         setContentView(R.layout.activity_card)
         ActivityCompat.postponeEnterTransition(this)
         snackbarNeedMargin = false
+        if (hasNavigationBar()) {
+            card_content.setBottomPaddingForNavigationBar()
+            card_info_content.setBottomPaddingForNavigationBar()
+            cardInfoSheetBehavior.peekHeight = resources.getDimensionPixelOffset(R.dimen.card_bottom_sheet_peek_height) +
+                    resources.getDimensionPixelOffset(R.dimen.navigation_bar_height)
+        }
 
         configureRecycleView()
         loadCardInfo()
