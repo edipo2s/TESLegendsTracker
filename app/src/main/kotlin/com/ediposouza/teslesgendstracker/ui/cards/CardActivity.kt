@@ -76,21 +76,27 @@ class CardActivity : BaseActivity() {
         }
 
         configureRecycleView()
-        loadCardInfo()
-        configureBottomSheet()
-        card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        with(card_recycler_view) {
+            var listener: ViewTreeObserver.OnPreDrawListener? = null
+            listener = ViewTreeObserver.OnPreDrawListener {
+                viewTreeObserver.removeOnPreDrawListener(listener)
+                ActivityCompat.startPostponedEnterTransition(this@CardActivity)
+                getCardPatches()
+                true
+            }
+            viewTreeObserver.addOnPreDrawListener(listener)
+        }
         setResult(Activity.RESULT_CANCELED, Intent())
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        card_ads_view.load()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.sharedElementEnterTransition?.apply {
                 addListener(object : Transition.TransitionListener {
                     override fun onTransitionEnd(transition: Transition?) {
                         removeListener(this)
-                        configQtdAndFavoriteInfo()
+                        onTransitionEnds()
                     }
 
                     override fun onTransitionResume(transition: Transition?) {
@@ -109,10 +115,18 @@ class CardActivity : BaseActivity() {
                 })
             }
         } else {
-            configQtdAndFavoriteInfo()
+            onTransitionEnds()
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
+    }
+
+    private fun onTransitionEnds() {
+        card_ads_view.load()
+        card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        loadCardInfo()
+        configBottomSheet()
+        configQtdAndFavoriteInfo()
     }
 
     private fun configQtdAndFavoriteInfo() {
@@ -180,7 +194,7 @@ class CardActivity : BaseActivity() {
         }
     }
 
-    private fun configureBottomSheet() {
+    private fun configBottomSheet() {
         cardInfoSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
@@ -219,14 +233,6 @@ class CardActivity : BaseActivity() {
             adapter = CardAdapter(cardVersions, onCardClick)
             setHasFixedSize(true)
             LinearSnapHelper().attachToRecyclerView(this)
-            var listener: ViewTreeObserver.OnPreDrawListener? = null
-            listener = ViewTreeObserver.OnPreDrawListener {
-                card_recycler_view.viewTreeObserver.removeOnPreDrawListener(listener)
-                ActivityCompat.startPostponedEnterTransition(this@CardActivity)
-                getCardPatches()
-                true
-            }
-            viewTreeObserver.addOnPreDrawListener(listener)
         }
     }
 

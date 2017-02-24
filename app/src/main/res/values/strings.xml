@@ -6,8 +6,6 @@
     <string name="app_ads_card_full" translatable="false">***REMOVED***</string>
     <string name="app_ads_deck_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_deck_list_size" translatable="false">280x80</string>
-    <string name="app_ads_deck_full" translatable="false">ca-app-pub-7881623561544201/4768635172</string>
-    <string name="app_ads_deck_full_size" translatable="false">240x50</string>
     <string name="app_ads_new_deck_card_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_new_deck_card_list_size" translatable="false">220x50</string>
     <string name="app_ads_match_history_list" translatable="false">***REMOVED***</string>
@@ -77,7 +75,7 @@
     <string name="about_info_version">App Version:</string>
     <string name="about_info_developer_label">Developer:</string>
     <string name="about_info_developer" translatable="false">Édipo Souza (edipo2s)</string>
-    <string name="about_info_developer_link" translatable="false">https://twitter.com/EdipoSilvaSouza</string>
+    <string name="about_info_developer_link" translatable="false">https://twitter.com/Edipo2s</string>
     <string name="about_info_thanks_label">Special Thanks:</string>
     <string name="about_info_thanks_direwolf" translatable="false">Dire Wolf - </string>
     <string name="about_info_thanks_direwolf_text">TES Legends game</string>

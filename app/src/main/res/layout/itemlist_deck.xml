@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/deck_height"
     android:layout_marginTop="@dimen/default_margin"
-    android:transitionGroup="true"
     app:cardCornerRadius="@dimen/small_margin"
     app:cardElevation="@dimen/card_elevation"
     tools:layout_marginTop="@dimen/status_bar_height">
@@ -147,7 +146,9 @@
             android:drawableStart="@drawable/ic_soul_missing"
             android:gravity="center_vertical|end"
             android:textColor="@color/red_800"
-            tools:text="13,705" />
+            android:visibility="gone"
+            tools:text="13,705"
+            tools:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/deck_soul_missing_loading"
