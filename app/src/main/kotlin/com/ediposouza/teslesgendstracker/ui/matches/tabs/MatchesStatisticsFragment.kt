@@ -7,7 +7,6 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
 import android.view.*
-import android.widget.CompoundButton
 import android.widget.FrameLayout
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
@@ -41,7 +40,8 @@ class MatchesStatisticsFragment : BaseFragment() {
     private var currentMatchMode = MatchMode.RANKED
     private var currentSeason: Season? = null
     private var selectedClass: DeckClass? = null
-    private var showPercent: CompoundButton? = null
+    private var showPercent: MenuItem? = null
+    private var hideEmpty: MenuItem? = null
 
     var statisticsTableAdapter: StatisticsTableAdapter? = null
     var results: Map<DeckClass, MutableList<Match>> = mutableMapOf()
@@ -68,14 +68,27 @@ class MatchesStatisticsFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        val menuPercent = menu?.findItem(R.id.menu_percent)
-        menuPercent?.isVisible = true
-        showPercent = menuPercent?.actionView as CompoundButton
-        showPercent?.setOnCheckedChangeListener { _, checked ->
-            updateStatisticsData()
-            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE(checked))
-        }
+        val menuFilter = menu?.findItem(R.id.menu_filter)
+        menuFilter?.isVisible = true
+        showPercent = menuFilter?.subMenu?.findItem(R.id.menu_percent)
+        hideEmpty = menuFilter?.subMenu?.findItem(R.id.menu_hide_empty)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_percent -> {
+                item.isChecked = !item.isChecked
+                updateStatisticsData()
+                MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_WIN_RATE(item.isChecked))
+            }
+            R.id.menu_hide_empty -> {
+                item.isChecked = !item.isChecked
+                updateStatisticsData()
+                MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_HIDE_EMPTY(item.isChecked))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
@@ -94,8 +107,8 @@ class MatchesStatisticsFragment : BaseFragment() {
                         it.getTag(com.inqbarna.tablefixheaders.R.id.tag_row) == row &&
                                 it.getTag(com.inqbarna.tablefixheaders.R.id.tag_type_view) == 2
                     }.first()
-            ActivityCompat.startActivity(activity, MatchesStatisticsClassActivity.newIntent(context, currentMatchMode, currentSeason,
-                    selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+            ActivityCompat.startActivity(activity, MatchesStatisticsClassActivity.newIntent(context, currentMatchMode,
+                    currentSeason, selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     Pair(classView.cell_class_attr1 as View, attr1TransitionName),
                     Pair(classView.cell_class_attr2 as View, attr2TransitionName)).toBundle())
             MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS(selectedClass!!))
@@ -114,6 +127,12 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsTableAdapter) {
         results = DeckClass.values().map { it to mutableListOf<Match>() }.toMap()
+        val allClass = DeckClass.values()
+        val classTotal: DeckClass? = null
+        var firstData = allClass.map { listOf(BodyItem(null, it, it == selectedClass)) }
+                .plus(listOf(mutableListOf(BodyItem())))
+        tableAdapter?.header = allClass.asList().plus(classTotal)
+        tableAdapter?.setFirstBody(firstData)
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
             DeckClass.values().forEach {
                 add(mutableListOf<BodyItem>().apply {
@@ -134,7 +153,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     private fun updateStatisticsData() {
         doAsync {
-            val data = mutableListOf<List<BodyItem>>().apply {
+            var data = mutableListOf<List<BodyItem>>().apply {
                 DeckClass.values().forEach { myCls ->
                     add(mutableListOf<BodyItem>().apply {
                         val resByMyCls = results[myCls]!!
@@ -154,8 +173,44 @@ class MatchesStatisticsFragment : BaseFragment() {
                     add(getResultBodyItem(allMatches, false))
                 })
             }
+            val allClass = DeckClass.values()
+            val classTotal: DeckClass? = null
+            var classHeader = allClass.asList().plus(classTotal)
+            var firstData = allClass.map { listOf(BodyItem(null, it, it == selectedClass)) }
+                    .plus(listOf(mutableListOf(BodyItem())))
+            if (hideEmpty?.isChecked ?: false) {
+                val filteredFirstBody = mutableListOf<List<BodyItem>>()
+                val filteredBody = mutableListOf<List<BodyItem>>()
+                for (i in data.indices) {
+                    if (data[i].filter { !it.isEmpty() }.isNotEmpty()) {
+                        filteredFirstBody.add(firstData[i])
+                        filteredBody.add(data[i])
+                    }
+                }
+                val nonEmptyCols = mutableListOf<Int>()
+                if (filteredBody.size > 0) {
+                    for (colIndex in filteredBody[0].indices) {
+                        if (filteredBody.filter { !it[colIndex].isEmpty() }.isNotEmpty()) {
+                            nonEmptyCols.add(colIndex)
+                        }
+                    }
+                }
+                classHeader = allClass.filter { nonEmptyCols.contains(allClass.indexOf(it)) }.plus(classTotal)
+                val filteredBodyWithoutEmptyColumn = mutableListOf<List<BodyItem>>().apply {
+                    filteredBody.forEach {
+                        val lineBody = it
+                        add(lineBody.filter { nonEmptyCols.contains(lineBody.indexOf(it)) })
+                    }
+                }
+                firstData = filteredFirstBody
+                data = filteredBodyWithoutEmptyColumn
+            }
             uiThread {
-                statisticsTableAdapter?.body = data
+                statisticsTableAdapter?.apply {
+                    header = classHeader
+                    setFirstBody(firstData)
+                    body = data
+                }
             }
         }
     }
@@ -165,7 +220,7 @@ class MatchesStatisticsFragment : BaseFragment() {
         val wins = result[true]?.size ?: 0
         val losses = result[false]?.size ?: 0
         val resultText = "$wins/$losses".takeIf { !(showPercent?.isChecked ?: false) } ?:
-            getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat()))
+                getString(R.string.match_statistics_percent, calcWinRate(wins.toFloat(), losses.toFloat()))
         return BodyItem(resultText, selected = cellSelected)
     }
 
@@ -200,7 +255,11 @@ class MatchesStatisticsFragment : BaseFragment() {
         }
     }
 
-    class BodyItem(val result: String? = null, val cls: DeckClass? = null, val selected: Boolean = false)
+    class BodyItem(val result: String? = null, val cls: DeckClass? = null, val selected: Boolean = false) {
+
+        fun isEmpty() = result == "0/0" || result == "-1.0%"
+
+    }
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
             DeckClass, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {

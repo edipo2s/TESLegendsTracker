@@ -109,6 +109,14 @@ sealed class MetricAction(val name: String) {
         val PARAM_CHECKED = "Checked"
     }
 
+    class ACTION_MATCH_STATISTICS_HIDE_EMPTY(val checked: Boolean) : MetricAction("MatchStatisticsHideEmpty") {
+        val PARAM_CHECKED = "Checked"
+    }
+
+    class ACTION_MATCH_STATISTICS_CLASS_HIDE_EMPTY(val checked: Boolean) : MetricAction("MatchStatisticsClassHideEmpty") {
+        val PARAM_CHECKED = "Checked"
+    }
+
     class ACTION_MATCH_STATISTICS_FILTER_MODE(val mode: MatchMode) : MetricAction("FilterMatchMode") {
         val PARAM_MODE = "Mode"
     }

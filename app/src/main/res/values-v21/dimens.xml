@@ -13,7 +13,7 @@
 
     <!-- Deck -->
     <!-- transparent status_bar + 115dp-->
-    <dimen name="deck_header_height">115dp</dimen>
+    <dimen name="deck_header_height">140dp</dimen>
     <!-- transparent navigation_bar_height + 36dp-->
     <dimen name="deck_comment_bottom_sheet_peek_height">38dp</dimen>
 </resources>

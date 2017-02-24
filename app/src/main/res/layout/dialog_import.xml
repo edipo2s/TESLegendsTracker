@@ -47,6 +47,17 @@
             android:layout_margin="@dimen/huge_margin"
             android:indeterminate="true" />
 
+        <ProgressBar
+            android:id="@+id/import_dialog_loading_details"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_micro"
+            android:layout_margin="@dimen/default_margin"
+            android:visibility="gone"
+            tools:max="100"
+            tools:progress="50"
+            tools:visibility="visible" />
+
         <WebView
             android:id="@+id/import_dialog_webview"
             android:layout_width="match_parent"

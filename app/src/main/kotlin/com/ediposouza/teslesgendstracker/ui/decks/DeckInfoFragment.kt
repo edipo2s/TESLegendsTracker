@@ -102,12 +102,12 @@ class DeckInfoFragment : BaseFragment() {
                 deck_details_soul_missing_loading.visibility = View.VISIBLE
             }
             PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
-                deck_details_soul_missing_loading.visibility = View.GONE
+                deck_details_soul_missing_loading?.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                 Timber.d("Missing %d", missingSoul)
                 text = NumberFormat.getNumberInstance().format(missingSoul)
                 visibility = View.VISIBLE
-                deck_details_cardlist.showMissingCards(it)
+                deck_details_cardlist?.showMissingCards(it)
             }
         }
     }

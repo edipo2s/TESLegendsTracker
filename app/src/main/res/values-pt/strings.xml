@@ -30,6 +30,8 @@
     <string name="menu_sets">Expanções</string>
     <string name="menu_statistics">Statísticas</string>
     <string name="menu_only_private">Apenas Privados</string>
+    <string name="menu_only_collection">Apenas da Colleção</string>
+    <string name="menu_hide_empty">Ocultar Vazios</string>
     <string name="menu_favorite">Favoritar</string>
     <string name="menu_unfavorite">Desfavoritar</string>
     <string name="menu_like">Curtir</string>
