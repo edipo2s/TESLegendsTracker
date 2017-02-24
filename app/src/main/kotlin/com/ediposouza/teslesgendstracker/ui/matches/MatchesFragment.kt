@@ -113,7 +113,7 @@ class MatchesFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_percent, menu)
+        inflater?.inflate(R.menu.menu_percent_and_hide_empty, menu)
         inflater?.inflate(R.menu.menu_season, menu)
         getSeasons(menu?.findItem(R.id.menu_season))
         super.onCreateOptionsMenu(menu, inflater)
