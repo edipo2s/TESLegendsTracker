@@ -375,8 +375,10 @@ class DeckActivity : BaseActivity() {
 
     fun calculateMissingSoul(deck: Deck) {
         with(deck_details_soul_missing) {
-            visibility = View.INVISIBLE
-            deck_details_soul_missing_loading.visibility = View.VISIBLE
+            runOnUiThread {
+                visibility = View.INVISIBLE
+                deck_details_soul_missing_loading.visibility = View.VISIBLE
+            }
             PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
                 deck_details_soul_missing_loading.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()

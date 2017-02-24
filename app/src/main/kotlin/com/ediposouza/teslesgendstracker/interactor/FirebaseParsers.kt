@@ -163,6 +163,7 @@ abstract class FirebaseParsers {
 
         val changes: Map<String, Map<String, Any>> = mapOf()
         val desc: String = ""
+        val legendsDeck: String = ""
         val type: String = ""
 
         @Suppress("UNCHECKED_CAST")
@@ -174,7 +175,7 @@ abstract class FirebaseParsers {
                 val change = it.value[KEY_PATCH_CHANGE].toString()
                 PatchChange(attr, set, it.key, change)
             }
-            return Patch(uuidDate, date, desc, PatchType.of(type), patchCardChanges)
+            return Patch(uuidDate, date, desc, legendsDeck, PatchType.of(type), patchCardChanges)
         }
 
     }

@@ -148,7 +148,7 @@ open class DecksPublicFragment : BaseFragment() {
     @Subscribe
     @Suppress("unused")
     fun onCmdShowDecksByClasses(cmdShowDecksByClasses: CmdShowDecksByClasses) {
-        currentClasses = cmdShowDecksByClasses.classes.toTypedArray()
+        currentClasses = cmdShowDecksByClasses.classes?.toTypedArray() ?: DeckClass.values()
         showDecks()
         if (currentClasses.isEmpty()) {
             decksAdapter.notifyDataSetChanged()

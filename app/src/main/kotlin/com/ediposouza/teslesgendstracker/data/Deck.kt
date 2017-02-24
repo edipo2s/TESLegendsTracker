@@ -28,6 +28,10 @@ enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAt
 
     companion object {
 
+        fun getClass(attr1: CardAttribute, attr2: CardAttribute): DeckClass {
+            return getClasses(listOf(attr1, attr2)).first()
+        }
+
         fun getClasses(attr: List<CardAttribute>): List<DeckClass> {
             return values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
         }
@@ -43,8 +47,16 @@ enum class DeckType {
     COMBO,
     CONTROL,
     MIDRANGE,
-    OTHER
+    OTHER;
 
+    companion object {
+
+        fun of(value: String): DeckType {
+            val name = value.toUpperCase()
+            return OTHER.takeUnless { values().map { it.name }.contains(name) } ?: valueOf(name)
+        }
+
+    }
 }
 
 data class DeckUpdate(

@@ -89,6 +89,7 @@
 
     <string name="dialog_import_title">Import from Legends-Decks</string>
     <string name="dialog_import_text">Please do login and open your collection edit page</string>
+    <string name="dialog_import_deck_text">Please do login and open my decks page</string>
     <string name="dialog_import_result_title">Collection Import</string>
     <string name="dialog_import_result_imported_text">Cards imported:</string>
     <string name="dialog_import_result_difference_text">Collection differences of Legends-Decks:</string>
@@ -97,7 +98,8 @@
     <string name="dialog_import_result_you_have">YOU HAVE</string>
     <string name="dialog_import_result_has_more">HAS MORE</string>
     <string name="dialog_import_legends_deck_link" translatable="false">https://www.legends-decks.com/collection-manager</string>
-    <string name="dialog_import_legends_deck_login_done_link" translatable="false">https://www.legends-decks.com/#</string>
+    <string name="dialog_import_legends_deck_main_link" translatable="false">https://www.legends-decks.com/#</string>
+    <string name="dialog_import_legends_deck_profile_base_link" translatable="false">https://www.legends-decks.com/profile/</string>
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>

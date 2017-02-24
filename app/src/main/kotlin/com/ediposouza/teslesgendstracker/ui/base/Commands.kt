@@ -22,7 +22,7 @@ data class CmdUpdateTitle(@IntegerRes val title: Int)
 
 data class CmdShowCardsByAttr(val attr: CardAttribute)
 
-data class CmdShowDecksByClasses(val classes: List<DeckClass>)
+data class CmdShowDecksByClasses(val classes: List<DeckClass>?)
 
 data class CmdUpdateRarityMagikaFiltersPosition(val high: Boolean)
 
