@@ -220,8 +220,11 @@ class DashActivity : BaseFilterActivity(),
             data = Uri.parse(intent.extras.getString(EXTRA_DEEPLINK))
         }
         data?.pathSegments?.apply {
-            Timber.d("${this[0]}")
-            when (this[0]) {
+            val path = this[0]
+            val params = this.minus(path).joinToString { it }
+            Timber.d("$path with $params")
+            MetricsManager.trackAction(MetricAction.ACTION_DEEPLINK(path, params))
+            when (path) {
                 getString(R.string.app_deeplink_path_card) -> {
                     PublicInteractor.getCards(null) {
                         val ctx = this@DashActivity
@@ -239,6 +242,10 @@ class DashActivity : BaseFilterActivity(),
                 }
                 getString(R.string.app_deeplink_path_season) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_seasons))
+                }
+                getString(R.string.app_deeplink_path_update) -> {
+                    startActivity(Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                 }
             }
         }

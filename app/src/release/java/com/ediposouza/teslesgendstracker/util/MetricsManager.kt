@@ -132,6 +132,10 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_CARD, action.card.shortName)
                 is MetricAction.ACTION_DECK_CHANGE_VIEW_MODE ->
                     putBoolean(action.PARAM_COMPACT_MODE, action.compatMode)
+                is MetricAction.ACTION_DEEPLINK -> {
+                    putString(action.PARAM_PATH, action.path)
+                    putString(action.PARAM_PATH_PARAMS, action.params)
+                }
             }
         }
         answers?.logCustom(CustomEvent(action.name))

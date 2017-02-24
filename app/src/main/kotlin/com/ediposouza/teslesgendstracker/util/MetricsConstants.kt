@@ -197,6 +197,11 @@ sealed class MetricAction(val name: String) {
     class ACTION_DECK_CHANGE_VIEW_MODE(val compatMode: Boolean) : MetricAction("DeckChangeViewMode") {
         val PARAM_COMPACT_MODE = "CompactMode"
     }
+
+    class ACTION_DEEPLINK(val path: String, val params: String) : MetricAction("Deeplink") {
+        val PARAM_PATH = "path"
+        val PARAM_PATH_PARAMS = "pathParams"
+    }
 }
 
 sealed class MetricScreen(val name: String) {
