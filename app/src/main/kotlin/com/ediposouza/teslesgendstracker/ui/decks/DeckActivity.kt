@@ -199,6 +199,7 @@ class DeckActivity : BaseActivity() {
         val menuDeckView = menu?.findItem(R.id.menu_compact_view)?.actionView as CompoundButton
         menuDeckView.setOnCheckedChangeListener { _, isChecked ->
             eventBus.post(CmdChangeDeckViewMode(isChecked))
+            MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_VIEW_MODE(isChecked))
         }
         return super.onCreateOptionsMenu(menu)
     }
