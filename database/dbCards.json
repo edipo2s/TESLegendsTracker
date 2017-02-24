@@ -5077,7 +5077,8 @@
         "rarity": "Epic",
         "keyword": "Activate",
         "text": "Uses: 3. Activate: Transform a creature card in your hand into a random Legend.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "season": "2017_02"
       },
       "mechanicalally": {
         "name": "Mechanical Ally",

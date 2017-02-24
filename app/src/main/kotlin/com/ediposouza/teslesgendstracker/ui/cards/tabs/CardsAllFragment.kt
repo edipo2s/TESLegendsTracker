@@ -49,6 +49,8 @@ open class CardsAllFragment : BaseFragment() {
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
+    val rewardText by lazy { getString(R.string.cards_search_reward) }
+    val uniqueText by lazy { getString(R.string.cards_search_unique) }
 
     protected var shouldScrollToTop: Boolean = false
 
@@ -252,7 +254,10 @@ open class CardsAllFragment : BaseFragment() {
                         else -> {
                             val search = searchFilter!!.toLowerCase().trim()
                             it.name.toLowerCase().contains(search) ||
+                                    (search == rewardText && it.season.isNotEmpty()) ||
+                                    (search == uniqueText && it.unique) ||
                                     it.race.name.toLowerCase().contains(search) ||
+                                    it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
                                     it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty()
                         }

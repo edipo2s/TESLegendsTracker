@@ -41,6 +41,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.setPadding(0, 0, 0, 0)
+        cards_refresh_layout.isEnabled = false
         isFragmentSelected = true
         arguments.getParcelableArrayList<CardSlot>(EXTRA_DECK_CARDS)?.apply {
             cardsCollectionAdapter.showCards(this)
