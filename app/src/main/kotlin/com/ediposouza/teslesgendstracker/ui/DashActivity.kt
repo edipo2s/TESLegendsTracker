@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -24,6 +26,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
@@ -45,6 +48,7 @@ import timber.log.Timber
 class DashActivity : BaseFilterActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
+    private val EXTRA_DEEPLINK = "deeplink"
     private val KEY_TITLE = "titleKey"
     private val KEY_MENU_ITEM_SELECTED = "menuIndexKey"
     private val SKU_TEST = "android.test.purchased"
@@ -71,6 +75,10 @@ class DashActivity : BaseFilterActivity(),
                 }
             }
         }
+        configIabHelper()
+    }
+
+    private fun configIabHelper() {
         iabHelper = IabHelper(this, "$PPKA$PPKB$PPKC$PPKD").apply {
             enableDebugLogging(BuildConfig.DEBUG)
             startSetup {
@@ -118,6 +126,7 @@ class DashActivity : BaseFilterActivity(),
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit()
         }
+        checkDeeplinkInfo()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -149,20 +158,6 @@ class DashActivity : BaseFilterActivity(),
             Timber.d(e)
         }
         super.onDestroy()
-    }
-
-    private fun updateUserMenuInfo() {
-        val user = FirebaseAuth.getInstance().currentUser
-        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
-        dash_navigation_view.menu.findItem(R.id.menu_arena)?.isEnabled = App.hasUserLogged()
-        with(dash_navigation_view.getHeaderView(0)) {
-            profile_change_user.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.GONE
-            profile_name.text = user?.displayName ?: getString(R.string.unknown)
-            if (user != null) {
-                val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
-                profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
-            }
-        }
     }
 
     override fun onBackPressed() {
@@ -216,6 +211,50 @@ class DashActivity : BaseFilterActivity(),
             }
             R.id.menu_about -> showAboutDialog()
             else -> false
+        }
+    }
+
+    private fun checkDeeplinkInfo() {
+        var data = intent.data
+        if (intent?.hasExtra(EXTRA_DEEPLINK) ?: false) {
+            data = Uri.parse(intent.extras.getString(EXTRA_DEEPLINK))
+        }
+        data?.pathSegments?.apply {
+            Timber.d("${this[0]}")
+            when (this[0]) {
+                getString(R.string.app_deeplink_path_card) -> {
+                    PublicInteractor.getCards(null) {
+                        val ctx = this@DashActivity
+                        val card = it.filter { it.shortName == this[1] }.first()
+                        val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                getString(R.string.card_transition_name))
+                        ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                    }
+                }
+                getString(R.string.app_deeplink_path_arena) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_arena))
+                }
+                getString(R.string.app_deeplink_path_articles) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_articles))
+                }
+                getString(R.string.app_deeplink_path_season) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_seasons))
+                }
+            }
+        }
+    }
+
+    private fun updateUserMenuInfo() {
+        val user = FirebaseAuth.getInstance().currentUser
+        dash_navigation_view.menu.findItem(R.id.menu_matches)?.isEnabled = App.hasUserLogged()
+        dash_navigation_view.menu.findItem(R.id.menu_arena)?.isEnabled = App.hasUserLogged()
+        with(dash_navigation_view.getHeaderView(0)) {
+            profile_change_user.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.GONE
+            profile_name.text = user?.displayName ?: getString(R.string.unknown)
+            if (user != null) {
+                val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
+                profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
+            }
         }
     }
 

@@ -5067,6 +5067,18 @@
         "text": "Summon: Give a creature +2/+1.",
         "arenaTier": "Good"
       },
+      "heroicrebirth": {
+        "name": "Heroic Rebirth",
+        "cost": "03",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "Activate",
+        "text": "Uses: 3. Activate: Transform a creature card in your hand into a random Legend.",
+        "arenaTier": "Unknown"
+      },
       "mechanicalally": {
         "name": "Mechanical Ally",
         "cost": "03",

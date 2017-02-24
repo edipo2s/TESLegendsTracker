@@ -44,9 +44,10 @@ class PushNotificationService : FirebaseMessagingService() {
             return
         }
 
-        val intent = Intent(this, DashActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtras(extras)
+        val intent = Intent(this, DashActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            putExtras(extras)
+        }
 
         val notification = NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_legend)
