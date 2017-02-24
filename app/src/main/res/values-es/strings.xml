@@ -29,6 +29,8 @@
     <string name="menu_sets">Conjuntos</string>
     <string name="menu_statistics">Estadística</string>
     <string name="menu_only_private">Solo privado</string>
+    <string name="menu_only_collection">Solo da Colecione</string>
+    <string name="menu_hide_empty">Ocultar vacio</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_unfavorite">Desfavorable</string>
     <string name="menu_like">Gusta</string>

@@ -21,7 +21,6 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:transitionGroup="true"
                 app:statusBarScrim="@color/colorPrimary"
                 app:titleEnabled="false">
 
@@ -33,7 +32,6 @@
                     android:gravity="center"
                     android:lines="1"
                     android:minHeight="?attr/actionBarSize"
-                    android:transitionGroup="true"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title=""
@@ -56,7 +54,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
-                    android:transitionGroup="true"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.5">
 
@@ -119,25 +116,12 @@
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
+            android:id="@+id/deck_info_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/deck_info_bottom_margin"
             android:layout_marginTop="@dimen/small_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <include layout="@layout/include_deck_info" />
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/deck_ads_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:layout_marginStart="@dimen/small_margin"
-                android:visibility="gone"
-                app:adSize="@string/app_ads_deck_full_size"
-                app:adUnitId="@string/app_ads_deck_full"
-                tools:visibility="visible" />
 
         </FrameLayout>
 

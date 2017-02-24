@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_filter"
+        android:icon="@drawable/ic_filter_svg"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/menu_percent"
+                android:checkable="true"
+                android:checked="false"
+                android:title="@string/menu_percent"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/menu_hide_empty"
+                android:checkable="true"
+                android:checked="false"
+                android:title="@string/menu_hide_empty"
+                app:showAsAction="always" />
+
+        </menu>
+
+    </item>
+
+</menu>

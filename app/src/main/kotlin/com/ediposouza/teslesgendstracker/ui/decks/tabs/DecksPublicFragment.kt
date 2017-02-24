@@ -207,7 +207,9 @@ open class DecksPublicFragment : BaseFragment() {
                 deck_likes.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
                 deck_views.text = numberInstance.format(deck.views)
                 deck_views.visibility = View.INVISIBLE.takeIf { deck.private } ?: View.VISIBLE
-                calculateMissingSoul(deck)
+                if (App.hasUserLogged()) {
+                    calculateMissingSoul(deck)
+                }
             }
         }
 

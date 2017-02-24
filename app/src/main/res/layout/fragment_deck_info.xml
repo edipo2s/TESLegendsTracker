@@ -78,7 +78,9 @@
                 android:layout_below="@id/deck_details_soul_cost"
                 android:drawablePadding="@dimen/large_margin"
                 android:drawableStart="@drawable/ic_soul_missing"
-                tools:text="2650" />
+                android:visibility="gone"
+                tools:text="2650"
+                tools:visibility="visible" />
 
             <ProgressBar
                 android:id="@+id/deck_details_soul_missing_loading"
@@ -156,8 +158,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/deck_details_updates_label"
-                android:padding="@dimen/default_margin"
                 android:fadeScrollbars="false"
+                android:padding="@dimen/default_margin"
                 android:scrollbarSize="@dimen/small_margin"
                 android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
                 android:scrollbars="vertical"

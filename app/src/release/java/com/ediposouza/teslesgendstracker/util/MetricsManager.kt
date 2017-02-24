@@ -71,6 +71,10 @@ object MetricsManager : MetricsConstants() {
                     putBoolean(action.PARAM_CHECKED, action.checked)
                 is MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE ->
                     putBoolean(action.PARAM_CHECKED, action.checked)
+                is MetricAction.ACTION_MATCH_STATISTICS_HIDE_EMPTY ->
+                    putBoolean(action.PARAM_CHECKED, action.checked)
+                is MetricAction.ACTION_MATCH_STATISTICS_CLASS_HIDE_EMPTY ->
+                    putBoolean(action.PARAM_CHECKED, action.checked)
                 is MetricAction.ACTION_MATCH_STATISTICS_FILTER_MODE ->
                     putString(action.PARAM_MODE, action.mode.name)
                 is MetricAction.ACTION_MATCH_STATISTICS_FILTER_SEASON ->
