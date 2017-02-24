@@ -5,6 +5,7 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.Patch
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.iid.FirebaseInstanceId
 import timber.log.Timber
 
 /**
@@ -14,6 +15,7 @@ import timber.log.Timber
 object MetricsManager : MetricsConstants() {
 
     fun initialize(context: Context) {
+        Timber.d("Token: ${FirebaseInstanceId.getInstance().token}")
     }
 
     fun flush() {

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">TESL Tracker</string>
     <string name="app_name_full" translatable="false">TES Legends Tracker</string>
+    <string name="app_deeplink_scheme" translatable="false">e2s</string>
+    <string name="app_deeplink_host" translatable="false">tesltracker</string>
+    <string name="app_deeplink_path_arena" translatable="false">arena</string>
+    <string name="app_deeplink_path_articles" translatable="false">articles</string>
+    <string name="app_deeplink_path_card" translatable="false">card</string>
+    <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_ads_card_list" translatable="false">ca-app-pub-7881623561544201/7976661172</string>
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
     <string name="app_ads_card_full" translatable="false">ca-app-pub-7881623561544201/1511325179</string>
