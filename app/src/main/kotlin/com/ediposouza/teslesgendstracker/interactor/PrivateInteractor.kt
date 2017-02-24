@@ -352,17 +352,17 @@ object PrivateInteractor : BaseInteractor() {
     }
 
     fun saveDeck(name: String, cls: DeckClass, type: DeckType, cost: Int, patch: String, cards: Map<String, Int>,
-                 private: Boolean, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (uid: String) -> Unit) {
+                 private: Boolean, owner: String = getUserID(), onError: ((e: Exception?) -> Unit)? = null, onSuccess: (deck: Deck) -> Unit) {
         dbUser()?.apply {
             with(if (private) child(NODE_DECKS).child(NODE_DECKS_PRIVATE) else dbDecks.child(NODE_DECKS_PUBLIC)) {
-                val deck = Deck(push().key, name, getUserID(), private, type, cls, cost, LocalDateTime.now().withNano(0),
+                val deck = Deck(push().key, name, owner, private, type, cls, cost, LocalDateTime.now().withNano(0),
                         LocalDateTime.now().withNano(0), patch, listOf(), 0, cards, listOf(), listOf())
                 val childEventListener = object : SimpleChildEventListener() {
                     override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
                         Timber.d(snapshot.toString())
                         if (snapshot?.key == deck.uuid) {
                             removeEventListener(this)
-                            onSuccess.invoke(deck.uuid)
+                            onSuccess.invoke(deck)
                         }
                     }
                 }
