@@ -83,25 +83,25 @@ class DeckInfoFragment : BaseFragment() {
             }
             if (!deckOwned) {
                 PublicInteractor.incDeckView(deck) {
-                    deck_details_views.text = it.toString()
+                    deck_details_views?.text = it.toString()
                 }
             }
             PublicInteractor.getPatches {
                 val patch = it.find { it.uuidDate == deck.patch }
-                context.runOnUiThread {
-                    deck_details_patch.text = patch?.desc ?: ""
+                context?.runOnUiThread {
+                    deck_details_patch?.text = patch?.desc ?: ""
                 }
             }
         }
     }
 
     private fun calculateMissingSoul(deck: Deck) {
-        with(deck_details_soul_missing) {
+        deck_details_soul_missing?.apply {
             context.runOnUiThread {
                 visibility = View.INVISIBLE
-                deck_details_soul_missing_loading.visibility = View.VISIBLE
+                deck_details_soul_missing_loading?.visibility = View.VISIBLE
             }
-            PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading.visibility = View.VISIBLE }) {
+            PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading?.visibility = View.VISIBLE }) {
                 deck_details_soul_missing_loading?.visibility = View.GONE
                 val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
                 Timber.d("Missing %d", missingSoul)
