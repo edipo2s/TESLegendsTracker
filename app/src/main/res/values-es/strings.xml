@@ -59,6 +59,7 @@
 
     <string name="dialog_import_title">Importación desde Legends-Decks</string>
     <string name="dialog_import_text">Inicie sesión y abra su página de edición de la colección</string>
+    <string name="dialog_import_deck_text">Inicie sesión y abra su página de mis decks</string>
     <string name="dialog_import_result_title">Importación de la colección</string>
     <string name="dialog_import_result_imported_text">Tarjetas importadas:</string>
     <string name="dialog_import_result_difference_text">Diferencias de colección de Legends-Decks:</string>

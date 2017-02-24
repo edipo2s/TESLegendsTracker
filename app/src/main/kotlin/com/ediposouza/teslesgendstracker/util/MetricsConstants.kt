@@ -181,6 +181,10 @@ sealed class MetricAction(val name: String) {
         val PARAM_CARD = "Card"
     }
 
+    class ACTION_IMPORT_DECKS_CANCELLED : MetricAction("ImportDecksCancelled")
+    class ACTION_IMPORT_DECKS_FINISH(val decksImported: Int) : MetricAction("ImportDecksFinish") {
+        val PARAM_DECKS_IMPORTED = "DecksImported"
+    }
 }
 
 sealed class MetricScreen(val name: String) {
@@ -216,5 +220,6 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_DONATE : MetricScreen("Donate")
     class SCREEN_ABOUT : MetricScreen("About")
     class SCREEN_IMPORT_COLLECTION : MetricScreen("ImportCollection")
+    class SCREEN_IMPORT_DECKS : MetricScreen("ImportDecks")
 
 }

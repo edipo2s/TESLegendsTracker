@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="status_bar_height">25dp</dimen>
+    <dimen name="navigation_bar_height">48dp</dimen>
+
+    <!-- Card List -->
+    <!-- transparent navigation_bar_height + default_margin-->
+    <dimen name="card_list_padding_bottom">56dp</dimen>
+
+    <!-- Card View -->
+    <!-- transparent navigation_bar_height + 36dp-->
+    <dimen name="card_bottom_sheet_peek_height">36dp</dimen>
+
+    <!-- Deck -->
+    <!-- transparent status_bar + 115dp-->
+    <dimen name="deck_header_height">115dp</dimen>
+    <!-- transparent navigation_bar_height + 36dp-->
+    <dimen name="deck_comment_bottom_sheet_peek_height">38dp</dimen>
+</resources>

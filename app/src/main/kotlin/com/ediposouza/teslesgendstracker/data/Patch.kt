@@ -73,6 +73,7 @@ data class Patch(
         val uuidDate: String,
         val date: LocalDate,
         val desc: String,
+        val legendsDeck: String,
         val type: PatchType,
         val changes: List<PatchChange>
 
@@ -86,13 +87,14 @@ data class Patch(
     }
 
     constructor(source: Parcel) : this(source.readString(), LocalDate.ofEpochDay(source.readLong()),
-            source.readString(), PatchType.values()[source.readInt()],
+            source.readString(), source.readString(), PatchType.values()[source.readInt()],
             mutableListOf<PatchChange>().apply { source.readList(this, PatchChange::class.java.classLoader) })
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(uuidDate)
         dest?.writeLong(date.toEpochDay())
         dest?.writeString(desc)
+        dest?.writeString(legendsDeck)
         dest?.writeInt(type.ordinal)
         dest?.writeList(changes)
     }

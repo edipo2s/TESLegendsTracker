@@ -99,11 +99,13 @@
       }
     },
     "desc": "Mantikora Nerf",
-    "type": "balance"
+    "type": "balance",
+    "legendsDeck": "Beta"
   },
   "2016_10_01": {
     "desc": "Hist Grove",
-    "type": "reward"
+    "type": "reward",
+    "legendsDeck": "HistGrove"
   },
   "2016_11_01": {
     "desc": "Mechanical Ally",
@@ -188,7 +190,8 @@
       }
     },
     "desc": "Nahkriin Nerf",
-    "type": "balance"
+    "type": "balance",
+    "legendsDeck": "NahkriinNerf"
   },
   "2016_12_01": {
     "desc": "Battlereeve Of Dusk",
@@ -203,7 +206,8 @@
       }
     },
     "desc": "Madhouse Collection",
-    "type": "set"
+    "type": "set",
+    "legendsDeck": "Madhouse"
   },
   "2017_01_01": {
     "desc": "Elsweyr Lookout",
@@ -258,7 +262,8 @@
       }
     },
     "desc": "Hist Grove Nerf",
-    "type": "balance"
+    "type": "balance",
+    "legendsDeck": "JanuaryNerf"
   },
   "2017_01_25": {
     "changes": {
@@ -303,6 +308,7 @@
   },
   "2017_02_01": {
     "desc": "Stampede Sentinel",
-    "type": "reward"
+    "type": "reward",
+    "legendsDeck": "Patch-1-61"
   }
 }

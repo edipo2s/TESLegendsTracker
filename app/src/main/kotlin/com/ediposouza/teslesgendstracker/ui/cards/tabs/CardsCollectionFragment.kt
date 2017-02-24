@@ -40,8 +40,8 @@ import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
 import kotlinx.android.synthetic.main.itemlist_card_imported.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
-import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
 import timber.log.Timber
 import java.util.*
@@ -172,7 +172,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                             loadUrl("javascript:HtmlViewer.showHTML" +
                                     "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');")
                         }
-                        if (url == getString(R.string.dialog_import_legends_deck_login_done_link)) {
+                        if (url == getString(R.string.dialog_import_legends_deck_main_link)) {
                             loadUrl(getString(R.string.dialog_import_legends_deck_link))
                         }
                     }
@@ -239,7 +239,7 @@ class CardsCollectionFragment : CardsAllFragment() {
                     val cardName = it.select(".td_title_card_collection").text()
                     val cardQtd = it.select(".td_total_card_collection").text().toInt()
                     val cardShortName = cardName.replace(" ", "").replace("-", "")
-                            .replace("'", "").replace(",", "").toLowerCase().toLowerCase()
+                            .replace("'", "").replace(",", "").toLowerCase()
                     cardShortName to cardQtd
                 }?.filter { it.second > 0 }?.toMap() ?: mapOf()
                 if (legendsSlots.isNotEmpty()) {
@@ -249,38 +249,40 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
 
         private fun importLegendDecksCards(legendsSlots: Map<String, Int>) {
-            PublicInteractor.getCards(null) { allCards ->
-                val legendsDecksCards = allCards.filter { legendsSlots.keys.contains(it.shortName) }.toMutableList()
-                PrivateInteractor.getUserCollection(null) { userSlots ->
-                    val userCards = allCards.filter { userSlots.keys.contains(it.shortName) }.toMutableList()
-                    val onlyInLegendsDecks = legendsDecksCards.filter { !userSlots.keys.contains(it.shortName) }
-                    val onlyInUserCollection = userCards.filter { !legendsSlots.keys.contains(it.shortName) }
-                    val cardsInCommon = userCards.filter { legendsSlots.keys.contains(it.shortName) }
-                    val userQtdGreater = cardsInCommon.filter {
-                        userSlots[it.shortName] ?: 0 > legendsSlots[it.shortName] ?: 0
-                    }
-                    val legendsQtdGreater = cardsInCommon.filter {
-                        legendsSlots[it.shortName] ?: 0 > userSlots[it.shortName] ?: 0
-                    }
-                    onlyInLegendsDecks.forEach {
-                        val qtd = legendsSlots[it.shortName] ?: 0
-                        PrivateInteractor.setUserCardQtd(it, qtd) {
-                            Timber.d("$qtd ${it.name} card added")
+            doAsync {
+                PublicInteractor.getCards(null) { allCards ->
+                    val legendsDecksCards = allCards.filter { legendsSlots.keys.contains(it.shortName) }.toMutableList()
+                    PrivateInteractor.getUserCollection(null) { userSlots ->
+                        val userCards = allCards.filter { userSlots.keys.contains(it.shortName) }.toMutableList()
+                        val onlyInLegendsDecks = legendsDecksCards.filter { !userSlots.keys.contains(it.shortName) }
+                        val onlyInUserCollection = userCards.filter { !legendsSlots.keys.contains(it.shortName) }
+                        val cardsInCommon = userCards.filter { legendsSlots.keys.contains(it.shortName) }
+                        val userQtdGreater = cardsInCommon.filter {
+                            userSlots[it.shortName] ?: 0 > legendsSlots[it.shortName] ?: 0
                         }
-                    }
-                    legendsQtdGreater.forEach {
-                        val qtd = legendsSlots[it.shortName] ?: 0
-                        PrivateInteractor.setUserCardQtd(it, qtd) {
-                            Timber.d("${it.name} qtd updated to $qtd")
+                        val legendsQtdGreater = cardsInCommon.filter {
+                            legendsSlots[it.shortName] ?: 0 > userSlots[it.shortName] ?: 0
                         }
+                        onlyInLegendsDecks.forEach {
+                            val qtd = legendsSlots[it.shortName] ?: 0
+                            PrivateInteractor.setUserCardQtd(it, qtd) {
+                                Timber.d("$qtd ${it.name} card added")
+                            }
+                        }
+                        legendsQtdGreater.forEach {
+                            val qtd = legendsSlots[it.shortName] ?: 0
+                            PrivateInteractor.setUserCardQtd(it, qtd) {
+                                Timber.d("${it.name} qtd updated to $qtd")
+                            }
+                        }
+                        showImportSummary(onlyInLegendsDecks, onlyInUserCollection, legendsQtdGreater,
+                                userQtdGreater, legendsSlots, userSlots)
                     }
-                    showImportSummary(onlyInLegendsDecks, onlyInUserCollection, legendsQtdGreater,
-                            userQtdGreater, legendsSlots, userSlots)
                 }
-            }
-            context.runOnUiThread {
-                context.toast("Collection imported!")
-                importDialog?.dismiss()
+                uiThread {
+                    context.toast("Collection imported!")
+                    importDialog?.dismiss()
+                }
             }
         }
 

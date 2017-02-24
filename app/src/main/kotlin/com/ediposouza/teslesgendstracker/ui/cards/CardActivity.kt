@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.cards
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
+import android.transition.Transition
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -82,9 +84,38 @@ class CardActivity : BaseActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
+        card_ads_view.load()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.sharedElementEnterTransition?.apply {
+                addListener(object : Transition.TransitionListener {
+                    override fun onTransitionEnd(transition: Transition?) {
+                        removeListener(this)
+                        configQtdAndFavoriteInfo()
+                    }
+
+                    override fun onTransitionResume(transition: Transition?) {
+                    }
+
+                    override fun onTransitionPause(transition: Transition?) {
+                    }
+
+                    override fun onTransitionCancel(transition: Transition?) {
+                        removeListener(this)
+                    }
+
+                    override fun onTransitionStart(transition: Transition?) {
+                    }
+
+                })
+            }
+        } else {
+            configQtdAndFavoriteInfo()
+        }
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
-        card_ads_view.load()
+    }
+
+    private fun configQtdAndFavoriteInfo() {
         if (App.hasUserLogged()) {
             showUserCardQtd()
         }

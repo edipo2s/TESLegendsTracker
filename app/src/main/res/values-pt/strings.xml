@@ -60,6 +60,7 @@
 
     <string name="dialog_import_title">Importar de Legends-Decks</string>
     <string name="dialog_import_text">Por favor faça login e abra a página de editar coleção</string>
+    <string name="dialog_import_deck_text">Por favor faça login e abra a página meus decks</string>
     <string name="dialog_import_result_title">Importar Coleção</string>
     <string name="dialog_import_result_imported_text">Cartas importadas:</string>
     <string name="dialog_import_result_difference_text">Diferenças da coleção de Legends-Decks:</string>

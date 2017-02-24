@@ -112,6 +112,8 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_IMPORT_COLLECTION_FINISH ->
                     putInt(action.PARAM_CARDS_IMPORTED, action.cardsImported)
+                is MetricAction.ACTION_IMPORT_DECKS_FINISH ->
+                    putInt(action.PARAM_DECKS_IMPORTED, action.decksImported)
                 is MetricAction.ACTION_ARTICLES_VIEW_NEWS ->
                     putString(action.PARAM_ARTICLE, action.article.uuidDate)
                 is MetricAction.ACTION_ARTICLES_VIEW_WORLD ->
