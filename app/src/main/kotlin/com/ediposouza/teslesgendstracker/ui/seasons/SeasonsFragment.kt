@@ -89,7 +89,7 @@ class SeasonsFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        with(seasons_recycler_view) {
+        seasons_recycler_view?.apply {
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }

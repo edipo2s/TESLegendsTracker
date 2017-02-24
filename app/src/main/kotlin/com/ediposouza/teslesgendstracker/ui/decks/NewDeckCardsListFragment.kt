@@ -52,12 +52,16 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         isFragmentSelected = true
         arguments.getParcelable<Deck>(EXTRA_DECK)?.apply {
             PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
-                cards.forEach { cardShortName, qtd ->
-                    val card = it.find { it.shortName == cardShortName }
-                    if (card != null) {
-                        cardsAdapter.updateCardSlot(CardSlot(card, qtd))
-                    }
-                }
+                loadDeckCards(it)
+            }
+        }
+    }
+
+    private fun Deck.loadDeckCards(it: List<Card>) {
+        cards.forEach { cardShortName, qtd ->
+            val card = it.find { it.shortName == cardShortName }
+            if (card != null) {
+                cardsAdapter.updateCardSlot(CardSlot(card, qtd))
             }
         }
     }

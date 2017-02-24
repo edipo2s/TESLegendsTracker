@@ -36,6 +36,7 @@ import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_import.view.*
 import kotlinx.android.synthetic.main.fragment_decks.*
@@ -247,17 +248,20 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     inner class HTMLViewerInterface {
 
         var decksLinkRemains = listOf<String>()
+        var savedDecksLink = ""
+        var importingSavedDecks = false
 
         @Suppress("unused")
         @JavascriptInterface
         fun showHTML(html: String) {
             doAsync {
                 try {
-                    val decksLink = Jsoup.parse(html).select(".table_large tr .td_name_deck_full")?.map {
+                    val decksTableClass = "td_name_deck_full_with_save".takeIf { importingSavedDecks } ?: "td_name_deck_full"
+                    val decksLink = Jsoup.parse(html).select(".table_large tr .$decksTableClass")?.map {
                         it.child(0).attr("href")
                     } ?: listOf()
                     if (decksLink.isNotEmpty()) {
-                        Timber.d("MyDecksLinks: $decksLink")
+                        Timber.d("SavedDecksLinks: $decksLink".takeIf { importingSavedDecks } ?: "MyDecksLinks: $decksLink")
                         uiThread {
                             importLegendDecks(decksLink)
                         }
@@ -279,7 +283,9 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     Timber.d("UserID: $userID")
                     if (userID.isNotEmpty()) {
                         uiThread {
-                            importDialogWebView?.loadUrl("$baseProfileLink$userID/decks")
+                            savedDecksLink = "$baseProfileLink$userID/saved"
+                            val myDecksLink = "$baseProfileLink$userID/decks"
+                            importDialogWebView?.loadUrl(myDecksLink)
                         }
                     }
                 }
@@ -319,19 +325,32 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                                     text.substring(text.indexOfLast { it == ' ' } + 1).toInt()
                         }?.toMap() ?: mapOf()
 
-                        Timber.d("Saving Deck: $deckName $deckCls $deckType $deckCost $deckPatch $deckCards")
+                        var deckOwner = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                        if (importingSavedDecks) {
+                            deckOwner = it.select(".deck_page_deck_author .inner_deck_head  a").first().text()
+                        }
+
+                        Timber.d("Saving Deck: $deckName $deckCls $deckType $deckCost $deckPatch $deckCards $deckOwner")
                         if(userDecks.find { it.name == deckName } == null){
                             PrivateInteractor.saveDeck(deckName, deckCls, deckType, deckCost, deckPatch.uuidDate,
-                                    deckCards, false) {
+                                    deckCards, false, deckOwner) { savedDeck ->
                                 userDecksImported += 1
                                 Timber.d("$deckName Saved")
                                 uiThread {
+                                    if (importingSavedDecks) {
+                                        PrivateInteractor.setUserDeckFavorite(savedDeck, true) {
+                                            context.toast("$deckName Favorite Imported!")
+                                        }
+                                    } else {
+                                        context.toast("$deckName Saved!")
+                                    }
                                     loadNextDeckPage(decksLinkRemains)
                                 }
                             }
                         }else{
                             Timber.d("$deckName is already saved")
                             uiThread {
+                                context.toast("$deckName is already saved")
                                 loadNextDeckPage(decksLinkRemains)
                             }
                         }
@@ -349,9 +368,15 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
-                        Timber.d("onPageFinished: $url")
-                        loadUrl("javascript:HtmlViewer.showDeckHTML" +
-                                "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');")
+                        Timber.d("importLegendDecks onPageFinished: $url")
+                        if (url == savedDecksLink) {
+                            importingSavedDecks = true
+                            loadUrl("javascript:HtmlViewer.showHTML" +
+                                    "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');")
+                        } else {
+                            loadUrl("javascript:HtmlViewer.showDeckHTML" +
+                                    "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');")
+                        }
                     }
                 })
             }
@@ -364,37 +389,43 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 importDialogWebView?.loadUrl(decksLink.first())
             } else {
                 context.runOnUiThread {
-                    context.toast("$userDecksImported Decks imported!")
-                    importDialog?.dismiss()
+                    if (importingSavedDecks) {
+                        context.toast("$userDecksImported Favorites imported!")
+                        importDialog?.dismiss()
+                    } else {
+                        context.toast("$userDecksImported Decks imported!")
+                        userDecksImported = 0
+                        importingSavedDecks = true
+                        importDialogWebView?.loadUrl(savedDecksLink)
+                    }
                 }
                 MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_FINISH(userDecksImported))
             }
         }
     }
 
-}
+    class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        var titles: Array<String> = ctx.resources.getStringArray(R.array.decks_tabs)
+        val decksPublicFragment by lazy { DecksPublicFragment() }
+        val decksMyFragment by lazy { DecksOwnerFragment() }
+        val decksSavedFragment by lazy { DecksFavoritedFragment() }
 
-    var titles: Array<String> = ctx.resources.getStringArray(R.array.decks_tabs)
-    val decksPublicFragment by lazy { DecksPublicFragment() }
-    val decksMyFragment by lazy { DecksOwnerFragment() }
-    val decksSavedFragment by lazy { DecksFavoritedFragment() }
-
-    override fun getItem(position: Int): BaseFragment {
-        return when (position) {
-            1 -> decksMyFragment
-            2 -> decksSavedFragment
-            else -> decksPublicFragment
+        override fun getItem(position: Int): BaseFragment {
+            return when (position) {
+                1 -> decksMyFragment
+                2 -> decksSavedFragment
+                else -> decksPublicFragment
+            }
         }
-    }
 
-    override fun getCount(): Int {
-        return titles.size
-    }
+        override fun getCount(): Int {
+            return titles.size
+        }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
-    }
+        override fun getPageTitle(position: Int): CharSequence {
+            return titles[position]
+        }
 
+    }
 }
