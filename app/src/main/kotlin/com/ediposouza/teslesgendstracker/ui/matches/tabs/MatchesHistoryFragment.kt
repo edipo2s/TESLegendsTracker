@@ -136,7 +136,7 @@ open class MatchesHistoryFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menu?.findItem(R.id.menu_percent)?.isVisible = false
+        menu?.findItem(R.id.menu_filter)?.isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 

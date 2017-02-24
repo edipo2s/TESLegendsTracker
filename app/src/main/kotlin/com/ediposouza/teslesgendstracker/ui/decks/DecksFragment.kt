@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.CardAttribute
@@ -71,6 +72,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private var importDialog: AlertDialog? = null
     private var importDialogWebView: WebView? = null
+    private var importDialogProgress: ProgressBar? = null
     private var userDecks: List<Deck> = listOf()
     private var userDecksImported = 0
 
@@ -156,7 +158,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     userDecksImported = 0
                     showImportDialog()
                 }
-            }else{
+            } else {
                 eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.error_auth))
             }
             return true
@@ -196,11 +198,13 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun showImportDialog() {
+        val htmlViewerInterface = HTMLViewerInterface()
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
         dialogView.import_dialog_text.text = getString(R.string.dialog_import_deck_text)
         importDialog = AlertDialog.Builder(context, R.style.AppDialog)
                 .setView(dialogView)
                 .setNegativeButton(android.R.string.cancel, { _, _ ->
+                    htmlViewerInterface.continueImporting = false
                     dialogView.import_dialog_webview.stopLoading()
                     MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_CANCELLED())
                 })
@@ -209,7 +213,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             dialogView.import_dialog_webview?.apply {
                 importDialogWebView = this
                 settings.javaScriptEnabled = true
-                addJavascriptInterface(HTMLViewerInterface(), "HtmlViewer")
+                addJavascriptInterface(htmlViewerInterface, "HtmlViewer")
                 loadUrl(getString(R.string.dialog_import_legends_deck_main_link))
                 setWebViewClient(object : WebViewClient() {
                     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -217,6 +221,10 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         val isMyDecksPage = url?.endsWith("/decks") ?: false
                         settings.loadsImagesAutomatically = !isMyDecksPage
                         dialogView.import_dialog_loading.visibility = View.VISIBLE.takeIf { isMyDecksPage } ?: View.GONE
+                        with(dialogView.import_dialog_loading_details) {
+                            importDialogProgress = this
+                            visibility = View.VISIBLE.takeIf { isMyDecksPage } ?: View.GONE
+                        }
                         with(dialogView.import_dialog_webview) {
                             layoutParams = layoutParams.apply {
                                 height = 1.takeIf { isMyDecksPage } ?: ViewGroup.LayoutParams.WRAP_CONTENT
@@ -250,6 +258,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         var decksLinkRemains = listOf<String>()
         var savedDecksLink = ""
         var importingSavedDecks = false
+        var continueImporting = true
 
         @Suppress("unused")
         @JavascriptInterface
@@ -263,6 +272,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     if (decksLink.isNotEmpty()) {
                         Timber.d("SavedDecksLinks: $decksLink".takeIf { importingSavedDecks } ?: "MyDecksLinks: $decksLink")
                         uiThread {
+                            importDialogProgress?.max = decksLink.size
                             importLegendDecks(decksLink)
                         }
                     }
@@ -331,7 +341,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         }
 
                         Timber.d("Saving Deck: $deckName $deckCls $deckType $deckCost $deckPatch $deckCards $deckOwner")
-                        if(userDecks.find { it.name == deckName } == null){
+                        if (userDecks.find { it.name == deckName } == null) {
                             PrivateInteractor.saveDeck(deckName, deckCls, deckType, deckCost, deckPatch.uuidDate,
                                     deckCards, false, deckOwner) { savedDeck ->
                                 userDecksImported += 1
@@ -347,7 +357,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                                     loadNextDeckPage(decksLinkRemains)
                                 }
                             }
-                        }else{
+                        } else {
                             Timber.d("$deckName is already saved")
                             uiThread {
                                 context.toast("$deckName is already saved")
@@ -384,11 +394,14 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
 
         private fun loadNextDeckPage(decksLink: List<String>) {
-            if (decksLink.isNotEmpty()) {
-                decksLinkRemains = decksLink.minus(decksLink.first())
-                importDialogWebView?.loadUrl(decksLink.first())
-            } else {
-                context.runOnUiThread {
+            context.runOnUiThread {
+                if (decksLink.isNotEmpty() && continueImporting) {
+                    val nextDeckLink = decksLink.first()
+                    decksLinkRemains = decksLink.minus(nextDeckLink)
+                    val progressMax = importDialogProgress?.max ?: decksLink.size
+                    importDialogProgress?.progress = progressMax - decksLink.size
+                    importDialogWebView?.loadUrl(nextDeckLink)
+                } else {
                     if (importingSavedDecks) {
                         context.toast("$userDecksImported Favorites imported!")
                         importDialog?.dismiss()
@@ -396,10 +409,12 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         context.toast("$userDecksImported Decks imported!")
                         userDecksImported = 0
                         importingSavedDecks = true
-                        importDialogWebView?.loadUrl(savedDecksLink)
+                        if (continueImporting) {
+                            importDialogWebView?.loadUrl(savedDecksLink)
+                        }
                     }
+                    MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_FINISH(userDecksImported))
                 }
-                MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_FINISH(userDecksImported))
             }
         }
     }

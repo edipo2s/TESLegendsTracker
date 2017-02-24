@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
 import android.view.*
-import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.R
@@ -56,7 +55,8 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     private var seasons = listOf<Season>()
     private var currentSeason: Season? = null
     private var menuSeasons: SubMenu? = null
-    private var showPercent: CompoundButton? = null
+    private var showPercent: MenuItem? = null
+    private var hideEmpty: MenuItem? = null
 
     var statisticsClassTableAdapter: StatisticsTableAdapter? = null
     var results: MutableMap<MatchDeck, MutableList<Match>> = mutableMapOf()
@@ -101,15 +101,13 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_percent, menu)
+        menuInflater.inflate(R.menu.menu_percent_and_hide_empty, menu)
         menuInflater?.inflate(R.menu.menu_season, menu)
         getSeasons(menu?.findItem(R.id.menu_season))
-        val menuPercent = menu?.findItem(R.id.menu_percent)
-        showPercent = menuPercent?.actionView as CompoundButton
-        showPercent?.setOnCheckedChangeListener { _, checked ->
-            updateStatisticsData()
-            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(checked))
-        }
+        val menuFilter = menu?.findItem(R.id.menu_filter)
+        menuFilter?.isVisible = true
+        showPercent = menuFilter?.subMenu?.findItem(R.id.menu_percent)
+        hideEmpty = menuFilter?.subMenu?.findItem(R.id.menu_hide_empty)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -118,6 +116,16 @@ class MatchesStatisticsClassActivity : BaseActivity() {
             android.R.id.home -> {
                 ActivityCompat.finishAfterTransition(this)
                 return true
+            }
+            R.id.menu_percent -> {
+                item.isChecked = !item.isChecked
+                updateStatisticsData()
+                MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_WIN_RATE(item.isChecked))
+            }
+            R.id.menu_hide_empty -> {
+                item.isChecked = !item.isChecked
+                updateStatisticsData()
+                MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS_HIDE_EMPTY(item.isChecked))
             }
             R.id.menu_season_all -> filterSeason(null)
             else -> seasons.find { it.id == item?.itemId }?.apply { filterSeason(this) }
@@ -164,7 +172,10 @@ class MatchesStatisticsClassActivity : BaseActivity() {
     }
 
     private fun loadingStatisticsData(tableAdapter: StatisticsTableAdapter? = statisticsClassTableAdapter) {
-        tableAdapter?.setFirstBody(DeckClass.values().map { listOf(BodyItem(cls = it)) })
+        val allClass = DeckClass.values()
+        val classTotal: DeckClass? = null
+        tableAdapter?.setFirstBody(allClass.map { listOf(BodyItem(cls = it)) })
+        tableAdapter?.header = allClass.asList().plus(classTotal)
         tableAdapter?.body = mutableListOf<List<BodyItem>>().apply {
             DeckClass.values().forEach {
                 add(mutableListOf<BodyItem>().apply {
@@ -179,7 +190,7 @@ class MatchesStatisticsClassActivity : BaseActivity() {
 
     private fun updateStatisticsData() {
         doAsync {
-            val data = mutableListOf<List<BodyItem>>().apply {
+            var data = mutableListOf<List<BodyItem>>().apply {
                 results.forEach { result ->
                     add(mutableListOf<BodyItem>().apply {
                         DeckClass.values().forEach { opponentCls ->
@@ -190,9 +201,43 @@ class MatchesStatisticsClassActivity : BaseActivity() {
                     })
                 }
             }
+            val allClass = DeckClass.values()
+            val classTotal: DeckClass? = null
+            var classHeader = allClass.asList().plus(classTotal)
+            var firstData = results.map { listOf(BodyItem(it.key.name)) }
+            if (hideEmpty?.isChecked ?: false) {
+                val filteredFirstBody = mutableListOf<List<BodyItem>>()
+                val filteredBody = mutableListOf<List<BodyItem>>()
+                for (i in data.indices) {
+                    if (data[i].filter { !it.isEmpty() }.isNotEmpty()) {
+                        filteredFirstBody.add(firstData[i])
+                        filteredBody.add(data[i])
+                    }
+                }
+                val nonEmptyCols = mutableListOf<Int>()
+                if (filteredBody.size > 0) {
+                    for (colIndex in filteredBody[0].indices) {
+                        if (filteredBody.filter { !it[colIndex].isEmpty() }.isNotEmpty()) {
+                            nonEmptyCols.add(colIndex)
+                        }
+                    }
+                }
+                classHeader = allClass.filter { nonEmptyCols.contains(allClass.indexOf(it)) }.plus(classTotal)
+                val filteredBodyWithoutEmptyColumn = mutableListOf<List<BodyItem>>().apply {
+                    filteredBody.forEach {
+                        val lineBody = it
+                        add(lineBody.filter { nonEmptyCols.contains(lineBody.indexOf(it)) })
+                    }
+                }
+                firstData = filteredFirstBody
+                data = filteredBodyWithoutEmptyColumn
+            }
             uiThread {
-                statisticsClassTableAdapter?.setFirstBody(results.map { listOf(BodyItem(it.key.name)) })
-                statisticsClassTableAdapter?.body = data
+                statisticsClassTableAdapter?.apply {
+                    header = classHeader
+                    setFirstBody(firstData)
+                    body = data
+                }
                 val allMatches = results.flatMap { it.value }
                 val wins = allMatches.filter { it.win }.size
                 val losses = allMatches.filter { !it.win }.size
@@ -219,7 +264,11 @@ class MatchesStatisticsClassActivity : BaseActivity() {
         return if (total == 0f) -1f else 100 / total * wins
     }
 
-    class BodyItem(val result: String? = null, val cls: DeckClass? = null)
+    class BodyItem(val result: String? = null, val cls: DeckClass? = null) {
+
+        fun isEmpty() = result == "0/0" || result == "-1.0%"
+
+    }
 
     class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
             DeckClass, CellClass, List<BodyItem>, CellTextCenter, CellTextCenter, CellTextCenter>(context) {

@@ -55,6 +55,7 @@
     <dimen name="deck_menu_switch_size">20dp</dimen>
     <dimen name="deck_menu_private_icon_size">12dp</dimen>
     <dimen name="deck_menu_percent_icon_size">14dp</dimen>
+    <dimen name="deck_menu_hide_empty_icon_size">14dp</dimen>
 
     <!-- transparent status_bar_height + 115dp-->
     <dimen name="deck_header_height">115dp</dimen>
