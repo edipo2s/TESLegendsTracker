@@ -193,6 +193,10 @@ sealed class MetricAction(val name: String) {
     class ACTION_IMPORT_DECKS_FINISH(val decksImported: Int) : MetricAction("ImportDecksFinish") {
         val PARAM_DECKS_IMPORTED = "DecksImported"
     }
+
+    class ACTION_DECK_CHANGE_VIEW_MODE(val compatMode: Boolean) : MetricAction("DeckChangeViewMode") {
+        val PARAM_COMPACT_MODE = "CompactMode"
+    }
 }
 
 sealed class MetricScreen(val name: String) {
