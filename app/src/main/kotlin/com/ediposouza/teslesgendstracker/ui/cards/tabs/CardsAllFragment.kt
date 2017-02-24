@@ -45,6 +45,7 @@ open class CardsAllFragment : BaseFragment() {
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
     var sets: List<CardSet> = listOf()
+    open var enableMenu: Boolean = true
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
@@ -73,7 +74,7 @@ open class CardsAllFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(enableMenu)
         configRecycleView()
     }
 

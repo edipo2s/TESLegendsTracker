@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
@@ -18,12 +19,14 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.decks.CmdRemAttr
 import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
+import com.ediposouza.teslesgendstracker.ui.decks.DeckListCardsFragment
 import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
 import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.bundleOf
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import java.util.*
@@ -43,6 +46,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var editMode = false
 
     val cardTransitionName by lazy { context.getString(R.string.card_transition_name) }
+
+    val deckListCardsFragment by lazy {
+        DeckListCardsFragment().apply {
+            arguments = bundleOf(DeckListCardsFragment.EXTRA_DECK_CARDS to getCards())
+        }
+    }
 
     val deckListAdapter by lazy {
         DeckListAdapter({ index -> decklist_recycle_view.scrollToPosition(index) },
@@ -129,6 +138,21 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun getSoulCost(): Int = getCards().sumBy { it.card.rarity.soulCost * it.qtd }
 
+    fun setCardViewMode(fragmentManager: FragmentManager, compact: Boolean) {
+        with(fragmentManager.beginTransaction()) {
+            setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            if (compact) {
+                replace(R.id.decklist_cards_container, deckListCardsFragment)
+                decklist_recycle_view.visibility = View.GONE
+            } else {
+                remove(deckListCardsFragment)
+                deckListCardsFragment.getListView().visibility = View.GONE
+                decklist_recycle_view.visibility = View.VISIBLE
+            }
+            commit()
+        }
+    }
+
     private fun onCardListChange() {
         val cards = getCards()
         decklist_costs.updateCosts(cards)
@@ -163,13 +187,6 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         decklist_class_prophecy.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
         decklist_class_prophecy_qtd.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
         decklist_class_prophecy_qtd.text = "${prophecyCardSlots.sumBy { it.qtd }}"
-    }
-
-    fun <K, V> Map<K, V>.mergeReduce(other: Map<K, V>, reduce: (V, V) -> V = { a, b -> b }): Map<K, V> {
-        val result = LinkedHashMap<K, V>(this.size + other.size)
-        result.putAll(this)
-        other.forEach { e -> result[e.key] = result[e.key]?.let { reduce(e.value, it) } ?: e.value }
-        return result
     }
 
     class DeckListAdapter(val onAdd: (Int) -> Unit, val itemClick: (View, Card) -> Unit,

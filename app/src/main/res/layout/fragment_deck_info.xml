@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:animateLayoutChanges="true"
     tools:layout_marginTop="@dimen/status_bar_height">
 
     <ScrollView
@@ -15,8 +16,7 @@
         android:fadeScrollbars="false"
         android:scrollbarSize="@dimen/small_margin"
         android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-        android:scrollbars="vertical"
-        app:layout_widthPercent="50%">
+        android:scrollbars="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"

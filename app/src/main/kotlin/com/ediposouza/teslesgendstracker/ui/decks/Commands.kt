@@ -24,3 +24,9 @@ data class CmdUpdateCardSlot(
         val cardSlot: CardSlot
 
 )
+
+data class CmdChangeDeckViewMode(
+
+        val compactMode: Boolean
+
+)

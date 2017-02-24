@@ -39,7 +39,7 @@ import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card_collection.view.*
 import kotlinx.android.synthetic.main.itemlist_card_imported.view.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
+import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
@@ -50,7 +50,7 @@ import java.util.*
 /**
  * Created by EdipoSouza on 10/30/16.
  */
-class CardsCollectionFragment : CardsAllFragment() {
+open class CardsCollectionFragment : CardsAllFragment() {
 
     private val EXPAND_CODE = 123
 
@@ -58,13 +58,17 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     var isEditStarted: Boolean = false
 
-    val view_statistics: CollectionStatistics
-        get() = activity.find<CollectionStatistics>(R.id.cards_collection_statistics)
+    val view_statistics: CollectionStatistics?
+        get() = activity.findOptional<CollectionStatistics>(R.id.cards_collection_statistics)
 
-    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>
-        get() = BottomSheetBehavior.from(view_statistics)
+    val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>?
+        get() = if (view_statistics != null) {
+            BottomSheetBehavior.from(view_statistics)
+        } else {
+            null
+        }
 
-    val cardsCollectionAdapter by lazy {
+    open val cardsCollectionAdapter by lazy {
         CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
                 { changeUserCardQtd(it) }) { view, card ->
             showCardExpanded(card, view)
@@ -80,8 +84,8 @@ class CardsCollectionFragment : CardsAllFragment() {
             val expanded = newState == BottomSheetBehavior.STATE_EXPANDED ||
                     newState == BottomSheetBehavior.STATE_SETTLING
             if (expanded) {
-                view_statistics.scrollToTop()
-                view_statistics.updateStatistics()
+                view_statistics?.scrollToTop()
+                view_statistics?.updateStatistics()
             }
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED -> {
@@ -99,11 +103,10 @@ class CardsCollectionFragment : CardsAllFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         with(cards_recycler_view) {
             setPadding(paddingLeft, paddingTop, paddingRight, resources.getDimensionPixelSize(R.dimen.huge_margin))
         }
-        statisticsSheetBehavior.setBottomSheetCallback(sheetBehaviorCallback)
+        statisticsSheetBehavior?.setBottomSheetCallback(sheetBehaviorCallback)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -224,7 +227,7 @@ class CardsCollectionFragment : CardsAllFragment() {
         PrivateInteractor.setUserCardQtd(cardSlot.card, finalQtd) {
             cards_recycler_view?.itemAnimator = null
             cardsCollectionAdapter.updateSlot(cardSlot, finalQtd)
-            view_statistics.updateStatistics(currentAttr)
+            view_statistics?.updateStatistics(currentAttr)
             MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE(cardSlot.card, finalQtd))
         }
     }
@@ -329,9 +332,9 @@ class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
-                                 @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
-                                 val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
+    open class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+                                      @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
+                                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
         var items: MutableList<CardSlot> = mutableListOf()
 

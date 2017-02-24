@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/card_decklist_image"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/card_height"
+        android:paddingEnd="@dimen/default_margin"
+        tools:src="@drawable/card" />
+
+    <ImageView
+        android:id="@+id/card_decklist_qtd_layout"
+        android:layout_width="@dimen/deck_list_card_slot_height"
+        android:layout_height="@dimen/deck_list_card_slot_height"
+        android:layout_alignBottom="@id/card_decklist_image"
+        android:layout_alignEnd="@id/card_decklist_image"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:src="@drawable/xml_circle_qtd_two" />
+
+    <TextView
+        android:id="@+id/card_decklist_qtd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@id/card_decklist_qtd_layout"
+        android:layout_alignEnd="@id/card_decklist_qtd_layout"
+        android:layout_alignTop="@id/card_decklist_qtd_layout"
+        android:layout_alignBottom="@id/card_decklist_qtd_layout"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_small"
+        tools:text="2" />
+
+</RelativeLayout>
