@@ -39,7 +39,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     }
 
     override val cardsAdapter by lazy {
-        cardsNewDeckAdapter(ADS_EACH_ITEMS, gridLayoutManager, onItemClick, {
+        CardsNewDeckAdapter(ADS_EACH_ITEMS, gridLayoutManager, onItemClick, {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
@@ -52,14 +52,14 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         isFragmentSelected = true
         arguments.getParcelable<Deck>(EXTRA_DECK)?.apply {
             PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
-                loadDeckCards(it)
+                loadDeckCards(cards, it)
             }
         }
     }
 
-    private fun Deck.loadDeckCards(it: List<Card>) {
+    private fun loadDeckCards(cards: Map<String, Int>, clsCards: List<Card>) {
         cards.forEach { cardShortName, qtd ->
-            val card = it.find { it.shortName == cardShortName }
+            val card = clsCards.find { it.shortName == cardShortName }
             if (card != null) {
                 cardsAdapter.updateCardSlot(CardSlot(card, qtd))
             }
@@ -72,7 +72,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         cardsAdapter.updateCardSlot(cmdUpdateCardSlot.cardSlot)
     }
 
-    class cardsNewDeckAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, itemClick: (View, Card) -> Unit,
+    class CardsNewDeckAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, itemClick: (View, Card) -> Unit,
                               itemLongClick: (View, Card) -> Boolean) : CardsAllAdapter(adsEachItems,
             layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -55,12 +56,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:textStyle="bold"
+            android:text="P"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_big"
+            android:textStyle="bold"
             android:visibility="gone"
-            tools:visibility="visible"
-            android:text="P" />
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/decklist_class_prophecy_qtd"
@@ -72,23 +73,30 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/decklist_recycle_view"
+    <FrameLayout
+        android:id="@+id/decklist_cards_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:layout_weight="1"
-        android:background="@drawable/xml_cards_bg"
-        android:fadeScrollbars="false"
-        android:paddingBottom="@dimen/nano_margin"
-        android:paddingTop="@dimen/nano_margin"
-        android:scrollbarSize="@dimen/small_margin"
-        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-        android:scrollbars="vertical"
-        app:layoutManager="LinearLayoutManager"
-        tools:layout_gravity="end"
-        tools:layout_width="200dp"
-        tools:listitem="@layout/itemlist_decklist_slot" />
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/decklist_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/xml_cards_bg"
+            android:fadeScrollbars="false"
+            android:paddingBottom="@dimen/nano_margin"
+            android:paddingTop="@dimen/nano_margin"
+            android:scrollbarSize="@dimen/small_margin"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            tools:layout_gravity="end"
+            tools:layout_width="200dp"
+            tools:listitem="@layout/itemlist_decklist_slot" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/decklist_soul"
@@ -98,8 +106,8 @@
         android:drawablePadding="@dimen/large_margin"
         android:drawableStart="@drawable/ic_soul"
         android:gravity="center"
-        tools:text="0"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        tools:text="0" />
 
     <com.ediposouza.teslesgendstracker.ui.decks.widget.MagikaCosts
         android:id="@+id/decklist_costs"

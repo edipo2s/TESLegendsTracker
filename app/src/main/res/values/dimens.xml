@@ -22,6 +22,7 @@
 
     <!-- Cards List -->
     <dimen name="card_height">200dp</dimen>
+    <dimen name="card_height_min">160dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
     <!-- transparent navigation_bar_height + default_margin-->
@@ -55,7 +56,8 @@
     <dimen name="deck_menu_switch_size">20dp</dimen>
     <dimen name="deck_menu_private_icon_size">12dp</dimen>
     <dimen name="deck_menu_percent_icon_size">14dp</dimen>
-    <dimen name="deck_menu_hide_empty_icon_size">14dp</dimen>
+    <dimen name="deck_menu_compact_view_list_icon_size">14dp</dimen>
+    <dimen name="deck_menu_compact_view_cards_icon_size">10dp</dimen>
 
     <!-- transparent status_bar_height + 115dp-->
     <dimen name="deck_header_height">115dp</dimen>
@@ -64,6 +66,7 @@
     <!-- transparent navigation_bar_height + 38dp-->
     <dimen name="deck_comment_bottom_sheet_peek_height">38dp</dimen>
     <dimen name="deck_list_comment_name_width">56dp</dimen>
+    <dimen name="deck_list_card_slot_height">24dp</dimen>
     <dimen name="deck_list_slot_height">32dp</dimen>
     <dimen name="deck_list_slot_half_height">16dp</dimen>
     <dimen name="deck_list_slot_rarity_height">12dp</dimen>

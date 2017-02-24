@@ -21,6 +21,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.App
@@ -42,6 +43,7 @@ import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
 import org.jetbrains.anko.*
 import org.threeten.bp.format.DateTimeFormatter
+import timber.log.Timber
 import java.text.NumberFormat
 import java.util.*
 
@@ -168,9 +170,13 @@ class DeckActivity : BaseActivity() {
         if (commentsSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
             commentsSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         } else {
-            supportFragmentManager.beginTransaction()
-                    .remove(deckInfoFragment)
-                    .commit()
+            try {
+                supportFragmentManager.beginTransaction()
+                        .remove(deckInfoFragment)
+                        .commit()
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
             super.onBackPressed()
         }
     }
@@ -186,9 +192,14 @@ class DeckActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_deck_view, menu)
         menuInflater.inflate(if (deckOwned) R.menu.menu_edit_delete else R.menu.menu_like, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
+        val menuDeckView = menu?.findItem(R.id.menu_compact_view)?.actionView as CompoundButton
+        menuDeckView.setOnCheckedChangeListener { _, isChecked ->
+            eventBus.post(CmdChangeDeckViewMode(isChecked))
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -343,7 +354,7 @@ class DeckActivity : BaseActivity() {
                     deck_details_create_by.text = name.takeIf { name.isNotEmpty() } ?: deck.owner
                     Glide.with(this@DeckActivity)
                             .load(ownerUser.photoUrl)
-                            .placeholder(R.drawable.ic_user)
+                            .placeholder(ContextCompat.getDrawable(this@DeckActivity, R.drawable.ic_user))
                             .transform(CircleTransform(this@DeckActivity))
                             .into(deck_details_create_by_photo)
                 }

@@ -29,6 +29,7 @@
     <string name="menu_search">Busca</string>
     <string name="menu_sets">Expanções</string>
     <string name="menu_statistics">Statísticas</string>
+    <string name="menu_compact_view">Modo compacto</string>
     <string name="menu_only_private">Apenas Privados</string>
     <string name="menu_only_collection">Apenas da Colleção</string>
     <string name="menu_hide_empty">Ocultar Vazios</string>

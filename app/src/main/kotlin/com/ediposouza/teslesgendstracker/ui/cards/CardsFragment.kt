@@ -123,14 +123,14 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
         checkLastVersion {
             Timber.d("New version $it found!")
-            new_update_layout.visibility = View.VISIBLE
-            new_update_later.rippleDuration = 200
-            new_update_later.setOnRippleCompleteListener {
-                new_update_layout.visibility = View.GONE
+            new_update_layout?.visibility = View.VISIBLE
+            new_update_later?.rippleDuration = 200
+            new_update_later?.setOnRippleCompleteListener {
+                new_update_layout?.visibility = View.GONE
                 MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_LATER())
             }
-            new_update_now.rippleDuration = 200
-            new_update_now.setOnRippleCompleteListener {
+            new_update_now?.rippleDuration = 200
+            new_update_now?.setOnRippleCompleteListener {
                 startActivity(Intent(Intent.ACTION_VIEW)
                         .setData(Uri.parse(getString(R.string.playstore_url_format, context.packageName))))
                 MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_NOW())

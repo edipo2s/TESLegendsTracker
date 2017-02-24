@@ -11,6 +11,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
@@ -22,6 +23,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_update.view.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import org.threeten.bp.format.DateTimeFormatter
@@ -122,6 +124,13 @@ class DeckInfoFragment : BaseFragment() {
                 postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
             }
         }
+    }
+
+    @Subscribe
+    fun onCmdChangeDeckViewMode(cmdChangeDeckViewMode: CmdChangeDeckViewMode) {
+        deck_details_cardlist.setCardViewMode(fragmentManager, cmdChangeDeckViewMode.compactMode)
+        deck_details_cardlist.layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,
+                2.5f.takeIf { cmdChangeDeckViewMode.compactMode } ?: 1f)
     }
 
     class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
