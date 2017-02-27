@@ -99,16 +99,18 @@ class NewDeckCardsListFragment : CardsAllFragment() {
             CardsAllViewHolder(view, itemClick, itemLongClick) {
 
         fun bind(cardSlot: CardSlot) {
-            itemView.setOnLongClickListener { itemLongClick(itemView.card_all_image, cardSlot.card) }
-            itemView.card_all_image.setImageBitmap(cardSlot.card.imageBitmap(itemView.context))
-            val isCardUnique = cardSlot.card.unique
-            if (isCardUnique && cardSlot.qtd == 1 || !isCardUnique && cardSlot.qtd == 3) {
-                val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
-                itemView.card_all_image.setColorFilter(color)
-                itemView.setOnClickListener { }
-            } else {
-                itemView.setOnClickListener { itemClick(itemView.card_all_image, cardSlot.card) }
-                itemView.card_all_image.clearColorFilter()
+            with(itemView) {
+                setOnLongClickListener { itemLongClick(itemView.card_all_image, cardSlot.card) }
+                cardSlot.card.loadCardImageInto(card_all_image)
+                val isCardUnique = cardSlot.card.unique
+                if (isCardUnique && cardSlot.qtd == 1 || !isCardUnique && cardSlot.qtd == 3) {
+                    val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
+                    card_all_image.setColorFilter(color)
+                    setOnClickListener { }
+                } else {
+                    setOnClickListener { itemClick(itemView.card_all_image, cardSlot.card) }
+                    card_all_image.clearColorFilter()
+                }
             }
         }
 

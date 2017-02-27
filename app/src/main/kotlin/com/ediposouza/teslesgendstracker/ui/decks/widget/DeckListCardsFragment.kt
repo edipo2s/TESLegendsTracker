@@ -69,7 +69,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
         fun bind(cardSlot: CardSlot) {
             with(itemView.card_decklist_image) {
-                setImageBitmap(cardSlot.card.imageBitmap(itemView.context))
+                cardSlot.card.loadCardImageInto(this)
                 layoutParams = layoutParams.apply { height = itemView.context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
                 itemView.setOnClickListener { itemLongClick(this, cardSlot.card) }
                 itemView.setOnLongClickListener { itemLongClick(this, cardSlot.card) }

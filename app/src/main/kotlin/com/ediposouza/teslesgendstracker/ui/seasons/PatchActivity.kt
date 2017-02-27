@@ -178,15 +178,17 @@ class PatchActivity : BaseActivity() {
                  itemClick: (View, Card) -> Unit) {
             with(itemView) {
                 patch_card_change.text = context.getString(R.string.patch_change, patchChange.change)
-                patch_card_old_image.setImageBitmap(patchChange.oldImageBitmap(context, patchUuid))
-                patch_card_new_image.setImageBitmap(patchChange.newImageBitmap(context, nextPatchUuid))
+                patchChange.oldImageBitmap(patch_card_old_image, patchUuid)
+                patchChange.newImageBitmap(patch_card_new_image, nextPatchUuid)
                 val set = CardSet.of(patchChange.set)
                 val attr = CardAttribute.valueOf(patchChange.attr.toUpperCase())
                 PublicInteractor.getCard(set, attr, patchChange.shortName) { card ->
-                    val cardOld = card.patchVersion(context, patchUuid)
-                    val cardNew = card.patchVersion(context, nextPatchUuid)
-                    patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, cardOld) }
-                    patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, cardNew) }
+                    card.patchVersion(context, patchUuid) { cardOld ->
+                        patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, cardOld) }
+                    }
+                    card.patchVersion(context, nextPatchUuid) { cardNew ->
+                        patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, cardNew) }
+                    }
                 }
             }
         }

@@ -158,7 +158,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun onSelect(card: Card) {
         selectedCard = card
         selectDialog?.dismiss()
-        arena_draft_card_iv.setImageBitmap(card.imageBitmap(context))
+        card.loadCardImageInto(arena_draft_card_iv)
         val calcArenaValue = calcArenaValue(card)
         val arenaValue = (calcArenaValue.first.takeIf { it > 0 } ?: INVALID_TEXT_VALUE).toString()
         arena_draft_card_value.text = "$arenaValue" + ("*".takeIf { calcArenaValue.second.isNotEmpty() } ?: "")
