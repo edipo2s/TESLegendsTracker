@@ -337,7 +337,7 @@ open class CardsAllFragment : BaseFragment() {
             with(itemView) {
                 setOnClickListener { itemClick(card_all_image, card) }
                 setOnLongClickListener { itemLongClick(card_all_image, card) }
-                card_all_image.setImageBitmap(card.imageBitmap(context))
+                card.loadCardImageInto(card_all_image)
             }
         }
 

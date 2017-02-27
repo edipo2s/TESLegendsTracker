@@ -131,7 +131,7 @@ class SeasonsFragment : BaseFragment() {
                         val rewardAttr = CardAttribute.valueOf(season.rewardCardAttr.toUpperCase())
                         PublicInteractor.getCard(CardSet.CORE, rewardAttr, season.rewardCardShortname) { card ->
                             context.runOnUiThread {
-                                season_card_reward.setImageBitmap(card.imageBitmap(context))
+                                card.loadCardImageInto(season_card_reward)
                                 season_card_reward.setOnClickListener { itemClick(season_card_reward, card) }
                             }
                         }
