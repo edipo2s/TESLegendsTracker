@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
+import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -28,6 +29,7 @@ import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
+import com.ediposouza.teslesgendstracker.ui.cards.CmdInputSearch
 import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.ArenaFragment
@@ -242,6 +244,11 @@ class DashActivity : BaseFilterActivity(),
                 }
                 getString(R.string.app_deeplink_path_season) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_seasons))
+                }
+                getString(R.string.app_deeplink_path_search) -> {
+                    dash_content.postDelayed({
+                        eventBus.post(CmdInputSearch(this[1]))
+                    }, DateUtils.SECOND_IN_MILLIS)
                 }
                 getString(R.string.app_deeplink_path_update) -> {
                     startActivity(Intent(Intent.ACTION_VIEW)

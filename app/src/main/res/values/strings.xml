@@ -6,6 +6,7 @@
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
     <string name="app_deeplink_path_articles" translatable="false">articles</string>
     <string name="app_deeplink_path_card" translatable="false">card</string>
+    <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_ads_card_list" translatable="false">ca-app-pub-7881623561544201/7976661172</string>
