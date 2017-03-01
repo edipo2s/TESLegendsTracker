@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/large_margin"
         android:orientation="vertical"
-        android:paddingTop="@dimen/huge_margin">
+        android:paddingTop="@dimen/huge_margin"
+        android:layout_marginTop="@dimen/default_margin">
 
         <include layout="@layout/include_login_button" />
 

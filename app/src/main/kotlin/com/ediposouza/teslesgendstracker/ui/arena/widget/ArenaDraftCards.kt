@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
@@ -88,6 +89,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         currentAttr = null
         currentMagika = -1
         currentRarity = null
+        Glide.clear(arena_draft_card_iv)
         arena_draft_card_iv.setImageBitmap(Card.getDefaultCardImage(context))
         arena_draft_card_value.text = INVALID_TEXT_VALUE
         arena_draft_card_value.setTextColor(ContextCompat.getColor(context, android.R.color.white))
