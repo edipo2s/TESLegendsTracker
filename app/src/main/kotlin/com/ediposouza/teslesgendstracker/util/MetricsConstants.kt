@@ -14,6 +14,7 @@ abstract class MetricsConstants {
         const val EVENT_SIGNUP = "SignUp"
         const val PARAM_SIGN_METHOD = "method"
         const val PARAM_SIGN_METHOD_VALUE_GOOGLE = "Google"
+        const val PARAM_SIGN_METHOD_VALUE_FACEBOOK = "Facebook"
 
         const val EVENT_VIEW_CARD = "ViewCard"
         const val PARAM_VIEW_CARD_ID = "ID"
