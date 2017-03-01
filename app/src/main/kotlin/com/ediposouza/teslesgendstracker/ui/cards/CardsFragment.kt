@@ -24,6 +24,7 @@ import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
@@ -37,6 +38,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private val KEY_PAGE_VIEW_POSITION = "pageViewPositionKey"
 
     private var query: String? = null
+    private var searchView: SearchView? = null
     private val handler = Handler()
     private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
@@ -150,12 +152,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_import, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
         menu?.findItem(R.id.menu_import)?.isVisible = false
-        val actionView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search))
-        if (actionView is SearchView) {
-            with(actionView) {
-                queryHint = getString(R.string.cards_search_hint)
-                setOnQueryTextListener(this@CardsFragment)
-            }
+        searchView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as? SearchView
+        searchView?.apply {
+            queryHint = getString(R.string.cards_search_hint)
+            setOnQueryTextListener(this@CardsFragment)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -175,6 +175,13 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
         return true
+    }
+
+    @Subscribe
+    @Suppress("unused", "UNUSED_PARAMETER")
+    fun onCmdInputSearch(cmdInputSearch: CmdInputSearch) {
+        searchView?.isIconified = false
+        searchView?.setQuery(cmdInputSearch.search, true)
     }
 
     fun checkLastVersion(onNewVersion: (String?) -> Unit) {

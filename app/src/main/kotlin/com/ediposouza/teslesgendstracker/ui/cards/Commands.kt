@@ -19,3 +19,5 @@ data class CmdFilterAttr(val attr: CardAttribute?)
 data class CmdFilterRarity(val rarity: CardRarity?)
 
 data class CmdFilterMagika(val magika: Int)
+
+data class CmdInputSearch(val search: String?)
