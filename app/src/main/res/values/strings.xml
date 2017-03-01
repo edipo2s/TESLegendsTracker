@@ -38,7 +38,7 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
-    <string name="facebook_app_id">***REMOVED***</string>
+    <string name="facebook_app_id" translatable="false">***REMOVED***</string>
 
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
