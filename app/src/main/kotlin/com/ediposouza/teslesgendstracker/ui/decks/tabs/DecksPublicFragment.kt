@@ -25,7 +25,6 @@ import com.ediposouza.teslesgendstracker.util.inflate
 import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_decks_list.*
-import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_deck.view.*
 import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
@@ -119,9 +118,8 @@ open class DecksPublicFragment : BaseFragment() {
         }
     }
 
-    fun configLoggedViews() {
-        signin_button.setOnClickListener { showLogin() }
-        signin_button.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+    override fun configLoggedViews() {
+        super.configLoggedViews()
         decks_recycler_view.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.INVISIBLE
     }
 

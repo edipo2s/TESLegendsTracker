@@ -153,23 +153,23 @@ object MetricsManager : MetricsConstants() {
         mixpanelAnalytics?.trackBundle(MetricScreen.EVENT_SCREEN_VIEW, bundle)
     }
 
-    fun trackSignUp() {
+    fun trackSignUp(method: String) {
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, PARAM_SIGN_METHOD_VALUE_GOOGLE)
+            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, method)
         }
-        answers?.logSignUp(SignUpEvent().putMethod(PARAM_SIGN_METHOD_VALUE_GOOGLE))
+        answers?.logSignUp(SignUpEvent().putMethod(method))
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
-        mixpanelAnalytics?.trackMap(EVENT_SIGNUP, mapOf(PARAM_SIGN_METHOD to PARAM_SIGN_METHOD_VALUE_GOOGLE))
+        mixpanelAnalytics?.trackMap(EVENT_SIGNUP, mapOf(PARAM_SIGN_METHOD to method))
     }
 
-    fun trackSignIn(user: FirebaseUser?, success: Boolean) {
+    fun trackSignIn(user: FirebaseUser?, success: Boolean, method: String) {
         identifyUser(user)
         val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, PARAM_SIGN_METHOD_VALUE_GOOGLE)
+            putString(FirebaseAnalytics.Param.SIGN_UP_METHOD, method)
         }
-        answers?.logLogin(LoginEvent().putMethod(PARAM_SIGN_METHOD_VALUE_GOOGLE).putSuccess(success))
+        answers?.logLogin(LoginEvent().putMethod(method).putSuccess(success))
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
-        mixpanelAnalytics?.trackMap(EVENT_LOGIN, mapOf(PARAM_SIGN_METHOD to PARAM_SIGN_METHOD_VALUE_GOOGLE))
+        mixpanelAnalytics?.trackMap(EVENT_LOGIN, mapOf(PARAM_SIGN_METHOD to method))
     }
 
     private fun identifyUser(user: FirebaseUser?) {

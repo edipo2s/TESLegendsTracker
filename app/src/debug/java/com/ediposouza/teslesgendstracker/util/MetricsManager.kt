@@ -29,11 +29,11 @@ object MetricsManager : MetricsConstants() {
         Timber.d(screen.name)
     }
 
-    fun trackSignUp() {
+    fun trackSignUp(method: String) {
         Timber.d("SignUp")
     }
 
-    fun trackSignIn(user: FirebaseUser?, success: Boolean) {
+    fun trackSignIn(user: FirebaseUser?, success: Boolean, method: String) {
         Timber.d("SignIn success: $success")
     }
 
