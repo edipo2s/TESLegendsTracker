@@ -18,10 +18,20 @@ android {
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("boolean", "ENABLE_LOGS_IN_RELEASE", "false")
-        buildConfigField("boolean", "PREPARE_TO_RELEASE", "$prepareToRelease")
-        buildConfigField("String", "MIXPANEL_TOKEN", '"***REMOVED***"')
-        buildConfigField("String", "GCM_SENDER", '"***REMOVED***"')
+        buildConfigField "boolean", "ENABLE_LOGS_IN_RELEASE", "false"
+        buildConfigField "boolean", "PREPARE_TO_RELEASE", "$prepareToRelease"
+        resValue "string", "app_ads_card_full", "$key_ads_card_full"
+        resValue "string", "app_ads_card_list", "$key_ads_card_list"
+        resValue "string", "app_ads_deck_list", "$key_ads_deck_list"
+        resValue "string", "app_ads_new_deck_card_list", "$key_ads_new_deck_card_list"
+        resValue "string", "app_ads_match_history_list", "$key_ads_match_history_list"
+        resValue "string", "app_ads_match_statistics_class_full", "$key_ads_match_statistics_class_full"
+        resValue "string", "app_ads_new_matches_full", "$key_ads_new_matches_full"
+        resValue "string", "app_ads_news_list", "$key_ads_news_list"
+        resValue "string", "app_ads_season_list", "$key_ads_season_list"
+        resValue "string", "app_ads_patch_full", "$key_ads_patch_full"
+        resValue "string", "facebook_app_id", "$key_facebook_app_id"
+        resValue "string", "mixpanel_app_id", "$key_mixpanel_app_id"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
     }

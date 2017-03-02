@@ -5,6 +5,7 @@
 # Built application files
 *.apk
 *.ap_
+google-services.json
 
 # Files for the ART/Dalvik VM
 *.dex

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
 import com.ediposouza.teslesgendstracker.BuildConfig
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.Patch
@@ -23,6 +24,7 @@ import java.util.*
  */
 object MetricsManager : MetricsConstants() {
 
+    var gcmSender: String = ""
     var answers: Answers? = null
     var firebaseAnalytics: FirebaseAnalytics? = null
     var mixpanelAnalytics: MixpanelAPI? = null
@@ -33,9 +35,10 @@ object MetricsManager : MetricsConstants() {
         } else {
             Timber.w("Fabric not initialized")
         }
+        gcmSender = context.getString(R.string.gcm_defaultSenderId)
         answers = Answers.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)
-        mixpanelAnalytics = MixpanelAPI.getInstance(context, BuildConfig.MIXPANEL_TOKEN)
+        mixpanelAnalytics = MixpanelAPI.getInstance(context, context.getString(R.string.mixpanel_app_id))
     }
 
     fun flush() {
@@ -182,7 +185,7 @@ object MetricsManager : MetricsConstants() {
         mixpanelAnalytics?.identify(userId)
         mixpanelAnalytics?.people?.apply {
             identify(userId)
-            initPushHandling(BuildConfig.GCM_SENDER)
+            initPushHandling(gcmSender)
             set(PARAM_MIXPANEL_USER_NAME, user?.displayName)
             set(PARAM_MIXPANEL_USER_EMAIL, user?.email)
         }

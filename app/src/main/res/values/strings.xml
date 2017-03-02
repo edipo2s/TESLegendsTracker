@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">TESL Tracker</string>
     <string name="app_name_full" translatable="false">TES Legends Tracker</string>
+
     <string name="app_deeplink_scheme" translatable="false">e2s</string>
     <string name="app_deeplink_host" translatable="false">tesltracker</string>
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
@@ -9,22 +10,14 @@
     <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
-    <string name="app_ads_card_list" translatable="false">***REMOVED***</string>
+
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
-    <string name="app_ads_card_full" translatable="false">***REMOVED***</string>
-    <string name="app_ads_deck_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_deck_list_size" translatable="false">280x80</string>
-    <string name="app_ads_new_deck_card_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_new_deck_card_list_size" translatable="false">220x50</string>
-    <string name="app_ads_match_history_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
-    <string name="app_ads_match_statistics_class_full" translatable="false">***REMOVED***</string>
-    <string name="app_ads_new_matches_full" translatable="false">***REMOVED***</string>
-    <string name="app_ads_news_list" translatable="false">***REMOVED***</string>
     <string name="app_ads_news_list_size" translatable="false">280x80</string>
-    <string name="app_ads_season_list" translatable="false">***REMOVED***</string>
-    <string name="app_ads_patch_full" translatable="false">***REMOVED***</string>
     <string name="app_ads_season_list_size" translatable="false">280x80</string>
+
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
@@ -38,7 +31,6 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
-    <string name="facebook_app_id" translatable="false">***REMOVED***</string>
 
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
