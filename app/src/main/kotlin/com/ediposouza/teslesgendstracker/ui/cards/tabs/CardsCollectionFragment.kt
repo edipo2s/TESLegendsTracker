@@ -374,23 +374,25 @@ open class CardsCollectionFragment : CardsAllFragment() {
                                     val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         fun bind(cardSlot: CardSlot) {
-            itemView.setOnClickListener { itemClick(cardSlot) }
-            itemView.setOnLongClickListener {
-                itemLongClick(itemView.card_collection_image, cardSlot.card)
+            with(itemView) {
+                setOnClickListener { itemClick(cardSlot) }
+                setOnLongClickListener {
+                    itemLongClick(itemView.card_collection_image, cardSlot.card)
+                }
+                cardSlot.card.loadCardImageInto(card_collection_image)
+                if (cardSlot.qtd == 0) {
+                    val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
+                    card_collection_image.setColorFilter(color)
+                } else {
+                    card_collection_image.clearColorFilter()
+                }
+                card_collection_qtd.setImageResource(when (cardSlot.qtd) {
+                    0 -> R.drawable.ic_qtd_zero
+                    2 -> R.drawable.ic_qtd_two
+                    else -> R.drawable.ic_qtd_three
+                })
+                card_collection_qtd.visibility = View.GONE.takeIf { cardSlot.qtd == 1 } ?: View.VISIBLE
             }
-            itemView.card_collection_image.setImageBitmap(cardSlot.card.imageBitmap(itemView.context))
-            if (cardSlot.qtd == 0) {
-                val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
-                itemView.card_collection_image.setColorFilter(color)
-            } else {
-                itemView.card_collection_image.clearColorFilter()
-            }
-            itemView.card_collection_qtd.setImageResource(when (cardSlot.qtd) {
-                0 -> R.drawable.ic_qtd_zero
-                2 -> R.drawable.ic_qtd_two
-                else -> R.drawable.ic_qtd_three
-            })
-            itemView.card_collection_qtd.visibility = View.GONE.takeIf { cardSlot.qtd == 1 } ?: View.VISIBLE
         }
 
     }

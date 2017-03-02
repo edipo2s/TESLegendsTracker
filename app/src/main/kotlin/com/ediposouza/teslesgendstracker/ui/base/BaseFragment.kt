@@ -1,12 +1,20 @@
 package com.ediposouza.teslesgendstracker.ui.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.View
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.alertThemed
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import kotlinx.android.synthetic.main.include_login_button.*
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
@@ -19,6 +27,7 @@ open class BaseFragment : Fragment() {
     private val KEY_IS_FRAGMENT_SELECTED = "isFragmentSelectedKey"
 
     protected val eventBus: EventBus by lazy { EventBus.getDefault() }
+    protected val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
 
     protected var isFragmentSelected: Boolean = false
 
@@ -74,6 +83,11 @@ open class BaseFragment : Fragment() {
         super.onDestroy()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
         isFragmentSelected = menuVisible
@@ -81,6 +95,28 @@ open class BaseFragment : Fragment() {
 
     protected fun showLogin() {
         eventBus.post(CmdShowLogin())
+    }
+
+    open fun configLoggedViews() {
+        signin_buttons.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+        signin_google_button.setOnClickListener { showLogin() }
+        with(signin_facebook_button) {
+            setReadPermissions("email")
+            setFragment(this@BaseFragment)
+            registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(result: LoginResult?) {
+                    eventBus.post(result?.getAccessToken())
+                }
+
+                override fun onError(error: FacebookException?) {
+                    Timber.d(error)
+                }
+
+                override fun onCancel() {
+                }
+
+            })
+        }
     }
 
 }

@@ -100,7 +100,12 @@ dependencies {
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"
+    compile "com.google.firebase:firebase-storage:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
+    compile "com.google.firebase:firebase-storage:$playServicesVersion"
+    compile("com.firebaseui:firebase-ui-storage:1.2.0", {
+        exclude group: "com.google.firebase", module: "firebase-storage"
+    })
 
     //Fabric
     compile("com.crashlytics.sdk.android:answers:1.3.11") {
@@ -111,12 +116,13 @@ dependencies {
     }
 
     //Others
-    compile "com.mixpanel.android:mixpanel-android:4.9.3"
+    compile "com.facebook.android:facebook-android-sdk:4.19.0"
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
     compile "com.jakewharton.timber:timber:4.5.1"
     compile "org.greenrobot:eventbus:3.0.0"
     compile "com.github.bumptech.glide:glide:3.7.0"
     compile "com.github.bumptech.glide:okhttp3-integration:1.4.0@aar"
+    compile "com.mixpanel.android:mixpanel-android:4.9.3"
     compile "com.squareup.okio:okio:$okIOVersion"
     compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
 

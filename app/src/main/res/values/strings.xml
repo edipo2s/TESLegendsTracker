@@ -6,7 +6,9 @@
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
     <string name="app_deeplink_path_articles" translatable="false">articles</string>
     <string name="app_deeplink_path_card" translatable="false">card</string>
+    <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
+    <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_ads_card_list" translatable="false">ca-app-pub-7881623561544201/7976661172</string>
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
     <string name="app_ads_card_full" translatable="false">ca-app-pub-7881623561544201/1511325179</string>
@@ -36,6 +38,7 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
+    <string name="facebook_app_id" translatable="false">256005371476875</string>
 
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
@@ -134,6 +137,8 @@
     <string name="title_tab_articles_world">TES Legends World</string>
 
     <string name="cards_sets_all">All</string>
+    <string name="cards_search_reward" translatable="false">reward</string>
+    <string name="cards_search_unique" translatable="false">unique</string>
 
     <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>

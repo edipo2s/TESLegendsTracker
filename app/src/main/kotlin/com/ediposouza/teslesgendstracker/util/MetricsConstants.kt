@@ -14,6 +14,7 @@ abstract class MetricsConstants {
         const val EVENT_SIGNUP = "SignUp"
         const val PARAM_SIGN_METHOD = "method"
         const val PARAM_SIGN_METHOD_VALUE_GOOGLE = "Google"
+        const val PARAM_SIGN_METHOD_VALUE_FACEBOOK = "Facebook"
 
         const val EVENT_VIEW_CARD = "ViewCard"
         const val PARAM_VIEW_CARD_ID = "ID"
@@ -192,6 +193,15 @@ sealed class MetricAction(val name: String) {
     class ACTION_IMPORT_DECKS_CANCELLED : MetricAction("ImportDecksCancelled")
     class ACTION_IMPORT_DECKS_FINISH(val decksImported: Int) : MetricAction("ImportDecksFinish") {
         val PARAM_DECKS_IMPORTED = "DecksImported"
+    }
+
+    class ACTION_DECK_CHANGE_VIEW_MODE(val compatMode: Boolean) : MetricAction("DeckChangeViewMode") {
+        val PARAM_COMPACT_MODE = "CompactMode"
+    }
+
+    class ACTION_DEEPLINK(val path: String, val params: String) : MetricAction("Deeplink") {
+        val PARAM_PATH = "path"
+        val PARAM_PATH_PARAMS = "pathParams"
     }
 }
 

@@ -41,6 +41,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         cards_recycler_view.setPadding(0, 0, 0, 0)
+        cards_refresh_layout.isEnabled = false
         isFragmentSelected = true
         arguments.getParcelableArrayList<CardSlot>(EXTRA_DECK_CARDS)?.apply {
             cardsCollectionAdapter.showCards(this)
@@ -68,7 +69,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
         fun bind(cardSlot: CardSlot) {
             with(itemView.card_decklist_image) {
-                setImageBitmap(cardSlot.card.imageBitmap(itemView.context))
+                cardSlot.card.loadCardImageInto(this)
                 layoutParams = layoutParams.apply { height = itemView.context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
                 itemView.setOnClickListener { itemLongClick(this, cardSlot.card) }
                 itemView.setOnLongClickListener { itemLongClick(this, cardSlot.card) }

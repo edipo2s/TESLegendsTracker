@@ -303,8 +303,7 @@ class CardActivity : BaseActivity() {
                  isLast: Boolean, hasPatchVersion: Boolean, onCardClick: () -> Unit) {
             with(itemView) {
                 with(card_patch_full_image) {
-                    setImageBitmap(Card.getCardImageBitmap(context, cardBasicInfo.set,
-                            cardBasicInfo.attr, cardBasicInfo.shortName))
+                    Card.loadCardImageInto(this, cardBasicInfo.set, cardBasicInfo.attr, cardBasicInfo.shortName)
                     ViewCompat.setTransitionName(this, context.getString(R.string.card_transition_name).takeIf { isFirst } ?: "")
                     setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
                 }
