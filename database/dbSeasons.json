@@ -33,5 +33,10 @@
     "reward": {
       "neutral": "heroicrebirth"
     }
+  },
+  "2017_03": {
+    "reward": {
+      "unknown": true
+    }
   }
 }

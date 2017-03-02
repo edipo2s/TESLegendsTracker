@@ -310,5 +310,9 @@
     "desc": "Stampede Sentinel",
     "type": "reward",
     "legendsDeck": "Patch-1-61"
+  },
+  "2017_03_01": {
+    "desc": "Heroic Rebirth",
+    "type": "reward"
   }
 }

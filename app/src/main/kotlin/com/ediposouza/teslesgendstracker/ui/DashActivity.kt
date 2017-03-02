@@ -251,8 +251,10 @@ class DashActivity : BaseFilterActivity(),
                     }, DateUtils.SECOND_IN_MILLIS)
                 }
                 getString(R.string.app_deeplink_path_update) -> {
-                    startActivity(Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
+                    checkLastVersion {
+                        val updateUri = Uri.parse(getString(R.string.playstore_url_format, packageName))
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(updateUri))
+                    }
                 }
             }
         }

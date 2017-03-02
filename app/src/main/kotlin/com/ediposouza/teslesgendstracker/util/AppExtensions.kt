@@ -22,8 +22,12 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.jetbrains.anko.AlertDialogBuilder
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import org.jsoup.Jsoup
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
+import timber.log.Timber
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -152,6 +156,34 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
 }
 
 fun LocalDate.toYearMonth(): YearMonth = YearMonth.of(year, month)
+
+
+fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
+    doAsync {
+        try {
+            val newer = Jsoup.connect(getString(R.string.playstore_url_format, packageName))
+                    .timeout(resources.getInteger(R.integer.jsoup_timeout))
+                    .userAgent(getString(R.string.jsoup_user_agent))
+                    .referrer(getString(R.string.jsoup_referrer))
+                    .get()
+                    .select("div[itemprop=softwareVersion]")
+                    .first()
+                    .ownText()
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            val newerVersion = newer.replace(".", "")
+            val actualVersion = pInfo.versionName.replace(".", "")
+            Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
+            uiThread {
+                if (Integer.parseInt(newerVersion) > Integer.parseInt(actualVersion)) {
+                    onNewVersion(newer)
+                }
+            }
+        } catch (e: Exception) {
+            Timber.e(e.message)
+        }
+    }
+}
+
 
 fun Context.hasNavigationBar(): Boolean {
     val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);

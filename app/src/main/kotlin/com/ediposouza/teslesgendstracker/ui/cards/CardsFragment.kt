@@ -25,9 +25,6 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import org.jsoup.Jsoup
 import timber.log.Timber
 
 /**
@@ -123,7 +120,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onResume()
         cards_app_bar_layout.setExpanded(true, true)
         (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
-        checkLastVersion {
+        context.checkLastVersion {
             Timber.d("New version $it found!")
             new_update_layout?.visibility = View.VISIBLE
             new_update_later?.rippleDuration = 200
@@ -182,33 +179,6 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     fun onCmdInputSearch(cmdInputSearch: CmdInputSearch) {
         searchView?.isIconified = false
         searchView?.setQuery(cmdInputSearch.search, true)
-    }
-
-    fun checkLastVersion(onNewVersion: (String?) -> Unit) {
-        doAsync {
-            try {
-                val pkg = context.packageName
-                val newer = Jsoup.connect(getString(R.string.playstore_url_format, pkg))
-                        .timeout(resources.getInteger(R.integer.jsoup_timeout))
-                        .userAgent(getString(R.string.jsoup_user_agent))
-                        .referrer(getString(R.string.jsoup_referrer))
-                        .get()
-                        .select("div[itemprop=softwareVersion]")
-                        .first()
-                        .ownText()
-                val pInfo = context.packageManager.getPackageInfo(pkg, 0)
-                val newerVersion = newer.replace(".", "")
-                val actualVersion = pInfo.versionName.replace(".", "")
-                Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
-                uiThread {
-                    if (Integer.parseInt(newerVersion) > Integer.parseInt(actualVersion)) {
-                        onNewVersion(newer)
-                    }
-                }
-            } catch (e: Exception) {
-                Timber.e(e.message)
-            }
-        }
     }
 
     class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
