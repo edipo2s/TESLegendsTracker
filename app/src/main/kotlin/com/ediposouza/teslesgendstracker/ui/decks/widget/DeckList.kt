@@ -3,7 +3,6 @@ package com.ediposouza.teslesgendstracker.ui.decks.widget
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentManager
@@ -295,43 +294,37 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                              val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         fun bind(slot: CardSlot, missingQtd: Int, updateMode: Boolean) {
-            itemView.setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
-            itemView.setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
-            itemView.deckslot_card_image.setImageBitmap(getCroppedCardImage(slot))
-            itemView.decl_slot_card_name.text = slot.card.name
-            itemView.deckslot_card_rarity.setImageResource(slot.card.rarity.imageRes)
-            itemView.deckslot_card_magika.setImageResource(when (slot.card.cost) {
-                0 -> R.drawable.ic_magika_0
-                1 -> R.drawable.ic_magika_1
-                2 -> R.drawable.ic_magika_2
-                3 -> R.drawable.ic_magika_3
-                4 -> R.drawable.ic_magika_4
-                5 -> R.drawable.ic_magika_5
-                6 -> R.drawable.ic_magika_6
-                else -> R.drawable.ic_magika_7plus
-            })
-            itemView.deckslot_card_qtd.text = "+${slot.qtd}".takeIf { updateMode && slot.qtd > 0 } ?: "${slot.qtd}"
-            itemView.deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
-            itemView.deckslot_card_qtd_layout.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
-            itemView.deckslot_card_qtd_missing.text = "-$missingQtd"
-            itemView.deckslot_card_qtd_missing.visibility = View.VISIBLE.takeIf { missingQtd > 0 } ?: View.INVISIBLE
-        }
-
-        private fun getCroppedCardImage(slot: CardSlot): Bitmap {
-            val resources = itemView.resources
-            var cardBitmap: Bitmap
-            try {
-                cardBitmap = slot.card.imageBitmap(itemView.context)
-            } catch (e: Exception) {
-                cardBitmap = BitmapFactory.decodeResource(resources, R.drawable.card)
+            with(itemView) {
+                setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
+                setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
+                slot.card.loadCardImageInto(itemView.deckslot_card_image, { cardBitmap ->
+                    with(itemView.resources) {
+                        val bmpWidth = cardBitmap.width
+                        val bmpHeight = cardBitmap.height
+                        val leftCropMargin = getInteger(R.integer.decklist_slot_cover_left_crop_margin)
+                        val rightCropMargin = getInteger(R.integer.decklist_slot_cover_right_crop_margin)
+                        val cropWidth = bmpWidth - leftCropMargin - rightCropMargin
+                        Bitmap.createBitmap(cardBitmap, leftCropMargin, 0, cropWidth, bmpHeight * 2 / 3)
+                    }
+                })
+                decl_slot_card_name.text = slot.card.name
+                deckslot_card_rarity.setImageResource(slot.card.rarity.imageRes)
+                deckslot_card_magika.setImageResource(when (slot.card.cost) {
+                    0 -> R.drawable.ic_magika_0
+                    1 -> R.drawable.ic_magika_1
+                    2 -> R.drawable.ic_magika_2
+                    3 -> R.drawable.ic_magika_3
+                    4 -> R.drawable.ic_magika_4
+                    5 -> R.drawable.ic_magika_5
+                    6 -> R.drawable.ic_magika_6
+                    else -> R.drawable.ic_magika_7plus
+                })
+                deckslot_card_qtd.text = "+${slot.qtd}".takeIf { updateMode && slot.qtd > 0 } ?: "${slot.qtd}"
+                deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
+                deckslot_card_qtd_layout.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
+                deckslot_card_qtd_missing.text = "-$missingQtd"
+                deckslot_card_qtd_missing.visibility = View.VISIBLE.takeIf { missingQtd > 0 } ?: View.INVISIBLE
             }
-            val bmpWidth = cardBitmap.width
-            val bmpHeight = cardBitmap.height
-            val leftCropMargin = resources.getInteger(R.integer.decklist_slot_cover_left_crop_margin)
-            val rightCropMargin = resources.getInteger(R.integer.decklist_slot_cover_right_crop_margin)
-            val cropWidth = bmpWidth - leftCropMargin - rightCropMargin
-            val cropeBitmap = Bitmap.createBitmap(cardBitmap, leftCropMargin, 0, cropWidth, bmpHeight * 2 / 3)
-            return cropeBitmap
         }
 
     }

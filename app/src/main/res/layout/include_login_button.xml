@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signin_button"
+    android:id="@+id/signin_buttons"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/large_margin"
-    android:background="@drawable/selector_btn_google_signin_light"
-    android:text="@string/sign_in_with_google"
-    android:textColor="@color/grey_500"
-    android:textStyle="bold"
+    android:layout_marginBottom="@dimen/huge_margin"
     android:visibility="invisible"
     tools:showIn="@layout/fragment_cards_list"
-    tools:visibility="visible" />
+    tools:visibility="visible">
+
+    <Button
+        android:id="@+id/signin_google_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_google_signin_light"
+        android:text="@string/sign_in_with_google"
+        android:textColor="@color/grey_500"
+        android:textStyle="bold" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/signin_facebook_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/signin_google_button"
+        android:layout_alignStart="@id/signin_google_button"
+        android:layout_below="@id/signin_google_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/huge_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/huge_margin"
+        android:paddingBottom="@dimen/medium_margin"
+        android:paddingTop="@dimen/medium_margin" />
+
+</RelativeLayout>

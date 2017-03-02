@@ -122,6 +122,10 @@
             android:name="io.fabric.ApiKey"
             android:value="***REMOVED***" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
     </application>
 
 </manifest>

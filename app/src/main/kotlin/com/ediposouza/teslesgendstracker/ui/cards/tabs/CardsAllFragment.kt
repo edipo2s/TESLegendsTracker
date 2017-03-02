@@ -21,7 +21,6 @@ import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
-import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.itemsSequence
@@ -49,6 +48,8 @@ open class CardsAllFragment : BaseFragment() {
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view.layoutManager as GridLayoutManager }
+    val rewardText by lazy { getString(R.string.cards_search_reward) }
+    val uniqueText by lazy { getString(R.string.cards_search_unique) }
 
     protected var shouldScrollToTop: Boolean = false
 
@@ -140,9 +141,8 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    fun configLoggedViews() {
-        signin_button.setOnClickListener { showLogin() }
-        signin_button.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+    override fun configLoggedViews() {
+        super.configLoggedViews()
         cards_recycler_view.visibility = View.VISIBLE.takeIf { App.hasUserLogged() } ?: View.INVISIBLE
     }
 
@@ -252,7 +252,10 @@ open class CardsAllFragment : BaseFragment() {
                         else -> {
                             val search = searchFilter!!.toLowerCase().trim()
                             it.name.toLowerCase().contains(search) ||
+                                    (search.contains(rewardText) && it.season.isNotEmpty()) ||
+                                    (search == uniqueText && it.unique) ||
                                     it.race.name.toLowerCase().contains(search) ||
+                                    it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
                                     it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty()
                         }
@@ -332,7 +335,7 @@ open class CardsAllFragment : BaseFragment() {
             with(itemView) {
                 setOnClickListener { itemClick(card_all_image, card) }
                 setOnLongClickListener { itemLongClick(card_all_image, card) }
-                card_all_image.setImageBitmap(card.imageBitmap(context))
+                card.loadCardImageInto(card_all_image)
             }
         }
 
