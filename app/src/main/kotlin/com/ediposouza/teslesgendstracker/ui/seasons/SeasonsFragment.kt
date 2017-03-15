@@ -68,7 +68,7 @@ class SeasonsFragment : BaseFragment() {
             }
 
             override fun onSyncEnd() {
-                seasons_refresh_layout.isRefreshing = false
+                seasons_refresh_layout?.isRefreshing = false
             }
 
         }

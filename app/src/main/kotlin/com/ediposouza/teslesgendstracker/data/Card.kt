@@ -33,6 +33,12 @@ enum class CardSet(val db: String) {
     MADHOUSE("madhouse"),
     UNKNOWN(TEXT_UNKNOWN);
 
+    var unknownSetName = ""
+
+    override fun toString(): String {
+        return name.takeIf { this != UNKNOWN } ?: unknownSetName
+    }
+
     companion object {
 
         fun of(value: String): CardSet {
@@ -293,7 +299,26 @@ data class CardMissing(
         val rarity: CardRarity,
         val qtd: Int
 
-)
+) : Parcelable {
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<CardMissing> = object : Parcelable.Creator<CardMissing> {
+            override fun createFromParcel(source: Parcel): CardMissing = CardMissing(source)
+            override fun newArray(size: Int): Array<CardMissing?> = arrayOfNulls(size)
+        }
+    }
+
+    constructor(source: Parcel) : this(source.readString(), CardRarity.values()[source.readInt()], source.readInt())
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(shortName)
+        dest?.writeInt(rarity.ordinal)
+        dest?.writeInt(qtd)
+    }
+
+    override fun describeContents(): Int = 0
+
+}
 
 data class CardStatistic(
 
@@ -368,10 +393,9 @@ data class Card(
         }
 
         private const val CARD_PATH = "Cards"
-        private const val CARD_BACK = "card_back.webp"
 
         fun getDefaultCardImage(context: Context): Bitmap {
-            return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+            return BitmapFactory.decodeResource(context.resources, R.drawable.card_back)
         }
 
         fun loadCardImageInto(view: ImageView, cardSet: String, cardAttr: String,
@@ -430,6 +454,7 @@ data class Card(
             val setName = cardSet.toLowerCase().capitalize()
             val attrName = cardAttr.toLowerCase().capitalize()
             val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.webp"
+            Timber.d(imagePath)
             return imagePath
         }
 
@@ -461,12 +486,12 @@ data class Card(
     override fun describeContents() = 0
 
     fun loadCardImageInto(view: ImageView, transform: ((Bitmap) -> Bitmap)? = null) {
-        Card.loadCardImageInto(view, set.name, attr.name, shortName, transform)
+        Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
     }
 
     fun patchVersion(context: Context, patchUuid: String, onGetCard: (Card) -> Unit) {
         var patchShortName = "${shortName}_$patchUuid"
-        loadCardImageInto(context, set.name, attr.name, patchShortName) { patchImageFound ->
+        loadCardImageInto(context, set.toString(), attr.name, patchShortName) { patchImageFound ->
             if (!patchImageFound) {
                 patchShortName = shortName
             }

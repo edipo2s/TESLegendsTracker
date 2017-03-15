@@ -18,7 +18,7 @@ class CmdLoginSuccess
 
 class CmdUpdateDeckAndShowDeck
 
-data class CmdUpdateTitle(@IntegerRes val title: Int)
+data class CmdUpdateTitle(@IntegerRes val titleRes: Int = 0, val title: String = "")
 
 data class CmdShowCardsByAttr(val attr: CardAttribute)
 

@@ -68,12 +68,11 @@ android {
 }
 
 ext {
-    anko_version = "0.9.1a"
-    icePickVersion = "3.2.+"
+    anko_version = "0.9.1"
     okIOVersion = "1.11.+"
     okHttpVersion = "3.6.+"
     playServicesVersion = prepareToRelease ? "10.2.0" : "9.8.0"
-    supportLibraryVersion = "25.2.0"
+    supportLibraryVersion = "25.3.0"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.7.+"
@@ -141,7 +140,7 @@ dependencies {
     compile "com.github.miguelbcr:TableFixHeaders-Wrapper:0.2.0"
     compile "com.timehop.stickyheadersrecyclerview:library:0.4.3"
     compile "com.kyleduo.switchbutton:library:1.4.4"
-    compile "jp.wasabeef:recyclerview-animators:2.2.4"
+    compile "jp.wasabeef:recyclerview-animators:2.2.5"
     compile "org.jsoup:jsoup:1.10.1"
 
     testCompile "junit:junit:4.12"

@@ -59,7 +59,7 @@ class ArticlesNewsFragment : BaseFragment() {
             }
 
             override fun onSyncEnd() {
-                articles_news_refresh_layout.isRefreshing = false
+                articles_news_refresh_layout?.isRefreshing = false
             }
 
         }

@@ -59,9 +59,8 @@ class NewDeckCardsListFragment : CardsAllFragment() {
 
     private fun loadDeckCards(cards: Map<String, Int>, clsCards: List<Card>) {
         cards.forEach { cardShortName, qtd ->
-            val card = clsCards.find { it.shortName == cardShortName }
-            if (card != null) {
-                cardsAdapter.updateCardSlot(CardSlot(card, qtd))
+            clsCards.find { it.shortName == cardShortName }?.apply {
+                cardsAdapter.updateCardSlot(CardSlot(this, qtd))
             }
         }
     }

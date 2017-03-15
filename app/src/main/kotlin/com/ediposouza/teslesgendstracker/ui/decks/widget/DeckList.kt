@@ -48,7 +48,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     val deckListCardsFragment by lazy {
         DeckListCardsFragment().apply {
-            arguments = bundleOf(DeckListCardsFragment.EXTRA_DECK_CARDS to getCards())
+            arguments = bundleOf(DeckListCardsFragment.EXTRA_DECK_CARDS to getCards(),
+                    DeckListCardsFragment.EXTRA_MISSING_CARDS to deckListAdapter.missingCards)
         }
     }
 
@@ -82,7 +83,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         inflate(context, R.layout.widget_decklist, this)
         decklist_recycle_view.adapter = deckListAdapter
         decklist_recycle_view.itemAnimator = SlideInLeftAnimator()
-        decklist_recycle_view.layoutManager = LinearLayoutManager(context)
+        decklist_recycle_view.layoutManager = object : LinearLayoutManager(context) {
+            override fun supportsPredictiveItemAnimations(): Boolean = false
+        }
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
             val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
@@ -192,8 +195,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                           val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<DeckListViewHolder>() {
 
         private val items = arrayListOf<CardSlot>()
-        private var missingCards: List<CardMissing> = listOf()
         private val eventBus by lazy { EventBus.getDefault() }
+
+        var missingCards: List<CardMissing> = listOf()
 
         var updateMode = false
 

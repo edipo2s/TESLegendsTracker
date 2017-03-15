@@ -24,13 +24,28 @@
         android:id="@+id/card_decklist_qtd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@id/card_decklist_qtd_layout"
-        android:layout_alignEnd="@id/card_decklist_qtd_layout"
-        android:layout_alignTop="@id/card_decklist_qtd_layout"
         android:layout_alignBottom="@id/card_decklist_qtd_layout"
+        android:layout_alignEnd="@id/card_decklist_qtd_layout"
+        android:layout_alignStart="@id/card_decklist_qtd_layout"
+        android:layout_alignTop="@id/card_decklist_qtd_layout"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_small"
         tools:text="2" />
+
+    <TextView
+        android:id="@+id/card_decklist_qtd_missing"
+        android:layout_width="@dimen/deck_list_slot_half_height"
+        android:layout_height="@dimen/deck_list_slot_half_height"
+        android:layout_alignBottom="@+id/card_decklist_qtd_layout"
+        android:layout_alignEnd="@+id/card_decklist_qtd_layout"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:background="@drawable/xml_circle_red"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_micro"
+        android:visibility="invisible"
+        tools:text="-1"
+        tools:visibility="visible" />
 
 </RelativeLayout>

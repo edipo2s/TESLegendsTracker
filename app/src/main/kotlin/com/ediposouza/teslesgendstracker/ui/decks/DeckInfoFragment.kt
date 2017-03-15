@@ -20,6 +20,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
+import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_update.view.*
@@ -119,7 +120,9 @@ class DeckInfoFragment : BaseFragment() {
         if (deck.updates.isNotEmpty()) {
             with(deck_details_updates) {
                 adapter = DeckUpdateAdapter(deck.updates.reversed(), deck.cls)
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = object : LinearLayoutManager(context) {
+                    override fun supportsPredictiveItemAnimations(): Boolean = false
+                }
                 setHasFixedSize(true)
                 postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
             }
@@ -163,14 +166,14 @@ class DeckInfoFragment : BaseFragment() {
         private fun DeckUpdateViewHolder.configUpdateCardsChanges(cards: List<Card>, deckUpdate: DeckUpdate) {
             with(itemView.deck_update_changes) {
                 val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
-                adapter = com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
+                adapter = DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
                     updateMode = true
                     showDeck(deckUpdate.changes.map {
                         val cardQtd = it
                         com.ediposouza.teslesgendstracker.data.CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
                     })
                 }
-                layoutManager = android.support.v7.widget.LinearLayoutManager(context)
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }
         }

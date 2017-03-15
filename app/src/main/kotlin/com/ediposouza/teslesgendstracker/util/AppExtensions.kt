@@ -184,7 +184,6 @@ fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
     }
 }
 
-
 fun Context.hasNavigationBar(): Boolean {
     val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
     val hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);

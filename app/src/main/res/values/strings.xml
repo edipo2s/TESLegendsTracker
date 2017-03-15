@@ -7,6 +7,7 @@
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
     <string name="app_deeplink_path_articles" translatable="false">articles</string>
     <string name="app_deeplink_path_card" translatable="false">card</string>
+    <string name="app_deeplink_path_spoiler" translatable="false">spoiler</string>
     <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
@@ -40,6 +41,8 @@
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
     <string name="menu_arena">Arena Draft</string>
+    <string name="menu_spoiler">New Set</string>
+    <string name="menu_spoiler_widget" translatable="false">Spoiler</string>
     <string name="menu_articles">TESL Articles</string>
     <string name="menu_seasons">TESL Seasons</string>
     <string name="menu_season">Seasons</string>

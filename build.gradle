@@ -2,11 +2,11 @@
 
 buildscript {
     ext {
-        appVersionName = "0.4.7"
-        appVersionCode = 18
+        appVersionName = "0.5.0"
+        appVersionCode = 19
 
-        kotlin_version = "1.1.0"
-        prepareToRelease = false
+        kotlin_version = "1.1.1"
+        prepareToRelease = true
     }
 
     repositories {
@@ -19,7 +19,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0-rc1'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "com.google.gms:google-services:3.0.0"
         classpath "com.google.firebase:firebase-plugins:1.0.5"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"

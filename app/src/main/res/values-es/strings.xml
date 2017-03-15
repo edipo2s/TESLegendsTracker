@@ -17,6 +17,7 @@
     <string name="menu_decks">Barajos</string>
     <string name="menu_matches">Partidos</string>
     <string name="menu_arena">Draft de la Arena</string>
+    <string name="menu_spoiler">Nuevo Conjunto</string>
     <string name="menu_articles">TESL Artículos</string>
     <string name="menu_seasons">TESL Estaciones</string>
     <string name="menu_season">Estaciones</string>

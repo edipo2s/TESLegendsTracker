@@ -173,7 +173,7 @@ class DeckActivity : BaseActivity() {
             try {
                 supportFragmentManager.beginTransaction()
                         .remove(deckInfoFragment)
-                        .commit()
+                        .commitNow()
             } catch (e: Exception) {
                 Timber.e(e)
             }

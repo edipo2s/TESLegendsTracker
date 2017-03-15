@@ -12,6 +12,10 @@ import timber.log.Timber
  */
 object PublicInteractor : BaseInteractor() {
 
+    private val NODE_SPOILER_CARDS = "cards"
+
+    private val KEY_SPOILER_NAME = "name"
+    private val KEY_SPOILER_SET = "set"
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
@@ -97,6 +101,91 @@ object PublicInteractor : BaseInteractor() {
 
                     })
         }
+    }
+
+    fun getSpoilerName(onSuccess: (String) -> Unit) {
+        database.child(NODE_SPOILER).child(KEY_SPOILER_NAME)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val name = "${ds.value}"
+                        Timber.d(name)
+                        onSuccess.invoke(name.takeIf { it != "null" } ?: "")
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
+    fun getSpoilerCards(onSuccess: (List<Card>) -> Unit) {
+        database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        getSpoilerSet { spoilerSet ->
+                            val set = CardSet.UNKNOWN.apply {
+                                unknownSetName = spoilerSet
+                            }
+                            val cards = ds.children.map {
+                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                                it.children.map {
+                                    it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                                }
+                            }.flatMap { it }
+                            onSuccess.invoke(cards)
+                        }
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
+    fun getSpoilerCards(attr: CardAttribute, onSuccess: (List<Card>) -> Unit) {
+        val node_attr = attr.name.toLowerCase()
+        database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).child(node_attr).orderByChild(KEY_CARD_COST)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        getSpoilerSet { spoilerSet ->
+                            val set = CardSet.UNKNOWN.apply {
+                                unknownSetName = spoilerSet
+                            }
+                            val cards = ds.children.mapTo(arrayListOf()) {
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                            }
+                            Timber.d(cards.toString())
+                            onSuccess.invoke(cards)
+                        }
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
+    private fun getSpoilerSet(onSuccess: (String) -> Unit) {
+        database.child(NODE_SPOILER).child(KEY_SPOILER_SET)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val name = "${ds.value}"
+                        Timber.d(name)
+                        onSuccess.invoke(name.takeIf { it != "null" } ?: "")
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
     }
 
     fun getCardsForStatistics(set: CardSet?, onSuccess: (List<CardStatistic>) -> Unit) {
