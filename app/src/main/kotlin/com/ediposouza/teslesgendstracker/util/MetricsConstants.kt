@@ -231,6 +231,7 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
     class SCREEN_SEASONS : MetricScreen("Seasons")
+    class SCREEN_SPOILER : MetricScreen("Spoiler")
     class SCREEN_ARENA : MetricScreen("Arena")
     class SCREEN_NEW_ARENA : MetricScreen("NewArena")
     class SCREEN_NEW_ARENA_DRAFT : MetricScreen("NewArenaDraft")

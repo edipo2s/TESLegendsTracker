@@ -1,0 +1,104 @@
+{
+  "name": "The Fall of the Dark Brotherhood",
+  "set": "thefallofthedarkbrotherhood",
+  "cards": {
+    "strength": {
+      "underworldvigilante": {
+        "name": "Underworld Vigilante",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Wood Elf",
+        "attack": "4",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Enemy creatures in this lane lose Cover.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "intelligence": {
+      "daggersinthedark": {
+        "name": "Daggers in the Dark",
+        "cost": "0",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Equip a +1/+0 Steel Dagger to a random friendly creature in each lane.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "willpower": {
+      "sanctuaryraid": {
+        "name": "Sanctuary Raid",
+        "cost": "7",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Destroy an enemy creature. Give all friendly creatures in its lane +1/+1.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "agility": {
+      "brotherhoodslayer": {
+        "name": "Brotherhood Slayer",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Wood Elf",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "Prophecy",
+        "text": "Prophecy. Slay: Put a Completed Contract into your hand.",
+        "arenaTier": "Unknown"
+      },
+      "completedcontract": {
+        "name": "Completed Contract",
+        "cost": "0",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Gain 1 magicka this turn.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "endurance": {
+      "cicerothebetrayer": {
+        "name": "Cicero the Betrayer",
+        "cost": "6",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "1",
+        "health": "6",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Lethal, Slay",
+        "text": "Lethal. Slay: Draw two cards. Cicero can attack friendly creatures.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "neutral": {
+      "thenightmother": {
+        "name": "The Night Mother",
+        "cost": "2",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Activate",
+        "text": "Uses: Unlimited. Activate: Summon 0/1 Target with Guard for your opponent. Once 20 enemy creatures have died, deal 20 damage to your opponent, gain 20 health, and draw up to 10 cards.",
+        "arenaTier": "Unknown"
+      }
+    }
+  }
+}

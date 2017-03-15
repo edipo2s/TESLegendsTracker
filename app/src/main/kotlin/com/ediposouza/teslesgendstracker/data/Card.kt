@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
@@ -31,6 +32,12 @@ enum class CardSet(val db: String) {
     CORE("core"),
     MADHOUSE("madhouse"),
     UNKNOWN(TEXT_UNKNOWN);
+
+    var unknownSetName = ""
+
+    override fun toString(): String {
+        return name.takeIf { this != UNKNOWN } ?: unknownSetName
+    }
 
     companion object {
 
@@ -447,6 +454,7 @@ data class Card(
             val setName = cardSet.toLowerCase().capitalize()
             val attrName = cardAttr.toLowerCase().capitalize()
             val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.webp"
+            Timber.d(imagePath)
             return imagePath
         }
 
@@ -478,12 +486,12 @@ data class Card(
     override fun describeContents() = 0
 
     fun loadCardImageInto(view: ImageView, transform: ((Bitmap) -> Bitmap)? = null) {
-        Card.loadCardImageInto(view, set.name, attr.name, shortName, transform)
+        Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
     }
 
     fun patchVersion(context: Context, patchUuid: String, onGetCard: (Card) -> Unit) {
         var patchShortName = "${shortName}_$patchUuid"
-        loadCardImageInto(context, set.name, attr.name, patchShortName) { patchImageFound ->
+        loadCardImageInto(context, set.toString(), attr.name, patchShortName) { patchImageFound ->
             if (!patchImageFound) {
                 patchShortName = shortName
             }

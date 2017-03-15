@@ -52,7 +52,7 @@ class CardActivity : BaseActivity() {
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
-        val cardBasicInfo = CardBasicInfo(card.shortName, card.set.name, card.attr.name)
+        val cardBasicInfo = CardBasicInfo(card.shortName, card.set.toString(), card.attr.name)
         mutableListOf(Pair(cardBasicInfo, getString(R.string.card_patch_current)))
     }
 
@@ -221,7 +221,7 @@ class CardActivity : BaseActivity() {
             card_reward.text = "$month/${yearMonth.year} ${getString(R.string.season_reward)}"
             card_reward_label.visibility = View.VISIBLE
         }
-        card_race.text = card.race.name.toLowerCase().capitalize()
+        card_race.text = card.race.name.toLowerCase().capitalize().replace("_", " ")
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()

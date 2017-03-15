@@ -214,7 +214,7 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    private fun loadCardsByAttr(attribute: CardAttribute) {
+    open fun loadCardsByAttr(attribute: CardAttribute) {
         currentAttr = attribute
         PublicInteractor.getCards(setFilter, attribute) {
             cardsLoaded = it

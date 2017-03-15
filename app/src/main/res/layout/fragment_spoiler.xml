@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_marginBottom="@dimen/navigation_bar_height"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour">
+
+            <include layout="@layout/include_new_update" />
+
+            <com.ediposouza.teslesgendstracker.ui.widget.FilterAttr
+                android:id="@+id/spoiler_filter_attr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <FrameLayout
+                android:id="@+id/spoiler_cards_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>
+
+    <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
+        android:id="@+id/spoiler_filter_rarity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/large_margin" />
+
+    <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
+        android:id="@+id/spoiler_filter_magika"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/large_margin" />
+
+</android.support.design.widget.CoordinatorLayout>

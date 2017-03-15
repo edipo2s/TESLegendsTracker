@@ -34,6 +34,7 @@ import com.ediposouza.teslesgendstracker.ui.decks.DecksFragment
 import com.ediposouza.teslesgendstracker.ui.matches.MatchesFragment
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.ArenaFragment
 import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
+import com.ediposouza.teslesgendstracker.ui.spoiler.SpoilerFragment
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
@@ -200,6 +201,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_articles -> showFragment(ArticlesFragment())
             R.id.menu_arena -> showFragment(ArenaFragment())
             R.id.menu_seasons -> showFragment(SeasonsFragment())
+            R.id.menu_spoiler -> showFragment(SpoilerFragment())
             R.id.menu_donate -> showDonateDialog()
             R.id.menu_share -> {
                 val appLink = getString(R.string.playstore_url_format, packageName)
@@ -229,6 +231,16 @@ class DashActivity : BaseFilterActivity(),
             when (path) {
                 getString(R.string.app_deeplink_path_card) -> {
                     PublicInteractor.getCards(null) {
+                        val ctx = this@DashActivity
+                        val card = it.filter { it.shortName == this[1] }.first()
+                        val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                getString(R.string.card_transition_name))
+                        ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                    }
+                }
+                getString(R.string.app_deeplink_path_spoiler) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
+                    PublicInteractor.getSpoilerCards() {
                         val ctx = this@DashActivity
                         val card = it.filter { it.shortName == this[1] }.first()
                         val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
@@ -271,6 +283,9 @@ class DashActivity : BaseFilterActivity(),
                 val placeholder = ContextCompat.getDrawable(context, R.drawable.ic_user)
                 profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
+        }
+        PublicInteractor.getSpoilerName {
+            dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it.isNotEmpty()
         }
     }
 
@@ -423,7 +438,8 @@ class DashActivity : BaseFilterActivity(),
     @Subscribe
     @Suppress("unused")
     fun onCmdUpdateTitle(cmdUpdateTitle: CmdUpdateTitle) {
-        dash_toolbar_title.setText(cmdUpdateTitle.title)
+        val title = cmdUpdateTitle.title.takeIf(String::isNotEmpty) ?: getString(cmdUpdateTitle.titleRes)
+        dash_toolbar_title.setText(title)
     }
 
     @Subscribe
