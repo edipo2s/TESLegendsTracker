@@ -17,7 +17,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
@@ -293,7 +292,26 @@ data class CardMissing(
         val rarity: CardRarity,
         val qtd: Int
 
-)
+) : Parcelable {
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<CardMissing> = object : Parcelable.Creator<CardMissing> {
+            override fun createFromParcel(source: Parcel): CardMissing = CardMissing(source)
+            override fun newArray(size: Int): Array<CardMissing?> = arrayOfNulls(size)
+        }
+    }
+
+    constructor(source: Parcel) : this(source.readString(), CardRarity.values()[source.readInt()], source.readInt())
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(shortName)
+        dest?.writeInt(rarity.ordinal)
+        dest?.writeInt(qtd)
+    }
+
+    override fun describeContents(): Int = 0
+
+}
 
 data class CardStatistic(
 

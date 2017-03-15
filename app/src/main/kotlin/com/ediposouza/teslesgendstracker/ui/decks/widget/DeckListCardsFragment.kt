@@ -4,8 +4,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.CardMissing
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
@@ -18,6 +18,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     companion object {
 
         val EXTRA_DECK_CARDS = "deckExtra"
+        val EXTRA_MISSING_CARDS = "missingExtra"
 
     }
 
@@ -31,7 +32,8 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     }
 
     override val cardsCollectionAdapter by lazy {
-        CardsDeckListAdapter(ADS_EACH_ITEMS, gridLayoutManager, { _ -> }, {
+        val missingCards = arguments.getParcelableArrayList<CardMissing>(EXTRA_MISSING_CARDS) ?: listOf<CardMissing>()
+        CardsDeckListAdapter(ADS_EACH_ITEMS, gridLayoutManager, missingCards, { _ -> }, {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
@@ -50,8 +52,8 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
     fun getListView(): View = cards_recycler_view
 
-    class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, itemClick: (CardSlot) -> Unit,
-                               itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(adsEachItems,
+    class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val missingCards: List<CardMissing>,
+                               itemClick: (CardSlot) -> Unit, itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(adsEachItems,
             layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -59,7 +61,9 @@ class DeckListCardsFragment : CardsCollectionFragment() {
         }
 
         override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-            (holder as CardsDeckListViewHolder).bind(items[position])
+            val cardSlot = items[position]
+            val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
+            (holder as CardsDeckListViewHolder).bind(cardSlot, cardMissing?.qtd ?: 0)
         }
 
     }
@@ -67,14 +71,20 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     class CardsDeckListViewHolder(view: View, val itemLongClick: (View, Card) -> Boolean) :
             RecyclerView.ViewHolder(view) {
 
-        fun bind(cardSlot: CardSlot) {
-            with(itemView.card_decklist_image) {
-                cardSlot.card.loadCardImageInto(this)
-                layoutParams = layoutParams.apply { height = itemView.context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
-                itemView.setOnClickListener { itemLongClick(this, cardSlot.card) }
-                itemView.setOnLongClickListener { itemLongClick(this, cardSlot.card) }
+        fun bind(cardSlot: CardSlot, missingQtd: Int) {
+            with(itemView) {
+                card_decklist_image.apply {
+                    cardSlot.card.loadCardImageInto(this)
+                    layoutParams = layoutParams.apply { height = context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
+                }
+                setOnClickListener { itemLongClick(this, cardSlot.card) }
+                setOnLongClickListener { itemLongClick(this, cardSlot.card) }
+                card_decklist_qtd.setText("${cardSlot.qtd}")
+                card_decklist_qtd_missing.apply {
+                    text = "-$missingQtd"
+                    visibility = View.VISIBLE.takeIf { missingQtd > 0 } ?: View.INVISIBLE
+                }
             }
-            itemView.card_decklist_qtd.setText("${cardSlot.qtd}")
         }
 
     }

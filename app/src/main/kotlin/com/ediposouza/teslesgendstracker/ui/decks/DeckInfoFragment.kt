@@ -13,13 +13,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.ediposouza.teslesgendstracker.App
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
+import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_deck_info.*
 import kotlinx.android.synthetic.main.itemlist_deck_update.view.*
@@ -163,7 +163,7 @@ class DeckInfoFragment : BaseFragment() {
         private fun DeckUpdateViewHolder.configUpdateCardsChanges(cards: List<Card>, deckUpdate: DeckUpdate) {
             with(itemView.deck_update_changes) {
                 val onItemClick = { view: View, card: Card -> showExpandedCard(context, card, view) }
-                adapter = com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
+                adapter = DeckList.DeckListAdapter({ }, onItemClick, { _, _ -> true }).apply {
                     updateMode = true
                     showDeck(deckUpdate.changes.map {
                         val cardQtd = it

@@ -66,7 +66,7 @@
         android:layout_height="@dimen/deck_list_slot_half_height"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@id/deckslot_card_rarity"
-        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginStart="@dimen/nano_margin"
         android:background="@drawable/xml_circle_red"
         android:gravity="center"
         android:textColor="@android:color/white"

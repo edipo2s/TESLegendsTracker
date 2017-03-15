@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
@@ -48,7 +47,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     val deckListCardsFragment by lazy {
         DeckListCardsFragment().apply {
-            arguments = bundleOf(DeckListCardsFragment.EXTRA_DECK_CARDS to getCards())
+            arguments = bundleOf(DeckListCardsFragment.EXTRA_DECK_CARDS to getCards(),
+                    DeckListCardsFragment.EXTRA_MISSING_CARDS to deckListAdapter.missingCards)
         }
     }
 
@@ -192,8 +192,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                           val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<DeckListViewHolder>() {
 
         private val items = arrayListOf<CardSlot>()
-        private var missingCards: List<CardMissing> = listOf()
         private val eventBus by lazy { EventBus.getDefault() }
+
+        var missingCards: List<CardMissing> = listOf()
 
         var updateMode = false
 
