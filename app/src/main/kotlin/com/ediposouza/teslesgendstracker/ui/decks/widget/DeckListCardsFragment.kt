@@ -50,6 +50,9 @@ class DeckListCardsFragment : CardsCollectionFragment() {
         }
     }
 
+    override fun configLoggedViews() {
+    }
+
     fun getListView(): View = cards_recycler_view
 
     class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val missingCards: List<CardMissing>,

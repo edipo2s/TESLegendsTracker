@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.CardSlot
@@ -59,9 +58,8 @@ class NewDeckCardsListFragment : CardsAllFragment() {
 
     private fun loadDeckCards(cards: Map<String, Int>, clsCards: List<Card>) {
         cards.forEach { cardShortName, qtd ->
-            val card = clsCards.find { it.shortName == cardShortName }
-            if (card != null) {
-                cardsAdapter.updateCardSlot(CardSlot(card, qtd))
+            clsCards.find { it.shortName == cardShortName }?.apply {
+                cardsAdapter.updateCardSlot(CardSlot(this, qtd))
             }
         }
     }

@@ -386,10 +386,9 @@ data class Card(
         }
 
         private const val CARD_PATH = "Cards"
-        private const val CARD_BACK = "card_back.webp"
 
         fun getDefaultCardImage(context: Context): Bitmap {
-            return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+            return BitmapFactory.decodeResource(context.resources, R.drawable.card_back)
         }
 
         fun loadCardImageInto(view: ImageView, cardSet: String, cardAttr: String,

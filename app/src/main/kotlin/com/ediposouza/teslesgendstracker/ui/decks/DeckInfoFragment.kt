@@ -119,7 +119,9 @@ class DeckInfoFragment : BaseFragment() {
         if (deck.updates.isNotEmpty()) {
             with(deck_details_updates) {
                 adapter = DeckUpdateAdapter(deck.updates.reversed(), deck.cls)
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = object : LinearLayoutManager(context) {
+                    override fun supportsPredictiveItemAnimations(): Boolean = false
+                }
                 setHasFixedSize(true)
                 postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
             }
@@ -170,7 +172,7 @@ class DeckInfoFragment : BaseFragment() {
                         com.ediposouza.teslesgendstracker.data.CardSlot(cards.find { it.shortName == cardQtd.key }!!, it.value)
                     })
                 }
-                layoutManager = android.support.v7.widget.LinearLayoutManager(context)
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }
         }

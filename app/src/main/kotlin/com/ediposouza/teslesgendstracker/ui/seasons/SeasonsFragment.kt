@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
@@ -68,7 +67,7 @@ class SeasonsFragment : BaseFragment() {
             }
 
             override fun onSyncEnd() {
-                seasons_refresh_layout.isRefreshing = false
+                seasons_refresh_layout?.isRefreshing = false
             }
 
         }

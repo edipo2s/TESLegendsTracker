@@ -165,16 +165,15 @@
             android:id="@+id/deck_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_toEndOf="@id/deck_private"
-            android:layout_toStartOf="@id/deck_soul_missing"
+            android:layout_toStartOf="@id/deck_soul_cost"
             android:ellipsize="end"
             android:lines="1"
             android:textSize="@dimen/font_large"
             android:transitionName="@string/deck_name_transition_name"
-            tools:text="Cycle Archer Shot" />
+            tools:text="Cycle Archer Shot Legend" />
 
     </RelativeLayout>
 

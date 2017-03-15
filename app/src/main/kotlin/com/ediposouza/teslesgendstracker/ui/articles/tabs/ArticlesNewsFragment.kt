@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.ediposouza.teslesgendstracker.NEWS_DATE_PATTERN
 import com.ediposouza.teslesgendstracker.PREF_NEWS_CHECK_LAST_TIME
-import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Article
 import com.ediposouza.teslesgendstracker.data.ArticleCategory
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
@@ -59,7 +58,7 @@ class ArticlesNewsFragment : BaseFragment() {
             }
 
             override fun onSyncEnd() {
-                articles_news_refresh_layout.isRefreshing = false
+                articles_news_refresh_layout?.isRefreshing = false
             }
 
         }

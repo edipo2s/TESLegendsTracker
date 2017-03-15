@@ -82,7 +82,9 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         inflate(context, R.layout.widget_decklist, this)
         decklist_recycle_view.adapter = deckListAdapter
         decklist_recycle_view.itemAnimator = SlideInLeftAnimator()
-        decklist_recycle_view.layoutManager = LinearLayoutManager(context)
+        decklist_recycle_view.layoutManager = object : LinearLayoutManager(context) {
+            override fun supportsPredictiveItemAnimations(): Boolean = false
+        }
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
             val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
