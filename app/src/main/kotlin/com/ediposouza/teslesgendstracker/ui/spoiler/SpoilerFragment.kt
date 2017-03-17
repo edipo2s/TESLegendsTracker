@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
-import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
@@ -39,8 +38,12 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_spoiler)
         spoiler_filter_attr.filterClick = {
-            eventBus.post(CmdShowCardsByAttr(it))
-            spoiler_filter_attr.selectAttr(it, true)
+            if (spoiler_filter_attr.isAttrSelected(it)) {
+                spoiler_filter_attr.unSelectAttr(it)
+            } else {
+                spoiler_filter_attr.selectAttr(it, false)
+            }
+            eventBus.post(CmdFilterAttrs(spoiler_filter_attr.getSelectedAttrs()))
         }
         spoiler_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
         spoiler_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
