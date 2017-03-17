@@ -101,10 +101,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true, showQtd: Boolean = true) {
+    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true,
+                 showQtd: Boolean = true, cardViewMode: Boolean = false) {
         decklist_soul.visibility = View.VISIBLE.takeIf { showSoulCost } ?: View.GONE
         decklist_costs.visibility = View.VISIBLE.takeIf { showMagikaCosts } ?: View.GONE
         decklist_qtd.visibility = View.VISIBLE.takeIf { showQtd } ?: View.GONE
+        decklist_recycle_view.visibility = View.INVISIBLE.takeIf { cardViewMode } ?: View.VISIBLE
         if (deck != null) {
             doAsync {
                 PublicInteractor.getDeckCards(deck) {

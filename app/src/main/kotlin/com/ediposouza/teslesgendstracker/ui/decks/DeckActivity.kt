@@ -63,6 +63,8 @@ class DeckActivity : BaseActivity() {
 
     }
 
+    private val DECK_CARD_VIEW_MODE_PREF = "deckCardViewModePref"
+
     private val keyboardUtil by lazy { KeyboardUtil(this, contentView) }
     private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
     private val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
@@ -72,6 +74,7 @@ class DeckActivity : BaseActivity() {
     private var favorite: Boolean = false
     private var like: Boolean = false
     private var menuLike: MenuItem? = null
+    private var menuDeckView: CompoundButton? = null
     private var deckInfoFragment: DeckInfoFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,9 +160,11 @@ class DeckActivity : BaseActivity() {
         updateFavoriteItem()
         configDeckComments()
         loadDeckRemoteInfo()
+        val deckCardViewMode = menuDeckView?.isChecked ?: false
         deckInfoFragment = DeckInfoFragment().apply {
             arguments = bundleOf(DeckInfoFragment.EXTRA_DECK to deck,
-                    DeckInfoFragment.EXTRA_OWNED to deckOwned)
+                    DeckInfoFragment.EXTRA_OWNED to deckOwned,
+                    DeckInfoFragment.EXTRA_CARD_VIEW_MODE to deckCardViewMode)
         }
         supportFragmentManager.beginTransaction()
                 .replace(R.id.deck_info_container, deckInfoFragment)
@@ -196,10 +201,14 @@ class DeckActivity : BaseActivity() {
         menuInflater.inflate(if (deckOwned) R.menu.menu_edit_delete else R.menu.menu_like, menu)
         menuLike = menu?.findItem(R.id.menu_like)
         updateLikeItem()
-        val menuDeckView = menu?.findItem(R.id.menu_compact_view)?.actionView as CompoundButton
-        menuDeckView.setOnCheckedChangeListener { _, isChecked ->
+        menuDeckView = menu?.findItem(R.id.menu_compact_view)?.actionView as CompoundButton
+        menuDeckView?.setOnCheckedChangeListener { _, isChecked ->
             eventBus.post(CmdChangeDeckViewMode(isChecked))
+            defaultSharedPreferences.edit().putBoolean(DECK_CARD_VIEW_MODE_PREF, isChecked).apply()
             MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_VIEW_MODE(isChecked))
+        }
+        if (defaultSharedPreferences.getBoolean(DECK_CARD_VIEW_MODE_PREF, false)) {
+            menuDeckView?.isChecked = true
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -316,10 +325,10 @@ class DeckActivity : BaseActivity() {
     }
 
     private fun loadDeckBasicInfo() {
-        deck_name.text = deck.name
-        deck_class_cover.setImageResource(deck.cls.imageRes)
-        deck_class_attr1.setImageResource(deck.cls.attr1.imageRes)
-        deck_class_attr2.setImageResource(deck.cls.attr2.imageRes)
+        deck_name.text = deck?.name ?: ""
+        deck_class_cover.setImageResource(deck?.cls?.imageRes ?: 0)
+        deck_class_attr1.setImageResource(deck?.cls?.attr1?.imageRes ?: 0)
+        deck_class_attr2.setImageResource(deck?.cls?.attr2?.imageRes ?: 0)
     }
 
     private fun configDeckComments() {

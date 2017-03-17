@@ -13,7 +13,8 @@
     </declare-styleable>
 
     <declare-styleable name="FilterAttr">
-        <attr name="deckMode" format="boolean" />
+        <attr name="selectMode" format="boolean" />
+        <attr name="onlyBasicAttributes" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ImageViewTopCrop">
