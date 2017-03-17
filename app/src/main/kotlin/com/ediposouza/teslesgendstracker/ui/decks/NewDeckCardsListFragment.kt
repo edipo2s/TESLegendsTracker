@@ -51,16 +51,12 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         cards_recycler_view.setPadding(0, 0, 0, 0)
         isFragmentSelected = true
         arguments.getParcelable<Deck>(EXTRA_DECK)?.apply {
-            PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
-                loadDeckCards(cards, it)
-            }
-        }
-    }
-
-    private fun loadDeckCards(cards: Map<String, Int>, clsCards: List<Card>) {
-        cards.forEach { cardShortName, qtd ->
-            clsCards.find { it.shortName == cardShortName }?.apply {
-                cardsAdapter.updateCardSlot(CardSlot(this, qtd))
+            PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { clsCards ->
+                cards.forEach { (cardShortName, qtd) ->
+                    clsCards.find { it.shortName == cardShortName }?.apply {
+                        cardsAdapter.updateCardSlot(CardSlot(this, qtd))
+                    }
+                }
             }
         }
     }

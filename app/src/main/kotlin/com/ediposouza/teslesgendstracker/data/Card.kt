@@ -393,9 +393,14 @@ data class Card(
         }
 
         private const val CARD_PATH = "Cards"
+        private val CARD_BACK = "card_back.png"
 
         fun getDefaultCardImage(context: Context): Bitmap {
-            return BitmapFactory.decodeResource(context.resources, R.drawable.card_back)
+            try {
+                return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+            } catch (e: Exception) {
+                return BitmapFactory.decodeResource(context.resources, R.drawable.card_back)
+            }
         }
 
         fun loadCardImageInto(view: ImageView, cardSet: String, cardAttr: String,
