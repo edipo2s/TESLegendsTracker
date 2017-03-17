@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
-                app:deckMode="true" />
+                app:selectMode="true"
+                app:onlyBasicAttributes="true" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/decks_view_pager"

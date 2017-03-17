@@ -139,6 +139,7 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATH, action.path)
                     putString(action.PARAM_PATH_PARAMS, action.params)
                 }
+                is MetricAction.ACTION_SHARE -> answers?.logShare(ShareEvent())
             }
         }
         answers?.logCustom(CustomEvent(action.name))

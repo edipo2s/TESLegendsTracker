@@ -40,11 +40,13 @@ class DeckInfoFragment : BaseFragment() {
 
         val EXTRA_DECK = "deckExtra"
         val EXTRA_OWNED = "ownedExtra"
+        val EXTRA_CARD_VIEW_MODE = "cardViewModeExtra"
 
     }
 
     private val deck by lazy { arguments.getParcelable<Deck>(EXTRA_DECK) }
     private val deckOwned by lazy { arguments.getBoolean(EXTRA_OWNED, false) }
+    private val deckCardViewMode by lazy { arguments.getBoolean(EXTRA_CARD_VIEW_MODE, false) }
     private val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,7 +68,7 @@ class DeckInfoFragment : BaseFragment() {
             deck_details_likes.visibility = View.GONE
             deck_details_views.visibility = View.GONE
         }
-        deck_details_cardlist.showDeck(deck, false)
+        deck_details_cardlist.showDeck(deck, false, cardViewMode = deckCardViewMode)
         deck_details_type.text = deck.type.name.toLowerCase().capitalize()
         deck_details_views.text = numberInstance.format(deck.views)
         deck_details_likes.text = numberInstance.format(deck.likes.size)
@@ -111,6 +113,9 @@ class DeckInfoFragment : BaseFragment() {
                 text = NumberFormat.getNumberInstance().format(missingSoul)
                 visibility = View.VISIBLE
                 deck_details_cardlist?.showMissingCards(it)
+                if (deckCardViewMode) {
+                    eventBus.post(CmdChangeDeckViewMode(true))
+                }
             }
         }
     }

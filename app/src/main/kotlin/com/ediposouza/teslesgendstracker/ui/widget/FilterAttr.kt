@@ -26,17 +26,22 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             if (!value) {
                 selectAttr(lastAttrSelected, true)
             } else {
-                rootView.attr_filter_dual.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
-                rootView.attr_filter_dual_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
-                rootView.attr_filter_neutral.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
-                rootView.attr_filter_neutral_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                if (onlyBasicAttributes) {
+                    rootView.attr_filter_dual.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                    rootView.attr_filter_dual_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                    rootView.attr_filter_neutral.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                    rootView.attr_filter_neutral_indicator.visibility = View.GONE.takeIf { value } ?: View.VISIBLE
+                }
             }
         }
+
+    var onlyBasicAttributes: Boolean = false
 
     init {
         inflate(context, R.layout.widget_attributes_filter, rootView as ViewGroup)
         val a = context.obtainStyledAttributes(attrs, R.styleable.FilterAttr)
-        deckMode = a.getBoolean(R.styleable.FilterAttr_deckMode, false)
+        onlyBasicAttributes = a.getBoolean(R.styleable.FilterAttr_onlyBasicAttributes, false)
+        deckMode = a.getBoolean(R.styleable.FilterAttr_selectMode, false)
         a.recycle()
         if (!isInEditMode) {
             rootView.attr_filter_strength?.setOnClickListener { attrClick(CardAttribute.STRENGTH, false) }
@@ -111,7 +116,7 @@ open class FilterAttr(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun getSelectedAttrs(): List<CardAttribute> {
         val attrs = CardAttribute.values().filter { isAttrSelected(it) }
-        return if (deckMode) attrs.plus(CardAttribute.NEUTRAL) else attrs
+        return if (deckMode && onlyBasicAttributes) attrs.plus(CardAttribute.NEUTRAL) else attrs
     }
 
     protected fun updateVisibility(v: View, show: Boolean, only: Boolean) {
