@@ -145,6 +145,9 @@ data class Deck(
             override fun createFromParcel(source: Parcel): Deck = Deck(source)
             override fun newArray(size: Int): Array<Deck?> = arrayOfNulls(size)
         }
+
+        val DUMMY = Deck("", "", "", false, DeckType.OTHER, DeckClass.AGILITY, 0, LocalDateTime.now(),
+                LocalDateTime.now(), "", listOf(), 0, mapOf(), listOf(), listOf())
     }
 
     constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),

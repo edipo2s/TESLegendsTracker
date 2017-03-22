@@ -49,7 +49,7 @@ class CardActivity : BaseActivity() {
 
     }
 
-    private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) }
+    private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) ?: Card.DUMMY }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
         val cardBasicInfo = CardBasicInfo(card.shortName, card.set.toString(), card.attr.name)

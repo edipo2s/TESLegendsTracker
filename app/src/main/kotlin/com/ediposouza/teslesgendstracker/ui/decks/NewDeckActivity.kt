@@ -47,7 +47,7 @@ class NewDeckActivity : BaseFilterActivity() {
     private val EXIT_CONFIRM_MIN_CARDS = 3
     private val KEY_DECK_CARDS = "deckCardsKey"
 
-    private val deckToEdit: Deck? by lazy { intent.getParcelableExtra<Deck>(DECK_EXTRA) }
+    private val deckToEdit: Deck? by lazy { intent.getParcelableExtra<Deck>(DECK_EXTRA) ?: Deck.DUMMY }
 
     private val attrFilterClick: (CardAttribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))

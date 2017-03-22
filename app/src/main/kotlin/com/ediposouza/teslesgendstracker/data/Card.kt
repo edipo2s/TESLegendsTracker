@@ -393,6 +393,11 @@ data class Card(
             override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
         }
 
+        val DUMMY = Card("", "  '", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
+                CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
+                CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
+                CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
+
         private const val CARD_PATH = "Cards"
         private const val CARD_BACK = "card_back.png"
 
