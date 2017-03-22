@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
+import android.support.v4.content.ContextCompat
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
@@ -393,13 +394,14 @@ data class Card(
         }
 
         private const val CARD_PATH = "Cards"
-        private val CARD_BACK = "card_back.png"
+        private const val CARD_BACK = "card_back.png"
 
         fun getDefaultCardImage(context: Context): Bitmap {
             try {
-                return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+                val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
+                return (cardBackDrawable as BitmapDrawable).bitmap
             } catch (e: Exception) {
-                return BitmapFactory.decodeResource(context.resources, R.drawable.card_back)
+                return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
             }
         }
 

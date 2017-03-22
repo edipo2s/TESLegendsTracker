@@ -71,7 +71,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
                               itemLongClick: (View, Card) -> Boolean) : CardsAllAdapter(adsEachItems,
             layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
 
-        var deckCardSlots = arrayListOf<CardSlot>()
+        var deckCardSlots = mutableListOf<CardSlot>()
 
         override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             return CardsNewDeckViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
@@ -84,7 +84,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         }
 
         fun updateCardSlot(cardSlot: CardSlot) {
-            deckCardSlots.removeIf { it.card.shortName == cardSlot.card.shortName }
+            deckCardSlots.removeAll { it.card.shortName == cardSlot.card.shortName }
             deckCardSlots.add(cardSlot)
             notifyDataSetChanged()
         }

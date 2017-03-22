@@ -9,6 +9,7 @@ import com.ediposouza.teslesgendstracker.data.MatchMode
 import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.arena.NewArenaActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateVisibility
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
@@ -38,6 +39,7 @@ class ArenaFragment : MatchesHistoryFragment() {
             val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
             ActivityCompat.startActivity(activity, context.intentFor<NewArenaActivity>(), anim.toBundle())
         }
+        eventBus.post(CmdUpdateTitle(R.string.menu_arena))
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARENA())
     }
 
