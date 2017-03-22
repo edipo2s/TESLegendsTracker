@@ -88,7 +88,9 @@ open class CardsAllFragment : BaseFragment() {
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+        if (cards_recycler_view?.layoutManager != null) {
+            cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
+        }
         currentAttr = CardAttribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
     }
 

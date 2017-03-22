@@ -171,6 +171,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
+        googleApiClient?.clearDefaultAccountAndReconnect()
     }
 
     override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
