@@ -3,6 +3,19 @@
   "set": "thefallofthedarkbrotherhood",
   "cards": {
     "strength": {
+      "granagdarkadherent": {
+        "name": "Granag, Dark Adherent",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Orc",
+        "attack": "4",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Breakthrougth",
+        "text": "Breakthrougth. Players can´ have more than 7 magicka",
+        "arenaTier": "Unknown"
+      },
       "underworldvigilante": {
         "name": "Underworld Vigilante",
         "cost": "5",
@@ -31,6 +44,18 @@
       }
     },
     "willpower": {
+      "penitusoculatusagent": {
+        "name": "Penitus Oculatus Agent",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Steal a creature's keywords",
+        "arenaTier": "Unknown"
+      },
       "sanctuaryraid": {
         "name": "Sanctuary Raid",
         "cost": "7",
@@ -42,9 +67,34 @@
         "keyword": "",
         "text": "Destroy an enemy creature. Give all friendly creatures in its lane +1/+1.",
         "arenaTier": "Unknown"
+      },
+      "theblackdragon": {
+        "name": "The Black Dragon",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Rare",
+        "keyword": "Slay",
+        "text": "Immune to Lethal. Slay: Discard all copies of the slain creature from the opponent's deck.",
+        "arenaTier": "Unknown"
       }
     },
     "agility": {
+      "astrid": {
+        "name": "Astrid",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Lethal",
+        "text": "Lethal. When a friendly Lethal creature Slays, put a Completed Contract into your hand.",
+        "arenaTier": "Unknown"
+      },
       "brotherhoodslayer": {
         "name": "Brotherhood Slayer",
         "cost": "3",
@@ -68,6 +118,30 @@
         "keyword": "",
         "text": "Gain 1 magicka this turn.",
         "arenaTier": "Unknown"
+      },
+      "sanctuarypet": {
+        "name": "Sanctuary Pet",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Spider",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Summon, Shackle, Lethal",
+        "text": "Lethal. Summon: Shackle an enemy creature in this lane.",
+        "arenaTier": "Unknown"
+      },
+      "skoomaunderboss": {
+        "name": "Skooma Underboss",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Khajiit",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Friendly Pilfer abilities are also Slay abilities",
+        "arenaTier": "Unknown"
       }
     },
     "endurance": {
@@ -82,6 +156,43 @@
         "unique": true,
         "keyword": "Lethal, Slay",
         "text": "Lethal. Slay: Draw two cards. Cicero can attack friendly creatures.",
+        "arenaTier": "Unknown"
+      },
+      "speakerterenus": {
+        "name": "Speaker Terenus",
+        "cost": "10",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "After you play an action, put a random action into your hand.",
+        "arenaTier": "Unknown"
+      },
+      "stalkingshadowscale": {
+        "name": "Stalking Shadowscale",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Argonian",
+        "attack": "3",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "Slay",
+        "text": "Slay: +1/+1",
+        "arenaTier": "Unknown"
+      },
+      "wrathofsithis": {
+        "name": "Wrath of Sithis",
+        "cost": "6",
+        "type": "Creature"
+        .
+        "race": "Spirit",
+        "attack": "5",
+        "health": "6",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Your opponent's cards cost 1 more next turn.",
         "arenaTier": "Unknown"
       }
     },

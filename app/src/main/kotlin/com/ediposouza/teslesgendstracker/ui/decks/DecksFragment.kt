@@ -410,7 +410,8 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         userDecksImported = 0
                         importingSavedDecks = true
                         if (continueImporting) {
-                            importDialogWebView?.loadUrl(savedDecksLink)
+//                            importDialogWebView?.loadUrl(savedDecksLink)      //import saved decks disabled to avoid duplicate import
+                            importDialog?.dismiss()
                         }
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_FINISH(userDecksImported))

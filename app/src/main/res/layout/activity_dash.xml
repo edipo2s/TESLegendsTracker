@@ -53,6 +53,7 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         android:fitsSystemWindows="true"
+        android:paddingBottom="@dimen/navigation_bar_height"
         app:elevation="@dimen/cardview_default_elevation"
         app:headerLayout="@layout/navigation_drawer_header"
         app:itemIconTint="@drawable/selector_menu_item"
