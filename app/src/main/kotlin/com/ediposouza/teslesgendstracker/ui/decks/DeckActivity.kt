@@ -67,7 +67,7 @@ class DeckActivity : BaseActivity() {
 
     private val keyboardUtil by lazy { KeyboardUtil(this, contentView) }
     private val deckOwned by lazy { intent.getBooleanExtra(EXTRA_OWNED, false) }
-    private val deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) }
+    private val deck: Deck by lazy { intent.getParcelableExtra<Deck>(EXTRA_DECK) ?: Deck.DUMMY }
     private val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
     private val commentsSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(deck_bottom_sheet) }
 

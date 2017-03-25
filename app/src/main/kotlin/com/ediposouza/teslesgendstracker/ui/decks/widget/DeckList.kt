@@ -88,10 +88,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
         decklist_recycle_view.setHasFixedSize(true)
         if (isInEditMode) {
-            val card = Card("Tyr", "tyr", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
-                    CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
-                    CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                    CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
+            val card = Card.DUMMY
             val cards = listOf(CardSlot(card, 3), CardSlot(card, 1), CardSlot(card, 2), CardSlot(card, 3))
             deckListAdapter.showDeck(cards)
         }

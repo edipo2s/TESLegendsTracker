@@ -121,29 +121,31 @@ object PublicInteractor : BaseInteractor() {
     }
 
     fun getSpoilerCards(onSuccess: (List<Card>) -> Unit) {
-        database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+        with(database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
 
-                    override fun onDataChange(ds: DataSnapshot) {
-                        getSpoilerSet { spoilerSet ->
-                            val set = CardSet.UNKNOWN.apply {
-                                unknownSetName = spoilerSet
-                            }
-                            val cards = ds.children.map {
-                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
-                                it.children.map {
-                                    it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
-                                }
-                            }.flatMap { it }
-                            onSuccess.invoke(cards)
+                override fun onDataChange(ds: DataSnapshot) {
+                    getSpoilerSet { spoilerSet ->
+                        val set = CardSet.UNKNOWN.apply {
+                            unknownSetName = spoilerSet
                         }
+                        val cards = ds.children.map {
+                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                            it.children.map {
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                            }
+                        }.flatMap { it }
+                        onSuccess.invoke(cards)
                     }
+                }
 
-                    override fun onCancelled(de: DatabaseError) {
-                        Timber.d("Fail: " + de.message)
-                    }
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
 
-                })
+            })
+        }
     }
 
     fun getSpoilerCards(attr: CardAttribute, onSuccess: (List<Card>) -> Unit) {

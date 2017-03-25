@@ -78,6 +78,9 @@ class DashActivity : BaseFilterActivity(),
                 }
             }
         }
+        dash_navigation_view.getChildAt(0)?.apply {
+            isScrollbarFadingEnabled = false
+        }
         configIabHelper()
     }
 

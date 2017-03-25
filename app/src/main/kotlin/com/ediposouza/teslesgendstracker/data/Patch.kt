@@ -85,6 +85,8 @@ data class Patch(
             override fun createFromParcel(source: Parcel): Patch = Patch(source)
             override fun newArray(size: Int): Array<Patch?> = arrayOfNulls(size)
         }
+
+        val DUMMY = Patch("", LocalDate.now(), "", "", PatchType.UNKNOWN, listOf())
     }
 
     constructor(source: Parcel) : this(source.readString(), LocalDate.ofEpochDay(source.readLong()),

@@ -38,7 +38,7 @@ open class BaseInteractor {
 
     fun <T> getListFromSets(set: CardSet?, onSuccess: (List<T>) -> Unit,
                             getFromSet: (set: CardSet, onSuccess: (List<T>) -> Unit) -> Unit) {
-        getListFromSets(set, CardAttribute.NEUTRAL, onSuccess, { set, attr, success ->
+        getListFromSets(set, CardAttribute.NEUTRAL, onSuccess, { set, _, success ->
             getFromSet(set, success)
         })
     }

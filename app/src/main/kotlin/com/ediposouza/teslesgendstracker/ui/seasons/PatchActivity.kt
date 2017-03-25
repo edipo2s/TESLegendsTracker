@@ -48,7 +48,7 @@ class PatchActivity : BaseActivity() {
     }
 
     private val transitionName: String by lazy { getString(R.string.card_transition_name) }
-    private val selectedPatch: Patch by lazy { intent.getParcelableExtra<Patch>(EXTRA_PATCH) }
+    private val selectedPatch: Patch by lazy { intent.getParcelableExtra<Patch>(EXTRA_PATCH) ?: Patch.DUMMY }
     private val patches: List<Patch> by lazy { intent.getParcelableArrayListExtra<Patch>(EXTRA_NEXT_PATCH_UUID) }
 
     private val onCardClick: (View, Card) -> Unit = { view, card ->
