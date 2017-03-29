@@ -30,6 +30,18 @@
       }
     },
     "intelligence": {
+      "bloodsorceress": {
+        "name": "Blood Sorceress",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Redguard",
+        "attack": "2",
+        "health": "1",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "At the start of your turn, if you have 7 or more max magicka, deal 5 damage to your opponent.",
+        "arenaTier": "Unknown"
+      },
       "daggersinthedark": {
         "name": "Daggers in the Dark",
         "cost": "0",
@@ -40,6 +52,18 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Equip a +1/+0 Steel Dagger to a random friendly creature in each lane.",
+        "arenaTier": "Unknown"
+      },
+      "palaceconspirator": {
+        "name": "Palace Conspirator",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Draw a card. Then discard a card.",
         "arenaTier": "Unknown"
       }
     },
@@ -158,6 +182,18 @@
         "text": "Lethal. Slay: Draw two cards. Cicero can attack friendly creatures.",
         "arenaTier": "Unknown"
       },
+      "falkreathdefiler": {
+        "name": "Falkreath Defiler",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Slay",
+        "text": "Slay: Summon a creature from your discard pile.",
+        "arenaTier": "Unknown"
+      },
       "speakerterenus": {
         "name": "Speaker Terenus",
         "cost": "10",
@@ -185,8 +221,7 @@
       "wrathofsithis": {
         "name": "Wrath of Sithis",
         "cost": "6",
-        "type": "Creature"
-        .
+        "type": "Creature",
         "race": "Spirit",
         "attack": "5",
         "health": "6",

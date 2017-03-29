@@ -5,6 +5,7 @@ import android.preference.PreferenceManager
 import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
+import com.ediposouza.teslesgendstracker.ui.util.firebase.FirebaseDatabaseConnectionHandler
 import com.ediposouza.teslesgendstracker.util.ConfigManager
 import com.ediposouza.teslesgendstracker.util.LoggerManager
 import com.ediposouza.teslesgendstracker.util.MetricAction
@@ -38,6 +39,7 @@ class App : MultiDexApplication() {
         ctx = applicationContext
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initializeDependencies()
+        registerActivityLifecycleCallbacks(FirebaseDatabaseConnectionHandler())
     }
 
     private fun initializeDependencies() {
