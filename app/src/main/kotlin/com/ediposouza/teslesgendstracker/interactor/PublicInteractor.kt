@@ -26,8 +26,8 @@ object PublicInteractor : BaseInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val card = ds.getValue(FirebaseParsers.CardParser::class.java)
-                                .toCard(shortname, set, attribute)
-                        onSuccess.invoke(card)
+                                ?.toCard(shortname, set, attribute)
+                        onSuccess.invoke(card ?: Card.DUMMY)
                     }
 
                     override fun onCancelled(de: DatabaseError) {

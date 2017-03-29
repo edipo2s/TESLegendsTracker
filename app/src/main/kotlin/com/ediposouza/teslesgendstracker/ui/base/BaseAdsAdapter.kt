@@ -70,8 +70,8 @@ abstract class BaseAdsAdapter(val adsEachItems: Int, @LayoutRes val adsLayout: I
         return position.div(adsEachItems)
     }
 
-    fun onRestoreState(layoutManager: GridLayoutManager) {
-        layoutManager.apply {
+    fun onRestoreState(layoutManager: GridLayoutManager?) {
+        layoutManager?.apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     val itemType = getItemViewType(position)

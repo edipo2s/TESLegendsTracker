@@ -171,7 +171,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        googleApiClient?.clearDefaultAccountAndReconnect()
+        googleApiClient?.apply {
+            if (isConnected) {
+                clearDefaultAccountAndReconnect()
+            }
+        }
     }
 
     override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
@@ -286,7 +290,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     @Subscribe
     @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdShowLogin(showLogin: CmdShowLogin) {
-        googleApiClient?.clearDefaultAccountAndReconnect()
+        googleApiClient?.apply {
+            if (isConnected) {
+                clearDefaultAccountAndReconnect()
+            }
+        }
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

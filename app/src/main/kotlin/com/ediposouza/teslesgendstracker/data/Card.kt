@@ -393,7 +393,7 @@ data class Card(
             override fun newArray(size: Int): Array<Card?> = arrayOfNulls(size)
         }
 
-        val DUMMY = Card("", "  '", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
+        val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
                 CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
@@ -413,6 +413,9 @@ data class Card(
         fun loadCardImageInto(view: ImageView, cardSet: String, cardAttr: String,
                               cardShortName: String, transform: ((Bitmap) -> Bitmap)? = null,
                               onLoadDefault: (() -> Unit)? = null) {
+            if (cardShortName.isEmpty()) {
+                return
+            }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
             Timber.d(imagePath)
             with(view.context) {
