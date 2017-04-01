@@ -47,7 +47,7 @@ open class CardsAllFragment : BaseFragment() {
     open var enableMenu: Boolean = true
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
-    val gridLayoutManager by lazy { cards_recycler_view?.layoutManager as GridLayoutManager }
+    val gridLayoutManager by lazy { cards_recycler_view?.layoutManager as? GridLayoutManager }
     val rewardText by lazy { getString(R.string.cards_search_reward) }
     val uniqueText by lazy { getString(R.string.cards_search_unique) }
 
@@ -294,7 +294,7 @@ open class CardsAllFragment : BaseFragment() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
-    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,
                                @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
                                val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 

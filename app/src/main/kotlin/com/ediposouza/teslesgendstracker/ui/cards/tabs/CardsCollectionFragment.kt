@@ -332,7 +332,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    open class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager,
+    open class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,
                                       @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
                                       val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
 
