@@ -4743,6 +4743,21 @@
         "attr1": "intelligence",
         "attr2": "endurance"
       },
+      "sowerofrevenge": {
+        "name": "Sower of Revenge",
+        "cost": "05",
+        "type": "Creature",
+        "race": "Daedra ",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Epic",
+        "keyword": "Guard, Last Gasp",
+        "text": "Guard. Last Gasp: Deals 5 damage to the enemy player.",
+        "arenaTier": "Unknown",
+        "attr1": "strength",
+        "attr2": "endurance",
+        "season": "2017_03"
+      },
       "thornhistmage": {
         "name": "Thorn Histmage",
         "cost": "05",
