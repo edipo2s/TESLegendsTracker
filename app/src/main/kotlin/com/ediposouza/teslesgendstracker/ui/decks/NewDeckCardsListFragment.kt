@@ -67,7 +67,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         cardsAdapter.updateCardSlot(cmdUpdateCardSlot.cardSlot)
     }
 
-    class CardsNewDeckAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, itemClick: (View, Card) -> Unit,
+    class CardsNewDeckAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?, itemClick: (View, Card) -> Unit,
                               itemLongClick: (View, Card) -> Boolean) : CardsAllAdapter(adsEachItems,
             layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
 

@@ -56,7 +56,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
     fun getListView(): View = cards_recycler_view
 
-    class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager, val missingCards: List<CardMissing>,
+    class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?, val missingCards: List<CardMissing>,
                                itemClick: (CardSlot) -> Unit, itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(adsEachItems,
             layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
 
