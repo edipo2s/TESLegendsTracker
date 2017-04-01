@@ -146,7 +146,7 @@ data class Deck(
             override fun newArray(size: Int): Array<Deck?> = arrayOfNulls(size)
         }
 
-        val DUMMY = Deck("", "", "", false, DeckType.OTHER, DeckClass.AGILITY, 0, LocalDateTime.now(),
+        val DUMMY = Deck("", "", "", false, DeckType.OTHER, DeckClass.NEUTRAL, 0, LocalDateTime.now(),
                 LocalDateTime.now(), "", listOf(), 0, mapOf(), listOf(), listOf())
     }
 

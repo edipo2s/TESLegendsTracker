@@ -2,109 +2,6 @@
   "name": "The Fall of the Dark Brotherhood",
   "set": "thefallofthedarkbrotherhood",
   "cards": {
-    "strength": {
-      "granagdarkadherent": {
-        "name": "Granag, Dark Adherent",
-        "cost": "4",
-        "type": "Creature",
-        "race": "Orc",
-        "attack": "4",
-        "health": "5",
-        "rarity": "Legendary",
-        "unique": true,
-        "keyword": "Breakthrougth",
-        "text": "Breakthrougth. Players can´ have more than 7 magicka",
-        "arenaTier": "Unknown"
-      },
-      "underworldvigilante": {
-        "name": "Underworld Vigilante",
-        "cost": "5",
-        "type": "Creature",
-        "race": "Wood Elf",
-        "attack": "4",
-        "health": "1",
-        "rarity": "Common",
-        "keyword": "Summon",
-        "text": "Summon: Enemy creatures in this lane lose Cover.",
-        "arenaTier": "Unknown"
-      }
-    },
-    "intelligence": {
-      "bloodsorceress": {
-        "name": "Blood Sorceress",
-        "cost": "1",
-        "type": "Creature",
-        "race": "Redguard",
-        "attack": "2",
-        "health": "1",
-        "rarity": "Epic",
-        "keyword": "",
-        "text": "At the start of your turn, if you have 7 or more max magicka, deal 5 damage to your opponent.",
-        "arenaTier": "Unknown"
-      },
-      "daggersinthedark": {
-        "name": "Daggers in the Dark",
-        "cost": "0",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Common",
-        "keyword": "",
-        "text": "Equip a +1/+0 Steel Dagger to a random friendly creature in each lane.",
-        "arenaTier": "Unknown"
-      },
-      "palaceconspirator": {
-        "name": "Palace Conspirator",
-        "cost": "2",
-        "type": "Creature",
-        "race": "Dark Elf",
-        "attack": "2",
-        "health": "2",
-        "rarity": "Common",
-        "keyword": "Summon",
-        "text": "Summon: Draw a card. Then discard a card.",
-        "arenaTier": "Unknown"
-      }
-    },
-    "willpower": {
-      "penitusoculatusagent": {
-        "name": "Penitus Oculatus Agent",
-        "cost": "3",
-        "type": "Creature",
-        "race": "Imperial",
-        "attack": "2",
-        "health": "3",
-        "rarity": "Rare",
-        "keyword": "Summon",
-        "text": "Summon: Steal a creature's keywords",
-        "arenaTier": "Unknown"
-      },
-      "sanctuaryraid": {
-        "name": "Sanctuary Raid",
-        "cost": "7",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Common",
-        "keyword": "",
-        "text": "Destroy an enemy creature. Give all friendly creatures in its lane +1/+1.",
-        "arenaTier": "Unknown"
-      },
-      "theblackdragon": {
-        "name": "The Black Dragon",
-        "cost": "4",
-        "type": "Creature",
-        "race": "Imperial",
-        "attack": "5",
-        "health": "5",
-        "rarity": "Rare",
-        "keyword": "Slay",
-        "text": "Immune to Lethal. Slay: Discard all copies of the slain creature from the opponent's deck.",
-        "arenaTier": "Unknown"
-      }
-    },
     "agility": {
       "astrid": {
         "name": "Astrid",
@@ -141,6 +38,30 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Gain 1 magicka this turn.",
+        "arenaTier": "Unknown"
+      },
+      "eclipsebaroness": {
+        "name": "Eclipse Baroness",
+        "cost": "8",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Epic",
+        "keyword": "Summon, Last Gasp",
+        "text": "Summon and Last Gasp: Draw a card and reduce its cost by 2.",
+        "arenaTier": "Unknown"
+      },
+      "grandball": {
+        "name": "Grand Ball",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Move all friendly creatures.",
         "arenaTier": "Unknown"
       },
       "sanctuarypet": {
@@ -180,6 +101,18 @@
         "unique": true,
         "keyword": "Lethal, Slay",
         "text": "Lethal. Slay: Draw two cards. Cicero can attack friendly creatures.",
+        "arenaTier": "Unknown"
+      },
+      "darkguardian": {
+        "name": "Dark Guardian",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "2",
+        "health": "5",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard. When your opponent draws a Prophecy from a rune being destroyed, draw a card.",
         "arenaTier": "Unknown"
       },
       "falkreathdefiler": {
@@ -231,7 +164,81 @@
         "arenaTier": "Unknown"
       }
     },
+    "intelligence": {
+      "bloodsorceress": {
+        "name": "Blood Sorceress",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Redguard",
+        "attack": "2",
+        "health": "1",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "At the start of your turn, if you have 7 or more max magicka, deal 5 damage to your opponent.",
+        "arenaTier": "Unknown"
+      },
+      "corsairship": {
+        "name": "Corsair Ship",
+        "cost": "4",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Summon a 1/1 Coursair. When you summon a creature, equipe it with a Steel Dagger.",
+        "arenaTier": "Unknown"
+      },
+      "daggersinthedark": {
+        "name": "Daggers in the Dark",
+        "cost": "0",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Equip a +1/+0 Steel Dagger to a random friendly creature in each lane.",
+        "arenaTier": "Unknown"
+      },
+      "palaceconspirator": {
+        "name": "Palace Conspirator",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Draw a card. Then discard a card.",
+        "arenaTier": "Unknown"
+      },
+      "spearofembers": {
+        "name": "Spear of Embers",
+        "cost": "5",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "Prophecy",
+        "text": "Prophecy: Instead of equipping Spear of Embers, you may throw it at an enemy creature to deal 3 damage. ",
+        "arenaTier": "Unknown"
+      }
+    },
     "neutral": {
+      "gristlehidedreugh": {
+        "name": "Gristlehide Dreugh",
+        "cost": "5",
+        "type": "Creature",
+        "race": "",
+        "attack": "",
+        "health": "5",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "When Gristlehide Dreugh takes damage and survives, draw a card.",
+        "arenaTier": "Unknown"
+      },
       "thenightmother": {
         "name": "The Night Mother",
         "cost": "2",
@@ -243,6 +250,95 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses: Unlimited. Activate: Summon 0/1 Target with Guard for your opponent. Once 20 enemy creatures have died, deal 20 damage to your opponent, gain 20 health, and draw up to 10 cards.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "strength": {
+      "granagdarkadherent": {
+        "name": "Granag, Dark Adherent",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Orc",
+        "attack": "4",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Breakthrougth",
+        "text": "Breakthrougth. Players can´ have more than 7 magicka",
+        "arenaTier": "Unknown"
+      },
+      "protectoroftheinnocent": {
+        "name": "Protector of the Innocent",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "2",
+        "rarity": "Common",
+        "text": "Prophecy, Guard",
+        "keyword": "Prophecy, Guard",
+        "arenaTier": "Unknown"
+      },
+      "underworldvigilante": {
+        "name": "Underworld Vigilante",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Wood Elf",
+        "attack": "4",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Enemy creatures in this lane lose Cover.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "willpower": {
+      "markedman": {
+        "name": "Marked Man",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "1",
+        "health": "1",
+        "keyword": "Summon",
+        "text": "Summon: Put a 0/2 Makeshift Defenses with Guard into your hand.",
+        "rarity": "Common",
+        "arenaTier": "Unknown"
+      },
+      "penitusoculatusagent": {
+        "name": "Penitus Oculatus Agent",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Steal a creature's keywords",
+        "arenaTier": "Unknown"
+      },
+      "sanctuaryraid": {
+        "name": "Sanctuary Raid",
+        "cost": "7",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Destroy an enemy creature. Give all friendly creatures in its lane +1/+1.",
+        "arenaTier": "Unknown"
+      },
+      "theblackdragon": {
+        "name": "The Black Dragon",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Rare",
+        "keyword": "Slay",
+        "text": "Immune to Lethal. Slay: Discard all copies of the slain creature from the opponent's deck.",
         "arenaTier": "Unknown"
       }
     }
