@@ -117,7 +117,7 @@
     <string name="profile_collection">Colección</string>
     <string name="unknown">Desconocido</string>
 
-    <string name="cards_search_hint">Nombre, raza, tipo o palabra clave</string>
+    <string name="cards_search_hint">Nombre, raza, tipo, palabra clave o texto</string>
     <string name="collection_statistics_total_cards">Total Cartas \n Soul para completar</string>
 
     <string name="decks_search_hint">Barajo Name</string>

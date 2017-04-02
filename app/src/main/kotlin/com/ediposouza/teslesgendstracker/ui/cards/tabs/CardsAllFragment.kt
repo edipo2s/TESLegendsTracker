@@ -259,7 +259,8 @@ open class CardsAllFragment : BaseFragment() {
                                     it.race.name.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
-                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty()
+                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||
+                                    it.text.contains(search)
                         }
                     }
                 }

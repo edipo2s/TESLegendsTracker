@@ -118,7 +118,7 @@
     <string name="profile_collection">Coleção</string>
     <string name="unknown">Desconhecido</string>
 
-    <string name="cards_search_hint">Nome, raça, tipo ou habilidade</string>
+    <string name="cards_search_hint">Nome, raça, tipo, habilidade ou texto</string>
     <string name="collection_statistics_total_cards">Cartas Total \nSoul para completar</string>
 
     <string name="decks_search_hint">Nome do Deck</string>

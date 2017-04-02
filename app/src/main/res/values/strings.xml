@@ -142,6 +142,10 @@
     <string name="card_collection_edit_success">Collection edit enabled!</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
+    <string name="card_sounds_label">Sounds:</string>
+    <string name="card_sounds_attack_label">Attack</string>
+    <string name="card_sounds_enter_label">Enter</string>
+    <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
@@ -157,7 +161,7 @@
     <string name="zero_percent" translatable="false">0%</string>
 
     <string name="zero_of_zero" translatable="false">0/0</string>
-    <string name="cards_search_hint">Name, race, type or keyword</string>
+    <string name="cards_search_hint">Name, race, type, keyword or text</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
     <string name="collection_statistics_percent" translatable="false">%1$.2f%%</string>
