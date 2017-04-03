@@ -3,6 +3,10 @@ package com.ediposouza.teslesgendstracker.ui.cards
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.AssetFileDescriptor
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -26,6 +30,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import kotlinx.android.synthetic.main.itemlist_card_full.view.*
@@ -82,6 +87,7 @@ class CardActivity : BaseActivity() {
                 viewTreeObserver.removeOnPreDrawListener(listener)
                 ActivityCompat.startPostponedEnterTransition(this@CardActivity)
                 getCardPatches()
+                getCardSounds()
                 true
             }
             viewTreeObserver.addOnPreDrawListener(listener)
@@ -256,6 +262,68 @@ class CardActivity : BaseActivity() {
                 }
             }
 
+        }
+    }
+
+    private fun getCardSounds() {
+        FirebaseStorage.getInstance().reference.apply {
+            with(card_sound_play) {
+                if (card.hasLocalPlaySound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener { playSound(afd = getAssets().openFd(card.playSoundPath())) }
+                }
+                child(card.playSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener { playSound(result) }
+                }
+            }
+            with(card_sound_attack) {
+                if (card.hasLocalAttackSound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener { playSound(afd = getAssets().openFd(card.attackSoundPath())) }
+                }
+                child(card.attackSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener { playSound(result) }
+                }
+            }
+            with(card_sound_extra_label) {
+                if (card.hasLocalExtraSound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener { playSound(afd = getAssets().openFd(card.extraSoundPath())) }
+                }
+                child(card.extraSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener { playSound(result) }
+                }
+            }
+        }
+    }
+
+    private fun showSoundButton(button: View) {
+        card_sounds_label.visibility = View.VISIBLE
+        button.visibility = View.VISIBLE
+    }
+
+    private fun playSound(uri: Uri? = null, afd: AssetFileDescriptor? = null) {
+        try {
+            MediaPlayer().apply {
+                uri?.let {
+                    setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    setDataSource(this@CardActivity, it);
+                }
+                afd?.let {
+                    if (afd.declaredLength < 0) {
+                        setDataSource(afd.fileDescriptor)
+                    } else {
+                        setDataSource(afd.fileDescriptor, afd.startOffset, afd.declaredLength)
+                    }
+                }
+                prepare();
+                start();
+            }
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 

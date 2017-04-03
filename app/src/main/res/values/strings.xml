@@ -144,7 +144,7 @@
     <string name="card_race_label">Race:</string>
     <string name="card_sounds_label">Sounds:</string>
     <string name="card_sounds_attack_label">Attack</string>
-    <string name="card_sounds_enter_label">Enter</string>
+    <string name="card_sounds_play_label">Play</string>
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>

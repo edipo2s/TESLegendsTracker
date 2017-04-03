@@ -105,6 +105,10 @@
     <string name="card_collection_edit_success">¡La edición de colecciones está habilitada!</string>
     <string name="card_set_label">Conjunto:</string>
     <string name="card_race_label">Raza:</string>
+    <string name="card_sounds_label">Sonidos:</string>
+    <string name="card_sounds_attack_label">Ataque</string>
+    <string name="card_sounds_play_label">Jugar</string>
+    <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>
 

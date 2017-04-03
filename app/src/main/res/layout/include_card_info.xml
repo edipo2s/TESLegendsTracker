@@ -14,14 +14,13 @@
     app:behavior_peekHeight="@dimen/card_bottom_sheet_peek_height"
     app:cardCornerRadius="@dimen/default_margin"
     app:cardElevation="@dimen/card_elevation"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:showIn="@layout/activity_card">
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <RelativeLayout
         android:id="@+id/card_info_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/large_margin"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/default_margin">
@@ -49,8 +48,8 @@
             android:id="@+id/card_reward_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/card_more_info_label"
             android:layout_alignParentEnd="true"
+            android:layout_below="@id/card_more_info_label"
             android:layout_marginTop="@dimen/large_margin"
             android:text="@string/season_reward"
             android:textStyle="bold"
@@ -61,8 +60,8 @@
             android:id="@+id/card_reward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/card_reward_label"
             android:layout_alignParentEnd="true"
+            android:layout_below="@id/card_reward_label"
             android:layout_marginTop="@dimen/default_margin"
             tools:text="November / 2016" />
 
@@ -191,6 +190,51 @@
             android:layout_marginTop="@dimen/small_margin"
             android:layout_toStartOf="@id/card_favorite_btn"
             tools:text="None" />
+
+        <TextView
+            android:id="@+id/card_sounds_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_race_desc"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/card_sounds_label"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/card_sound_play"
+            style="@style/CardSoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/card_sounds_label"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_below="@id/card_race_desc"
+            android:text="@string/card_sounds_play_label"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/card_sound_attack"
+            style="@style/CardSoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/card_sound_play"
+            android:layout_toEndOf="@id/card_sound_play"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:text="@string/card_sounds_attack_label"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/card_sound_extra_label"
+            style="@style/CardSoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/card_sound_play"
+            android:layout_toEndOf="@id/card_sound_attack"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:text="@string/card_sounds_extra_label"
+            tools:visibility="visible" />
 
     </RelativeLayout>
 

@@ -106,6 +106,10 @@
     <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_sounds_label">Sons:</string>
+    <string name="card_sounds_attack_label">Ataque</string>
+    <string name="card_sounds_play_label">Jogar</string>
+    <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
 
