@@ -61,6 +61,7 @@
     <string name="about_info_thanks_label">Gracias especiales:</string>
     <string name="about_info_thanks_direwolf_text">TES Legends juego</string>
     <string name="about_info_thanks_cvh_text">Lista de niveles de arena</string>
+    <string name="about_info_thanks_unity_studio">Desarrolladores del UnityStudio - </string>
     <string name="about_rate_app">Calificar aplicacion</string>
 
     <string name="dialog_import_title">Importación desde Legends-Decks</string>
@@ -113,6 +114,10 @@
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>
+    <string name="card_full_downloaded">Imagen guardada en la carpeta de descarga.</string>
+    <string name="card_full_wallpaper_set">Imagen establecida como fondo de pantalla</string>
+    <string name="card_full_permission_write_storage">Para descargar la imagen, es necesario el permiso de almacenamiento de escritura</string>
+    <string name="card_full_permission_write_storage_denied">Se ha denegado el permiso de almacenamiento de escritura.</string>
 
     <string name="action_login">Iniciar sesión</string>
     <string name="action_favorited">%1$s Favorito</string>

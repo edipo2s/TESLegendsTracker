@@ -54,6 +54,10 @@ object MetricsManager : MetricsConstants() {
                 }
                 is MetricAction.ACTION_CARD_FULL_ART ->
                     putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_FULL_ART_DOWNLOAD ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_FULL_ART_SET_WALLPAPER ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
                 is MetricAction.ACTION_CARD_START_SOUND_PLAY ->
                     putString(action.PARAM_CARD_NAME, action.card.name)
                 is MetricAction.ACTION_CARD_START_SOUND_ATTACK ->

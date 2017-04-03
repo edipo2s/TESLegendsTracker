@@ -83,6 +83,14 @@ sealed class MetricAction(val name: String) {
         val PARAM_CARD_NAME = "Name"
     }
 
+    class ACTION_CARD_FULL_ART_DOWNLOAD(val card: Card) : MetricAction("CardFullArtDownload") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
+    class ACTION_CARD_FULL_ART_SET_WALLPAPER(val card: Card) : MetricAction("CardFullArtSetWalpaper") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
     class ACTION_CARD_START_SOUND_PLAY(val card: Card) : MetricAction("StartSoundPlay") {
         val PARAM_CARD_NAME = "Name"
     }

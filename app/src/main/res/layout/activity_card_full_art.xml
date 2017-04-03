@@ -29,24 +29,24 @@
                 app:adSize="BANNER"
                 app:adUnitId="@string/app_ads_card_full" />
 
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/card_full_art_iv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:transitionName="@string/card_full_transition_name" />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/card_full_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:background="@color/white_tiny_transparent"
                 android:elevation="@dimen/cardview_default_elevation"
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:title=""
                 tools:targetApi="lollipop" />
-
-            <com.github.chrisbanes.photoview.PhotoView
-                android:id="@+id/card_full_art_iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/navigation_bar_height"
-                android:transitionName="@string/card_full_transition_name" />
 
         </LinearLayout>
 

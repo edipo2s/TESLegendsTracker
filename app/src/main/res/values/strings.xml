@@ -92,6 +92,9 @@
     <string name="about_info_thanks_cvh" translatable="false">CVH - </string>
     <string name="about_info_thanks_cvh_text">Arena Tier List</string>
     <string name="about_info_thanks_cvh_link" translatable="false">https://betweenthelanes.net/arena-tier-list</string>
+    <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
+    <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
+    <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
     <string name="about_rate_app">Rate App</string>
 
     <string name="dialog_import_title">Import from Legends-Decks</string>
@@ -152,6 +155,11 @@
     <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_full_transition_name" translatable="false">card_full_transition</string>
+    <string name="card_full_downloaded">Image saved to download folder.</string>
+    <string name="card_full_wallpaper_set">Image set as Wallpaper</string>
+    <string name="card_full_permission_write_storage">To download image, Write Storage permission is necessary.</string>
+    <string name="card_full_permission_write_storage_denied">Write Storage permission denied.</string>
+
 
     <string name="action_login">Do Login</string>
     <string name="action_favorited">%1$s favorited</string>

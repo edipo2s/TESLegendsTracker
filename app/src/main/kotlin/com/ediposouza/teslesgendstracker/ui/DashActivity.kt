@@ -312,6 +312,11 @@ class DashActivity : BaseFilterActivity(),
                 startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
                 MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DIREWOLF())
             }
+            about_dialog_thanks_unity_studio_text.setOnClickListener {
+                val linkUri = Uri.parse(getString(R.string.about_info_thanks_unity_studio_link))
+                startActivity(Intent(Intent.ACTION_VIEW).setData(linkUri))
+                MetricsManager.trackAction(MetricAction.ACTION_ABOUT_DIREWOLF())
+            }
         }
         AlertDialog.Builder(this, R.style.AppDialog)
                 .setView(dialogView)

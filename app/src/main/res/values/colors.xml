@@ -39,6 +39,7 @@
     <color name="red_800">#C62828</color>
     <color name="indigo_transparent">#333f51b5</color>
     <color name="white_transparent">#33ffffff</color>
+    <color name="white_tiny_transparent">#DDffffff</color>
 
     <color name="colorBlue">#6f99ff</color>
     <color name="colorYellow">#FFD54F</color>
