@@ -52,6 +52,14 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_CARD, action.card.shortName)
                     putInt(action.PARAM_QTD, action.qtd)
                 }
+                is MetricAction.ACTION_CARD_FULL_ART ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_START_SOUND_PLAY ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_START_SOUND_ATTACK ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_START_SOUND_EXTRA ->
+                    putString(action.PARAM_CARD_NAME, action.card.name)
                 is MetricAction.ACTION_CARD_FILTER_SET ->
                     putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_ATTR ->

@@ -79,6 +79,22 @@ sealed class MetricAction(val name: String) {
         val PARAM_MAGIKA = "Magika"
     }
 
+    class ACTION_CARD_FULL_ART(val card: Card) : MetricAction("ViewCardFullArt") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
+    class ACTION_CARD_START_SOUND_PLAY(val card: Card) : MetricAction("StartSoundPlay") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
+    class ACTION_CARD_START_SOUND_ATTACK(val card: Card) : MetricAction("StartSoundAttack") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
+    class ACTION_CARD_START_SOUND_EXTRA(val card: Card) : MetricAction("StartSoundExtra") {
+        val PARAM_CARD_NAME = "Name"
+    }
+
     class ACTION_NOTIFY_UPDATE : MetricAction("NotifyUpdate")
     class ACTION_VERSION_UNSUPPORTED : MetricAction("VersionUnsupported")
     class ACTION_DECK_DETAILS_DELETE : MetricAction("DeckDetailsDelete")
@@ -219,6 +235,7 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_CARDS_FAVORED : MetricScreen("CardsFavored")
     class SCREEN_CARDS_STATISTICS : MetricScreen("CardsStatistics")
     class SCREEN_CARD_DETAILS : MetricScreen("CardDetails")
+    class SCREEN_CARD_FULL_ART : MetricScreen("CardFullArt")
     class SCREEN_DECKS_PUBLIC : MetricScreen("DecksPublic")
     class SCREEN_DECKS_OWNED : MetricScreen("DecksOwned")
     class SCREEN_DECKS_FAVORED : MetricScreen("DecksFavored")

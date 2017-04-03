@@ -28,20 +28,33 @@
                 app:adSize="BANNER"
                 app:adUnitId="@string/app_ads_card_full" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/card_recycler_view"
+            <android.support.percent.PercentFrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fadeScrollbars="false"
-                android:orientation="horizontal"
-                android:padding="@dimen/default_margin"
-                android:scrollbarSize="@dimen/small_margin"
-                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-                android:scrollbars="horizontal"
-                android:visibility="visible"
-                app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/itemlist_card_full"
-                tools:visibility="gone" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/card_art_iv"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    app:layout_marginTopPercent="25%" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/card_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fadeScrollbars="false"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_margin"
+                    android:scrollbarSize="@dimen/small_margin"
+                    android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+                    android:scrollbars="horizontal"
+                    android:visibility="visible"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/itemlist_card_full"
+                    tools:visibility="gone" />
+
+            </android.support.percent.PercentFrameLayout>
 
         </LinearLayout>
 

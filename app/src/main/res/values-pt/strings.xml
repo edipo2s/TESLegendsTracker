@@ -44,6 +44,8 @@
     <string name="menu_percent">Porcento</string>
     <string name="menu_import">Importar do Legends-Decks</string>
     <string name="menu_start">Iniciar</string>
+    <string name="menu_wallpaper">Papel de parede</string>
+    <string name="menu_download">Baixar</string>
 
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>

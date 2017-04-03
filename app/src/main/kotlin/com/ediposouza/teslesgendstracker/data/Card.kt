@@ -399,6 +399,7 @@ data class Card(
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
                 CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
 
+        private const val ARTS_PATH = "Arts"
         private const val CARD_PATH = "Cards"
         private const val SOUNDS_PATH = "Sounds"
         private const val CARD_BACK = "card_back.png"
@@ -519,6 +520,44 @@ data class Card(
             onGetCard(Card(name, patchShortName, set, attr, dualAttr1, dualAttr2, rarity, unique, cost,
                     attack, health, type, race, keywords, text, arenaTier, arenaTierPlus, evolves, season))
         }
+    }
+
+    fun fullArtPath(): String {
+        val setName = set.name.toLowerCase().capitalize()
+        val attrName = attr.name.toLowerCase().capitalize()
+        val artPath = "$ARTS_PATH/$setName/$attrName/$shortName.webp"
+        Timber.d(artPath)
+        return artPath
+    }
+
+    fun getCardFullArtBitmap(context: Context, onLoaded: (Bitmap?) -> Unit) {
+        try {
+            onLoaded(BitmapFactory.decodeStream(context.resources.assets.open(fullArtPath())))
+        } catch (e: Exception) {
+            onLoaded(null)
+        }
+        Glide.with(context)
+                .using(FirebaseImageLoader())
+                .load(FirebaseStorage.getInstance().reference.child(fullArtPath()))
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .listener(object : RequestListener<StorageReference?, Bitmap?> {
+                    override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                        onLoaded(null)
+                        return true
+                    }
+
+                    override fun onResourceReady(resource: Bitmap?, model: StorageReference?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                        return true
+                    }
+                })
+                .into(object : SimpleTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                        if (resource != null) {
+                            onLoaded(resource)
+                        }
+                    }
+                })
     }
 
     fun hasLocalAttackSound(resources: Resources): Boolean {
