@@ -1,5 +1,5 @@
 {
-  "name": "The Fall of the Dark Brotherhood",
+  "name": "Fall of the Dark Brotherhood",
   "set": "thefallofthedarkbrotherhood",
   "cards": {
     "agility": {
@@ -125,6 +125,18 @@
         "rarity": "Rare",
         "keyword": "Slay",
         "text": "Slay: Summon a creature from your discard pile.",
+        "arenaTier": "Unknown"
+      },
+      "littlegirl": {
+        "name": "Little Girl",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Vampire",
+        "attack": "0",
+        "health": "2",
+        "rarity": "Rare",
+        "keyword": "Changes",
+        "text": "At the start of your turn, Little Girl Changes into a 5/5 Ageless Vampire with Drain",
         "arenaTier": "Unknown"
       },
       "speakerterenus": {
@@ -293,6 +305,18 @@
       }
     },
     "willpower": {
+      "bloodpactmessenger": {
+        "name": "Blood Pact Messenger",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Kajiit",
+        "attack": "1",
+        "health": "1",
+        "keyword": "Pilfer",
+        "text": "Pilfer: Draw two cards. Sacrifice Blood Pact Messenger at the end of the turn",
+        "rarity": "Rare",
+        "arenaTier": "Unknown"
+      },
       "markedman": {
         "name": "Marked Man",
         "cost": "1",
