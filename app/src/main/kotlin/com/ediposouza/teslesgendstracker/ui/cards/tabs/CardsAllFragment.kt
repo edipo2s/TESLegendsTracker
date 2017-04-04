@@ -252,14 +252,15 @@ open class CardsAllFragment : BaseFragment() {
                     when (searchFilter) {
                         null -> it is Card
                         else -> {
-                            val search = searchFilter!!.toLowerCase().trim()
+                            val search = searchFilter?.toLowerCase()?.trim() ?: ""
                             it.name.toLowerCase().contains(search) ||
                                     (search.contains(rewardText) && it.season.isNotEmpty()) ||
                                     (search == uniqueText && it.unique) ||
                                     it.race.name.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
-                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty()
+                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||
+                                    it.text.contains(search)
                         }
                     }
                 }

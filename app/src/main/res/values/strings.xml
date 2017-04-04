@@ -68,6 +68,8 @@
     <string name="menu_percent">Percent</string>
     <string name="menu_import">Import from Legends-Decks</string>
     <string name="menu_start">Start</string>
+    <string name="menu_wallpaper">Wallpaper</string>
+    <string name="menu_download">Download</string>
 
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
@@ -90,6 +92,9 @@
     <string name="about_info_thanks_cvh" translatable="false">CVH - </string>
     <string name="about_info_thanks_cvh_text">Arena Tier List</string>
     <string name="about_info_thanks_cvh_link" translatable="false">https://betweenthelanes.net/arena-tier-list</string>
+    <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
+    <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
+    <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
     <string name="about_rate_app">Rate App</string>
 
     <string name="dialog_import_title">Import from Legends-Decks</string>
@@ -142,9 +147,19 @@
     <string name="card_collection_edit_success">Collection edit enabled!</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
+    <string name="card_sounds_label">Sounds:</string>
+    <string name="card_sounds_attack_label">Attack</string>
+    <string name="card_sounds_play_label">Play</string>
+    <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
+    <string name="card_full_transition_name" translatable="false">card_full_transition</string>
+    <string name="card_full_downloaded">Image saved to download folder.</string>
+    <string name="card_full_wallpaper_set">Image set as Wallpaper</string>
+    <string name="card_full_permission_write_storage">To download image, Write Storage permission is necessary.</string>
+    <string name="card_full_permission_write_storage_denied">Write Storage permission denied.</string>
+
 
     <string name="action_login">Do Login</string>
     <string name="action_favorited">%1$s favorited</string>
@@ -157,7 +172,7 @@
     <string name="zero_percent" translatable="false">0%</string>
 
     <string name="zero_of_zero" translatable="false">0/0</string>
-    <string name="cards_search_hint">Name, race, type or keyword</string>
+    <string name="cards_search_hint">Name, race, type, keyword or text</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
     <string name="collection_statistics_percent" translatable="false">%1$.2f%%</string>

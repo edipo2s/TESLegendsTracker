@@ -325,10 +325,10 @@ class DeckActivity : BaseActivity() {
     }
 
     private fun loadDeckBasicInfo() {
-        deck_name.text = deck?.name ?: ""
-        deck_class_cover.setImageResource(deck?.cls?.imageRes ?: 0)
-        deck_class_attr1.setImageResource(deck?.cls?.attr1?.imageRes ?: 0)
-        deck_class_attr2.setImageResource(deck?.cls?.attr2?.imageRes ?: 0)
+        deck_name.text = deck.name
+        deck_class_cover.setImageResource(deck.cls.imageRes)
+        deck_class_attr1.setImageResource(deck.cls.attr1.imageRes)
+        deck_class_attr2.setImageResource(deck.cls.attr2.imageRes)
     }
 
     private fun configDeckComments() {

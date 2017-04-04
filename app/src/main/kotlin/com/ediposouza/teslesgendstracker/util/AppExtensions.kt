@@ -1,11 +1,15 @@
 package com.ediposouza.teslesgendstracker.util
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.IntegerRes
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.*
 import android.widget.ImageView
 import android.widget.ListPopupWindow
@@ -188,6 +192,14 @@ fun Context.hasNavigationBar(): Boolean {
     val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
     val hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
     return (!(hasBackKey && hasHomeKey))
+}
+
+fun Activity.hasPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}
+
+fun Fragment.hasPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 }
 
 fun View.setBottomPaddingForNavigationBar() {

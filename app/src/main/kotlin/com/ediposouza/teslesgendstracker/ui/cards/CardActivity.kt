@@ -3,10 +3,15 @@ package com.ediposouza.teslesgendstracker.ui.cards
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.AssetFileDescriptor
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
@@ -26,6 +31,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import kotlinx.android.synthetic.main.itemlist_card_full.view.*
@@ -82,6 +88,8 @@ class CardActivity : BaseActivity() {
                 viewTreeObserver.removeOnPreDrawListener(listener)
                 ActivityCompat.startPostponedEnterTransition(this@CardActivity)
                 getCardPatches()
+                getCardSounds()
+                getCardFullArt()
                 true
             }
             viewTreeObserver.addOnPreDrawListener(listener)
@@ -256,6 +264,109 @@ class CardActivity : BaseActivity() {
                 }
             }
 
+        }
+    }
+
+    private fun getCardFullArt() {
+        card.getCardFullArtBitmap(this) { cardImage ->
+            with(card_expand_btn) {
+                if (visibility == View.VISIBLE && cardImage == null) {
+                    return@getCardFullArtBitmap
+                }
+                visibility = View.VISIBLE.takeIf { cardImage != null } ?: View.GONE
+                setOnClickListener {
+                    visibility = View.GONE
+                    card_expand_pb.visibility = View.VISIBLE
+                    MetricsManager.trackAction(MetricAction.ACTION_CARD_FULL_ART(card))
+                    visibility = View.VISIBLE
+                    card_expand_pb.visibility = View.GONE
+                    card_art_iv.setImageBitmap(cardImage)
+                    val intent = intentFor<CardFullArtActivity>(CardFullArtActivity.EXTRA_CARD to card)
+                    ActivityCompat.startActivity(this@CardActivity, intent,
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(this@CardActivity,
+                                    card_art_iv, getString(R.string.card_full_transition_name)).toBundle())
+                }
+            }
+        }
+    }
+
+    private fun getCardSounds() {
+        FirebaseStorage.getInstance().reference.apply {
+            with(card_sound_play) {
+                if (card.hasLocalPlaySound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
+                        playSound(afd = getAssets().openFd(card.playSoundPath()))
+                    }
+                }
+                child(card.playSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
+                        playSound(result)
+                    }
+                }
+            }
+            with(card_sound_attack) {
+                if (card.hasLocalAttackSound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_ATTACK(card))
+                        playSound(afd = getAssets().openFd(card.attackSoundPath()))
+                    }
+                }
+                child(card.attackSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_ATTACK(card))
+                        playSound(result)
+                    }
+                }
+            }
+            with(card_sound_extra_label) {
+                if (card.hasLocalExtraSound(resources)) {
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_EXTRA(card))
+                        playSound(afd = getAssets().openFd(card.extraSoundPath()))
+                    }
+                }
+                child(card.extraSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                    showSoundButton(this)
+                    setOnClickListener {
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_EXTRA(card))
+                        playSound(result)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showSoundButton(button: View) {
+        card_sounds_label.visibility = View.VISIBLE
+        button.visibility = View.VISIBLE
+    }
+
+    private fun playSound(uri: Uri? = null, afd: AssetFileDescriptor? = null) {
+        try {
+            MediaPlayer().apply {
+                uri?.let {
+                    setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    setDataSource(this@CardActivity, it);
+                }
+                afd?.let {
+                    if (afd.declaredLength < 0) {
+                        setDataSource(afd.fileDescriptor)
+                    } else {
+                        setDataSource(afd.fileDescriptor, afd.startOffset, afd.declaredLength)
+                    }
+                }
+                prepare();
+                start();
+            }
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 

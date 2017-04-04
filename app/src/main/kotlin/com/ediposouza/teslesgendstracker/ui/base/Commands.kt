@@ -38,6 +38,7 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
     }
 
     @IntDef(TYPE_INFO, TYPE_INFO_FIXED, TYPE_ERROR)
+    @Retention(AnnotationRetention.SOURCE)
     annotation class SnackbarType
 
     var msg: String = ""

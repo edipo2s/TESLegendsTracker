@@ -71,7 +71,7 @@ abstract class FirebaseParsers {
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {
-            return CardStatistic(shortName, CardRarity.valueOf(rarity.trim().toUpperCase()), unique)
+            return CardStatistic(shortName, CardRarity.of(rarity), unique)
         }
 
     }

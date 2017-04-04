@@ -44,6 +44,8 @@
     <string name="menu_percent">Porcento</string>
     <string name="menu_import">Importar do Legends-Decks</string>
     <string name="menu_start">Iniciar</string>
+    <string name="menu_wallpaper">Papel de parede</string>
+    <string name="menu_download">Baixar</string>
 
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
@@ -60,6 +62,7 @@
     <string name="about_info_thanks_label">Agradecimentos Especiais:</string>
     <string name="about_info_thanks_direwolf_text">Jogo TES Legends</string>
     <string name="about_info_thanks_cvh_text">Lista de Níveis da Arena</string>
+    <string name="about_info_thanks_unity_studio">Desenvolvedores do UnityStudio - </string>
     <string name="about_rate_app">Avalie este App</string>
 
     <string name="dialog_import_title">Importar de Legends-Decks</string>
@@ -106,8 +109,16 @@
     <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_sounds_label">Sons:</string>
+    <string name="card_sounds_attack_label">Ataque</string>
+    <string name="card_sounds_play_label">Jogar</string>
+    <string name="card_sounds_extra_label">Extra</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
+    <string name="card_full_downloaded">Imagem salva na pasta de downloads.</string>
+    <string name="card_full_wallpaper_set">Imagem definida como Wallpaper</string>
+    <string name="card_full_permission_write_storage">Para baixar a image, a permissão de Escrita no Armazenamento é necessária.</string>
+    <string name="card_full_permission_write_storage_denied">Permissão de Escrita no Armazenamento negada.</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>
@@ -118,7 +129,7 @@
     <string name="profile_collection">Coleção</string>
     <string name="unknown">Desconhecido</string>
 
-    <string name="cards_search_hint">Nome, raça, tipo ou habilidade</string>
+    <string name="cards_search_hint">Nome, raça, tipo, habilidade ou texto</string>
     <string name="collection_statistics_total_cards">Cartas Total \nSoul para completar</string>
 
     <string name="decks_search_hint">Nome do Deck</string>

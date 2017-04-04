@@ -81,7 +81,8 @@ class NewDeckActivity : BaseFilterActivity() {
                     .commit()
         }
         handler.postDelayed({
-            eventBus.post(CmdShowCardsByAttr(deckToEdit?.cls?.attr1 ?: CardAttribute.STRENGTH))
+            eventBus.post(CmdShowCardsByAttr(deckToEdit?.cls?.attr1?.takeIf { deckToEdit != Deck.DUMMY }
+                    ?: CardAttribute.STRENGTH))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
     }
@@ -165,9 +166,9 @@ class NewDeckActivity : BaseFilterActivity() {
                 }
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
-            if (deckToEdit != null) {
-                lockAttrs(deckToEdit!!.cls.attr1, deckToEdit!!.cls.attr2)
-                attrFilterClick.invoke(deckToEdit!!.cls.attr1)
+            deckToEdit?.let {
+                lockAttrs(it.cls.attr1, it.cls.attr2)
+                attrFilterClick.invoke(it.cls.attr1.takeIf { deckToEdit != Deck.DUMMY } ?: CardAttribute.STRENGTH)
             }
         }
         cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
