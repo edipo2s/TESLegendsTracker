@@ -314,5 +314,9 @@
   "2017_03_01": {
     "desc": "Heroic Rebirth",
     "type": "reward"
+  },
+  "2017_04_01": {
+    "desc": "Sower of Revenge",
+    "type": "reward"
   }
 }

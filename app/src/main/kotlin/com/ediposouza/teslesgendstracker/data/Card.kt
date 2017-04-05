@@ -29,13 +29,16 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 10/31/16.
  */
-enum class CardSet(val db: String) {
+enum class CardSet(val title: String) {
 
-    CORE("core"),
-    MADHOUSE("madhouse"),
+    CORE("Core"),
+    MADHOUSE("Madhouse Collection"),
+    FALLOFTHEDARKBROTHERHOOD("Fall of the Dark Brotherhood"),
     UNKNOWN(TEXT_UNKNOWN);
 
     var unknownSetName = ""
+
+    val db = name.toLowerCase()
 
     override fun toString(): String {
         return name.takeIf { this != UNKNOWN } ?: unknownSetName
@@ -407,7 +410,6 @@ data class Card(
         private const val SOUND_TYPE_PLAY = "enter_play"
         private const val SOUND_TYPE_EXTRA = "extra"
 
-
         fun getDefaultCardImage(context: Context): Bitmap {
             try {
                 val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
@@ -548,6 +550,9 @@ data class Card(
                     }
 
                     override fun onResourceReady(resource: Bitmap?, model: StorageReference?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                        if (resource != null) {
+                            onLoaded(resource)
+                        }
                         return true
                     }
                 })
@@ -561,7 +566,6 @@ data class Card(
     }
 
     fun hasLocalAttackSound(resources: Resources): Boolean {
-        Timber.d("Files: ${resources.getAssets().list(getLocalCardSoundPath()).toSet()}")
         return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_ATTACK.mp3")
     }
 

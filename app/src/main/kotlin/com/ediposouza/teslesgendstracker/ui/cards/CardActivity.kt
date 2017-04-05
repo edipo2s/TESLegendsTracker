@@ -222,7 +222,7 @@ class CardActivity : BaseActivity() {
 
     private fun loadCardInfo() {
         updateFavoriteButton()
-        card_set.text = card.set.name.toLowerCase().capitalize()
+        card_set.text = card.set.title
         if (card.season.isNotEmpty()) {
             val yearMonth = YearMonth.parse(card.season, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
             val month = yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())

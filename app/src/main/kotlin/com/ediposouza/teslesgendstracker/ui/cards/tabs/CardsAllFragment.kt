@@ -115,7 +115,7 @@ open class CardsAllFragment : BaseFragment() {
             PublicInteractor.getSets {
                 sets = it
                 sets.forEach {
-                    add(0, it.ordinal, 0, it.name.toLowerCase().capitalize())
+                    add(0, it.ordinal, 0, it.title)
                 }
             }
         }
