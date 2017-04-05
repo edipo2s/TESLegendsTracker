@@ -28,6 +28,18 @@
         "text": "Prophecy. Slay: Put a Completed Contract into your hand.",
         "arenaTier": "Unknown"
       },
+      "brotherhoodsanctuary": {
+        "name": "Brotherhood Sanctuary",
+        "cost": "1",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "When a friendly creature Slays, it receives its reward and extra time.",
+        "arenaTier": "Unknown"
+      },
       "completedcontract": {
         "name": "Completed Contract",
         "cost": "0",
@@ -127,6 +139,18 @@
         "text": "Slay: Summon a creature from your discard pile.",
         "arenaTier": "Unknown"
       },
+      "gravesinger": {
+        "name": "Gravesinger",
+        "cost": "10",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "At the start of your turn, summon the highest cost creature from your discard pile and give Charge. At the end of the turn, put it on the bottom of your deck.",
+        "arenaTier": "Unknown"
+      },
       "littlegirl": {
         "name": "Little Girl",
         "cost": "4",
@@ -137,18 +161,6 @@
         "rarity": "Rare",
         "keyword": "Changes",
         "text": "At the start of your turn, Little Girl Changes into a 5/5 Ageless Vampire with Drain",
-        "arenaTier": "Unknown"
-      },
-      "speakerterenus": {
-        "name": "Speaker Terenus",
-        "cost": "10",
-        "type": "Creature",
-        "race": "Breton",
-        "attack": "6",
-        "health": "6",
-        "rarity": "Legendary",
-        "keyword": "",
-        "text": "After you play an action, put a random action into your hand.",
         "arenaTier": "Unknown"
       },
       "stalkingshadowscale": {
@@ -225,6 +237,18 @@
         "text": "Summon: Draw a card. Then discard a card.",
         "arenaTier": "Unknown"
       },
+      "speakerterenus": {
+        "name": "Speaker Terenus",
+        "cost": "10",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "After you play an action, put a random action into your hand.",
+        "arenaTier": "Unknown"
+      },
       "spearofembers": {
         "name": "Spear of Embers",
         "cost": "5",
@@ -236,9 +260,33 @@
         "keyword": "Prophecy",
         "text": "Prophecy: Instead of equipping Spear of Embers, you may throw it at an enemy creature to deal 3 damage. ",
         "arenaTier": "Unknown"
+      },
+      "stealerofsecrets": {
+        "name": "Stealer of Secrets",
+        "cost": "6",
+        "type": "Creature",
+        "race": "High Elf",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Ward, Summon",
+        "text": "Ward. Summon: +1/+1 for each action in your discard pile.",
+        "arenaTier": "Unknown"
       }
     },
     "neutral": {
+      "fleshsculpture": {
+        "name": "Flesh Sculpture",
+        "cost": "3",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "Activate",
+        "text": "Activate: Transform each card in your hand into a random card.",
+        "arenaTier": "Unknown"
+      },
       "gristlehidedreugh": {
         "name": "Gristlehide Dreugh",
         "cost": "5",
@@ -249,6 +297,31 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When Gristlehide Dreugh takes damage and survives, draw a card.",
+        "arenaTier": "Unknown"
+      },
+      "knifetothethroat": {
+        "name": "Knife to the Throat",
+        "cost": "4",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Silence a creature. Draw a card",
+        "arenaTier": "Unknown"
+      },
+      "shadowmere": {
+        "name": "Shadowmere",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Charge, Last Gasp",
+        "text": "Charge. Last Gasp: Shuffle Shadowmere into your deck, give it +3/+3 and increase its cost by 3.",
         "arenaTier": "Unknown"
       },
       "thenightmother": {
@@ -266,7 +339,19 @@
       }
     },
     "strength": {
-      "granagdarkadherent": {
+      "fellthemighty": {
+        "name": "Fell the Mighty",
+        "cost": "4",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "text": "",
+        "keyword": "Destroy a creature with 4 power or more.",
+        "arenaTier": "Unknown"
+      },
+      "garnagdarkadherent": {
         "name": "Granag, Dark Adherent",
         "cost": "4",
         "type": "Creature",
@@ -276,7 +361,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Breakthrougth",
-        "text": "Breakthrougth. Players can´ have more than 7 magicka",
+        "text": "Breakthrougth. Players can't have more than 7 magicka",
         "arenaTier": "Unknown"
       },
       "protectoroftheinnocent": {
@@ -291,6 +376,30 @@
         "keyword": "Prophecy, Guard",
         "arenaTier": "Unknown"
       },
+      "quicksilvercrossbow": {
+        "name": "Quicksilver Crossbow",
+        "cost": "3",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "text": "Summon",
+        "keyword": "Summon: The wielder deals 1 damage",
+        "arenaTier": "Unknown"
+      },
+      "skeeverinfestation": {
+        "name": "Skeever Infestation",
+        "cost": "3",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "text": "",
+        "keyword": "Summon a Skeever in each lane with power and health equal to the number of Infestations you've played. Shuffle two copies of this into your deck.",
+        "arenaTier": "Unknown"
+      },
       "underworldvigilante": {
         "name": "Underworld Vigilante",
         "cost": "5",
@@ -301,6 +410,18 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Enemy creatures in this lane lose Cover.",
+        "arenaTier": "Unknown"
+      },
+      "unstoppablerage": {
+        "name": "Unstoppable Rage",
+        "cost": "7",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "A friendly creature deals damage equal to its power to all other creatures in its lane.",
         "arenaTier": "Unknown"
       }
     },
@@ -314,6 +435,18 @@
         "health": "1",
         "keyword": "Pilfer",
         "text": "Pilfer: Draw two cards. Sacrifice Blood Pact Messenger at the end of the turn",
+        "rarity": "Rare",
+        "arenaTier": "Unknown"
+      },
+      "chanterofakatosh": {
+        "name": "Chanter of Akatosh",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "1",
+        "health": "2",
+        "keyword": "",
+        "text": "After you play an action, summon a random creature from your deck with the same cost.",
         "rarity": "Rare",
         "arenaTier": "Unknown"
       },
@@ -339,6 +472,18 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Steal a creature's keywords",
+        "arenaTier": "Unknown"
+      },
+      "knightofthehour": {
+        "name": "Knight of the Hour",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "Prophecy, Guard, Summon",
+        "text": "Prophecy. Guard. Summon: You gain 3 health",
         "arenaTier": "Unknown"
       },
       "sanctuaryraid": {

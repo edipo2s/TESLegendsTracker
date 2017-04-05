@@ -29,13 +29,16 @@ import timber.log.Timber
 /**
  * Created by ediposouza on 10/31/16.
  */
-enum class CardSet(val db: String) {
+enum class CardSet(val title: String) {
 
-    CORE("core"),
-    MADHOUSE("madhouse"),
+    CORE("Core"),
+    MADHOUSE("Madhouse Collection"),
+    FALLOFTHEDARKBROTHERHOOD("Fall of the Dark Brotherhood"),
     UNKNOWN(TEXT_UNKNOWN);
 
     var unknownSetName = ""
+
+    val db = name.toLowerCase()
 
     override fun toString(): String {
         return name.takeIf { this != UNKNOWN } ?: unknownSetName
@@ -548,6 +551,9 @@ data class Card(
                     }
 
                     override fun onResourceReady(resource: Bitmap?, model: StorageReference?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                        if (resource != null) {
+                            onLoaded(resource)
+                        }
                         return true
                     }
                 })
