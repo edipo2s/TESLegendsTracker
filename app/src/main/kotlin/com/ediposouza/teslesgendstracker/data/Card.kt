@@ -410,7 +410,6 @@ data class Card(
         private const val SOUND_TYPE_PLAY = "enter_play"
         private const val SOUND_TYPE_EXTRA = "extra"
 
-
         fun getDefaultCardImage(context: Context): Bitmap {
             try {
                 val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
@@ -567,7 +566,6 @@ data class Card(
     }
 
     fun hasLocalAttackSound(resources: Resources): Boolean {
-        Timber.d("Files: ${resources.getAssets().list(getLocalCardSoundPath()).toSet()}")
         return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_ATTACK.mp3")
     }
 
