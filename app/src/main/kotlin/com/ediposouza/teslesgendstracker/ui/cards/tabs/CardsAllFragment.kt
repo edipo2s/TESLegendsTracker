@@ -257,6 +257,7 @@ open class CardsAllFragment : BaseFragment() {
                                     (search.contains(rewardText) && it.season.isNotEmpty()) ||
                                     (search == uniqueText && it.unique) ||
                                     it.race.name.toLowerCase().contains(search) ||
+                                    it.set.title.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
                                     it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||

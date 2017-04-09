@@ -34,6 +34,7 @@ enum class CardSet(val title: String) {
     CORE("Core"),
     MADHOUSE("Madhouse Collection"),
     FALLOFTHEDARKBROTHERHOOD("Fall of the Dark Brotherhood"),
+    TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 
     var unknownSetName = ""
@@ -175,6 +176,7 @@ enum class CardKeyword {
 
     ACTIVATE,
     BREAKTHROUGH,
+    CHANGES,
     CHARGE,
     COVER,
     DRAIN,
@@ -187,6 +189,7 @@ enum class CardKeyword {
     REGENERATE,
     SHACKLE,
     SILENCE,
+    SLAY,
     SUMMON,
     WARD,
     UNKNOWN;
