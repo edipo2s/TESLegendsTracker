@@ -33,7 +33,7 @@ enum class CardSet(val title: String) {
 
     CORE("Core"),
     MADHOUSE("Madhouse Collection"),
-    FALLOFTHEDARKBROTHERHOOD("Fall of the Dark Brotherhood"),
+    FALLOFTHEDARKBROTHERHOOD("The Fall of the Dark Brotherhood"),
     TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 
@@ -176,7 +176,7 @@ enum class CardKeyword {
 
     ACTIVATE,
     BREAKTHROUGH,
-    CHANGES,
+    CHANGE,
     CHARGE,
     COVER,
     DRAIN,

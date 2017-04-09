@@ -318,5 +318,61 @@
   "2017_04_01": {
     "desc": "Sower of Revenge",
     "type": "reward"
+  },
+  "2017_04_05": {
+    "desc": "The Fall of the Dark Brotherhood",
+    "type": "set",
+    "changes": {
+      "daggerfallmage": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "iliacsorcerer": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "shornhelmchampion": {
+        "set": "core",
+        "attr": "dual",
+        "change": "Text"
+      },
+      "initiateofhircine": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      },
+      "childofhircine": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      },
+      "pahmarrahtrenegade": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "archeinvenomtongue": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "lucienlachance": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "bloodmagiclord": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "nighttalonlord": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      }
+    }
   }
 }
