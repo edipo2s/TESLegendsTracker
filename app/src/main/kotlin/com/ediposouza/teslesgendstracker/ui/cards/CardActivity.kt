@@ -1,27 +1,33 @@
 package com.ediposouza.teslesgendstracker.ui.cards
 
+import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.Handler
+import android.provider.MediaStore
+import android.provider.Settings
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
-import android.support.v7.widget.CardView
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
+import android.support.v7.view.ContextThemeWrapper
+import android.support.v7.widget.*
 import android.text.format.DateUtils
 import android.transition.Transition
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
@@ -30,6 +36,7 @@ import com.ediposouza.teslesgendstracker.data.CardBasicInfo
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
+import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_card.*
@@ -41,6 +48,7 @@ import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.TextStyle
 import timber.log.Timber
+import java.io.File
 import java.util.*
 
 class CardActivity : BaseActivity() {
@@ -55,6 +63,10 @@ class CardActivity : BaseActivity() {
 
     }
 
+    private val RC_WRITE_STORAGE_PERMISSION = 125
+    private val RC_WRITE_SETTINGS_PERMISSION = 126
+    private val PERMISSION_WRITE_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
+
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) ?: Card.DUMMY }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
@@ -68,6 +80,16 @@ class CardActivity : BaseActivity() {
         finishAndAnimateBack()
         MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
     }
+
+    private val ringtoneDir by lazy { Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) }
+    private val playAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_play.mp3") }
+    private val attackAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_attack.mp3") }
+    private val extraAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_extra.mp3") }
+    private var playSoundBytes: ByteArray? = null
+    private var attackSoundBytes: ByteArray? = null
+    private var extraSoundBytes: ByteArray? = null
+
+    private lateinit var tmpRingtoneFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,6 +180,39 @@ class CardActivity : BaseActivity() {
         } else {
             finishAndAnimateBack()
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == RC_WRITE_STORAGE_PERMISSION) {
+            if (hasPermission(PERMISSION_WRITE_STORAGE)) {
+                setAsRingtoneClick(tmpRingtoneFile)
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION_WRITE_STORAGE)) {
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_INFO, R.string.card_full_permission_write_storage)
+                            .withAction(android.R.string.ok, { requestWriteStoragePermission() }))
+                } else {
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_INFO, R.string.card_full_permission_write_storage_denied))
+                }
+            }
+        }
+        if (requestCode == RC_WRITE_SETTINGS_PERMISSION) {
+            if (Settings.System.canWrite(this)) {
+                setAsRingtoneClick(tmpRingtoneFile)
+            } else {
+                eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_INFO, R.string.card_full_permission_write_settings_denied))
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun requestWriteStoragePermission() {
+        requestPermissions(arrayOf(PERMISSION_WRITE_STORAGE), RC_WRITE_STORAGE_PERMISSION)
+    }
+
+    private fun requestWriteSettingsPermission() {
+        startActivityForResult(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS).apply {
+            data = Uri.parse("package:${packageName}")
+        }, RC_WRITE_SETTINGS_PERMISSION)
     }
 
     private fun finishAndAnimateBack() {
@@ -291,33 +346,51 @@ class CardActivity : BaseActivity() {
     }
 
     private fun getCardSounds() {
+        val ringtonePopupMenu = PopupMenu(ContextThemeWrapper(this, R.style.AppDialog), card_sound_ringtone).apply {
+            inflate(R.menu.menu_ringtone)
+            setOnMenuItemClickListener { item ->
+                setAsRingtoneClick(when (item.itemId) {
+                    R.id.menu_ringtone_play -> playAsRingtoneFile
+                    R.id.menu_ringtone_attack -> attackAsRingtoneFile
+                    else -> extraAsRingtoneFile
+                })
+                true
+            }
+        }
+        card_sound_ringtone.setOnClickListener { ringtonePopupMenu.show() }
         FirebaseStorage.getInstance().reference.apply {
             with(card_sound_play) {
+                val playSoundPath = card.playSoundPath()
                 if (card.hasLocalPlaySound(resources)) {
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_play).isVisible = true
                     setOnClickListener {
+                        playSound(afd = assets.openFd(playSoundPath))
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
-                        playSound(afd = getAssets().openFd(card.playSoundPath()))
                     }
                 }
-                child(card.playSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                child(playSoundPath).downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_play).isVisible = true
                     setOnClickListener {
-                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
                         playSound(result)
+                        MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
                     }
                 }
             }
             with(card_sound_attack) {
+                val attackSoundPath = card.attackSoundPath()
                 if (card.hasLocalAttackSound(resources)) {
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_attack).isVisible = true
                     setOnClickListener {
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_ATTACK(card))
-                        playSound(afd = getAssets().openFd(card.attackSoundPath()))
+                        playSound(afd = getAssets().openFd(attackSoundPath))
                     }
                 }
-                child(card.attackSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                child(attackSoundPath).downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_attack).isVisible = true
                     setOnClickListener {
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_ATTACK(card))
                         playSound(result)
@@ -325,15 +398,18 @@ class CardActivity : BaseActivity() {
                 }
             }
             with(card_sound_extra_label) {
+                val extraSoundPath = card.extraSoundPath()
                 if (card.hasLocalExtraSound(resources)) {
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_extra).isVisible = true
                     setOnClickListener {
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_EXTRA(card))
-                        playSound(afd = getAssets().openFd(card.extraSoundPath()))
+                        playSound(afd = getAssets().openFd(extraSoundPath))
                     }
                 }
-                child(card.extraSoundPath()).downloadUrl.addOnSuccessListener { result ->
+                child(extraSoundPath).downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
+                    ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_extra).isVisible = true
                     setOnClickListener {
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_EXTRA(card))
                         playSound(result)
@@ -343,9 +419,77 @@ class CardActivity : BaseActivity() {
         }
     }
 
+    private fun setAsRingtoneClick(ringtoneFile: File) {
+        tmpRingtoneFile = ringtoneFile
+        if (!hasPermission(PERMISSION_WRITE_STORAGE)) {
+            requestWriteStoragePermission()
+            return
+        }
+        if (!Settings.System.canWrite(this)) {
+            requestWriteSettingsPermission()
+            return
+        }
+        FirebaseStorage.getInstance().reference.apply {
+            val playSoundPath = card.playSoundPath()
+            if (card.hasLocalPlaySound(resources)) {
+                playSoundBytes = assets.open(playSoundPath).readBytes()
+            }
+            child(playSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+                playSoundBytes = bytes
+            }
+            val attackSoundPath = card.attackSoundPath()
+            if (card.hasLocalAttackSound(resources)) {
+                attackSoundBytes = assets.open(attackSoundPath).readBytes()
+            }
+            child(attackSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+                attackSoundBytes = bytes
+            }
+            val extraSoundPath = card.extraSoundPath()
+            if (card.hasLocalExtraSound(resources)) {
+                extraSoundBytes = assets.open(extraSoundPath).readBytes()
+            }
+            child(extraSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+                extraSoundBytes = bytes
+            }
+        }
+        Handler().postDelayed({
+            when (ringtoneFile) {
+                playAsRingtoneFile -> playSoundBytes?.saveToFile(playAsRingtoneFile)
+                attackAsRingtoneFile -> attackSoundBytes?.saveToFile(attackAsRingtoneFile)
+                extraAsRingtoneFile -> extraSoundBytes?.saveToFile(extraAsRingtoneFile)
+            }
+            setAsRingtone(ringtoneFile)
+        }, DateUtils.SECOND_IN_MILLIS * 2)
+    }
+
+    private fun setAsRingtone(ringtoneFile: File) {
+        if (!ringtoneFile.exists()) {
+            return
+        }
+        val content = ContentValues().apply {
+            put(MediaStore.MediaColumns.DATA, ringtoneFile.getAbsolutePath());
+            put(MediaStore.MediaColumns.TITLE, ringtoneFile.name);
+            put(MediaStore.MediaColumns.SIZE, 215454);
+            put(MediaStore.MediaColumns.MIME_TYPE, "audio/*");
+            put(MediaStore.Audio.Media.DURATION, 230);
+            put(MediaStore.Audio.Media.IS_RINGTONE, true);
+            put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
+            put(MediaStore.Audio.Media.IS_ALARM, false);
+            put(MediaStore.Audio.Media.IS_MUSIC, false);
+        }
+        val uri = MediaStore.Audio.Media.getContentUriForPath(ringtoneFile.getAbsolutePath());
+
+        getContentResolver().delete(uri, "${MediaStore.MediaColumns.DATA}=\"${ringtoneFile.getAbsolutePath()}\"", null);
+        RingtoneManager.setActualDefaultRingtoneUri(getApplicationContext(),
+                RingtoneManager.TYPE_RINGTONE, getContentResolver().insert(uri, content));
+
+        Toast.makeText(this, R.string.card_full_sound_set, Toast.LENGTH_SHORT).show()
+    }
+
     private fun showSoundButton(button: View) {
-        card_sounds_label.visibility = View.VISIBLE
         button.visibility = View.VISIBLE
+        card_sounds_label.visibility = View.VISIBLE
+        card_sound_ringtone.visibility = View.VISIBLE
     }
 
     private fun playSound(uri: Uri? = null, afd: AssetFileDescriptor? = null) {

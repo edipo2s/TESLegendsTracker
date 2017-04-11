@@ -46,6 +46,10 @@
     <string name="menu_wallpaper">Papel pintado</string>
     <string name="menu_download">Descargar</string>
 
+    <string name="menu_ringtone_play">Establecer Play como tono de llamada</string>
+    <string name="menu_ringtone_attack">Establecer Attack como tono de llamada</string>
+    <string name="menu_ringtone_extra">Establecer Extra como tono de llamada</string>
+
     <string name="confirm_message">¿Estás seguro?</string>
     <string name="drawer_open">Cajón abierto</string>
     <string name="drawer_close">Cajón cerrado</string>
@@ -115,9 +119,11 @@
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>
     <string name="card_full_downloaded">Imagen guardada en la carpeta de descarga.</string>
+    <string name="card_full_sound_set">Sonido como tono de llamada</string>
     <string name="card_full_wallpaper_set">Imagen establecida como fondo de pantalla</string>
-    <string name="card_full_permission_write_storage">Para descargar la imagen, es necesario el permiso de almacenamiento de escritura</string>
+    <string name="card_full_permission_write_storage">Para salvar el arquivo, es necesario el permiso de almacenamiento de escritura</string>
     <string name="card_full_permission_write_storage_denied">Se ha denegado el permiso de almacenamiento de escritura.</string>
+    <string name="card_full_permission_write_settings_denied">Se ha denegado el permiso de almacenamiento escritura de configuracion.</string>
 
     <string name="action_login">Iniciar sesión</string>
     <string name="action_favorited">%1$s Favorito</string>

@@ -454,6 +454,9 @@ data class Card(
 
         fun loadCardImageInto(context: Context, cardSet: String, cardAttr: String, cardShortName: String,
                               onLoaded: ((Boolean) -> Unit)? = null) {
+            if (cardShortName.isEmpty()) {
+                return
+            }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
             Glide.with(context)
                     .using(FirebaseImageLoader())
