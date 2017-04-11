@@ -47,6 +47,10 @@
     <string name="menu_wallpaper">Papel de parede</string>
     <string name="menu_download">Baixar</string>
 
+    <string name="menu_ringtone_play">Definir Play como toque de chamada</string>
+    <string name="menu_ringtone_attack">Definir Attack como toque de chamada</string>
+    <string name="menu_ringtone_extra">Definir Extra como toque de chamada</string>
+
     <string name="confirm_message">Tem certeza?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
@@ -116,9 +120,11 @@
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
     <string name="card_full_downloaded">Imagem salva na pasta de downloads.</string>
+    <string name="card_full_sound_set">Som definido como toque de chamada</string>
     <string name="card_full_wallpaper_set">Imagem definida como Wallpaper</string>
-    <string name="card_full_permission_write_storage">Para baixar a image, a permissão de Escrita no Armazenamento é necessária.</string>
+    <string name="card_full_permission_write_storage">Para salvar o arquivo, a permissão de Escrita no Armazenamento é necessária.</string>
     <string name="card_full_permission_write_storage_denied">Permissão de Escrita no Armazenamento negada.</string>
+    <string name="card_full_permission_write_settings_denied">Permissão de Escrita de Configuração negada.</string>
 
     <string name="action_login">Fazer Login</string>
     <string name="action_favorited">%1$s favoritado</string>

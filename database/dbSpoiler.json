@@ -71,7 +71,7 @@
         "race": "",
         "attack": "",
         "health": "",
-        "rarity": "Common",
+        "rarity": "Rare",
         "keyword": "",
         "text": "Move all friendly creatures.",
         "arenaTier": "Unknown"
@@ -159,7 +159,7 @@
         "attack": "0",
         "health": "2",
         "rarity": "Rare",
-        "keyword": "Changes",
+        "keyword": "Change",
         "text": "At the start of your turn, Little Girl Changes into a 5/5 Ageless Vampire with Drain",
         "arenaTier": "Unknown"
       },
@@ -245,6 +245,7 @@
         "attack": "6",
         "health": "6",
         "rarity": "Legendary",
+        "unique": true,
         "keyword": "",
         "text": "After you play an action, put a random action into your hand.",
         "arenaTier": "Unknown"
@@ -284,7 +285,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Activate",
-        "text": "Activate: Transform each card in your hand into a random card.",
+        "text": "Uses: 2. Activate: Transform each card in your hand into a random card.",
         "arenaTier": "Unknown"
       },
       "gristlehidedreugh": {
@@ -505,7 +506,8 @@
         "race": "Imperial",
         "attack": "5",
         "health": "5",
-        "rarity": "Rare",
+        "rarity": "Legendary",
+        "unique": true,
         "keyword": "Slay",
         "text": "Immune to Lethal. Slay: Discard all copies of the slain creature from the opponent's deck.",
         "arenaTier": "Unknown"

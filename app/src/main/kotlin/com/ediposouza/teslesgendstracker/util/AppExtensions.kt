@@ -32,6 +32,8 @@ import org.jsoup.Jsoup
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -209,4 +211,17 @@ fun View.setBottomPaddingForNavigationBar() {
         result = resources.getDimensionPixelSize(resourceId)
     }
     setPadding(paddingLeft, paddingTop, paddingRight, result)
+}
+
+fun ByteArray.saveToFile(file: File) {
+    if (file.exists()) {
+        file.delete()
+    } else {
+        file.createNewFile()
+    }
+    FileOutputStream(file).apply {
+        write(this@saveToFile)
+        flush()
+        close()
+    }
 }

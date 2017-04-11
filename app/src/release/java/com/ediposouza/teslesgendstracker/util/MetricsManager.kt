@@ -64,6 +64,10 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_CARD_NAME, action.card.name)
                 is MetricAction.ACTION_CARD_START_SOUND_EXTRA ->
                     putString(action.PARAM_CARD_NAME, action.card.name)
+                is MetricAction.ACTION_CARD_SOUND_SET_RINGTONE -> {
+                    putString(action.PARAM_CARD_NAME, action.card.name)
+                    putString(action.PARAM_CARD_SOUND_TYPE, action.soundType)
+                }
                 is MetricAction.ACTION_CARD_FILTER_SET ->
                     putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_ATTR ->

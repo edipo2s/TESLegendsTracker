@@ -806,8 +806,8 @@
         "attack": "6",
         "health": "7",
         "rarity": "Epic",
-        "keyword": "",
-        "text": "When Child of Hircine attacks and destroys a creature, it may attack again this turn.",
+        "keyword": "Slay",
+        "text": "Slay: May attack again this turn.",
         "arenaTier": "Good"
       },
       "dreadclannfear": {
@@ -830,8 +830,8 @@
         "attack": "4",
         "health": "5",
         "rarity": "Epic",
-        "keyword": "Evolves",
-        "text": "When Initiate of Hircine attacks and destroys a creature, she may attack again this turn.",
+        "keyword": "Slay, Evolves",
+        "text": "Slay: May attack again this turn",
         "evolves": true
       },
       "stampedesentinel": {
@@ -1072,7 +1072,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
-        "text": "When you play an action, Crystal Tower Crafter gets +1/+1.",
+        "text": "After you play an action, Crystal Tower Crafter gets +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
@@ -1333,7 +1333,7 @@
         "health": "2",
         "rarity": "Legendary",
         "keyword": "Ward",
-        "text": "Ward. After Daggerfall Mage loses a Ward, put a Tome of Alteration into your hand.",
+        "text": "Ward. After Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
         "arenaTier": "Excellent"
       },
       "darkrift": {
@@ -1444,7 +1444,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Ward, Guard",
-        "text": "Ward. After Breton Conjurer loses a Ward, summon a 5/5 Frost Atronach with Guard.",
+        "text": "Ward. After Breton Conjurer's Ward is broken, summon a 5/5 Frost Atronach with Guard.",
         "arenaTier": "Excellent"
       },
       "dresguard": {
@@ -1609,7 +1609,7 @@
         "health": "4",
         "rarity": "Common",
         "keyword": "",
-        "text": "When you play an action, deal 2 damage to your opponent.",
+        "text": "After you play an action, deal 2 damage to your opponent.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Action"
@@ -2229,7 +2229,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "",
-        "text": "When you play an action, a random friendly creature gets +1/+1.",
+        "text": "After you play an action, a random friendly creature gets +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
@@ -3296,7 +3296,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "",
-        "text": "All lanes become Shadow lanes. Friendly creatures have +1/+0.",
+        "text": "All field lanes become Shadow lanes. Friendly creatures have +1/+0.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -3499,8 +3499,8 @@
         "attack": "4",
         "health": "6",
         "rarity": "Epic",
-        "keyword": "",
-        "text": "When Pahmar-raht Renegade attacks and destroys a creature, draw a card.",
+        "keyword": "Slay",
+        "text": "Slay: Draw a card.",
         "arenaTier": "Good"
       },
       "snowysabrecat": {
@@ -3732,7 +3732,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Ward",
-        "text": "Ward. After Iliac Sorcerer loses a Ward, double his power.",
+        "text": "Ward. After Iliac Sorcerer's Ward is broken, double his power.",
         "arenaTier": "Good"
       },
       "rottingdraugr": {
@@ -4134,8 +4134,8 @@
         "attack": "1",
         "health": "4",
         "rarity": "Rare",
-        "keyword": "Lethal",
-        "text": "Lethal. When Archein Venomtongue attacks and destroys a creature, gain +1 max magicka.",
+        "keyword": "Lethal, Slay",
+        "text": "Lethal, Slay: Gain +1 max magicka.",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -4235,7 +4235,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Lethal",
-        "text": "Lethal. When another friendly creature attacks and destroys a creature, give it +2/+2.",
+        "text": "Lethal, When another friendly creature Slays, give it +2/+2.",
         "arenaTier": "Excellent"
       },
       "midnightsweep": {
@@ -4531,8 +4531,8 @@
         "attack": "6",
         "health": "6",
         "rarity": "Legendary",
-        "keyword": "Summon",
-        "text": "Summon: Draw a Blood Magic Spell. When Blood Magic Lord attacks and destroys a creature, draw a Blood Magic Spell.",
+        "keyword": "Summon, Slay",
+        "text": "Summon and Slay: Put a Blood Magic Spell into your hand.",
         "arenaTier": "Excellent"
       },
       "nighttalonlord": {
@@ -4543,8 +4543,8 @@
         "attack": "8",
         "health": "8",
         "rarity": "Legendary",
-        "keyword": "Drain",
-        "text": "Drain. When Night Talon Lord attacks and destroys a creature, summon that creature.",
+        "keyword": "Drain, Slay",
+        "text": "Drain, Slay: Summon the slain creature.",
         "arenaTier": "Good"
       },
       "volkiharlord": {
@@ -4738,7 +4738,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Breakthrough, Ward",
-        "text": "Breakthrough, Ward. After Shornhelm Champion loses a Ward, he gains +3/+3.",
+        "text": "Breakthrough, Ward. After Shornhelm Champion's Ward is broken, he gains +3/+3.",
         "arenaTier": "Excellent",
         "attr1": "intelligence",
         "attr2": "endurance"
@@ -5582,18 +5582,6 @@
         "text": "When a friendly creature Slays, it receives its reward and extra time.",
         "arenaTier": "Unknown"
       },
-      "completedcontract": {
-        "name": "Completed Contract",
-        "cost": "0",
-        "type": "Action",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Common",
-        "keyword": "",
-        "text": "Gain 1 magicka this turn.",
-        "arenaTier": "Unknown"
-      },
       "eclipsebaroness": {
         "name": "Eclipse Baroness",
         "cost": "8",
@@ -5613,7 +5601,7 @@
         "race": "",
         "attack": "",
         "health": "",
-        "rarity": "Common",
+        "rarity": "Rare",
         "keyword": "",
         "text": "Move all friendly creatures.",
         "arenaTier": "Unknown"
@@ -5701,7 +5689,7 @@
         "attack": "0",
         "health": "2",
         "rarity": "Rare",
-        "keyword": "Changes",
+        "keyword": "Change",
         "text": "At the start of your turn, Little Girl Changes into a 5/5 Ageless Vampire with Drain",
         "arenaTier": "Unknown"
       },
@@ -5787,6 +5775,7 @@
         "attack": "6",
         "health": "6",
         "rarity": "Legendary",
+        "unique": true,
         "keyword": "",
         "text": "After you play an action, put a random action into your hand.",
         "arenaTier": "Unknown"
@@ -5826,7 +5815,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Activate",
-        "text": "Activate: Transform each card in your hand into a random card.",
+        "text": "Uses: 2. Activate: Transform each card in your hand into a random card.",
         "arenaTier": "Unknown"
       },
       "gristlehidedreugh": {
@@ -6047,7 +6036,8 @@
         "race": "Imperial",
         "attack": "5",
         "health": "5",
-        "rarity": "Rare",
+        "rarity": "Legendary",
+        "unique": true,
         "keyword": "Slay",
         "text": "Immune to Lethal. Slay: Discard all copies of the slain creature from the opponent's deck.",
         "arenaTier": "Unknown"
