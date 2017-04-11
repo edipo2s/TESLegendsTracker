@@ -103,6 +103,11 @@ sealed class MetricAction(val name: String) {
         val PARAM_CARD_NAME = "Name"
     }
 
+    class ACTION_CARD_SOUND_SET_RINGTONE(val card: Card, val soundType: String) : MetricAction("CardSoundSetRingtone") {
+        val PARAM_CARD_NAME = "Name"
+        val PARAM_CARD_SOUND_TYPE = "SoundType"
+    }
+
     class ACTION_NOTIFY_UPDATE : MetricAction("NotifyUpdate")
     class ACTION_VERSION_UNSUPPORTED : MetricAction("VersionUnsupported")
     class ACTION_DECK_DETAILS_DELETE : MetricAction("DeckDetailsDelete")

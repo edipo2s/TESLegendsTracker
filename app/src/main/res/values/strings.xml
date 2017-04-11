@@ -71,6 +71,10 @@
     <string name="menu_wallpaper">Wallpaper</string>
     <string name="menu_download">Download</string>
 
+    <string name="menu_ringtone_play">Set play as ringtone</string>
+    <string name="menu_ringtone_attack">Set attack as ringtone</string>
+    <string name="menu_ringtone_extra">Set extra as ringtone</string>
+
     <string name="confirm_message">Are you sure?</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
@@ -95,6 +99,10 @@
     <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
     <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
     <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
+    <string name="about_info_thanks_translation_german">Russian translation - </string>
+    <string name="about_info_thanks_translation_german_text" translatable="false">Ballaum</string>
+    <string name="about_info_thanks_translation_russian">Russian translation - </string>
+    <string name="about_info_thanks_translation_russian_text" translatable="false">WickedTroll</string>
     <string name="about_rate_app">Rate App</string>
 
     <string name="dialog_import_title">Import from Legends-Decks</string>
@@ -156,9 +164,11 @@
     <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_full_transition_name" translatable="false">card_full_transition</string>
     <string name="card_full_downloaded">Image saved to download folder.</string>
+    <string name="card_full_sound_set">Sound set as Ringtone</string>
     <string name="card_full_wallpaper_set">Image set as Wallpaper</string>
-    <string name="card_full_permission_write_storage">To download image, Write Storage permission is necessary.</string>
+    <string name="card_full_permission_write_storage">To save file, Write Storage permission is necessary.</string>
     <string name="card_full_permission_write_storage_denied">Write Storage permission denied.</string>
+    <string name="card_full_permission_write_settings_denied">Write Settings permission denied.</string>
 
 
     <string name="action_login">Do Login</string>

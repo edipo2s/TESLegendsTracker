@@ -409,9 +409,9 @@ data class Card(
         private const val CARD_PATH = "Cards"
         private const val SOUNDS_PATH = "Sounds"
         private const val CARD_BACK = "card_back.png"
-        private const val SOUND_TYPE_ATTACK = "attack"
-        private const val SOUND_TYPE_PLAY = "enter_play"
-        private const val SOUND_TYPE_EXTRA = "extra"
+        const val SOUND_TYPE_ATTACK = "attack"
+        const val SOUND_TYPE_PLAY = "enter_play"
+        const val SOUND_TYPE_EXTRA = "extra"
 
         fun getDefaultCardImage(context: Context): Bitmap {
             try {
@@ -426,6 +426,7 @@ data class Card(
                               cardShortName: String, transform: ((Bitmap) -> Bitmap)? = null,
                               onLoadDefault: (() -> Unit)? = null) {
             if (cardShortName.isEmpty()) {
+                view.setImageBitmap(getDefaultCardImage(view.context))
                 return
             }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
@@ -516,7 +517,11 @@ data class Card(
     override fun describeContents() = 0
 
     fun loadCardImageInto(view: ImageView, transform: ((Bitmap) -> Bitmap)? = null) {
-        Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
+        if (shortName.isEmpty()) {
+            view.setImageBitmap(getDefaultCardImage(view.context))
+        } else {
+            Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
+        }
     }
 
     fun patchVersion(context: Context, patchUuid: String, onGetCard: (Card) -> Unit) {

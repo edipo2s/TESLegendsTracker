@@ -265,7 +265,7 @@
             android:layout_below="@id/card_race_desc"
             android:layout_marginTop="@dimen/small_margin"
             android:src="@drawable/ic_notification"
-            android:visibility="invisible"
+            android:visibility="gone"
             tools:visibility="visible" />
 
     </RelativeLayout>

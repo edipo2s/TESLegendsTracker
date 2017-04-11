@@ -110,8 +110,12 @@ class CardActivity : BaseActivity() {
                 viewTreeObserver.removeOnPreDrawListener(listener)
                 ActivityCompat.startPostponedEnterTransition(this@CardActivity)
                 getCardPatches()
-                getCardSounds()
-                getCardFullArt()
+                try {
+                    getCardSounds()
+                    getCardFullArt()
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
                 true
             }
             viewTreeObserver.addOnPreDrawListener(listener)
@@ -454,15 +458,23 @@ class CardActivity : BaseActivity() {
         }
         Handler().postDelayed({
             when (ringtoneFile) {
-                playAsRingtoneFile -> playSoundBytes?.saveToFile(playAsRingtoneFile)
-                attackAsRingtoneFile -> attackSoundBytes?.saveToFile(attackAsRingtoneFile)
-                extraAsRingtoneFile -> extraSoundBytes?.saveToFile(extraAsRingtoneFile)
+                playAsRingtoneFile -> {
+                    playSoundBytes?.saveToFile(playAsRingtoneFile)
+                    setAsRingtone(playAsRingtoneFile, Card.SOUND_TYPE_PLAY)
+                }
+                attackAsRingtoneFile -> {
+                    attackSoundBytes?.saveToFile(attackAsRingtoneFile)
+                    setAsRingtone(attackAsRingtoneFile, Card.SOUND_TYPE_ATTACK)
+                }
+                else -> {
+                    extraSoundBytes?.saveToFile(extraAsRingtoneFile)
+                    setAsRingtone(extraAsRingtoneFile, Card.SOUND_TYPE_EXTRA)
+                }
             }
-            setAsRingtone(ringtoneFile)
         }, DateUtils.SECOND_IN_MILLIS * 2)
     }
 
-    private fun setAsRingtone(ringtoneFile: File) {
+    private fun setAsRingtone(ringtoneFile: File, soundType: String) {
         if (!ringtoneFile.exists()) {
             return
         }
@@ -484,6 +496,7 @@ class CardActivity : BaseActivity() {
                 RingtoneManager.TYPE_RINGTONE, getContentResolver().insert(uri, content));
 
         Toast.makeText(this, R.string.card_full_sound_set, Toast.LENGTH_SHORT).show()
+        MetricsManager.trackAction(MetricAction.ACTION_CARD_SOUND_SET_RINGTONE(card, soundType))
     }
 
     private fun showSoundButton(button: View) {
