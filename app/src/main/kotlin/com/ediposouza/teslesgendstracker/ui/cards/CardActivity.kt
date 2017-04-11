@@ -429,10 +429,11 @@ class CardActivity : BaseActivity() {
             requestWriteStoragePermission()
             return
         }
-        if (!Settings.System.canWrite(this)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.System.canWrite(this)) {
             requestWriteSettingsPermission()
             return
         }
+        card_progress_bar.visibility = View.VISIBLE
         FirebaseStorage.getInstance().reference.apply {
             val playSoundPath = card.playSoundPath()
             if (card.hasLocalPlaySound(resources)) {
@@ -495,6 +496,7 @@ class CardActivity : BaseActivity() {
         RingtoneManager.setActualDefaultRingtoneUri(getApplicationContext(),
                 RingtoneManager.TYPE_RINGTONE, getContentResolver().insert(uri, content));
 
+        card_progress_bar.visibility = View.GONE
         Toast.makeText(this, R.string.card_full_sound_set, Toast.LENGTH_SHORT).show()
         MetricsManager.trackAction(MetricAction.ACTION_CARD_SOUND_SET_RINGTONE(card, soundType))
     }
