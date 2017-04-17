@@ -408,7 +408,7 @@ data class Card(
         private const val ARTS_PATH = "Arts"
         private const val CARD_PATH = "Cards"
         private const val SOUNDS_PATH = "Sounds"
-        private const val CARD_BACK = "card_back.png"
+        private const val CARD_BACK = "card_back.webp"
         const val SOUND_TYPE_ATTACK = "attack"
         const val SOUND_TYPE_PLAY = "enter_play"
         const val SOUND_TYPE_EXTRA = "extra"
@@ -517,7 +517,7 @@ data class Card(
     override fun describeContents() = 0
 
     fun loadCardImageInto(view: ImageView, transform: ((Bitmap) -> Bitmap)? = null) {
-        if (shortName.isEmpty()) {
+        if (name.isEmpty() || shortName.isEmpty()) {
             view.setImageBitmap(getDefaultCardImage(view.context))
         } else {
             Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
