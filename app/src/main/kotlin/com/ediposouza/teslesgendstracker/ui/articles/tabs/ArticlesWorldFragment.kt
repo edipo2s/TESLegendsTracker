@@ -11,7 +11,7 @@ import com.ediposouza.teslesgendstracker.data.Article
 import com.ediposouza.teslesgendstracker.data.ArticleCategory
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.util.inflate
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_articles_world.*
 
 /**
@@ -43,8 +43,10 @@ class ArticlesWorldFragment : BaseFragment() {
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
-            adapter = worldAdapter
-            itemAnimator = SlideInRightAnimator()
+            adapter = SlideInRightAnimationAdapter(worldAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             setHasFixedSize(true)
         }
     }

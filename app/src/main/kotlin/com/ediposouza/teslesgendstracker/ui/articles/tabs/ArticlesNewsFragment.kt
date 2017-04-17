@@ -15,7 +15,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_articles.*
 import kotlinx.android.synthetic.main.fragment_articles_news.*
 import org.jetbrains.anko.doAsync
@@ -76,8 +76,10 @@ class ArticlesNewsFragment : BaseFragment() {
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
-            adapter = newsAdapter
-            itemAnimator = SlideInRightAnimator()
+            adapter = SlideInRightAnimationAdapter(newsAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             setHasFixedSize(true)
             addOnScrollListener(OnLinearLayoutItemScrolled(newsAdapter.getContentCount() - 3) {
                 view?.post { newsAdapter.more() }

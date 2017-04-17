@@ -23,7 +23,7 @@ import com.ediposouza.teslesgendstracker.ui.decks.DeckActivity
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.google.firebase.auth.FirebaseAuth
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_decks_list.*
 import kotlinx.android.synthetic.main.itemlist_deck.view.*
 import org.greenrobot.eventbus.Subscribe
@@ -53,8 +53,9 @@ open class DecksPublicFragment : BaseFragment() {
     }
 
     private val dataFilter: (FirebaseParsers.DeckParser) -> Boolean = {
-        currentClasses.map { it.ordinal }.contains(it.cls) &&
+        val searchResult = if (searchFilter?.isEmpty() ?: true) true else
                 it.name.toLowerCase().trim().contains(searchFilter ?: "")
+        currentClasses.map { it.ordinal }.contains(it.cls) && searchResult
     }
 
     val itemClick = { view: View, deck: Deck ->
@@ -104,8 +105,10 @@ open class DecksPublicFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(decks_recycler_view) {
-            adapter = decksAdapter
-            itemAnimator = SlideInLeftAnimator()
+            adapter = SlideInLeftAnimationAdapter(decksAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }

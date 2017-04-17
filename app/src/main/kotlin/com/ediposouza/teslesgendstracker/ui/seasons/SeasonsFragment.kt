@@ -22,7 +22,7 @@ import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.toYearMonth
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_seasons.*
 import kotlinx.android.synthetic.main.itemlist_season.view.*
 import kotlinx.android.synthetic.main.itemlist_season_patch.view.*
@@ -93,8 +93,10 @@ class SeasonsFragment : BaseFragment() {
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
-            adapter = seasonsAdapter
-            itemAnimator = SlideInRightAnimator()
+            adapter = SlideInRightAnimationAdapter(seasonsAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             setHasFixedSize(true)
         }
     }

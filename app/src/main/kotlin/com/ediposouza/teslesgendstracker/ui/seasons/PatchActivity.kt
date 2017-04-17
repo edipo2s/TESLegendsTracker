@@ -26,7 +26,7 @@ import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.load
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.activity_patch.*
 import kotlinx.android.synthetic.main.itemlist_patch_cards.view.*
 import org.jetbrains.anko.intentFor
@@ -91,8 +91,10 @@ class PatchActivity : BaseActivity() {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }
             val nextPatches = patches.filter { it.date.isAfter(selectedPatch.date) }
-            adapter = PatchAdapter(selectedPatch, nextPatches, onCardClick)
-            itemAnimator = SlideInRightAnimator()
+            adapter = SlideInRightAnimationAdapter(PatchAdapter(selectedPatch, nextPatches, onCardClick)).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             setHasFixedSize(true)
         }
     }

@@ -21,7 +21,7 @@ import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
 import com.ediposouza.teslesgendstracker.ui.decks.DeckListCardsFragment
 import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
 import org.greenrobot.eventbus.EventBus
@@ -81,8 +81,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     init {
         inflate(context, R.layout.widget_decklist, this)
-        decklist_recycle_view.adapter = deckListAdapter
-        decklist_recycle_view.itemAnimator = SlideInLeftAnimator()
+        decklist_recycle_view.adapter = SlideInLeftAnimationAdapter(deckListAdapter).apply {
+            setDuration(300)
+            setFirstOnly(false)
+        }
         decklist_recycle_view.layoutManager = object : LinearLayoutManager(context) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }

@@ -22,7 +22,7 @@ import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.matches.tabs.MatchesHistoryFragment
 import com.ediposouza.teslesgendstracker.util.*
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.activity_new_matches.*
 import kotlinx.android.synthetic.main.include_new_matches.*
 import org.jetbrains.anko.intentFor
@@ -139,8 +139,10 @@ class NewMatchesActivity : BaseActivity() {
             limitHeight(8)
         }
         new_matches_recycler_view.apply {
-            adapter = matchesAddedAdapter
-            itemAnimator = SlideInLeftAnimator()
+            adapter = SlideInLeftAnimationAdapter(matchesAddedAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
             setHasFixedSize(true)
         }

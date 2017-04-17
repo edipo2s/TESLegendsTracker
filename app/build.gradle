@@ -111,7 +111,6 @@ dependencies {
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"
     compile "com.google.firebase:firebase-storage:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
-    compile "com.google.firebase:firebase-storage:$playServicesVersion"
     compile("com.firebaseui:firebase-ui-storage:1.2.0", {
         exclude group: "com.google.firebase", module: "firebase-storage"
     })
@@ -140,7 +139,7 @@ dependencies {
     compile "com.github.miguelbcr:TableFixHeaders-Wrapper:0.2.0"
     compile "com.timehop.stickyheadersrecyclerview:library:0.4.3"
     compile "com.kyleduo.switchbutton:library:1.4.5"
-    compile "jp.wasabeef:recyclerview-animators:2.2.5"
+    compile "jp.wasabeef:recyclerview-animators:2.2.6"
     compile "org.jsoup:jsoup:1.10.1"
     compile "com.github.chrisbanes:PhotoView:2.0.0"
 
