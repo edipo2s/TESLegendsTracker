@@ -23,7 +23,7 @@ import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_matches_history.*
 import kotlinx.android.synthetic.main.itemlist_match_history.view.*
 import kotlinx.android.synthetic.main.itemlist_match_history_section.view.*
@@ -120,8 +120,10 @@ open class MatchesHistoryFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         with(matches_recycler_view) {
-            adapter = matchesAdapter
-            itemAnimator = SlideInLeftAnimator()
+            adapter = SlideInLeftAnimationAdapter(matchesAdapter).apply {
+                setDuration(300)
+                setFirstOnly(false)
+            }
             layoutManager = object : LinearLayoutManager(context) {
                 override fun supportsPredictiveItemAnimations(): Boolean = false
             }

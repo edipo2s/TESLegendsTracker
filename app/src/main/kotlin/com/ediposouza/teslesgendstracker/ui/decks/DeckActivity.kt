@@ -38,7 +38,7 @@ import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
 import io.fabric.sdk.android.services.common.CommonUtils
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
 import org.jetbrains.anko.*
@@ -333,10 +333,13 @@ class DeckActivity : BaseActivity() {
 
     private fun configDeckComments() {
         with(deck_comment_recycle_view) {
-            adapter = DeckCommentAdapter(deck.comments) {
+            adapter = SlideInLeftAnimationAdapter(DeckCommentAdapter(deck.comments) {
                 PrivateInteractor.remDeckComment(deck, it) {
                     remComment(it)
                 }
+            }).apply {
+                setDuration(300)
+                setFirstOnly(false)
             }
             layoutManager = object : LinearLayoutManager(this@DeckActivity) {
                 override fun setMeasuredDimension(childrenBounds: Rect, wSpec: Int, hSpec: Int) {
@@ -350,7 +353,6 @@ class DeckActivity : BaseActivity() {
                 private fun getVisiblePercent(): Float = 0.2f.takeIf { keyboardVisible } ?: 0.6f
 
             }
-            itemAnimator = SlideInLeftAnimator()
             addItemDecoration(DividerItemDecoration(this@DeckActivity, DividerItemDecoration.VERTICAL))
         }
         deck_comment_qtd.text = numberInstance.format(deck.comments.size)

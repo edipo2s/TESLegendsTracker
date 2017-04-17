@@ -65,9 +65,9 @@ class NewDeckActivity : BaseFilterActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        new_deck_toolbar_title.text = getString(R.string.new_deck_title).takeIf { deckToEdit == null } ?: deckToEdit?.name
+        new_deck_toolbar_title.text = deckToEdit?.name.takeIf { deckToEdit?.uuid?.isNotEmpty() ?: false } ?: getString(R.string.new_deck_title)
         new_deck_cardlist.editMode = true
-        if (deckToEdit != null) {
+        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
             new_deck_cardlist.showDeck(deckToEdit)
         }
         configDeckFilters()
@@ -186,11 +186,11 @@ class NewDeckActivity : BaseFilterActivity() {
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item, deckPatchesDesc)
-            if (deckToEdit != null) {
+            if (deckToEdit?.patch?.isNotEmpty() ?: false) {
                 view.new_deck_dialog_patch_spinner.setSelection(deckPatchesDesc.indexOf(deckToEdit!!.patch))
             }
         }
-        if (deckToEdit != null) {
+        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
             view.new_deck_dialog_title.text = getString(R.string.new_deck_update_dialog_title)
             view.new_deck_dialog_name.setText(deckToEdit!!.name)
             val currentDeckTypeName = deckToEdit!!.type.name.toLowerCase().capitalize()
@@ -199,8 +199,8 @@ class NewDeckActivity : BaseFilterActivity() {
         }
         alert {
             customView(view)
-            val confirmText = R.string.new_deck_save_dialog_save.takeIf { deckToEdit == null } ?:
-                    R.string.new_deck_save_dialog_update
+            val confirmText = R.string.new_deck_save_dialog_update.takeIf { deckToEdit?.uuid?.isNotEmpty() ?: false } ?:
+                    R.string.new_deck_save_dialog_save
             positiveButton(confirmText) { saveUpdateDeck(view, allPatches) }
             cancelButton { }
         }.show()
@@ -221,7 +221,7 @@ class NewDeckActivity : BaseFilterActivity() {
             eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
             return
         }
-        if (deckToEdit != null) {
+        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
             val deck = deckToEdit!!.update(deckName, deckPrivate, deckTypeSelected, deckCls,
                     deckSoulCost, deckPatchSelected.uuidDate, deckCards)
             PrivateInteractor.updateDeckCards(deck, deckToEdit!!.cards, deckSoulCost) {
