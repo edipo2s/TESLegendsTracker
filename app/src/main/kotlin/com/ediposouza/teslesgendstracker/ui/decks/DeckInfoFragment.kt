@@ -129,7 +129,7 @@ class DeckInfoFragment : BaseFragment() {
                     override fun supportsPredictiveItemAnimations(): Boolean = false
                 }
                 setHasFixedSize(true)
-                postDelayed({ deck_details_scroll.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
+                postDelayed({ deck_details_scroll?.smoothScrollTo(0, 0) }, DateUtils.SECOND_IN_MILLIS)
             }
         }
     }

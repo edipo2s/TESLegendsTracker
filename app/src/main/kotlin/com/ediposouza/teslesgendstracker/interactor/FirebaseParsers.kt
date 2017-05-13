@@ -51,23 +51,22 @@ abstract class FirebaseParsers {
                     text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season)
         }
 
-        private fun getCardArenaTierPlus(): CardArenaTierPlus? {
-            if (arenaTierPlus.keys.isEmpty()) {
-                return null
-            }
-            val cardArenaTierPlusType = CardArenaTierPlusType.of(arenaTierPlus.keys.first())
-            var operator: CardArenaTierPlusOperator? = null
-            var value = when (cardArenaTierPlusType) {
-                CardArenaTierPlusType.ATTACK,
-                CardArenaTierPlusType.COST,
-                CardArenaTierPlusType.HEALTH ->
-                    with(arenaTierPlus.values.first().split(ARENA_TIER_PLUS_VALUE_DELIMITER)) {
-                        operator = CardArenaTierPlusOperator.of(get(0))
-                        get(1)
-                    }
-                else -> arenaTierPlus.values.first()
-            }
-            return CardArenaTierPlus(cardArenaTierPlusType, operator, value)
+        private fun getCardArenaTierPlus(): List<CardArenaTierPlus?> {
+            return arenaTierPlus.map {
+                val cardArenaTierPlusType = CardArenaTierPlusType.of(it.key)
+                var operator: CardArenaTierPlusOperator? = null
+                var value = when (cardArenaTierPlusType) {
+                    CardArenaTierPlusType.ATTACK,
+                    CardArenaTierPlusType.COST,
+                    CardArenaTierPlusType.HEALTH ->
+                        with(it.value.split(ARENA_TIER_PLUS_VALUE_DELIMITER)) {
+                            operator = CardArenaTierPlusOperator.of(get(0))
+                            get(1)
+                        }
+                    else -> it.value
+                }
+                CardArenaTierPlus(cardArenaTierPlusType, operator, value)
+            }.toList()
         }
 
         fun toCardStatistic(shortName: String): CardStatistic {

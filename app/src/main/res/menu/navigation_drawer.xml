@@ -70,6 +70,12 @@
             android:title="@string/menu_share" />
 
         <item
+            android:id="@+id/menu_language"
+            android:checkable="false"
+            android:icon="@drawable/ic_menu_earth"
+            android:title="@string/menu_language" />
+
+        <item
             android:id="@+id/menu_about"
             android:checkable="false"
             android:icon="@drawable/ic_menu_about"

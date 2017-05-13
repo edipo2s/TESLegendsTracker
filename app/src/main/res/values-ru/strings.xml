@@ -1,0 +1,235 @@
+<resources>
+    <string name="app_exit_confirm">Нажмите еще раз, чтобы выйти</string>
+    <string name="app_bd_under_updating">База данных TESL Tracker находится под обновлением. Вы будете уведомлены, когда он будет завершен.</string>
+    <string name="app_version_unsupported">Эта версия TESL Tracker стал неподдерживаемый. Необходимо обновить, чтобы продолжить использование приложения.</string>
+    <string name="app_donate_dialog_text">Все функции приложения являются бесплатными, но если вы хотите, чтобы поддержать развитие, Вы можете пожертвовать некоторую ценность и остаться без рекламы.</string>
+    <string name="app_donate_dialog_value">Донат %1$s</string>
+    <string name="app_donate_dialog_not_now">Не сейчас, спасибо</string>
+    <string name="app_donate_dialog_payment_error">Сервис недоступен</string>
+    <string name="app_donate_dialog_payment_fail">Пожертвовать терпят неудачу, пожалуйста, попробуйте еще раз.</string>
+    <string name="app_donate_dialog_payment_success">Спасибо за пожертвование.</string>
+    <string name="app_new_version_available">Доступна новая версия!</string>
+    <string name="app_new_version_message">Держите ваше приложение обновляется для новых функций и улучшений!</string>
+    <string name="app_new_version_update_now">Обновить сейчас</string>
+    <string name="app_new_version_update_later">Позже</string>
+
+    <string name="menu_cards">Карты</string>
+    <string name="menu_decks">Колоды</string>
+    <string name="menu_matches">Матчи</string>
+    <string name="menu_arena">Арена Проект</string>
+    <string name="menu_spoiler">Новый сет</string>
+    <string name="menu_articles">TESL Статьи</string>
+    <string name="menu_seasons">Сезоны TESL</string>
+    <string name="menu_season">Сезоны</string>
+    <string name="menu_filter">Фильтр</string>
+    <string name="menu_donate">Ads версия</string>
+    <string name="menu_donate_done">Нет Ads версия</string>
+    <string name="menu_share">Пригласить друга</string>
+    <string name="menu_language">Язык</string>
+    <string name="menu_about">Около</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_sets">Сеты</string>
+    <string name="menu_statistics">Статистика</string>
+    <string name="menu_compact_view"></string>
+    <string name="menu_only_private">Только приватные</string>
+    <string name="menu_only_collection">Только из коллекции</string>
+    <string name="menu_hide_empty"></string>
+    <string name="menu_favorite">любимый</string>
+    <string name="menu_unfavorite">Удалить из избранного</string>
+    <string name="menu_like">подобно</string>
+    <string name="menu_unlike">В отличие от</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="menu_done">Готово</string>
+    <string name="menu_percent">Процент</string>
+    <string name="menu_import">Импорт из Legends-Decks</string>
+    <string name="menu_start">Начало</string>
+    <string name="menu_wallpaper"></string>
+    <string name="menu_download">Скачать</string>
+
+    <string name="menu_ringtone_play">Установить воспроизведение в качестве мелодии звонка</string>
+    <string name="menu_ringtone_attack">Установить атаку в качестве мелодии звонка</string>
+    <string name="menu_ringtone_extra">Установить как мелодию звонка</string>
+
+    <string name="confirm_message">Вы уверены?</string>
+    <string name="drawer_open">Открыть ящик</string>
+    <string name="drawer_close">Закрыть ящик</string>
+
+    <string name="share_with">Поделитесь с…</string>
+    <string name="share_text">Управление вашей коллекции TES Legends, поиск и создавать общественные или частные палубы, чтобы отслеживать ваши матчи</string>
+
+    <string name="about_title">Около TES Legends Tracker</string>
+    <string name="about_text">TES Legends Tracker является помощник приложение для карточной игры The Elder Scroll Легенды разработанные Dire Wolf Digital и опубликованных Bethesda Softworks.</string>
+    <string name="about_text_bottom">Dire Wolf Digital имеет все права защищены от всех карт изображений и другой игровой ресурс в этом приложении.</string>
+    <string name="about_info_version">Версия приложения:</string>
+    <string name="about_info_developer_label">Разработчик:</string>
+    <string name="about_info_thanks_label">Отдельное спасибо::</string>
+    <string name="about_info_thanks_direwolf_text">TES Legends игра</string>
+    <string name="about_info_thanks_cvh_text">Список Tier Arena</string>
+    <string name="about_info_thanks_unity_studio">Разработчики UnityStudio - </string>
+    <string name="about_rate_app">Оценить App</string>
+
+    <string name="dialog_import_title">Импорт из Legends-Decks</string>
+    <string name="dialog_import_text">Пожалуйста, сделайте логин и открыть страницу редактирования коллекции</string>
+    <string name="dialog_import_deck_text"></string>
+    <string name="dialog_import_result_title">Коллекция Импорт</string>
+    <string name="dialog_import_result_imported_text">карты импортированы:</string>
+    <string name="dialog_import_result_difference_text">Коллекция отличия Legends-Decks:</string>
+    <string name="dialog_import_result_added">ДОБАВЛЕНО</string>
+    <string name="dialog_import_result_updated">ОБНОВЛЕНО</string>
+    <string name="dialog_import_result_you_have">У ТЕБЯ ЕСТЬ</string>
+    <string name="dialog_import_result_has_more">ИМЕЕТ БОЛЬШЕ</string>
+
+    <string name="tab_cards_all">Карты</string>
+    <string name="tab_cards_collection">Коллекция</string>
+    <string name="tab_cards_favorites">Избранные</string>
+    <string name="tab_decks_public">общественного</string>
+    <string name="tab_decks_owned">Подержанный</string>
+    <string name="tab_decks_favorites">Избранные</string>
+    <string name="tab_matches_statistics">Статистика</string>
+    <string name="tab_matches_history">История</string>
+    <string name="tab_mode_ranked">Первое место</string>
+    <string name="tab_mode_casual">Повседневная</string>
+    <string name="tab_mode_arena">Арена</string>
+    <string name="tab_articles_news">Новости</string>
+    <string name="tab_articles_world">Мир</string>
+
+    <string name="title_tab_cards_collection">Коллекция карт</string>
+    <string name="title_tab_cards_favorites">карты Избранное</string>
+    <string name="title_tab_decks_public">Публичные колоды</string>
+    <string name="title_tab_decks_owned">Приватная колоды</string>
+    <string name="title_tab_decks_favorites">вертушки Избранное</string>
+    <string name="title_tab_matches_statistics">Матчи Статистика</string>
+    <string name="title_tab_matches_history">Матчи История</string>
+    <string name="title_tab_articles_news">Новости TES Legends</string>
+    <string name="title_tab_articles_world">Мир TES Legends</string>
+
+    <string name="cards_sets_all">Все</string>
+
+    <string name="card_more_info_label">Больше информации</string>
+    <string name="card_arena_tier_label">Арена Tier:</string>
+    <string name="card_collection_qtd_label">Коллекция Количество:</string>
+    <string name="card_collection_edit_confirm">Включить сбор редактировать?</string>
+    <string name="card_collection_edit_success">Коллекция редактировать включен!</string>
+    <string name="card_set_label">Сет:</string>
+    <string name="card_race_label">Раса:</string>
+    <string name="card_sounds_label">Звуки:</string>
+    <string name="card_sounds_attack_label"></string>
+    <string name="card_sounds_play_label">Играть</string>
+    <string name="card_sounds_extra_label">дополнительно</string>
+    <string name="card_patch_current">Текущая версия</string>
+    <string name="card_patch_pre">до того-%s версии</string>
+    <string name="card_full_downloaded"></string>
+    <string name="card_full_sound_set">Звук установлен как Мелодия</string>
+    <string name="card_full_wallpaper_set">Изображение установлено как обои</string>
+    <string name="card_full_permission_write_storage">Для сохранения файла необходимо разрешение на запись в хранилище.</string>
+    <string name="card_full_permission_write_storage_denied">Разрешение на запись в хранилище отклонено.</string>
+    <string name="card_full_permission_write_settings_denied">Разрешение на запись настроек отклонено.</string>
+
+    <string name="action_login">Есть Вход</string>
+    <string name="action_favorited">%1$s добавили в избранное</string>
+    <string name="action_unfavorited">%1$s Удалить из избранного</string>
+    <string name="sign_in_with_google">Войти на Google</string>
+    <string name="error_auth">Это действие требует авторизованного пользователя.</string>
+    <string name="error_login">Ошибка аутентификации.</string>
+    <string name="profile_collection">Коллекция</string>
+    <string name="unknown">Неизвестно</string>
+
+    <string name="cards_search_hint">Имя, раса, тип, ключевое слово или текст</string>
+    <string name="collection_statistics_total_cards">Всего карточек\n Душа для завершения</string>
+
+    <string name="decks_search_hint">Название колоды</string>
+    <string name="deck_details">Название колоды</string>
+    <string name="deck_details_create_by">Создано</string>
+    <string name="deck_details_create_at">Создано</string>
+    <string name="deck_details_last_update">Последнее обновление</string>
+    <string name="deck_details_last_update_format">%1$s в %2$s</string>
+    <string name="deck_details_updates">Обновления</string>
+    <string name="deck_deleted">Колода удалена!</string>
+    <string name="deck_exit_confirm">Нажмите снова, чтобы выйти без сохранения</string>
+    <string name="deck_comments_text">Комментарии</string>
+    <string name="deck_comment_new_hint">Ваш комментарий!</string>
+    <string name="deck_comment_new_hint_anonymous">Ваш комментарий! (необходимо войти)</string>
+    <string name="deck_comment_size_error">Сообщение слишком короткое!</string>
+
+    <string name="new_deck_title">Новая колода</string>
+    <string name="new_deck_class_title">Новая %s палуба</string>
+    <string name="new_deck_save_dialog_title">Инофрмация о колоде</string>
+    <string name="new_deck_update_dialog_title">Сохранить изменения в колоде?</string>
+    <string name="new_deck_save_dialog_name_label">Имя</string>
+    <string name="new_deck_save_dialog_type_label">Тип</string>
+    <string name="new_deck_save_dialog_public_label">Сделать колоду публичной</string>
+    <string name="new_deck_save_dialog_save">Сохранить</string>
+    <string name="new_deck_save_dialog_update">Обновить</string>
+    <string name="new_deck_save_as_public">Колода сохранена как публичная</string>
+    <string name="new_deck_save_as_private">Колода сохранена как приватная</string>
+    <string name="new_deck_updated_as_public">Колода обновлена как публичная</string>
+    <string name="new_deck_updated_as_private">Колода обновлена как приватная</string>
+    <string name="new_deck_save_error_incomplete">Заполните, пожалуйста, вашу палубу, прежде чем сохранить его</string>
+
+    <string name="match_win">Победа</string>
+    <string name="match_loss">Поражение</string>
+    <string name="match_statistics_summary_label">Сводка класса</string>
+    <string name="match_statistics_tree_wins_label">3 победы</string>
+    <string name="match_statistics_games_label">Игры</string>
+    <string name="match_statistics_wins_label">Победы</string>
+    <string name="match_statistics_losses_label">Поражения</string>
+    <string name="match_statistics_win_rate_label">Шанс на победу</string>
+    <string name="match_statistics_total_label">Всего</string>
+    <string name="match_history_delete">Удаление матче против %1$s</string>
+    <string name="matches_seasons_all">Все сезоны</string>
+    <string name="matches_class_title">%1$s Статистика</string>
+
+    <string name="new_match_dialog_title">Я играю с</string>
+    <string name="new_match_save_dialog_name_label">Имя</string>
+    <string name="new_match_dialog_class_label">Класс</string>
+    <string name="new_match_dialog_mode_label">Режим</string>
+    <string name="new_match_dialog_deck_label">Колода</string>
+    <string name="new_match_dialog_deck_other">Другие</string>
+    <string name="new_match_dialog_name_hint">Название колоды</string>
+    <string name="new_match_dialog_start">Начало</string>
+    <string name="new_match_dialog_start_error_name">Имя должно быть не менее 5 символов</string>
+    <string name="new_match_opt_class_label">Класс колоды оппоннета</string>
+    <string name="new_match_opt_type_label">Тип колоды оппонента</string>
+    <string name="new_match_cards_remains_label">карты Остатки</string>
+    <string name="new_match_first_label">Отправляясь Первый</string>
+    <string name="new_match_legend_label">Ранг Legend</string>
+    <string name="new_match_rank_label">Ранг</string>
+    <string name="new_match_save_rank_error">Ранговых матчей нужен ранг, чтобы спастись</string>
+    <string name="new_match_saved">Новый Совпадение Сохраненный!</string>
+
+    <string name="article_news_title">Новости</string>
+    <string name="article_news_category_all">Все</string>
+    <string name="article_news_category_announcements">Объявления</string>
+    <string name="article_news_category_battle">тактика ведения боя</string>
+    <string name="article_news_category_forging">Ковка Легенды</string>
+    <string name="article_news_category_imperial">Императорская библиотека</string>
+    <string name="article_news_category_legendary">Легендарные Beginnings</string>
+    <string name="article_news_category_arena">Арена Район</string>
+    <string name="article_world_title">Мир</string>
+    <string name="article_world_races_title">Расы</string>
+    <string name="article_world_classes_title">Классы</string>
+    <string name="article_world_attributes_title">Атрибуты</string>
+
+    <string name="season_reward">Награда</string>
+    <string name="season_no_matches">Нет Матчи информация</string>
+    <string name="season_matches_label">ранговых матчей</string>
+    <string name="season_opponent_label">Оппонент</string>
+    <string name="season_matches_best_rank">Лучший \nранг</string>
+    <string name="season_matches_wins">Всего побед:</string>
+    <string name="season_matches_losses">Всего поражений:</string>
+    <string name="season_matches_total">Всего совпадений:</string>
+    <string name="season_matches_class_most_seen">Наиболее просматриваемые:</string>
+    <string name="season_matches_class_most_defeated">Наиболее поражение:</string>
+    <string name="season_matches_class_less_defeated">Меньше поражение:</string>
+
+    <string name="patch_change">%s\nИзменено</string>
+
+    <string name="arena_title">Выберите класс, чтобы начать новый проект Arena!</string>
+    <string name="new_arena_title">Арена Проект - %s</string>
+    <string name="new_arena_draft_tip">Длинное нажатие на карты или нажмите на стрелку, чтобы выбрать ваш выбор</string>
+    <string name="new_arena_draft_pick">Выберите карту</string>
+    <string name="new_arena_draft_synergy">Взаимодействие с: \n%s</string>
+    <string name="new_arena_draft_remove_card">Удалить карту?</string>
+
+</resources>

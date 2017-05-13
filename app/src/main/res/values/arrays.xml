@@ -1,5 +1,13 @@
 <resources>
 
+    <array name="languages">
+        <item name="english">@string/about_language_english</item>
+        <item name="portuguese">@string/about_language_portuguese</item>
+        <item name="spanish">@string/about_language_spanish</item>
+        <item name="german">@string/about_language_german</item>
+        <item name="russian">@string/about_language_russian</item>
+    </array>
+
     <array name="testing_devices">
         <item name="device_id_1">2CD46C8BC9B0FF2DBF9A80861A7A8867</item>
         <item name="device_id_2">0428BD38C7ABE67635C669930454496D</item>

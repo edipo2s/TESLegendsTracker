@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
+import com.ediposouza.teslesgendstracker.util.getCurrentVersion
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -388,7 +389,7 @@ data class Card(
         val keywords: List<CardKeyword>,
         val text: String,
         val arenaTier: CardArenaTier,
-        val arenaTierPlus: CardArenaTierPlus?,
+        val arenaTierPlus: List<CardArenaTierPlus?>,
         val evolves: Boolean,
         val season: String
 
@@ -403,7 +404,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                CardArenaTierPlus(CardArenaTierPlusType.ATTACK, CardArenaTierPlusOperator.GREAT, "5"), false, "")
+                listOf(), false, "")
 
         private const val ARTS_PATH = "Arts"
         private const val CARD_PATH = "Cards"
@@ -414,11 +415,14 @@ data class Card(
         const val SOUND_TYPE_EXTRA = "extra"
 
         fun getDefaultCardImage(context: Context): Bitmap {
+            val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
             try {
-                val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
+                context.resources.assets.open(CARD_BACK)?.let {
+                    return BitmapFactory.decodeStream(it)
+                }
                 return (cardBackDrawable as BitmapDrawable).bitmap
             } catch (e: Exception) {
-                return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+                return (cardBackDrawable as BitmapDrawable).bitmap
             }
         }
 
@@ -430,11 +434,12 @@ data class Card(
                 return
             }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
-            Timber.d(imagePath)
+            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${view.context.getCurrentVersion()}/$imagePath"
+            Timber.d("Local: $imagePath - Remote: $remotePath")
             with(view.context) {
                 Glide.with(this)
                         .using(FirebaseImageLoader())
-                        .load(FirebaseStorage.getInstance().reference.child(imagePath))
+                        .load(FirebaseStorage.getInstance().reference.child(remotePath))
                         .placeholder(BitmapDrawable(resources, getCardImageBitmap(this, imagePath, transform, onLoadDefault)))
                         .bitmapTransform(object : Transformation<Bitmap> {
                             override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
@@ -456,16 +461,20 @@ data class Card(
         fun loadCardImageInto(context: Context, cardSet: String, cardAttr: String, cardShortName: String,
                               onLoaded: ((Boolean) -> Unit)? = null) {
             if (cardShortName.isEmpty()) {
+                onLoaded?.invoke(false)
                 return
             }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
+            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
+            Timber.d("Local: $imagePath - Remote: $remotePath")
             Glide.with(context)
                     .using(FirebaseImageLoader())
-                    .load(FirebaseStorage.getInstance().reference.child(imagePath))
+                    .load(FirebaseStorage.getInstance().reference.child(remotePath))
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                        override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                        override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                            Timber.d(e)
                             onLoaded?.invoke(false)
                             return true
                         }
@@ -511,7 +520,7 @@ data class Card(
             CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             source.readString(), CardArenaTier.values()[source.readInt()],
-            source.readParcelable<CardArenaTierPlus>(CardArenaTierPlus::class.java.classLoader),
+            mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
             1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0
@@ -539,7 +548,6 @@ data class Card(
         val setName = set.name.toLowerCase().capitalize()
         val attrName = attr.name.toLowerCase().capitalize()
         val artPath = "$ARTS_PATH/$setName/$attrName/$shortName.webp"
-        Timber.d(artPath)
         return artPath
     }
 
@@ -551,11 +559,12 @@ data class Card(
         }
         Glide.with(context)
                 .using(FirebaseImageLoader())
-                .load(FirebaseStorage.getInstance().reference.child(fullArtPath()))
+                .load(FirebaseStorage.getInstance().reference.child("v${context.getCurrentVersion()}/${fullArtPath()}"))
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                    override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                    override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                        Timber.d(e)
                         onLoaded(null)
                         return true
                     }
@@ -623,7 +632,7 @@ data class Card(
         dest?.writeList(keywords)
         dest?.writeString(text)
         dest?.writeInt(arenaTier.ordinal)
-        dest?.writeParcelable(arenaTierPlus, 0)
+        dest?.writeList(arenaTierPlus)
         dest?.writeInt((if (evolves) 1 else 0))
         dest?.writeString(season)
     }
