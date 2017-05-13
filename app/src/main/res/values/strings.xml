@@ -51,6 +51,7 @@
     <string name="menu_donate_done">No Ads Version</string>
     <string name="menu_share">Invite a Friend</string>
     <string name="menu_about">About</string>
+    <string name="menu_language">Language</string>
     <string name="menu_search">Search</string>
     <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistics</string>
@@ -82,6 +83,12 @@
     <string name="share_with">Share with…</string>
     <string name="share_text">Manage your TES Legends collection, search and create public or private decks to track your matches</string>
 
+    <string name="about_language_english" translatable="false">English</string>
+    <string name="about_language_portuguese" translatable="false">Portuguese</string>
+    <string name="about_language_spanish" translatable="false">Spanish</string>
+    <string name="about_language_german" translatable="false">German</string>
+    <string name="about_language_russian" translatable="false">Russian</string>
+
     <string name="about_title">About TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker is a assistant app for card game The Elder Scroll Legends developed by Dire Wolf Digital and published by Bethesda Softworks.</string>
     <string name="about_text_bottom">Dire Wolf Digital has all rights reserved of all cards images and other game resource in this app.</string>
@@ -99,9 +106,9 @@
     <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
     <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
     <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
-    <string name="about_info_thanks_translation_german">Russian translation - </string>
+    <string name="about_info_thanks_translation_german" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_german_text" translatable="false">Ballaum</string>
-    <string name="about_info_thanks_translation_russian">Russian translation - </string>
+    <string name="about_info_thanks_translation_russian" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_russian_text" translatable="false">WickedTroll</string>
     <string name="about_rate_app">Rate App</string>
 
@@ -169,7 +176,6 @@
     <string name="card_full_permission_write_storage">To save file, Write Storage permission is necessary.</string>
     <string name="card_full_permission_write_storage_denied">Write Storage permission denied.</string>
     <string name="card_full_permission_write_settings_denied">Write Settings permission denied.</string>
-
 
     <string name="action_login">Do Login</string>
     <string name="action_favorited">%1$s favorited</string>

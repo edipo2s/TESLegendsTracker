@@ -1,9 +1,7 @@
 package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
-import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
-import com.ediposouza.teslesgendstracker.ui.base.read
-import com.ediposouza.teslesgendstracker.ui.base.write
+import android.os.Parcelable
 
 /**
  * Created by ediposouza on 25/01/17.
@@ -24,21 +22,26 @@ data class MatchDeck(
         val deck: String? = null,
         val version: String? = null
 
-) : BaseParcelable {
+) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            MatchDeck(it.read(), DeckClass.values()[it.readInt()], DeckType.values()[it.readInt()],
-                    it.read(), it.read())
+        @JvmField val CREATOR: Parcelable.Creator<MatchDeck> = object : Parcelable.Creator<MatchDeck> {
+            override fun createFromParcel(source: Parcel): MatchDeck = MatchDeck(source)
+            override fun newArray(size: Int): Array<MatchDeck?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readString(), DeckClass.values()[source.readInt()],
+            DeckType.values()[source.readInt()], source.readString(), source.readString())
+
+    override fun describeContents() = 0
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(name)
-        dest?.write(cls.ordinal)
-        dest?.write(type.ordinal)
-        dest?.write(deck)
-        dest?.write(version)
+        dest?.writeString(name)
+        dest?.writeInt(cls.ordinal)
+        dest?.writeInt(type.ordinal)
+        dest?.writeString(deck)
+        dest?.writeString(version)
     }
 }
 
@@ -54,24 +57,32 @@ data class Match(
         val legend: Boolean,
         val win: Boolean
 
-) : BaseParcelable {
+) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            Match(it.read(), 1 == it.readInt(), it.read(), it.read(), MatchMode.values()[it.read()],
-                    it.read(), it.read(), 1 == it.readInt(), 1 == it.readInt())
+        @JvmField val CREATOR: Parcelable.Creator<Match> = object : Parcelable.Creator<Match> {
+            override fun createFromParcel(source: Parcel): Match = Match(source)
+            override fun newArray(size: Int): Array<Match?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readString(), 1 == source.readInt(),
+            source.readParcelable<MatchDeck>(MatchDeck::class.java.classLoader),
+            source.readParcelable<MatchDeck>(MatchDeck::class.java.classLoader),
+            MatchMode.values()[source.readInt()], source.readString(), source.readInt(),
+            1 == source.readInt(), 1 == source.readInt())
+
+    override fun describeContents() = 0
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(uuid)
-        dest?.writeInt(if (first) 1 else 0)
-        dest?.write(player)
-        dest?.write(opponent)
-        dest?.write(mode.ordinal)
-        dest?.write(season)
-        dest?.write(rank)
-        dest?.writeInt(if (legend) 1 else 0)
-        dest?.writeInt(if (win) 1 else 0)
+        dest?.writeString(uuid)
+        dest?.writeInt((if (first) 1 else 0))
+        dest?.writeParcelable(player, 0)
+        dest?.writeParcelable(opponent, 0)
+        dest?.writeInt(mode.ordinal)
+        dest?.writeString(season)
+        dest?.writeInt(rank)
+        dest?.writeInt((if (legend) 1 else 0))
+        dest?.writeInt((if (win) 1 else 0))
     }
 }

@@ -21,9 +21,6 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
-import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
-import com.ediposouza.teslesgendstracker.ui.base.read
-import com.ediposouza.teslesgendstracker.ui.base.write
 import com.ediposouza.teslesgendstracker.util.getCurrentVersion
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
@@ -236,21 +233,26 @@ data class CardArenaTierPlus(
         val operator: CardArenaTierPlusOperator?,
         val value: String
 
-) : BaseParcelable {
+) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            CardArenaTierPlus(CardArenaTierPlusType.values()[it.read()], with(it.readInt()) {
-                if (this > -1) CardArenaTierPlusOperator.values()[this] else null
-            }, it.read())
+        @JvmField val CREATOR: Parcelable.Creator<CardArenaTierPlus> = object : Parcelable.Creator<CardArenaTierPlus> {
+            override fun createFromParcel(source: Parcel): CardArenaTierPlus = CardArenaTierPlus(source)
+            override fun newArray(size: Int): Array<CardArenaTierPlus?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(CardArenaTierPlusType.values()[source.readInt()],
+            with(source.readInt()) { if (this > -1) CardArenaTierPlusOperator.values()[this] else null },
+            source.readString())
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(type.ordinal)
-        dest?.write(operator?.ordinal ?: -1)
-        dest?.write(value)
+        dest?.writeInt(type.ordinal)
+        dest?.writeInt(operator?.ordinal ?: -1)
+        dest?.writeString(value)
     }
+
+    override fun describeContents(): Int = 0
 
 }
 
@@ -306,19 +308,24 @@ data class CardMissing(
         val rarity: CardRarity,
         val qtd: Int
 
-) : BaseParcelable {
+) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            CardMissing(it.read(), CardRarity.values()[it.read()], it.read())
+        @JvmField val CREATOR: Parcelable.Creator<CardMissing> = object : Parcelable.Creator<CardMissing> {
+            override fun createFromParcel(source: Parcel): CardMissing = CardMissing(source)
+            override fun newArray(size: Int): Array<CardMissing?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readString(), CardRarity.values()[source.readInt()], source.readInt())
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(shortName)
-        dest?.write(rarity.ordinal)
-        dest?.write(qtd)
+        dest?.writeString(shortName)
+        dest?.writeInt(rarity.ordinal)
+        dest?.writeInt(qtd)
     }
+
+    override fun describeContents(): Int = 0
 
 }
 
@@ -342,19 +349,25 @@ data class CardSlot(
         val card: Card,
         val qtd: Int
 
-) : Comparable<CardSlot>, BaseParcelable {
+) : Comparable<CardSlot>, Parcelable {
 
     companion object {
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            CardSlot(it.read(), it.read())
+        @JvmField val CREATOR: Parcelable.Creator<CardSlot> = object : Parcelable.Creator<CardSlot> {
+            override fun createFromParcel(source: Parcel): CardSlot = CardSlot(source)
+            override fun newArray(size: Int): Array<CardSlot?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readParcelable<Card>(Card::class.java.classLoader),
+            source.readInt())
+
     override fun compareTo(other: CardSlot): Int = card.compareTo(other.card)
 
+    override fun describeContents() = 0
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(card, 0)
-        dest?.write(qtd)
+        dest?.writeParcelable(card, 0)
+        dest?.writeInt(qtd)
     }
 }
 
@@ -402,11 +415,14 @@ data class Card(
         const val SOUND_TYPE_EXTRA = "extra"
 
         fun getDefaultCardImage(context: Context): Bitmap {
+            val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
             try {
-                val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
+                context.resources.assets.open(CARD_BACK)?.let {
+                    return BitmapFactory.decodeStream(it)
+                }
                 return (cardBackDrawable as BitmapDrawable).bitmap
             } catch (e: Exception) {
-                return BitmapFactory.decodeStream(context.resources.assets.open(CARD_BACK))
+                return (cardBackDrawable as BitmapDrawable).bitmap
             }
         }
 
@@ -418,11 +434,12 @@ data class Card(
                 return
             }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
-            Timber.d(imagePath)
+            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${view.context.getCurrentVersion()}/$imagePath"
+            Timber.d("Local: $imagePath - Remote: $remotePath")
             with(view.context) {
                 Glide.with(this)
                         .using(FirebaseImageLoader())
-                        .load(FirebaseStorage.getInstance().reference.child("v${view.context.getCurrentVersion()}/$imagePath"))
+                        .load(FirebaseStorage.getInstance().reference.child(remotePath))
                         .placeholder(BitmapDrawable(resources, getCardImageBitmap(this, imagePath, transform, onLoadDefault)))
                         .bitmapTransform(object : Transformation<Bitmap> {
                             override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
@@ -444,16 +461,20 @@ data class Card(
         fun loadCardImageInto(context: Context, cardSet: String, cardAttr: String, cardShortName: String,
                               onLoaded: ((Boolean) -> Unit)? = null) {
             if (cardShortName.isEmpty()) {
+                onLoaded?.invoke(false)
                 return
             }
             val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
+            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
+            Timber.d("Local: $imagePath - Remote: $remotePath")
             Glide.with(context)
                     .using(FirebaseImageLoader())
-                    .load(FirebaseStorage.getInstance().reference.child("v${context.getCurrentVersion()}/$imagePath"))
+                    .load(FirebaseStorage.getInstance().reference.child(remotePath))
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                        override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                        override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                            Timber.d(e)
                             onLoaded?.invoke(false)
                             return true
                         }
@@ -527,7 +548,6 @@ data class Card(
         val setName = set.name.toLowerCase().capitalize()
         val attrName = attr.name.toLowerCase().capitalize()
         val artPath = "$ARTS_PATH/$setName/$attrName/$shortName.webp"
-        Timber.d(artPath)
         return artPath
     }
 
@@ -543,7 +563,8 @@ data class Card(
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                    override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                    override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                        Timber.d(e)
                         onLoaded(null)
                         return true
                     }

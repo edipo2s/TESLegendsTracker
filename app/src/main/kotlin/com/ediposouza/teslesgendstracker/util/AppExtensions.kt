@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.IntegerRes
@@ -19,21 +20,22 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.PREF_USER_LANGUAGE
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
 import com.mixpanel.android.mpmetrics.MixpanelAPI
-import org.jetbrains.anko.AlertDialogBuilder
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 import org.jsoup.Jsoup
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 /**
  * Created by ediposouza on 01/11/16.
@@ -163,6 +165,25 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
 
 fun LocalDate.toYearMonth(): YearMonth = YearMonth.of(year, month)
 
+fun Activity.changeAppLanguage(language: String) {
+    Timber.d("Changing language to: $language")
+    var locale = if (!language.contains("-")) Locale(language) else
+        Locale(language.substringBefore("-"), language.substringAfter("-"))
+    try {
+        with(locale) {
+            Locale.setDefault(this)
+            resources.updateConfiguration(Configuration().apply {
+                setLocale(this@with)
+            }, null)
+        }
+    } catch (e: Exception) {
+        Timber.e(e)
+    }
+    defaultSharedPreferences.edit().putString(PREF_USER_LANGUAGE, language).apply()
+    App.currentLanguage = language
+    startActivity(intentFor<DashActivity>().clearTask().newTask())
+    finish()
+}
 
 fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
     doAsync {
@@ -175,7 +196,7 @@ fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
                     .select("div[itemprop=softwareVersion]")
                     .first()
                     .ownText()
-            val actualVersion = getCurrentVersion()
+            val actualVersion = getCurrentVersion().replace(".", "")
             val newerVersion = newer.replace(".", "")
             Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
             uiThread {
@@ -191,7 +212,7 @@ fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
 
 fun Context.getCurrentVersion(): String {
     val pInfo = packageManager.getPackageInfo(packageName, 0)
-    return pInfo.versionName.replace(".", "")
+    return pInfo.versionName
 }
 
 fun Context.hasNavigationBar(): Boolean {

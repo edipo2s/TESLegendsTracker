@@ -16,6 +16,7 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.ProgressBar
 import com.ediposouza.teslesgendstracker.App
+import com.ediposouza.teslesgendstracker.PREF_USER_LANGUAGE
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -39,6 +40,7 @@ import kotlinx.android.synthetic.main.include_login_button.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.contentView
+import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import timber.log.Timber
@@ -125,6 +127,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         supportActionBar?.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         contentView?.viewTreeObserver?.addOnGlobalLayoutListener(keyboardChangeListener)
+        with(defaultSharedPreferences.getString(PREF_USER_LANGUAGE, "en")) {
+            if (this != "en" && App.currentLanguage.isEmpty()) {
+                changeAppLanguage(this)
+            }
+        }
     }
 
     override fun onStart() {

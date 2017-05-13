@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.ui
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -17,8 +18,11 @@ import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
@@ -216,6 +220,7 @@ class DashActivity : BaseFilterActivity(),
                 MetricsManager.trackAction(MetricAction.ACTION_SHARE())
                 true
             }
+            R.id.menu_language -> showLanguageDialog()
             R.id.menu_about -> showAboutDialog()
             else -> false
         }
@@ -292,6 +297,38 @@ class DashActivity : BaseFilterActivity(),
         PublicInteractor.getSpoilerName {
             dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it.isNotEmpty()
         }
+    }
+
+    private fun showLanguageDialog(): Boolean {
+        val languages = resources.getStringArray(R.array.languages)
+        AlertDialog.Builder(this, R.style.AppDialog)
+                .setAdapter(object : ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages) {
+                    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                        return (super.getView(position, convertView, parent) as TextView).apply {
+                            setTextColor(ContextCompat.getColor(context, R.color.primary_text_dark))
+                            setCompoundDrawablesWithIntrinsicBounds(when (position) {
+                                0 -> R.drawable.lang_en
+                                1 -> R.drawable.lang_ptbr
+                                2 -> R.drawable.lang_es
+                                3 -> R.drawable.lang_de
+                                4 -> R.drawable.lang_ru
+                                else -> R.drawable.ic_menu_earth
+                            }, 0, 0, 0)
+                            compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.default_margin)
+                        }
+                    }
+                }, DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                    changeAppLanguage(when (which) {
+                        1 -> "pt-br"
+                        2 -> "es"
+                        3 -> "de"
+                        4 -> "ru"
+                        else -> "en"
+                    })
+                })
+                .show()
+        return true
     }
 
     private fun showAboutDialog(): Boolean {

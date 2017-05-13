@@ -24,6 +24,7 @@ class App : MultiDexApplication() {
 
         private var ctx: Context? = null
 
+        var currentLanguage: String = ""
         var hasUserAlreadyLogged: Boolean = false
 
         fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null

@@ -4,9 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
-import com.ediposouza.teslesgendstracker.ui.base.read
-import com.ediposouza.teslesgendstracker.ui.base.write
 import org.threeten.bp.LocalDateTime
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
@@ -94,19 +91,25 @@ data class DeckComment(
         val comment: String,
         val date: LocalDateTime
 
-) : BaseParcelable {
+) : Parcelable {
     companion object {
         @Suppress("unused")
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            DeckComment(it.read(), it.read(), it.read(), it.read())
+        @JvmField val CREATOR: Parcelable.Creator<DeckComment> = object : Parcelable.Creator<DeckComment> {
+            override fun createFromParcel(source: Parcel): DeckComment = DeckComment(source)
+            override fun newArray(size: Int): Array<DeckComment?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),
+            source.readSerializable() as LocalDateTime)
+
+    override fun describeContents() = 0
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(uuid)
-        dest?.write(owner)
-        dest?.write(comment)
-        dest?.write(date)
+        dest?.writeString(uuid)
+        dest?.writeString(owner)
+        dest?.writeString(comment)
+        dest?.writeSerializable(date)
     }
 
     override fun toString(): String = "DeckComment(id='$uuid', owner='$owner', comment='$comment', date=$date)"
