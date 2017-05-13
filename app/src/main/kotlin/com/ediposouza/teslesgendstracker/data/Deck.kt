@@ -4,6 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.IntegerRes
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
+import com.ediposouza.teslesgendstracker.ui.base.read
+import com.ediposouza.teslesgendstracker.ui.base.write
 import org.threeten.bp.LocalDateTime
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
@@ -64,23 +67,17 @@ data class DeckUpdate(
         val date: LocalDateTime,
         val changes: Map<String, Int>
 
-) : Parcelable {
+) : BaseParcelable {
     companion object {
         @Suppress("unused")
-        @JvmField val CREATOR: Parcelable.Creator<DeckUpdate> = object : Parcelable.Creator<DeckUpdate> {
-            override fun createFromParcel(source: Parcel): DeckUpdate = DeckUpdate(source)
-            override fun newArray(size: Int): Array<DeckUpdate?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            DeckUpdate(it.read(), hashMapOf<String, Int>().apply { it.readMap(this, Int::class.java.classLoader) })
         }
     }
 
-    constructor(source: Parcel) : this(source.readSerializable() as LocalDateTime,
-            hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) })
-
-    override fun describeContents() = 0
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeSerializable(date)
-        dest?.writeMap(changes)
+        dest?.write(date)
+        dest?.write(changes)
     }
 }
 
@@ -91,25 +88,19 @@ data class DeckComment(
         val comment: String,
         val date: LocalDateTime
 
-) : Parcelable {
+) : BaseParcelable {
     companion object {
         @Suppress("unused")
-        @JvmField val CREATOR: Parcelable.Creator<DeckComment> = object : Parcelable.Creator<DeckComment> {
-            override fun createFromParcel(source: Parcel): DeckComment = DeckComment(source)
-            override fun newArray(size: Int): Array<DeckComment?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            DeckComment(it.read(), it.read(), it.read(), it.read())
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(),
-            source.readSerializable() as LocalDateTime)
-
-    override fun describeContents() = 0
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(uuid)
-        dest?.writeString(owner)
-        dest?.writeString(comment)
-        dest?.writeSerializable(date)
+        dest?.write(uuid)
+        dest?.write(owner)
+        dest?.write(comment)
+        dest?.write(date)
     }
 
     override fun toString(): String = "DeckComment(id='$uuid', owner='$owner', comment='$comment', date=$date)"

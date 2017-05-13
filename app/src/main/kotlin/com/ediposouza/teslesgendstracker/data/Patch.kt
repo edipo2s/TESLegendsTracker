@@ -3,6 +3,9 @@ package com.ediposouza.teslesgendstracker.data
 import android.os.Parcel
 import android.os.Parcelable
 import android.widget.ImageView
+import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
+import com.ediposouza.teslesgendstracker.ui.base.read
+import com.ediposouza.teslesgendstracker.ui.base.write
 import org.threeten.bp.LocalDate
 
 /**
@@ -33,25 +36,20 @@ class PatchChange(
         val shortName: String,
         val change: String
 
-) : Parcelable {
+) : BaseParcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<PatchChange> = object : Parcelable.Creator<PatchChange> {
-            override fun createFromParcel(source: Parcel): PatchChange = PatchChange(source)
-            override fun newArray(size: Int): Array<PatchChange?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            PatchChange(it.read(), it.read(), it.read(), it.read())
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(), source.readString())
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(attr)
-        dest?.writeString(set)
-        dest?.writeString(shortName)
-        dest?.writeString(change)
+        dest?.write(attr)
+        dest?.write(set)
+        dest?.write(shortName)
+        dest?.write(change)
     }
-
-    override fun describeContents(): Int = 0
 
     fun newImageBitmap(view: ImageView, nextPatchUuid: String) {
         val cardName = shortName + "_" + nextPatchUuid

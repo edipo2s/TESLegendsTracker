@@ -21,6 +21,9 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
+import com.ediposouza.teslesgendstracker.ui.base.BaseParcelable
+import com.ediposouza.teslesgendstracker.ui.base.read
+import com.ediposouza.teslesgendstracker.ui.base.write
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -232,26 +235,21 @@ data class CardArenaTierPlus(
         val operator: CardArenaTierPlusOperator?,
         val value: String
 
-) : Parcelable {
+) : BaseParcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<CardArenaTierPlus> = object : Parcelable.Creator<CardArenaTierPlus> {
-            override fun createFromParcel(source: Parcel): CardArenaTierPlus = CardArenaTierPlus(source)
-            override fun newArray(size: Int): Array<CardArenaTierPlus?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            CardArenaTierPlus(CardArenaTierPlusType.values()[it.read()], with(it.readInt()) {
+                if (this > -1) CardArenaTierPlusOperator.values()[this] else null
+            }, it.read())
         }
     }
 
-    constructor(source: Parcel) : this(CardArenaTierPlusType.values()[source.readInt()],
-            with(source.readInt()) { if (this > -1) CardArenaTierPlusOperator.values()[this] else null },
-            source.readString())
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeInt(type.ordinal)
-        dest?.writeInt(operator?.ordinal ?: -1)
-        dest?.writeString(value)
+        dest?.write(type.ordinal)
+        dest?.write(operator?.ordinal ?: -1)
+        dest?.write(value)
     }
-
-    override fun describeContents(): Int = 0
 
 }
 
@@ -307,24 +305,19 @@ data class CardMissing(
         val rarity: CardRarity,
         val qtd: Int
 
-) : Parcelable {
+) : BaseParcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<CardMissing> = object : Parcelable.Creator<CardMissing> {
-            override fun createFromParcel(source: Parcel): CardMissing = CardMissing(source)
-            override fun newArray(size: Int): Array<CardMissing?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            CardMissing(it.read(), CardRarity.values()[it.read()], it.read())
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), CardRarity.values()[source.readInt()], source.readInt())
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(shortName)
-        dest?.writeInt(rarity.ordinal)
-        dest?.writeInt(qtd)
+        dest?.write(shortName)
+        dest?.write(rarity.ordinal)
+        dest?.write(qtd)
     }
-
-    override fun describeContents(): Int = 0
 
 }
 
@@ -348,25 +341,19 @@ data class CardSlot(
         val card: Card,
         val qtd: Int
 
-) : Comparable<CardSlot>, Parcelable {
+) : Comparable<CardSlot>, BaseParcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<CardSlot> = object : Parcelable.Creator<CardSlot> {
-            override fun createFromParcel(source: Parcel): CardSlot = CardSlot(source)
-            override fun newArray(size: Int): Array<CardSlot?> = arrayOfNulls(size)
+        @JvmField val CREATOR = BaseParcelable.generateCreator {
+            CardSlot(it.read(), it.read())
         }
     }
 
-    constructor(source: Parcel) : this(source.readParcelable<Card>(Card::class.java.classLoader),
-            source.readInt())
-
     override fun compareTo(other: CardSlot): Int = card.compareTo(other.card)
 
-    override fun describeContents() = 0
-
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeParcelable(card, 0)
-        dest?.writeInt(qtd)
+        dest?.write(card, 0)
+        dest?.write(qtd)
     }
 }
 

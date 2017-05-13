@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
+import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -97,6 +98,9 @@ class SeasonsFragment : BaseFragment() {
                 setDuration(300)
                 setFirstOnly(false)
             }
+            addOnScrollListener(OnLinearLayoutItemScrolled(seasonsAdapter.getContentCount() - 3) {
+                view?.post { seasonsAdapter.more() }
+            })
             setHasFixedSize(true)
         }
     }
