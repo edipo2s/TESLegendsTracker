@@ -67,17 +67,23 @@ data class DeckUpdate(
         val date: LocalDateTime,
         val changes: Map<String, Int>
 
-) : BaseParcelable {
+) : Parcelable {
     companion object {
         @Suppress("unused")
-        @JvmField val CREATOR = BaseParcelable.generateCreator {
-            DeckUpdate(it.read(), hashMapOf<String, Int>().apply { it.readMap(this, Int::class.java.classLoader) })
+        @JvmField val CREATOR: Parcelable.Creator<DeckUpdate> = object : Parcelable.Creator<DeckUpdate> {
+            override fun createFromParcel(source: Parcel): DeckUpdate = DeckUpdate(source)
+            override fun newArray(size: Int): Array<DeckUpdate?> = arrayOfNulls(size)
         }
     }
 
+    constructor(source: Parcel) : this(source.readSerializable() as LocalDateTime,
+            hashMapOf<String, Int>().apply { source.readMap(this, Int::class.java.classLoader) })
+
+    override fun describeContents() = 0
+
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.write(date)
-        dest?.write(changes)
+        dest?.writeSerializable(date)
+        dest?.writeMap(changes)
     }
 }
 

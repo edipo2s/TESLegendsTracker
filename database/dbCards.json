@@ -483,7 +483,8 @@
         "text": "Destroy an enemy creature if you have a creature with higher power.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "attack": ">_4"
+          "attack": ">_4",
+          "type": "creature"
         }
       },
       "valenwoodhuntsman": {
@@ -1808,7 +1809,8 @@
         "text": "When you summon a creature that costs 2 or less, summon a copy of that creature in the other lane.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "cost": "<_3"
+          "cost": "<_3",
+          "type": "creature"
         }
       },
       "indorilarchmage": {
@@ -3666,6 +3668,18 @@
         "keyword": "Breakthrough, Charge, Last Gasp",
         "text": "Breakthrough, Charge. Last Gasp: Summon a 4/4 Durzog.",
         "arenaTier": "Excellent"
+      },
+      "chaurusbreedingpit": {
+        "name": "Chaurus Breeding Pit",
+        "cost": "10",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "Summon a Chaurus Reaper in each lane",
+        "arenaTier": "Unknown"
       },
       "nestofvipers": {
         "name": "Nest of Vipers",

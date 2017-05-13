@@ -41,6 +41,11 @@
   },
   "2017_04": {
     "reward": {
+      "agility": "chaurusbreedingpit"
+    }
+  },
+  "2017_05": {
+    "reward": {
       "unknown": true
     }
   }

@@ -82,6 +82,7 @@ class CardActivity : BaseActivity() {
     }
 
     private val ringtoneDir by lazy { Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) }
+    private val currentVersion by lazy { getCurrentVersion() }
     private val playAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_play.mp3") }
     private val attackAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_attack.mp3") }
     private val extraAsRingtoneFile by lazy { File(ringtoneDir, "${card.name}_extra.mp3") }
@@ -373,7 +374,7 @@ class CardActivity : BaseActivity() {
                         MetricsManager.trackAction(MetricAction.ACTION_CARD_START_SOUND_PLAY(card))
                     }
                 }
-                child(playSoundPath).downloadUrl.addOnSuccessListener { result ->
+                child("v$currentVersion/$playSoundPath").downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
                     ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_play).isVisible = true
                     setOnClickListener {
@@ -392,7 +393,7 @@ class CardActivity : BaseActivity() {
                         playSound(afd = getAssets().openFd(attackSoundPath))
                     }
                 }
-                child(attackSoundPath).downloadUrl.addOnSuccessListener { result ->
+                child("v$currentVersion/$attackSoundPath").downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
                     ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_attack).isVisible = true
                     setOnClickListener {
@@ -411,7 +412,7 @@ class CardActivity : BaseActivity() {
                         playSound(afd = getAssets().openFd(extraSoundPath))
                     }
                 }
-                child(extraSoundPath).downloadUrl.addOnSuccessListener { result ->
+                child("v$currentVersion/$extraSoundPath").downloadUrl.addOnSuccessListener { result ->
                     showSoundButton(this)
                     ringtonePopupMenu.menu.findItem(R.id.menu_ringtone_extra).isVisible = true
                     setOnClickListener {
@@ -439,21 +440,21 @@ class CardActivity : BaseActivity() {
             if (card.hasLocalPlaySound(resources)) {
                 playSoundBytes = assets.open(playSoundPath).readBytes()
             }
-            child(playSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+            child("v$currentVersion/$playSoundPath").getBytes(1024 * 1024).addOnSuccessListener { bytes ->
                 playSoundBytes = bytes
             }
             val attackSoundPath = card.attackSoundPath()
             if (card.hasLocalAttackSound(resources)) {
                 attackSoundBytes = assets.open(attackSoundPath).readBytes()
             }
-            child(attackSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+            child("v$currentVersion/$attackSoundPath").getBytes(1024 * 1024).addOnSuccessListener { bytes ->
                 attackSoundBytes = bytes
             }
             val extraSoundPath = card.extraSoundPath()
             if (card.hasLocalExtraSound(resources)) {
                 extraSoundBytes = assets.open(extraSoundPath).readBytes()
             }
-            child(extraSoundPath).getBytes(1024 * 1024).addOnSuccessListener { bytes ->
+            child("v$currentVersion/$extraSoundPath").getBytes(1024 * 1024).addOnSuccessListener { bytes ->
                 extraSoundBytes = bytes
             }
         }

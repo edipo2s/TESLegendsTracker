@@ -175,9 +175,8 @@ fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
                     .select("div[itemprop=softwareVersion]")
                     .first()
                     .ownText()
-            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            val actualVersion = getCurrentVersion()
             val newerVersion = newer.replace(".", "")
-            val actualVersion = pInfo.versionName.replace(".", "")
             Timber.d("Versions - remote: %s, local: %s", newerVersion, actualVersion)
             uiThread {
                 if (Integer.parseInt(newerVersion) > Integer.parseInt(actualVersion)) {
@@ -188,6 +187,11 @@ fun Context.checkLastVersion(onNewVersion: (String?) -> Unit) {
             Timber.e(e.message)
         }
     }
+}
+
+fun Context.getCurrentVersion(): String {
+    val pInfo = packageManager.getPackageInfo(packageName, 0)
+    return pInfo.versionName.replace(".", "")
 }
 
 fun Context.hasNavigationBar(): Boolean {
