@@ -21,13 +21,38 @@ object PublicInteractor : BaseInteractor() {
 
     fun getCard(set: CardSet, attribute: CardAttribute, shortname: String, onSuccess: (Card) -> Unit) {
         val attr = attribute.name.toLowerCase()
-        database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+        with(database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val card = ds.getValue(FirebaseParsers.CardParser::class.java)
+                            ?.toCard(shortname, set, attribute)
+                    onSuccess.invoke(card ?: Card.DUMMY)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
+
+            })
+        }
+    }
+
+    fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
+        getListFromSets(set, onSuccess) { set, onEachSuccess ->
+            with(database.child(NODE_CARDS).child(set.db).orderByChild(KEY_CARD_COST)) {
+                keepSynced()
+                addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
-                        val card = ds.getValue(FirebaseParsers.CardParser::class.java)
-                                ?.toCard(shortname, set, attribute)
-                        onSuccess.invoke(card ?: Card.DUMMY)
+                        val cards = ds.children.map {
+                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                            it.children.map {
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                            }
+                        }.flatMap { it }
+                        onEachSuccess.invoke(cards)
                     }
 
                     override fun onCancelled(de: DatabaseError) {
@@ -35,28 +60,7 @@ object PublicInteractor : BaseInteractor() {
                     }
 
                 })
-    }
-
-    fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
-        getListFromSets(set, onSuccess) { set, onEachSuccess ->
-            database.child(NODE_CARDS).child(set.db).orderByChild(KEY_CARD_COST)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                        override fun onDataChange(ds: DataSnapshot) {
-                            val cards = ds.children.map {
-                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
-                                it.children.map {
-                                    it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
-                                }
-                            }.flatMap { it }
-                            onEachSuccess.invoke(cards)
-                        }
-
-                        override fun onCancelled(de: DatabaseError) {
-                            Timber.d("Fail: " + de.message)
-                        }
-
-                    })
+            }
         }
     }
 

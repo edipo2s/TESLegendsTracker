@@ -240,10 +240,12 @@ class DashActivity : BaseFilterActivity(),
                 getString(R.string.app_deeplink_path_card) -> {
                     PublicInteractor.getCards(null) {
                         val ctx = this@DashActivity
-                        val card = it.filter { it.shortName == this[1] }.first()
-                        val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
-                                getString(R.string.card_transition_name))
-                        ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                        val card = it.filter { it.shortName == this[1] }.firstOrNull()
+                        card?.let {
+                            val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                    getString(R.string.card_transition_name))
+                            ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                        }
                     }
                 }
                 getString(R.string.app_deeplink_path_spoiler) -> {
