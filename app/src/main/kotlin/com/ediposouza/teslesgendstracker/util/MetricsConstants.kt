@@ -232,6 +232,11 @@ sealed class MetricAction(val name: String) {
         val PARAM_PATH = "path"
         val PARAM_PATH_PARAMS = "pathParams"
     }
+
+    class ACTION_DECK_CHANGE_LANGUAGE(val language: String) : MetricAction("DeckChangeLanguage") {
+        val PARAM_LANGUAGE = "Language"
+    }
+
 }
 
 sealed class MetricScreen(val name: String) {

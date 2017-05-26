@@ -321,13 +321,15 @@ class DashActivity : BaseFilterActivity(),
                     }
                 }, DialogInterface.OnClickListener { dialog, which ->
                     dialog.dismiss()
-                    changeAppLanguage(when (which) {
+                    val language = when (which) {
                         1 -> "pt-br"
                         2 -> "es"
                         3 -> "de"
                         4 -> "ru"
                         else -> "en"
-                    })
+                    }
+                    MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_LANGUAGE(language))
+                    changeAppLanguage(language)
                 })
                 .show()
         return true

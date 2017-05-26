@@ -156,6 +156,8 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_PATH_PARAMS, action.params)
                 }
                 is MetricAction.ACTION_SHARE -> answers?.logShare(ShareEvent())
+                is MetricAction.ACTION_DECK_CHANGE_LANGUAGE ->
+                    putBoolean(action.PARAM_LANGUAGE, action.language)
             }
         }
         answers?.logCustom(CustomEvent(action.name))
