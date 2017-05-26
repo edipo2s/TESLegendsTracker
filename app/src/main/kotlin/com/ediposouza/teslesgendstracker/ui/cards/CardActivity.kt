@@ -286,7 +286,7 @@ class CardActivity : BaseActivity() {
         if (card.season.isNotEmpty()) {
             val yearMonth = YearMonth.parse(card.season, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
             val month = yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
-            card_reward.text = "$month/${yearMonth.year} ${getString(R.string.season_reward)}"
+            card_reward.text = "$month/${yearMonth.year}"
             card_reward_label.visibility = View.VISIBLE
         }
         card_race.text = card.race.name.toLowerCase().capitalize().replace("_", " ")

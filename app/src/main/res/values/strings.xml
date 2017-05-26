@@ -106,7 +106,7 @@
     <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
     <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
     <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
-    <string name="about_info_thanks_translation_german" translatable="false">Russian translation - </string>
+    <string name="about_info_thanks_translation_german" translatable="false">German translation - </string>
     <string name="about_info_thanks_translation_german_text" translatable="false">Ballaum</string>
     <string name="about_info_thanks_translation_russian" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_russian_text" translatable="false">WickedTroll</string>
