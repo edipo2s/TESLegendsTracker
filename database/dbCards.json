@@ -100,7 +100,7 @@
         "health": "1",
         "rarity": "Legendary",
         "keyword": "",
-        "text": "When an enemy rune is destroyed, deal 1 damage to your opponent.",
+        "text": "After an enemy rune is destroyed, deal 1 damage to your opponent.",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
@@ -3679,7 +3679,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Summon a Chaurus Reaper in each lane",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "season": "2017_04"
       },
       "nestofvipers": {
         "name": "Nest of Vipers",
@@ -4643,6 +4644,24 @@
         "arenaTierPlus": {
           "keyword": "Pilfer"
         }
+      },
+      "protectorofthemane": {
+        "name": "Protector of the Mane",
+        "cost": "05",
+        "type": "Creature",
+        "race": "Khajiit",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Epic",
+        "keyword": "Drain, Guard",
+        "text": "When you gain health, Protector of the Mane gains +1/+1",
+        "attr1": "willpower",
+        "attr2": "agility",
+        "arenaTier": "Unknown",
+        "arenaTierPlus": {
+          "keyword": "Drain"
+        },
+        "season": "2017_05"
       },
       "queenbarenziah": {
         "name": "Queen Barenziah",
@@ -5930,7 +5949,7 @@
         "arenaTier": "Excellent"
       },
       "garnagdarkadherent": {
-        "name": "Granag, Dark Adherent",
+        "name": "Garnag, Dark Adherent",
         "cost": "4",
         "type": "Creature",
         "race": "Orc",

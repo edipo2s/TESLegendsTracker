@@ -374,5 +374,20 @@
         "change": "Text"
       }
     }
+  },
+  "2017_05_25": {
+    "changes": {
+      "relentlessraider": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      }
+    },
+    "desc": "Relentless Raider Nerf",
+    "type": "balance"
+  },
+  "2017_05_26": {
+    "desc": "Protector of the Mane",
+    "type": "reward"
   }
 }
