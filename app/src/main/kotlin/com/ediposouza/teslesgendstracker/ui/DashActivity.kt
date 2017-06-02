@@ -250,7 +250,7 @@ class DashActivity : BaseFilterActivity(),
                 }
                 getString(R.string.app_deeplink_path_spoiler) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
-                    PublicInteractor.getSpoilerCards() {
+                    PublicInteractor.getSpoilerCards {
                         val ctx = this@DashActivity
                         val card = it.filter { it.shortName == this[1] }.firstOrNull()
                         if (card != null) {
@@ -296,8 +296,8 @@ class DashActivity : BaseFilterActivity(),
                 profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
-        PublicInteractor.getSpoilerName {
-            dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it.isNotEmpty()
+        PublicInteractor.isSpoilerEnable {
+            dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it
         }
     }
 

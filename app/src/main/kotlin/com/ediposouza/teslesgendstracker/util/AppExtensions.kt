@@ -199,6 +199,7 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
 private fun ImageView.loadLocalCardImage(imagePath: String, transform: ((Bitmap) -> Bitmap)?) {
     Glide.with(context)
             .load("file:///android_asset/$imagePath")
+            .crossFade()
             .bitmapTransform(object : Transformation<Bitmap> {
                 override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
                     return transform?.let {
@@ -215,10 +216,10 @@ private fun ImageView.loadLocalCardImage(imagePath: String, transform: ((Bitmap)
 
 private fun ImageView.loadRemoteCardImage(remotePath: String, transform: ((Bitmap) -> Bitmap)?, imagePath: String, onNotFound: (() -> Unit)?) {
     FirebaseStorage.getInstance().reference.child(remotePath).metadata.addOnSuccessListener { metadata ->
-        if (context != null) {
+        try {
             Glide.with(context)
                     .load(metadata.downloadUrl)
-                    .placeholder(R.drawable.card_back)
+                    .crossFade()
                     .bitmapTransform(object : Transformation<Bitmap> {
                         override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
                             return transform?.let {
@@ -231,6 +232,8 @@ private fun ImageView.loadRemoteCardImage(remotePath: String, transform: ((Bitma
                     })
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(this)
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }.addOnFailureListener {
         onNotFound?.invoke()

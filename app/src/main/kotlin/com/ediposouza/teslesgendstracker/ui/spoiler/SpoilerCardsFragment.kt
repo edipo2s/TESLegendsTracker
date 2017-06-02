@@ -15,7 +15,7 @@ class SpoilerCardsFragment : CardsAllFragment() {
     override fun configRecycleView() {
         super.configRecycleView()
         isFragmentSelected = true
-        PublicInteractor.getSpoilerName {
+        PublicInteractor.getSpoilerTitle {
             eventBus.post(CmdUpdateTitle(title = it))
         }
     }
