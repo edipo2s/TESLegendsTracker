@@ -19,6 +19,7 @@ import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.loadFromCard
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
@@ -339,7 +340,7 @@ open class CardsAllFragment : BaseFragment() {
             with(itemView) {
                 setOnClickListener { itemClick(card_all_image, card) }
                 setOnLongClickListener { itemLongClick(card_all_image, card) }
-                card.loadCardImageInto(card_all_image)
+                card_all_image.loadFromCard(card)
             }
         }
 

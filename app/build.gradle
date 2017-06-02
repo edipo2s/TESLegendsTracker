@@ -111,9 +111,8 @@ dependencies {
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"
+    compile "com.google.firebase:firebase-storage:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
-    compile "com.google.firebase:firebase-storage:10.2.1"
-    compile("com.firebaseui:firebase-ui-storage:1.2.0")
 
     //Fabric
     compile('com.crashlytics.sdk.android:answers:1.3.13') {

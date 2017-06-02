@@ -379,7 +379,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
                 setOnLongClickListener {
                     itemLongClick(itemView.card_collection_image, cardSlot.card)
                 }
-                cardSlot.card.loadCardImageInto(card_collection_image)
+                card_collection_image.loadFromCard(cardSlot.card)
                 if (cardSlot.qtd == 0) {
                     val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
                     card_collection_image.setColorFilter(color)

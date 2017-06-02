@@ -4,17 +4,12 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.Resource
-import com.bumptech.glide.load.resource.bitmap.BitmapResource
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
@@ -22,9 +17,7 @@ import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import com.ediposouza.teslesgendstracker.util.getCurrentVersion
-import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import timber.log.Timber
 
 /**
@@ -406,109 +399,12 @@ data class Card(
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
                 listOf(), false, "")
 
-        private const val ARTS_PATH = "Arts"
-        private const val CARD_PATH = "Cards"
-        private const val SOUNDS_PATH = "Sounds"
-        private const val CARD_BACK = "card_back.webp"
+        const val ARTS_PATH = "Arts"
+        const val CARD_PATH = "Cards"
+        const val SOUNDS_PATH = "Sounds"
         const val SOUND_TYPE_ATTACK = "attack"
         const val SOUND_TYPE_PLAY = "enter_play"
         const val SOUND_TYPE_EXTRA = "extra"
-
-        fun getDefaultCardImage(context: Context): Bitmap {
-            val cardBackDrawable = ContextCompat.getDrawable(context, R.drawable.card_back)
-            try {
-                context.resources.assets.open(CARD_BACK)?.let {
-                    return BitmapFactory.decodeStream(it)
-                }
-                return (cardBackDrawable as BitmapDrawable).bitmap
-            } catch (e: Exception) {
-                return (cardBackDrawable as BitmapDrawable).bitmap
-            }
-        }
-
-        fun loadCardImageInto(view: ImageView, cardSet: String, cardAttr: String,
-                              cardShortName: String, transform: ((Bitmap) -> Bitmap)? = null,
-                              onLoadDefault: (() -> Unit)? = null) {
-            if (cardShortName.isEmpty()) {
-                view.setImageBitmap(getDefaultCardImage(view.context))
-                return
-            }
-            val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
-            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${view.context.getCurrentVersion()}/$imagePath"
-            Timber.d("Local: $imagePath - Remote: $remotePath")
-            with(view.context) {
-                Glide.with(this)
-                        .using(FirebaseImageLoader())
-                        .load(FirebaseStorage.getInstance().reference.child(remotePath))
-                        .placeholder(BitmapDrawable(resources, getCardImageBitmap(this, imagePath, transform, onLoadDefault)))
-                        .bitmapTransform(object : Transformation<Bitmap> {
-                            override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
-                                if (transform == null) {
-                                    return resource
-                                }
-                                val newBitmap = transform.invoke(resource.get())
-                                return BitmapResource.obtain(newBitmap, Glide.get(this@with).getBitmapPool())
-                            }
-
-                            override fun getId(): String = imagePath
-
-                        })
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                        .into(view)
-            }
-        }
-
-        fun loadCardImageInto(context: Context, cardSet: String, cardAttr: String, cardShortName: String,
-                              onLoaded: ((Boolean) -> Unit)? = null) {
-            if (cardShortName.isEmpty()) {
-                onLoaded?.invoke(false)
-                return
-            }
-            val imagePath = getImagePath(cardAttr, cardSet, cardShortName)
-            val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
-            Timber.d("Local: $imagePath - Remote: $remotePath")
-            Glide.with(context)
-                    .using(FirebaseImageLoader())
-                    .load(FirebaseStorage.getInstance().reference.child(remotePath))
-                    .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                        override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
-                            Timber.d(e)
-                            onLoaded?.invoke(false)
-                            return true
-                        }
-
-                        override fun onResourceReady(resource: Bitmap?, model: StorageReference?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                            return true
-                        }
-                    })
-                    .into(object : SimpleTarget<Bitmap>() {
-                        override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                            onLoaded?.invoke(true)
-                        }
-                    })
-        }
-
-        private fun getImagePath(cardAttr: String, cardSet: String, cardShortName: String): String {
-            val setName = cardSet.toLowerCase().capitalize()
-            val attrName = cardAttr.toLowerCase().capitalize()
-            val imagePath = "$CARD_PATH/$setName/$attrName/$cardShortName.webp"
-            Timber.d(imagePath)
-            return imagePath
-        }
-
-        private fun getCardImageBitmap(context: Context, imagePath: String, transform: ((Bitmap) -> Bitmap)? = null,
-                                       onLoadDefault: (() -> Unit)? = null): Bitmap {
-            var localBmp: Bitmap
-            try {
-                localBmp = BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
-            } catch (e: Exception) {
-                localBmp = getDefaultCardImage(context)
-                onLoadDefault?.invoke()
-            }
-            return localBmp.takeUnless { transform != null } ?: transform!!.invoke(localBmp)
-        }
 
     }
 
@@ -525,25 +421,6 @@ data class Card(
 
     override fun describeContents() = 0
 
-    fun loadCardImageInto(view: ImageView, transform: ((Bitmap) -> Bitmap)? = null) {
-        if (name.isEmpty() || shortName.isEmpty()) {
-            view.setImageBitmap(getDefaultCardImage(view.context))
-        } else {
-            Card.loadCardImageInto(view, set.toString(), attr.name, shortName, transform)
-        }
-    }
-
-    fun patchVersion(context: Context, patchUuid: String, onGetCard: (Card) -> Unit) {
-        var patchShortName = "${shortName}_$patchUuid"
-        loadCardImageInto(context, set.toString(), attr.name, patchShortName) { patchImageFound ->
-            if (!patchImageFound) {
-                patchShortName = shortName
-            }
-            onGetCard(Card(name, patchShortName, set, attr, dualAttr1, dualAttr2, rarity, unique, cost,
-                    attack, health, type, race, keywords, text, arenaTier, arenaTierPlus, evolves, season))
-        }
-    }
-
     fun fullArtPath(): String {
         val setName = set.name.toLowerCase().capitalize()
         val attrName = attr.name.toLowerCase().capitalize()
@@ -557,32 +434,35 @@ data class Card(
         } catch (e: Exception) {
             onLoaded(null)
         }
-        Glide.with(context)
-                .using(FirebaseImageLoader())
-                .load(FirebaseStorage.getInstance().reference.child("v${context.getCurrentVersion()}/${fullArtPath()}"))
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .listener(object : RequestListener<StorageReference?, Bitmap?> {
-                    override fun onException(e: Exception?, model: StorageReference?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
-                        Timber.d(e)
-                        onLoaded(null)
-                        return true
-                    }
+        val path = "v${context.getCurrentVersion()}/${fullArtPath()}"
+        FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
+            Glide.with(context)
+                    .load(uri)
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .listener(object : RequestListener<Uri?, Bitmap?> {
+                        override fun onException(e: Exception?, model: Uri?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                            Timber.d(e)
+                            onLoaded(null)
+                            return true
+                        }
 
-                    override fun onResourceReady(resource: Bitmap?, model: StorageReference?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                        if (resource != null) {
-                            onLoaded(resource)
+                        override fun onResourceReady(resource: Bitmap?, model: Uri?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                            if (resource != null) {
+                                onLoaded(resource)
+                            }
+                            return true
                         }
-                        return true
-                    }
-                })
-                .into(object : SimpleTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                        if (resource != null) {
-                            onLoaded(resource)
+                    })
+                    .into(object : SimpleTarget<Bitmap>() {
+                        override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                            if (resource != null) {
+                                onLoaded(resource)
+                            }
                         }
-                    }
-                })
+
+                    })
+        }
     }
 
     fun hasLocalAttackSound(resources: Resources): Boolean {

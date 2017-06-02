@@ -21,6 +21,7 @@ import com.ediposouza.teslesgendstracker.ui.decks.CmdUpdateCardSlot
 import com.ediposouza.teslesgendstracker.ui.decks.DeckListCardsFragment
 import com.ediposouza.teslesgendstracker.util.alertThemed
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.loadFromCard
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.itemlist_decklist_slot.view.*
 import kotlinx.android.synthetic.main.widget_decklist.view.*
@@ -300,7 +301,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             with(itemView) {
                 setOnClickListener { itemClick.invoke(itemView.deckslot_card_image, slot.card) }
                 setOnLongClickListener { itemLongClick.invoke(itemView.deckslot_card_image, slot.card) }
-                slot.card.loadCardImageInto(itemView.deckslot_card_image, { cardBitmap ->
+                itemView.deckslot_card_image.loadFromCard(slot.card, { cardBitmap ->
                     with(itemView.resources) {
                         val bmpWidth = cardBitmap.width
                         val bmpHeight = cardBitmap.height

@@ -2,7 +2,6 @@ package com.ediposouza.teslesgendstracker.ui.base
 
 import android.R
 import android.support.annotation.IntDef
-import android.support.annotation.IntegerRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
@@ -18,7 +17,7 @@ class CmdLoginSuccess
 
 class CmdUpdateDeckAndShowDeck
 
-data class CmdUpdateTitle(@IntegerRes val titleRes: Int = 0, val title: String = "")
+data class CmdUpdateTitle(@StringRes val titleRes: Int = 0, val title: String = "")
 
 data class CmdShowCardsByAttr(val attr: CardAttribute)
 

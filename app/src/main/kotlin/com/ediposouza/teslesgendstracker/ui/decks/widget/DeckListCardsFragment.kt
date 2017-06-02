@@ -11,6 +11,7 @@ import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.loadFromCard
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card_deck_list.view.*
 
@@ -78,7 +79,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
         fun bind(cardSlot: CardSlot, missingQtd: Int) {
             with(itemView) {
                 card_decklist_image.apply {
-                    cardSlot.card.loadCardImageInto(this)
+                    loadFromCard(cardSlot.card)
                     layoutParams = layoutParams.apply { height = context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
                 }
                 setOnClickListener { itemLongClick(this, cardSlot.card) }
