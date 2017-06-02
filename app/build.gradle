@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-crash'
+apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
@@ -67,11 +68,18 @@ android {
 
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 ext {
     anko_version = "0.9.1"
+    coroutines_version = "0.15"
     okIOVersion = "1.12.+"
     okHttpVersion = "3.7.+"
-    playServicesVersion = "10.2.4"
+    playServicesVersion = "10.2.6"
     supportLibraryVersion = "25.3.1"
     threetenabpVersion = "1.0.+"
 
@@ -92,6 +100,8 @@ dependencies {
     compile(name: 'clansFAB', ext: 'aar')
     compile(name: 'googleinapputil', ext: 'aar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
 
     //Support
@@ -111,6 +121,7 @@ dependencies {
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"
+    compile "com.google.firebase:firebase-perf:$playServicesVersion"
     compile "com.google.firebase:firebase-storage:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
 
