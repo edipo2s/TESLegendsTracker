@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.annotation.IntegerRes
+import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -78,7 +78,7 @@ fun String.toIntSafely(): Int {
     return Integer.parseInt(this)
 }
 
-fun ViewGroup.inflate(@IntegerRes resource: Int): View {
+fun ViewGroup.inflate(@LayoutRes resource: Int): View {
     return LayoutInflater.from(context).inflate(resource, this, false)
 }
 

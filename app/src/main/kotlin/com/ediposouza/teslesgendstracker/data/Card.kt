@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.IntegerRes
+import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -57,7 +57,7 @@ enum class CardSet(val title: String) {
 
 }
 
-enum class CardAttribute(@IntegerRes val imageRes: Int, val isBasic: Boolean = true) {
+enum class CardAttribute(@DrawableRes val imageRes: Int, val isBasic: Boolean = true) {
 
     STRENGTH(R.drawable.attr_strength),
     INTELLIGENCE(R.drawable.attr_intelligence),
@@ -69,7 +69,7 @@ enum class CardAttribute(@IntegerRes val imageRes: Int, val isBasic: Boolean = t
 
 }
 
-enum class CardRarity(val soulCost: Int, @IntegerRes val imageRes: Int) {
+enum class CardRarity(val soulCost: Int, @DrawableRes val imageRes: Int) {
 
     COMMON(50, R.drawable.ic_rarity_common),
     RARE(100, R.drawable.ic_rarity_rare),
