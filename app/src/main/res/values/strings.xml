@@ -34,6 +34,8 @@
     <string name="app_new_version_update_later">Later</string>
 
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="wabbatrack_url" translatable="false">https://edipo2s.github.io/WabbaTrack/</string>
+    <string name="wabbatrack_video_url" translatable="false">https://www.youtube.com/watch?v=zw0o0QVhkow</string>
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
     <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
@@ -49,6 +51,7 @@
     <string name="menu_filter">Filter</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
+    <string name="menu_wabbatrack" translatable="false">WabbaTrack</string>
     <string name="menu_share">Invite a Friend</string>
     <string name="menu_about">About</string>
     <string name="menu_language">Language</string>
@@ -70,6 +73,7 @@
     <string name="menu_import">Import from Legends-Decks</string>
     <string name="menu_start">Start</string>
     <string name="menu_wallpaper">Wallpaper</string>
+    <string name="menu_video">Watch</string>
     <string name="menu_download">Download</string>
 
     <string name="menu_ringtone_play">Set play as ringtone</string>
@@ -150,6 +154,17 @@
     <string name="title_tab_matches_history">Matches History</string>
     <string name="title_tab_articles_news">TES Legends News</string>
     <string name="title_tab_articles_world">TES Legends World</string>
+    <string name="title_tab_wabbatrack_about">About</string>
+    <string name="title_tab_wabbatrack_arenatier" translatable="false">Arena Tier</string>
+    <string name="title_tab_wabbatrack_decktracker" translatable="false">Deck Tracker</string>
+    <string name="title_tab_wabbatrack_matches">Matches Statistics</string>
+    <string name="title_tab_wabbatrack_autobuild">Deck Auto-Build</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack is an windows application for The Elder Scroll Legends to automatically track your matches and helps you with arena draft.</string>
+    <string name="wabbatrack_arenatier_desc">Arena Tier based on CVH Arena Tier list with synergy list</string>
+    <string name="wabbatrack_autobuild_desc">Auto-Build feature to automacally build a imported deck from your decks or legends-decks</string>
+    <string name="wabbatrack_decktracker_desc">Deck Tracker with Card Hover feature and Attribute/Phophecy cards count with hit chances</string>
+    <string name="wabbatrack_matches_desc">Matches History and Statistics with Win-Rate and filters for modes and season</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_search_reward" translatable="false">reward</string>

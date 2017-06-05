@@ -27,6 +27,7 @@ import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.articles.ArticlesFragment
+import com.ediposouza.teslesgendstracker.ui.articles.WabbaTrackFragment
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
@@ -210,6 +211,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_spoiler -> showFragment(SpoilerFragment())
             R.id.menu_donate -> showDonateDialog()
+            R.id.menu_wabbatrack -> showFragment(WabbaTrackFragment())
             R.id.menu_share -> {
                 val appLink = getString(R.string.playstore_url_format, packageName)
                 val intent = Intent(Intent.ACTION_SEND).apply {

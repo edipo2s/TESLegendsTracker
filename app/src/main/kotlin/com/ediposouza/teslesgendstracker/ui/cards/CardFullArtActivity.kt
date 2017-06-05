@@ -62,7 +62,7 @@ class CardFullArtActivity : BaseActivity() {
         card_full_toolbar.setOnMenuItemClickListener { item ->
             when (item?.itemId) {
                 R.id.menu_wallpaper -> setCardFullImageAsWallpaper(item)
-                R.id.menu_download -> downloadCardFullImage(item)
+                R.id.menu_download_art -> downloadCardFullImage(item)
             }
             true
         }

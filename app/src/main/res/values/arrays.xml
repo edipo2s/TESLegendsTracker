@@ -37,4 +37,12 @@
         <item name="tab_articles_world">@string/tab_articles_world</item>
     </array>
 
+    <array name="wabbatrack_tabs">
+        <item name="tab_wabbatrack_about">@string/title_tab_wabbatrack_about</item>
+        <item name="tab_wabbatrack_arenatier">@string/title_tab_wabbatrack_arenatier</item>
+        <item name="tab_wabbatrack_autobuild">@string/title_tab_wabbatrack_autobuild</item>
+        <item name="tab_wabbatrack_decktrack">@string/title_tab_wabbatrack_decktracker</item>
+        <item name="tab_wabbatrack_matches">@string/title_tab_wabbatrack_matches</item>
+    </array>
+
 </resources>

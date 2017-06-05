@@ -237,6 +237,9 @@ sealed class MetricAction(val name: String) {
         val PARAM_LANGUAGE = "Language"
     }
 
+    class ACTION_WABBATRACK_VIDEO : MetricAction("WabbaTrackVideo")
+    class ACTION_WABBATRACK_WEBSITE : MetricAction("WabbaTrackWebsite")
+
 }
 
 sealed class MetricScreen(val name: String) {
@@ -265,6 +268,11 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
+    class SCREEN_WABBATARCK_ABOUT : MetricScreen("WabbaTrackDeckAbout")
+    class SCREEN_WABBATARCK_ARENATIER : MetricScreen("WabbaTrackDeckArenaTier")
+    class SCREEN_WABBATARCK_DECKTRACKER : MetricScreen("WabbaTrackDeckTracker")
+    class SCREEN_WABBATARCK_MATCHES : MetricScreen("WabbaTrackDeckMatches")
+    class SCREEN_WABBATARCK_AUTOBUILD : MetricScreen("WabbaTrackDeckAutoBuild")
     class SCREEN_SEASONS : MetricScreen("Seasons")
     class SCREEN_SPOILER : MetricScreen("Spoiler")
     class SCREEN_ARENA : MetricScreen("Arena")

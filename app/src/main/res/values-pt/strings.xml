@@ -46,6 +46,7 @@
     <string name="menu_import">Importar do Legends-Decks</string>
     <string name="menu_start">Iniciar</string>
     <string name="menu_wallpaper">Papel de parede</string>
+    <string name="menu_video">Assistir</string>
     <string name="menu_download">Baixar</string>
 
     <string name="menu_ringtone_play">Definir Play como toque de chamada</string>
@@ -104,6 +105,9 @@
     <string name="title_tab_matches_history">Histórico de Partidas</string>
     <string name="title_tab_articles_news">TES Legends Notícias</string>
     <string name="title_tab_articles_world">TES Legends Mundo</string>
+    <string name="title_tab_wabbatrack_about">Sobre</string>
+    <string name="title_tab_wabbatrack_matches">Estatísticas de partidas</string>
+    <string name="title_tab_wabbatrack_autobuild">Auto-Criar deck</string>
 
     <string name="cards_sets_all">Todos</string>
 
