@@ -34,11 +34,11 @@ class WabbaTrackFragment : BaseFragment() {
         override fun onPageSelected(position: Int) {
             updateActivityTitle(position)
             MetricsManager.trackScreen(when (position) {
-                1 -> MetricScreen.SCREEN_WABBATARCK_ARENATIER()
-                2 -> MetricScreen.SCREEN_WABBATARCK_AUTOBUILD()
-                3 -> MetricScreen.SCREEN_WABBATARCK_DECKTRACKER()
-                4 -> MetricScreen.SCREEN_WABBATARCK_MATCHES()
-                else -> MetricScreen.SCREEN_WABBATARCK_ABOUT()
+                1 -> MetricScreen.SCREEN_WABBATRACK_ARENATIER()
+                2 -> MetricScreen.SCREEN_WABBATRACK_AUTOBUILD()
+                3 -> MetricScreen.SCREEN_WABBATRACK_DECKTRACKER()
+                4 -> MetricScreen.SCREEN_WABBATRACK_MATCHES()
+                else -> MetricScreen.SCREEN_WABBATRACK_ABOUT()
             })
         }
 
