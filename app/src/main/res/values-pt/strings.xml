@@ -237,4 +237,7 @@
     <string name="new_arena_draft_synergy">Sinergia com: \n%s</string>
     <string name="new_arena_draft_remove_card">Remover Carta?</string>
 
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Baseado na raça usada no retrato.</string>
+
 </resources>

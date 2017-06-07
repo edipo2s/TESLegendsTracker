@@ -251,6 +251,9 @@ sealed class MetricScreen(val name: String) {
 
     }
 
+    class SCREEN_BASICS_LEVELUP : MetricScreen("BasicsLevelUp")
+    class SCREEN_BASICS_RACES : MetricScreen("BasicsRaces")
+    class SCREEN_BASICS_RANKED : MetricScreen("BasicsRanked")
     class SCREEN_CARDS_ALL : MetricScreen("CardsAll")
     class SCREEN_CARDS_COLLECTION : MetricScreen("CardsCollection")
     class SCREEN_CARDS_FAVORED : MetricScreen("CardsFavored")

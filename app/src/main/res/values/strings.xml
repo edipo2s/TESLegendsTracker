@@ -39,6 +39,7 @@
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
     <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
+    <string name="menu_basics">Basics</string>
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
@@ -144,6 +145,9 @@
     <string name="tab_articles_news">News</string>
     <string name="tab_articles_world">World</string>
 
+    <string name="title_tab_basics_levelup" translatable="false">Level-Up</string>
+    <string name="title_tab_basics_races">Races</string>
+    <string name="title_tab_basics_ranked">Ranked</string>
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
     <string name="title_tab_cards_favorites">Cards Favorites</string>
@@ -325,5 +329,8 @@
     <string name="new_arena_draft_pick">Select a Card</string>
     <string name="new_arena_draft_synergy">Synergy with: \n%s</string>
     <string name="new_arena_draft_remove_card">Remove Card?</string>
+
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Based on used race on portrait.</string>
 
 </resources>

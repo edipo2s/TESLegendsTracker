@@ -63,7 +63,7 @@ class WabbaTrackFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity.dash_navigation_view.setCheckedItem(R.id.menu_wabbatrack)
-        wabbatrack_view_pager.adapter = ArticlesPageAdapter(context, childFragmentManager)
+        wabbatrack_view_pager.adapter = WabbaTrackPageAdapter(context, childFragmentManager)
         wabbatrack_view_pager.addOnPageChangeListener(pageChange)
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARTICLES_NEWS())
     }
@@ -118,7 +118,7 @@ class WabbaTrackFragment : BaseFragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    class ArticlesPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class WabbaTrackPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         var titles: Array<String> = ctx.resources.getStringArray(R.array.wabbatrack_tabs)
 

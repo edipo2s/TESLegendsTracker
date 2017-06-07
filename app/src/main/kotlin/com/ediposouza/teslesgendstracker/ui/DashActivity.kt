@@ -32,6 +32,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
+import com.ediposouza.teslesgendstracker.ui.basics.BasicsFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CmdInputSearch
@@ -203,6 +204,7 @@ class DashActivity : BaseFilterActivity(),
             return true
         }
         return when (item.itemId) {
+            R.id.menu_basics -> showFragment(BasicsFragment())
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())

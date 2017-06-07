@@ -236,4 +236,7 @@
     <string name="new_arena_draft_synergy">Взаимодействие с: \n%s</string>
     <string name="new_arena_draft_remove_card">Удалить карту?</string>
 
+    <string name="basics_extras">Добавочный:</string>
+    <string name="basics_portrait">На основе использованной расы на портрете.</string>
+
 </resources>

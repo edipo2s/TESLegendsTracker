@@ -187,7 +187,7 @@
     },
     "24": {
       "type": "card",
-      "reward": "legendary",
+      "legendary": true,
       "racial": true
     },
     "25": {
@@ -237,7 +237,7 @@
       "target": [
         "fateweaver"
       ],
-      "reward": "legendary",
+      "legendary": true,
       "racial": true
     },
     "33": {

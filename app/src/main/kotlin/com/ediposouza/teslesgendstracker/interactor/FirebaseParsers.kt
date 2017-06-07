@@ -272,4 +272,48 @@ abstract class FirebaseParsers {
 
     }
 
+    class LevelUpParser(
+
+            val source: String = "",
+            val target: List<String> = listOf(),
+            val type: String = "",
+            val extra: String = "",
+            val gold: Int = 0,
+            val legendary: Boolean = false,
+            val racial: Boolean = false
+
+    ) {
+
+        fun toLevelUp(key: String): LevelUp {
+            return LevelUp(key.toIntSafely(), LevelUpSource.of(source), source, target, LevelUpType.of(type),
+                    LevelUpExtra.of(extra), extra, gold, legendary, racial)
+        }
+
+    }
+
+    class RaceParser {
+
+        fun toRace(raceData: Pair<String, List<String>>): Race {
+            return Race(CardRace.of(raceData.first), raceData.second)
+        }
+
+    }
+
+    class RankedParser(
+
+            val name: String = "",
+            val monthly: Int = 0,
+            val reset: Int = 0,
+            val stars: Int = 0,
+            val gems: Int = 0,
+            val gold: Int = 0
+
+    ) {
+
+        fun toRanked(key: String): Ranked {
+            return Ranked(key.toIntSafely(), name, monthly, reset, stars, gems, gold)
+        }
+
+    }
+
 }

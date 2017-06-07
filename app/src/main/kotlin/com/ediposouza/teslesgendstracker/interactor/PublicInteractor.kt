@@ -12,6 +12,10 @@ import timber.log.Timber
  */
 object PublicInteractor : BaseInteractor() {
 
+    private val NODE_BASICS = "basics"
+    private val NODE_BASICS_LEVEL = "level"
+    private val NODE_BASICS_RACES = "races"
+    private val NODE_BASICS_RANKED = "ranked"
     private val NODE_SPOILER_CARDS = "cards"
 
     private val KEY_SPOILER_ENABLE = "enabled"
@@ -398,6 +402,74 @@ object PublicInteractor : BaseInteractor() {
                     Timber.d("Fail: " + e.message)
                     onError?.invoke(e)
                 }
+    }
+
+    fun getLevels(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<LevelUp>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_LEVEL)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val levels = ds.children.mapTo(arrayListOf()) {
+                        Timber.d(it.key)
+                        val value = it.value
+                        it.getValue(FirebaseParsers.LevelUpParser::class.java).toLevelUp(it.key)
+                    }
+                    Timber.d(levels.toString())
+                    onSuccess.invoke(levels)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
+    }
+
+    fun getRaces(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Race>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_RACES)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val races = ds.children.mapTo(arrayListOf()) {
+                        it.getValue(FirebaseParsers.RaceParser::class.java).toRace(it.key to it.value as List<String>)
+                    }
+                    Timber.d(races.toString())
+                    onSuccess.invoke(races)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
+    }
+
+    fun getRanked(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Ranked>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_RANKED)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val rankeds = ds.children.mapTo(arrayListOf()) {
+                        it.getValue(FirebaseParsers.RankedParser::class.java).toRanked(it.key)
+                    }
+                    Timber.d(rankeds.toString())
+                    onSuccess.invoke(rankeds)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
     }
 
 }

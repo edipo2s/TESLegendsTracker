@@ -80,7 +80,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
             with(itemView) {
                 card_decklist_image.apply {
                     loadFromCard(cardSlot.card)
-                    layoutParams = layoutParams.apply { height = context.resources.getDimensionPixelSize(R.dimen.card_height_min) }
+                    layoutParams = layoutParams.apply { height = context.resources.getDimensionPixelSize(R.dimen.card_height_micro) }
                 }
                 setOnClickListener { itemLongClick(this, cardSlot.card) }
                 setOnLongClickListener { itemLongClick(this, cardSlot.card) }

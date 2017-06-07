@@ -236,4 +236,7 @@
     <string name="new_arena_draft_synergy">Synergie mit</string>
     <string name="new_arena_draft_remove_card">Karte entfernen?</string>
 
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Basierend auf gebrauchtem Rennen auf Porträt.</string>
+
 </resources>

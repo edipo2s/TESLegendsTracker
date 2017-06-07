@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="@dimen/size_medium"
             android:layout_height="@dimen/size_medium"
-            android:src="@drawable/ic_arrow_forward" />
+            android:src="@drawable/ic_arrow_forward_blue" />
 
         <TextView
             android:id="@+id/patch_card_change"

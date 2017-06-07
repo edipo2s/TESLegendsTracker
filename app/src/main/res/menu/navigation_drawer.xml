@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <group
-        android:id="@+id/group_public"
+        android:id="@+id/group_main"
         android:checkableBehavior="single">
         <item
             android:id="@+id/menu_cards"
@@ -16,18 +16,23 @@
             android:icon="@drawable/ic_menu_decks"
             android:title="@string/menu_decks" />
 
-    </group>
-
-    <group
-        android:id="@+id/group_advanced"
-        android:checkableBehavior="single">
-
         <item
             android:id="@+id/menu_matches"
             android:enabled="false"
             android:icon="@drawable/ic_menu_matches"
             android:title="@string/menu_matches"
             tools:enabled="true" />
+
+    </group>
+
+    <group
+        android:id="@+id/group_tools"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_basics"
+            android:icon="@drawable/ic_menu_basics"
+            android:title="@string/menu_basics" />
 
         <item
             android:id="@+id/menu_arena"
