@@ -98,9 +98,9 @@ class BasicsLevelUpFragment : BaseFragment() {
                             levelUp.sourceValue.takeIf { levelUp.source == LevelUpSource.RARITY } ?: levelUp.extraValue
                     basics_levelup_extra_card_rarity.setImageResource(CardRarity.of(rarity).imageRes)
                 }
-                basics_levelup_extra_coin.visibility = View.VISIBLE.takeIf { levelUp.gold > 0 } ?: View.GONE
-                basics_levelup_extra_coin_value.visibility = View.VISIBLE.takeIf { levelUp.gold > 0 } ?: View.GONE
-                basics_levelup_extra_coin_value.setText("${levelUp.gold}")
+                basics_levelup_extra_gold.visibility = View.VISIBLE.takeIf { levelUp.gold > 0 } ?: View.GONE
+                basics_levelup_extra_gold_value.visibility = View.VISIBLE.takeIf { levelUp.gold > 0 } ?: View.GONE
+                basics_levelup_extra_gold_value.setText("${levelUp.gold}")
                 val extraPack = levelUp.extra == LevelUpExtra.PACK
                 basics_levelup_extra_pack.visibility = View.VISIBLE.takeIf { extraPack } ?: View.GONE
                 basics_levelup_extra_pack_value.visibility = View.VISIBLE.takeIf { extraPack } ?: View.GONE

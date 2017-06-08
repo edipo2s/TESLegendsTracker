@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/basics_ranked_refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/basics_ranked_levelup"
+        android:layout_width="@dimen/size_small"
+        android:layout_height="@dimen/size_small"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_mode_ranked_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/basics_ranked_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_levelup"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/basics_ranked_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/basics_ranked_level"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_monthly_value"
+        tools:text="Thief"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_level"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp" />
+
+    <ImageView
+        android:id="@+id/basics_ranked_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_down"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_level"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/basics_ranked_reset_value"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/basics_ranked_reset_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        tools:text="5"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/basics_ranked_level"
+        app:layout_constraintEnd_toStartOf="@+id/basics_ranked_stars"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_level"
+        android:layout_marginTop="8dp" />
+
+    <ImageView
+        android:id="@+id/basics_ranked_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_star"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_reset"
+        app:layout_constraintEnd_toStartOf="@+id/basics_ranked_stars_value"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/basics_ranked_stars_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        tools:text="7"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/basics_ranked_level"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_level"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/basics_ranked_monthly_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        tools:text="3x"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/basics_ranked_level"
+        app:layout_constraintTop_toBottomOf="@+id/basics_ranked_level"
+        android:layout_marginTop="24dp" />
+
+    <ImageView
+        android:id="@+id/basics_ranked_monthly"
+        android:layout_width="@dimen/size_normal"
+        android:layout_height="@dimen/size_normal"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/basics_ranked_monthly_value"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_monthly_value"
+        android:src="@drawable/ic_rarity_epic"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_monthly_value" />
+
+    <TextView
+        android:id="@+id/basics_ranked_gems_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="250"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_monthly"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_monthly_value"
+        android:layout_marginStart="32dp" />
+
+    <ImageView
+        android:id="@+id/basics_ranked_extra_card_rarity"
+        android:layout_width="@dimen/size_normal"
+        android:layout_height="@dimen/size_normal"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_soul"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_gems_value"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_monthly" />
+
+    <TextView
+        android:id="@+id/basics_ranked_gold_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="0dp"
+        android:text="100"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_extra_card_rarity"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_gems_value" />
+
+    <ImageView
+        android:id="@+id/basics_ranked_gold"
+        android:layout_width="@dimen/size_medium"
+        android:layout_height="@dimen/size_normal"
+        android:paddingBottom="@dimen/nano_margin"
+        android:src="@drawable/ic_coin"
+        app:layout_constraintStart_toEndOf="@+id/basics_ranked_gold_value"
+        app:layout_constraintTop_toTopOf="@+id/basics_ranked_extra_card_rarity" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey_900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/basics_ranked_extra_card_rarity" />
+
+</android.support.constraint.ConstraintLayout>

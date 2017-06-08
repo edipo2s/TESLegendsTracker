@@ -78,7 +78,7 @@ data class Race(
 
 data class Ranked(
 
-        val level: Int,
+        val rank: Int,
         val name: String,
         val monthly: Int,
         val reset: Int,

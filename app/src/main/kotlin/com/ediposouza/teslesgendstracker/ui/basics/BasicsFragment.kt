@@ -87,7 +87,7 @@ class BasicsFragment : BaseFragment() {
 
         val basicsLevelUpFragment by lazy { BasicsLevelUpFragment() }
         val basicsRacesFragment by lazy { BasicsLevelUpFragment() }
-        val basicsRankedFragment by lazy { BasicsLevelUpFragment() }
+        val basicsRankedFragment by lazy { BasicsRankedFragment() }
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
