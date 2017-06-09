@@ -53,7 +53,7 @@ class BasicsFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_wabbatrack)
+        activity.dash_navigation_view.setCheckedItem(R.id.menu_basics)
         basics_view_pager.adapter = BasicsPageAdapter(context, childFragmentManager)
         basics_view_pager.addOnPageChangeListener(pageChange)
     }
