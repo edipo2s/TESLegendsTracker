@@ -166,12 +166,6 @@
     <string name="title_tab_wabbatrack_matches">Matches Statistics</string>
     <string name="title_tab_wabbatrack_autobuild">Deck Auto-Build</string>
 
-    <string name="wabbatrack_about_desc">WabbaTrack is an windows application for The Elder Scroll Legends to automatically track your matches and helps you with arena draft.</string>
-    <string name="wabbatrack_arenatier_desc">Arena Tier based on CVH Arena Tier list with synergy list</string>
-    <string name="wabbatrack_autobuild_desc">Auto-Build feature to automacally build a imported deck from your decks or legends-decks</string>
-    <string name="wabbatrack_decktracker_desc">Deck Tracker with Card Hover feature and Attribute/Phophecy cards count with hit chances</string>
-    <string name="wabbatrack_matches_desc">Matches History and Statistics with Win-Rate and filters for modes and season</string>
-
     <string name="cards_sets_all">All</string>
     <string name="cards_search_reward" translatable="false">reward</string>
     <string name="cards_search_unique" translatable="false">unique</string>
@@ -335,5 +329,11 @@
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Based on used race on portrait.</string>
     <string name="basics_races">Level 24 and 32 reward based on used race on portrait.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack is an windows application for The Elder Scroll Legends to automatically track your matches and helps you with arena draft.</string>
+    <string name="wabbatrack_arenatier_desc">Arena Tier based on CVH Arena Tier list and synergy list with cards picked before</string>
+    <string name="wabbatrack_autobuild_desc">Auto-Build feature to automatically build a imported deck from your decks or legends-decks</string>
+    <string name="wabbatrack_decktracker_desc">Deck Tracker with Card Hover feature and Attribute/Phophecy cards count with hit chances</string>
+    <string name="wabbatrack_matches_desc">Matches History and Statistics with Win-Rate and filters for modes and season</string>
 
 </resources>

@@ -97,6 +97,8 @@
     <string name="tab_articles_news">Notícias</string>
     <string name="tab_articles_world">Mundo</string>
 
+    <string name="title_tab_basics_races">Raças</string>
+    <string name="title_tab_basics_ranked">Ranqueado</string>
     <string name="title_tab_cards_collection">Coleção de Cartas</string>
     <string name="title_tab_cards_favorites">Cartas Favoritas</string>
     <string name="title_tab_decks_public">Decks Público</string>
@@ -241,5 +243,11 @@
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Baseado na raça usada no retrato.</string>
     <string name="basics_races">Recompensa de nível 24 e 32 baseado na raça usada no retrato.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack é um aplicativo de Windows para The Elder Scroll Legends para rastrear automaticamente suas partidas e ajuda você com draft na arena.</string>
+    <string name="wabbatrack_arenatier_desc">Arena Tier com base na CVH Arena Tier List acrescido de lista de sinergias com cartas já escolhidas antes.</string>
+    <string name="wabbatrack_autobuild_desc">Recurso Auto-Build para criar automaticamente um deck importado de suas plataformas ou plataformas-decks.</string>
+    <string name="wabbatrack_decktracker_desc">O Tracker do Deck com o recurso Hover do cartão e os cartões Atributo / Profecia contam com chances de sucesso.</string>
+    <string name="wabbatrack_matches_desc">História e Estatística das partidas com Win-Rate e filtros para modos e estação.</string>
 
 </resources>

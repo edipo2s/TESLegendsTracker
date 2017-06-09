@@ -38,7 +38,6 @@
         android:text="1x"
         android:textColor="@android:color/white"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_extra_card_rarity"
         app:layout_constraintStart_toEndOf="@+id/basics_levelup_level"
         app:layout_constraintTop_toTopOf="@+id/basics_levelup_extra_card_rarity"
         tools:visibility="visible" />
@@ -51,7 +50,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_extra_card"
         app:layout_constraintStart_toEndOf="@+id/basics_levelup_extra_card_value"
         app:layout_constraintTop_toTopOf="@+id/basics_levelup_levelup"
         tools:src="@drawable/ic_rarity_epic"

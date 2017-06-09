@@ -113,7 +113,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="4dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_extra_card"
         app:layout_constraintStart_toEndOf="@+id/basics_levelup_extra_card_value"
         app:layout_constraintTop_toBottomOf="@+id/basics_levelup_extras"
         tools:src="@drawable/ic_rarity_epic"

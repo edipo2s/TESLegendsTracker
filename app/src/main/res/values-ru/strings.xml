@@ -96,6 +96,8 @@
     <string name="tab_articles_news">Новости</string>
     <string name="tab_articles_world">Мир</string>
 
+    <string name="title_tab_basics_races">Pacas</string>
+    <string name="title_tab_basics_ranked">Ранжированный</string>
     <string name="title_tab_cards_collection">Коллекция карт</string>
     <string name="title_tab_cards_favorites">карты Избранное</string>
     <string name="title_tab_decks_public">Публичные колоды</string>
@@ -240,5 +242,11 @@
     <string name="basics_extras">Добавочный:</string>
     <string name="basics_portrait">На основе использованной расы на портрете.</string>
     <string name="basics_races">Награда за уровень 24 и 32 hа основе использованной расы на портрете.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack - это приложение для Windows Legends, чтобы автоматически отслеживать ваши матчи и помогает вам с проектом арены.</string>
+    <string name="wabbatrack_arenatier_desc">Уровень арены на основе списка уровней и списка симуляторов CVH с картами, выбранными ранее.</string>
+    <string name="wabbatrack_autobuild_desc">Функция Auto-Build для автоматической сборки импортированной колоды с ваших колод или легенд-колод.</string>
+    <string name="wabbatrack_decktracker_desc">Палуба Tracker с функцией наложения карты и картами Attribute / Prophecy считаются с шансами удара.</string>
+    <string name="wabbatrack_matches_desc">Соответствует истории и статистике с помощью Win-Rate и фильтров для режимов и сезонов</string>
 
 </resources>
