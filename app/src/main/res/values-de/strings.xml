@@ -13,6 +13,7 @@
     <string name="app_new_version_update_now">Jetzt Aktualisieren</string>
     <string name="app_new_version_update_later">Später</string>
 
+    <string name="menu_basics">Basisinformation</string>
     <string name="menu_cards">Karten</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Spiele</string>

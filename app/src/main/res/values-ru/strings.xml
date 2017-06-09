@@ -13,6 +13,7 @@
     <string name="app_new_version_update_now">Обновить сейчас</string>
     <string name="app_new_version_update_later">Позже</string>
 
+    <string name="menu_basics">Базовая информация</string>
     <string name="menu_cards">Карты</string>
     <string name="menu_decks">Колоды</string>
     <string name="menu_matches">Матчи</string>

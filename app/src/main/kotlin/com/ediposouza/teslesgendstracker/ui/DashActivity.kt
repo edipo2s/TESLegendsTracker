@@ -256,16 +256,24 @@ class DashActivity : BaseFilterActivity(),
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
                     PublicInteractor.getSpoilerCards {
                         val ctx = this@DashActivity
-                        val card = it.filter { it.shortName == this[1] }.firstOrNull()
-                        if (card != null) {
-                            val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
-                                    getString(R.string.card_transition_name))
-                            ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                        if (size > 1) {
+                            val card = it.filter { it.shortName == this[1] }.firstOrNull()
+                            if (card != null) {
+                                val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                        getString(R.string.card_transition_name))
+                                ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                            }
                         }
                     }
                 }
+                getString(R.string.app_deeplink_path_basic) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_basics))
+                }
                 getString(R.string.app_deeplink_path_arena) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_arena))
+                }
+                getString(R.string.app_deeplink_path_wabbatrack) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_wabbatrack))
                 }
                 getString(R.string.app_deeplink_path_articles) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_articles))

@@ -4,6 +4,7 @@
 
     <string name="app_deeplink_scheme" translatable="false">e2s</string>
     <string name="app_deeplink_host" translatable="false">tesltracker</string>
+    <string name="app_deeplink_path_basic" translatable="false">basic</string>
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
     <string name="app_deeplink_path_articles" translatable="false">articles</string>
     <string name="app_deeplink_path_card" translatable="false">card</string>
@@ -11,6 +12,7 @@
     <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
+    <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
     <string name="app_ads_deck_list_size" translatable="false">280x80</string>
@@ -39,7 +41,7 @@
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
     <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
-    <string name="menu_basics">Basics</string>
+    <string name="menu_basics">Basic Info</string>
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>

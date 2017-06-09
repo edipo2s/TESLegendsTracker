@@ -14,6 +14,7 @@
     <string name="app_new_version_update_later">Depois</string>
     <string name="app_new_version_update_now">Atualizar Agora</string>
 
+    <string name="menu_basics">Informações Básicas</string>
     <string name="menu_cards">Cartas</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
