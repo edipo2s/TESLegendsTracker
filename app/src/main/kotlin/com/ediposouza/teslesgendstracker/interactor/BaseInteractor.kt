@@ -12,6 +12,7 @@ open class BaseInteractor {
 
     companion object {
 
+        val NODE_BASICS = "basics"
         val NODE_CARDS = "cards"
         val NODE_PATCHES = "patches"
         val NODE_SEASONS = "seasons"

@@ -22,10 +22,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.load
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.activity_patch.*
 import kotlinx.android.synthetic.main.itemlist_patch_cards.view.*
@@ -180,17 +177,13 @@ class PatchActivity : BaseActivity() {
                  itemClick: (View, Card) -> Unit) {
             with(itemView) {
                 patch_card_change.text = context.getString(R.string.patch_change, patchChange.change)
-                patchChange.oldImageBitmap(patch_card_old_image, patchUuid)
-                patchChange.newImageBitmap(patch_card_new_image, nextPatchUuid)
+                patch_card_old_image.loadFromPatch(patchChange, patchUuid, false)
+                patch_card_new_image.loadFromPatch(patchChange, nextPatchUuid, true)
                 val set = CardSet.of(patchChange.set)
                 val attr = CardAttribute.valueOf(patchChange.attr.toUpperCase())
                 PublicInteractor.getCard(set, attr, patchChange.shortName) { card ->
-                    card.patchVersion(context, patchUuid) { cardOld ->
-                        patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, cardOld) }
-                    }
-                    card.patchVersion(context, nextPatchUuid) { cardNew ->
-                        patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, cardNew) }
-                    }
+                    patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, card) }
+                    patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, card) }
                 }
             }
         }

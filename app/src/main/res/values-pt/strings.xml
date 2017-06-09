@@ -14,6 +14,7 @@
     <string name="app_new_version_update_later">Depois</string>
     <string name="app_new_version_update_now">Atualizar Agora</string>
 
+    <string name="menu_basics">Informações Básicas</string>
     <string name="menu_cards">Cartas</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Partidas</string>
@@ -46,6 +47,7 @@
     <string name="menu_import">Importar do Legends-Decks</string>
     <string name="menu_start">Iniciar</string>
     <string name="menu_wallpaper">Papel de parede</string>
+    <string name="menu_video">Assistir</string>
     <string name="menu_download">Baixar</string>
 
     <string name="menu_ringtone_play">Definir Play como toque de chamada</string>
@@ -95,6 +97,8 @@
     <string name="tab_articles_news">Notícias</string>
     <string name="tab_articles_world">Mundo</string>
 
+    <string name="title_tab_basics_races">Raças</string>
+    <string name="title_tab_basics_ranked">Ranqueado</string>
     <string name="title_tab_cards_collection">Coleção de Cartas</string>
     <string name="title_tab_cards_favorites">Cartas Favoritas</string>
     <string name="title_tab_decks_public">Decks Público</string>
@@ -104,6 +108,9 @@
     <string name="title_tab_matches_history">Histórico de Partidas</string>
     <string name="title_tab_articles_news">TES Legends Notícias</string>
     <string name="title_tab_articles_world">TES Legends Mundo</string>
+    <string name="title_tab_wabbatrack_about">Sobre</string>
+    <string name="title_tab_wabbatrack_matches">Estatísticas de partidas</string>
+    <string name="title_tab_wabbatrack_autobuild">Auto-Criar deck</string>
 
     <string name="cards_sets_all">Todos</string>
 
@@ -232,5 +239,15 @@
     <string name="new_arena_draft_pick">Selecione uma Carta</string>
     <string name="new_arena_draft_synergy">Sinergia com: \n%s</string>
     <string name="new_arena_draft_remove_card">Remover Carta?</string>
+
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Baseado na raça usada no retrato.</string>
+    <string name="basics_races">Recompensa de nível 24 e 32 baseado na raça usada no retrato.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack é um aplicativo de Windows para The Elder Scroll Legends para rastrear automaticamente suas partidas e ajuda você com draft na arena.</string>
+    <string name="wabbatrack_arenatier_desc">Arena Tier com base na CVH Arena Tier List acrescido de lista de sinergias com cartas já escolhidas antes.</string>
+    <string name="wabbatrack_autobuild_desc">Recurso Auto-Build para criar automaticamente um deck importado de suas plataformas ou plataformas-decks.</string>
+    <string name="wabbatrack_decktracker_desc">O Tracker do Deck com o recurso Hover do cartão e os cartões Atributo / Profecia contam com chances de sucesso.</string>
+    <string name="wabbatrack_matches_desc">História e Estatística das partidas com Win-Rate e filtros para modos e estação.</string>
 
 </resources>

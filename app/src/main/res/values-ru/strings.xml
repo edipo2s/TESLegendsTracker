@@ -13,6 +13,7 @@
     <string name="app_new_version_update_now">Обновить сейчас</string>
     <string name="app_new_version_update_later">Позже</string>
 
+    <string name="menu_basics">Базовая информация</string>
     <string name="menu_cards">Карты</string>
     <string name="menu_decks">Колоды</string>
     <string name="menu_matches">Матчи</string>
@@ -30,7 +31,7 @@
     <string name="menu_search">Поиск</string>
     <string name="menu_sets">Сеты</string>
     <string name="menu_statistics">Статистика</string>
-    <string name="menu_compact_view"></string>
+    <string name="menu_compact_view">Скрыть пустые</string>
     <string name="menu_only_private">Только приватные</string>
     <string name="menu_only_collection">Только из коллекции</string>
     <string name="menu_hide_empty"></string>
@@ -44,7 +45,8 @@
     <string name="menu_percent">Процент</string>
     <string name="menu_import">Импорт из Legends-Decks</string>
     <string name="menu_start">Начало</string>
-    <string name="menu_wallpaper"></string>
+    <string name="menu_wallpaper">Обои</string>
+    <string name="menu_video">Смотреть</string>
     <string name="menu_download">Скачать</string>
 
     <string name="menu_ringtone_play">Установить воспроизведение в качестве мелодии звонка</string>
@@ -94,6 +96,8 @@
     <string name="tab_articles_news">Новости</string>
     <string name="tab_articles_world">Мир</string>
 
+    <string name="title_tab_basics_races">Pacas</string>
+    <string name="title_tab_basics_ranked">Ранжированный</string>
     <string name="title_tab_cards_collection">Коллекция карт</string>
     <string name="title_tab_cards_favorites">карты Избранное</string>
     <string name="title_tab_decks_public">Публичные колоды</string>
@@ -103,6 +107,9 @@
     <string name="title_tab_matches_history">Матчи История</string>
     <string name="title_tab_articles_news">Новости TES Legends</string>
     <string name="title_tab_articles_world">Мир TES Legends</string>
+    <string name="title_tab_wabbatrack_about">Около</string>
+    <string name="title_tab_wabbatrack_matches">Статистика матчей</string>
+    <string name="title_tab_wabbatrack_autobuild">Автоматическая сборка колоды</string>
 
     <string name="cards_sets_all">Все</string>
 
@@ -231,5 +238,15 @@
     <string name="new_arena_draft_pick">Выберите карту</string>
     <string name="new_arena_draft_synergy">Взаимодействие с: \n%s</string>
     <string name="new_arena_draft_remove_card">Удалить карту?</string>
+
+    <string name="basics_extras">Добавочный:</string>
+    <string name="basics_portrait">На основе использованной расы на портрете.</string>
+    <string name="basics_races">Награда за уровень 24 и 32 hа основе использованной расы на портрете.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack - это приложение для Windows Legends, чтобы автоматически отслеживать ваши матчи и помогает вам с проектом арены.</string>
+    <string name="wabbatrack_arenatier_desc">Уровень арены на основе списка уровней и списка симуляторов CVH с картами, выбранными ранее.</string>
+    <string name="wabbatrack_autobuild_desc">Функция Auto-Build для автоматической сборки импортированной колоды с ваших колод или легенд-колод.</string>
+    <string name="wabbatrack_decktracker_desc">Палуба Tracker с функцией наложения карты и картами Attribute / Prophecy считаются с шансами удара.</string>
+    <string name="wabbatrack_matches_desc">Соответствует истории и статистике с помощью Win-Rate и фильтров для режимов и сезонов</string>
 
 </resources>

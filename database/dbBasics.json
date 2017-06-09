@@ -1,0 +1,516 @@
+{
+  "level": {
+    "2": {
+      "type": "evolve",
+      "source": "valenwoodtrapper",
+      "target": [
+        "valenwoodhuntsman"
+      ]
+    },
+    "3": {
+      "type": "evolve",
+      "source": "whiterunrecruit",
+      "target": [
+        "whiteruntrooper"
+      ]
+    },
+    "4": {
+      "type": "evolve",
+      "source": "hiveworker",
+      "target": [
+        "hivedefender",
+        "hivewarrior"
+      ]
+    },
+    "5": {
+      "type": "evolve",
+      "source": "snappingdreugh",
+      "target": [
+        "dreughshellarmor",
+        "viciousdreugh"
+      ]
+    },
+    "6": {
+      "type": "evolve",
+      "source": "guildrecruit",
+      "target": [
+        "thievesguildrecruit",
+        "fightersguildrecruit"
+      ],
+      "extra": "common",
+      "racial": true
+    },
+    "7": {
+      "type": "evolve",
+      "source": "camlornadventurer",
+      "target": [
+        "camlornsentinel",
+        "camlornhero"
+      ],
+      "extra": "rare",
+      "racial": true
+    },
+    "8": {
+      "type": "evolve",
+      "source": "archeinguerrilla",
+      "target": [
+        "archeinelite",
+        "archeinvenomtongue"
+      ],
+      "extra": "epic"
+    },
+    "9": {
+      "type": "evolve",
+      "source": "divineconviction",
+      "target": [
+        "divinefervor"
+      ]
+    },
+    "10": {
+      "type": "evolve",
+      "source": "quinrawlskulker",
+      "target": [
+        "quinrawlburglar"
+      ],
+      "extra": "pack",
+      "gold": 100
+    },
+    "11": {
+      "type": "evolve",
+      "source": "rihadnomad",
+      "target": [
+        "rihadhorseman",
+        "rihadbattlemage"
+      ]
+    },
+    "12": {
+      "type": "evolve",
+      "source": "orcclansman",
+      "target": [
+        "orcclanshaman",
+        "orcclancaptain"
+      ],
+      "extra": "rare",
+      "racial": true
+    },
+    "13": {
+      "type": "evolve",
+      "source": "rottingdraugr",
+      "target": [
+        "deathlessdraugr",
+        "deadlydraugr"
+      ],
+      "extra": "epic",
+      "racial": true
+    },
+    "14": {
+      "type": "evolve",
+      "source": "northpointlieutenant",
+      "target": [
+        "northpointcaptain"
+      ],
+      "extra": "rare"
+    },
+    "15": {
+      "type": "evolve",
+      "source": "stalkingcrocodile",
+      "target": [
+        "lurkingcrocodile",
+        "ravenouscrocodile"
+      ],
+      "extra": "pack"
+    },
+    "16": {
+      "type": "evolve",
+      "source": "dresguard",
+      "target": [
+        "drestormentor",
+        "dresrenegade"
+      ],
+      "extra": "epic",
+      "racial": true
+    },
+    "17": {
+      "type": "evolve",
+      "source": "deshaansneak",
+      "target": [
+        "deshaanavenger"
+      ]
+    },
+    "18": {
+      "type": "evolve",
+      "source": "apprenticespotion",
+      "target": [
+        "healingpotion"
+      ],
+      "extra": "rare"
+    },
+    "19": {
+      "type": "evolve",
+      "source": "alikrbandit",
+      "target": [
+        "alikrsurvivalist"
+      ]
+    },
+    "20": {
+      "type": "evolve",
+      "source": "reclusivegiant",
+      "target": [
+        "vigilantgiant"
+      ],
+      "extra": "pack",
+      "gold": 100
+    },
+    "21": {
+      "type": "evolve",
+      "source": "dunerogue",
+      "target": [
+        "dunestalker",
+        "dunesmuggler"
+      ]
+    },
+    "22": {
+      "type": "evolve",
+      "source": "detain",
+      "target": [
+        "imprison"
+      ],
+      "extra": "epic"
+    },
+    "23": {
+      "type": "evolve",
+      "source": "nightpatrol",
+      "target": [
+        "nightpredator",
+        "nightshadow"
+      ]
+    },
+    "24": {
+      "type": "card",
+      "legendary": true,
+      "racial": true
+    },
+    "25": {
+      "type": "card",
+      "source": "rare",
+      "extra": "pack"
+    },
+    "26": {
+      "type": "evolve",
+      "source": "twilightwerebat",
+      "target": [
+        "moonlightwerebat"
+      ]
+    },
+    "27": {
+      "type": "card",
+      "source": "epic"
+    },
+    "28": {
+      "type": "evolve",
+      "source": "slaughterfish",
+      "target": [
+        "slaughterfishspawning"
+      ]
+    },
+    "29": {
+      "type": "card",
+      "source": "rare",
+      "racial": true
+    },
+    "30": {
+      "type": "evolve",
+      "source": "risinglegate",
+      "target": [
+        "renownedlegate"
+      ],
+      "extra": "pack",
+      "gold": 100
+    },
+    "31": {
+      "type": "card",
+      "source": "epic"
+    },
+    "32": {
+      "type": "evolve",
+      "source": "fateswitness",
+      "target": [
+        "fateweaver"
+      ],
+      "legendary": true,
+      "racial": true
+    },
+    "33": {
+      "type": "card",
+      "source": "rare"
+    },
+    "34": {
+      "type": "evolve",
+      "source": "studentofarms",
+      "target": [
+        "masterofarms"
+      ]
+    },
+    "35": {
+      "type": "card",
+      "source": "epic",
+      "extra": "pack"
+    },
+    "36": {
+      "type": "evolve",
+      "source": "wildspriggan",
+      "target": [
+        "wildbeastcaller"
+      ]
+    },
+    "37": {
+      "type": "card",
+      "source": "epic"
+    },
+    "38": {
+      "type": "evolve",
+      "source": "initiateofhircine",
+      "target": [
+        "childofhircine"
+      ]
+    },
+    "39": {
+      "type": "card",
+      "source": "epic"
+    },
+    "40": {
+      "type": "evolve",
+      "source": "expertatromancer",
+      "target": [
+        "supremeatromancer"
+      ],
+      "extra": "pack",
+      "gold": 100
+    },
+    "41": {
+      "type": "card",
+      "source": "rare",
+      "racial": true
+    },
+    "42": {
+      "type": "evolve",
+      "source": "winterstouch",
+      "target": [
+        "wintersgrasp"
+      ]
+    },
+    "43": {
+      "type": "card",
+      "source": "epic"
+    },
+    "44": {
+      "type": "evolve",
+      "source": "strongholdprototype",
+      "target": [
+        "strongholdincubator",
+        "strongholderadicator"
+      ]
+    },
+    "45": {
+      "type": "card",
+      "source": "epic",
+      "extra": "pack"
+    },
+    "46": {
+      "type": "evolve",
+      "source": "cavegrahl",
+      "target": [
+        "angrygrahl"
+      ],
+      "extra": "epic",
+      "racial": true
+    },
+    "47": {
+      "type": "card",
+      "source": "epic"
+    },
+    "48": {
+      "type": "evolve",
+      "source": "starvedhunger",
+      "target": [
+        "ravenoushunger"
+      ]
+    },
+    "49": {
+      "type": "card",
+      "source": "epic"
+    },
+    "50": {
+      "type": "evolve",
+      "source": "volkiharlord",
+      "target": [
+        "nighttalonlord",
+        "bloodmagiclord"
+      ],
+      "extra": "pack",
+      "gold": 100
+    }
+  },
+  "races": {
+    "Argonian": [
+      "blackmarshwarden",
+      "redbramman"
+    ],
+    "Breton": [
+      "daggerfallmage",
+      "highkingemeric",
+      "supremeatromancer"
+    ],
+    "Dark Elf": [
+      "queenbarenziah",
+      "necrommastermind",
+      "indorilarchmage",
+      "divaythfyr"
+    ],
+    "High Elf": [
+      "ayrenn",
+      "mentorsring"
+    ],
+    "Imperial": [
+      "lucienlachance",
+      "generaltullius",
+      "renownedlegate"
+    ],
+    "Khajiit": [
+      "descendantofalkosh",
+      "ahnassi",
+      "quinrawlburglar",
+      "thievesden"
+    ],
+    "Nord": [
+      "relentlessraider",
+      "tyr",
+      "haafingarmarauder",
+      "miraakdragonborn"
+    ],
+    "Orc": [
+      "woodorcheadhunter",
+      "gortwoggronagorm"
+    ],
+    "Redguard": [
+      "merricataswala"
+    ],
+    "Wood Elf": [
+      "ungolimthelistener",
+      "allenabenoch"
+    ]
+  },
+  "ranked": {
+    "0": {
+      "name": "Legend",
+      "stars": 0,
+      "monthly": 3,
+      "gems": 250,
+      "gold": 70,
+      "reset": 5
+    },
+    "1": {
+      "name": "The Thief",
+      "stars": 7,
+      "monthly": 3,
+      "gems": 200,
+      "gold": 65,
+      "reset": 5
+    },
+    "2": {
+      "name": "The Atronach",
+      "stars": 6,
+      "monthly": 2,
+      "gems": 180,
+      "gold": 60,
+      "reset": 5
+    },
+    "3": {
+      "name": "The Tower",
+      "stars": 6,
+      "monthly": 2,
+      "gems": 170,
+      "gold": 55,
+      "reset": 5
+    },
+    "4": {
+      "name": "The Lady",
+      "stars": 6,
+      "monthly": 2,
+      "gems": 160,
+      "gold": 50,
+      "reset": 5
+    },
+    "5": {
+      "name": "The Warrior",
+      "stars": 7,
+      "monthly": 2,
+      "gems": 150,
+      "gold": 45,
+      "reset": 9
+    },
+    "6": {
+      "name": "The Apprentice",
+      "stars": 5,
+      "monthly": 1,
+      "gems": 130,
+      "gold": 40,
+      "reset": 9,
+      "bonus": true
+    },
+    "7": {
+      "name": "The Steed",
+      "stars": 5,
+      "monthly": 1,
+      "gems": 120,
+      "gold": 35,
+      "reset": 9,
+      "bonus": true
+    },
+    "8": {
+      "name": "The Shadow",
+      "stars": 5,
+      "monthly": 1,
+      "gems": 110,
+      "gold": 30,
+      "reset": 9,
+      "bonus": true
+    },
+    "9": {
+      "name": "The Mage",
+      "stars": 7,
+      "monthly": 1,
+      "gems": 100,
+      "gold": 25,
+      "reset": 12,
+      "bonus": true
+    },
+    "10": {
+      "name": "The Lord",
+      "stars": 4,
+      "monthly": 0,
+      "gems": 80,
+      "gold": 20,
+      "reset": 12,
+      "bonus": true
+    },
+    "11": {
+      "name": "The Lover",
+      "stars": 4,
+      "monthly": 0,
+      "gems": 70,
+      "gold": 15,
+      "reset": 12,
+      "bonus": true
+    },
+    "12": {
+      "name": "The Ritual",
+      "stars": 7,
+      "monthly": 0,
+      "gems": 0,
+      "gold": 10,
+      "reset": 12,
+      "bonus": true
+    }
+  }
+}

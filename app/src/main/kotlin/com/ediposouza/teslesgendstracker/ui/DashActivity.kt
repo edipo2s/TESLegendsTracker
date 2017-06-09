@@ -27,10 +27,12 @@ import com.ediposouza.teslesgendstracker.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.articles.ArticlesFragment
+import com.ediposouza.teslesgendstracker.ui.articles.WabbaTrackFragment
 import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdLoginSuccess
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
+import com.ediposouza.teslesgendstracker.ui.basics.BasicsFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CardsFragment
 import com.ediposouza.teslesgendstracker.ui.cards.CmdInputSearch
@@ -202,6 +204,7 @@ class DashActivity : BaseFilterActivity(),
             return true
         }
         return when (item.itemId) {
+            R.id.menu_basics -> showFragment(BasicsFragment())
             R.id.menu_cards -> supportFragmentManager.popBackStackImmediate()
             R.id.menu_decks -> showFragment(DecksFragment())
             R.id.menu_matches -> showFragment(MatchesFragment())
@@ -210,6 +213,7 @@ class DashActivity : BaseFilterActivity(),
             R.id.menu_seasons -> showFragment(SeasonsFragment())
             R.id.menu_spoiler -> showFragment(SpoilerFragment())
             R.id.menu_donate -> showDonateDialog()
+            R.id.menu_wabbatrack -> showFragment(WabbaTrackFragment())
             R.id.menu_share -> {
                 val appLink = getString(R.string.playstore_url_format, packageName)
                 val intent = Intent(Intent.ACTION_SEND).apply {
@@ -240,26 +244,36 @@ class DashActivity : BaseFilterActivity(),
                 getString(R.string.app_deeplink_path_card) -> {
                     PublicInteractor.getCards(null) {
                         val ctx = this@DashActivity
-                        val card = it.filter { it.shortName == this[1] }.first()
-                        val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
-                                getString(R.string.card_transition_name))
-                        ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
-                    }
-                }
-                getString(R.string.app_deeplink_path_spoiler) -> {
-                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
-                    PublicInteractor.getSpoilerCards() {
-                        val ctx = this@DashActivity
                         val card = it.filter { it.shortName == this[1] }.firstOrNull()
-                        if (card != null) {
+                        card?.let {
                             val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
                                     getString(R.string.card_transition_name))
                             ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
                         }
                     }
                 }
+                getString(R.string.app_deeplink_path_spoiler) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
+                    PublicInteractor.getSpoilerCards {
+                        val ctx = this@DashActivity
+                        if (size > 1) {
+                            val card = it.filter { it.shortName == this[1] }.firstOrNull()
+                            if (card != null) {
+                                val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                        getString(R.string.card_transition_name))
+                                ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                            }
+                        }
+                    }
+                }
+                getString(R.string.app_deeplink_path_basic) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_basics))
+                }
                 getString(R.string.app_deeplink_path_arena) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_arena))
+                }
+                getString(R.string.app_deeplink_path_wabbatrack) -> {
+                    onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_wabbatrack))
                 }
                 getString(R.string.app_deeplink_path_articles) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_articles))
@@ -294,8 +308,8 @@ class DashActivity : BaseFilterActivity(),
                 profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
-        PublicInteractor.getSpoilerName {
-            dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it.isNotEmpty()
+        PublicInteractor.isSpoilerEnable {
+            dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it
         }
     }
 
@@ -319,13 +333,15 @@ class DashActivity : BaseFilterActivity(),
                     }
                 }, DialogInterface.OnClickListener { dialog, which ->
                     dialog.dismiss()
-                    changeAppLanguage(when (which) {
+                    val language = when (which) {
                         1 -> "pt-br"
                         2 -> "es"
                         3 -> "de"
                         4 -> "ru"
                         else -> "en"
-                    })
+                    }
+                    MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_LANGUAGE(language))
+                    changeAppLanguage(language)
                 })
                 .show()
         return true

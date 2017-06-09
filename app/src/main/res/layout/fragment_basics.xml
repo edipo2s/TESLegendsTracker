@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_marginBottom="@dimen/navigation_bar_height"
+    tools:layout_marginTop="@dimen/status_bar_height">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/basics_app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/basics_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/cardview_default_elevation"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:tabBackground="@android:color/transparent"
+            app:tabGravity="fill"
+            tools:targetApi="lollipop" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/basics_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.ediposouza.teslesgendstracker.ui.util.AutoHideBehaviour" />
+
+    </com.ediposouza.teslesgendstracker.ui.widget.NestedCoordinatorLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -2,12 +2,12 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.IntegerRes
+import android.support.annotation.DrawableRes
 import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
-                     @IntegerRes val imageRes: Int, @IntegerRes val arenaImageRes: Int? = null) {
+                     @DrawableRes val imageRes: Int, @DrawableRes val arenaImageRes: Int? = null) {
 
     ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer, R.drawable.arena_archer),
     ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin, R.drawable.arena_assassin),

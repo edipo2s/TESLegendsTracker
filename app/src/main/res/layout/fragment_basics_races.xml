@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/basics_races"
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/basics_races_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/small_margin"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/itemlist_match_history" />
+
+</LinearLayout>

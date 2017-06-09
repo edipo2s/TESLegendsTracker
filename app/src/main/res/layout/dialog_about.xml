@@ -54,7 +54,7 @@
             android:layout_marginTop="@dimen/huge_margin"
             android:layout_toEndOf="@id/about_dialog_version_label"
             android:textSize="@dimen/font_medium"
-            tools:text="0.3" />
+            tools:text="1.0" />
 
         <TextView
             android:id="@+id/about_dialog_developer_label"
@@ -156,10 +156,56 @@
             android:textSize="@dimen/font_medium" />
 
         <TextView
-            android:id="@+id/about_dialog_text_bottom"
+            android:id="@+id/about_dialog_thanks_translation_german"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/about_dialog_thanks_unity_studio"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:paddingStart="@dimen/huge_margin"
+            android:text="@string/about_info_thanks_translation_german"
+            android:textSize="@dimen/font_medium" />
+
+        <TextView
+            android:id="@+id/about_dialog_thanks_translation_german_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_dialog_thanks_unity_studio"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@id/about_dialog_thanks_unity_studio"
+            android:text="@string/about_info_thanks_translation_german_text"
+            android:textColor="@color/indigo_500"
+            android:textSize="@dimen/font_medium" />
+
+        <TextView
+            android:id="@+id/about_dialog_thanks_translation_russian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_dialog_thanks_translation_german"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:paddingStart="@dimen/huge_margin"
+            android:text="@string/about_info_thanks_translation_russian"
+            android:textSize="@dimen/font_medium" />
+
+        <TextView
+            android:id="@+id/about_dialog_thanks_translation_russian_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_dialog_thanks_translation_german"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@id/about_dialog_thanks_unity_studio"
+            android:text="@string/about_info_thanks_translation_russian_text"
+            android:textColor="@color/indigo_500"
+            android:textSize="@dimen/font_medium" />
+
+        <TextView
+            android:id="@+id/about_dialog_text_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_dialog_thanks_translation_russian"
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginTop="@dimen/huge_margin"
             android:text="@string/about_text"

@@ -10,7 +10,7 @@
         android:layout_width="@dimen/size_medium"
         android:layout_height="@dimen/size_medium"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_arrow_forward" />
+        android:src="@drawable/ic_arrow_forward_blue" />
 
     <ImageView
         android:id="@+id/card_patch_full_image"

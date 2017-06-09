@@ -12,22 +12,51 @@ import timber.log.Timber
  */
 object PublicInteractor : BaseInteractor() {
 
+    private val NODE_BASICS_LEVEL = "level"
+    private val NODE_BASICS_RACES = "races"
+    private val NODE_BASICS_RANKED = "ranked"
     private val NODE_SPOILER_CARDS = "cards"
 
-    private val KEY_SPOILER_NAME = "name"
+    private val KEY_SPOILER_ENABLE = "enabled"
+    private val KEY_SPOILER_TITLE = "title"
     private val KEY_SPOILER_SET = "set"
     private val KEY_CARD_EVOLVES = "evolves"
     private val KEY_DECK_VIEWS = "views"
 
     fun getCard(set: CardSet, attribute: CardAttribute, shortname: String, onSuccess: (Card) -> Unit) {
         val attr = attribute.name.toLowerCase()
-        database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+        with(database.child(NODE_CARDS).child(set.db).child(attr).child(shortname)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val card = ds.getValue(FirebaseParsers.CardParser::class.java)
+                            ?.toCard(shortname, set, attribute)
+                    onSuccess.invoke(card ?: Card.DUMMY)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
+
+            })
+        }
+    }
+
+    fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
+        getListFromSets(set, onSuccess) { set, onEachSuccess ->
+            with(database.child(NODE_CARDS).child(set.db).orderByChild(KEY_CARD_COST)) {
+                keepSynced()
+                addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
-                        val card = ds.getValue(FirebaseParsers.CardParser::class.java)
-                                ?.toCard(shortname, set, attribute)
-                        onSuccess.invoke(card ?: Card.DUMMY)
+                        val cards = ds.children.map {
+                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                            it.children.map {
+                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
+                            }
+                        }.flatMap { it }
+                        onEachSuccess.invoke(cards)
                     }
 
                     override fun onCancelled(de: DatabaseError) {
@@ -35,28 +64,7 @@ object PublicInteractor : BaseInteractor() {
                     }
 
                 })
-    }
-
-    fun getCards(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
-        getListFromSets(set, onSuccess) { set, onEachSuccess ->
-            database.child(NODE_CARDS).child(set.db).orderByChild(KEY_CARD_COST)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                        override fun onDataChange(ds: DataSnapshot) {
-                            val cards = ds.children.map {
-                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
-                                it.children.map {
-                                    it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
-                                }
-                            }.flatMap { it }
-                            onEachSuccess.invoke(cards)
-                        }
-
-                        override fun onCancelled(de: DatabaseError) {
-                            Timber.d("Fail: " + de.message)
-                        }
-
-                    })
+            }
         }
     }
 
@@ -103,8 +111,24 @@ object PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getSpoilerName(onSuccess: (String) -> Unit) {
-        database.child(NODE_SPOILER).child(KEY_SPOILER_NAME)
+    fun isSpoilerEnable(onSuccess: (Boolean) -> Unit) {
+        database.child(NODE_SPOILER).child(KEY_SPOILER_ENABLE)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(ds: DataSnapshot) {
+                        val name = ds.getValue(Boolean::class.java)
+                        onSuccess.invoke(name ?: false)
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+                        Timber.d("Fail: " + de.message)
+                    }
+
+                })
+    }
+
+    fun getSpoilerTitle(onSuccess: (String) -> Unit) {
+        database.child(NODE_SPOILER).child(KEY_SPOILER_TITLE)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(ds: DataSnapshot) {
@@ -123,7 +147,7 @@ object PublicInteractor : BaseInteractor() {
     fun getSpoilerCards(onSuccess: (List<Card>) -> Unit) {
         with(database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)) {
             keepSynced()
-            addListenerForSingleValueEvent(object : ValueEventListener {
+            addValueEventListener(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     getSpoilerSet { spoilerSet ->
@@ -146,31 +170,6 @@ object PublicInteractor : BaseInteractor() {
 
             })
         }
-    }
-
-    fun getSpoilerCards(attr: CardAttribute, onSuccess: (List<Card>) -> Unit) {
-        val node_attr = attr.name.toLowerCase()
-        database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).child(node_attr).orderByChild(KEY_CARD_COST)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                    override fun onDataChange(ds: DataSnapshot) {
-                        getSpoilerSet { spoilerSet ->
-                            val set = CardSet.UNKNOWN.apply {
-                                unknownSetName = spoilerSet
-                            }
-                            val cards = ds.children.mapTo(arrayListOf()) {
-                                it.getValue(FirebaseParsers.CardParser::class.java).toCard(it.key, set, attr)
-                            }
-                            Timber.d(cards.toString())
-                            onSuccess.invoke(cards)
-                        }
-                    }
-
-                    override fun onCancelled(de: DatabaseError) {
-                        Timber.d("Fail: " + de.message)
-                    }
-
-                })
     }
 
     private fun getSpoilerSet(onSuccess: (String) -> Unit) {
@@ -402,6 +401,74 @@ object PublicInteractor : BaseInteractor() {
                     Timber.d("Fail: " + e.message)
                     onError?.invoke(e)
                 }
+    }
+
+    fun getLevels(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<LevelUp>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_LEVEL)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val levels = ds.children.mapTo(arrayListOf()) {
+                        Timber.d(it.key)
+                        val value = it.value
+                        it.getValue(FirebaseParsers.LevelUpParser::class.java).toLevelUp(it.key)
+                    }
+                    Timber.d(levels.toString())
+                    onSuccess.invoke(levels)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
+    }
+
+    fun getRaces(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Race>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_RACES)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val races = ds.children.mapTo(arrayListOf()) {
+                        FirebaseParsers.RaceParser().toRace(it.key to it.value as List<String>)
+                    }
+                    Timber.d(races.toString())
+                    onSuccess.invoke(races)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
+    }
+
+    fun getRanked(onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<Ranked>) -> Unit) {
+        with(database.child(NODE_BASICS).child(NODE_BASICS_RANKED)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val rankeds = ds.children.mapTo(arrayListOf()) {
+                        it.getValue(FirebaseParsers.RankedParser::class.java).toRanked(it.key)
+                    }
+                    Timber.d(rankeds.toString())
+                    onSuccess.invoke(rankeds)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                    onError?.invoke(de.toException())
+                }
+
+            })
+        }
     }
 
 }

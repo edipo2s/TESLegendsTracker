@@ -14,6 +14,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.util.inflate
+import com.ediposouza.teslesgendstracker.util.loadFromCard
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
@@ -96,7 +97,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         fun bind(cardSlot: CardSlot) {
             with(itemView) {
                 setOnLongClickListener { itemLongClick(itemView.card_all_image, cardSlot.card) }
-                cardSlot.card.loadCardImageInto(card_all_image)
+                card_all_image.loadFromCard(cardSlot.card)
                 val isCardUnique = cardSlot.card.unique
                 if (isCardUnique && cardSlot.qtd == 1 || !isCardUnique && cardSlot.qtd == 3) {
                     val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)

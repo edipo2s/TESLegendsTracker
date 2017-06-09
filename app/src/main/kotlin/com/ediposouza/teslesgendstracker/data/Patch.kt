@@ -2,7 +2,6 @@ package com.ediposouza.teslesgendstracker.data
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.widget.ImageView
 import org.threeten.bp.LocalDate
 
 /**
@@ -52,20 +51,6 @@ class PatchChange(
     }
 
     override fun describeContents(): Int = 0
-
-    fun newImageBitmap(view: ImageView, nextPatchUuid: String) {
-        val cardName = shortName + "_" + nextPatchUuid
-        Card.loadCardImageInto(view, set.capitalize(), attr.capitalize(), cardName) {
-            view.post {
-                Card.loadCardImageInto(view, set.capitalize(), attr.capitalize(), shortName)
-            }
-        }
-    }
-
-    fun oldImageBitmap(view: ImageView, patchUuid: String) {
-        val cardName = shortName + "_" + patchUuid
-        Card.loadCardImageInto(view, set.capitalize(), attr.capitalize(), cardName)
-    }
 
 }
 

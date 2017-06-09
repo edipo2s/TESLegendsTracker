@@ -15,8 +15,14 @@
         <item name="device_id_4">819B0D7E49567D0139704731892AC480</item>
     </array>
 
+    <array name="basics_tabs">
+        <item name="tab_basics_levelup">@string/title_tab_basics_levelup</item>
+        <item name="tab_basics_races">@string/title_tab_basics_races</item>
+        <item name="tab_basics_ranked">@string/title_tab_basics_ranked</item>
+    </array>
+
     <array name="cards_tabs">
-        <item name="tab_cards_all_all">@string/tab_cards_all</item>
+        <item name="tab_cards_all">@string/tab_cards_all</item>
         <item name="tab_cards_collection">@string/tab_cards_collection</item>
         <item name="tab_cards_favorites">@string/tab_cards_favorites</item>
     </array>
@@ -35,6 +41,14 @@
     <array name="articles_tabs">
         <item name="tab_articles_news">@string/tab_articles_news</item>
         <item name="tab_articles_world">@string/tab_articles_world</item>
+    </array>
+
+    <array name="wabbatrack_tabs">
+        <item name="tab_wabbatrack_about">@string/title_tab_wabbatrack_about</item>
+        <item name="tab_wabbatrack_arenatier">@string/title_tab_wabbatrack_arenatier</item>
+        <item name="tab_wabbatrack_autobuild">@string/title_tab_wabbatrack_autobuild</item>
+        <item name="tab_wabbatrack_decktrack">@string/title_tab_wabbatrack_decktracker</item>
+        <item name="tab_wabbatrack_matches">@string/title_tab_wabbatrack_matches</item>
     </array>
 
 </resources>

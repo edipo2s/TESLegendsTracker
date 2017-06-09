@@ -20,6 +20,7 @@ import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterAttr
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.decks.widget.DeckList
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
+import com.ediposouza.teslesgendstracker.util.loadFromCard
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.dialog_select_card.view.*
 import kotlinx.android.synthetic.main.widget_arena_cards.view.*
@@ -90,7 +91,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         currentMagika = -1
         currentRarity = null
         Glide.clear(arena_draft_card_iv)
-        arena_draft_card_iv.setImageBitmap(Card.getDefaultCardImage(context))
+        arena_draft_card_iv.setImageResource(R.drawable.card_back)
         arena_draft_card_value.text = INVALID_TEXT_VALUE
         arena_draft_card_value.setTextColor(ContextCompat.getColor(context, android.R.color.white))
         arena_draft_card_value_shadow.text = INVALID_TEXT_VALUE
@@ -160,7 +161,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun onSelect(card: Card) {
         selectedCard = card
         selectDialog?.dismiss()
-        card.loadCardImageInto(arena_draft_card_iv)
+        arena_draft_card_iv.loadFromCard(card)
         val calcArenaValue = calcArenaValue(card)
         val arenaValue = (calcArenaValue.first.takeIf { it > 0 } ?: INVALID_TEXT_VALUE).toString()
         arena_draft_card_value.text = "$arenaValue" + ("*".takeIf { calcArenaValue.second.isNotEmpty() } ?: "")

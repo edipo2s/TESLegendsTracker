@@ -4,6 +4,7 @@
 
     <string name="app_deeplink_scheme" translatable="false">e2s</string>
     <string name="app_deeplink_host" translatable="false">tesltracker</string>
+    <string name="app_deeplink_path_basic" translatable="false">basic</string>
     <string name="app_deeplink_path_arena" translatable="false">arena</string>
     <string name="app_deeplink_path_articles" translatable="false">articles</string>
     <string name="app_deeplink_path_card" translatable="false">card</string>
@@ -11,6 +12,7 @@
     <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
+    <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
     <string name="app_ads_card_list_size" translatable="false">280x80</string>
     <string name="app_ads_deck_list_size" translatable="false">280x80</string>
@@ -34,9 +36,12 @@
     <string name="app_new_version_update_later">Later</string>
 
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="wabbatrack_url" translatable="false">https://edipo2s.github.io/WabbaTrack/</string>
+    <string name="wabbatrack_video_url" translatable="false">https://www.youtube.com/watch?v=zw0o0QVhkow</string>
     <string name="jsoup_user_agent" translatable="false">Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6</string>
     <string name="jsoup_referrer" translatable="false">http://www.google.com</string>
 
+    <string name="menu_basics">Basic Info</string>
     <string name="menu_cards">Cards</string>
     <string name="menu_decks">Decks</string>
     <string name="menu_matches">Matches</string>
@@ -49,6 +54,7 @@
     <string name="menu_filter">Filter</string>
     <string name="menu_donate">Ads Version</string>
     <string name="menu_donate_done">No Ads Version</string>
+    <string name="menu_wabbatrack" translatable="false">WabbaTrack</string>
     <string name="menu_share">Invite a Friend</string>
     <string name="menu_about">About</string>
     <string name="menu_language">Language</string>
@@ -70,6 +76,7 @@
     <string name="menu_import">Import from Legends-Decks</string>
     <string name="menu_start">Start</string>
     <string name="menu_wallpaper">Wallpaper</string>
+    <string name="menu_video">Watch</string>
     <string name="menu_download">Download</string>
 
     <string name="menu_ringtone_play">Set play as ringtone</string>
@@ -106,7 +113,7 @@
     <string name="about_info_thanks_unity_studio">Devs of UnityStudio - </string>
     <string name="about_info_thanks_unity_studio_text" translatable="false">UnityStudio</string>
     <string name="about_info_thanks_unity_studio_link" translatable="false">https://github.com/Ungaminga/UnityStudio</string>
-    <string name="about_info_thanks_translation_german" translatable="false">Russian translation - </string>
+    <string name="about_info_thanks_translation_german" translatable="false">German translation - </string>
     <string name="about_info_thanks_translation_german_text" translatable="false">Ballaum</string>
     <string name="about_info_thanks_translation_russian" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_russian_text" translatable="false">WickedTroll</string>
@@ -140,6 +147,9 @@
     <string name="tab_articles_news">News</string>
     <string name="tab_articles_world">World</string>
 
+    <string name="title_tab_basics_levelup" translatable="false">Level-Up</string>
+    <string name="title_tab_basics_races">Races</string>
+    <string name="title_tab_basics_ranked">Ranked</string>
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
     <string name="title_tab_cards_collection">Cards Collection</string>
     <string name="title_tab_cards_favorites">Cards Favorites</string>
@@ -150,6 +160,11 @@
     <string name="title_tab_matches_history">Matches History</string>
     <string name="title_tab_articles_news">TES Legends News</string>
     <string name="title_tab_articles_world">TES Legends World</string>
+    <string name="title_tab_wabbatrack_about">About</string>
+    <string name="title_tab_wabbatrack_arenatier" translatable="false">Arena Tier</string>
+    <string name="title_tab_wabbatrack_decktracker" translatable="false">Deck Tracker</string>
+    <string name="title_tab_wabbatrack_matches">Matches Statistics</string>
+    <string name="title_tab_wabbatrack_autobuild">Deck Auto-Build</string>
 
     <string name="cards_sets_all">All</string>
     <string name="cards_search_reward" translatable="false">reward</string>
@@ -310,5 +325,15 @@
     <string name="new_arena_draft_pick">Select a Card</string>
     <string name="new_arena_draft_synergy">Synergy with: \n%s</string>
     <string name="new_arena_draft_remove_card">Remove Card?</string>
+
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Based on used race on portrait.</string>
+    <string name="basics_races">Level 24 and 32 reward based on used race on portrait.</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack is an windows application for The Elder Scroll Legends to automatically track your matches and helps you with arena draft.</string>
+    <string name="wabbatrack_arenatier_desc">Arena Tier based on CVH Arena Tier list and synergy list with cards picked before</string>
+    <string name="wabbatrack_autobuild_desc">Auto-Build feature to automatically build a imported deck from your decks or legends-decks</string>
+    <string name="wabbatrack_decktracker_desc">Deck Tracker with Card Hover feature and Attribute/Phophecy cards count with hit chances</string>
+    <string name="wabbatrack_matches_desc">Matches History and Statistics with Win-Rate and filters for modes and season</string>
 
 </resources>

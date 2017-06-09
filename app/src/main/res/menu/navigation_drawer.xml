@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <group
-        android:id="@+id/group_public"
+        android:id="@+id/group_main"
         android:checkableBehavior="single">
         <item
             android:id="@+id/menu_cards"
@@ -23,12 +23,28 @@
             android:title="@string/menu_matches"
             tools:enabled="true" />
 
+    </group>
+
+    <group
+        android:id="@+id/group_tools"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_basics"
+            android:icon="@drawable/ic_menu_basics"
+            android:title="@string/menu_basics" />
+
         <item
             android:id="@+id/menu_arena"
             android:enabled="false"
             android:icon="@drawable/ic_mode_arena"
             android:title="@string/menu_arena"
             tools:enabled="true" />
+
+        <item
+            android:id="@+id/menu_wabbatrack"
+            android:icon="@drawable/ic_menu_wabbatrack"
+            android:title="@string/menu_wabbatrack" />
 
     </group>
 
@@ -55,7 +71,9 @@
 
     </group>
 
-    <group android:checkableBehavior="none">
+    <group
+        android:id="@+id/group_app"
+        android:checkableBehavior="none">
 
         <item
             android:id="@+id/menu_donate"

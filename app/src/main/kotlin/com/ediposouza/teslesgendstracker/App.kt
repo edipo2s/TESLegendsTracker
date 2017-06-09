@@ -52,6 +52,7 @@ class App : MultiDexApplication() {
             setPersistenceEnabled(true)
             ConfigManager.updateCaches {
                 val sync = !ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported()
+                reference.child(BaseInteractor.NODE_BASICS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_SEASONS).keepSynced(sync)

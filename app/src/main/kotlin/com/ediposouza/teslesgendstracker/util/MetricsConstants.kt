@@ -232,6 +232,14 @@ sealed class MetricAction(val name: String) {
         val PARAM_PATH = "path"
         val PARAM_PATH_PARAMS = "pathParams"
     }
+
+    class ACTION_DECK_CHANGE_LANGUAGE(val language: String) : MetricAction("DeckChangeLanguage") {
+        val PARAM_LANGUAGE = "Language"
+    }
+
+    class ACTION_WABBATRACK_VIDEO : MetricAction("WabbaTrackVideo")
+    class ACTION_WABBATRACK_WEBSITE : MetricAction("WabbaTrackWebsite")
+
 }
 
 sealed class MetricScreen(val name: String) {
@@ -243,6 +251,9 @@ sealed class MetricScreen(val name: String) {
 
     }
 
+    class SCREEN_BASICS_LEVELUP : MetricScreen("BasicsLevelUp")
+    class SCREEN_BASICS_RACES : MetricScreen("BasicsRaces")
+    class SCREEN_BASICS_RANKED : MetricScreen("BasicsRanked")
     class SCREEN_CARDS_ALL : MetricScreen("CardsAll")
     class SCREEN_CARDS_COLLECTION : MetricScreen("CardsCollection")
     class SCREEN_CARDS_FAVORED : MetricScreen("CardsFavored")
@@ -260,6 +271,11 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_NEW_MATCHES : MetricScreen("NewMatches")
     class SCREEN_ARTICLES_NEWS : MetricScreen("ArticlesNews")
     class SCREEN_ARTICLES_WORLD : MetricScreen("ArticlesWorld")
+    class SCREEN_WABBATRACK_ABOUT : MetricScreen("WabbaTrackDeckAbout")
+    class SCREEN_WABBATRACK_ARENATIER : MetricScreen("WabbaTrackDeckArenaTier")
+    class SCREEN_WABBATRACK_DECKTRACKER : MetricScreen("WabbaTrackDeckTracker")
+    class SCREEN_WABBATRACK_MATCHES : MetricScreen("WabbaTrackDeckMatches")
+    class SCREEN_WABBATRACK_AUTOBUILD : MetricScreen("WabbaTrackDeckAutoBuild")
     class SCREEN_SEASONS : MetricScreen("Seasons")
     class SCREEN_SPOILER : MetricScreen("Spoiler")
     class SCREEN_ARENA : MetricScreen("Arena")

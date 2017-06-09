@@ -19,10 +19,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
-import com.ediposouza.teslesgendstracker.util.MetricScreen
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.toYearMonth
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_seasons.*
 import kotlinx.android.synthetic.main.itemlist_season.view.*
@@ -128,7 +125,7 @@ class SeasonsFragment : BaseFragment() {
                 }
                 season_month.text = season.date.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
                 season_year.text = season.date.year.toString()
-                season_card_reward.setImageBitmap(Card.getDefaultCardImage(context))
+                season_card_reward.setImageResource(R.drawable.card_back)
                 season_card_reward.setOnClickListener { }
                 val seasonPatches = patches.filter { it.date.toYearMonth() == season.date }
                 season_patches_recycler_view.adapter = PatchAdapter(seasonPatches, onPatchClick)
@@ -137,7 +134,7 @@ class SeasonsFragment : BaseFragment() {
                         val rewardAttr = CardAttribute.valueOf(season.rewardCardAttr.toUpperCase())
                         PublicInteractor.getCard(CardSet.CORE, rewardAttr, season.rewardCardShortname) { card ->
                             context.runOnUiThread {
-                                card.loadCardImageInto(season_card_reward)
+                                season_card_reward.loadFromCard(card)
                                 season_card_reward.setOnClickListener { itemClick(season_card_reward, card) }
                             }
                         }

@@ -1,6 +1,7 @@
 {
-  "name": "Fall of the Dark Brotherhood",
-  "set": "thefallofthedarkbrotherhood",
+  "enabled": false,
+  "title": "Fall of the Dark Brotherhood",
+  "set": "fallofthedarkbrotherhood",
   "cards": {
     "agility": {
       "astrid": {

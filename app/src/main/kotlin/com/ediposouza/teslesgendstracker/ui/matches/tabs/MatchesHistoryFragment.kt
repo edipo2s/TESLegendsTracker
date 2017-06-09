@@ -186,7 +186,7 @@ open class MatchesHistoryFragment : BaseFragment() {
                 val resultText = R.string.match_win.takeIf { match.win } ?: R.string.match_loss
                 match_history_result.setTextColor(ContextCompat.getColor(context, resultColor))
                 match_history_result.text = context.getString(resultText)
-                match_history_legend.visibility = View.VISIBLE.takeIf { match.legend } ?: View.INVISIBLE
+                match_history_legend.visibility = View.VISIBLE.takeIf { match.legend && match.mode == MatchMode.RANKED } ?: View.INVISIBLE
                 val rankText = R.string.match_rank_legend.takeIf { match.legend } ?: R.string.match_rank_normal
                 match_history_rank.text = context.getString(rankText, match.rank)
                 match_history_rank.visibility = View.VISIBLE.takeIf { match.mode == MatchMode.RANKED } ?: View.INVISIBLE

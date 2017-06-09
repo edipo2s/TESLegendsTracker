@@ -5,9 +5,10 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.annotation.IntegerRes
+import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -16,17 +17,24 @@ import android.widget.ImageView
 import android.widget.ListPopupWindow
 import android.widget.Spinner
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.Resource
+import com.bumptech.glide.load.resource.bitmap.BitmapResource
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.PREF_USER_LANGUAGE
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.Card
+import com.ediposouza.teslesgendstracker.data.PatchChange
 import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.NativeExpressAdView
+import com.google.firebase.storage.FirebaseStorage
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.jetbrains.anko.*
 import org.jsoup.Jsoup
@@ -78,7 +86,7 @@ fun String.toIntSafely(): Int {
     return Integer.parseInt(this)
 }
 
-fun ViewGroup.inflate(@IntegerRes resource: Int): View {
+fun ViewGroup.inflate(@LayoutRes resource: Int): View {
     return LayoutInflater.from(context).inflate(resource, this, false)
 }
 
@@ -160,11 +168,91 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
     } else {
         setImageResource(R.drawable.article_cover)
     }
+}
 
+fun ImageView.loadFromCard(card: Card, transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
+    with(card) {
+        if (name.isEmpty() || shortName.isEmpty()) {
+            this@loadFromCard.setImageResource(R.drawable.card_back)
+        } else {
+            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, transform, onNotFound)
+        }
+    }
+}
+
+fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String,
+                           transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
+    if (cardShortName.isEmpty()) {
+        setImageResource(R.drawable.card_back)
+        return
+    }
+    val setName = cardSet.toLowerCase().capitalize()
+    val attrName = cardAttr.toLowerCase().capitalize()
+    val imagePath = "${Card.CARD_PATH}/$setName/$attrName/$cardShortName.webp"
+    Timber.d(imagePath)
+    loadLocalCardImage(imagePath, transform)
+    val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
+    Timber.d("Local: $imagePath - Remote: $remotePath")
+    loadRemoteCardImage(remotePath, transform, imagePath, onNotFound)
+}
+
+private fun ImageView.loadLocalCardImage(imagePath: String, transform: ((Bitmap) -> Bitmap)?) {
+    Glide.with(context)
+            .load("file:///android_asset/$imagePath")
+            .crossFade()
+            .bitmapTransform(object : Transformation<Bitmap> {
+                override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
+                    return transform?.let {
+                        BitmapResource.obtain(transform.invoke(resource.get()), Glide.get(context).getBitmapPool())
+                    } ?: resource
+                }
+
+                override fun getId(): String = imagePath
+
+            })
+            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+            .into(this)
+}
+
+private fun ImageView.loadRemoteCardImage(remotePath: String, transform: ((Bitmap) -> Bitmap)?, imagePath: String, onNotFound: (() -> Unit)?) {
+    FirebaseStorage.getInstance().reference.child(remotePath).metadata.addOnSuccessListener { metadata ->
+        try {
+            Glide.with(context)
+                    .load(metadata.downloadUrl)
+                    .crossFade()
+                    .bitmapTransform(object : Transformation<Bitmap> {
+                        override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
+                            return transform?.let {
+                                BitmapResource.obtain(transform.invoke(resource.get()), Glide.get(context).getBitmapPool())
+                            } ?: resource
+                        }
+
+                        override fun getId(): String = imagePath
+
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(this)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+    }.addOnFailureListener {
+        onNotFound?.invoke()
+    }
+}
+
+fun ImageView.loadFromPatch(patch: PatchChange, patchUuid: String, newImage: Boolean) {
+    with(patch) {
+        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid) {
+            if (newImage) {
+                loadFromCard(set.capitalize(), attr.capitalize(), shortName)
+            }
+        }
+    }
 }
 
 fun LocalDate.toYearMonth(): YearMonth = YearMonth.of(year, month)
 
+@Suppress("DEPRECATION")
 fun Activity.changeAppLanguage(language: String) {
     Timber.d("Changing language to: $language")
     var locale = if (!language.contains("-")) Locale(language) else

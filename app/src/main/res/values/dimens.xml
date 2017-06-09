@@ -22,7 +22,9 @@
 
     <!-- Cards List -->
     <dimen name="card_height">200dp</dimen>
-    <dimen name="card_height_min">160dp</dimen>
+    <dimen name="card_height_micro">160dp</dimen>
+    <dimen name="card_height_nano">130dp</dimen>
+    <dimen name="card_width_nano">90dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>
     <dimen name="card_margin">@dimen/default_margin</dimen>
     <!-- transparent navigation_bar_height + default_margin-->
