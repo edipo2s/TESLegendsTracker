@@ -7,41 +7,41 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/basics_ranked_levelup"
-        android:layout_width="@dimen/size_small"
-        android:layout_height="@dimen/size_small"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
+        android:id="@+id/basics_ranked_icon"
+        android:layout_width="@dimen/size_medium"
+        android:layout_height="@dimen/size_medium"
+        android:layout_marginStart="8dp"
         android:src="@drawable/ic_mode_ranked_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/basics_ranked_level"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/basics_ranked_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:textColor="@android:color/white"
-        android:textSize="28sp"
-        app:layout_constraintStart_toEndOf="@+id/basics_ranked_levelup"
+        android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:text="1" />
+        tools:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/basics_ranked_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="48dp"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/basics_ranked_level"
-        app:layout_constraintStart_toEndOf="@+id/basics_ranked_monthly_value"
         tools:text="Thief"
         app:layout_constraintTop_toTopOf="@+id/basics_ranked_level"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="@+id/basics_ranked_level" />
 
     <ImageView
         android:id="@+id/basics_ranked_reset"
@@ -92,12 +92,12 @@
         android:id="@+id/basics_ranked_monthly_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="48dp"
         tools:text="3x"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="@+id/basics_ranked_level"
         app:layout_constraintTop_toBottomOf="@+id/basics_ranked_level"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/basics_ranked_level" />
 
     <ImageView
         android:id="@+id/basics_ranked_monthly"

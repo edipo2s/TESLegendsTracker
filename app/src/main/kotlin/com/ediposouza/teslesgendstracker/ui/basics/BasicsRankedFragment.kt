@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.data.*
+import com.ediposouza.teslesgendstracker.data.Ranked
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -61,6 +61,21 @@ class BasicsRankedFragment : BaseFragment() {
         fun bind(ranked: Ranked) {
             with(itemView) {
                 val legend = ranked.rank == 0
+                basics_ranked_icon.setImageResource(when (ranked.rank) {
+                    1 -> R.drawable.ic_ranked_the_thief
+                    2 -> R.drawable.ic_ranked_the_atronach
+                    3 -> R.drawable.ic_ranked_the_tower
+                    4 -> R.drawable.ic_ranked_the_lady
+                    5 -> R.drawable.ic_ranked_the_warrior
+                    6 -> R.drawable.ic_ranked_the_apprentice
+                    7 -> R.drawable.ic_ranked_the_steed
+                    8 -> R.drawable.ic_ranked_the_shadow
+                    9 -> R.drawable.ic_ranked_the_mage
+                    10 -> R.drawable.ic_ranked_the_lord
+                    11 -> R.drawable.ic_ranked_the_lover
+                    12 -> R.drawable.ic_ranked_the_ritual
+                    else -> R.drawable.ic_ranked_legend
+                })
                 basics_ranked_level.setText("Legend".takeIf { legend } ?: "${ranked.rank}")
                 basics_ranked_name.setText(ranked.name)
                 basics_ranked_name.visibility = View.VISIBLE.takeUnless { legend } ?: View.GONE
