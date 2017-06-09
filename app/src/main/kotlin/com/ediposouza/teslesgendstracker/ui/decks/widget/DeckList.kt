@@ -321,7 +321,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                     4 -> R.drawable.ic_magika_4
                     5 -> R.drawable.ic_magika_5
                     6 -> R.drawable.ic_magika_6
-                    else -> R.drawable.ic_magika_7plus
+                    7 -> R.drawable.ic_magika_7
+                    8 -> R.drawable.ic_magika_8
+                    9 -> R.drawable.ic_magika_9
+                    10 -> R.drawable.ic_magika_10
+                    11 -> R.drawable.ic_magika_11
+                    else -> R.drawable.ic_magika_12
                 })
                 deckslot_card_qtd.text = "+${slot.qtd}".takeIf { updateMode && slot.qtd > 0 } ?: "${slot.qtd}"
                 deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE
