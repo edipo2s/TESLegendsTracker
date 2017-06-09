@@ -332,5 +332,6 @@
 
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Based on used race on portrait.</string>
+    <string name="basics_races">Level 24 and 32 reward based on used race on portrait.</string>
 
 </resources>

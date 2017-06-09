@@ -12,7 +12,6 @@ import timber.log.Timber
  */
 object PublicInteractor : BaseInteractor() {
 
-    private val NODE_BASICS = "basics"
     private val NODE_BASICS_LEVEL = "level"
     private val NODE_BASICS_RACES = "races"
     private val NODE_BASICS_RANKED = "ranked"
@@ -435,7 +434,7 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val races = ds.children.mapTo(arrayListOf()) {
-                        it.getValue(FirebaseParsers.RaceParser::class.java).toRace(it.key to it.value as List<String>)
+                        FirebaseParsers.RaceParser().toRace(it.key to it.value as List<String>)
                     }
                     Timber.d(races.toString())
                     onSuccess.invoke(races)

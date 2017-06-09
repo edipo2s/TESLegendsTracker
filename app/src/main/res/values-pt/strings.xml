@@ -239,5 +239,6 @@
 
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Baseado na raça usada no retrato.</string>
+    <string name="basics_races">Recompensa de nível 24 e 32 baseado na raça usada no retrato.</string>
 
 </resources>

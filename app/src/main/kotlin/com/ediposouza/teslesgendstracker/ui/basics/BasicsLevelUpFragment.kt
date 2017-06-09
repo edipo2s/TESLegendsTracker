@@ -112,9 +112,9 @@ class BasicsLevelUpFragment : BaseFragment() {
         fun bindEvolveCards(levelUp: LevelUp, cards: List<Card>, onCardClick: (Card, View) -> Unit) {
             with(itemView) {
                 cards.find { it.shortName == levelUp.sourceValue }?.apply {
-                    basics_levelup_souce.loadFromCard(this)
-                    basics_levelup_souce.setOnClickListener {
-                        onCardClick(this, basics_levelup_souce)
+                    basics_levelup_source.loadFromCard(this)
+                    basics_levelup_source.setOnClickListener {
+                        onCardClick(this, basics_levelup_source)
                     }
                 }
                 cards.find { it.shortName == levelUp.target.first() }?.apply {

@@ -29,7 +29,7 @@
         tools:text="1" />
 
     <ImageView
-        android:id="@+id/basics_levelup_souce"
+        android:id="@+id/basics_levelup_source"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/card_height_micro"
         android:layout_marginBottom="16dp"
@@ -51,10 +51,10 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_arrow_forward_green"
-        app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_souce"
+        app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_source"
         app:layout_constraintEnd_toStartOf="@+id/basics_levelup_target1"
-        app:layout_constraintStart_toEndOf="@+id/basics_levelup_souce"
-        app:layout_constraintTop_toTopOf="@+id/basics_levelup_souce" />
+        app:layout_constraintStart_toEndOf="@+id/basics_levelup_source"
+        app:layout_constraintTop_toTopOf="@+id/basics_levelup_source" />
 
     <ImageView
         android:id="@+id/basics_levelup_target1"

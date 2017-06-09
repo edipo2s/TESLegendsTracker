@@ -86,7 +86,7 @@ class BasicsFragment : BaseFragment() {
         var titles: Array<String> = ctx.resources.getStringArray(R.array.basics_tabs)
 
         val basicsLevelUpFragment by lazy { BasicsLevelUpFragment() }
-        val basicsRacesFragment by lazy { BasicsLevelUpFragment() }
+        val basicsRacesFragment by lazy { BasicsRacesFragment() }
         val basicsRankedFragment by lazy { BasicsRankedFragment() }
 
         override fun getItem(position: Int): Fragment {

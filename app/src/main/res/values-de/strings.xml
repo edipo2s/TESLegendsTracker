@@ -238,5 +238,6 @@
 
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Basierend auf gebrauchtem Rennen auf Porträt.</string>
+    <string name="basics_races">Stufe 24 und 32 Belohnung basierend auf gebrauchtem Rennen auf Porträt.</string>
 
 </resources>

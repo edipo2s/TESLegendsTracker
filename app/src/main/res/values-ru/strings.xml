@@ -238,5 +238,6 @@
 
     <string name="basics_extras">Добавочный:</string>
     <string name="basics_portrait">На основе использованной расы на портрете.</string>
+    <string name="basics_races">Награда за уровень 24 и 32 hа основе использованной расы на портрете.</string>
 
 </resources>
