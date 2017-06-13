@@ -8,6 +8,7 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
@@ -175,12 +176,12 @@ fun ImageView.loadFromCard(card: Card, transform: ((Bitmap) -> Bitmap)? = null, 
         if (name.isEmpty() || shortName.isEmpty()) {
             this@loadFromCard.setImageResource(R.drawable.card_back)
         } else {
-            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, transform, onNotFound)
+            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, null, transform, onNotFound)
         }
     }
 }
 
-fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String,
+fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String, @DrawableRes placeholder: Int? = null,
                            transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
     if (cardShortName.isEmpty()) {
         setImageResource(R.drawable.card_back)
@@ -190,16 +191,18 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     val attrName = cardAttr.toLowerCase().capitalize()
     val imagePath = "${Card.CARD_PATH}/$setName/$attrName/$cardShortName.webp"
     Timber.d(imagePath)
-    loadLocalCardImage(imagePath, transform)
+    loadLocalCardImage(imagePath, placeholder, transform)
     val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
-    loadRemoteCardImage(remotePath, transform, imagePath, onNotFound)
+    loadRemoteCardImage(remotePath, placeholder, transform, imagePath, onNotFound)
 }
 
-private fun ImageView.loadLocalCardImage(imagePath: String, transform: ((Bitmap) -> Bitmap)?) {
-    Glide.with(context)
-            .load("file:///android_asset/$imagePath")
-            .crossFade()
+private fun ImageView.loadLocalCardImage(imagePath: String, @DrawableRes placeholder: Int? = null, transform: ((Bitmap) -> Bitmap)?) {
+    val request = Glide.with(context).load("file:///android_asset/$imagePath")
+    placeholder?.let {
+        request.placeholder(it)
+    }
+    request.crossFade()
             .bitmapTransform(object : Transformation<Bitmap> {
                 override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
                     return transform?.let {
@@ -214,12 +217,15 @@ private fun ImageView.loadLocalCardImage(imagePath: String, transform: ((Bitmap)
             .into(this)
 }
 
-private fun ImageView.loadRemoteCardImage(remotePath: String, transform: ((Bitmap) -> Bitmap)?, imagePath: String, onNotFound: (() -> Unit)?) {
-    FirebaseStorage.getInstance().reference.child(remotePath).metadata.addOnSuccessListener { metadata ->
+private fun ImageView.loadRemoteCardImage(remotePath: String, @DrawableRes placeholder: Int? = null,
+                                          transform: ((Bitmap) -> Bitmap)?, imagePath: String, onNotFound: (() -> Unit)?) {
+    FirebaseStorage.getInstance().reference.child(remotePath).downloadUrl.addOnSuccessListener { url ->
         try {
-            Glide.with(context)
-                    .load(metadata.downloadUrl)
-                    .crossFade()
+            val request = Glide.with(context).load(url)
+            placeholder?.let {
+                request.placeholder(it)
+            }
+            request.crossFade()
                     .bitmapTransform(object : Transformation<Bitmap> {
                         override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
                             return transform?.let {
@@ -242,9 +248,9 @@ private fun ImageView.loadRemoteCardImage(remotePath: String, transform: ((Bitma
 
 fun ImageView.loadFromPatch(patch: PatchChange, patchUuid: String, newImage: Boolean) {
     with(patch) {
-        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid) {
+        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid, R.drawable.card_back) {
             if (newImage) {
-                loadFromCard(set.capitalize(), attr.capitalize(), shortName)
+                loadFromCard(set.capitalize(), attr.capitalize(), shortName, R.drawable.card_back)
             }
         }
     }

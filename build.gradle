@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        appVersionName = "1.2.0"
-        appVersionCode = 32
+        appVersionName = "1.2.1"
+        appVersionCode = 34
         prepareToRelease = false
 
         kotlin_version = "1.1.2-4"

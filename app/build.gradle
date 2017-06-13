@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
         minSdkVersion prepareToRelease ? 16 : 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -80,7 +80,7 @@ ext {
     okIOVersion = "1.12.+"
     okHttpVersion = "3.7.+"
     playServicesVersion = "10.2.6"
-    supportLibraryVersion = "25.3.1"
+    supportLibraryVersion = "25.4.0"
     threetenabpVersion = "1.0.+"
 
     testMockitoVersion = "2.7.+"

@@ -36,7 +36,7 @@ import java.text.NumberFormat
 open class DecksPublicFragment : BaseFragment() {
 
     val ADS_EACH_ITEMS = 10 //after 10 lines
-    val DECK_PAGE_SIZE = 8
+    val DECK_PAGE_SIZE = 20
 
     protected var searchFilter: String? = null
     protected var currentClasses = DeckClass.values()
