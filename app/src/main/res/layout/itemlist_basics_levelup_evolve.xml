@@ -30,10 +30,10 @@
 
     <ImageView
         android:id="@+id/basics_levelup_source"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/card_width_nicro"
         android:layout_height="@dimen/card_height_micro"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/card_back"
         app:layout_constraintBottom_toBottomOf="@+id/basics_levelup_target2"
@@ -58,7 +58,7 @@
 
     <ImageView
         android:id="@+id/basics_levelup_target1"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/card_width_nicro"
         android:layout_height="@dimen/card_height_micro"
         android:layout_marginTop="16dp"
         android:src="@drawable/card_back"
@@ -69,7 +69,7 @@
 
     <ImageView
         android:id="@+id/basics_levelup_target2"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/card_width_nicro"
         android:layout_height="@dimen/card_height_micro"
         android:layout_marginEnd="0dp"
         android:src="@drawable/card_back"
