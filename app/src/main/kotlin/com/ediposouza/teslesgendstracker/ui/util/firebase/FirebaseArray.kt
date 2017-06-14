@@ -171,7 +171,9 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
         }
 
         try {
-            mSnapshots.add(index, Pair(snapshot.key, snapshot.getValue(mModel)))
+            snapshot.getValue(mModel)?.let {
+                mSnapshots.add(index, Pair(snapshot.key, it))
+            }
         } catch (e: Exception) {
             Timber.d(e)
         }
@@ -181,7 +183,9 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
     override fun onChildChanged(snapshot: DataSnapshot, previousChildKey: String?) {
         val index = getIndexForKey(snapshot.key)
         try {
-            mSnapshots[index] = Pair(snapshot.key, snapshot.getValue(mModel))
+            snapshot.getValue(mModel)?.let {
+                mSnapshots[index] = Pair(snapshot.key, it)
+            }
         } catch (e: Exception) {
             Timber.d(e)
         }
@@ -198,7 +202,9 @@ class FirebaseArray<T>(var mModel: Class<T>, val mOriginalQuery: () -> Query?, p
         val oldIndex = getIndexForKey(snapshot.key)
         mSnapshots.removeAt(oldIndex)
         val newIndex = 0.takeIf { previousChildKey == null } ?: getIndexForKey(previousChildKey!!) + 1
-        mSnapshots.add(newIndex, Pair(snapshot.key, snapshot.getValue(mModel)))
+        snapshot.getValue(mModel)?.let {
+            mSnapshots.add(newIndex, Pair(snapshot.key, it))
+        }
         notifyChangedListeners(EventType.Moved, newIndex, oldIndex)
     }
 

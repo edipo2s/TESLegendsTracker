@@ -216,9 +216,13 @@ class DeckActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                supportFragmentManager.beginTransaction()
-                        .remove(deckInfoFragment)
-                        .commitNow()
+                try {
+                    supportFragmentManager.beginTransaction()
+                            .remove(deckInfoFragment)
+                            .commitNow()
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
                 ActivityCompat.finishAfterTransition(this)
                 return true
             }

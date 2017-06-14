@@ -42,6 +42,7 @@ import com.ediposouza.teslesgendstracker.ui.matches.tabs.ArenaFragment
 import com.ediposouza.teslesgendstracker.ui.seasons.SeasonsFragment
 import com.ediposouza.teslesgendstracker.ui.spoiler.SpoilerFragment
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -69,6 +70,11 @@ class DashActivity : BaseFilterActivity(),
 
     private var iabHelper: IabHelper? = null
     private var iabHelperStarted: Boolean = false
+    private val adsInterstitial by lazy {
+        InterstitialAd(this@DashActivity).apply {
+            adUnitId = getString(R.string.key_ads_intersticial)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,6 +145,7 @@ class DashActivity : BaseFilterActivity(),
                     .commit()
         }
         checkDeeplinkInfo()
+        adsInterstitial.load(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -164,6 +171,9 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
+        if (!App.hasUserDonate()) {
+            adsInterstitial.show()
+        }
         try {
             iabHelper?.disposeWhenFinished()
         } catch (e: Exception) {
@@ -258,10 +268,10 @@ class DashActivity : BaseFilterActivity(),
                         val ctx = this@DashActivity
                         if (size > 1) {
                             val card = it.filter { it.shortName == this[1] }.firstOrNull()
-                            if (card != null) {
+                            card?.let {
                                 val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
                                         getString(R.string.card_transition_name))
-                                ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                                ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, it), anim.toBundle())
                             }
                         }
                     }

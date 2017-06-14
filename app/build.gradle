@@ -31,6 +31,7 @@ android {
         resValue "string", "app_ads_news_list", "$key_ads_news_list"
         resValue "string", "app_ads_season_list", "$key_ads_season_list"
         resValue "string", "app_ads_patch_full", "$key_ads_patch_full"
+        resValue "string", "key_ads_intersticial", "$key_ads_intersticial"
         resValue "string", "facebook_app_id", "$key_facebook_app_id"
         resValue "string", "mixpanel_app_id", "$key_mixpanel_app_id"
         multiDexEnabled true
@@ -79,7 +80,7 @@ ext {
     coroutines_version = "0.15"
     okIOVersion = "1.12.+"
     okHttpVersion = "3.7.+"
-    playServicesVersion = "10.2.6"
+    playServicesVersion = "11.0.0"
     supportLibraryVersion = "25.4.0"
     threetenabpVersion = "1.0.+"
 
@@ -125,6 +126,7 @@ dependencies {
     compile "com.google.firebase:firebase-perf:$playServicesVersion"
     compile "com.google.firebase:firebase-storage:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
+    compile("com.firebaseui:firebase-ui-storage:2.0.0")
 
     //Fabric
     compile('com.crashlytics.sdk.android:answers:1.3.13') {

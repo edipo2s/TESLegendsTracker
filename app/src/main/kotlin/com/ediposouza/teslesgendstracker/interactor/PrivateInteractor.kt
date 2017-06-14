@@ -224,9 +224,9 @@ object PrivateInteractor : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 Timber.d(ds.value?.toString())
-                val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, false)
-                }.filter { cls == null || it.cls == cls }
+                val decks = ds.children.mapTo(arrayListOf<Deck?>()) {
+                    it.getValue(FirebaseParsers.DeckParser::class.java)?.toDeck(it.key, false)
+                }.filterNotNull().filter { cls == null || it.cls == cls }
                 Timber.d(decks.toString())
                 onSuccess.invoke(decks)
             }
@@ -242,9 +242,9 @@ object PrivateInteractor : BaseInteractor() {
         getUserPrivateDecksRef()?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(ds: DataSnapshot) {
-                val decks = ds.children.mapTo(arrayListOf<Deck>()) {
-                    it.getValue(FirebaseParsers.DeckParser::class.java).toDeck(it.key, true)
-                }.filter { cls == null || it.cls == cls }
+                val decks = ds.children.mapTo(arrayListOf<Deck?>()) {
+                    it.getValue(FirebaseParsers.DeckParser::class.java)?.toDeck(it.key, true)
+                }.filterNotNull().filter { cls == null || it.cls == cls }
                 Timber.d(decks.toString())
                 onSuccess.invoke(decks)
             }
@@ -491,9 +491,9 @@ object PrivateInteractor : BaseInteractor() {
             (if (season != null) query else this).addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(ds: DataSnapshot) {
-                    val matches = ds.children.mapTo(arrayListOf<Match>()) {
-                        it.getValue(FirebaseParsers.MatchParser::class.java).toMatch(it.key)
-                    }.filter { mode == null || it.mode == mode }
+                    val matches = ds.children.mapTo(arrayListOf<Match?>()) {
+                        it.getValue(FirebaseParsers.MatchParser::class.java)?.toMatch(it.key)
+                    }.filterNotNull().filter { mode == null || it.mode == mode }
                     Timber.d(matches.toString())
                     onSuccess.invoke(matches)
                 }
