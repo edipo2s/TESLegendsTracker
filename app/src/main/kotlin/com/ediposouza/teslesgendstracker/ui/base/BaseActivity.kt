@@ -58,7 +58,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     private var googleApiClient: GoogleApiClient? = null
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    protected var canExit = false
+    protected var canExit = true
     protected var currentMethod = MetricsConstants.PARAM_SIGN_METHOD_VALUE_GOOGLE
         set(value) {
             field = value

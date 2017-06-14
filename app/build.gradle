@@ -31,6 +31,7 @@ android {
         resValue "string", "app_ads_news_list", "$key_ads_news_list"
         resValue "string", "app_ads_season_list", "$key_ads_season_list"
         resValue "string", "app_ads_patch_full", "$key_ads_patch_full"
+        resValue "string", "key_ads_intersticial", "$key_ads_intersticial"
         resValue "string", "facebook_app_id", "$key_facebook_app_id"
         resValue "string", "mixpanel_app_id", "$key_mixpanel_app_id"
         multiDexEnabled true

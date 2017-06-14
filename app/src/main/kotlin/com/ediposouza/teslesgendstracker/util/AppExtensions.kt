@@ -34,6 +34,7 @@ import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.NativeExpressAdView
 import com.google.firebase.storage.FirebaseStorage
 import com.mixpanel.android.mpmetrics.MixpanelAPI
@@ -110,6 +111,10 @@ fun NativeExpressAdView.load() {
     } else {
         loadAd(createAdRequest(context))
     }
+}
+
+fun InterstitialAd.load(context: Context) {
+    loadAd(createAdRequest(context))
 }
 
 private fun createAdRequest(context: Context): AdRequest {
