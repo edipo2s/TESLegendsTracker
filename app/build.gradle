@@ -80,7 +80,7 @@ ext {
     coroutines_version = "0.15"
     okIOVersion = "1.12.+"
     okHttpVersion = "3.7.+"
-    playServicesVersion = "10.2.6"
+    playServicesVersion = "11.0.0"
     supportLibraryVersion = "25.4.0"
     threetenabpVersion = "1.0.+"
 
