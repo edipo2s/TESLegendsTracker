@@ -6,9 +6,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
@@ -32,11 +33,13 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.PatchChange
 import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
+import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.NativeExpressAdView
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.jetbrains.anko.*
 import org.jsoup.Jsoup
@@ -181,12 +184,12 @@ fun ImageView.loadFromCard(card: Card, transform: ((Bitmap) -> Bitmap)? = null, 
         if (name.isEmpty() || shortName.isEmpty()) {
             this@loadFromCard.setImageResource(R.drawable.card_back)
         } else {
-            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, null, transform, onNotFound)
+            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, transform, onNotFound)
         }
     }
 }
 
-fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String, @DrawableRes placeholder: Int? = null,
+fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String,
                            transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
     if (cardShortName.isEmpty()) {
         setImageResource(R.drawable.card_back)
@@ -195,19 +198,13 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     val setName = cardSet.toLowerCase().capitalize()
     val attrName = cardAttr.toLowerCase().capitalize()
     val imagePath = "${Card.CARD_PATH}/$setName/$attrName/$cardShortName.webp"
-    Timber.d(imagePath)
-    loadLocalCardImage(imagePath, placeholder, transform)
     val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
-    loadRemoteCardImage(remotePath, placeholder, transform, imagePath, onNotFound)
-}
-
-private fun ImageView.loadLocalCardImage(imagePath: String, @DrawableRes placeholder: Int? = null, transform: ((Bitmap) -> Bitmap)?) {
-    val request = Glide.with(context).load("file:///android_asset/$imagePath")
-    placeholder?.let {
-        request.placeholder(it)
-    }
-    request.crossFade()
+    Glide.with(context)
+            .using(FirebaseImageLoader())
+            .load(FirebaseStorage.getInstance().reference.child(remotePath))
+            .placeholder(getLocalCardBitmap(context, imagePath, transform))
+            .crossFade()
             .bitmapTransform(object : Transformation<Bitmap> {
                 override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
                     return transform?.let {
@@ -219,45 +216,38 @@ private fun ImageView.loadLocalCardImage(imagePath: String, @DrawableRes placeho
 
             })
             .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+            .listener(object : RequestListener<StorageReference, GlideDrawable> {
+                override fun onResourceReady(resource: GlideDrawable?, model: StorageReference?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                    return false
+                }
+
+                override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
+                    onNotFound?.invoke()
+                    return false
+                }
+            })
             .into(this)
-}
-
-private fun ImageView.loadRemoteCardImage(remotePath: String, @DrawableRes placeholder: Int? = null,
-                                          transform: ((Bitmap) -> Bitmap)?, imagePath: String, onNotFound: (() -> Unit)?) {
-    FirebaseStorage.getInstance().reference.child(remotePath).downloadUrl.addOnSuccessListener { url ->
-        try {
-            val request = Glide.with(context).load(url)
-            placeholder?.let {
-                request.placeholder(it)
-            }
-            request.crossFade()
-                    .bitmapTransform(object : Transformation<Bitmap> {
-                        override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
-                            return transform?.let {
-                                BitmapResource.obtain(transform.invoke(resource.get()), Glide.get(context).getBitmapPool())
-                            } ?: resource
-                        }
-
-                        override fun getId(): String = imagePath
-
-                    })
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(this)
-        } catch (e: Exception) {
-            Timber.e(e)
-        }
-    }.addOnFailureListener {
-        onNotFound?.invoke()
-    }
 }
 
 fun ImageView.loadFromPatch(patch: PatchChange, patchUuid: String, newImage: Boolean) {
     with(patch) {
-        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid, R.drawable.card_back) {
+        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid) {
             if (newImage) {
-                loadFromCard(set.capitalize(), attr.capitalize(), shortName, R.drawable.card_back)
+                loadFromCard(set.capitalize(), attr.capitalize(), shortName)
             }
         }
+    }
+}
+
+private fun getLocalCardBitmap(context: Context, imagePath: String, transform: ((Bitmap) -> Bitmap)? = null): Drawable {
+    return try {
+        var cardBitmap = BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
+        transform?.apply {
+            cardBitmap = invoke(cardBitmap)
+        }
+        BitmapDrawable(context.resources, cardBitmap)
+    } catch (e: Exception) {
+        ContextCompat.getDrawable(context, R.drawable.card_back)
     }
 }
 
