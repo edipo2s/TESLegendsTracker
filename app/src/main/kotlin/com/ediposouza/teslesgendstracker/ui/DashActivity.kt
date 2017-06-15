@@ -171,7 +171,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
-        if (!App.hasUserDonate()) {
+        if (BuildConfig.PREPARE_TO_RELEASE && !App.hasUserDonate()) {
             adsInterstitial.show()
         }
         try {
