@@ -180,11 +180,16 @@ fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
 }
 
 fun ImageView.loadFromCard(card: Card, transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
+    loadFromCard(card, 0, transform, onNotFound)
+}
+
+fun ImageView.loadFromCard(card: Card, shoutLevel: Int = 0, transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
     with(card) {
         if (name.isEmpty() || shortName.isEmpty()) {
-            this@loadFromCard.setImageResource(R.drawable.card_back)
+            setImageResource(R.drawable.card_back)
         } else {
-            this@loadFromCard.loadFromCard(set.toString(), attr.name, shortName, transform, onNotFound)
+            val cardShortName = "${shortName}_lv$shoutLevel".takeIf { shoutLevel > 1 } ?: shortName
+            loadFromCard(set.toString(), attr.name, cardShortName, transform, onNotFound)
         }
     }
 }
@@ -198,7 +203,7 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     val setName = cardSet.toLowerCase().capitalize()
     val attrName = cardAttr.toLowerCase().capitalize()
     val imagePath = "${Card.CARD_PATH}/$setName/$attrName/$cardShortName.webp"
-    val remotePath = imagePath.takeIf { cardShortName.contains("_") } ?: "v${context.getCurrentVersion()}/$imagePath"
+    val remotePath = imagePath.takeIf { cardShortName.contains("_201") } ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
     Glide.with(context)
             .using(FirebaseImageLoader())

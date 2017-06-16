@@ -23,7 +23,7 @@
     <!-- Cards List -->
     <dimen name="card_height">200dp</dimen>
     <dimen name="card_height_micro">160dp</dimen>
-    <dimen name="card_width_nicro">110dp</dimen>
+    <dimen name="card_width_micro">110dp</dimen>
     <dimen name="card_height_nano">130dp</dimen>
     <dimen name="card_width_nano">90dp</dimen>
     <dimen name="card_qtd_height">16dp</dimen>

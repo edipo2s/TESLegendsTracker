@@ -124,6 +124,7 @@
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jugar</string>
     <string name="card_sounds_extra_label">Extra</string>
+    <string name="card_levels_label">Nivel:</string>
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>
     <string name="card_full_downloaded">Imagen guardada en la carpeta de descarga.</string>

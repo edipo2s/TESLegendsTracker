@@ -109,6 +109,7 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Shout, Unsummon",
+        "shout": 3,
         "text": "Shout - Level 1. Unsummon an enemy creature with power 3 or less",
         "arenaTier": "Unknown"
       }

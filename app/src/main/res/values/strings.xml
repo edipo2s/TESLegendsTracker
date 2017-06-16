@@ -181,6 +181,7 @@
     <string name="card_sounds_attack_label">Attack</string>
     <string name="card_sounds_play_label">Play</string>
     <string name="card_sounds_extra_label">Extra</string>
+    <string name="card_levels_label">Levels:</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
