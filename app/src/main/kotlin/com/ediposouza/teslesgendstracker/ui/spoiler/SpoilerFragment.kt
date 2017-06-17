@@ -18,6 +18,7 @@ import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_spoiler.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.toast
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -54,6 +55,7 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
         fragmentManager.beginTransaction()
                 .replace(R.id.spoiler_cards_container, SpoilerCardsFragment())
                 .commit()
+        context.toast(getString(R.string.spoiler_image_qlt_warning))
     }
 
     override fun onResume() {

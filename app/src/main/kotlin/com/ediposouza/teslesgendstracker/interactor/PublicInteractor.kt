@@ -144,34 +144,6 @@ object PublicInteractor : BaseInteractor() {
                 })
     }
 
-    fun getSpoilerCards(onSuccess: (List<Card>) -> Unit) {
-        with(database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)) {
-            keepSynced()
-            addValueEventListener(object : ValueEventListener {
-
-                override fun onDataChange(ds: DataSnapshot) {
-                    getSpoilerSet { spoilerSet ->
-                        val set = CardSet.UNKNOWN.apply {
-                            unknownSetName = spoilerSet
-                        }
-                        val cards = ds.children.map {
-                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
-                            it.children.map {
-                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
-                            }.filterNotNull()
-                        }.flatMap { it }
-                        onSuccess.invoke(cards)
-                    }
-                }
-
-                override fun onCancelled(de: DatabaseError) {
-                    Timber.d("Fail: " + de.message)
-                }
-
-            })
-        }
-    }
-
     private fun getSpoilerSet(onSuccess: (String) -> Unit) {
         database.child(NODE_SPOILER).child(KEY_SPOILER_SET)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -187,6 +159,37 @@ object PublicInteractor : BaseInteractor() {
                     }
 
                 })
+    }
+
+    fun getSpoilerCards(onSuccess: (List<Card>) -> Unit) {
+        with(database.child(NODE_SPOILER).child(NODE_SPOILER_CARDS).orderByChild(KEY_CARD_COST)) {
+            keepSynced()
+            addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    getSpoilerTitle { spoilerTitle ->
+                        getSpoilerSet { spoilerSet ->
+                            val set = CardSet.UNKNOWN.apply {
+                                unknownSetName = spoilerSet
+                                unknownSetTitle = spoilerTitle
+                            }
+                            val cards = ds.children.map {
+                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                                it.children.map {
+                                    it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                }.filterNotNull()
+                            }.flatMap { it }
+                            onSuccess.invoke(cards)
+                        }
+                    }
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
+
+            })
+        }
     }
 
     fun getCardsForStatistics(set: CardSet?, onSuccess: (List<CardStatistic>) -> Unit) {

@@ -125,6 +125,7 @@
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jogar</string>
     <string name="card_sounds_extra_label">Extra</string>
+    <string name="card_levels_label">Níveis:</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
     <string name="card_full_downloaded">Imagem salva na pasta de downloads.</string>
@@ -243,6 +244,8 @@
     <string name="basics_extras">Extras:</string>
     <string name="basics_portrait">Baseado na raça usada no retrato.</string>
     <string name="basics_races">Recompensa de nível 24 e 32 baseado na raça usada no retrato.</string>
+
+    <string name="spoiler_image_qlt_warning">Spoiler podem conter cartas com imagem em baixa qualidade</string>
 
     <string name="wabbatrack_about_desc">WabbaTrack é um aplicativo de Windows para The Elder Scroll Legends para rastrear automaticamente suas partidas e ajuda você com draft na arena.</string>
     <string name="wabbatrack_arenatier_desc">Arena Tier com base na CVH Arena Tier List acrescido de lista de sinergias com cartas já escolhidas antes.</string>

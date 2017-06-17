@@ -20,10 +20,10 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
-import android.support.v7.view.ContextThemeWrapper
 import android.support.v7.widget.*
 import android.text.format.DateUtils
 import android.transition.Transition
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -33,6 +33,7 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardBasicInfo
+import com.ediposouza.teslesgendstracker.data.CardSet
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
@@ -42,6 +43,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import kotlinx.android.synthetic.main.itemlist_card_full.view.*
+import kotlinx.android.synthetic.main.itemlist_card_min.view.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.threeten.bp.YearMonth
@@ -282,7 +284,9 @@ class CardActivity : BaseActivity() {
 
     private fun loadCardInfo() {
         updateFavoriteButton()
-        card_set.text = card.set.title
+        card_set.text = card.set.let { set ->
+            set.title.takeIf { set != CardSet.UNKNOWN } ?: set.unknownSetTitle
+        }
         if (card.season.isNotEmpty()) {
             val yearMonth = YearMonth.parse(card.season, DateTimeFormatter.ofPattern(SEASON_UUID_PATTERN))
             val month = yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
@@ -293,6 +297,26 @@ class CardActivity : BaseActivity() {
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
+        configureShoutLevels()
+    }
+
+    private fun configureShoutLevels() {
+        if (card.shout > 1) {
+            card_levels_label.visibility = View.VISIBLE
+            with(card_levels_rv) {
+                visibility = View.VISIBLE
+                layoutManager = LinearLayoutManager(this@CardActivity, LinearLayoutManager.HORIZONTAL, false)
+                val shoutCards = (2..card.shout).asSequence().map { card to it }.toList()
+                adapter = CardLevelsAdapter(shoutCards) { view, level ->
+                    val intent = intentFor<CardLevelActivity>(CardLevelActivity.EXTRA_CARD to card,
+                            CardLevelActivity.EXTRA_CARD_LEVEL to level)
+                    ActivityCompat.startActivity(this@CardActivity, intent,
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(this@CardActivity,
+                                    view, getString(R.string.card_full_transition_name)).toBundle())
+                }
+                setHasFixedSize(true)
+            }
+        }
     }
 
     private fun configureRecycleView() {
@@ -584,6 +608,30 @@ class CardActivity : BaseActivity() {
                 card_patch_desc_shadow.visibility = View.VISIBLE.takeIf { hasPatchVersion } ?: View.GONE
                 card_patch_arrow.visibility = View.GONE.takeIf { isLast } ?: View.VISIBLE
                 setOnClickListener { onCardClick() }
+            }
+        }
+
+    }
+
+    class CardLevelsAdapter(val items: List<Pair<Card, Int>>, val onCardClick: (View, Int) -> Unit) : RecyclerView.Adapter<CardLevelsViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardLevelsViewHolder {
+            return CardLevelsViewHolder(parent?.inflate(R.layout.itemlist_card_min))
+        }
+
+        override fun onBindViewHolder(holder: CardLevelsViewHolder?, position: Int) {
+            holder?.bind(items[position], onCardClick)
+        }
+
+        override fun getItemCount(): Int = items.size
+
+    }
+
+    class CardLevelsViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+
+        fun bind(cardLevel: Pair<Card, Int>, onCardClick: (View, Int) -> Unit) {
+            with(itemView) {
+                card_min_image.loadFromCard(cardLevel.first, cardLevel.second)
+                setOnClickListener { onCardClick(card_min_image, cardLevel.second) }
             }
         }
 

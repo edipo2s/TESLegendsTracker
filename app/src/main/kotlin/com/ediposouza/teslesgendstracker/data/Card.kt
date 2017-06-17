@@ -26,12 +26,14 @@ import timber.log.Timber
 enum class CardSet(val title: String) {
 
     CORE("Core"),
+    HEROESOFSKYRIM("Heroes of Skyrim"),
     MADHOUSE("Madhouse Collection"),
     FALLOFTHEDARKBROTHERHOOD("The Fall of the Dark Brotherhood"),
     TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 
     var unknownSetName = ""
+    var unknownSetTitle = ""
 
     val db = name.toLowerCase()
 
@@ -384,7 +386,8 @@ data class Card(
         val arenaTier: CardArenaTier,
         val arenaTierPlus: List<CardArenaTierPlus?>,
         val evolves: Boolean,
-        val season: String
+        val season: String,
+        val shout: Int
 
 ) : Comparable<Card>, Parcelable {
 
@@ -397,7 +400,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "")
+                listOf(), false, "", 0)
 
         const val ARTS_PATH = "Arts"
         const val CARD_PATH = "Cards"
@@ -417,7 +420,7 @@ data class Card(
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             source.readString(), CardArenaTier.values()[source.readInt()],
             mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
-            1 == source.readInt(), source.readString())
+            1 == source.readInt(), source.readString(), source.readInt())
 
     override fun describeContents() = 0
 
@@ -515,6 +518,7 @@ data class Card(
         dest?.writeList(arenaTierPlus)
         dest?.writeInt((if (evolves) 1 else 0))
         dest?.writeString(season)
+        dest?.writeInt(shout)
     }
 
     override fun compareTo(other: Card): Int {
