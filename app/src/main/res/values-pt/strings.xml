@@ -245,6 +245,8 @@
     <string name="basics_portrait">Baseado na raça usada no retrato.</string>
     <string name="basics_races">Recompensa de nível 24 e 32 baseado na raça usada no retrato.</string>
 
+    <string name="spoiler_image_qlt_warning">Spoiler podem conter cartas com imagem em baixa qualidade</string>
+
     <string name="wabbatrack_about_desc">WabbaTrack é um aplicativo de Windows para The Elder Scroll Legends para rastrear automaticamente suas partidas e ajuda você com draft na arena.</string>
     <string name="wabbatrack_arenatier_desc">Arena Tier com base na CVH Arena Tier List acrescido de lista de sinergias com cartas já escolhidas antes.</string>
     <string name="wabbatrack_autobuild_desc">Recurso Auto-Build para criar automaticamente um deck importado de suas plataformas ou plataformas-decks.</string>

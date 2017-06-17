@@ -304,6 +304,7 @@ class DashActivity : BaseFilterActivity(),
                 }
             }
         }
+        intent = Intent()
     }
 
     private fun updateUserMenuInfo() {

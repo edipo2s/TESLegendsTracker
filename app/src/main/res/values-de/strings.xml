@@ -244,6 +244,8 @@
     <string name="basics_portrait">Basierend auf gebrauchtem Rennen auf Porträt.</string>
     <string name="basics_races">Stufe 24 und 32 Belohnung basierend auf gebrauchtem Rennen auf Porträt.</string>
 
+    <string name="spoiler_image_qlt_warning">Spoiler können Bilder mit geringer Qualität haben</string>
+
     <string name="wabbatrack_about_desc">WabbaTrack ist eine Windows-Anwendung für die Elder Scroll Legends, um Ihre Spiele automatisch zu verfolgen und hilft Ihnen mit Arena Draft.</string>
     <string name="wabbatrack_arenatier_desc">Arena Tier basierend auf CVH Arena Tier Liste und Synergie-Liste mit Karten ausgewählt vor</string>
     <string name="wabbatrack_autobuild_desc">Auto-Build-Funktion, um automatisch ein importiertes Deck aus Ihren Decks oder Legenden-Decks zu bauen.</string>

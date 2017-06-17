@@ -331,6 +331,8 @@
     <string name="basics_portrait">Based on used race on portrait.</string>
     <string name="basics_races">Level 24 and 32 reward based on used race on portrait.</string>
 
+    <string name="spoiler_image_qlt_warning">Spoilers may have low quality images</string>
+
     <string name="wabbatrack_about_desc">WabbaTrack is an windows application for The Elder Scroll Legends to automatically track your matches and helps you with arena draft.</string>
     <string name="wabbatrack_arenatier_desc">Arena Tier based on CVH Arena Tier list and synergy list with cards picked before</string>
     <string name="wabbatrack_autobuild_desc">Auto-Build feature to automatically build a imported deck from your decks or legends-decks</string>

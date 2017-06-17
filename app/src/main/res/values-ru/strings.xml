@@ -244,6 +244,8 @@
     <string name="basics_portrait">На основе использованной расы на портрете.</string>
     <string name="basics_races">Награда за уровень 24 и 32 hа основе использованной расы на портрете.</string>
 
+    <string name="spoiler_image_qlt_warning">Спойлеры могут иметь изображения низкого качества</string>
+
     <string name="wabbatrack_about_desc">WabbaTrack - это приложение для Windows Legends, чтобы автоматически отслеживать ваши матчи и помогает вам с проектом арены.</string>
     <string name="wabbatrack_arenatier_desc">Уровень арены на основе списка уровней и списка симуляторов CVH с картами, выбранными ранее.</string>
     <string name="wabbatrack_autobuild_desc">Функция Auto-Build для автоматической сборки импортированной колоды с ваших колод или легенд-колод.</string>
