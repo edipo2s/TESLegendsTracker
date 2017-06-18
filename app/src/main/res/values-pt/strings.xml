@@ -236,6 +236,7 @@
 
     <string name="arena_title">Escolha uma class para iniciar um novo draft de Arena!</string>
     <string name="new_arena_title">Draft de Arena - %s</string>
+    <string name="new_arena_warning">O valor mais alto nem sempre é o melhor pick. Arena Tiers não se preocupam com sua curva de magicka.</string>
     <string name="new_arena_draft_tip">Toque longo na Carta ou toque na Seta para indicar sua Escolha</string>
     <string name="new_arena_draft_pick">Selecione uma Carta</string>
     <string name="new_arena_draft_synergy">Sinergia com: \n%s</string>

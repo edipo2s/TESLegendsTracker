@@ -235,6 +235,7 @@
 
     <string name="arena_title">Wähle eine Klasse um die Arena zu beginnen.</string>
     <string name="new_arena_title">Arena Entwurf - %s</string>
+    <string name="new_arena_warning">Höchster Wert ist nicht immer die beste Auswahl. Arena Tiers interessiert sich nicht für deine magische Kurve.</string>
     <string name="new_arena_draft_tip">Um eine Karte auszuwählen entweder lange auf die Karte drücken, oder auf den Pfeil drücken.</string>
     <string name="new_arena_draft_pick">Wähle eine Karte aus</string>
     <string name="new_arena_draft_synergy">Synergie mit</string>
