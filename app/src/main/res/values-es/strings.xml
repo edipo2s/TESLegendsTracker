@@ -32,6 +32,7 @@
     <string name="menu_sets">Conjuntos</string>
     <string name="menu_statistics">Estadística</string>
     <string name="menu_compact_view">Vista compacta</string>
+    <string name="menu_only_favorite">Solo Favorito</string>
     <string name="menu_only_private">Solo privado</string>
     <string name="menu_only_collection">Solo da Colecione</string>
     <string name="menu_hide_empty">Ocultar vacio</string>
@@ -84,7 +85,6 @@
 
     <string name="tab_cards_all">Cartas</string>
     <string name="tab_cards_collection">Colección</string>
-    <string name="tab_cards_favorites">Favoritos</string>
     <string name="tab_cards_tokens">Fichas</string>
     <string name="tab_decks_public">Público</string>
     <string name="tab_decks_owned">Propiedad</string>
@@ -100,7 +100,6 @@
     <string name="title_tab_basics_races">Razas</string>
     <string name="title_tab_basics_ranked">Clasificado</string>
     <string name="title_tab_cards_collection">Colección de cartas</string>
-    <string name="title_tab_cards_favorites">Cartas Favoritos</string>
     <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Barajos Publicos</string>
     <string name="title_tab_decks_owned">Barajos propiedad</string>

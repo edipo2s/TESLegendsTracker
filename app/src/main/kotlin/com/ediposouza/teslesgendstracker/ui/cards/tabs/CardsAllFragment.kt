@@ -1,5 +1,7 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
@@ -8,9 +10,11 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
+import android.widget.CompoundButton
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.*
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
@@ -22,6 +26,7 @@ import com.ediposouza.teslesgendstracker.util.inflate
 import com.ediposouza.teslesgendstracker.util.loadFromCard
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
+import kotlinx.android.synthetic.main.include_login_button.*
 import kotlinx.android.synthetic.main.itemlist_card.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.itemsSequence
@@ -35,6 +40,7 @@ open class CardsAllFragment : BaseFragment() {
 
     open val ADS_EACH_ITEMS = 21 //after 7 lines
     open val CARDS_PER_ROW = 3
+    val EXPAND_CODE = 123
 
     var currentAttr: CardAttribute = CardAttribute.STRENGTH
     var cardsLoaded: List<Card> = listOf()
@@ -44,6 +50,7 @@ open class CardsAllFragment : BaseFragment() {
     var rarityFilter: CardRarity? = null
     var searchFilter: String? = null
     var menuSets: SubMenu? = null
+    var onlyFavorites: CompoundButton? = null
     var sets: List<CardSet> = listOf()
     open var enableMenu: Boolean = true
 
@@ -99,6 +106,17 @@ open class CardsAllFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menuSets = menu?.findItem(R.id.menu_sets)?.subMenu
         getSets()
+        menu?.findItem(R.id.menu_only_favorite)?.isVisible = true
+        onlyFavorites = menu?.findItem(R.id.menu_only_favorite)?.actionView as? CompoundButton
+        onlyFavorites?.apply {
+            configSignButtons()
+            setOnCheckedChangeListener { _, _ ->
+                val shouldShowLogin = !App.hasUserLogged() && isChecked
+                cards_recycler_view.visibility = View.INVISIBLE.takeIf { shouldShowLogin } ?: View.VISIBLE
+                signin_buttons?.visibility = View.VISIBLE.takeIf { shouldShowLogin } ?: View.INVISIBLE
+                showCards()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -107,6 +125,13 @@ open class CardsAllFragment : BaseFragment() {
             else -> sets.find { it.ordinal == item?.itemId }?.apply { filterSet(item, this) }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EXPAND_CODE && resultCode == Activity.RESULT_OK) {
+            updateCardsList()
+        }
     }
 
     private fun getSets() {
@@ -161,7 +186,11 @@ open class CardsAllFragment : BaseFragment() {
     @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
-        loadCardsByAttr(currentAttr)
+        if (onlyFavorites?.isChecked ?: false) {
+            showCards()
+        } else {
+            loadCardsByAttr(currentAttr)
+        }
     }
 
     @Subscribe
@@ -226,9 +255,16 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCards() {
-        cardsAdapter.showCards(filteredCards())
-        eventBus.post(CmdUpdateVisibility(true))
-        scrollToTop()
+        if (onlyFavorites?.isChecked ?: false) {
+            PrivateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
+                cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
+                scrollToTop()
+            }
+        } else {
+            cardsAdapter.showCards(filteredCards())
+            eventBus.post(CmdUpdateVisibility(true))
+            scrollToTop()
+        }
     }
 
     protected fun scrollToTop() {
@@ -293,8 +329,13 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCardExpanded(card: Card, view: View) {
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        if (onlyFavorites?.isChecked ?: false) {
+            startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        } else {
+            ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        }
     }
 
     open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,

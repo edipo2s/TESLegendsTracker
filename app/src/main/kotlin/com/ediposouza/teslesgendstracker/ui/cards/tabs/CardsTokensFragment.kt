@@ -1,5 +1,8 @@
 package com.ediposouza.teslesgendstracker.ui.cards.tabs
 
+import android.view.Menu
+import android.view.MenuInflater
+import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 
 /**
@@ -13,6 +16,11 @@ class CardsTokensFragment : CardsAllFragment() {
             cardsAdapter.showCards(filteredCards())
             scrollToTop()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu?.findItem(R.id.menu_only_favorite)?.isVisible = false
     }
 
 }

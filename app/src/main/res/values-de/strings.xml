@@ -32,6 +32,7 @@
     <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistiken</string>
     <string name="menu_compact_view">Kompakte Ansicht</string>
+    <string name="menu_only_favorite">Nur Favorit</string>
     <string name="menu_only_private">Nur Privat</string>
     <string name="menu_only_collection">Nur aus der Sammlung</string>
     <string name="menu_hide_empty">Versteckt leere</string>
@@ -84,7 +85,6 @@
 
     <string name="tab_cards_all">Karten</string>
     <string name="tab_cards_collection">Sammlung</string>
-    <string name="tab_cards_favorites">Favoriten</string>
     <string name="tab_cards_tokens">Token</string>
     <string name="tab_decks_public">Öffentlich</string>
     <string name="tab_decks_owned">Privatgelände</string>
@@ -100,7 +100,6 @@
     <string name="title_tab_basics_races">Rasse</string>
     <string name="title_tab_basics_ranked">Rangliste</string>
     <string name="title_tab_cards_collection">Kartensammlung</string>
-    <string name="title_tab_cards_favorites">Favorisierte Karten</string>
     <string name="title_tab_cards_tokens">Token</string>
     <string name="title_tab_decks_public">Öffentliche Decks</string>
     <string name="title_tab_decks_owned">Privatgelände Decks</string>

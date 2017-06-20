@@ -221,9 +221,9 @@
       }
     },
     "neutral": {
-      "ancientegiant": {
+      "ancientgiant": {
         "creators": "desperateconjuring",
-        "name": "Anciente Giant",
+        "name": "Ancient Giant",
         "cost": "14",
         "type": "Creature",
         "race": "Giant",

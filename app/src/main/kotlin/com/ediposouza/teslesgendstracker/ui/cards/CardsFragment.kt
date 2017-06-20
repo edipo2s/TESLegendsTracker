@@ -18,7 +18,6 @@ import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
-import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsTokensFragment
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.util.*
@@ -68,8 +67,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private fun updateActivityTitle(position: Int) {
         val title = when (position) {
             1 -> R.string.title_tab_cards_collection
-            2 -> R.string.title_tab_cards_favorites
-            3 -> R.string.title_tab_cards_tokens
+            2 -> R.string.title_tab_cards_tokens
             else -> R.string.title_tab_cards_all
         }
         eventBus.post(CmdUpdateTitle(title))
@@ -150,8 +148,10 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
         inflater?.inflate(R.menu.menu_import, menu)
+        inflater?.inflate(R.menu.menu_favorite, menu)
         inflater?.inflate(R.menu.menu_sets, menu)
         menu?.findItem(R.id.menu_import)?.isVisible = false
+        menu?.findItem(R.id.menu_only_favorite)?.isVisible = false
         searchView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as? SearchView
         searchView?.apply {
             queryHint = getString(R.string.cards_search_hint)
@@ -190,13 +190,11 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val cardsAllFragment by lazy { CardsAllFragment() }
         val cardsCollectionFragment by lazy { CardsCollectionFragment() }
         val cardsTokensFragment by lazy { CardsTokensFragment() }
-        val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
 
         override fun getItem(position: Int): CardsAllFragment {
             return when (position) {
                 1 -> cardsCollectionFragment.apply { isEditStarted = false }
-                2 -> cardsFavoritesFragment
-                3 -> cardsTokensFragment
+                2 -> cardsTokensFragment
                 else -> cardsAllFragment
             }
         }

@@ -33,6 +33,7 @@
     <string name="menu_sets">Expanções</string>
     <string name="menu_statistics">Statísticas</string>
     <string name="menu_compact_view">Modo compacto</string>
+    <string name="menu_only_favorite">Apenas Favoritos</string>
     <string name="menu_only_private">Apenas Privados</string>
     <string name="menu_only_collection">Apenas da Colleção</string>
     <string name="menu_hide_empty">Ocultar Vazios</string>
@@ -85,7 +86,6 @@
 
     <string name="tab_cards_all">Cartas</string>
     <string name="tab_cards_collection">Coleção</string>
-    <string name="tab_cards_favorites">Favoritos</string>
     <string name="tab_cards_tokens">Fichas</string>
     <string name="tab_decks_public">Público</string>
     <string name="tab_decks_owned">Próprios</string>
@@ -101,7 +101,6 @@
     <string name="title_tab_basics_races">Raças</string>
     <string name="title_tab_basics_ranked">Ranqueado</string>
     <string name="title_tab_cards_collection">Coleção de Cartas</string>
-    <string name="title_tab_cards_favorites">Cartas Favoritas</string>
     <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Decks Público</string>
     <string name="title_tab_decks_owned">Decks Próprio</string>
