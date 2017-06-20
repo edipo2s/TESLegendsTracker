@@ -152,7 +152,7 @@
     <string name="title_tab_basics_races">Races</string>
     <string name="title_tab_basics_ranked">Ranked</string>
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
-    <string name="title_tab_cards_collection">Cards Collection</string>
+    <string name="title_tab_cards_collection">Collection</string>
     <string name="title_tab_cards_tokens">Tokens</string>
     <string name="title_tab_decks_public">Decks Public</string>
     <string name="title_tab_decks_owned">Decks Owned</string>
@@ -184,6 +184,7 @@
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Levels:</string>
     <string name="card_creators_label">Creators:</string>
+    <string name="card_generates_label">Generates:</string>
     <string name="card_tokens_label">Tokens:</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>

@@ -314,8 +314,9 @@ class CardActivity : BaseActivity() {
     }
 
     private fun configureTokens() {
-        if (card.canGenerateTokens() || card.isToken()) {
-            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() } ?: R.string.card_tokens_label)
+        if (card.canGenerateCards() || card.canGenerateTokens() || card.isToken()) {
+            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() } ?:
+                    R.string.card_generates_label.takeIf { card.canGenerateCards() } ?: R.string.card_tokens_label)
             card_tokens_label.visibility = View.VISIBLE
             with(card_tokens_rv) {
                 val relatedCards = mutableListOf<Card>()
@@ -333,14 +334,15 @@ class CardActivity : BaseActivity() {
                     }
                 }
                 setHasFixedSize(true)
-                if (card.isToken()) {
-                    PublicInteractor.getCards(null) { allCards ->
-                        relatedCards.addAll(allCards.filter { card.creators.contains(it.shortName) })
+                if (card.canGenerateTokens()) {
+                    PublicInteractor.getTokens(null) { allTokens ->
+                        relatedCards.addAll(allTokens.filter { card.tokens.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }
                 } else {
-                    PublicInteractor.getTokens(null) { allTokens ->
-                        relatedCards.addAll(allTokens.filter { card.tokens.contains(it.shortName) })
+                    PublicInteractor.getCards(null) { allCards ->
+                        val related = card.generates.takeIf { card.canGenerateCards() } ?: card.creators
+                        relatedCards.addAll(allCards.filter { related.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }
                 }

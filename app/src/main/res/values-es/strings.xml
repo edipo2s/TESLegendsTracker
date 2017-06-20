@@ -99,7 +99,7 @@
 
     <string name="title_tab_basics_races">Razas</string>
     <string name="title_tab_basics_ranked">Clasificado</string>
-    <string name="title_tab_cards_collection">Colección de cartas</string>
+    <string name="title_tab_cards_collection">Colección</string>
     <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Barajos Publicos</string>
     <string name="title_tab_decks_owned">Barajos propiedad</string>
@@ -127,6 +127,7 @@
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Nivel:</string>
     <string name="card_creators_label">Creadores:</string>
+    <string name="card_generates_label">Genera:</string>
     <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>

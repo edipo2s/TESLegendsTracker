@@ -100,7 +100,7 @@
 
     <string name="title_tab_basics_races">Raças</string>
     <string name="title_tab_basics_ranked">Ranqueado</string>
-    <string name="title_tab_cards_collection">Coleção de Cartas</string>
+    <string name="title_tab_cards_collection">Coleção</string>
     <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Decks Público</string>
     <string name="title_tab_decks_owned">Decks Próprio</string>
@@ -128,6 +128,7 @@
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Níveis:</string>
     <string name="card_creators_label">Criadores:</string>
+    <string name="card_generates_label">Gera:</string>
     <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>

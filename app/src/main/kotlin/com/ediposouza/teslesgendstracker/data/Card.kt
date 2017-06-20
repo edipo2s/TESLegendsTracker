@@ -392,6 +392,7 @@ data class Card(
         val season: String,
         val shout: Int,
         val creators: List<String>,
+        val generates: List<String>,
         val tokens: List<String>
 
 ) : Comparable<Card>, Parcelable {
@@ -405,7 +406,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0, listOf(), listOf())
+                listOf(), false, "", 0, listOf(), listOf(), listOf())
 
         const val ARTS_PATH = "Arts"
         const val ARTS_TOKENS_PATH = "TokensArts"
@@ -426,6 +427,7 @@ data class Card(
             source.readString(), CardArenaTier.values()[source.readInt()],
             mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
             1 == source.readInt(), source.readString(), source.readInt(),
+            mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) })
 
@@ -474,6 +476,8 @@ data class Card(
                     })
         }
     }
+
+    fun canGenerateCards(): Boolean = generates.isNotEmpty()
 
     fun canGenerateTokens(): Boolean = tokens.isNotEmpty()
 
@@ -531,6 +535,7 @@ data class Card(
         dest?.writeString(season)
         dest?.writeInt(shout)
         dest?.writeStringList(creators)
+        dest?.writeStringList(generates)
         dest?.writeStringList(tokens)
     }
 

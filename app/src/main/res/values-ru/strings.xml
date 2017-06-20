@@ -99,7 +99,7 @@
 
     <string name="title_tab_basics_races">Pacas</string>
     <string name="title_tab_basics_ranked">Ранжированный</string>
-    <string name="title_tab_cards_collection">Коллекция карт</string>
+    <string name="title_tab_cards_collection">Коллекция</string>
     <string name="title_tab_cards_tokens">Токены</string>
     <string name="title_tab_decks_public">Публичные колоды</string>
     <string name="title_tab_decks_owned">Приватная колоды</string>
@@ -127,6 +127,7 @@
     <string name="card_sounds_extra_label">дополнительно</string>
     <string name="card_levels_label">Уровни:</string>
     <string name="card_creators_label">Создатель:</string>
+    <string name="card_generates_label">Генерирует:</string>
     <string name="card_tokens_label">Токены::</string>
     <string name="card_patch_current">Текущая версия</string>
     <string name="card_patch_pre">до того-%s версии</string>

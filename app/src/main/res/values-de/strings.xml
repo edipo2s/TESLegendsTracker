@@ -99,7 +99,7 @@
 
     <string name="title_tab_basics_races">Rasse</string>
     <string name="title_tab_basics_ranked">Rangliste</string>
-    <string name="title_tab_cards_collection">Kartensammlung</string>
+    <string name="title_tab_cards_collection">Sammlung</string>
     <string name="title_tab_cards_tokens">Token</string>
     <string name="title_tab_decks_public">Öffentliche Decks</string>
     <string name="title_tab_decks_owned">Privatgelände Decks</string>
@@ -127,6 +127,7 @@
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Ebene:</string>
     <string name="card_creators_label">Urheber:</string>
+    <string name="card_generates_label">Erzeugt:</string>
     <string name="card_tokens_label">Token:</string>
     <string name="card_patch_current">Neuste Version</string>
     <string name="card_patch_pre">Voherige Version</string>

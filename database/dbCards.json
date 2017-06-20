@@ -427,7 +427,8 @@
         "rarity": "Rare",
         "keyword": "Charge",
         "text": "Put two 1/1 Nord Firebrands with Charge into your hand.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generates": "nordfirebrand"
       },
       "riftenpillager": {
         "name": "Riften Pillager",
@@ -783,7 +784,8 @@
         "rarity": "Epic",
         "keyword": "Charge",
         "text": "When Markarth Bannerman attacks, put two 1/1 Nord Firebrands with Charge into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "nordfirebrand"
       },
       "woodorcheadhunter": {
         "name": "Wood Orc Headhunter",
@@ -1328,7 +1330,8 @@
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "attr": "intelligence"
-        }
+        },
+        "generates": "firebolt"
       },
       "daggerfallmage": {
         "name": "Daggerfall Mage",
@@ -1340,7 +1343,8 @@
         "rarity": "Legendary",
         "keyword": "Ward",
         "text": "Ward. After Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "tomeofalteration"
       },
       "darkrift": {
         "name": "Dark Rift",
@@ -1529,7 +1533,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, draw an Ice Spike.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "generates": "icespike"
       },
       "lightningbolt": {
         "name": "Lightning Bolt",
@@ -2406,7 +2411,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "If your opponent doesn't damage you on their turn, sacrifice this and summon a Priest of the Moons in each lane.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "generates": "priestofthemoons"
       },
       "alphawolf": {
         "name": "Alpha Wolf",
@@ -3024,7 +3030,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp, Guard",
         "text": "Last Gasp: Your opponent summons a 2/1 Mournhold Guardian with Guard.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "mournholdguardian"
       },
       "murkwaterwitch": {
         "name": "Murkwater Witch",
@@ -3285,7 +3292,8 @@
         "rarity": "Rare",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Summon a 3/3 Deshaan Sneak.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "deshaansneak"
       },
       "deshaansneak": {
         "name": "Deshaan Sneak",
@@ -3348,7 +3356,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, put a Curse into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "curse"
       },
       "murkwaterskirmisher": {
         "name": "Murkwater Skirmisher",
@@ -3704,7 +3713,8 @@
         "keyword": "",
         "text": "Summon a Chaurus Reaper in each lane",
         "arenaTier": "Good",
-        "season": "2017_04"
+        "season": "2017_04",
+        "generates": "chaurusreaper"
       },
       "nestofvipers": {
         "name": "Nest of Vipers",
@@ -3716,7 +3726,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Fill a lane with territorial Vipers.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "generates": "territorialviper"
       }
     },
     "endurance": {
@@ -4032,7 +4043,8 @@
         "keyword": "Summon",
         "text": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
         "arenaTier": "Poor",
-        "season": "2016_09"
+        "season": "2016_09",
+        "generates": "swampleviathan"
       },
       "imperialarmor": {
         "name": "Imperial Armor",
@@ -4721,7 +4733,8 @@
         "text": "Guard. Last Gasp: Summon a 2/1 Mournhold Guardian with Guard.",
         "attr1": "intelligence",
         "attr2": "agility",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "mournholdguardian"
       },
       "sentinelbattlemace": {
         "name": "Sentinel Battlemace",
@@ -5256,7 +5269,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Summon a Slaughterfish in each lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "slaughterfish"
       },
       "snappingdreugh": {
         "name": "Snapping Dreugh",
@@ -5392,7 +5406,8 @@
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Dwemer"
-        }
+        },
+        "generates": "dwarvenspider"
       },
       "orbofvaermina": {
         "name": "Orb of Vaermina",
@@ -5429,7 +5444,8 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Guard",
         "text": "Brekathrough. When Dwarven Centurion is dealt damage, draw a 0/3 Dwarven Spider with Guard.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "dwarvenspider"
       },
       "goldbrand": {
         "name": "Goldbrand",
