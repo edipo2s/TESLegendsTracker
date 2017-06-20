@@ -271,7 +271,11 @@ class DashActivity : BaseFilterActivity(),
                             card?.let {
                                 val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
                                         getString(R.string.card_transition_name))
-                                ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, it), anim.toBundle())
+                                try {
+                                    ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                                } catch (e: Exception) {
+                                    startActivity(CardActivity.newIntent(ctx, card))
+                                }
                             }
                         }
                     }

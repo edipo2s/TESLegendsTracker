@@ -366,11 +366,13 @@ class DeckActivity : BaseActivity() {
                 runOnUiThread {
                     val name = ownerUser.name
                     deck_details_create_by.text = name.takeIf { name.isNotEmpty() } ?: deck.owner
-                    Glide.with(this@DeckActivity)
-                            .load(ownerUser.photoUrl)
-                            .placeholder(ContextCompat.getDrawable(this@DeckActivity, R.drawable.ic_user))
-                            .transform(CircleTransform(this@DeckActivity))
-                            .into(deck_details_create_by_photo)
+                    if (!this@DeckActivity.isDestroyed) {
+                        Glide.with(this@DeckActivity)
+                                .load(ownerUser.photoUrl)
+                                .placeholder(ContextCompat.getDrawable(this@DeckActivity, R.drawable.ic_user))
+                                .transform(CircleTransform(this@DeckActivity))
+                                .into(deck_details_create_by_photo)
+                    }
                 }
             }
         }
