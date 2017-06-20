@@ -51,8 +51,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:clickable="true"
+            android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_favorite_unchecked" />
+            android:src="@drawable/ic_favorite_unchecked"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/card_more_info_label"
@@ -287,6 +290,35 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_toEndOf="@id/card_levels_label"
+            android:fadeScrollbars="false"
+            android:orientation="horizontal"
+            android:scrollbarSize="@dimen/small_margin"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+            android:scrollbars="horizontal"
+            android:visibility="gone"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/itemlist_card_min"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/card_tokens_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_levels_rv"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/card_creators_label"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/card_tokens_rv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_height_micro"
+            android:layout_below="@id/card_levels_rv"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_toEndOf="@id/card_tokens_label"
             android:fadeScrollbars="false"
             android:orientation="horizontal"
             android:scrollbarSize="@dimen/small_margin"

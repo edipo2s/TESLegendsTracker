@@ -22,6 +22,7 @@ import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_arena_draft.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.toast
 import org.threeten.bp.LocalDateTime
 
 /**
@@ -100,6 +101,7 @@ class NewArenaDraftFragment : BaseFragment() {
             arena_draft_cards3.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_ARENA_DRAFT())
+        context.toast(R.string.new_arena_warning)
     }
 
     @Subscribe

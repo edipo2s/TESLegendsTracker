@@ -33,6 +33,7 @@
     <string name="menu_sets">Expanções</string>
     <string name="menu_statistics">Statísticas</string>
     <string name="menu_compact_view">Modo compacto</string>
+    <string name="menu_only_favorite">Apenas Favoritos</string>
     <string name="menu_only_private">Apenas Privados</string>
     <string name="menu_only_collection">Apenas da Colleção</string>
     <string name="menu_hide_empty">Ocultar Vazios</string>
@@ -85,7 +86,7 @@
 
     <string name="tab_cards_all">Cartas</string>
     <string name="tab_cards_collection">Coleção</string>
-    <string name="tab_cards_favorites">Favoritos</string>
+    <string name="tab_cards_tokens">Fichas</string>
     <string name="tab_decks_public">Público</string>
     <string name="tab_decks_owned">Próprios</string>
     <string name="tab_decks_favorites">Favoritos</string>
@@ -99,8 +100,8 @@
 
     <string name="title_tab_basics_races">Raças</string>
     <string name="title_tab_basics_ranked">Ranqueado</string>
-    <string name="title_tab_cards_collection">Coleção de Cartas</string>
-    <string name="title_tab_cards_favorites">Cartas Favoritas</string>
+    <string name="title_tab_cards_collection">Coleção</string>
+    <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Decks Público</string>
     <string name="title_tab_decks_owned">Decks Próprio</string>
     <string name="title_tab_decks_favorites">Decks Favoritos</string>
@@ -126,6 +127,9 @@
     <string name="card_sounds_play_label">Jogar</string>
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Níveis:</string>
+    <string name="card_creators_label">Criadores:</string>
+    <string name="card_generates_label">Gera:</string>
+    <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versão Atual</string>
     <string name="card_patch_pre">Versão pre-%s</string>
     <string name="card_full_downloaded">Imagem salva na pasta de downloads.</string>
@@ -236,6 +240,7 @@
 
     <string name="arena_title">Escolha uma class para iniciar um novo draft de Arena!</string>
     <string name="new_arena_title">Draft de Arena - %s</string>
+    <string name="new_arena_warning">O valor mais alto nem sempre é o melhor pick. Arena Tiers não se preocupam com sua curva de magicka.</string>
     <string name="new_arena_draft_tip">Toque longo na Carta ou toque na Seta para indicar sua Escolha</string>
     <string name="new_arena_draft_pick">Selecione uma Carta</string>
     <string name="new_arena_draft_synergy">Sinergia com: \n%s</string>

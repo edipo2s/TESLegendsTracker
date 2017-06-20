@@ -31,9 +31,7 @@ import android.widget.Toast
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
-import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.data.CardBasicInfo
-import com.ediposouza.teslesgendstracker.data.CardSet
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
@@ -58,9 +56,15 @@ class CardActivity : BaseActivity() {
     companion object {
 
         private val EXTRA_CARD = "cardExtra"
+        private val EXTRA_PREVIOUS_CARD = "previousCardExtra"
+        private val EXTRA_FROM_SPOILER = "fromSpoilerExtra"
 
-        fun newIntent(context: Context, card: Card): Intent {
-            return context.intentFor<CardActivity>(EXTRA_CARD to card)
+        fun newIntent(context: Context, card: Card, previousCard: Card? = null, fromSpoiler: Boolean = false): Intent {
+            return context.intentFor<CardActivity>(EXTRA_CARD to card, EXTRA_FROM_SPOILER to fromSpoiler).apply {
+                previousCard?.let {
+                    putExtra(EXTRA_PREVIOUS_CARD, previousCard)
+                }
+            }
         }
 
     }
@@ -70,15 +74,20 @@ class CardActivity : BaseActivity() {
     private val PERMISSION_WRITE_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
     private val card: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_CARD) ?: Card.DUMMY }
+    private val previousCard: Card by lazy { intent.getParcelableExtra<Card>(EXTRA_PREVIOUS_CARD) ?: Card.DUMMY }
+    private val fromSpoiler: Boolean by lazy { intent.getBooleanExtra(EXTRA_FROM_SPOILER, false) }
     private val cardInfoSheetBehavior: BottomSheetBehavior<CardView> by lazy { BottomSheetBehavior.from(card_bottom_sheet) }
     private val cardVersions by lazy {
-        val cardBasicInfo = CardBasicInfo(card.shortName, card.set.toString(), card.attr.name)
+        val cardBasicInfo = CardBasicInfo(card.shortName, card.set.toString(), card.attr.name, card.isToken())
         mutableListOf(Pair(cardBasicInfo, getString(R.string.card_patch_current)))
     }
 
     private var favorite: Boolean = false
     private var userCardQtd = 0
     private val onCardClick = {
+        if (cardInfoSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            cardInfoSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
         finishAndAnimateBack()
         MetricsManager.trackAction(MetricAction.ACTION_CARD_DETAILS_CLOSE_TAP())
     }
@@ -167,9 +176,10 @@ class CardActivity : BaseActivity() {
     }
 
     private fun configQtdAndFavoriteInfo() {
-        if (App.hasUserLogged()) {
+        if (App.hasUserLogged() && !card.isToken() && !fromSpoiler) {
             showUserCardQtd()
         }
+        card_favorite_btn.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.GONE
         PrivateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()
@@ -294,14 +304,54 @@ class CardActivity : BaseActivity() {
             card_reward_label.visibility = View.VISIBLE
         }
         card_race.text = card.race.name.toLowerCase().capitalize().replace("_", " ")
+        card_race_label.visibility = View.VISIBLE.takeIf { card.type == CardType.CREATURE } ?: View.GONE
+        card_race.visibility = View.VISIBLE.takeIf { card.type == CardType.CREATURE } ?: View.GONE
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
+        configureTokens()
         configureShoutLevels()
     }
 
+    private fun configureTokens() {
+        if (card.canGenerateCards() || card.canGenerateTokens() || card.isToken()) {
+            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() } ?:
+                    R.string.card_generates_label.takeIf { card.canGenerateCards() } ?: R.string.card_tokens_label)
+            card_tokens_label.visibility = View.VISIBLE
+            with(card_tokens_rv) {
+                val relatedCards = mutableListOf<Card>()
+                visibility = View.VISIBLE
+                layoutManager = LinearLayoutManager(this@CardActivity, LinearLayoutManager.HORIZONTAL, false)
+                adapter = CardRelatedAdapter(relatedCards) { view, relatedCard ->
+                    Timber.d("${relatedCard.shortName} - ${previousCard.shortName}")
+                    if (relatedCard == previousCard) {
+                        ActivityCompat.finishAfterTransition(this@CardActivity)
+                    } else {
+                        val intent = CardActivity.newIntent(this@CardActivity, relatedCard, card)
+                        ActivityCompat.startActivity(this@CardActivity, intent,
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(this@CardActivity,
+                                        view, getString(R.string.card_transition_name)).toBundle())
+                    }
+                }
+                setHasFixedSize(true)
+                if (card.canGenerateTokens()) {
+                    PublicInteractor.getTokens(null) { allTokens ->
+                        relatedCards.addAll(allTokens.filter { card.tokens.contains(it.shortName) })
+                        adapter.notifyDataSetChanged()
+                    }
+                } else {
+                    PublicInteractor.getCards(null) { allCards ->
+                        val related = card.generates.takeIf { card.canGenerateCards() } ?: card.creators
+                        relatedCards.addAll(allCards.filter { related.contains(it.shortName) })
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
+    }
+
     private fun configureShoutLevels() {
-        if (card.shout > 1) {
+        if (card.keywords.contains(CardKeyword.SHOUT) && card.shout > 1) {
             card_levels_label.visibility = View.VISIBLE
             with(card_levels_rv) {
                 visibility = View.VISIBLE
@@ -337,7 +387,7 @@ class CardActivity : BaseActivity() {
             if (cardPatches.isNotEmpty()) {
                 cardPatches.forEach {
                     val cardPatchName = "${card.shortName}_${it.uuidDate}"
-                    val cardBasicInfo = CardBasicInfo(cardPatchName, card.set.name, card.attr.name)
+                    val cardBasicInfo = CardBasicInfo(cardPatchName, card.set.name, card.attr.name, card.isToken())
                     cardVersions.add(Pair(cardBasicInfo, getString(R.string.card_patch_pre, it.desc)))
                 }
                 with(card_recycler_view) {
@@ -598,7 +648,7 @@ class CardActivity : BaseActivity() {
                  isLast: Boolean, hasPatchVersion: Boolean, onCardClick: () -> Unit) {
             with(itemView) {
                 with(card_patch_full_image) {
-                    loadFromCard(cardBasicInfo.set, cardBasicInfo.attr, cardBasicInfo.shortName)
+                    loadFromCard(cardBasicInfo.set, cardBasicInfo.attr, cardBasicInfo.shortName, cardBasicInfo.isToken)
                     ViewCompat.setTransitionName(this, context.getString(R.string.card_transition_name).takeIf { isFirst } ?: "")
                     setPadding(if (isLast) 0 else resources.getDimensionPixelSize(R.dimen.huge_margin), 0, 0, 0)
                 }
@@ -632,6 +682,30 @@ class CardActivity : BaseActivity() {
             with(itemView) {
                 card_min_image.loadFromCard(cardLevel.first, cardLevel.second)
                 setOnClickListener { onCardClick(card_min_image, cardLevel.second) }
+            }
+        }
+
+    }
+
+    class CardRelatedAdapter(val items: List<Card>, val onCardClick: (View, Card) -> Unit) : RecyclerView.Adapter<CardRelatedViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardRelatedViewHolder {
+            return CardRelatedViewHolder(parent?.inflate(R.layout.itemlist_card_min))
+        }
+
+        override fun onBindViewHolder(holder: CardRelatedViewHolder?, position: Int) {
+            holder?.bind(items[position], onCardClick)
+        }
+
+        override fun getItemCount(): Int = items.size
+
+    }
+
+    class CardRelatedViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
+
+        fun bind(card: Card, onCardClick: (View, Card) -> Unit) {
+            with(itemView) {
+                card_min_image.loadFromCard(card)
+                setOnClickListener { onCardClick(card_min_image, card) }
             }
         }
 

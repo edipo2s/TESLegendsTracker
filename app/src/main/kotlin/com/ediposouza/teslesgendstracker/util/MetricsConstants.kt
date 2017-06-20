@@ -257,6 +257,7 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_CARDS_ALL : MetricScreen("CardsAll")
     class SCREEN_CARDS_COLLECTION : MetricScreen("CardsCollection")
     class SCREEN_CARDS_FAVORED : MetricScreen("CardsFavored")
+    class SCREEN_CARDS_TOKENS : MetricScreen("CardsTokens")
     class SCREEN_CARDS_STATISTICS : MetricScreen("CardsStatistics")
     class SCREEN_CARD_DETAILS : MetricScreen("CardDetails")
     class SCREEN_CARD_FULL_ART : MetricScreen("CardFullArt")

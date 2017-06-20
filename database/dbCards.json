@@ -152,7 +152,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to each player.",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
         }
@@ -203,7 +203,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Mage Slayer can't be damaged by actions.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "northwindoutpost": {
         "name": "Northwind Outpost",
@@ -338,7 +338,7 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "blightedalit": {
         "name": "Blighted Alit",
@@ -427,7 +427,8 @@
         "rarity": "Rare",
         "keyword": "Charge",
         "text": "Put two 1/1 Nord Firebrands with Charge into your hand.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generates": "nordfirebrand"
       },
       "riftenpillager": {
         "name": "Riften Pillager",
@@ -548,7 +549,8 @@
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
-        }
+        },
+        "tokens": "steeldagger"
       },
       "bangkoraibutcher": {
         "name": "Bangkorai Butcher",
@@ -699,7 +701,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, deal 4 damage to a random enemy.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Poor"
       },
       "whiterunrecruit": {
         "name": "Whiterun Recruit",
@@ -758,7 +760,7 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "grahtwoodambusher": {
         "name": "Grahtwood Ambusher",
@@ -782,7 +784,8 @@
         "rarity": "Epic",
         "keyword": "Charge",
         "text": "When Markarth Bannerman attacks, put two 1/1 Nord Firebrands with Charge into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "nordfirebrand"
       },
       "woodorcheadhunter": {
         "name": "Wood Orc Headhunter",
@@ -845,7 +848,7 @@
         "rarity": "Epic",
         "keyword": "Breakthrough",
         "text": "Breakthrough, You can't be damaged by actions or supports.",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "season": "2017_01"
       },
       "triumphantjarl": {
@@ -858,7 +861,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: If you have more health than your opponent, draw two cards.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane"
       },
       "whirlingduelist": {
         "name": "Whirling Duelist",
@@ -870,7 +873,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When Whirling Duelist equips an item, deal 1 damage to each enemy creature in this lane.",
-        "arenaTier": "Average",
+        "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
         }
@@ -885,7 +888,7 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Summon, Unsummon",
         "text": "Breakthrough. Summon: Unsummon a enemy creature or destroy an enemy support.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane"
       },
       "savageogre": {
         "name": "Savage Ogre",
@@ -1011,7 +1014,8 @@
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "equip"
-        }
+        },
+        "tokens": "steeldagger"
       },
       "firebolt": {
         "name": "Firebolt",
@@ -1092,7 +1096,8 @@
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "equip"
-        }
+        },
+        "tokens": "ironsword"
       },
       "evermoresteward": {
         "name": "Evermore Steward",
@@ -1116,7 +1121,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Put a random Atronach into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "flameatronach, frostatronach, stormatronach"
       },
       "icespike": {
         "name": "Ice Spike",
@@ -1209,7 +1215,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Sacrifice a creature to summon a 3/2 Sundered Shade in each lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Average",
+        "tokens": "sunderedshade"
       },
       "steelsword": {
         "name": "Steel Sword",
@@ -1281,7 +1288,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to your opponent.",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "camlornsentinel": {
         "name": "Camlorn Sentinel",
@@ -1323,7 +1330,8 @@
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "attr": "intelligence"
-        }
+        },
+        "generates": "firebolt"
       },
       "daggerfallmage": {
         "name": "Daggerfall Mage",
@@ -1335,7 +1343,8 @@
         "rarity": "Legendary",
         "keyword": "Ward",
         "text": "Ward. After Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "tomeofalteration"
       },
       "darkrift": {
         "name": "Dark Rift",
@@ -1347,7 +1356,8 @@
         "rarity": "Epic",
         "keyword": "Activate",
         "text": "Uses: 5. Activate: Deal 1 damage to your opponent. If Dark Rift has dealt 5 damage, sacrifice it to summon a Storm Atronach.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "tokens": "stormatronach"
       },
       "desperateconjuring": {
         "name": "Desperate Conjuring",
@@ -1359,7 +1369,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Sacrifice a creature to summon a random creature that costs 2 more.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "ancientegiant"
       },
       "farsightnereid": {
         "name": "Farsight Nereid",
@@ -1446,7 +1457,8 @@
         "rarity": "Epic",
         "keyword": "Ward, Guard",
         "text": "Ward. After Breton Conjurer's Ward is broken, summon a 5/5 Frost Atronach with Guard.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "frostatronach"
       },
       "dresguard": {
         "name": "Dres Guard",
@@ -1470,7 +1482,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard. Other friendly creatures can't be Shackled.",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "drestormentor": {
         "name": "Dres Tormentor",
@@ -1509,7 +1521,7 @@
         "rarity": "Rare",
         "keyword": "Prophecy",
         "text": "Prophecy. Deal 2 damage to all creatures in one lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "icewraith": {
         "name": "Ice Wraith",
@@ -1521,7 +1533,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, draw an Ice Spike.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "generates": "icespike"
       },
       "lightningbolt": {
         "name": "Lightning Bolt",
@@ -1665,7 +1678,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Friendly creatures get +1/+1 for each keyword they have.",
-        "arenaTier": "Terrible",
+        "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "keyword"
         },
@@ -1795,7 +1808,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of each turn, if you played two actions, summon a random Atronach.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "tokens": "flameatronach, frostatronach, stormatronach"
       },
       "wispmother": {
         "name": "Wispmother",
@@ -1847,7 +1861,8 @@
         "rarity": "Legendary",
         "keyword": "Summon, Breakthrough, Evolves",
         "text": "Summon: Summon a 5/3 Flame Atronach with Breakthrough in each lane.",
-        "evolves": true
+        "evolves": true,
+        "tokens": "flameatronach"
       },
       "nahkriindragonpriest": {
         "name": "Nahkriin, Dragon Priest",
@@ -1872,7 +1887,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Summon a Flame Atronach in each lane. When you summon another creature, deal 2 damage to your opponent.",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "tokens": "flameatronach"
       },
       "divaythfyr": {
         "name": "Divayth Fyr",
@@ -1885,7 +1901,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Deal 6 damage to a random enemy. At the start of your turn, Divayth Fyr summons a Daughter of Fyr.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "alfefyr, beytefyr, deltefyr, uupsefyr"
       }
     },
     "willpower": {
@@ -1911,7 +1928,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "aldmeripatriot": {
         "name": "Aldmeri Patriot",
@@ -2013,7 +2030,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Summon a 1/1 Imperial Grunt in each lane.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "imperialgrunt"
       },
       "sunholdmedic": {
         "name": "Sunhold Medic",
@@ -2314,7 +2332,8 @@
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
-        }
+        },
+        "tokens": "youngwolf"
       },
       "pitlion": {
         "name": "Pit Lion",
@@ -2338,7 +2357,7 @@
         "rarity": "Common",
         "keyword": "Pilfer",
         "text": "Pilfer: Draw a card.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "resoluteally": {
         "name": "Resolute Ally",
@@ -2392,7 +2411,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "If your opponent doesn't damage you on their turn, sacrifice this and summon a Priest of the Moons in each lane.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Poor",
+        "generates": "priestofthemoons"
       },
       "alphawolf": {
         "name": "Alpha Wolf",
@@ -2506,7 +2526,8 @@
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "strategy": "Aggro"
-        }
+        },
+        "tokens": "imperialgrunt"
       },
       "warcry": {
         "name": "War Cry",
@@ -2581,7 +2602,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of your turn, summon a 1/1 Imperial Grunt in a random lane.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "tokens": "imperialgrunt"
       },
       "imperialsiegeengine": {
         "name": "Imperial Siege Engine",
@@ -2605,7 +2627,7 @@
         "rarity": "Epic",
         "keyword": "Prophecy, Summon, Guard",
         "text": "Prophecy. Summon: Give a creature +2/+2 and Guard.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "piercingjavelin": {
         "name": "Piercing Javelin",
@@ -2719,7 +2741,8 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon",
         "text": "Breakthrough. Summon: Summon a 1/1 Imperial Grunt, then gain 1 health for each friendly creature.",
-        "arenaTier": "Average"
+        "arenaTier": "Good",
+        "tokens": "imperialgrunt"
       },
       "risinglegate": {
         "name": "Rising Legate",
@@ -2731,7 +2754,8 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Evolves",
         "text": "Breakthrough. Summon: Summon a 1/1 Imperial Grunt.",
-        "evolves": true
+        "evolves": true,
+        "tokens": "imperialgrunt"
       },
       "auroransentry": {
         "name": "Auroran Sentry",
@@ -2743,7 +2767,7 @@
         "rarity": "Legendary",
         "keyword": "Guard",
         "text": "Guard. When Auroran Sentry is dealt damage, you gain that much health.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "dawnswrath": {
         "name": "Dawn's Wrath",
@@ -2767,7 +2791,7 @@
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Destroy an enemy creature in this lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "miraakdragonborn": {
         "name": "Miraak, Dragonborn",
@@ -2794,7 +2818,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Give a creature -1/-1.",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "murkwatergoblin": {
         "name": "Murkwater Goblin",
@@ -2818,7 +2842,7 @@
         "rarity": "Common",
         "keyword": "Shackle",
         "text": "Shackle a creature and deal 1 damage to it.",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "mournholdguardian": {
         "name": "Mournhold Guardian",
@@ -2855,7 +2879,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Shuffle three Brotherhood Assassins into your deck.",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "tokens": "brotherhoodassassin"
       },
       "voraciousspriggan": {
         "name": "Voracious Spriggan",
@@ -3005,7 +3030,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp, Guard",
         "text": "Last Gasp: Your opponent summons a 2/1 Mournhold Guardian with Guard.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "mournholdguardian"
       },
       "murkwaterwitch": {
         "name": "Murkwater Witch",
@@ -3116,7 +3142,7 @@
         "rarity": "Common",
         "keyword": "Charge, Drain",
         "text": "Charge, Drain",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "greenheartknight": {
         "name": "Greenheart Knight",
@@ -3164,7 +3190,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "If Murkwater Butcher is in your hand during your first turn, reduce his cost to 1.",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "murkwatersavage": {
         "name": "Murkwater Savage",
@@ -3230,7 +3256,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage to your opponent and gain 3 health.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Poor"
       },
       "varaniscourier": {
         "name": "Varanis Courier",
@@ -3266,7 +3292,8 @@
         "rarity": "Rare",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Summon a 3/3 Deshaan Sneak.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "deshaansneak"
       },
       "deshaansneak": {
         "name": "Deshaan Sneak",
@@ -3329,7 +3356,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, put a Curse into your hand.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent",
+        "generates": "curse"
       },
       "murkwaterskirmisher": {
         "name": "Murkwater Skirmisher",
@@ -3422,7 +3450,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Charge",
         "text": "Summon: Summon a 2/2 Wood Elf Scout with Charge in each lane with a wounded enemy creature.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "tokens": "woodelfscout"
       },
       "cliffracer": {
         "name": "Cliff Racer",
@@ -3606,7 +3635,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Summon a random Animal.",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "wildspriggan": {
         "name": "Wild Spriggan",
@@ -3618,7 +3647,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Evolves",
         "text": "Summon: Summon a 2/3 Snow Fox.",
-        "evolves": true
+        "evolves": true,
+        "tokens": "snowfox"
       },
       "chaurusreaper": {
         "name": "Chaurus Reaper",
@@ -3642,7 +3672,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, summon a random Spider.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "tokens": "cavernspider, poisonousspider, protectivespider, "
       },
       "spiderdaedra": {
         "name": "Spider Daedra",
@@ -3654,7 +3685,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Fill your lanes with 2/1 Spiderlings. Last Gasp: Destroy all friendly Spiderlings.",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "tokens": "spiderling"
       },
       "tazkadthepackmaster": {
         "name": "Tazkad the Packmaster",
@@ -3667,7 +3699,8 @@
         "unique": true,
         "keyword": "Breakthrough, Charge, Last Gasp",
         "text": "Breakthrough, Charge. Last Gasp: Summon a 4/4 Durzog.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "durzog"
       },
       "chaurusbreedingpit": {
         "name": "Chaurus Breeding Pit",
@@ -3679,8 +3712,9 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Summon a Chaurus Reaper in each lane",
-        "arenaTier": "Unknown",
-        "season": "2017_04"
+        "arenaTier": "Good",
+        "season": "2017_04",
+        "generates": "chaurusreaper"
       },
       "nestofvipers": {
         "name": "Nest of Vipers",
@@ -3692,7 +3726,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Fill a lane with territorial Vipers.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor",
+        "generates": "territorialviper"
       }
     },
     "endurance": {
@@ -3742,7 +3777,8 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp; Summon a 1/1 Skeleton.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "skeleton"
       },
       "iliacsorcerer": {
         "name": "Iliac Sorcerer",
@@ -3802,7 +3838,7 @@
         "rarity": "Rare",
         "keyword": "Activate",
         "text": "Uses: 3. Activate: Give a creature +0/+1.",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "enchantedplate": {
         "name": "Enchanted Plate",
@@ -3955,7 +3991,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Friendly Orcs have +0/+2.",
-        "arenaTier": "Poor",
+        "arenaTier": "Terrible",
         "arenaTierPlus": {
           "race": "Orc"
         }
@@ -4007,7 +4043,8 @@
         "keyword": "Summon",
         "text": "Summon: +1 max magicka. At the start of your turn, if you have 15 or more max magicka, sacrifice this to summon an 8/8 Swamp Leviathan in each lane.",
         "arenaTier": "Poor",
-        "season": "2016_09"
+        "season": "2016_09",
+        "generates": "swampleviathan"
       },
       "imperialarmor": {
         "name": "Imperial Armor",
@@ -4019,7 +4056,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+0/+6",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "mummify": {
         "name": "Mummify",
@@ -4031,7 +4068,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy",
         "text": "Prophecy. Transform a creature into a 2/2 Shriveled Mummy.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "tokens": "shriveledmummy"
       },
       "necromancersamulet": {
         "name": "Necromancer's Amulet",
@@ -4085,7 +4123,7 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Guard, Summon: Gain +1 max magicka.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "wrothgarartisan": {
         "name": "Wrothgar Artisan",
@@ -4172,7 +4210,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "At the end of your turn, summon a 1/1 Argonian Recruit. If you have 7 or more max magicka, summon a 3/3 Argonian Veteran instead.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "argonianrecruit, argonianveteran"
       },
       "cavegrahl": {
         "name": "Cave Grahl",
@@ -4260,7 +4299,7 @@
         "unique": true,
         "keyword": "Lethal",
         "text": "Lethal, When another friendly creature Slays, give it +2/+2.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "midnightsweep": {
         "name": "Midnight Sweep",
@@ -4272,7 +4311,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
         "text": "Prophecy. Summon a 2/2 Colovian Trooper with Guard in each lane.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "coloviantrooper"
       },
       "northpointcaptain": {
         "name": "Northpoint Captain",
@@ -4284,7 +4324,8 @@
         "rarity": "Rare",
         "keyword": "Summon, Guard",
         "text": "Summon: Summon a 0/4 Northpoint Herald with Guard.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "northpointherald"
       },
       "northpointlieutenant": {
         "name": "Northpoint Lieutenant",
@@ -4508,7 +4549,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent",
+        "tokens": "skeleton"
       },
       "lowlandtroll": {
         "name": "Lowland Troll",
@@ -4557,7 +4599,8 @@
         "rarity": "Legendary",
         "keyword": "Summon, Slay",
         "text": "Summon and Slay: Put a Blood Magic Spell into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "corpsecurse, drainlife, gargoyle, raisedead"
       },
       "nighttalonlord": {
         "name": "Night Talon Lord",
@@ -4690,7 +4733,8 @@
         "text": "Guard. Last Gasp: Summon a 2/1 Mournhold Guardian with Guard.",
         "attr1": "intelligence",
         "attr2": "agility",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "mournholdguardian"
       },
       "sentinelbattlemace": {
         "name": "Sentinel Battlemace",
@@ -4842,7 +4886,8 @@
         "text": "Summon: Summon a 2/2 Colovian Trooper with Guard in each lane. When a friendly creature is destroyed, General Tullius gains +1/+1.",
         "attr1": "willpower",
         "attr2": "endurance",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "tokens": "coloviantrooper"
       },
       "gortwoggronagorm": {
         "name": "Gortwog gro-Nagorm",
@@ -5224,7 +5269,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Summon a Slaughterfish in each lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generates": "slaughterfish"
       },
       "snappingdreugh": {
         "name": "Snapping Dreugh",
@@ -5360,7 +5406,8 @@
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Dwemer"
-        }
+        },
+        "generates": "dwarvenspider"
       },
       "orbofvaermina": {
         "name": "Orb of Vaermina",
@@ -5397,7 +5444,8 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Guard",
         "text": "Brekathrough. When Dwarven Centurion is dealt damage, draw a 0/3 Dwarven Spider with Guard.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generates": "dwarvenspider"
       },
       "goldbrand": {
         "name": "Goldbrand",
@@ -5601,7 +5649,8 @@
         "arenaTier": "Good",
         "arenaTierPlus": {
           "keyword": "lethal"
-        }
+        },
+        "tokens": "completedcontract"
       },
       "brotherhoodslayer": {
         "name": "Brotherhood Slayer",
@@ -5613,7 +5662,8 @@
         "rarity": "Common",
         "keyword": "Prophecy",
         "text": "Prophecy. Slay: Put a Completed Contract into your hand.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane",
+        "tokens": "completedcontract"
       },
       "brotherhoodsanctuary": {
         "name": "Brotherhood Sanctuary",
@@ -5730,7 +5780,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, summon the highest cost creature from your discard pile and give Charge. At the end of the turn, put it on the bottom of your deck.",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "littlegirl": {
         "name": "Little Girl",
@@ -5742,7 +5792,8 @@
         "rarity": "Rare",
         "keyword": "Change",
         "text": "At the start of your turn, Little Girl Changes into a 5/5 Ageless Vampire with Drain",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "agelessvampire"
       },
       "stalkingshadowscale": {
         "name": "Stalking Shadowscale",
@@ -5766,7 +5817,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Your opponent's cards cost 1 more next turn.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       }
     },
     "intelligence": {
@@ -5795,7 +5846,8 @@
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "Aggro"
-        }
+        },
+        "tokens": "corsair, steeldagger"
       },
       "daggersinthedark": {
         "name": "Daggers in the Dark",
@@ -5810,7 +5862,8 @@
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "text": "equip"
-        }
+        },
+        "tokens": "steeldagger"
       },
       "palaceconspirator": {
         "name": "Palace Conspirator",
@@ -5822,7 +5875,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card. Then discard a card.",
-        "arenaTier": "Good"
+        "arenaTier": "Poor"
       },
       "speakerterenus": {
         "name": "Speaker Terenus",
@@ -5865,7 +5918,7 @@
         "rarity": "Common",
         "keyword": "Ward, Summon",
         "text": "Ward. Summon: +1/+1 for each action in your discard pile.",
-        "arenaTier": "Poor",
+        "arenaTier": "Terrible",
         "arenaTierPlus": {
           "type": "action"
         }
@@ -5932,7 +5985,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses: Unlimited. Activate: Summon 0/1 Target with Guard for your opponent. Once 20 enemy creatures have died, deal 20 damage to your opponent, gain 20 health, and draw up to 10 cards.",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "tokens": "target"
       }
     },
     "strength": {
@@ -5998,7 +6052,8 @@
         "rarity": "Rare",
         "text": "",
         "keyword": "Summon a Skeever in each lane with power and health equal to the number of Infestations you've played. Shuffle two copies of this into your deck.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "tokens": "skeever"
       },
       "underworldvigilante": {
         "name": "Underworld Vigilante",
@@ -6024,6 +6079,7 @@
         "text": "A friendly creature deals damage equal to its power to all other creatures in its lane.",
         "arenaTier": "Good",
         "arenaTierPlus": {
+          "attack": ">_4",
           "keyword": "Lethal"
         }
       }
@@ -6066,7 +6122,8 @@
         "keyword": "Summon",
         "text": "Summon: Put a 0/2 Makeshift Defenses with Guard into your hand.",
         "rarity": "Common",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "tokens": "makeshiftdefenses"
       },
       "penitusoculatusagent": {
         "name": "Penitus Oculatus Agent",
@@ -6102,7 +6159,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Destroy an enemy creature. Give all friendly creatures in its lane +1/+1.",
-        "arenaTier": "Average"
+        "arenaTier": "Excellent"
       },
       "theblackdragon": {
         "name": "The Black Dragon",

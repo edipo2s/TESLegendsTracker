@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/grey_900_with_alpha" />
+                </shape>
+            </item>
+            <item android:bottom="1dp">
+                <shape android:shape="oval">
+                    <solid android:color="@color/colorAccent" />
+
+                    <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/ic_favorite_menu_checked" android:gravity="center" />
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/grey_900_with_alpha" />
+                </shape>
+            </item>
+            <item android:bottom="1dp">
+                <shape android:shape="oval">
+                    <solid android:color="@android:color/white" />
+
+                    <size android:width="@dimen/deck_menu_switch_size" android:height="@dimen/deck_menu_switch_size" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/ic_favorite_menu_unchecked" android:gravity="center" />
+        </layer-list>
+    </item>
+</selector>

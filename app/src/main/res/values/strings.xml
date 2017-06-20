@@ -62,6 +62,7 @@
     <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistics</string>
     <string name="menu_compact_view">Compact View</string>
+    <string name="menu_only_favorite">Only Favorite</string>
     <string name="menu_only_private">Only Private</string>
     <string name="menu_only_collection">Only from Collection</string>
     <string name="menu_hide_empty">Hide Empty</string>
@@ -135,7 +136,7 @@
 
     <string name="tab_cards_all">Cards</string>
     <string name="tab_cards_collection">Collection</string>
-    <string name="tab_cards_favorites">Favorites</string>
+    <string name="tab_cards_tokens">Tokens</string>
     <string name="tab_decks_public">Public</string>
     <string name="tab_decks_owned">Owned</string>
     <string name="tab_decks_favorites">Favorites</string>
@@ -151,8 +152,8 @@
     <string name="title_tab_basics_races">Races</string>
     <string name="title_tab_basics_ranked">Ranked</string>
     <string name="title_tab_cards_all" translatable="false">@string/app_name_full</string>
-    <string name="title_tab_cards_collection">Cards Collection</string>
-    <string name="title_tab_cards_favorites">Cards Favorites</string>
+    <string name="title_tab_cards_collection">Collection</string>
+    <string name="title_tab_cards_tokens">Tokens</string>
     <string name="title_tab_decks_public">Decks Public</string>
     <string name="title_tab_decks_owned">Decks Owned</string>
     <string name="title_tab_decks_favorites">Decks Favorites</string>
@@ -182,6 +183,9 @@
     <string name="card_sounds_play_label">Play</string>
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Levels:</string>
+    <string name="card_creators_label">Creators:</string>
+    <string name="card_generates_label">Generates:</string>
+    <string name="card_tokens_label">Tokens:</string>
     <string name="card_patch_current">Current Version</string>
     <string name="card_patch_pre">pre-%s Version</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
@@ -322,6 +326,7 @@
 
     <string name="arena_title">Choose a class to start a new Arena draft!</string>
     <string name="new_arena_title">Arena Draft - %s</string>
+    <string name="new_arena_warning">Highest value is not always the best pick. Arena Tiers don\'t care about your magicka curve.</string>
     <string name="new_arena_draft_tip">Long tap on Card or tap on Arrow to choose your Pick</string>
     <string name="new_arena_draft_pick">Select a Card</string>
     <string name="new_arena_draft_synergy">Synergy with: \n%s</string>

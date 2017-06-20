@@ -99,6 +99,10 @@ open class BaseFragment : Fragment() {
 
     open fun configLoggedViews() {
         signin_buttons.visibility = View.INVISIBLE.takeIf { App.hasUserLogged() } ?: View.VISIBLE
+        configSignButtons()
+    }
+
+    fun configSignButtons() {
         signin_google_button.setOnClickListener { showLogin() }
         with(signin_facebook_button) {
             setReadPermissions("email")

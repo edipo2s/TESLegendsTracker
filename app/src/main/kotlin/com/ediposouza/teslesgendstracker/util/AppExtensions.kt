@@ -189,12 +189,12 @@ fun ImageView.loadFromCard(card: Card, shoutLevel: Int = 0, transform: ((Bitmap)
             setImageResource(R.drawable.card_back)
         } else {
             val cardShortName = "${shortName}_lv$shoutLevel".takeIf { shoutLevel > 1 } ?: shortName
-            loadFromCard(set.toString(), attr.name, cardShortName, transform, onNotFound)
+            loadFromCard(set.toString(), attr.name, cardShortName, card.isToken(), transform, onNotFound)
         }
     }
 }
 
-fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String,
+fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: String, isToken: Boolean = false,
                            transform: ((Bitmap) -> Bitmap)? = null, onNotFound: (() -> Unit)? = null) {
     if (cardShortName.isEmpty()) {
         setImageResource(R.drawable.card_back)
@@ -202,7 +202,7 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     }
     val setName = cardSet.toLowerCase().capitalize()
     val attrName = cardAttr.toLowerCase().capitalize()
-    val imagePath = "${Card.CARD_PATH}/$setName/$attrName/$cardShortName.webp"
+    val imagePath = "${"Cards".takeUnless { isToken } ?: "Tokens"}/$setName/$attrName/$cardShortName.webp"
     val remotePath = imagePath.takeIf { cardShortName.contains("_201") } ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
     Glide.with(context)

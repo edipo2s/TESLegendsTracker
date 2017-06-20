@@ -32,10 +32,11 @@
     <string name="menu_sets">Сеты</string>
     <string name="menu_statistics">Статистика</string>
     <string name="menu_compact_view">Скрыть пустые</string>
+    <string name="menu_only_favorite">Только Любимый</string>
     <string name="menu_only_private">Только приватные</string>
     <string name="menu_only_collection">Только из коллекции</string>
     <string name="menu_hide_empty"></string>
-    <string name="menu_favorite">любимый</string>
+    <string name="menu_favorite">Любимый</string>
     <string name="menu_unfavorite">Удалить из избранного</string>
     <string name="menu_like">подобно</string>
     <string name="menu_unlike">В отличие от</string>
@@ -84,7 +85,7 @@
 
     <string name="tab_cards_all">Карты</string>
     <string name="tab_cards_collection">Коллекция</string>
-    <string name="tab_cards_favorites">Избранные</string>
+    <string name="tab_cards_tokens">Токены</string>
     <string name="tab_decks_public">общественного</string>
     <string name="tab_decks_owned">Подержанный</string>
     <string name="tab_decks_favorites">Избранные</string>
@@ -98,8 +99,8 @@
 
     <string name="title_tab_basics_races">Pacas</string>
     <string name="title_tab_basics_ranked">Ранжированный</string>
-    <string name="title_tab_cards_collection">Коллекция карт</string>
-    <string name="title_tab_cards_favorites">карты Избранное</string>
+    <string name="title_tab_cards_collection">Коллекция</string>
+    <string name="title_tab_cards_tokens">Токены</string>
     <string name="title_tab_decks_public">Публичные колоды</string>
     <string name="title_tab_decks_owned">Приватная колоды</string>
     <string name="title_tab_decks_favorites">вертушки Избранное</string>
@@ -125,6 +126,9 @@
     <string name="card_sounds_play_label">Играть</string>
     <string name="card_sounds_extra_label">дополнительно</string>
     <string name="card_levels_label">Уровни:</string>
+    <string name="card_creators_label">Создатель:</string>
+    <string name="card_generates_label">Генерирует:</string>
+    <string name="card_tokens_label">Токены::</string>
     <string name="card_patch_current">Текущая версия</string>
     <string name="card_patch_pre">до того-%s версии</string>
     <string name="card_full_downloaded"></string>
@@ -235,6 +239,7 @@
 
     <string name="arena_title">Выберите класс, чтобы начать новый проект Arena!</string>
     <string name="new_arena_title">Арена Проект - %s</string>
+    <string name="new_arena_warning">Наивысшее значение не всегда является лучшим выбором. Arena Tiers не заботятся о вашей кривой магии.</string>
     <string name="new_arena_draft_tip">Длинное нажатие на карты или нажмите на стрелку, чтобы выбрать ваш выбор</string>
     <string name="new_arena_draft_pick">Выберите карту</string>
     <string name="new_arena_draft_synergy">Взаимодействие с: \n%s</string>

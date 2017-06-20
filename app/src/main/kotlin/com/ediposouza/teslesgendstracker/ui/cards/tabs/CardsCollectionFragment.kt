@@ -52,8 +52,6 @@ import java.util.*
  */
 open class CardsCollectionFragment : CardsAllFragment() {
 
-    private val EXPAND_CODE = 123
-
     override val isCardsCollection: Boolean = true
 
     var isEditStarted: Boolean = false
@@ -110,8 +108,9 @@ open class CardsCollectionFragment : CardsAllFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menu?.findItem(R.id.menu_import)?.isVisible = true
         super.onCreateOptionsMenu(menu, inflater)
+        menu?.findItem(R.id.menu_import)?.isVisible = true
+        menu?.findItem(R.id.menu_only_favorite)?.isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

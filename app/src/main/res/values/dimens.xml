@@ -57,6 +57,7 @@
     <dimen name="deck_icon_height">24dp</dimen>
     <dimen name="deck_private_icon_height">16dp</dimen>
     <dimen name="deck_menu_switch_size">20dp</dimen>
+    <dimen name="deck_menu_favorite_icon_size">14dp</dimen>
     <dimen name="deck_menu_private_icon_size">12dp</dimen>
     <dimen name="deck_menu_percent_icon_size">14dp</dimen>
     <dimen name="deck_menu_compact_view_list_icon_size">14dp</dimen>

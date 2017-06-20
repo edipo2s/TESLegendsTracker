@@ -1,0 +1,487 @@
+{
+  "core": {
+    "agility": {
+      "brotherhoodassassin": {
+        "creators": "ungolimthelistener",
+        "name": "Brotherhood Assassin",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Legendary",
+        "keyword": "Lethal, Summon",
+        "text": "Lethal, Summon: Draw a card."
+      },
+      "cavernspider": {
+        "creators": "spiderlair",
+        "name": "Cavern Spider",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Spider",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Shackle a random enemy creature."
+      },
+      "durzog": {
+        "creators": "tazkadthepackmaster",
+        "name": "Durzog",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Reptile",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": ""
+      },
+      "poisonousspider": {
+        "creators": "spiderlair",
+        "name": "Poisonous Spider",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Spider",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Lethal",
+        "text": "Lethal"
+      },
+      "protectivespider": {
+        "creators": "spiderlair",
+        "name": "Protective Spider",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Spider",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "snowfox": {
+        "creators": "wildspriggan",
+        "name": "Snowfox",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Animal",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "spiderling": {
+        "creators": "spiderdaedra",
+        "name": "Spiderling",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "2",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "woodelfscout": {
+        "creators": "camoranscoutleader",
+        "name": "Wood Elf Scout",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Wood Elf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Charge",
+        "text": "Charge"
+      }
+    },
+    "endurance": {
+      "argonianrecruit": {
+        "creators": "blackmarshwarden",
+        "name": "Argonian Recruit",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Argonian",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "argonianveteran": {
+        "creators": "blackmarshwarden",
+        "name": "Argonian Veteran",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Argonian",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "coloviantrooper": {
+        "creators": "midnightsweep, generaltullius, alanddivided",
+        "name": "Colovian Trooper",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "corpsecurse": {
+        "creators": "bloodmagiclord",
+        "name": "Corpse Curse",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "Shackle all enemy creatures in a lane."
+      },
+      "drainlife": {
+        "creators": "bloodmagiclord",
+        "name": "Drain Life",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "Deal 5 damage to your opponent and gain 5 health."
+      },
+      "northpointherald": {
+        "creators": "northpointcaptain",
+        "name": "Northpoint Herald",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "0",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "gargoyle": {
+        "creators": "bloodmagiclord",
+        "name": "Gargoyle",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Gargoyle",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "raisedead": {
+        "creators": "bloodmagiclord",
+        "name": "Raise Dead",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "Summon a random creature from each discard pile."
+      },
+      "shriveledmummy": {
+        "creators": "mummify",
+        "name": "Shriveled Mummy",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Mummy",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "skeleton": {
+        "creators": "deathlessdraugr, bonecolossus",
+        "name": "Skeleton",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "neutral": {
+      "ancientgiant": {
+        "creators": "desperateconjuring",
+        "name": "Ancient Giant",
+        "cost": "14",
+        "type": "Creature",
+        "race": "Giant",
+        "attack": "14",
+        "health": "14",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": ""
+      },
+      "steeldagger": {
+        "creators": "alikrsurvivalist, crownquartermaster, daggersinthedark, corsairship",
+        "name": "Steel Dagger",
+        "cost": "1",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "+1/+0"
+      }
+    },
+    "intelligence": {
+      "alfefyr": {
+        "creators": "divaythfyr",
+        "name": "Alfe Fyr",
+        "cost": "11",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Deal 6 damage to a random enemy."
+      },
+      "beytefyr": {
+        "creators": "divaythfyr",
+        "name": "Beyte Fyr",
+        "cost": "11",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Deal 6 damage to a random enemy."
+      },
+      "deltefyr": {
+        "creators": "divaythfyr",
+        "name": "Delte Fyr",
+        "cost": "11",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Deal 6 damage to a random enemy."
+      },
+      "flameatronach": {
+        "creators": "highrocksummoner, magesguildretreat, expertatromancer, supremeatromancer",
+        "name": "Flame Atronach",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "5",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Breakthrough",
+        "text": "Breakthrough"
+      },
+      "frostatronach": {
+        "creators": "highrocksummoner, bretonconjurer, magesguildretreat",
+        "name": "Frost Atronach",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Rare",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "ironsword": {
+        "creators": "dunmernightblade",
+        "name": "Iron Sword",
+        "cost": "2",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "+2/+0"
+      },
+      "stormatronach": {
+        "creators": "highrocksummoner, darkrift, magesguildretreat",
+        "name": "Storm Atronach",
+        "cost": "6",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "7",
+        "health": "5",
+        "rarity": "Rare",
+        "keyword": "Ward",
+        "text": "Ward"
+      },
+      "sunderedshade": {
+        "creators": "soulsplit",
+        "name": "Sundered Shade",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Spirit",
+        "attack": "3",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "uupsefyr": {
+        "creators": "divaythfyr",
+        "name": "Uupse Fyr",
+        "cost": "11",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Deal 6 damage to a random enemy."
+      }
+    },
+    "willpower": {
+      "imperialgrunt": {
+        "creators": "scoutingpatrol, imperialreinforcements, imperialmight, renownedlegate, risinglegate",
+        "name": "Imperial Grunt",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "youngwolf": {
+        "creators": "packwolf",
+        "name": "Young Wolf",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    }
+  },
+  "fallofthedarkbrotherhood": {
+    "agility": {
+      "completedcontract": {
+        "creators": "astrid, brotherhoodslayer",
+        "name": "Completed Contract",
+        "cost": "0",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Gain 1 magicka this turn."
+      }
+    },
+    "endurance": {
+      "agelessvampire": {
+        "creators": "littlegirl",
+        "name": "Ageless Vampire",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Vampire",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Rare",
+        "keyword": "Drain",
+        "text": "Drain"
+      }
+    },
+    "intelligence": {
+      "corsair": {
+        "creators": "corsairship",
+        "name": "Corsair",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "neutral": {
+      "makeshiftdefenses": {
+        "creators": "markedman",
+        "name": "Makeshift Defenses",
+        "cost": "0",
+        "type": "Creature",
+        "race": "Defense",
+        "attack": "0",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "target": {
+        "creators": "thenightmother",
+        "name": "Target",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Khajiit",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      }
+    },
+    "strength": {
+      "skeever": {
+        "creators": "skeeverinfestation",
+        "name": "Skeever",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    }
+  },
+  "heroesofskyrim": {
+    "endurance": {
+      "grandmasterdelphine": {
+        "creators": "innkeeperdelphine",
+        "name": "Grandmaster Delphine",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": "Can't be damaged or targeted by enemy Dragons."
+      }
+    }
+  }
+}
