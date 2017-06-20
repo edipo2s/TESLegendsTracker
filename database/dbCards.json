@@ -1365,7 +1365,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Sacrifice a creature to summon a random creature that costs 2 more.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "tokens": "ancientegiant"
       },
       "farsightnereid": {
         "name": "Farsight Nereid",

@@ -31,10 +31,7 @@ import android.widget.Toast
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
-import com.ediposouza.teslesgendstracker.data.Card
-import com.ediposouza.teslesgendstracker.data.CardBasicInfo
-import com.ediposouza.teslesgendstracker.data.CardSet
-import com.ediposouza.teslesgendstracker.data.CardType
+import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
@@ -352,7 +349,7 @@ class CardActivity : BaseActivity() {
     }
 
     private fun configureShoutLevels() {
-        if (card.shout > 1) {
+        if (card.keywords.contains(CardKeyword.SHOUT) && card.shout > 1) {
             card_levels_label.visibility = View.VISIBLE
             with(card_levels_rv) {
                 visibility = View.VISIBLE

@@ -466,5 +466,22 @@
         "text": ""
       }
     }
+  },
+  "heroesofskyrim": {
+    "endurance": {
+      "grandmasterdelphine": {
+        "creators": "innkeeperdelphine",
+        "name": "Grandmaster Delphine",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": "Can't be damaged or targeted by enemy Dragons."
+      }
+    }
   }
 }

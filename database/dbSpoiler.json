@@ -68,7 +68,8 @@
         "keyword": "",
         "text": "After you play a Dragon or Schout, Innkeeper Delphine changes into Grandmaster Delphine.",
         "arenaTier": "Unknown",
-        "shout": 2
+        "shout": 2,
+        "tokens": "grandmasterdelphine"
       },
       "mentorofthewatch": {
         "name": "Mentor of the Watch",
