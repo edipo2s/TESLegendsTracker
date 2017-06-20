@@ -85,6 +85,7 @@
     <string name="tab_cards_all">Карты</string>
     <string name="tab_cards_collection">Коллекция</string>
     <string name="tab_cards_favorites">Избранные</string>
+    <string name="tab_cards_tokens">Токены</string>
     <string name="tab_decks_public">общественного</string>
     <string name="tab_decks_owned">Подержанный</string>
     <string name="tab_decks_favorites">Избранные</string>
@@ -100,6 +101,7 @@
     <string name="title_tab_basics_ranked">Ранжированный</string>
     <string name="title_tab_cards_collection">Коллекция карт</string>
     <string name="title_tab_cards_favorites">карты Избранное</string>
+    <string name="title_tab_cards_tokens">Токены</string>
     <string name="title_tab_decks_public">Публичные колоды</string>
     <string name="title_tab_decks_owned">Приватная колоды</string>
     <string name="title_tab_decks_favorites">вертушки Избранное</string>
@@ -125,6 +127,8 @@
     <string name="card_sounds_play_label">Играть</string>
     <string name="card_sounds_extra_label">дополнительно</string>
     <string name="card_levels_label">Уровни:</string>
+    <string name="card_creators_label">Создатель:</string>
+    <string name="card_tokens_label">Токены::</string>
     <string name="card_patch_current">Текущая версия</string>
     <string name="card_patch_pre">до того-%s версии</string>
     <string name="card_full_downloaded"></string>

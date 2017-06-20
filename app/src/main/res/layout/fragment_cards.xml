@@ -22,6 +22,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:tabBackground="@android:color/transparent"
             app:tabGravity="fill"
+            app:tabMode="fixed"
             tools:targetApi="lollipop" />
 
     </android.support.design.widget.AppBarLayout>

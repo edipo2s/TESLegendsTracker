@@ -19,6 +19,7 @@ import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsCollectionFragment
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsFavoritesFragment
+import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsTokensFragment
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
 import com.ediposouza.teslesgendstracker.util.*
 import kotlinx.android.synthetic.main.activity_dash.*
@@ -57,7 +58,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             MetricsManager.trackScreen(when (position) {
                 0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
-                else -> MetricScreen.SCREEN_CARDS_FAVORED()
+                2 -> MetricScreen.SCREEN_CARDS_FAVORED()
+                else -> MetricScreen.SCREEN_CARDS_TOKENS()
             })
         }
 
@@ -67,6 +69,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val title = when (position) {
             1 -> R.string.title_tab_cards_collection
             2 -> R.string.title_tab_cards_favorites
+            3 -> R.string.title_tab_cards_tokens
             else -> R.string.title_tab_cards_all
         }
         eventBus.post(CmdUpdateTitle(title))
@@ -184,14 +187,16 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         var titles: Array<String> = ctx.resources.getStringArray(R.array.cards_tabs)
-        val cardsCollectionFragment by lazy { CardsCollectionFragment() }
-        val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
         val cardsAllFragment by lazy { CardsAllFragment() }
+        val cardsCollectionFragment by lazy { CardsCollectionFragment() }
+        val cardsTokensFragment by lazy { CardsTokensFragment() }
+        val cardsFavoritesFragment by lazy { CardsFavoritesFragment() }
 
         override fun getItem(position: Int): CardsAllFragment {
             return when (position) {
                 1 -> cardsCollectionFragment.apply { isEditStarted = false }
                 2 -> cardsFavoritesFragment
+                3 -> cardsTokensFragment
                 else -> cardsAllFragment
             }
         }

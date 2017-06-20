@@ -54,6 +54,7 @@ class App : MultiDexApplication() {
                 val sync = !ConfigManager.isDBUpdating() && !ConfigManager.isVersionUnsupported()
                 reference.child(BaseInteractor.NODE_BASICS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_CARDS).keepSynced(sync)
+                reference.child(BaseInteractor.NODE_TOKENS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_PATCHES).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_SEASONS).keepSynced(sync)
                 reference.child(BaseInteractor.NODE_SPOILER).keepSynced(sync)

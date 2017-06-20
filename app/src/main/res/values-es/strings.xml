@@ -85,6 +85,7 @@
     <string name="tab_cards_all">Cartas</string>
     <string name="tab_cards_collection">Colección</string>
     <string name="tab_cards_favorites">Favoritos</string>
+    <string name="tab_cards_tokens">Fichas</string>
     <string name="tab_decks_public">Público</string>
     <string name="tab_decks_owned">Propiedad</string>
     <string name="tab_decks_favorites">Favoritos</string>
@@ -100,6 +101,7 @@
     <string name="title_tab_basics_ranked">Clasificado</string>
     <string name="title_tab_cards_collection">Colección de cartas</string>
     <string name="title_tab_cards_favorites">Cartas Favoritos</string>
+    <string name="title_tab_cards_tokens">Fichas</string>
     <string name="title_tab_decks_public">Barajos Publicos</string>
     <string name="title_tab_decks_owned">Barajos propiedad</string>
     <string name="title_tab_decks_favorites">Barajos Favoritos</string>
@@ -125,6 +127,8 @@
     <string name="card_sounds_play_label">Jugar</string>
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Nivel:</string>
+    <string name="card_creators_label">Creadores:</string>
+    <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versión actual</string>
     <string name="card_patch_pre">pre-%s Versión</string>
     <string name="card_full_downloaded">Imagen guardada en la carpeta de descarga.</string>

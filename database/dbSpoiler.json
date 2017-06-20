@@ -28,9 +28,48 @@
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put a random Shout into your hand.",
         "arenaTier": "Unknown"
+      },
+      "drainvitality": {
+        "name": "Drain Vitality ",
+        "cost": "1",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "Shout",
+        "shout": 3,
+        "text": "Give an enemy creature -1/-1.",
+        "arenaTier": "Unknown"
+      },
+      "shearpointdragon": {
+        "name": "Shearpoint Dragon",
+        "cost": "6",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Give a creature -2/-2. When you reduce a creature power or health with another effect, reduce it by an extra 1.",
+        "arenaTier": "Unknown"
       }
     },
     "endurance": {
+      "innkeeperdelphine": {
+        "name": "Innkeeper Delphine",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": "After you play a Dragon or Schout, Innkeeper Delphine changes into Grandmaster Delphine.",
+        "arenaTier": "Unknown",
+        "shout": 2
+      },
       "mentorofthewatch": {
         "name": "Mentor of the Watch",
         "cost": "3",
@@ -72,7 +111,43 @@
       }
     },
     "neutral": {
-      
+      "greybeardmentor": {
+        "name": "Greybeard Mentor",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Draw a random Shout from your deck.",
+        "arenaTier": "Unknown"
+      },
+      "journeytosovngarde": {
+        "name": "Journey to Sovngarde",
+        "cost": "7",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5 and reduce their costs by 5.",
+        "arenaTier": "Unknown"
+      },
+      "wordwall": {
+        "name": "Word Wall",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Defense",
+        "attack": "0",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Upgrade a Shout in your hand.",
+        "arenaTier": "Unknown"
+      }
     },
     "strength": {
       "duelatoptheworld": {
@@ -125,7 +200,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Fill the left lane with Stormcloak Aggressors or the right lane with Colovian Troopers.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "tokens": "coloviantrooper"
       }
     }
   }

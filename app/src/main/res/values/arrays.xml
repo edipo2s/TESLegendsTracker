@@ -25,6 +25,7 @@
         <item name="tab_cards_all">@string/tab_cards_all</item>
         <item name="tab_cards_collection">@string/tab_cards_collection</item>
         <item name="tab_cards_favorites">@string/tab_cards_favorites</item>
+        <item name="tab_cards_tokens">@string/tab_cards_tokens</item>
     </array>
 
     <array name="decks_tabs">

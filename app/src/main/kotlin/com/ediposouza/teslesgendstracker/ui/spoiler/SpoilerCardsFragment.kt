@@ -1,9 +1,13 @@
 package com.ediposouza.teslesgendstracker.ui.spoiler
 
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.view.View
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
+import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterAttrs
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
 import org.greenrobot.eventbus.Subscribe
@@ -31,6 +35,11 @@ class SpoilerCardsFragment : CardsAllFragment() {
         return super.filteredCards().filter {
             currentAttributes.contains(it.attr)
         }.sortedBy { it.name }.sortedBy { it.cost }
+    }
+
+    override fun showCardExpanded(card: Card, view: View) {
+        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, fromSpoiler = true),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
     }
 
     @Subscribe

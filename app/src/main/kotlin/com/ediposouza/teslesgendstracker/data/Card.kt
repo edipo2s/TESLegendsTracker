@@ -171,6 +171,7 @@ enum class CardRace(val desc: String) {
 enum class CardKeyword {
 
     ACTIVATE,
+    BATTLES,
     BREAKTHROUGH,
     CHANGE,
     CHARGE,
@@ -185,6 +186,7 @@ enum class CardKeyword {
     REGENERATE,
     SHACKLE,
     SILENCE,
+    SHOUT,
     SLAY,
     SUMMON,
     WARD,
@@ -336,7 +338,8 @@ data class CardBasicInfo(
 
         val shortName: String,
         val set: String,
-        val attr: String
+        val attr: String,
+        val isToken: Boolean
 )
 
 data class CardSlot(
@@ -387,7 +390,9 @@ data class Card(
         val arenaTierPlus: List<CardArenaTierPlus?>,
         val evolves: Boolean,
         val season: String,
-        val shout: Int
+        val shout: Int,
+        val creators: List<String>,
+        val tokens: List<String>
 
 ) : Comparable<Card>, Parcelable {
 
@@ -400,10 +405,10 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0)
+                listOf(), false, "", 0, listOf(), listOf())
 
         const val ARTS_PATH = "Arts"
-        const val CARD_PATH = "Cards"
+        const val ARTS_TOKENS_PATH = "TokensArts"
         const val SOUNDS_PATH = "Sounds"
         const val SOUND_TYPE_ATTACK = "attack"
         const val SOUND_TYPE_PLAY = "enter_play"
@@ -420,14 +425,16 @@ data class Card(
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             source.readString(), CardArenaTier.values()[source.readInt()],
             mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
-            1 == source.readInt(), source.readString(), source.readInt())
+            1 == source.readInt(), source.readString(), source.readInt(),
+            mutableListOf<String>().apply { source.readStringList(this) },
+            mutableListOf<String>().apply { source.readStringList(this) })
 
     override fun describeContents() = 0
 
     fun fullArtPath(): String {
         val setName = set.name.toLowerCase().capitalize()
         val attrName = attr.name.toLowerCase().capitalize()
-        val artPath = "$ARTS_PATH/$setName/$attrName/$shortName.webp"
+        val artPath = "${ARTS_PATH.takeUnless { isToken() } ?: ARTS_TOKENS_PATH}/$setName/$attrName/$shortName.webp"
         return artPath
     }
 
@@ -467,6 +474,10 @@ data class Card(
                     })
         }
     }
+
+    fun canGenerateTokens(): Boolean = tokens.isNotEmpty()
+
+    fun isToken(): Boolean = creators.isNotEmpty()
 
     fun hasLocalAttackSound(resources: Resources): Boolean {
         return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_ATTACK.mp3")
@@ -519,10 +530,12 @@ data class Card(
         dest?.writeInt((if (evolves) 1 else 0))
         dest?.writeString(season)
         dest?.writeInt(shout)
+        dest?.writeStringList(creators)
+        dest?.writeStringList(tokens)
     }
 
     override fun compareTo(other: Card): Int {
         val compareCost = cost.compareTo(other.cost)
-        return if (compareCost != 0) compareCost else name.compareTo(other.name)
+        return if (compareCost != 0) compareCost else shortName.compareTo(other.shortName)
     }
 }

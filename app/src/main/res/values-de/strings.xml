@@ -85,6 +85,7 @@
     <string name="tab_cards_all">Karten</string>
     <string name="tab_cards_collection">Sammlung</string>
     <string name="tab_cards_favorites">Favoriten</string>
+    <string name="tab_cards_tokens">Token</string>
     <string name="tab_decks_public">Öffentlich</string>
     <string name="tab_decks_owned">Privatgelände</string>
     <string name="tab_decks_favorites">Favoriten</string>
@@ -100,6 +101,7 @@
     <string name="title_tab_basics_ranked">Rangliste</string>
     <string name="title_tab_cards_collection">Kartensammlung</string>
     <string name="title_tab_cards_favorites">Favorisierte Karten</string>
+    <string name="title_tab_cards_tokens">Token</string>
     <string name="title_tab_decks_public">Öffentliche Decks</string>
     <string name="title_tab_decks_owned">Privatgelände Decks</string>
     <string name="title_tab_decks_favorites">Favorisierte Decks</string>
@@ -125,6 +127,8 @@
     <string name="card_sounds_play_label">Abspielen</string>
     <string name="card_sounds_extra_label">Extra</string>
     <string name="card_levels_label">Ebene:</string>
+    <string name="card_creators_label">Urheber:</string>
+    <string name="card_tokens_label">Token:</string>
     <string name="card_patch_current">Neuste Version</string>
     <string name="card_patch_pre">Voherige Version</string>
     <string name="card_full_downloaded">Bild im Download-Ordner gespeichert</string>

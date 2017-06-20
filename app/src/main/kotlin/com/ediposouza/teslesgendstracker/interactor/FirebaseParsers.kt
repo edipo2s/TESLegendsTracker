@@ -33,6 +33,8 @@ abstract class FirebaseParsers {
         val attr2: String = ""
         val season: String = ""
         val shout: Int = 0
+        val creators: String = ""
+        val tokens: String = ""
 
         fun toCard(shortName: String, set: CardSet, attr: CardAttribute): Card {
             var clsAttr1 = attr
@@ -49,7 +51,8 @@ abstract class FirebaseParsers {
                             .mapTo(arrayListOf<CardKeyword>()) {
                                 CardKeyword.of(it)
                             },
-                    text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season, shout)
+                    text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season, shout,
+                    creators.split(", ").filter { it.isNotEmpty() }, tokens.split(", ").filter { it.isNotEmpty() })
         }
 
         private fun getCardArenaTierPlus(): List<CardArenaTierPlus?> {
