@@ -29,7 +29,10 @@ class App : MultiDexApplication() {
 
         fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null
 
-        fun hasUserDonate() = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
+        fun hasUserDonate(): Boolean {
+            return !BuildConfig.PREPARE_TO_RELEASE ||
+                    PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
+        }
 
         fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 

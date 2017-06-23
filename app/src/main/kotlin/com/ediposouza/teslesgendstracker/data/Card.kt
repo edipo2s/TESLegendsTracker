@@ -143,6 +143,7 @@ enum class CardRace(val desc: String) {
     MUMMY(""),
     NEREID(""),
     OGRE(""),
+    PASTRY(""),
     REPTILE(""),
     REACHMAN(""),
     SKELETON(""),

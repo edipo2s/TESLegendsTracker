@@ -171,7 +171,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
-        if (BuildConfig.PREPARE_TO_RELEASE && !App.hasUserDonate()) {
+        if (!App.hasUserDonate()) {
             adsInterstitial.show()
         }
         try {
@@ -253,6 +253,17 @@ class DashActivity : BaseFilterActivity(),
             when (path) {
                 getString(R.string.app_deeplink_path_card) -> {
                     PublicInteractor.getCards(null) {
+                        val ctx = this@DashActivity
+                        val card = it.filter { it.shortName == this[1] }.firstOrNull()
+                        card?.let {
+                            val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                    getString(R.string.card_transition_name))
+                            ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                        }
+                    }
+                }
+                getString(R.string.app_deeplink_path_token) -> {
+                    PublicInteractor.getTokens(null) {
                         val ctx = this@DashActivity
                         val card = it.filter { it.shortName == this[1] }.firstOrNull()
                         card?.let {

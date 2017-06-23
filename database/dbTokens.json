@@ -233,6 +233,18 @@
         "keyword": "",
         "text": ""
       },
+      "sweetroll": {
+        "creators": "wabbajack, altarofdespair, blackmail, chanterofakatosh",
+        "name": "Sweet Roll",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Pastry",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "When a creature eats Sweet Roll, heal that creature."
+      },
       "steeldagger": {
         "creators": "alikrsurvivalist, crownquartermaster, daggersinthedark, corsairship",
         "name": "Steel Dagger",
@@ -481,6 +493,20 @@
         "unique": true,
         "keyword": "",
         "text": "Can't be damaged or targeted by enemy Dragons."
+      }
+    },
+    "strength": {
+      "circleinitiate_beast": {
+        "creators": "circleinitiate",
+        "name": "Circle Initiate",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "4",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
       }
     }
   }

@@ -53,9 +53,58 @@
         "keyword": "Summon",
         "text": "Summon: Give a creature -2/-2. When you reduce a creature power or health with another effect, reduce it by an extra 1.",
         "arenaTier": "Unknown"
+      },
+      "palaceprowler": {
+        "name": "Palace Prowler",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Khajiit",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Drain, Pilfer",
+        "text": "Drain. Pilfer: Gain 1 magicka this turn.",
+        "arenaTier": "Unknown"
+      },
+      "woodlandlookout": {
+        "name": "Woodland Lookout",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Wood Elf",
+        "attack": "3",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "When you summon a Dragon, gain 4 health.",
+        "arenaTier": "Unknown"
       }
     },
     "endurance": {
+      "ancientlookout": {
+        "name": "Ancient Lookout",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "When you summon a Dragon, summon a 1/1 Draugr Sentry with Guard.",
+        "arenaTier": "Unknown",
+        "tokens": "draugrsentry"
+      },
+      "encumberedexplorer": {
+        "name": "Encumbered Explorer",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Imperial",
+        "attack": "2",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Shackle",
+        "text": "Shackle Encumbered Explorer after he attacks.",
+        "arenaTier": "Unknown"
+      },
       "innkeeperdelphine": {
         "name": "Innkeeper Delphine",
         "cost": "3",
@@ -70,6 +119,18 @@
         "arenaTier": "Unknown",
         "shout": 2,
         "tokens": "grandmasterdelphine"
+      },
+      "frosttroll": {
+        "name": "Frost Troll",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Troll",
+        "attack": "1",
+        "health": "6",
+        "rarity": "Epic",
+        "keyword": "Regenerate",
+        "text": "Regenerate. When Frost Troll take damage, it gains that much power.",
+        "arenaTier": "Unknown"
       },
       "mentorofthewatch": {
         "name": "Mentor of the Watch",
@@ -94,6 +155,18 @@
         "keyword": "Guard, Summon, Last Gasp",
         "text": "Guard, Summon: Give all creaturesin your discard pile +2/+2. Last Gasp: Draw a random creature from your discard pile.",
         "arenaTier": "Unknown"
+      },
+      "spineofeldersblood": {
+        "name": "Spine of Eldersblood",
+        "cost": "6",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Gaint +1 max magicka.",
+        "arenaTier": "Unknown"
       }
     },
     "intelligence": {
@@ -109,9 +182,69 @@
         "keyword": "Activate",
         "text": "Activate: Reveals three random 1-cost actions and draw one. Then, increase the cost of cards this reveals by 1.",
         "arenaTier": "Unknown"
+      },
+      "dragonsfury": {
+        "name": "Dragon's Fury",
+        "cost": "4",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Deal 3 damage to a creature, and 3 extra damage for each friendly Dragon.",
+        "arenaTier": "Unknown"
+      },
+      "dragonpriestmask": {
+        "name": "Dragon Priest Mask",
+        "cost": "6",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "+2/+2 Summon: Trigger the wielder's summon ability.",
+        "arenaTier": "Unknown"
+      },
+      "mysticdragon": {
+        "name": "Mystic Dragon",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "Prophecy",
+        "text": "Prophecy",
+        "arenaTier": "Unknown"
+      },
+      "studiousgreybeard": {
+        "name": "Studious Greybeard",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "0",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "At the start of your turn, look at the top card of your deck. You may discard it.",
+        "arenaTier": "Unknown"
       }
     },
     "neutral": {
+      "dwarvendynamo": {
+        "name": "Dwarven Dynamo",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Dwemer",
+        "attack": "3",
+        "health": "1",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Give another (Neutral) creature +3/+3 and Guard.",
+        "arenaTier": "Unknown"
+      },
       "greybeardmentor": {
         "name": "Greybeard Mentor",
         "cost": "4",
@@ -137,6 +270,30 @@
         "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5 and reduce their costs by 5.",
         "arenaTier": "Unknown"
       },
+      "lute": {
+        "name": "Lute",
+        "cost": "1",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "+1/+2. The wielder is immune to Silence.",
+        "arenaTier": "Unknown"
+      },
+      "midnightsnack": {
+        "name": "Midnight Snack",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Prophecy, Guard, Last Gasp",
+        "text": "Prophecy, Guard. Last Gasp: Reduce the cost of a random Dragon in your hand by 1.",
+        "arenaTier": "Unknown"
+      },
       "wordwall": {
         "name": "Word Wall",
         "cost": "1",
@@ -151,6 +308,19 @@
       }
     },
     "strength": {
+      "circleinitiate": {
+        "name": "Circle Initiate",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Prophecy, Beast Form",
+        "text": "Prophecy. Beast Form: +2/+1",
+        "arenaTier": "Unknown",
+        "tokens": "circleinitiate"
+      },
       "duelatoptheworld": {
         "name": "Duel Atop the World",
         "cost": "7",
@@ -188,6 +358,30 @@
         "shout": 3,
         "text": "Shout - Level 1. Unsummon an enemy creature with power 3 or less",
         "arenaTier": "Unknown"
+      },
+      "wildfiredragon": {
+        "name": "Wildfire Dragon",
+        "cost": "7",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Legendary",
+        "keyword": "Breakthrough, Summon, Slay",
+        "text": "Breakthrough. Summon: Deal 1 damage to all other creatures. Slay: +1/+1",
+        "arenaTier": "Unknown"
+      },
+      "worldeaterseyrie": {
+        "name": "World Eater's Eyrie",
+        "cost": "6",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "Ongoing. When you summon a creature that costs 7 or more, double its power and health.",
+        "arenaTier": "Unknown"
       }
     },
     "willpower": {
@@ -203,6 +397,45 @@
         "text": "Fill the left lane with Stormcloak Aggressors or the right lane with Colovian Troopers.",
         "arenaTier": "Unknown",
         "tokens": "coloviantrooper"
+      },
+      "callofvalor": {
+        "name": "Call of Valor",
+        "cost": "3",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "Shout",
+        "shout": 3,
+        "text": "Summon a 3/3 Sovngarde Hero",
+        "arenaTier": "Unknown",
+        "tokens": "sovngardehero"
+      },
+      "grislygourmet": {
+        "name": "Grisly Gourmet",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "1",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "Summon: Transform an enemy creature with 2 power or less into a Sweet Roll.",
+        "arenaTier": "Unknown",
+        "tokens": "sweetroll"
+      },
+      "undyingdragon": {
+        "name": "Undying Dragon",
+        "cost": "6",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "keyword": "Drain",
+        "text": "Drain. +5/+5 while you have 30 or more health.",
+        "arenaTier": "Unknown"
       }
     }
   }
