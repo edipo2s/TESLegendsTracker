@@ -1684,6 +1684,23 @@
         },
         "season": "2016_11"
       },
+      "conjurationtutor": {
+        "name": "Conjuration Tutor",
+        "cost": "06",
+        "type": "Creature",
+        "race": "Breton",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Epic",
+        "keyword": "Summon",
+        "text": "Summon: Shuffle three Lava Atronach into your deck. When you summon an Atronach, summon a copy of it in the other lane.",
+        "arenaTier": "Unknown",
+        "arenaTierPlus": {
+          "text": "Atronach"
+        },
+        "season": "2017_06",
+        "tokens": "lavaatronach"
+      },
       "fateweaver": {
         "name": "Fate Weaver",
         "cost": "06",

@@ -51,6 +51,11 @@
   },
   "2017_06": {
     "reward": {
+      "intelligence": "conjurationtutor"
+    }
+  },
+  "2017_07": {
+    "reward": {
       "unknown": true
     }
   }

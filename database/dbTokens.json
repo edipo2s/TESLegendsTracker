@@ -331,6 +331,18 @@
         "keyword": "",
         "text": "+2/+0"
       },
+      "lavaatronach": {
+        "creators": "conjurationtutor",
+        "name": "Lava Atronach",
+        "cost": "7",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "8",
+        "health": "8",
+        "rarity": "Epic",
+        "keyword": "Breakthrough, Guard, Ward",
+        "text": "Breakthrough, Guard, Ward"
+      },
       "stormatronach": {
         "creators": "highrocksummoner, darkrift, magesguildretreat",
         "name": "Storm Atronach",
@@ -481,6 +493,18 @@
   },
   "heroesofskyrim": {
     "endurance": {
+      "companionharbinger_beast": {
+        "creators": "companionharbinger",
+        "name": "Companion Harbinger",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": ""
+      },
       "grandmasterdelphine": {
         "creators": "innkeeperdelphine",
         "name": "Grandmaster Delphine",
