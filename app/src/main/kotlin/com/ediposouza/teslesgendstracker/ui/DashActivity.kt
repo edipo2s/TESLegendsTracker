@@ -171,7 +171,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
-        if (!App.hasUserDonate()) {
+        if (!App.hasUserDonated()) {
             adsInterstitial.show()
         }
         try {
@@ -334,6 +334,13 @@ class DashActivity : BaseFilterActivity(),
                 profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
+        if (App.hasUserDonated()) {
+            dash_navigation_view.menu.findItem(R.id.menu_donate)?.apply {
+                isEnabled = false
+                title = getString(R.string.menu_donate_done)
+                icon = ContextCompat.getDrawable(this@DashActivity, R.drawable.ic_no_ads)
+            }
+        }
         PublicInteractor.isSpoilerEnable {
             dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it
         }
@@ -429,10 +436,10 @@ class DashActivity : BaseFilterActivity(),
     private fun showDonateDialog(basicValue: String, proValue: String) {
         alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
             positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
-                processDonate(SKU_DONATE_BASIC)
+                processDonate(SKU_DONATE_PRO)
             })
             negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
-                processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
+                processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_BASIC)
             })
             neutralButton(R.string.app_donate_dialog_not_now, {
                 MetricsManager.trackAction(MetricAction.ACTION_DONATE_NOT_NOW())

@@ -101,7 +101,7 @@ fun <T : View> BottomSheetBehavior<T>.toggleExpanded() {
 }
 
 fun AdView.load() {
-    if (App.hasUserDonate()) {
+    if (App.hasUserDonated()) {
         layoutParams = layoutParams.apply { height = 0 }
     } else {
         loadAd(createAdRequest(context))
@@ -109,7 +109,7 @@ fun AdView.load() {
 }
 
 fun NativeExpressAdView.load() {
-    if (App.hasUserDonate()) {
+    if (App.hasUserDonated()) {
         layoutParams = layoutParams.apply { height = 0 }
     } else {
         loadAd(createAdRequest(context))

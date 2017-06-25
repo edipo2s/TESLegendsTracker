@@ -29,8 +29,8 @@ class App : MultiDexApplication() {
 
         fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null
 
-        fun hasUserDonate(): Boolean {
-            return !BuildConfig.PREPARE_TO_RELEASE ||
+        fun hasUserDonated(): Boolean {
+            return ConfigManager.isUserInAdsWhitelist() ||
                     PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
         }
 
