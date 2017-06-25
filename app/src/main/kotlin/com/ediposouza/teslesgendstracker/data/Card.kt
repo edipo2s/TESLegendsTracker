@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.data
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -448,6 +449,9 @@ data class Card(
             onLoaded(null)
         }
         val path = "v${context.getCurrentVersion()}/${fullArtPath()}"
+        if (context is Activity && context.isDestroyed) {
+            return
+        }
         FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
             Glide.with(context)
                     .load(uri)
