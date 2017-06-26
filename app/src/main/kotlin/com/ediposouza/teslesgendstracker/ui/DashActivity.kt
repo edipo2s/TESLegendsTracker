@@ -356,9 +356,10 @@ class DashActivity : BaseFilterActivity(),
                             setCompoundDrawablesWithIntrinsicBounds(when (position) {
                                 0 -> R.drawable.lang_en
                                 1 -> R.drawable.lang_ptbr
-                                2 -> R.drawable.lang_es
-                                3 -> R.drawable.lang_de
-                                4 -> R.drawable.lang_ru
+                                2 -> R.drawable.lang_it
+                                3 -> R.drawable.lang_es
+                                4 -> R.drawable.lang_de
+                                5 -> R.drawable.lang_ru
                                 else -> R.drawable.ic_menu_earth
                             }, 0, 0, 0)
                             compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.default_margin)
@@ -368,9 +369,10 @@ class DashActivity : BaseFilterActivity(),
                     dialog.dismiss()
                     val language = when (which) {
                         1 -> "pt-br"
-                        2 -> "es"
-                        3 -> "de"
-                        4 -> "ru"
+                        2 -> "it"
+                        3 -> "es"
+                        4 -> "de"
+                        5 -> "ru"
                         else -> "en"
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_LANGUAGE(language))
