@@ -532,6 +532,20 @@
         "keyword": "",
         "text": ""
       }
+    },
+    "willpower": {
+      "uncagedwolf": {
+        "creators": "wolfcage",
+        "name": "Uncaged Wolf",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Summon",
+        "keyword": "Summon: +1/+1 for each other friendly Wolf.",
+        "text": ""
+      }
     }
   }
 }

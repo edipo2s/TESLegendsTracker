@@ -42,6 +42,18 @@
         "text": "Give an enemy creature -1/-1.",
         "arenaTier": "Unknown"
       },
+      "embassydisguise": {
+        "name": "Embassy Disguise",
+        "cost": "2",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "Summon",
+        "text": "+0/+1. Summon: Draw a card. The weilder has Cover until it attacks.",
+        "arenaTier": "Unknown"
+      },
       "shearpointdragon": {
         "name": "Shearpoint Dragon",
         "cost": "6",
@@ -92,6 +104,19 @@
         "text": "When you summon a Dragon, summon a 1/1 Draugr Sentry with Guard.",
         "arenaTier": "Unknown",
         "tokens": "draugrsentry"
+      },
+      "companionharbinger": {
+        "name": "Companion Harbinger",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "Beast Form",
+        "text": "Beast Form: Give friendly Werewolves +1/+1.",
+        "arenaTier": "Unknown",
+        "tokens": "companionharbinger_beast"
       },
       "encumberedexplorer": {
         "name": "Encumbered Explorer",
@@ -170,6 +195,19 @@
       }
     },
     "intelligence": {
+      "arcano": {
+        "name": "Arcano",
+        "cost": "8",
+        "type": "Creature",
+        "race": "High Elf",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Breakthrough, Summon",
+        "text": "Breakthrough. Summon: Deal 5 damage. Your actions have Breakthrough.",
+        "arenaTier": "Unknown"
+      },
       "collegeofwinterhold": {
         "name": "College of Winterhold",
         "cost": "5",
@@ -207,6 +245,19 @@
         "text": "+2/+2 Summon: Trigger the wielder's summon ability.",
         "arenaTier": "Unknown"
       },
+      "firebreath": {
+        "name": "Fire Breath",
+        "cost": "3",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "Shout",
+        "shout": 3,
+        "text": "Deal 2 damage to a creature",
+        "arenaTier": "Unknown"
+      },
       "mysticdragon": {
         "name": "Mystic Dragon",
         "cost": "4",
@@ -233,6 +284,31 @@
       }
     },
     "neutral": {
+      "alduin": {
+        "name": "Alduin",
+        "cost": "20",
+        "type": "Creature",
+        "race": "Dragon",
+        "attack": "12",
+        "health": "12",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Summon",
+        "text": "Costs 2 less for each Dragon in your discard pile. Summon: Destroy all other creatures. At the start of your turn, summon a random Dragon from your discard pile.",
+        "arenaTier": "Unknown"
+      },
+      "anighttoremember": {
+        "name": "A Night to Remember",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "A friendly creature disappears to who knows where, then returns in the other lane Shackled.",
+        "arenaTier": "Unknown"
+      },
       "dwarvendynamo": {
         "name": "Dwarven Dynamo",
         "cost": "4",
@@ -294,6 +370,19 @@
         "text": "Prophecy, Guard. Last Gasp: Reduce the cost of a random Dragon in your hand by 1.",
         "arenaTier": "Unknown"
       },
+      "prizedchicken": {
+        "name": "Prized Chicken",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Epic",
+        "keyword": "Last Gasp",
+        "text": "Last Gasp: Fill this lane with 1/1 Angry Villagers.",
+        "arenaTier": "Unknown",
+        "tokens": "angryvillager"
+      },
       "wordwall": {
         "name": "Word Wall",
         "cost": "1",
@@ -308,6 +397,18 @@
       }
     },
     "strength": {
+      "ancestorsbattleaxe": {
+        "name": "Ancestor's Battleaxe",
+        "cost": "7",
+        "type": "Item",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "Summon",
+        "text": "+4/+4. Summon: Give the top creature of your deck +4/+4.",
+        "arenaTier": "Unknown"
+      },
       "circleinitiate": {
         "name": "Circle Initiate",
         "cost": "2",
@@ -319,7 +420,7 @@
         "keyword": "Prophecy, Beast Form",
         "text": "Prophecy. Beast Form: +2/+1",
         "arenaTier": "Unknown",
-        "tokens": "circleinitiate"
+        "tokens": "circleinitiate_beast"
       },
       "duelatoptheworld": {
         "name": "Duel Atop the World",
@@ -398,6 +499,18 @@
         "arenaTier": "Unknown",
         "tokens": "coloviantrooper"
       },
+      "arrest": {
+        "name": "Arrest",
+        "cost": "7",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "Steal an enemy creature. It loses Guard, and is permanently Shackled.",
+        "arenaTier": "Unknown"
+      },
       "callofvalor": {
         "name": "Call of Valor",
         "cost": "3",
@@ -425,6 +538,32 @@
         "arenaTier": "Unknown",
         "tokens": "sweetroll"
       },
+      "lydia": {
+        "name": "Lydia",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "8",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Guard",
+        "text": "Guard. Lydia guards both lanes.",
+        "arenaTier": "Unknown"
+      },
+      "wolfcage": {
+        "name": "Wolf Cage",
+        "cost": "6",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "Activate",
+        "text": "Uses 3. Activate. Summon an Uncaged Wolf",
+        "arenaTier": "Unknown",
+        "tokens": "uncagedwolf"
+      },
       "undyingdragon": {
         "name": "Undying Dragon",
         "cost": "6",
@@ -435,6 +574,36 @@
         "rarity": "Legendary",
         "keyword": "Drain",
         "text": "Drain. +5/+5 while you have 30 or more health.",
+        "arenaTier": "Unknown"
+      }
+    },
+    "dual": {
+      "archersgambit": {
+        "name": "Archer's Gambit",
+        "cost": "2",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": "Move a friendly creature. Then, it deals 1 damage.",
+        "attr1": "strength",
+        "attr2": "agility",
+        "arenaTier": "Unknown"
+      },
+      "scoutsreport": {
+        "name": "Scout's Report",
+        "cost": "1",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Rare",
+        "keyword": "Battles",
+        "text": "Look at the top card of your deck. You may discard it. Draw a card.",
+        "attr1": "agility",
+        "attr2": "endurance",
         "arenaTier": "Unknown"
       }
     }
