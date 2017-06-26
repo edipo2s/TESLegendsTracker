@@ -311,6 +311,11 @@ class DashActivity : BaseFilterActivity(),
                         eventBus.post(CmdInputSearch(this[1]))
                     }, DateUtils.SECOND_IN_MILLIS)
                 }
+                getString(R.string.app_deeplink_path_page) -> {
+                    if (size > 1) {
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(this[1])))
+                    }
+                }
                 getString(R.string.app_deeplink_path_update) -> {
                     checkLastVersion {
                         val updateUri = Uri.parse(getString(R.string.playstore_url_format, packageName))

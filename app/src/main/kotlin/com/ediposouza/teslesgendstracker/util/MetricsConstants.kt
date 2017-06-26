@@ -38,6 +38,7 @@ abstract class MetricsConstants {
         const val PARAM_MIXPANEL_USER_ID = "User ID"
         const val PARAM_MIXPANEL_USER_NAME = "\$name"
         const val PARAM_MIXPANEL_USER_EMAIL = "\$email"
+        const val PARAM_MIXPANEL_USER_DONATE = "Donate"
     }
 
 }
@@ -61,6 +62,10 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_CARD_QTD_CHANGE(val card: Card, val qtd: Int) : MetricAction("CollectionCardQtdChange") {
         val PARAM_CARD = "Card"
         val PARAM_QTD = "Qtd"
+    }
+
+    class ACTION_CARD_FILTER_FAVORITE(val checked: Boolean) : MetricAction("FilterCardFavorite") {
+        val PARAM_CHECKED = "Checked"
     }
 
     class ACTION_CARD_FILTER_SET(val set: CardSet?) : MetricAction("FilterCardSet") {
@@ -256,7 +261,6 @@ sealed class MetricScreen(val name: String) {
     class SCREEN_BASICS_RANKED : MetricScreen("BasicsRanked")
     class SCREEN_CARDS_ALL : MetricScreen("CardsAll")
     class SCREEN_CARDS_COLLECTION : MetricScreen("CardsCollection")
-    class SCREEN_CARDS_FAVORED : MetricScreen("CardsFavored")
     class SCREEN_CARDS_TOKENS : MetricScreen("CardsTokens")
     class SCREEN_CARDS_STATISTICS : MetricScreen("CardsStatistics")
     class SCREEN_CARD_DETAILS : MetricScreen("CardDetails")

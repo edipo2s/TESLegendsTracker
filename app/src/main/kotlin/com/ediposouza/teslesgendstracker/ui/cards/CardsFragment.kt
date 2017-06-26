@@ -55,10 +55,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
             eventBus.post(CmdUpdateRarityMagikaFiltersPosition(position == 1))
             MetricsManager.trackScreen(when (position) {
-                0 -> MetricScreen.SCREEN_CARDS_ALL()
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
-                2 -> MetricScreen.SCREEN_CARDS_FAVORED()
-                else -> MetricScreen.SCREEN_CARDS_TOKENS()
+                2 -> MetricScreen.SCREEN_CARDS_TOKENS()
+                else -> MetricScreen.SCREEN_CARDS_ALL()
             })
         }
 

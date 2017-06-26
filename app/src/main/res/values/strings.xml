@@ -12,6 +12,7 @@
     <string name="app_deeplink_path_spoiler" translatable="false">spoiler</string>
     <string name="app_deeplink_path_search" translatable="false">search</string>
     <string name="app_deeplink_path_season" translatable="false">seasons</string>
+    <string name="app_deeplink_path_page" translatable="false">page</string>
     <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
