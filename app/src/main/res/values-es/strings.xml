@@ -114,6 +114,7 @@
 
     <string name="cards_sets_all">Todas</string>
 
+    <string name="card_title_star_rating">Tu Clasificación</string>
     <string name="card_more_info_label">Más información</string>
     <string name="card_arena_tier_label">Nivel de arena:</string>
     <string name="card_collection_qtd_label">Colección Qtd:</string>

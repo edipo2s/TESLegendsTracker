@@ -172,6 +172,9 @@ class CardActivity : BaseActivity() {
     private fun onTransitionEnds() {
         card_ads_view.load()
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        card_star_rating.card = card
+        card_star_rating.userRating = 3f
+        card_star_rating.setGeneralRating(4.5f, 17)
         loadCardInfo()
         configBottomSheet()
         configQtdAndFavoriteInfo()

@@ -21,28 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/large_margin"
-        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/default_margin">
-
-        <ImageView
-            android:id="@+id/card_expand_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_expand"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <ProgressBar
-            android:id="@+id/card_expand_pb"
-            android:layout_width="@dimen/size_small"
-            android:layout_height="@dimen/size_small"
-            android:indeterminate="true"
-            android:visibility="gone"
-            tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/card_favorite_btn"
@@ -56,6 +37,37 @@
             android:src="@drawable/ic_favorite_unchecked"
             android:visibility="gone"
             tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/card_expand_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_toStartOf="@id/card_favorite_btn"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_expand"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/card_expand_pb"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_toStartOf="@id/card_favorite_btn"
+            android:indeterminate="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.StarRating
+            android:id="@+id/card_star_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/card_more_info_label"
@@ -111,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/card_arena_tier_label"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_toStartOf="@id/card_favorite_btn"
+            android:layout_toStartOf="@id/card_reward"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -210,7 +222,6 @@
             android:layout_alignStart="@id/card_race"
             android:layout_below="@id/card_race"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_toStartOf="@id/card_favorite_btn"
             tools:text="None" />
 
         <TextView
