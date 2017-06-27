@@ -13,7 +13,9 @@ import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
+import hotchemi.android.rate.AppRate
 import timber.log.Timber
+
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -64,6 +66,13 @@ class App : MultiDexApplication() {
                 reference.child(BaseInteractor.NODE_NEWS).keepSynced(sync)
             }
         }
+        AppRate.with(this)
+                .setInstallDays(10)
+                .setLaunchTimes(10)
+                .setRemindInterval(5)
+                .setShowLaterButton(true)
+                .setDebug(false)
+                .monitor()
     }
 
 }

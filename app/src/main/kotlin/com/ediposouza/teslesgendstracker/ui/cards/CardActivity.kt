@@ -38,6 +38,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.storage.FirebaseStorage
+import hotchemi.android.rate.AppRate
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import kotlinx.android.synthetic.main.itemlist_card_full.view.*
@@ -163,6 +164,7 @@ class CardActivity : BaseActivity() {
         } else {
             onTransitionEnds()
         }
+        AppRate.showRateDialogIfMeetsConditions(this);
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
     }
