@@ -72,6 +72,18 @@ object PrivateInteractor : BaseInteractor() {
         }
     }
 
+    fun setUserCardRating(card: Card, review: Int, onComplete: () -> Unit) {
+        val userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        val attr = card.attr.name.toLowerCase()
+        database.child(NODE_REVIEWS).child(card.set.db).child(attr).child(card.shortName)
+                .updateChildren(mapOf(userUid to review), object : DatabaseReference.CompletionListener {
+                    override fun onComplete(p0: DatabaseError?, p1: DatabaseReference?) {
+                        onComplete()
+                    }
+
+                })
+    }
+
     private fun execSetUserCardFavorite(dr: DatabaseReference, favorite: Boolean, onSuccess: () -> Unit) {
         val childEventListener = object : SimpleChildEventListener() {
             override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {

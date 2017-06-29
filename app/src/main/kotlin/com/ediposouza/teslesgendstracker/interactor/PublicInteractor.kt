@@ -111,7 +111,7 @@ object PublicInteractor : BaseInteractor() {
         }
     }
 
-    fun getCardReviews(card: Card, onSuccess: (List<Pair<String, Int>>) -> Unit) {
+    fun getCardRatings(card: Card, onSuccess: (List<Pair<String, Int>>) -> Unit) {
         val attr = card.attr.name.toLowerCase()
         with(database.child(NODE_REVIEWS).child(card.set.db).child(attr).child(card.shortName)) {
             keepSynced()

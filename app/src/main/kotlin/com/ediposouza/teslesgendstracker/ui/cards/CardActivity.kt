@@ -174,12 +174,10 @@ class CardActivity : BaseActivity() {
         card_ads_view.load()
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
         card_star_rating.card = card
-        PublicInteractor.getCardReviews(card) { reviews ->
-            val reviewsQtd = reviews.size
-            val reviewsRating = reviews.sumBy { it.second } / reviewsQtd.toFloat()
+        PublicInteractor.getCardRatings(card) { ratings ->
             val userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-            card_star_rating.userRating = reviews.find { it.first == userUid }?.second ?: -1
-            card_star_rating.setGeneralRating(reviewsRating, reviewsQtd)
+            card_star_rating.userRating = ratings.find { it.first == userUid }?.second ?: -1
+            card_star_rating.ratings = ratings
         }
         loadCardInfo()
         configBottomSheet()
