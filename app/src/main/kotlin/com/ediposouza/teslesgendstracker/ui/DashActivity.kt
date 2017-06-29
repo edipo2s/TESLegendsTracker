@@ -45,6 +45,7 @@ import com.ediposouza.teslesgendstracker.util.*
 import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
+import it.gmariotti.changelibs.library.view.ChangeLogRecyclerView
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_about.view.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
