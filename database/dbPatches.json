@@ -389,5 +389,40 @@
   "2017_05_26": {
     "desc": "Protector of the Mane",
     "type": "reward"
+  },
+  "2017_06_25": {
+    "desc": "Conjuration Tutor",
+    "type": "reward"
+  },
+  "2017_06_28": {
+    "changes": {
+      "ashservant": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "belligerentgiant": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      },
+      "leaflurker": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "murkwaterwitch": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "spitefuldremora": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Text"
+      }
+    },
+    "desc": "Heroes of Skyrim",
+    "type": "set"
   }
 }
