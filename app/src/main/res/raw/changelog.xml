@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+    <changelogversion
+        versionName="1.5.0"
+        changeDate="June 28, 2017">
+        <changelogtext>[b]Feature:[/b] Add Card Star Rating support</changelogtext>
+        <changelogtext>Add Heroes of Skyrim card images</changelogtext>
+        <changelogtext>Add Italian translations</changelogtext>
+        <changelogtext>Fixes and improvements</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.4.0"
+        changeDate="June 20, 2017">
+        <changelogtext>[b]Feature:[/b] Add Tokens support</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add Cards Generates info support</changelogtext>
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.3.0"
+        changeDate="June 15, 2017">
+        <changelogtext>[b]Feature:[/b] Add Shout support</changelogtext>
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.2.2"
+        changeDate="June 13, 2017">
+        <changelogtext>Image loading improvements</changelogtext>
+        <changelogtext>Fix crash when trying access image from Firebase Storage</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.2.0"
+        changeDate="June 8, 2017">
+        <changelogtext>Fix Basic evolve card size</changelogtext>
+        <changelogtext>Fix Patch card image load</changelogtext>
+        <changelogtext>Update Reive, Blade Master image</changelogtext>
+        <changelogtext>Update Orc Clansman image and full art</changelogtext>
+        <changelogtext>Update Relentless Raider image after nerf</changelogtext>
+        <changelogtext>Chaurus Bredding Pit card and full art</changelogtext>
+        <changelogtext>Add May monthly Protector of the Mane</changelogtext>
+        <changelogtext>Refactory card image load. Removed FirebaseImageLoader dependency.
+        </changelogtext>
+        <changelogtext>Add Firebase performance tool</changelogtext>
+        <changelogtext>Fix show card deeplink</changelogtext>
+        <changelogtext>Fix spoiler card deeplink</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.1.0"
+        changeDate="May 13, 2017">
+        <changelogtext>[b]Feature:[/b] Language change</changelogtext>
+        <changelogtext>Remote load resources by version</changelogtext>
+        <changelogtext>CardArenaTierPlus multiple attribute support</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.0.2"
+        changeDate="Apr 11, 2017">
+        <changelogtext>[b]Feature:[/b] Set card sound as ringtone</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.0.1"
+        changeDate="Apr 5, 2017">
+        <changelogtext>[b]Feature:[/b] Set art as wallpaper</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.0.0"
+        changeDate="Apr 3, 2017">
+        <changelogtext>[b]Feature:[/b] Add Cards Sounds support</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add Cards Full Arts support</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.6.1"
+        changeDate="Apr 1, 2017">
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.6.0"
+        changeDate="Mar 28, 2017">
+        <changelogtext>Firebase changelogversion database connection when app go to background
+        </changelogtext>
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.5.1"
+        changeDate="Mar 22, 2017">
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.5.0"
+        changeDate="Mar 15, 2017">
+        <changelogtext>[b]Feature:[/b] Spoiler Session</changelogtext>
+        <changelogtext>Spoiler card deeplink</changelogtext>
+        <changelogtext>Show missing cards in DeckList CardViewMode</changelogtext>
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.7"
+        changeDate="Mar 1, 2017">
+        <changelogtext>[b]Feature:[/b] Facebook Login</changelogtext>
+        <changelogtext>Search deeplink</changelogtext>
+        <changelogtext>Remote Load rewards card images</changelogtext>
+        <changelogtext>Removed patch and alternative images</changelogtext>
+        <changelogtext>Reward and Unique search term Disable deck card mode refresh</changelogtext>
+        <changelogtext>Update Deeplink and metric</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.6"
+        changeDate="Feb 26, 2017">
+        <changelogtext>[b]Feature:[/b] Add deeplink support for Card, Arena, Season and Articles
+        </changelogtext>
+        <changelogtext>Add Heroic Rebirth february reward</changelogtext>
+        <changelogtext>Deck card list view mode and Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.5"
+        changeDate="Feb 24, 2017">
+        <changelogtext>Fix deck view crash spliting deck info into a fragment</changelogtext>
+        <changelogtext>Import saved decks</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.4"
+        changeDate="Feb 24, 2017">
+        <changelogtext>[b]Feature:[/b] Deck import</changelogtext>
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.3"
+        changeDate="Feb 16, 2017">
+        <changelogtext>Fix dual attr count in deckList</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.2"
+        changeDate="Feb 16, 2017">
+        <changelogtext>Fixed bug when open deck in some devices</changelogtext>
+        <changelogtext>Fixed layout in devices without navigation bar</changelogtext>
+        <changelogtext>Others fixes and improviments</changelogtext>
+        <changelogtext>Removed russian translation</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.1"
+        changeDate="Feb 16, 2017">
+        <changelogtext>Fixes</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.4.0"
+        changeDate="Feb 11, 2017">
+        <changelogtext>[b]Feature:[/b] Arena Draft</changelogtext>
+        <changelogtext>[b]Feature:[/b] Edit Deck</changelogtext>
+        <changelogtext>Kotlin 1.1</changelogtext>
+        <changelogtext>Deck cardlist attrs and prophecy counter</changelogtext>
+        <changelogtext>Converted images to webp (Apk size reduced from 50Mb to 20Mb)</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.3.2"
+        changeDate="Jan 21, 2017">
+        <changelogtext>Rarity color removed.</changelogtext>
+        <changelogtext>Auth result check.</changelogtext>
+        <changelogtext>New deck arena mode check.</changelogtext>
+        <changelogtext>Transition group fix.</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.3.1"
+        changeDate="Jan 20, 2017">
+        <changelogtext>Search crash hotfix</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.3.0"
+        changeDate="Jan 17, 2017">
+        <changelogtext>[b]Feature:[/b] Matches</changelogtext>
+        <changelogtext>[b]Feature:[/b] Import from legends-decks</changelogtext>
+        <changelogtext>[b]Feature:[/b] Pagination</changelogtext>
+        <changelogtext>[b]Feature:[/b] Check version</changelogtext>
+        <changelogtext>[b]Feature:[/b] Donate</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.2.3"
+        changeDate="Dec 31, 2016">
+        <changelogtext>[b]Feature:[/b] Add Decks metrics</changelogtext>
+        <changelogtext>Fix JellyBean and Kitkat layout.</changelogtext>
+        <changelogtext>Fix Statistics scroll.</changelogtext>
+        <changelogtext>Fix keyboard cover comment edittext</changelogtext>
+        <changelogtext>Fix empty cost bar below Lollipop.</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.2.2"
+        changeDate="Dec 30, 2016">
+        <changelogtext>[b]Feature:[/b] Add DeckQtd and DeckMagika costs to deck activity
+        </changelogtext>
+        <changelogtext>[b]Feature:[/b] Comment deck support</changelogtext>
+        <changelogtext>Add Battlereeve Of Dusk december reward card</changelogtext>
+        <changelogtext>Deck card list sorted</changelogtext>
+        <changelogtext>Fix show deck DUAL and NEUTRAL cards</changelogtext>
+        <changelogtext>Fix missing soul calculation</changelogtext>
+        <changelogtext>Add Remote Config for DB_UPDATE and VERSION_UNSUPPORTED</changelogtext>
+        <changelogtext>App exit confirmation. Deck fab autoHide</changelogtext>
+        <changelogtext>Handle Save and Restore States</changelogtext>
+        <changelogtext>Not allow save deck with less than 50 cards</changelogtext>
+        <changelogtext>Make Adapters and ViewHolders class as InnerClass</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.2.1"
+        changeDate="Dec 27, 2016">
+        <changelogtext>[b]Feature:[/b] Login button in Decks and New Deck screens</changelogtext>
+        <changelogtext>Handle add unique card in decklist.</changelogtext>
+        <changelogtext>Evolves as keyword</changelogtext>
+        <changelogtext>Fix missing cards count with neutral/dual cards in deck</changelogtext>
+        <changelogtext>Change app launcher name to TESL Tracker.</changelogtext>
+        <changelogtext>Add notification icon</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.2.0"
+        changeDate="Dec 24, 2016">
+        <changelogtext>[b]Feature:[/b] List all decks</changelogtext>
+        <changelogtext>[b]Feature:[/b] Owned decks</changelogtext>
+        <changelogtext>[b]Feature:[/b] Favorite decks</changelogtext>
+        <changelogtext>[b]Feature:[/b] Create new deck</changelogtext>
+        <changelogtext>Add MixPanel</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="0.1.0"
+        changeDate="Dec 10, 2016">
+        <changelogtext>[b]Feature:[/b] List all cards</changelogtext>
+        <changelogtext>[b]Feature:[/b] View card details</changelogtext>
+        <changelogtext>[b]Feature:[/b] Favorite cards</changelogtext>
+        <changelogtext>[b]Feature:[/b] Manage collection</changelogtext>
+        <changelogtext>[b]Feature:[/b] Collection statistics</changelogtext>
+    </changelogversion>
+</changelog>

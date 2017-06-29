@@ -37,6 +37,7 @@
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
 
+    <string name="title_changelog" translatable="false">ChangeLog</string>
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
     <string name="wabbatrack_url" translatable="false">https://edipo2s.github.io/WabbaTrack/</string>
     <string name="wabbatrack_video_url" translatable="false">https://www.youtube.com/watch?v=zw0o0QVhkow</string>

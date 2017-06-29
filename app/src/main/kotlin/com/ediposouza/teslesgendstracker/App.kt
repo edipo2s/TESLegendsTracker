@@ -36,6 +36,14 @@ class App : MultiDexApplication() {
                     PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
         }
 
+        fun shouldShowChangelog(): Boolean {
+            return !PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(getVersion(), false)
+        }
+
+        fun setVersionChangelogViewed() {
+            PreferenceManager.getDefaultSharedPreferences(ctx).edit().putBoolean(getVersion(), true).apply()
+        }
+
         fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 
     }

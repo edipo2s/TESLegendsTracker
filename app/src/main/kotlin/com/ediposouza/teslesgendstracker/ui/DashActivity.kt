@@ -146,6 +146,10 @@ class DashActivity : BaseFilterActivity(),
         }
         checkDeeplinkInfo()
         adsInterstitial.load(this)
+        if (App.shouldShowChangelog()) {
+            App.setVersionChangelogViewed()
+            showChangeLogDialog()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -418,9 +422,24 @@ class DashActivity : BaseFilterActivity(),
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
                 })
+                .setNeutralButton(R.string.title_changelog, { _, _ ->
+                    showChangeLogDialog()
+                    MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CHANGELOG())
+                })
                 .show()
         MetricsManager.trackScreen(MetricScreen.SCREEN_ABOUT())
         return true
+    }
+
+    private fun showChangeLogDialog() {
+        AlertDialog.Builder(this, R.style.AppDialog)
+                .setTitle(R.string.title_changelog)
+                .setPositiveButton(android.R.string.ok, null)
+                .create()
+                .apply {
+                    setView(ChangeLogRecyclerView(context))
+                    show()
+                }
     }
 
     private fun showDonateDialog(): Boolean {
