@@ -350,6 +350,7 @@ class DashActivity : BaseFilterActivity(),
                 icon = ContextCompat.getDrawable(this@DashActivity, R.drawable.ic_no_ads)
             }
         }
+        dash_navigation_view.menu.findItem(R.id.menu_wabbatrack)?.isVisible = ConfigManager.isToShowWabbatrack()
         PublicInteractor.isSpoilerEnable {
             dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it
         }

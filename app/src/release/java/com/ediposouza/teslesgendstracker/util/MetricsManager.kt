@@ -49,6 +49,10 @@ object MetricsManager : MetricsConstants() {
     fun trackAction(action: MetricAction) {
         val bundle = Bundle().apply {
             when (action) {
+                is MetricAction.ACTION_COLLECTION_CARD_RANTING -> {
+                    putString(action.PARAM_CARD, action.card.shortName)
+                    putInt(action.PARAM_RATING, action.rating)
+                }
                 is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE -> {
                     putString(action.PARAM_CARD, action.card.shortName)
                     putInt(action.PARAM_QTD, action.qtd)

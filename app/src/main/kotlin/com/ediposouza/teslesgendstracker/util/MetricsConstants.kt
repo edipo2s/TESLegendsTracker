@@ -59,6 +59,11 @@ sealed class MetricAction(val name: String) {
     class ACTION_COLLECTION_STATISTICS_EXPAND : MetricAction("CollectionStatisticsExpand")
     class ACTION_COLLECTION_STATISTICS_COLLAPSE : MetricAction("CollectionStatisticsCollapse")
 
+    class ACTION_COLLECTION_CARD_RANTING(val card: Card, val rating: Int) : MetricAction("CardRating") {
+        val PARAM_CARD = "Card"
+        val PARAM_RATING = "Rating"
+    }
+
     class ACTION_COLLECTION_CARD_QTD_CHANGE(val card: Card, val qtd: Int) : MetricAction("CollectionCardQtdChange") {
         val PARAM_CARD = "Card"
         val PARAM_QTD = "Qtd"

@@ -12,6 +12,8 @@ import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
+import com.ediposouza.teslesgendstracker.util.MetricAction
+import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.widget_star_rating.view.*
 import org.jetbrains.anko.doAsync
@@ -121,6 +123,7 @@ class StarRating(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                         removeAll { it.first == userUid }
                         add(userUid to rating)
                     }
+                    MetricsManager.trackAction(MetricAction.ACTION_COLLECTION_CARD_RANTING(it, userRating))
                 }
             }
         }

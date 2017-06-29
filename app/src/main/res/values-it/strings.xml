@@ -70,7 +70,7 @@
     <string name="about_info_thanks_label">Ringraziamenti speciali:</string>
     <string name="about_info_thanks_direwolf_text">TES Legends</string>
     <string name="about_info_thanks_cvh_text">Arena Tier List</string>
-    <string name="about_info_thanks_unity_studio">Desenvolvedores do UnityStudio - </string>
+    <string name="about_info_thanks_unity_studio">Gli sviluppatori UnityStudio - </string>
     <string name="about_rate_app">Vota l\'app</string>
 
     <string name="dialog_import_title">Importa da Legends-Decks</string>
@@ -86,10 +86,10 @@
 
     <string name="tab_cards_all">Carte</string>
     <string name="tab_cards_collection">Collezione</string>
-    <string name="tab_cards_tokens">Gettone</string>
+    <string name="tab_cards_tokens">Token</string>
     <string name="tab_decks_public">Pubblici</string>
     <string name="tab_decks_owned">Posseduti</string>
-    <string name="tab_decks_favorites">Preferite</string>
+    <string name="tab_decks_favorites">Preferiti</string>
     <string name="tab_matches_statistics">Statistiche</string>
     <string name="tab_matches_history">Storico</string>
     <string name="tab_mode_ranked">Classicata</string>
@@ -99,9 +99,9 @@
     <string name="tab_articles_world">Mondo</string>
 
     <string name="title_tab_basics_races">Razze</string>
-    <string name="title_tab_basics_ranked">Classicare</string>
+    <string name="title_tab_basics_ranked">Ranked</string>
     <string name="title_tab_cards_collection">Collezione di carte</string>
-    <string name="title_tab_cards_tokens">Gettone</string>
+    <string name="title_tab_cards_tokens">Token</string>
     <string name="title_tab_decks_public">Deck pubblici</string>
     <string name="title_tab_decks_owned">Deck posseduti</string>
     <string name="title_tab_decks_favorites">Deck preferiti</string>
@@ -130,7 +130,7 @@
     <string name="card_levels_label">Livelli:</string>
     <string name="card_creators_label">Creatori:</string>
     <string name="card_generates_label">Generare:</string>
-    <string name="card_tokens_label">Gettone:</string>
+    <string name="card_tokens_label">Token:</string>
     <string name="card_patch_current">Attuale versione</string>
     <string name="card_patch_pre">Versione pre-%s</string>
     <string name="card_full_downloaded">Immagine salvata nella cartella dei download.</string>
@@ -255,8 +255,8 @@
 
     <string name="wabbatrack_about_desc">WabbaTrack è un\'applicazione Windows per The Elder Scrolls: Legends che ti aiuta a tracciare i tuoi match e a fare i draft in Arena.</string>
     <string name="wabbatrack_arenatier_desc">Arena Tier basato sulla Tier List CVH e sinergie con le carte selezionate precedentemente</string>
-    <string name="wabbatrack_autobuild_desc">Funzione di Auto-Build per costruire automaticamente un deck imporato dai tuoi deck o da Legends-Decks</string>
-    <string name="wabbatrack_decktracker_desc">Deck Tracker con funzionalità di Overlay del Deck e contatotore di Attributi/Profezie con percentuale di pescata.</string>
+    <string name="wabbatrack_autobuild_desc">Funzione di Auto-Build per costruire automaticamente un deck importato dai tuoi deck o da Legends-Decks</string>
+    <string name="wabbatrack_decktracker_desc">Deck Tracker con funzionalità di Overlay del Deck e contatore di Attributi/Profezie con percentuale di pescata.</string>
     <string name="wabbatrack_matches_desc">Storico dei match e statistiche, con percentuale di vittorie e filtri per modalità e stagioni</string>
 
 </resources>
