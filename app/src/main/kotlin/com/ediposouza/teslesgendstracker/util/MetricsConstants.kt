@@ -197,6 +197,7 @@ sealed class MetricAction(val name: String) {
     class ACTION_ABOUT_DEVELOPER : MetricAction("AboutDeveloper")
     class ACTION_ABOUT_CVH : MetricAction("AboutCVH")
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
+    class ACTION_ABOUT_CHANGELOG : MetricAction("AboutChangelog")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
     class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("ImportCollectionCancelled")
     class ACTION_IMPORT_COLLECTION_FINISH(val cardsImported: Int) : MetricAction("ImportCollectionFinish") {

@@ -35,7 +35,7 @@
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_favorite_unchecked"
-            android:visibility="gone"
+            android:visibility="invisible"
             tools:visibility="visible" />
 
         <ImageView
@@ -48,7 +48,7 @@
             android:clickable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_expand"
-            android:visibility="gone"
+            android:visibility="invisible"
             tools:visibility="visible" />
 
         <ProgressBar
@@ -59,7 +59,7 @@
             android:layout_marginEnd="@dimen/large_margin"
             android:layout_toStartOf="@id/card_favorite_btn"
             android:indeterminate="true"
-            android:visibility="gone"
+            android:visibility="invisible"
             tools:visibility="visible" />
 
         <com.ediposouza.teslesgendstracker.ui.cards.widget.StarRating
@@ -67,7 +67,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:visibility="invisible"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/card_more_info_label"

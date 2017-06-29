@@ -173,6 +173,7 @@ class CardActivity : BaseActivity() {
     private fun onTransitionEnds() {
         card_ads_view.load()
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        card_star_rating.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.INVISIBLE
         card_star_rating.card = card
         PublicInteractor.getCardRatings(card) { ratings ->
             val userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
@@ -188,7 +189,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged() && !card.isToken() && !fromSpoiler) {
             showUserCardQtd()
         }
-        card_favorite_btn.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.GONE
+        card_favorite_btn.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.INVISIBLE
         PrivateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()
