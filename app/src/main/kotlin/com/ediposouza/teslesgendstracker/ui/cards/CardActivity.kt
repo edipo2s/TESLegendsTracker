@@ -37,6 +37,7 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import hotchemi.android.rate.AppRate
 import kotlinx.android.synthetic.main.activity_card.*
@@ -173,8 +174,13 @@ class CardActivity : BaseActivity() {
         card_ads_view.load()
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
         card_star_rating.card = card
-        card_star_rating.userRating = 3f
-        card_star_rating.setGeneralRating(4.5f, 17)
+        PublicInteractor.getCardReviews(card) { reviews ->
+            val reviewsQtd = reviews.size
+            val reviewsRating = reviews.sumBy { it.second } / reviewsQtd.toFloat()
+            val userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+            card_star_rating.userRating = reviews.find { it.first == userUid }?.second ?: -1
+            card_star_rating.setGeneralRating(reviewsRating, reviewsQtd)
+        }
         loadCardInfo()
         configBottomSheet()
         configQtdAndFavoriteInfo()

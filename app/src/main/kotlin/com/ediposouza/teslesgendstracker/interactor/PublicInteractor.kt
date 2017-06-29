@@ -111,6 +111,27 @@ object PublicInteractor : BaseInteractor() {
         }
     }
 
+    fun getCardReviews(card: Card, onSuccess: (List<Pair<String, Int>>) -> Unit) {
+        val attr = card.attr.name.toLowerCase()
+        with(database.child(NODE_REVIEWS).child(card.set.db).child(attr).child(card.shortName)) {
+            keepSynced()
+            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val reviews = ds.children.map {
+                        it.key to it.getValue(Int::class.java)
+                    }.toList()
+                    onSuccess.invoke(reviews)
+                }
+
+                override fun onCancelled(de: DatabaseError) {
+                    Timber.d("Fail: " + de.message)
+                }
+
+            })
+        }
+    }
+
     fun getTokens(set: CardSet?, onSuccess: (List<Card>) -> Unit) {
         getListFromSets(set, onSuccess) { set, onEachSuccess ->
             with(database.child(NODE_TOKENS).child(set.db).orderByChild(KEY_CARD_COST)) {

@@ -40,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
-        android:text="(15)"
         android:textColor="@color/grey_700"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        tools:text="(15)" />
 
 </LinearLayout>

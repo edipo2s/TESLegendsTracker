@@ -20,9 +20,10 @@ class StarRating(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         LinearLayout(ctx, attrs, defStyleAttr) {
 
     var card: Card? = null
-    var userRating: Float = 0f
+    var userRating: Int = 0
         set(value) {
-            if (value > 0) {
+            field = value
+            if (value > -1) {
                 star_rating_qtd.setTextColor(ContextCompat.getColor(context, R.color.amber_500))
             }
         }
@@ -56,11 +57,11 @@ class StarRating(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                         .create()
                         .apply {
                             setOnShowListener {
-                                find<ImageView>(R.id.dialog_star_rating_1).setImageResource(getStarResource(1f, userRating))
-                                find<ImageView>(R.id.dialog_star_rating_2).setImageResource(getStarResource(2f, userRating))
-                                find<ImageView>(R.id.dialog_star_rating_3).setImageResource(getStarResource(3f, userRating))
-                                find<ImageView>(R.id.dialog_star_rating_4).setImageResource(getStarResource(4f, userRating))
-                                find<ImageView>(R.id.dialog_star_rating_5).setImageResource(getStarResource(5f, userRating))
+                                find<ImageView>(R.id.dialog_star_rating_1).setImageResource(getStarResource(1f, userRating.toFloat()))
+                                find<ImageView>(R.id.dialog_star_rating_2).setImageResource(getStarResource(2f, userRating.toFloat()))
+                                find<ImageView>(R.id.dialog_star_rating_3).setImageResource(getStarResource(3f, userRating.toFloat()))
+                                find<ImageView>(R.id.dialog_star_rating_4).setImageResource(getStarResource(4f, userRating.toFloat()))
+                                find<ImageView>(R.id.dialog_star_rating_5).setImageResource(getStarResource(5f, userRating.toFloat()))
                             }
                             show()
                         }
