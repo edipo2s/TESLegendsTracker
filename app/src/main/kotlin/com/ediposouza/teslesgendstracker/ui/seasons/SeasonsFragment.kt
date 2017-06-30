@@ -83,6 +83,9 @@ class SeasonsFragment : BaseFragment() {
             patches.addAll(it.filter { it.type != PatchType.REWARD })
             configureRecycleView()
         }
+        seasons_refresh_layout.setOnRefreshListener {
+            seasonsAdapter.reset()
+        }
         MetricsManager.trackScreen(MetricScreen.SCREEN_SEASONS())
     }
 

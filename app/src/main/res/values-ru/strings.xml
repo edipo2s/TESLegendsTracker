@@ -114,6 +114,7 @@
 
     <string name="cards_sets_all">Все</string>
 
+    <string name="card_title_star_rating">Ваш рейтинг</string>
     <string name="card_more_info_label">Больше информации</string>
     <string name="card_arena_tier_label">Арена Tier:</string>
     <string name="card_collection_qtd_label">Коллекция Количество:</string>

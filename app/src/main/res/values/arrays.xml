@@ -3,6 +3,7 @@
     <array name="languages">
         <item name="english">@string/about_language_english</item>
         <item name="portuguese">@string/about_language_portuguese</item>
+        <item name="italian">@string/about_language_italian</item>
         <item name="spanish">@string/about_language_spanish</item>
         <item name="german">@string/about_language_german</item>
         <item name="russian">@string/about_language_russian</item>

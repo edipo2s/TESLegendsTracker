@@ -13,7 +13,9 @@ import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.threetenabp.AndroidThreeTen
+import hotchemi.android.rate.AppRate
 import timber.log.Timber
+
 
 /**
  * Created by EdipoSouza on 10/30/16.
@@ -29,7 +31,18 @@ class App : MultiDexApplication() {
 
         fun hasUserLogged() = FirebaseAuth.getInstance().currentUser != null
 
-        fun hasUserDonate() = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
+        fun hasUserDonated(): Boolean {
+            return ConfigManager.isUserInAdsWhitelist() ||
+                    PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
+        }
+
+        fun shouldShowChangelog(): Boolean {
+            return !PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(getVersion(), false)
+        }
+
+        fun setVersionChangelogViewed() {
+            PreferenceManager.getDefaultSharedPreferences(ctx).edit().putBoolean(getVersion(), true).apply()
+        }
 
         fun getVersion() = ctx?.packageManager?.getPackageInfo(ctx?.packageName, 0)?.versionName ?: ""
 
@@ -61,6 +74,13 @@ class App : MultiDexApplication() {
                 reference.child(BaseInteractor.NODE_NEWS).keepSynced(sync)
             }
         }
+        AppRate.with(this)
+                .setInstallDays(10)
+                .setLaunchTimes(10)
+                .setRemindInterval(5)
+                .setShowLaterButton(true)
+                .setDebug(false)
+                .monitor()
     }
 
 }

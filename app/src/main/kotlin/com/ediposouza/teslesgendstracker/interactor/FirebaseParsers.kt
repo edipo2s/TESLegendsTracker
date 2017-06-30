@@ -116,8 +116,10 @@ abstract class FirebaseParsers {
         }
 
         fun toDeck(uuid: String, private: Boolean): Deck {
+            val createdAtDate = LocalDateTime.now().takeIf { createdAt.isNullOrBlank() } ?: LocalDateTime.parse(createdAt)
+            val updatedAtDate = LocalDateTime.now().takeIf { updatedAt.isNullOrBlank() } ?: LocalDateTime.parse(updatedAt)
             return Deck(uuid, name, owner, private, DeckType.values()[type], DeckClass.values()[cls], cost,
-                    LocalDateTime.parse(createdAt), LocalDateTime.parse(updatedAt), patch, likes, views, cards,
+                    createdAtDate, updatedAtDate, patch, likes, views, cards,
                     updates.map { DeckUpdate(LocalDateTime.parse(it.key), it.value) },
                     comments.map {
                         DeckComment(it.key, it.value[KEY_DECK_COMMENT_OWNER] as String,

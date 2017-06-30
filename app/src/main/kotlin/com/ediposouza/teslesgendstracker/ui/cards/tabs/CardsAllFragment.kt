@@ -115,6 +115,7 @@ open class CardsAllFragment : BaseFragment() {
                 cards_recycler_view.visibility = View.INVISIBLE.takeIf { shouldShowLogin } ?: View.VISIBLE
                 signin_buttons?.visibility = View.VISIBLE.takeIf { shouldShowLogin } ?: View.INVISIBLE
                 showCards()
+                MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_FAVORITE(isChecked))
             }
         }
     }

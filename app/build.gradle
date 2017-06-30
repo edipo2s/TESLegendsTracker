@@ -147,7 +147,9 @@ dependencies {
     compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
     compile 'com.jakewharton.timber:timber:4.5.1'
     compile 'com.mixpanel.android:mixpanel-android:5.1.0'
+    compile 'com.github.hotchemi:android-rate:1.0.1'
     compile 'com.github.emanzanoaxa:RippleEffect:52ea2a0ab6'
+    compile 'com.github.gabrielemariotti.changeloglib:changelog:2.1.0'
     compile 'org.greenrobot:eventbus:3.0.0'
 
     //    compile "com.github.traex.rippleeffect:library:1.3"

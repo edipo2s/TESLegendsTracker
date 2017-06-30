@@ -233,6 +233,18 @@
         "keyword": "",
         "text": ""
       },
+      "sweetroll": {
+        "creators": "wabbajack, altarofdespair, blackmail, chanterofakatosh",
+        "name": "Sweet Roll",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Pastry",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "When a creature eats Sweet Roll, heal that creature."
+      },
       "steeldagger": {
         "creators": "alikrsurvivalist, crownquartermaster, daggersinthedark, corsairship",
         "name": "Steel Dagger",
@@ -318,6 +330,18 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+2/+0"
+      },
+      "lavaatronach": {
+        "creators": "conjurationtutor",
+        "name": "Lava Atronach",
+        "cost": "7",
+        "type": "Creature",
+        "race": "Daedra",
+        "attack": "8",
+        "health": "8",
+        "rarity": "Epic",
+        "keyword": "Breakthrough, Guard, Ward",
+        "text": "Breakthrough, Guard, Ward"
       },
       "stormatronach": {
         "creators": "highrocksummoner, darkrift, magesguildretreat",
@@ -469,6 +493,30 @@
   },
   "heroesofskyrim": {
     "endurance": {
+      "companionharbinger_beast": {
+        "creators": "companionharbinger",
+        "name": "Companion Harbinger",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": ""
+      },
+      "draugrsentry": {
+        "creators": "ancientlookout",
+        "name": "Draugr Dentry",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
       "grandmasterdelphine": {
         "creators": "innkeeperdelphine",
         "name": "Grandmaster Delphine",
@@ -481,6 +529,219 @@
         "unique": true,
         "keyword": "",
         "text": "Can't be damaged or targeted by enemy Dragons."
+      },
+      "grimshieldbrother_beast": {
+        "creators": "grimshieldbrother",
+        "name": "Grim Shield-Brother",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "3",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "Drain",
+        "text": "Drain"
+      },
+      "hulkingdraugr": {
+        "creators": "wavesofthefallen",
+        "name": "Hulking Draugr",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "strickendraugr": {
+        "creators": "wavesofthefallen",
+        "name": "Stricken Draugr",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "whiterunprotector_beast": {
+        "creators": "whiterunprotector",
+        "name": "Whiterun Protector",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "6",
+        "health": "6",
+        "rarity": "Rare",
+        "keyword": "Guard, Regenerate",
+        "text": "Guard, Regenerate"
+      }
+    },
+    "intelligence": {
+      "experimentalscroll": {
+        "creators": "jzargo",
+        "name": "Experimental Scroll",
+        "cost": "4",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "Experimental Scroll is either Enlightenment, Flame Blast, or Flame Cloak. Don't worry which one it is. Just give it a try. Elnightenment: Give each friendly creature two random Keywords. Flame Blast: Deal 2 damage to each enemy creature. Flame Cloak: Deal 5 damage to each player."
+      }
+    },
+    "neutral": {
+      "angryvillager": {
+        "creators": "prizedchicken",
+        "name": "Angry Villager",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "counterfeittrinket": {
+        "creators": "thievesguildshadowfoot",
+        "name": "Counterfeit Trinket",
+        "cost": "0",
+        "type": "Action",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Common",
+        "keyword": "",
+        "text": "Draw a card and Counterfeit Trinket deals 1 damage to you."
+      }
+    },
+    "strength": {
+      "aelashuntmate_beast": {
+        "creators": "aelashuntmate",
+        "name": "Aela's Huntmate",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Rare",
+        "keyword": "",
+        "text": ""
+      },
+      "aelathehuntress_beast": {
+        "creators": "aelathehuntress",
+        "name": "Aela the Huntress",
+        "cost": "7",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": ""
+      },
+      "circleinitiate_beast": {
+        "creators": "circleinitiate",
+        "name": "Circle Initiate",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "4",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "rallyingstormcloak": {
+        "creators": "inspiringstormcloak, stormcloakavenger",
+        "name": "Rallying Stormcloak",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "stormcloakbattalion": {
+        "creators": "stormcloakvanguard",
+        "name": "Stormcloak Battalion",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "stormcloakskirmisher": {
+        "creators": "jarlbalgruuf",
+        "name": "Stormcloak Skirmisher",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Breakthrough",
+        "text": "Breakthrough"
+      },
+      "underforge": {
+        "creators": "skyforge",
+        "name": "Underforge",
+        "cost": "3",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Legendary",
+        "keyword": "Uses: Unlimited. Activate: A friendly creature becomes a Werewolf. Friendly werewolves have +1/+1.",
+        "text": ""
+      }
+    },
+    "willpower": {
+      "sovngardehero": {
+        "creators": "callofvalor",
+        "name": "Sovngarde Hero",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "3",
+        "rarity": "",
+        "keyword": "",
+        "text": ""
+      },
+      "thalmorsoldier": {
+        "creators": "thalmorjusticiar",
+        "name": "Thalmor Soldier",
+        "cost": "1",
+        "type": "Creature",
+        "race": "High Elf",
+        "attack": "1",
+        "health": "1",
+        "rarity": "",
+        "keyword": "",
+        "text": ""
+      },
+      "uncagedwolf": {
+        "creators": "wolfcage",
+        "name": "Uncaged Wolf",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Summon",
+        "keyword": "Summon: +1/+1 for each other friendly Wolf.",
+        "text": ""
       }
     }
   }

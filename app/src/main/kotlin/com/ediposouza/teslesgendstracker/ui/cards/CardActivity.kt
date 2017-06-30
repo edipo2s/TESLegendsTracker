@@ -37,7 +37,9 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
+import hotchemi.android.rate.AppRate
 import kotlinx.android.synthetic.main.activity_card.*
 import kotlinx.android.synthetic.main.include_card_info.*
 import kotlinx.android.synthetic.main.itemlist_card_full.view.*
@@ -163,6 +165,7 @@ class CardActivity : BaseActivity() {
         } else {
             onTransitionEnds()
         }
+        AppRate.showRateDialogIfMeetsConditions(this);
         MetricsManager.trackScreen(MetricScreen.SCREEN_CARD_DETAILS())
         MetricsManager.trackCardView(card)
     }
@@ -170,6 +173,13 @@ class CardActivity : BaseActivity() {
     private fun onTransitionEnds() {
         card_ads_view.load()
         card_favorite_btn.setOnClickListener { onFavoriteClick() }
+        card_star_rating.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.INVISIBLE
+        card_star_rating.card = card
+        PublicInteractor.getCardRatings(card) { ratings ->
+            val userUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+            card_star_rating.userRating = ratings.find { it.first == userUid }?.second ?: -1
+            card_star_rating.ratings = ratings
+        }
         loadCardInfo()
         configBottomSheet()
         configQtdAndFavoriteInfo()
@@ -179,7 +189,7 @@ class CardActivity : BaseActivity() {
         if (App.hasUserLogged() && !card.isToken() && !fromSpoiler) {
             showUserCardQtd()
         }
-        card_favorite_btn.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.GONE
+        card_favorite_btn.visibility = View.VISIBLE.takeUnless { card.isToken() } ?: View.INVISIBLE
         PrivateInteractor.isUserCardFavorite(card) {
             favorite = it
             updateFavoriteButton()

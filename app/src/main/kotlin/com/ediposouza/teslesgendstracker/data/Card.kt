@@ -1,5 +1,6 @@
 package com.ediposouza.teslesgendstracker.data
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -128,6 +129,7 @@ enum class CardRace(val desc: String) {
     DRAGON(""),
     DREUGH(""),
     DWEMER(""),
+    FALMER(""),
     FISH(""),
     GIANT(""),
     GOBLIN(""),
@@ -143,6 +145,7 @@ enum class CardRace(val desc: String) {
     MUMMY(""),
     NEREID(""),
     OGRE(""),
+    PASTRY(""),
     REPTILE(""),
     REACHMAN(""),
     SKELETON(""),
@@ -171,19 +174,22 @@ enum class CardRace(val desc: String) {
 enum class CardKeyword {
 
     ACTIVATE,
-    BATTLES,
+    BATTLE,
+    BEAST_FORM,
     BREAKTHROUGH,
     CHANGE,
     CHARGE,
     COVER,
     DRAIN,
     EVOLVES,
+    FETCH,
     GUARD,
     LAST_GASP,
     LETHAL,
     PILFER,
     PROPHECY,
     REGENERATE,
+    ROLL_OVER,
     SHACKLE,
     SILENCE,
     SHOUT,
@@ -447,6 +453,9 @@ data class Card(
             onLoaded(null)
         }
         val path = "v${context.getCurrentVersion()}/${fullArtPath()}"
+        if (context is Activity && context.isDestroyed) {
+            return
+        }
         FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
             Glide.with(context)
                     .load(uri)

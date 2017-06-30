@@ -45,6 +45,7 @@ import com.ediposouza.teslesgendstracker.util.*
 import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
+import it.gmariotti.changelibs.library.view.ChangeLogRecyclerView
 import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.dialog_about.view.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
@@ -146,6 +147,10 @@ class DashActivity : BaseFilterActivity(),
         }
         checkDeeplinkInfo()
         adsInterstitial.load(this)
+        if (App.shouldShowChangelog()) {
+            App.setVersionChangelogViewed()
+            showChangeLogDialog()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -171,7 +176,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     override fun onDestroy() {
-        if (BuildConfig.PREPARE_TO_RELEASE && !App.hasUserDonate()) {
+        if (!App.hasUserDonated()) {
             adsInterstitial.show()
         }
         try {
@@ -262,6 +267,17 @@ class DashActivity : BaseFilterActivity(),
                         }
                     }
                 }
+                getString(R.string.app_deeplink_path_token) -> {
+                    PublicInteractor.getTokens(null) {
+                        val ctx = this@DashActivity
+                        val card = it.filter { it.shortName == this[1] }.firstOrNull()
+                        card?.let {
+                            val anim = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx, dash_toolbar_title,
+                                    getString(R.string.card_transition_name))
+                            ActivityCompat.startActivity(ctx, CardActivity.newIntent(ctx, card), anim.toBundle())
+                        }
+                    }
+                }
                 getString(R.string.app_deeplink_path_spoiler) -> {
                     onNavigationItemSelected(dash_navigation_view.menu.findItem(R.id.menu_spoiler))
                     PublicInteractor.getSpoilerCards {
@@ -300,6 +316,11 @@ class DashActivity : BaseFilterActivity(),
                         eventBus.post(CmdInputSearch(this[1]))
                     }, DateUtils.SECOND_IN_MILLIS)
                 }
+                getString(R.string.app_deeplink_path_page) -> {
+                    if (size > 1) {
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(this[1])))
+                    }
+                }
                 getString(R.string.app_deeplink_path_update) -> {
                     checkLastVersion {
                         val updateUri = Uri.parse(getString(R.string.playstore_url_format, packageName))
@@ -323,6 +344,14 @@ class DashActivity : BaseFilterActivity(),
                 profile_image.loadFromUrl(user.photoUrl.toString(), placeholder, true)
             }
         }
+        if (App.hasUserDonated()) {
+            dash_navigation_view.menu.findItem(R.id.menu_donate)?.apply {
+                isEnabled = false
+                title = getString(R.string.menu_donate_done)
+                icon = ContextCompat.getDrawable(this@DashActivity, R.drawable.ic_no_ads)
+            }
+        }
+        dash_navigation_view.menu.findItem(R.id.menu_wabbatrack)?.isVisible = ConfigManager.isToShowWabbatrack()
         PublicInteractor.isSpoilerEnable {
             dash_navigation_view.menu.findItem(R.id.menu_spoiler)?.isVisible = it
         }
@@ -338,9 +367,10 @@ class DashActivity : BaseFilterActivity(),
                             setCompoundDrawablesWithIntrinsicBounds(when (position) {
                                 0 -> R.drawable.lang_en
                                 1 -> R.drawable.lang_ptbr
-                                2 -> R.drawable.lang_es
-                                3 -> R.drawable.lang_de
-                                4 -> R.drawable.lang_ru
+                                2 -> R.drawable.lang_it
+                                3 -> R.drawable.lang_es
+                                4 -> R.drawable.lang_de
+                                5 -> R.drawable.lang_ru
                                 else -> R.drawable.ic_menu_earth
                             }, 0, 0, 0)
                             compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.default_margin)
@@ -350,9 +380,10 @@ class DashActivity : BaseFilterActivity(),
                     dialog.dismiss()
                     val language = when (which) {
                         1 -> "pt-br"
-                        2 -> "es"
-                        3 -> "de"
-                        4 -> "ru"
+                        2 -> "it"
+                        3 -> "es"
+                        4 -> "de"
+                        5 -> "ru"
                         else -> "en"
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_LANGUAGE(language))
@@ -393,9 +424,24 @@ class DashActivity : BaseFilterActivity(),
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
                 })
+                .setNeutralButton(R.string.title_changelog, { _, _ ->
+                    showChangeLogDialog()
+                    MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CHANGELOG())
+                })
                 .show()
         MetricsManager.trackScreen(MetricScreen.SCREEN_ABOUT())
         return true
+    }
+
+    private fun showChangeLogDialog() {
+        AlertDialog.Builder(this, R.style.AppDialog)
+                .setTitle(R.string.title_changelog)
+                .setPositiveButton(android.R.string.ok, null)
+                .create()
+                .apply {
+                    setView(ChangeLogRecyclerView(context))
+                    show()
+                }
     }
 
     private fun showDonateDialog(): Boolean {
@@ -418,10 +464,10 @@ class DashActivity : BaseFilterActivity(),
     private fun showDonateDialog(basicValue: String, proValue: String) {
         alertThemed(R.string.app_donate_dialog_text, R.string.menu_donate, R.style.AppDialog) {
             positiveButton(getString(R.string.app_donate_dialog_value, proValue), {
-                processDonate(SKU_DONATE_BASIC)
+                processDonate(SKU_DONATE_PRO)
             })
             negativeButton(getString(R.string.app_donate_dialog_value, basicValue), {
-                processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_PRO)
+                processDonate(if (BuildConfig.DEBUG) SKU_TEST else SKU_DONATE_BASIC)
             })
             neutralButton(R.string.app_donate_dialog_not_now, {
                 MetricsManager.trackAction(MetricAction.ACTION_DONATE_NOT_NOW())

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.*
+import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.BuildConfig
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.data.Card
@@ -48,6 +49,10 @@ object MetricsManager : MetricsConstants() {
     fun trackAction(action: MetricAction) {
         val bundle = Bundle().apply {
             when (action) {
+                is MetricAction.ACTION_COLLECTION_CARD_RANTING -> {
+                    putString(action.PARAM_CARD, action.card.shortName)
+                    putInt(action.PARAM_RATING, action.rating)
+                }
                 is MetricAction.ACTION_COLLECTION_CARD_QTD_CHANGE -> {
                     putString(action.PARAM_CARD, action.card.shortName)
                     putInt(action.PARAM_QTD, action.qtd)
@@ -68,6 +73,8 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_CARD_NAME, action.card.name)
                     putString(action.PARAM_CARD_SOUND_TYPE, action.soundType)
                 }
+                is MetricAction.ACTION_CARD_FILTER_FAVORITE ->
+                    putBoolean(action.PARAM_CHECKED, action.checked)
                 is MetricAction.ACTION_CARD_FILTER_SET ->
                     putString(action.PARAM_SET, action.set?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_ATTR ->
@@ -207,6 +214,7 @@ object MetricsManager : MetricsConstants() {
             initPushHandling(gcmSender)
             set(PARAM_MIXPANEL_USER_NAME, user?.displayName)
             set(PARAM_MIXPANEL_USER_EMAIL, user?.email)
+            set(PARAM_MIXPANEL_USER_DONATE, App.hasUserDonated())
         }
         mixpanelAnalytics?.registerSuperPropertiesMap(mapOf(PARAM_MIXPANEL_USER_ID to userId))
         FirebaseCrash.log(userId)
