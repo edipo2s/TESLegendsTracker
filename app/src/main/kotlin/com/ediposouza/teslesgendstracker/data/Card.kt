@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.DrawableRes
+import android.support.v4.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
@@ -454,6 +455,9 @@ data class Card(
         }
         val path = "v${context.getCurrentVersion()}/${fullArtPath()}"
         if (context is Activity && context.isDestroyed) {
+            return
+        }
+        if (context is Fragment && context.activity?.isDestroyed ?: true) {
             return
         }
         FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
