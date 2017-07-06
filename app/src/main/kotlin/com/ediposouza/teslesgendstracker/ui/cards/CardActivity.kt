@@ -16,6 +16,13 @@ import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
+import android.support.customtabs.CustomTabsIntent
+import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
+import android.support.v7.widget.*
 import android.text.format.DateUtils
 import android.transition.Transition
 import android.view.ContextThemeWrapper
@@ -32,6 +39,19 @@ import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.base.BaseActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.util.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import hotchemi.android.rate.AppRate
+import kotlinx.android.synthetic.main.activity_card.*
+import kotlinx.android.synthetic.main.include_card_info.*
+import kotlinx.android.synthetic.main.itemlist_card_full.view.*
+import kotlinx.android.synthetic.main.itemlist_card_min.view.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.TextStyle
+import timber.log.Timber
 import java.io.File
 import java.util.*
 

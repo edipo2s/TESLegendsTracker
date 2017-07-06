@@ -6,6 +6,11 @@ import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.DateTimeFormatter
 
 abstract class FirebaseParsers {
 

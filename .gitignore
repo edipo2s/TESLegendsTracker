@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/android,intellij,osx,windows,linux,gradle,java
 
+secrets.properties
+AppsByEdipo.keystore
+
 ### Android ###
 # Built application files
 *.apk

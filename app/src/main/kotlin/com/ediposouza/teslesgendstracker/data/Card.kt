@@ -8,9 +8,19 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.annotation.DrawableRes
+import android.support.v4.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import com.ediposouza.teslesgendstracker.util.getCurrentVersion
+import com.google.firebase.storage.FirebaseStorage
+import timber.log.Timber
 
 /**
  * Created by ediposouza on 10/31/16.
