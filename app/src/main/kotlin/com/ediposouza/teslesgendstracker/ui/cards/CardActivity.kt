@@ -16,9 +16,11 @@ import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.*
 import android.text.format.DateUtils
@@ -318,6 +320,19 @@ class CardActivity : BaseActivity() {
         card_race.visibility = View.VISIBLE.takeIf { card.type == CardType.CREATURE } ?: View.GONE
         card_race_desc.text = card.race.desc
         card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
+        val hasLore = card.lore.isNotEmpty()
+        card_lore_label.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
+        card_lore_more.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
+        card_lore.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
+        card_lore.text = card.lore
+        card_lore_more.setOnClickListener {
+            CustomTabsIntent.Builder()
+                    .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                    .setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right)
+                    .build()
+                    .launchUrl(this, Uri.parse(card.loreLink))
+        }
         card_arena_tier.text = card.arenaTier.name.toLowerCase().capitalize()
         configureTokens()
         configureShoutLevels()

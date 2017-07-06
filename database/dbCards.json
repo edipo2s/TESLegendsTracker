@@ -376,20 +376,6 @@
         "text": "Breakthrough. When Fearless Northlander takes damage, he gains +2/+0.",
         "arenaTier": "Good"
       },
-      "gladiatorarena": {
-        "name": "Gladiator Arena",
-        "cost": "04",
-        "type": "Support",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "",
-        "arenaTier": "Poor",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
-      },
       "mightyally": {
         "name": "Mighty Ally",
         "cost": "03",
@@ -601,6 +587,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Deal 1 damage to all enemies.",
+        "lore": "'Fireball is a staple spell of the Destruction school. In Skyrim, it does fire damage in an area and sets anything nearby on fire, dealing ongoing damage. In each game, it's a low to mid level Fire Damage spell.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hwtn0/daily_card_discussion_thread_102_fireball/db3odpm",
         "arenaTier": "Poor"
       },
       "gladiatorarena": {
@@ -736,6 +724,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Blood Dragon ignores Guards and can attack creatures in any lane.",
+        "lore": "'Blood Dragons are a mid-level dragon variant in Skyrim. They're green, with fins on their backs and a triceratops-like frill on the back of their heads. They can have either fire or frost breath' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ky58y/daily_card_discussion_thread_119_blood_dragon/dbrl9ss",
         "arenaTier": "Insane"
       },
       "burnandpillage": {
@@ -748,6 +738,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
+        "lore": "'War is in the blood of the Nords, and pillaging comes as naturally as breathing. If you see a Nord across the battlefield from you, keep a tight hold on your runes, or they'll push an advantage to victory every time.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5i46z0/daily_card_discussion_thread_103_burn_and_pillage/db59kq4",
         "arenaTier": "Good"
       },
       "fortresswatchman": {
@@ -961,6 +953,8 @@
         "rarity": "Legendary",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Double a creature's power and health.",
+        "lore": "'Dremora are a Daedric race of humanoids, created and mostly in service to Mehrunes Dagon. A Markynaz is a duke rank, the highest level Dremora that most adventurers will encounter. Like all Daedra, Dremora are immortal, so they have a very alien mindset.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5k26r4/daily_card_discussion_thread_114_dremora_markynaz/dbl7dln",
         "arenaTier": "Poor"
       }
     },
@@ -1854,6 +1848,8 @@
         "rarity": "Legendary",
         "keyword": "Guard, Last Gasp",
         "text": "Guard. Last Gasp: Indoril Archmage deals 6 damage to all enemy creatures in this lane.",
+        "lore": "'House Indoril is one of the Great Houses of Morrowind. Like the Dres, they only have holdings on the mainland of Morrowind, so they didn't show up much in-game. House Indoril is xenophobic towards outlanders and politically and religiously conservative.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ibknp/daily_card_discussion_thread_104_indoril_archmage/db6wnye",
         "arenaTier": "Good"
       },
       "shockingwamasu": {
@@ -2243,7 +2239,9 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Other friendly creatures in this lane have +0/+1.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "lore": "'The Summerset Isles are the archipelagic home of the High Elves. Shield spells transmute your armor, clothes and even skin to be harder and resist damage. This Shieldmage is casting an area-effect version.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jl45q/daily_card_discussion_thread_111_summerset/dbh5kes"
       },
       "arrowstorm": {
         "name": "Arrow Storm",
@@ -3984,6 +3982,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, heal another random friendly creature.",
+        "lore": "'Blackrose is a city in Black Marsh. It wasn't founded by Argonians, but by an extinct race of fox people known as the Lilmothiit. Herbalism has a long history in Tamriel, especially as a component of alchemy.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kprqx/daily_card_discussion_thread_118_blackrose/dbq9isa",
         "arenaTier": "Average"
       },
       "brumaarmorer": {
@@ -4378,7 +4378,9 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Gain 5 health.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "lore": "'Templar are a class in ESO, focusing on healing and protection, as well as smiting enemies. In a ghoulish twist, this templar has been reanimated, turned into one of the things Stendarr opposes the most. Some necromancer out there has a sense of irony!' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kc7ba/daily_card_discussion_thread_116_restless_templar/dbnnbl4"
       },
       "stonetoothscrapper": {
         "name": "Stonetooth Scrapper",
@@ -4391,20 +4393,6 @@
         "keyword": "",
         "text": "",
         "arenaTier": "Good"
-      },
-      "blackwormnecromancer": {
-        "name": "Black Worm Necromancer",
-        "cost": "06",
-        "type": "Creature",
-        "race": "Imperial",
-        "attack": "4",
-        "health": "4",
-        "rarity": "Rare",
-        "keyword": "Summon",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
       },
       "discipleofnamira": {
         "name": "Disciple of Namira",
@@ -4592,6 +4580,8 @@
         "unique": true,
         "keyword": "Guard",
         "text": "Guard. Your opponent can't target Nahagliiv with actions.",
+        "lore": "'Nahagliiv was resurrected by Alduin from a dragon mound outside of the farming village of Rorikstead, and he swoops down and attacks when the Dovahkiin arrives after meeting with the Blades for the first time. His name means 'Fury Burn Wither'' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jctum/daily_card_discussion_thread_110_nahagliiv/dbfdw94",
         "arenaTier": "Insane"
       },
       "swampleviathan": {
@@ -4964,6 +4954,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Equip all friendly creatures in this lane with a random item.",
+        "lore": "'Merric-at-Aswala was a high-ranking member of the Fighters Guild during the Alliance War of the Second Era (ESO time). The 'at-Aswala' refers to where he's from: the famous Aswala Stables, known across Tamriel for the peerless Yokudan Charger breed.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ifwyl/daily_card_discussion_thread_105_merricataswala/db8bdl5",
         "attr1": "strength",
         "attr2": "intelligence",
         "arenaTier": "Good",
@@ -4996,6 +4988,8 @@
         "unique": true,
         "keyword": "Summon, Silence, Shackle",
         "text": "Summon: Silence and Shackle all enemy creatures in this lane.",
+        "lore": "'Red' Bramman was an infamous Argonian pirate during the First Era. Bramman is notable not only for his legend and cruelty, but also because the efforts to defeat him made a rare contact between Black Marsh and the outside world.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5k8a8j/daily_card_discussion_thread_115_red_bramman/dbmfpkc",
         "attr1": "agility",
         "attr2": "endurance",
         "arenaTier": "Excellent"
@@ -5121,6 +5115,8 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Summon: Give a creature Guard.",
+        "lore": "'Guar are large reptiles native to Morrowind. They're domesticated by the Dunmer, and are used as pack animals for carrying burdens, farming and sometimes mounts. This guar has had armor made for it, which is unusual--guar are not aggressive and aren't typically used in warfare.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hpsbp/daily_card_discussion_thread_101_barded_guar/db2ofox",
         "arenaTier": "Average"
       },
       "crushingblow": {
@@ -5521,6 +5517,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "This card belongs to the Madhouse Collection and cannot be Soul Summoned.",
+        "lore": "'The Garden of Swords wasn't a place when the Champion of Cyrodiil visited, but it's easy to imagine Sheogorath willing it into existence, and forcing some poor soul to tend to it with his bare hands.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5itsd2/daily_card_discussion_thread_107_gardener_of/dbbh754",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -5552,6 +5550,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Ongoing. When you play a 0-cost card, deal 1 damage to your opponent and gain 1 health.",
+        "lore": "'Swindlers mean criminals, and criminals mean our old favorite, the Thieves Guild! The Guild interacts with mainstream merchants through fences, the people that buy stolen goods.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kinco/daily_card_discussion_thread_117_swindlers_market/dbooubi",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "cost": "=_0"
@@ -5601,6 +5601,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Look at the top three cards of your deck. Put one into your hand and discard the others.",
+        "lore": "'Camels are beasts native to Hammerfell. The Redguard have domesticated them (somewhat) due to their adaptations to a harsh desert climate. The Mercantile (and later Speech) skill governs how much you can buy and sell goods for at merchants.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5immai/daily_card_discussion_thread_106_merchants_camel/db9royb",
         "arenaTier": "Average"
       },
       "forsakenchampion": {
@@ -5613,6 +5615,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Choose a friendly creature. Friendly creatures of the chosen type have +1/+1.",
+        "lore": "'Reachmen are the misfit human inhabitants of the Reach, the western region of Skyrim. They're rebellious and have an axe to grind against the other races of Skyrim.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jvxz1/daily_card_discussion_thread_113_forsaken/dbjvkjo",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Race"
@@ -5628,6 +5632,8 @@
         "rarity": "Legendary",
         "keyword": "Activate",
         "text": "Uses: 12. Activate: Sacrifice a creature to summon a creature from your deck that costs 1, then increase the cost of creatures this summons by 1.",
+        "lore": "'The flag that the Saints and Seducers fight over is the ruined fortress Cylarne, which may have been a past capital of the Isles. It's built around the Cold Flame of Agnon, lit by the twin Altars of Rapture and Despair.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5j66as/daily_card_discussion_thread_109_altar_of_despair/dbdqc9y",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "keyword": "Last Gasp"
@@ -5643,6 +5649,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Illusory Mimic gains all Keywords on the top three cards of your deck.",
+        "lore": "'Illusory would suggest illusion, but being a Spirit and having spells like Conjure Familiar and Conjure Dragon Priest as Conjuration suggest it belongs there--spells in the Illusion line can't cause actual harm.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5izvlg/daily_card_discussion_thread_108_illusory_mimic/dbcrbt2",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -6279,18 +6287,6 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Give an enemy creature -1/-1.",
-        "arenaTier": "Unknown"
-      },
-      "dovahofthevoice": {
-        "name": "Dovah of the Voice",
-        "cost": "7",
-        "type": "Creature",
-        "race": "Dragon",
-        "attack": "6",
-        "health": "4",
-        "rarity": "Common",
-        "keyword": "Last Gasp",
-        "text": "Last Gasp: Put a random Shout into your hand.",
         "arenaTier": "Unknown"
       },
       "eldergleammatron": {

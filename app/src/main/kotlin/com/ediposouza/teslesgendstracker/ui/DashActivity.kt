@@ -346,7 +346,6 @@ class DashActivity : BaseFilterActivity(),
         }
         if (App.hasUserDonated()) {
             dash_navigation_view.menu.findItem(R.id.menu_donate)?.apply {
-                isEnabled = false
                 title = getString(R.string.menu_donate_done)
                 icon = ContextCompat.getDrawable(this@DashActivity, R.drawable.ic_no_ads)
             }

@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">Коллекция редактировать включен!</string>
     <string name="card_set_label">Сет:</string>
     <string name="card_race_label">Раса:</string>
+    <string name="card_about_label">Около:</string>
+    <string name="card_about_more_label">Больше</string>
     <string name="card_sounds_label">Звуки:</string>
     <string name="card_sounds_attack_label"></string>
     <string name="card_sounds_play_label">Играть</string>

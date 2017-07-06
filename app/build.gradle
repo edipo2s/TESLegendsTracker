@@ -7,10 +7,13 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
+
+    def props = new Properties()
+    props.load(file("secrets.properties").newInputStream())
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
         minSdkVersion prepareToRelease ? 16 : 21
@@ -21,31 +24,29 @@ android {
 
         buildConfigField "boolean", "ENABLE_LOGS_IN_RELEASE", "false"
         buildConfigField "boolean", "PREPARE_TO_RELEASE", "$prepareToRelease"
-        resValue "string", "app_ads_card_full", "$key_ads_card_full"
-        resValue "string", "app_ads_card_list", "$key_ads_card_list"
-        resValue "string", "app_ads_deck_list", "$key_ads_deck_list"
-        resValue "string", "app_ads_new_deck_card_list", "$key_ads_new_deck_card_list"
-        resValue "string", "app_ads_match_history_list", "$key_ads_match_history_list"
-        resValue "string", "app_ads_match_statistics_class_full", "$key_ads_match_statistics_class_full"
-        resValue "string", "app_ads_new_matches_full", "$key_ads_new_matches_full"
-        resValue "string", "app_ads_news_list", "$key_ads_news_list"
-        resValue "string", "app_ads_season_list", "$key_ads_season_list"
-        resValue "string", "app_ads_patch_full", "$key_ads_patch_full"
-        resValue "string", "key_ads_intersticial", "$key_ads_intersticial"
-        resValue "string", "facebook_app_id", "$key_facebook_app_id"
-        resValue "string", "mixpanel_app_id", "$key_mixpanel_app_id"
+        resValue "string", "app_ads_card_full", props.getProperty('key_ads_card_full')
+        resValue "string", "app_ads_card_list", props.getProperty('key_ads_card_list')
+        resValue "string", "app_ads_deck_list", props.getProperty('key_ads_deck_list')
+        resValue "string", "app_ads_new_deck_card_list", props.getProperty('key_ads_new_deck_card_list')
+        resValue "string", "app_ads_match_history_list", props.getProperty('key_ads_match_history_list')
+        resValue "string", "app_ads_match_statistics_class_full", props.getProperty('key_ads_match_statistics_class_full')
+        resValue "string", "app_ads_new_matches_full", props.getProperty('key_ads_new_matches_full')
+        resValue "string", "app_ads_news_list", props.getProperty('key_ads_news_list')
+        resValue "string", "app_ads_season_list", props.getProperty('key_ads_season_list')
+        resValue "string", "app_ads_patch_full", props.getProperty('key_ads_patch_full')
+        resValue "string", "key_ads_intersticial", props.getProperty('key_ads_intersticial')
+        resValue "string", "facebook_app_id", props.getProperty('key_facebook_app_id')
+        resValue "string", "mixpanel_app_id", props.getProperty('key_mixpanel_app_id')
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
     }
     signingConfigs {
         release {
             try {
-                def props = new Properties()
-                props.load(file(propsFile).newInputStream())
-                storeFile file(props.keystore_file)
-                storePassword props.keystore_pass
+                storeFile file('AppsByEdipo.keystore')
+                storePassword props.getProperty('keystore_pass')
                 keyAlias "tes_legends_tracker"
-                keyPassword props.tes_legends_tracker_pass
+                keyPassword props.getProperty('tes_legends_tracker_pass')
             } catch (e) {
                 println(e.message)
             }

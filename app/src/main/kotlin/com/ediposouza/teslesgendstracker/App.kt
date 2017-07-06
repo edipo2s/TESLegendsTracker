@@ -12,6 +12,7 @@ import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import com.jakewharton.threetenabp.AndroidThreeTen
 import hotchemi.android.rate.AppRate
 import timber.log.Timber
@@ -58,6 +59,7 @@ class App : MultiDexApplication() {
 
     private fun initializeDependencies() {
         Timber.plant(LoggerManager())
+        Timber.d("Device token: ${FirebaseInstanceId.getInstance().token}")
         MetricsManager.initialize(this)
         MetricsManager.trackAction(MetricAction.ACTION_APP_LAUNCH())
         AndroidThreeTen.init(this)

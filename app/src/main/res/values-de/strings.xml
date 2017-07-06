@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">Editieren der Sammlung aktiviert</string>
     <string name="card_set_label">Satz</string>
     <string name="card_race_label">Rasse</string>
+    <string name="card_about_label">Über:</string>
+    <string name="card_about_more_label">Mehr</string>
     <string name="card_sounds_label">Ton:</string>
     <string name="card_sounds_attack_label">Angriff</string>
     <string name="card_sounds_play_label">Abspielen</string>
