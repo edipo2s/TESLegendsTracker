@@ -123,6 +123,8 @@
     <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_about_label">Sobre:</string>
+    <string name="card_about_more_label">Mais</string>
     <string name="card_sounds_label">Sons:</string>
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jogar</string>

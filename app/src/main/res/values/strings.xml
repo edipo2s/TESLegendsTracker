@@ -185,6 +185,8 @@
     <string name="card_collection_edit_success">Collection edit enabled!</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Race:</string>
+    <string name="card_about_label">About:</string>
+    <string name="card_about_more_label">More</string>
     <string name="card_sounds_label">Sounds:</string>
     <string name="card_sounds_attack_label">Attack</string>
     <string name="card_sounds_play_label">Play</string>

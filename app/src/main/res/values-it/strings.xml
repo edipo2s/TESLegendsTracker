@@ -123,6 +123,8 @@
     <string name="card_collection_edit_success">¡Hai abilitato la possibilità di modificare la collezione!</string>
     <string name="card_set_label">Set:</string>
     <string name="card_race_label">Razza:</string>
+    <string name="card_about_label">Informazioni:</string>
+    <string name="card_about_more_label">Di Più</string>
     <string name="card_sounds_label">Suoni:</string>
     <string name="card_sounds_attack_label">Attacca</string>
     <string name="card_sounds_play_label">Gioca</string>

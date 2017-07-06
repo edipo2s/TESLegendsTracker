@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">¡La edición de colecciones está habilitada!</string>
     <string name="card_set_label">Conjunto:</string>
     <string name="card_race_label">Raza:</string>
+    <string name="card_about_label">Acerca de:</string>
+    <string name="card_about_more_label">Más</string>
     <string name="card_sounds_label">Sonidos:</string>
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jugar</string>

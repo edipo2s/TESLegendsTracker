@@ -6,11 +6,6 @@ import com.ediposouza.teslesgendstracker.PATCH_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.SEASON_UUID_PATTERN
 import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.util.toIntSafely
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.Month
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.DateTimeFormatter
 
 abstract class FirebaseParsers {
 
@@ -36,6 +31,8 @@ abstract class FirebaseParsers {
         val creators: String = ""
         val generates: String = ""
         val tokens: String = ""
+        val lore: String = ""
+        val loreLink: String = ""
 
         fun toCard(shortName: String, set: CardSet, attr: CardAttribute): Card {
             var clsAttr1 = attr
@@ -54,7 +51,7 @@ abstract class FirebaseParsers {
                             },
                     text, CardArenaTier.of(arenaTier), getCardArenaTierPlus(), evolves, season, shout,
                     creators.split(", ").filter { it.isNotEmpty() }, generates.split(", ").filter { it.isNotEmpty() },
-                    tokens.split(", ").filter { it.isNotEmpty() })
+                    tokens.split(", ").filter { it.isNotEmpty() }, lore, loreLink)
         }
 
         private fun getCardArenaTierPlus(): List<CardArenaTierPlus?> {
