@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.DrawableRes
+import android.support.v4.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
@@ -399,7 +400,9 @@ data class Card(
         val shout: Int,
         val creators: List<String>,
         val generates: List<String>,
-        val tokens: List<String>
+        val tokens: List<String>,
+        val lore: String,
+        val loreLink: String
 
 ) : Comparable<Card>, Parcelable {
 
@@ -412,7 +415,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0, listOf(), listOf(), listOf())
+                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "")
 
         const val ARTS_PATH = "Arts"
         const val ARTS_TOKENS_PATH = "TokensArts"
@@ -435,7 +438,7 @@ data class Card(
             1 == source.readInt(), source.readString(), source.readInt(),
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
-            mutableListOf<String>().apply { source.readStringList(this) })
+            mutableListOf<String>().apply { source.readStringList(this) }, source.readString(), source.readString())
 
     override fun describeContents() = 0
 
@@ -454,6 +457,9 @@ data class Card(
         }
         val path = "v${context.getCurrentVersion()}/${fullArtPath()}"
         if (context is Activity && context.isDestroyed) {
+            return
+        }
+        if (context is Fragment && context.activity?.isDestroyed ?: true) {
             return
         }
         FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
@@ -546,6 +552,8 @@ data class Card(
         dest?.writeStringList(creators)
         dest?.writeStringList(generates)
         dest?.writeStringList(tokens)
+        dest?.writeString(lore)
+        dest?.writeString(loreLink)
     }
 
     override fun compareTo(other: Card): Int {

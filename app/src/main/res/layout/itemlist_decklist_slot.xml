@@ -21,12 +21,12 @@
         android:src="@drawable/card" />
 
     <ImageView
-        android:id="@+id/deckslot_card_magika"
+        android:id="@+id/deckslot_card_magicka"
         android:layout_width="@dimen/deck_list_slot_height"
         android:layout_height="@dimen/deck_list_slot_height"
         android:layout_marginTop="@dimen/deck_list_slot_rarity_margin"
         android:layout_marginStart="@dimen/small_margin"
-        android:src="@drawable/ic_magika_0" />
+        android:src="@drawable/ic_magicka_0" />
 
     <ImageView
         android:id="@+id/deckslot_card_qtd_layout"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginStart="@dimen/small_margin"
-        android:layout_toEndOf="@id/deckslot_card_magika"
+        android:layout_toEndOf="@id/deckslot_card_magicka"
         android:layout_toStartOf="@id/deckslot_card_qtd_layout"
         android:ellipsize="end"
         android:lines="1"

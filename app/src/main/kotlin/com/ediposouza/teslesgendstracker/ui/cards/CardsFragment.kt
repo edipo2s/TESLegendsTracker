@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.longToast
 import timber.log.Timber
 
 /**
@@ -53,7 +54,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             } else {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
-            eventBus.post(CmdUpdateRarityMagikaFiltersPosition(position == 1))
+            eventBus.post(CmdUpdateRarityMagickaFiltersPosition(position == 1))
             MetricsManager.trackScreen(when (position) {
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 2 -> MetricScreen.SCREEN_CARDS_TOKENS()
@@ -91,7 +92,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             cards_filter_attr.selectAttr(it, true)
         }
         cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        cards_filter_magicka.filterClick = { eventBus.post(CmdFilterMagicka(it)) }
         Handler().postDelayed({
             eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
@@ -119,7 +120,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onResume() {
         super.onResume()
         cards_app_bar_layout.setExpanded(true, true)
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(true)
         context.checkLastVersion {
             Timber.d("New version $it found!")
             new_update_layout?.visibility = View.VISIBLE
@@ -140,7 +141,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onPause() {
         super.onPause()
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -151,7 +152,20 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_sets, menu)
         menu?.findItem(R.id.menu_import)?.isVisible = false
         menu?.findItem(R.id.menu_only_favorite)?.isVisible = false
-        searchView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as? SearchView
+        val menuItemSearch = menu?.findItem(R.id.menu_search)
+        MenuItemCompat.setOnActionExpandListener(menuItemSearch, object : MenuItemCompat.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                context.longToast(getString(R.string.cards_search_keywords_hint,
+                        getString(R.string.cards_search_hint), getString(R.string.cards_search_keywords)))
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                return true
+            }
+
+        })
+        searchView = MenuItemCompat.getActionView(menuItemSearch) as? SearchView
         searchView?.apply {
             queryHint = getString(R.string.cards_search_hint)
             setOnQueryTextListener(this@CardsFragment)

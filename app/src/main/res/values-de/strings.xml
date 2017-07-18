@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">Editieren der Sammlung aktiviert</string>
     <string name="card_set_label">Satz</string>
     <string name="card_race_label">Rasse</string>
+    <string name="card_about_label">Über:</string>
+    <string name="card_about_more_label">Mehr</string>
     <string name="card_sounds_label">Ton:</string>
     <string name="card_sounds_attack_label">Angriff</string>
     <string name="card_sounds_play_label">Abspielen</string>
@@ -131,7 +133,7 @@
     <string name="card_generates_label">Erzeugt:</string>
     <string name="card_tokens_label">Token:</string>
     <string name="card_patch_current">Neuste Version</string>
-    <string name="card_patch_pre">Voherige Version</string>
+    <string name="card_patch_pre" formatted="false">Voherige-%s Version \n %s</string>
     <string name="card_full_downloaded">Bild im Download-Ordner gespeichert</string>
     <string name="card_full_sound_set">Sound Set als Klingelton</string>
     <string name="card_full_wallpaper_set">Bild als Hintergrund gesetzt</string>
@@ -149,6 +151,7 @@
     <string name="unknown">Unbekannt</string>
 
     <string name="cards_search_hint">Name, Rasse, Typ, Effekt oder Text </string>
+    <string name="cards_search_keywords_hint" formatted="false">Suche nach Karte %s \n Oder versuchen %s</string>
     <string name="collection_statistics_total_cards">Total Karten\nSoul zu vervollständigen</string>
 
     <string name="decks_search_hint">Deck Name</string>

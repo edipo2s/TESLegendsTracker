@@ -99,10 +99,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagikaCosts: Boolean = true,
+    fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagickaCosts: Boolean = true,
                  showQtd: Boolean = true, cardViewMode: Boolean = false) {
         decklist_soul.visibility = View.VISIBLE.takeIf { showSoulCost } ?: View.GONE
-        decklist_costs.visibility = View.VISIBLE.takeIf { showMagikaCosts } ?: View.GONE
+        decklist_costs.visibility = View.VISIBLE.takeIf { showMagickaCosts } ?: View.GONE
         decklist_qtd.visibility = View.VISIBLE.takeIf { showQtd } ?: View.GONE
         decklist_recycle_view.visibility = View.INVISIBLE.takeIf { cardViewMode } ?: View.VISIBLE
         if (deck != null) {
@@ -313,20 +313,22 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 })
                 decl_slot_card_name.text = slot.card.name
                 deckslot_card_rarity.setImageResource(slot.card.rarity.imageRes)
-                deckslot_card_magika.setImageResource(when (slot.card.cost) {
-                    0 -> R.drawable.ic_magika_0
-                    1 -> R.drawable.ic_magika_1
-                    2 -> R.drawable.ic_magika_2
-                    3 -> R.drawable.ic_magika_3
-                    4 -> R.drawable.ic_magika_4
-                    5 -> R.drawable.ic_magika_5
-                    6 -> R.drawable.ic_magika_6
-                    7 -> R.drawable.ic_magika_7
-                    8 -> R.drawable.ic_magika_8
-                    9 -> R.drawable.ic_magika_9
-                    10 -> R.drawable.ic_magika_10
-                    11 -> R.drawable.ic_magika_11
-                    else -> R.drawable.ic_magika_12
+                deckslot_card_magicka.setImageResource(when (slot.card.cost) {
+                    0 -> R.drawable.ic_magicka_0
+                    1 -> R.drawable.ic_magicka_1
+                    2 -> R.drawable.ic_magicka_2
+                    3 -> R.drawable.ic_magicka_3
+                    4 -> R.drawable.ic_magicka_4
+                    5 -> R.drawable.ic_magicka_5
+                    6 -> R.drawable.ic_magicka_6
+                    7 -> R.drawable.ic_magicka_7
+                    8 -> R.drawable.ic_magicka_8
+                    9 -> R.drawable.ic_magicka_9
+                    10 -> R.drawable.ic_magicka_10
+                    11 -> R.drawable.ic_magicka_11
+                    12 -> R.drawable.ic_magicka_12
+                    20 -> R.drawable.ic_magicka_20
+                    else -> R.drawable.ic_magicka_7plus
                 })
                 deckslot_card_qtd.text = "+${slot.qtd}".takeIf { updateMode && slot.qtd > 0 } ?: "${slot.qtd}"
                 deckslot_card_qtd.visibility = View.VISIBLE.takeIf { slot.qtd != 0 } ?: View.INVISIBLE

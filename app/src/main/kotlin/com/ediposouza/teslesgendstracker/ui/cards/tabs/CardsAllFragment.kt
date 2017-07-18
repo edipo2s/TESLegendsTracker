@@ -20,10 +20,7 @@ import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.*
 import com.ediposouza.teslesgendstracker.ui.util.GridSpacingItemDecoration
 import com.ediposouza.teslesgendstracker.ui.util.SimpleDiffCallback
-import com.ediposouza.teslesgendstracker.util.MetricAction
-import com.ediposouza.teslesgendstracker.util.MetricsManager
-import com.ediposouza.teslesgendstracker.util.inflate
-import com.ediposouza.teslesgendstracker.util.loadFromCard
+import com.ediposouza.teslesgendstracker.util.*
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.fragment_cards_list.*
 import kotlinx.android.synthetic.main.include_login_button.*
@@ -44,7 +41,7 @@ open class CardsAllFragment : BaseFragment() {
 
     var currentAttr: CardAttribute = CardAttribute.STRENGTH
     var cardsLoaded: List<Card> = listOf()
-    var magikaFilter: Int = -1
+    var magickaFilter: Int = -1
     var setFilter: CardSet? = null
     var classFilter: DeckClass? = null
     var rarityFilter: CardRarity? = null
@@ -56,8 +53,11 @@ open class CardsAllFragment : BaseFragment() {
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view?.layoutManager as? GridLayoutManager }
-    val rewardText by lazy { getString(R.string.cards_search_reward) }
-    val uniqueText by lazy { getString(R.string.cards_search_unique) }
+    val SEARCH_ANIMAL by lazy { getString(R.string.cards_search_animal) }
+    val SEARCH_LORE by lazy { getString(R.string.cards_search_lore) }
+    val SEARCH_REWARD by lazy { getString(R.string.cards_search_reward) }
+    val SEARCH_UNDEAD by lazy { getString(R.string.cards_search_undead) }
+    val SEARCH_UNIQUE by lazy { getString(R.string.cards_search_unique) }
 
     protected var shouldScrollToTop: Boolean = false
 
@@ -177,9 +177,9 @@ open class CardsAllFragment : BaseFragment() {
 
     @Subscribe
     @Suppress("unused")
-    fun onCmdUpdateRarityMagikaFiltersVisibility(update: CmdUpdateVisibility) {
+    fun onCmdUpdateRarityMagickaFiltersVisibility(update: CmdUpdateVisibility) {
         if (isFragmentSelected) {
-            (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(update.show)
+            (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(update.show)
         }
     }
 
@@ -239,11 +239,11 @@ open class CardsAllFragment : BaseFragment() {
 
     @Subscribe
     @Suppress("unused")
-    fun onCmdFilterMagika(filterMagika: CmdFilterMagika) {
-        magikaFilter = filterMagika.magika
+    fun onCmdFilterMagicka(filterMagicka: CmdFilterMagicka) {
+        magickaFilter = filterMagicka.magicka
         showCards()
         if (isFragmentSelected) {
-            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGIKA(magikaFilter))
+            MetricsManager.trackAction(MetricAction.ACTION_CARD_FILTER_MAGICKA(magickaFilter))
         }
     }
 
@@ -291,15 +291,18 @@ open class CardsAllFragment : BaseFragment() {
                         null -> it is Card
                         else -> {
                             val search = searchFilter?.toLowerCase()?.trim() ?: ""
-                            it.name.toLowerCase().contains(search) ||
-                                    (search.contains(rewardText) && it.season.isNotEmpty()) ||
-                                    (search == uniqueText && it.unique) ||
+                            val hasValidSearchKeyword = (search == SEARCH_LORE && it.lore.isNotEmpty()) ||
+                                    (search == SEARCH_ANIMAL && ConfigManager.animalRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
+                                    (search == SEARCH_UNDEAD && ConfigManager.undeadRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
+                                    (search == SEARCH_REWARD && it.season.isNotEmpty()) ||
+                                    (search == SEARCH_UNIQUE && it.unique)
+                            hasValidSearchKeyword || (it.name.toLowerCase().contains(search) ||
                                     it.race.name.toLowerCase().contains(search) ||
                                     it.set.title.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
                                     it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||
-                                    it.text.contains(search)
+                                    it.text.contains(search))
                         }
                     }
                 }
@@ -311,9 +314,9 @@ open class CardsAllFragment : BaseFragment() {
                 }
                 .filter {
                     when {
-                        magikaFilter == -1 -> it.cost is Int
-                        magikaFilter < 7 -> it.cost == magikaFilter
-                        else -> it.cost >= magikaFilter
+                        magickaFilter == -1 -> it.cost is Int
+                        magickaFilter < 7 -> it.cost == magickaFilter
+                        else -> it.cost >= magickaFilter
                     }
                 }
                 .filter {

@@ -355,7 +355,13 @@ object PrivateInteractor : BaseInteractor() {
             getUserCollection(null, attr1, attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { userCards ->
                 val missing = deck.cards.map { it.key to it.value.minus(userCards[it.key] ?: 0) }
                         .filter { it.second > 0 }
-                        .map { CardMissing(it.first, cards[it.first]!!, it.second) }
+                        .map {
+                            val rarity: CardRarity = cards[it.first] ?: CardRarity.UNKNOWN
+                            if (rarity == CardRarity.UNKNOWN) {
+                                Timber.d(it.first)
+                            }
+                            CardMissing(it.first, rarity, it.second)
+                        }
                         .filter { it.qtd > 0 }
                 Timber.d(missing.toString())
                 onSuccess.invoke(missing)

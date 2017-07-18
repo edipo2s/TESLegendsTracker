@@ -7,7 +7,7 @@ import android.support.design.widget.CoordinatorLayout
 import android.text.format.DateUtils
 import android.view.View
 import com.ediposouza.teslesgendstracker.R
-import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagicka
 import com.ediposouza.teslesgendstracker.ui.cards.widget.FilterRarity
 import org.greenrobot.eventbus.Subscribe
 
@@ -17,25 +17,25 @@ import org.greenrobot.eventbus.Subscribe
 open class BaseFilterActivity : BaseActivity() {
 
     private val KEY_FILTERS_GREAT_MARGIN = "filterGreatMarginKey"
-    private val KEY_FILTERS_BOTTOM_MARGIN = "filterMagikaBottomMarginKey"
+    private val KEY_FILTERS_BOTTOM_MARGIN = "filterMagickaBottomMarginKey"
     private val UPDATE_FILTERS_POSITION_DURATION = DateUtils.SECOND_IN_MILLIS
     private val UPDATE_FILTERS_VISIBILITY_DURATION = UPDATE_FILTERS_POSITION_DURATION / 2
 
     protected var filterGreatMargin = false
 
-    private var fab_filter_magika: View? = null
-        get() = findViewById(R.id.cards_filter_magika)
+    private var fab_filter_magicka: View? = null
+        get() = findViewById(R.id.cards_filter_magicka)
     private var fab_filter_rarity: View? = null
         get() = findViewById(R.id.cards_filter_rarity)
-    private val filterMagikaLP: CoordinatorLayout.LayoutParams?
-        get() = fab_filter_magika?.layoutParams as? CoordinatorLayout.LayoutParams
+    private val filterMagickaLP: CoordinatorLayout.LayoutParams?
+        get() = fab_filter_magicka?.layoutParams as? CoordinatorLayout.LayoutParams
     private val filterRarityLP: CoordinatorLayout.LayoutParams?
         get() = fab_filter_rarity?.layoutParams as? CoordinatorLayout.LayoutParams
 
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.apply {
             putBoolean(KEY_FILTERS_GREAT_MARGIN, filterGreatMargin)
-            putInt(KEY_FILTERS_BOTTOM_MARGIN, filterMagikaLP?.bottomMargin ?: 0)
+            putInt(KEY_FILTERS_BOTTOM_MARGIN, filterMagickaLP?.bottomMargin ?: 0)
         }
         super.onSaveInstanceState(outState)
     }
@@ -48,16 +48,16 @@ open class BaseFilterActivity : BaseActivity() {
         }
     }
 
-    @Synchronized fun updateRarityMagikaFiltersVisibility(show: Boolean) {
+    @Synchronized fun updateRarityMagickaFiltersVisibility(show: Boolean) {
         val margin = R.dimen.filter_great_margin_bottom.takeIf { filterGreatMargin } ?: R.dimen.large_margin
         val showBottomMargin = resources.getDimensionPixelSize(margin)
         val hideBottomMargin = -resources.getDimensionPixelSize(R.dimen.filter_hide_height)
-        if (show && filterMagikaLP?.bottomMargin == showBottomMargin ||
-                !show && filterMagikaLP?.bottomMargin == hideBottomMargin) {
+        if (show && filterMagickaLP?.bottomMargin == showBottomMargin ||
+                !show && filterMagickaLP?.bottomMargin == hideBottomMargin) {
             return
         }
-        if (!show && fab_filter_magika != null && fab_filter_rarity != null) {
-            (fab_filter_magika as FilterMagika).close()
+        if (!show && fab_filter_magicka != null && fab_filter_rarity != null) {
+            (fab_filter_magicka as FilterMagicka).close()
             (fab_filter_rarity as FilterRarity).collapse()
         }
         val animFrom = hideBottomMargin.takeIf { show } ?: showBottomMargin
@@ -87,10 +87,10 @@ open class BaseFilterActivity : BaseActivity() {
 
     @Subscribe
     @Suppress("unused")
-    fun onCmdUpdateRarityMagikaFiltersPosition(update: CmdUpdateRarityMagikaFiltersPosition) {
+    fun onCmdUpdateRarityMagickaFiltersPosition(update: CmdUpdateRarityMagickaFiltersPosition) {
         filterGreatMargin = update.high
         val endMargin = R.dimen.filter_great_margin_bottom.takeIf { filterGreatMargin } ?: R.dimen.large_margin
-        with(ValueAnimator.ofInt(filterMagikaLP?.bottomMargin ?: 0, resources.getDimensionPixelSize(endMargin))) {
+        with(ValueAnimator.ofInt(filterMagickaLP?.bottomMargin ?: 0, resources.getDimensionPixelSize(endMargin))) {
             duration = UPDATE_FILTERS_POSITION_DURATION
             addUpdateListener {
                 updateFiltersMargins(it.animatedValue as Int)
@@ -101,8 +101,8 @@ open class BaseFilterActivity : BaseActivity() {
 
     private fun updateFiltersMargins(bottomMargin: Int) {
         filterRarityLP?.bottomMargin = bottomMargin
-        filterMagikaLP?.bottomMargin = bottomMargin
-        fab_filter_magika?.layoutParams = filterMagikaLP
+        filterMagickaLP?.bottomMargin = bottomMargin
+        fab_filter_magicka?.layoutParams = filterMagickaLP
         fab_filter_rarity?.layoutParams = filterRarityLP
     }
 

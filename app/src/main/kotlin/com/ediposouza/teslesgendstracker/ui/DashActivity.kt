@@ -346,7 +346,6 @@ class DashActivity : BaseFilterActivity(),
         }
         if (App.hasUserDonated()) {
             dash_navigation_view.menu.findItem(R.id.menu_donate)?.apply {
-                isEnabled = false
                 title = getString(R.string.menu_donate_done)
                 icon = ContextCompat.getDrawable(this@DashActivity, R.drawable.ic_no_ads)
             }
@@ -423,6 +422,10 @@ class DashActivity : BaseFilterActivity(),
                     startActivity(Intent(Intent.ACTION_VIEW)
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
+                })
+                .setNegativeButton(R.string.about_twitter, { _, _ ->
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.about_twitter_link))))
+                    MetricsManager.trackAction(MetricAction.ACTION_ABOUT_TWITTER())
                 })
                 .setNeutralButton(R.string.title_changelog, { _, _ ->
                     showChangeLogDialog()

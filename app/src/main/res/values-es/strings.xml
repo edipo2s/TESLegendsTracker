@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">¡La edición de colecciones está habilitada!</string>
     <string name="card_set_label">Conjunto:</string>
     <string name="card_race_label">Raza:</string>
+    <string name="card_about_label">Acerca de:</string>
+    <string name="card_about_more_label">Más</string>
     <string name="card_sounds_label">Sonidos:</string>
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jugar</string>
@@ -131,7 +133,7 @@
     <string name="card_generates_label">Genera:</string>
     <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versión actual</string>
-    <string name="card_patch_pre">pre-%s Versión</string>
+    <string name="card_patch_pre" formatted="false">pre-%s Versión \n %s</string>
     <string name="card_full_downloaded">Imagen guardada en la carpeta de descarga.</string>
     <string name="card_full_sound_set">Sonido como tono de llamada</string>
     <string name="card_full_wallpaper_set">Imagen establecida como fondo de pantalla</string>
@@ -149,6 +151,7 @@
     <string name="unknown">Desconocido</string>
 
     <string name="cards_search_hint">Nombre, raza, tipo, palabra clave o texto</string>
+    <string name="cards_search_keywords_hint" formatted="false">Buscar %s \n O intentar %s</string>
     <string name="collection_statistics_total_cards">Total Cartas \n Soul para completar</string>
 
     <string name="decks_search_hint">Barajo Name</string>

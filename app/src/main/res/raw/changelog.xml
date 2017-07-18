@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.6.1"
+        changeDate="July 11, 2017">
+        <changelogtext>[b]Feature:[/b] Search 'Animal and 'Undead' support</changelogtext>
+        <changelogtext>[b]Feature:[/b] Search 'Lore' support for show only cards with lore text
+        </changelogtext>
+        <changelogtext>Add 20 magicka icon to Alduin</changelogtext>
+        <changelogtext>Show patch data in old card images</changelogtext>
+        <changelogtext>Add Twitter button in about dialog, follow app and stay tuned on news!
+        </changelogtext>
+        <changelogtext>Update Horned Helm sound</changelogtext>
+        <changelogtext>Fixes and improvements</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.6.0"
+        changeDate="July 5, 2017">
+        <changelogtext>[b]Feature:[/b] Add Card Lore support</changelogtext>
+        <changelogtext>Add Heroes of Skyrim card arts</changelogtext>
+        <changelogtext>Add Heroes of Skyrim card sounds</changelogtext>
+        <changelogtext>Fixes and improvements</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.5.0"
         changeDate="June 28, 2017">
         <changelogtext>[b]Feature:[/b] Add Card Star Rating support</changelogtext>
@@ -182,7 +203,7 @@
     <changelogversion
         versionName="0.2.2"
         changeDate="Dec 30, 2016">
-        <changelogtext>[b]Feature:[/b] Add DeckQtd and DeckMagika costs to deck activity
+        <changelogtext>[b]Feature:[/b] Add DeckQtd and DeckMagicka costs to deck activity
         </changelogtext>
         <changelogtext>[b]Feature:[/b] Comment deck support</changelogtext>
         <changelogtext>Add Battlereeve Of Dusk december reward card</changelogtext>

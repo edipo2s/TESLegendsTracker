@@ -122,6 +122,8 @@
     <string name="card_collection_edit_success">Коллекция редактировать включен!</string>
     <string name="card_set_label">Сет:</string>
     <string name="card_race_label">Раса:</string>
+    <string name="card_about_label">Около:</string>
+    <string name="card_about_more_label">Больше</string>
     <string name="card_sounds_label">Звуки:</string>
     <string name="card_sounds_attack_label"></string>
     <string name="card_sounds_play_label">Играть</string>
@@ -131,7 +133,7 @@
     <string name="card_generates_label">Генерирует:</string>
     <string name="card_tokens_label">Токены::</string>
     <string name="card_patch_current">Текущая версия</string>
-    <string name="card_patch_pre">до того-%s версии</string>
+    <string name="card_patch_pre" formatted="false">до того-%s версии \n %s</string>
     <string name="card_full_downloaded"></string>
     <string name="card_full_sound_set">Звук установлен как Мелодия</string>
     <string name="card_full_wallpaper_set">Изображение установлено как обои</string>
@@ -148,7 +150,8 @@
     <string name="profile_collection">Коллекция</string>
     <string name="unknown">Неизвестно</string>
 
-    <string name="cards_search_hint">Имя, раса, тип, ключевое слово или текст</string>
+    <string name="cards_search_hint">Имя, Раса, Тип, Ключевое Слово или Текст</string>
+    <string name="cards_search_keywords_hint" formatted="false">Поиск карты %s \n Или попробуйте %s</string>
     <string name="collection_statistics_total_cards">Всего карточек\n Душа для завершения</string>
 
     <string name="decks_search_hint">Название колоды</string>

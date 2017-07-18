@@ -20,7 +20,7 @@ import com.ediposouza.teslesgendstracker.ui.base.BaseFilterActivity
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowSnackbarMsg
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterClass
-import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagika
+import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterMagicka
 import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
@@ -172,7 +172,7 @@ class NewDeckActivity : BaseFilterActivity() {
             }
         }
         cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        cards_filter_magicka.filterClick = { eventBus.post(CmdFilterMagicka(it)) }
     }
 
     private fun showDeckInfoDialog() {

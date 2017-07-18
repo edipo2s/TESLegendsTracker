@@ -26,7 +26,7 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "covenantmarauder": {
         "name": "Covenant Marauder",
@@ -50,10 +50,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Fiery Imp attacks, deal 2 damage to your opponent.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Average"
       },
       "intimidate": {
         "name": "Intimidate",
@@ -101,10 +98,7 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "After an enemy rune is destroyed, deal 1 damage to your opponent.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Average"
       },
       "scuttler": {
         "name": "Scuttler",
@@ -152,10 +146,9 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to each player.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "lore": "'Alits are two-legged reptilian creatures native to Morrowind. Called 'mouths with legs', they are one of the top predators in the ecosystems of eastern Tamriel. This particular Alit has been infected with by the Blight, a cloud of sickness that issues forth from the Red Mountain.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5us3k0/daily_card_discussion_thread_170_afflicted_alit/ddwlyst",
+        "arenaTier": "Average"
       },
       "bonebow": {
         "name": "Bone Bow",
@@ -167,7 +160,7 @@
         "rarity": "Rare",
         "keyword": "Summon, Silence",
         "text": "+1/+0. Summon: Silence another creature.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "graystoneravager": {
         "name": "Graystone Ravager",
@@ -230,10 +223,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Other friendly creatures in this lane have +1/+0.",
-        "arenaTier": "Good",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Good"
       },
       "orcclanshaman": {
         "name": "Orc Clan Shaman",
@@ -362,7 +352,7 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Unsummon",
         "text": "Prophecy. Unsummon a creature",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "fearlessnorthlander": {
         "name": "Fearless Northlander",
@@ -375,20 +365,6 @@
         "keyword": "Breakthrough",
         "text": "Breakthrough. When Fearless Northlander takes damage, he gains +2/+0.",
         "arenaTier": "Good"
-      },
-      "gladiatorarena": {
-        "name": "Gladiator Arena",
-        "cost": "04",
-        "type": "Support",
-        "race": "",
-        "attack": "",
-        "health": "",
-        "rarity": "Epic",
-        "keyword": "",
-        "arenaTier": "Poor",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
       },
       "mightyally": {
         "name": "Mighty Ally",
@@ -415,6 +391,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
         "text": "Prophecy, Guard. Summon: Give a creature +2/+0.",
+        "lore": "'The Morkul clan of Orcs was prominent during the Second Era. They maintained a stronghold in Wrothgar, and prided themselves on being the best smiths of the Orsimer. Wrothgar Forge probably depicts the Morkuldin forge, found deep below the earth.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ezb0p/daily_card_discussion_thread_86_morkul_gatekeeper/dagk9s1",
         "arenaTier": "Insane"
       },
       "raidingparty": {
@@ -427,6 +405,8 @@
         "rarity": "Rare",
         "keyword": "Charge",
         "text": "Put two 1/1 Nord Firebrands with Charge into your hand.",
+        "lore": "'One is the line when you play it: 'Herma-Mora tests us.' This indeed refers to the Daedric Prince Hermaeus Mora, part of the Nordic pantheon and known to them as The Demon of Knowledge or The Woodland Man. Many myths involve Herma-Mora trying to trick Ysgramor, and Ysgramor outwitting the demon.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5fi9m4/daily_card_discussion_thread_89_raiding_party/dal4fdc",
         "arenaTier": "Average",
         "generates": "nordfirebrand"
       },
@@ -440,10 +420,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: +1/+1 for each destroyed enemy rune.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Average"
       },
       "rihadbattlemage": {
         "name": "Rihad Battlemage",
@@ -522,6 +499,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "All actions cost 2 more.",
+        "lore": "'The Withered Hand are a group of necromancers terrorizing the people of the Alik'r Desert. They have stolen the ancient Ansei Wards that protect the Alik'r from necromancy.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Withered_Hand",
         "arenaTier": "Good"
       },
       "alikrbandit": {
@@ -589,6 +568,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Silence",
         "text": "Summon: Silence another creature, then deal 1 damage to it.",
+        "lore": "'Spinners are Bosmer priests, of a sort. 'Spinning' refers to spinning a yarn, or telling tales, and they'll wax at length about the stories of the elves, nature, and the land itself. Bosmer priests certainly aren't reclusive or secretive, but getting a straight answer out of them can be as difficult as a monk under a vow of silence.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5renff/daily_card_discussion_thread_153_earthbone/dd7hw0q",
         "arenaTier": "Insane"
       },
       "fireball": {
@@ -601,6 +582,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Deal 1 damage to all enemies.",
+        "lore": "'Fireball is a staple spell of the Destruction school. In Skyrim, it does fire damage in an area and sets anything nearby on fire, dealing ongoing damage. In each game, it's a low to mid level Fire Damage spell.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hwtn0/daily_card_discussion_thread_102_fireball/db3odpm",
         "arenaTier": "Poor"
       },
       "gladiatorarena": {
@@ -613,10 +596,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of each player's turn, deal 2 damage to that player.",
-        "arenaTier": "Poor",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Poor"
       },
       "heavybattleaxe": {
         "name": "Heavy Battleaxe",
@@ -640,6 +620,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Lumbering Ogrim can't gain Cover.",
+        "lore": "'Ogrim are huge, unintelligent Daedra, similar to Ogres. They're usually found in Morrowind, as well as many planes of Oblivion. Ogrim are associated with our buddy Malacath, but will follow other Daedric Princes as well. As long as an ogrim is getting fed and squashing things, it's as happy as a clam.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5eoixw/daily_card_discussion_thread_84_lumbering_ogrim/dae1wkf",
         "arenaTier": "Excellent"
       },
       "orcishwarhammer": {
@@ -677,6 +659,8 @@
         "unique": true,
         "keyword": "",
         "text": "When Reive attacks, deal 2 damage to the enemy player, then increase the damage from this ability by 2.",
+        "lore": "'Reive is an original character to the Legends campaign, a Dremora Lord. He serves the Daedric Prince Boethiah, and works in the service of Lord Naarifin. As champion of Boethiah, Reive wields Goldbrand, and faces you when you break into the Imperial City. He puts up a good fight, but falls to the Hero and companions.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5quevd/daily_card_discussion_thread_150_reive/dd2c2da",
         "arenaTier": "Excellent"
       },
       "skirmisherselixir": {
@@ -689,7 +673,10 @@
         "rarity": "Rare",
         "keyword": "Activate, Breakthrough",
         "text": "Uses: 3. Activate: Give a creature +2/+0 and Breakthrough.",
-        "arenaTier": "Poor"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attack": ">_4"
+        }
       },
       "trebuchet": {
         "name": "Trebuchet",
@@ -701,6 +688,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, deal 4 damage to a random enemy.",
+        "lore": "'I bring you construction plans of Trebutchet, a deadly siege weapon, made by the northlanders of Skyrim. They can throw anything over the walls, from much farther distance than a catapult can.' - loyal scribe and Eye of the Queen, Rublinion",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/605kxr/daily_card_discussion_thread_198_trebuchet_march/df3pxlw",
         "arenaTier": "Poor"
       },
       "whiterunrecruit": {
@@ -736,6 +725,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Blood Dragon ignores Guards and can attack creatures in any lane.",
+        "lore": "'Blood Dragons are a mid-level dragon variant in Skyrim. They're green, with fins on their backs and a triceratops-like frill on the back of their heads. They can have either fire or frost breath' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ky58y/daily_card_discussion_thread_119_blood_dragon/dbrl9ss",
         "arenaTier": "Insane"
       },
       "burnandpillage": {
@@ -748,7 +739,9 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Deal 1 damage to all enemy creatures in a lane for each destroyed enemy rune.",
-        "arenaTier": "Good"
+        "lore": "'War is in the blood of the Nords, and pillaging comes as naturally as breathing. If you see a Nord across the battlefield from you, keep a tight hold on your runes, or they'll push an advantage to victory every time.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5i46z0/daily_card_discussion_thread_103_burn_and_pillage/db59kq4",
+        "arenaTier": "Excellent"
       },
       "fortresswatchman": {
         "name": "Fortress Watchman",
@@ -760,7 +753,7 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "grahtwoodambusher": {
         "name": "Grahtwood Ambusher",
@@ -784,6 +777,8 @@
         "rarity": "Epic",
         "keyword": "Charge",
         "text": "When Markarth Bannerman attacks, put two 1/1 Nord Firebrands with Charge into your hand.",
+        "lore": "'Markarth is a major city located in the Reach, near the border of High Rock. It is housed in an ancient Dwemer city, giving it architecture noticeably different from most cities in Skyrim. Much of the city is carved into the rock face which surrounds it. Jarl Igmund is the ruler of the Reach.' - .uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Skyrim:Markarth",
         "arenaTier": "Excellent",
         "generates": "nordfirebrand"
       },
@@ -797,6 +792,8 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Charge",
         "text": "Breakthrough. Summon: Give Wood Orc Headhunter Charge if you have another friendly Orc.",
+        "lore": "'Wood Orcs are tribes of Orcs that live in Valenwood. Some Wood Orcs, like this guy, paint their faces red. This traces back to a town called Abenath, that fell to invading Ayleids way back in the day.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hjnq3/daily_card_discussion_thread_100_wood_orc/db1hfyx",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "race": "Orc"
@@ -812,6 +809,8 @@
         "rarity": "Epic",
         "keyword": "Slay",
         "text": "Slay: May attack again this turn.",
+        "lore": "'Hircine is the Daedric Prince of the Hunt. He just loves hunting things! He created the Lycanthropes (werewolves, as well as werebears, wereboars, weretigers, and werebats), as his perfect children. These creatures hunt mortals by night, often needing to kill a person to slake their bloodlust.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5f67bq/daily_card_discussion_thread_87_child_of_hircine/dahy72d",
         "arenaTier": "Good"
       },
       "dreadclannfear": {
@@ -861,6 +860,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: If you have more health than your opponent, draw two cards.",
+        "lore": "'A Jarl is a ruler of one of the nine holds of Skyrim, equivalent to a Cyrodiilic Count. The jarls of Skyrim are largely autonomous, though they all swear fealty to the High King. Most jarls have their own personal housecarl and steward, and some also have one or more thanes in their service.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Skyrim:Jarl",
         "arenaTier": "Insane"
       },
       "whirlingduelist": {
@@ -873,6 +874,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When Whirling Duelist equips an item, deal 1 damage to each enemy creature in this lane.",
+        "lore": "'Redguards are the most naturally talented warriors in Tamriel. In addition to their cultural affinities for many armor styles and weapons (particularly swords), Redguards are also physically blessed with hardy constitutions, resistance to poison, and quickness of foot.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Legends:Redguard",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -888,6 +891,8 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Summon, Unsummon",
         "text": "Breakthrough. Summon: Unsummon a creature or destroy an enemy support.",
+        "lore": "'Giants are a race of enormous humanoids with colossal strength. They are found in the wilderness of Skyrim, High Rock, Hammerfell, Cyrodiil and Valenwood.' - uesp.net",
+        "loreLink": "http://uesp.net/wiki/Lore:Giant",
         "arenaTier": "Insane"
       },
       "savageogre": {
@@ -900,7 +905,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Give a creature +5/+0 this turn.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane"
       },
       "wrothgarforge": {
         "name": "Wrothgar Forge",
@@ -912,6 +917,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "The first time you summon a creature each turn, equip it with a random item.",
+        "lore": "'Orcs are gifted smiths. If you've read these for a while, you know that orcs are famously self-sufficient, as they've needed to be facing centuries of persecution. This extends to their weapons and armor as well. Orcs are masters of heavy armor and big two-handed weapons, especially using the metal orichalcum.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5sdpsf/daily_card_discussion_thread_158_wrothgar_forge/ddfezge",
         "arenaTier": "Average"
       },
       "reclusivegiant": {
@@ -949,6 +956,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses: 2. Activate: Give a creature +4/+4 and Breakthrough.",
+        "lore": "'Volendrung is the hammer of Malacath, Daedric Prince of outcasts and the patron of the Orcs. It's a huge blunt instrument, with a stamina-draining enchantment. It's made to let the wielder smash through a whole army, stealing their strength and never slowing down.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5mxqtv/daily_card_discussion_thread_130_volendung/dc7e8h7",
         "arenaTier": "Good"
       },
       "dremoramarkynaz": {
@@ -961,6 +970,8 @@
         "rarity": "Legendary",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Double a creature's power and health.",
+        "lore": "'Dremora are a Daedric race of humanoids, created and mostly in service to Mehrunes Dagon. A Markynaz is a duke rank, the highest level Dremora that most adventurers will encounter. Like all Daedra, Dremora are immortal, so they have a very alien mindset.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5k26r4/daily_card_discussion_thread_114_dremora_markynaz/dbl7dln",
         "arenaTier": "Poor"
       }
     },
@@ -999,7 +1010,9 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Deal 3 damage to a random enemy.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "lore": "'Ashlanders are the Dunmer nomads of Vvardenfell, the large volcanic island of Morrowind. They're also known as the Velothi, the loyalists who kept to the Daedra-worshiping traditions of the prophet Veloth. They've been pariahs for centuries, shunned as backwards, primitive, and savage.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5n4lds/daily_card_discussion_thread_131_brutal_ashlander/dc8yko5"
       },
       "crownquartermaster": {
         "name": "Crown Quartermaster",
@@ -1039,6 +1052,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+2/+0 when there are no enemy creatures in this lane.",
+        "lore": "'Niben Bay is a large body of water in the southesatern part of Cyrodiil, right next to Bravil. This particular Redguard is a long way from her homeland, but she's found a profitable spot for raiding. The Niben Bay is large, with plenty of caves and inlets to hide after a successful plunder.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5rtktb/daily_card_discussion_thread_155_niben_bay/ddasqln",
         "arenaTier": "Terrible"
       },
       "abeceannavigator": {
@@ -1066,6 +1081,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Summon a random creature with cost less than or equal to your max magicka.",
+        "lore": "'Balmora is the city most new players head to after exploring Seyda Neen. The silt strider nearby heads right there for cheap, and the first part of the main quest starts there, with the Blade Caius Cosades.There's tons to do in Balmora, especially for a light-fingered type like this Spymaster.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5a1vs3/daily_card_discussion_thread_58_balmora_spymaster/d9dn4i7",
         "arenaTier": "Average"
       },
       "crystaltowercrafter": {
@@ -1078,6 +1095,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "After you play an action, Crystal Tower Crafter gets +1/+1.",
+        "lore": "'The Crystal Tower was an ancient, mystical structure located near the northern tip of Summerset Isle, northwest of Cloudrest. It was built by the early Aldmer as a monument to their ancestors, and was considered sacred to the Altmer. Before the construction of the Arcane University, it was the pinnacle of magical learning in Tamriel.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Crystal_Tower",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
@@ -1121,6 +1140,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Put a random Atronach into your hand.",
+        "lore": "'High Rock is a province in the northwest section of Tamriel. Most of the province is inhabited by the Bretons, who have divided the province into multiple Breton city states and minor kingdoms. The northern tip of central High Rock also contains Orsinium, the City-State of the Orcs.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:High_Rock",
         "arenaTier": "Excellent",
         "tokens": "flameatronach, frostatronach, stormatronach"
       },
@@ -1134,10 +1155,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 2 damage to your opponent. Draw a card.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Average"
       },
       "momentofclarity": {
         "name": "Moment of Clarity",
@@ -1173,6 +1191,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of each turn, if you played two actions, draw a card.",
+        "lore": "'Shimmerene, sometimes written Shimerene, is a inland city on Summerset Isle. This peddler in particular seems to sell alchemy based stuff, from seemingly empty bottles to books and ingredients. Selling ones wares is not a simple task, you will need a really strong personality to haggle for better prices and to convince customers.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5y1w7a/daily_card_discussion_thread_187_shimmerene/demjom5",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Action"
@@ -1312,7 +1332,9 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When you play or activate a support, give Craglorn Scavenger +1/+1.",
-        "arenaTier": "Poor",
+        "lore": "'Craglorn is a region in northeastern Hammerfell, land of the Redguards. Craglorn used to be a more happenin' spot, thousands of years ago. The ancient Nedes (one of the ancestor races of the Imperials) used to frequent the area, along with the Ayleids, Dwemer and Yokudan (pre-Redguard).' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5gz3ss/daily_card_discussion_thread_97_craglorn/dawpzum",
+        "arenaTier": "Terrible",
         "arenaTierPlus": {
           "type": "Support"
         }
@@ -1343,6 +1365,8 @@
         "rarity": "Legendary",
         "keyword": "Ward",
         "text": "Ward. After Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
+        "lore": "'Daggerfall is the largest city in Glenumbra, located at the southwestern end of the peninsula. It is the capital of the kingdom of Daggerfall. The order Knights of the Dragon have the official duty of protecting the city and royal family of Daggerfall. The last census, in 3E 401, lists the population at over 110,000.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Daggerfall",
         "arenaTier": "Excellent",
         "generates": "tomeofalteration"
       },
@@ -1356,6 +1380,8 @@
         "rarity": "Epic",
         "keyword": "Activate",
         "text": "Uses: 5. Activate: Deal 1 damage to your opponent. If Dark Rift has dealt 5 damage, sacrifice it to summon a Storm Atronach.",
+        "lore": "'Conjuration, the art of summoning things from another plane, has been practiced for centuries, though it hasn't always been recognized as an official school of magic. If you're a squishy mage and want sweet weightless armor or an Atronach to do your fighting for you, you're well advised to study up.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cq6mt/daily_card_discussion_thread_73_dark_rift/d9yhyi7",
         "arenaTier": "Good",
         "tokens": "stormatronach"
       },
@@ -1382,6 +1408,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Reveal the top card of the opponent's deck.",
+        "lore": "'Nereids are water-based humanoid creatures, that were common in the Second Era. Though they're elemental beings, they aren't Daedra like the Atronachs; they're natural to Mundus. They're known for being entrancing, like the mythical Sirens, this amusing poem tells of a woman who almost lost her husband to one.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5m63sf/daily_card_discussion_thread_126_farsight_nereid/dc1x5cm",
         "arenaTier": "Poor"
       },
       "keeperofwhispers": {
@@ -1418,6 +1446,8 @@
         "rarity": "Rare",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put a random action into your hand.",
+        "lore": "'House Telvanni is one of the Great Houses of Morrowind. It governed the Telvanni District of eastern Morrowind, and administered the eastern portion of the Vvardenfell District from its council seat in Sadrith Mora. The house comprises mainly highly egocentric and ambitious mages, and is known to many as the house of the master wizard.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Telvanni",
         "arenaTier": "Good"
       },
       "ashservant": {
@@ -1442,6 +1472,8 @@
         "rarity": "Rare",
         "keyword": "Summon, Guard",
         "text": "Summon: Give other friendly (Intelligence) creatures +1/+0 and Guard.",
+        "lore": "'Tear is a port city on the southeast point of Morrowind, near the border with Black Marsh. It's also called Dres, since it's the seat and capital for the Great House. To protect it, Tear also maintains a huge border wall. This is probably what this card represents, the Baron ordering your other creatures to dig in and defend you.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5s7lwm/daily_card_discussion_thread_157_baron_of_tear/dddh3qz",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "intelligence"
@@ -1494,6 +1526,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When an enemy becomes Shackled, deal 3 damage to it.",
+        "lore": "'House Dres is one of the five Great Houses of Morrowind. Dres, Redoran, Telvanni, Indoril, and Sadras. House Hlaalu was stripped of its rank after Morrowind's secession in the Fourth Era.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5g2ftu/daily_card_discussion_thread_92_dres_tormentor/dap4se6",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Shackle"
@@ -1509,6 +1543,8 @@
         "rarity": "Rare",
         "keyword": "Summon, Last Gasp",
         "text": "Summon: Draw a card. Last Gasp: Shuffle a 0-cost Elusive Schemer into your deck.",
+        "lore": "'Scheming and thievery are a common thing in Vvanderfell and Morrowind, and it is not only restricted to one faction either! Thieves guild has a presence on Vvanderfell without any guild halls, Thieves guild representatives are found scattered across all settlements, usually residing in Cornerclubs.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5waifi/daily_card_discussion_thread_178_elusive/de8nktz",
         "arenaTier": "Excellent"
       },
       "firestorm": {
@@ -1533,6 +1569,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, draw an Ice Spike.",
+        "lore": "'Ice Wraiths are frost spirits native to Skyrim. They are fast and hard to see in the snow, and especially dangerous in numbers. Young warriors are often tasked with slaying one as part of a rite of passage, to help make travel safer.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5e4ia5/daily_card_discussion_thread_81_ice_wraith/da9mb0q",
         "arenaTier": "Poor",
         "generates": "icespike"
       },
@@ -1558,10 +1596,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: If you have more health than your opponent, give all friendly creatures a random keyword.",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Excellent"
       },
       "tomeofalteration": {
         "name": "Tome of Alteration",
@@ -1573,6 +1608,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "+2/+2. Summon: Draw a card.",
+        "lore": "'Alteration is one of the six schools of magic. Spells in this school change the world around the caster so normal physical truths no longer hold. It is sometimes confused with Illusion magic, as both schools seek to change normal truths. Illusion magic, however, is not bound by the laws of nature but Alteration magic is.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Alteration",
         "arenaTier": "Good"
       },
       "dragonstarrider": {
@@ -1585,6 +1622,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When Dragonstar Rider equips an item, draw a card.",
+        "lore": "'Dragonstar or Drangstor is one of the nine major kingdoms located in Hammerfell and it is the capital of the northern reaches of Craglorn. Dragonstar sits in disputed territory and it has been sought out by the Redguards and the Nords for many generations.' - elderscrolls.wikia.com",
+        "loreLink": "http://elderscrolls.wikia.com/wiki/Dragonstar",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -1612,6 +1651,8 @@
         "rarity": "Rare",
         "keyword": "Ward",
         "text": "Ward",
+        "lore": "'Glenumbra is a region of high rock. It lies west, and separates Iliac bay from the Abecean sea. Glenumbra is a calm region, mostly consisting of forests and sometimes swamps.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5xrqzo/daily_card_discussion_thread_186_glenumbra/del0u0q",
         "arenaTier": "Average"
       },
       "lillandrilhexmage": {
@@ -1639,6 +1680,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "+3/+3. Summon: Give all your other creatures the keywords of this creature.",
+        "lore": "'The Mentor's Ring is a magic-boosting ring found in a random tomb in Morrowind. It's a nice find for a starting Mage, since it's found near the starting town of Seyda Neen.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/59i6ey/daily_card_discussion_thread_55_mentors_ring/d98xx1o",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -1654,6 +1697,8 @@
         "rarity": "Epic",
         "keyword": "Shackle",
         "text": "Shackle all enemy creatures.",
+        "lore": "'There isn't a spell called Winter's Grasp in any of the games, but its effect is reflected in the frost spells in Skyrim. Starting in that game, cold damage itself also sapped the target's stamina, and with perks cold spells would freeze low-health targets altogether.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5nizn0/daily_card_discussion_thread_133_winters_grasp/dccf3v0",
         "arenaTier": "Average"
       },
       "winterstouch": {
@@ -1678,6 +1723,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Friendly creatures get +1/+1 for each keyword they have.",
+        "lore": "'A battlereeve is a military commander of the Aldmeri Dominion. The title was used in the Second Era, with the most famous being Battlereeve Urcelmo, adviser and guard to Queen Ayrenn. Dusk it's where she's from! Dusk is a city on the southeast coast of Summerset Isle.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5h69e0/daily_card_discussion_thread_98_battlereeve_of/daxy9ow",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -1711,6 +1758,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Draw a card. If it has Prophecy you may play it for free.",
+        "lore": "'Nereids are mer-like, feminine water creatures. They are often found near bodies of water; such as rivers, lakes and the sea. As nereids are considered flying creatures, snares and roots are ineffective against them. Nereids are weak to fire, thus using fire based attacks against them may stun them briefly.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Nereid",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "keyword": "Prophecy"
@@ -1738,6 +1787,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp",
         "text": "+5/+0. Last Gasp: Return Heirloom Greatsword to your hand.",
+        "lore": "'Greatswords are wielded with two hand, leaving the wielder unable to block. Until 4th era, greatswords were commonly called Claymores. They are slow to swing, but offer some great reach, making it easier for the wielder to repel those pesky rogues and bandits with shortswords.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ynlo4/daily_card_discussion_thread_190_heirloom/derjv0k",
         "arenaTier": "Excellent"
       },
       "icestorm": {
@@ -1750,6 +1801,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Deal 3 damage to all creatures.",
+        "lore": "'Ice Storm is an adept level Destruction spell that fires a slow-moving area-effect projectile that deals frost damage to the health and stamina of any enemies that it passes over, and slows targets' movement for 5 seconds.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Skyrim:Ice_Storm",
         "arenaTier": "Excellent"
       },
       "masterofarms": {
@@ -1801,6 +1854,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Each player draws two cards.",
+        "lore": "'Studium generale was a term for a medieval university, where 'generale' means its open to the public. So we can infer that its a term for a Altmer school, though not much more than that. Education is very important to the High Elves; they were the first race to study magic in modern times, and the founders of the Mages Guild.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5tr810/daily_card_discussion_thread_165_studium/ddp3gk5",
         "arenaTier": "Terrible"
       },
       "summersetorrery": {
@@ -1825,6 +1880,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of each turn, if you played two actions, summon a random Atronach.",
+        "lore": "'The Mages Guild was founded in the Second Era, by a Psijic Monk called Vanus Galerion. The Psijic Order, while an excellent place to study and refine magic, was too aloof from the average person, he felt. The world was missing the benefits that magic could bring.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5s0d6x/daily_card_discussion_thread_156_mages_guild/dddcu8x",
         "arenaTier": "Terrible",
         "tokens": "flameatronach, frostatronach, stormatronach"
       },
@@ -1838,6 +1895,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When you summon a creature that costs 2 or less, summon a copy of that creature in the other lane.",
+        "lore": "'Wispmothers are frost spirits native to Skyrim. They appear to be ghosts of living people (as the tag Spirit suggests), but are infused with cold magic in an unusual way. They will spawn an unlimited number of Shades, weak clones of themselves, which is where the card mechanic comes from.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5tjtgv/daily_card_discussion_thread_164_wispmother/ddo15uw",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "cost": "<_3",
@@ -1854,6 +1913,8 @@
         "rarity": "Legendary",
         "keyword": "Guard, Last Gasp",
         "text": "Guard. Last Gasp: Indoril Archmage deals 6 damage to all enemy creatures in this lane.",
+        "lore": "'House Indoril is one of the Great Houses of Morrowind. Like the Dres, they only have holdings on the mainland of Morrowind, so they didn't show up much in-game. House Indoril is xenophobic towards outlanders and politically and religiously conservative.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ibknp/daily_card_discussion_thread_104_indoril_archmage/db6wnye",
         "arenaTier": "Good"
       },
       "shockingwamasu": {
@@ -1866,7 +1927,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Deal 4 damage to a creature.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "expertatromancer": {
         "name": "Expert Atromancer",
@@ -1892,6 +1953,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Draw a card and reduce its cost to 0.",
+        "lore": "'Nahkriin is one of the eight high-ranked dragon priests in Skyrim, and is encountered in Skuldafn, a temple you visit during The World-Eater's Eyrie. Nahkriin, like the other seven dragon priests, has a mask with considerable power, as it gives 50 more magicka points and a 20% reduction on spell cost for Destruction and Restoration spells.' - uesp.net",
+        "loreLink": "http://pt.uesp.net/wiki/Skyrim:Nahkriin_(creature)",
         "arenaTier": "Average"
       },
       "supremeatromancer": {
@@ -1904,6 +1967,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Summon a Flame Atronach in each lane. When you summon another creature, deal 2 damage to your opponent.",
+        "lore": "'Atromancy is the art of summoning Daedra, specifically the elemental ones known as the Atronachs. 'Atronach' is kind of an imprecise term, since people use it for both the elementals and for animated golems. Elemental daedra are known to be highly intelligent, and unusually are not associated with any Daedric Prince.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5lrhbx/daily_card_discussion_thread_124_supreme/dbye9tf",
         "arenaTier": "Insane",
         "tokens": "flameatronach"
       },
@@ -1917,7 +1982,9 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "Summon",
-        "text": "Summon: Deal 6 damage to a random enemy. At the start of your turn, Divayth Fyr summons a Daughter of Fyr.",
+        "text": "Summon: Deal 6 damage to a random enemy. At the start of your turn, Divayth eses summons a Daughter of Fyr.",
+        "lore": "'Divayth Fyr was a Dunmer sorcerer born as a Chimer in Tel Aruh. He spent his time researching the Divine Disease, Corprus, and his Corprusarium was a refuge for anyone infected, including his oldest friend, Yagrum Bagarn, the last living Dwemer.[2][4] He took a deep interest in Dwemer history and collected many Dwemer artifacts.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Divayth_Fyr",
         "arenaTier": "Average",
         "tokens": "alfefyr, beytefyr, deltefyr, uupsefyr"
       }
@@ -1972,6 +2039,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Draw a copy of a random creature from your opponent's deck.",
+        "lore": "'It's a common pastime of the Thieves Guild, aka the best organization in Tamriel. Some thieves enjoy being silent as a ghost, lifting valuables. Others like putting a little personal touch into their work, intimidating people and throwing their weight around to make sure the guild is respected.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5b4037/daily_card_discussion_thread_64_cursed_spectre/d9ltnsh",
         "arenaTier": "Poor"
       },
       "cheydinhalsapper": {
@@ -1984,6 +2053,8 @@
         "rarity": "Common",
         "keyword": "Drain",
         "text": "Drain",
+        "lore": "'Cheydinhal is a sleepy town in Cyrodiil, right next to the border with Morrowind. Like all Cyrodiilic towns, it draws some culture and architecture from the nearby province, from travelers coming and going. Sapper is a military engineer, who builds or demolishes structures for an army.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5r1tgg/daily_card_discussion_thread_151_cheydinhal/dd3tldp",
         "arenaTier": "Average"
       },
       "descendantofalkosh": {
@@ -1996,7 +2067,9 @@
         "rarity": "Legendary",
         "keyword": "Pilfer",
         "text": "Pilfer: Descendant of Alkosh gains +1/+1 and a random keyword.",
-        "arenaTier": "Good"
+        "lore": "'Alkosh, colloquially known as the Dragon King of Cats, is the chief divinity of the Anaquinine Khajiit religion, which was loosely based on the Nine Divines and Altmer religions, and was a variation of the Altmer god Auri-El and the Imperial god Akatosh.' - elderscrolls.wikia.com",
+        "loreLink": "http://elderscrolls.wikia.com/wiki/Alkosh",
+        "arenaTier": "Average"
       },
       "detain": {
         "name": "Detain",
@@ -2047,7 +2120,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Summon a 1/1 Imperial Grunt in each lane.",
-        "arenaTier": "Excellent",
+        "arenaTier": "Good",
         "tokens": "imperialgrunt"
       },
       "sunholdmedic": {
@@ -2060,6 +2133,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Give a creature +0/+2.",
+        "lore": "'Sunhold is a city on the southern coast of Summerset. As a place in the Summerset Isles, you guessed it, we know basically nothing about it. One interesting tidbit is that two notable authors come from there, including the author of Rising Threat, a refugee named Lathenil.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5uevko/daily_card_discussion_thread_168_sunhold_medic/ddumta1",
         "arenaTier": "Poor"
       },
       "apprenticespotion": {
@@ -2096,6 +2171,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
+        "lore": "'Cathay-raht are the breed of Khajiit born when Masser and Secunda are both waxing. They're kind of the flip side to the Dagi-raht Mystic, which appear when the moons are waning. '-raht' here is a modifier on the base breed, caused by Secunda being one phase earlier than the base.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5o2owi/daily_card_discussion_thread_136_cathayraht/dcgjvee",
         "arenaTier": "Poor"
       },
       "elixirofthedefender": {
@@ -2144,10 +2221,9 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When another friendly creature attacks, Helgen Squad Leader gains +1/+0.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "lore": "'Helgen was a small town on Skyrim's southern border. This card depicts a Nord with traditional blue face paint and hide armor, but a squad leader in Helgen would have been part of the Imperial Legion.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ei4ny/daily_card_discussion_thread_83_helgen_squad/dacqxjp",
+        "arenaTier": "Average"
       },
       "kvatchsoldier": {
         "name": "Kvatch Soldier",
@@ -2195,6 +2271,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Drain",
         "text": "Summon: Give Ravenous Hunger Drain if there is an enemy creature in this lane.",
+        "lore": "'Hungers are Daedric servants of Boethiah, with spindly arms and legs and a long, corrosive tongue. Like D&D rust monsters, they specialize in wrecking the durability of your weapons and armor, so attacking them from range.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5u7boq/daily_card_discussion_thread_167_ravenous_hunger/ddsgp7e",
         "arenaTier": "Average"
       },
       "skingradpatroller": {
@@ -2243,7 +2321,9 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Other friendly creatures in this lane have +0/+1.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "lore": "'The Summerset Isles are the archipelagic home of the High Elves. Shield spells transmute your armor, clothes and even skin to be harder and resist damage. This Shieldmage is casting an area-effect version.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jl45q/daily_card_discussion_thread_111_summerset/dbh5kes"
       },
       "arrowstorm": {
         "name": "Arrow Storm",
@@ -2255,7 +2335,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Destroy all creatures with 2 power or less in one lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "artaeumsavant": {
         "name": "Artaeum Savant",
@@ -2267,6 +2347,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "After you play an action, a random friendly creature gets +1/+1.",
+        "lore": "'Artaeum is the third-largest island in the Summerset Archipelago. Artaeum's claim to fame is being the home of the Psijic Order, a monastic sect centered on the practice of Mysticism. The Psijics were founded before the First Era, when the Aldmer elves first started to worship a small group of elite ancestors, instead of those of their own family.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5pgnol/daily_card_discussion_thread_143_artaeum_savant/dcrtavx",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Action"
@@ -2282,6 +2364,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When an enemy rune is destroyed, gain 3 health.",
+        "lore": "'Dawnstar is a hellhole. And in the generally dangerous Skyrim, that's saying something. On the surface, it seems like a sleepy fishing and mining town. But just below the surface, all sorts of things are horrible about it.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5c13of/daily_card_discussion_thread_69_dawnstar_healer/d9svldc",
         "arenaTier": "Good"
       },
       "eastmarchcrusader": {
@@ -2331,10 +2415,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When an enemy rune is destroyed, Morthal Executioner gains +2/+0.",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Excellent"
       },
       "packwolf": {
         "name": "Pack Wolf",
@@ -2347,9 +2428,6 @@
         "keyword": "Summon",
         "text": "Summon: Summon a 1/1 Young Wolf in the other lane.",
         "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        },
         "tokens": "youngwolf"
       },
       "pitlion": {
@@ -2401,6 +2479,8 @@
         "rarity": "Rare",
         "keyword": "Guard, Pilfer",
         "text": "Guard. Pilfer: Move Riverhold Escort to the other lane.",
+        "lore": "'Riverhold is a city-state of Elsweyr, on the northern edge of the province. It's pretty unexplored in the games, but is known to be dominated by trade and have a massive, crowded market. It's a good location for it, right next to Bravil in Cyrodiil, with the Niben River right there to lead to the Imperial City or down to the sea.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5o910w/daily_card_discussion_thread_137_riverhold_escort/dcifiir",
         "arenaTier": "Average"
       },
       "toweralchemist": {
@@ -2453,6 +2533,8 @@
         "rarity": "Common",
         "keyword": "Drain",
         "text": "When you play an action, give Auridon Paladin Drain this turn.",
+        "lore": "'Auridon is the second-largest island of the Summerset Isles, home of the Altmer. It's the first line of defense for the archipelago, boasting craggy mountains and carefully cultivated wilderness to defer attackers from the mainland. The cities of Skywatch and Firsthold can both be found here.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5fxdjk/daily_card_discussion_thread_91_auridon_paladin/dao9aps",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "type": "Action"
@@ -2468,7 +2550,9 @@
         "rarity": "Epic",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Give a creature -4/-0 this turn.",
-        "arenaTier": "Excellent"
+        "lore": "'Cloudrest is a city to the north of Summerset, the main isle of the Summerset Isles. It's set on top of Eton Nir, the highest mountain on the isles. The city itself is made of vinelike materials, built on top of coral--not something the high elves typically use in their buildings. High Elves are the best wielders of illusion magic, because they're the best at every kind of magic.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ogdwh/daily_card_discussion_thread_138_cloudrest/dck0tno",
+        "arenaTier": "Insane"
       },
       "dawnbreaker": {
         "name": "Dawnbreaker",
@@ -2541,9 +2625,6 @@
         "keyword": "",
         "text": "Fill a lane with 1/1 Imperial Grunts.",
         "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        },
         "tokens": "imperialgrunt"
       },
       "warcry": {
@@ -2568,6 +2649,8 @@
         "rarity": "Epic",
         "keyword": "Pilfer",
         "text": "Pilfer: Draw a random support from your deck.",
+        "lore": "'Dagi-raht is a breed of Khajiit, known for being smaller than average, but naturally skilled with magic. Khajiit breed is determined by the moon phases when the baby is born, and Dagi-raht come when both Masser and Segunda are waning.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5mk10o/daily_card_discussion_thread_128_dagiraht_mystic/dc4oom2",
         "arenaTier": "Poor"
       },
       "divinefervor": {
@@ -2580,10 +2663,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Friendly creatures have +1/+1.",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Excellent"
       },
       "haafingarmarauder": {
         "name": "Haafingar Marauder",
@@ -2595,7 +2675,9 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "When a friendly creature destroys an enemy rune, equip it with a random item.",
-        "arenaTier": "Excellent"
+        "lore": "'Haafingar is Skyrim's northwestern hold, home to the capital city, Solitude. Between the harsh climate, Imperial Legion, Thalmor forces, and friggin' vampires, you'd need to be resourceful and strong to be a raider in Haafingar. Snatching weapons from your defeated foes could give you the edge you need to survive!' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5eud8t/daily_card_discussion_thread_85_haafingar/daf940w",
+        "arenaTier": "Good"
       },
       "heroofanvil": {
         "name": "Hero of Anvil",
@@ -2607,6 +2689,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Hero of Anvil costs 1 less for each creature summoned this turn.",
+        "lore": "'Anvil is a harbour city in Cyrodiil. You can get there from the Imperial city by going southwest along the Golden road, on which also lies Skingrad and Kvatch. Originaly, Anvil was a slum of wooden shacks, similar to Bravil, but without walls. The city was full of thieves, bandits and most importantly, pirates.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5wu93d/daily_card_discussion_thread_181_hero_of_anvil/ded9zqy",
         "arenaTier": "Poor"
       },
       "imperialmight": {
@@ -2619,6 +2703,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of your turn, summon a 1/1 Imperial Grunt in a random lane.",
+        "lore": "'General Talos waged a series of wars to unify the continent, starting with Cyrodiil and Skyrim, and eventually using a giant bronze war mech called Numidium to bring down the Aldmeri Dominion. This Empire lasted through the entire Third Era, and more or less into the Fourth.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5teg6s/daily_card_discussion_thread_163_imperial_might/ddn59db",
         "arenaTier": "Poor",
         "tokens": "imperialgrunt"
       },
@@ -2656,6 +2742,8 @@
         "rarity": "Common",
         "keyword": "Prophecy",
         "text": "Prophecy. Destroy a creature.",
+        "lore": "'Piercing Javelin deals Magic Damage to an enemy and knocks them backward, stunning them for a brief moment. Aurora Javelin increases the damage when the ability is used at a distance, while Binding Javelin converts it to a Stamina-based image, and increases the duration of the stun caused by the attack.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Piercing_Javelin",
         "arenaTier": "Insane"
       },
       "pillagingtribune": {
@@ -2668,6 +2756,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Drain",
         "text": "Summon: Give a friendly creature Drain this turn.",
+        "lore": "'Tribune is a high rank in the Imperial Legion, below Legate and General. The Imperial Legion borrows heavily from the structure of the Roman Army, where a Legate would command a few thousand men, and a Tribune was second in command. So this guy can probably order a couple thousand people to pillage.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5g8syw/daily_card_discussion_thread_93_pillaging_tribune/dar8d32",
         "arenaTier": "Good"
       },
       "spitefuldremora": {
@@ -2704,10 +2794,7 @@
         "rarity": "Rare",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: If you have more health than your opponent, summon a copy of Golden Saint in the other lane.",
-        "arenaTier": "Insane",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Insane"
       },
       "immolatingblast": {
         "name": "Immolating Blast",
@@ -2719,6 +2806,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Randomly destroy all but one creature on both sides of each lane.",
+        "lore": "'Immolating Blast is a fire spell in the game Oblivion. It's an extremely powerful single target spell, that does high damage to just one thing. You can learn it from the Arcane University's Destruction master, the Redguard Borissean.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5sl7cp/daily_card_discussion_thread_159_immolating_blast/ddg3lz4",
         "arenaTier": "Average"
       },
       "senchetiger": {
@@ -2743,10 +2832,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Other friendly creatures get +1/+1.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Average"
       },
       "renownedlegate": {
         "name": "Renowned Legate",
@@ -2758,7 +2844,9 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon",
         "text": "Breakthrough. Summon: Summon a 1/1 Imperial Grunt, then gain 1 health for each friendly creature.",
-        "arenaTier": "Good",
+        "lore": "'Legate is a high rank in the Imperial Legion. In the Roman Empire, a Legate would command a legion of several thousand troops, so we can assume this fella commands a significant portion of the Imperial army.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5oolt6/daily_card_discussion_thread_139_renowned_legate/dclcqpe",
+        "arenaTier": "Average",
         "tokens": "imperialgrunt"
       },
       "risinglegate": {
@@ -2784,6 +2872,8 @@
         "rarity": "Legendary",
         "keyword": "Guard",
         "text": "Guard. When Auroran Sentry is dealt damage, you gain that much health.",
+        "lore": "'Aurorans are Daedric creatures from Meridia's realm, commanded by Umaril the Unfeathered. They typically wield an Ayleid Battle Axe. These Daedra were created by the Daedric Princes Meridia, Azura, and Sheogorath.' - http://elderscrolls.wikia.com/",
+        "loreLink": "http://elderscrolls.wikia.com/wiki/Auroran",
         "arenaTier": "Average"
       },
       "dawnswrath": {
@@ -2796,6 +2886,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Destroy all creatures in a lane.",
+        "lore": "'Dawn's Wrath is a skill tree for the Templar class in ESO. It uses the power of the sun to deal magic and fire damage to enemies. The card depicts the ultimate ability of the tree: Nova, a huge blast that calls a fragment of the sun down onto an area.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hcqjc/daily_card_discussion_thread_99_dawns_wrath/dazgt22",
         "arenaTier": "Good"
       },
       "mantikora": {
@@ -2808,6 +2900,8 @@
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Destroy an enemy creature in this lane.",
+        "lore": "'Mantikoras are artifically created creatures - they combine the dealdiest traits of many predators, such as scorpions and wamasus. They also posses the intelligence and cunning of mer and man. The first Mantikora ever created was called Hruzizolk.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5xb212/daily_card_discussion_thread_183_mantikora_march/degvdsp",
         "arenaTier": "Excellent"
       },
       "miraakdragonborn": {
@@ -2821,6 +2915,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Steal an enemy creature.",
+        "lore": "'Miraak is a Nord from the Merethic Era, a powerful Dragon Priest and the first Dragonborn. He developed his mind controlling powers over the ages that followed, slowly seeding his influence among the people of Solstheim.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5w4qpy/daily_card_discussion_thread_177_miraak/de7nedt",
         "arenaTier": "Good"
       }
     },
@@ -2859,6 +2955,8 @@
         "rarity": "Common",
         "keyword": "Shackle",
         "text": "Shackle a creature and deal 1 damage to it.",
+        "lore": "'This is based on a stock interaction line from Skyrim's guards: 'I used to be an adventurer like you...then I took an arrow in the knee.' It inspired a lot of variations, too, so you could call it a snowclone. It's also referenced on {{Camlorn Hero}}'s summon line.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5p2fm0/daily_card_discussion_thread_141_i_used_to_be_an/dcohoj6",
         "arenaTier": "Terrible"
       },
       "mournholdguardian": {
@@ -2896,6 +2994,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Shuffle three Brotherhood Assassins into your deck.",
+        "lore": "'Ungolim was betrayed by one of his Speakers, Mathieu Bellamont, in a nearly successful attempt at destroying the Dark Brotherhood. Bellamont used the Hero of Cyrodiil to do the deed, by switching the dead drops with assassination targets to Speakers and Silencers of the Black Hand' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/59clhw/daily_card_discussion_thread_54_ungolim_the/d97nh86",
         "arenaTier": "Insane",
         "tokens": "brotherhoodassassin"
       },
@@ -3047,6 +3147,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp, Guard",
         "text": "Last Gasp: Your opponent summons a 2/1 Mournhold Guardian with Guard.",
+        "lore": "'Mournhold, the 'city of light and magic', also known as the City of Gems, was the capital city of Morrowind and the largest and oldest city in the province. Mournhold is located in the heart of the Deshaan region of Morrowind's southern mainland, and is the district seat of House Indoril.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Mournhold",
         "arenaTier": "Good",
         "generates": "mournholdguardian"
       },
@@ -3099,6 +3201,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Steal all items from an enemy creature.",
+        "lore": "'renthia is a border town in Valenwood, right near where it, Cyrodiil, and Elsweyr all meet. It's a high-traffic area that's seen plenty of war and bloodshed for its strategic location, and so the greater area is known as Reaper's March. Arenthia is named after one of the first Bosmer kings, and is known for its red wine vineyards.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5llpte/daily_card_discussion_thread_123_arenthia/dbwtu3l",
         "arenaTier": "Poor"
       },
       "baandaribruiser": {
@@ -3171,6 +3275,8 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge",
+        "lore": "'Greenheart is a town near the southern coast of Valenwood. It's notable for being the seat of the Wilderking, a mysterious nature deity who rules part of the southern region.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5dg11l/daily_card_discussion_thread_77_greenheart_knight/da4qz7p",
         "arenaTier": "Poor"
       },
       "housekinsman": {
@@ -3297,6 +3403,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
+        "lore": "'The An-Xileel are an Argonian political party, run out of the city of Lilmoth. They're highly isolationist, and were pushing for the secession of Black Marsh from the Empire before anyone else. They also have a mysteriously strong connection to the Hist, the sentient trees that are tied to the Argonian life cycle.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5q28m5/daily_card_discussion_thread_146_anxileel_invader/dcwxarl",
         "arenaTier": "Average"
       },
       "deshaanavenger": {
@@ -3346,10 +3454,9 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "All field lanes become Shadow lanes. Friendly creatures have +1/+0.",
-        "arenaTier": "Poor",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "lore": "'In the words of A Pocket Guide to the Empire, Valenwood is 'a sea of endless green, a maze of foliage with half-hidden cities growing like blooms from a flower, the home of the Bosmer is Tamriel's garden.' The Bosmer know the forest the best of anyone, and will happily lay traps and snipe at foolish intruders.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5d9kti/daily_card_discussion_thread_76_hidden_trail/da3foak",
+        "arenaTier": "Poor"
       },
       "moonlightwerebat": {
         "name": "Moonlight Werebat",
@@ -3413,6 +3520,8 @@
         "rarity": "Rare",
         "keyword": "Charge, Lethal",
         "text": "Charge, Lethal",
+        "lore": "'Snakes are oddly uncommon in the world of Tamriel. They were more common in the Second Era (ESO), along with Giant Snakes, sea serpents, and even winged adders! I guess once you hit the Third Era, legs became the hot new fashion requirement.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cknn9/daily_card_discussion_thread_72_territorial_viper/d9xd9bs",
         "arenaTier": "Good"
       },
       "thievesden": {
@@ -3425,10 +3534,9 @@
         "rarity": "Legendary",
         "keyword": "Pilfer",
         "text": "Friendly creatures have Pilfer: +1/+1.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "lore": "'The Thieves Guild pays homage to and is supported by Nocturnal, Daedric Prince of darkness and night. Nevertheless, they seem to enjoy stealing artifacts from her. When they're items like cowls that erase your identity and unbreakable lockpicks, I don't want to say she deserves it, but it shows an awful lack of forethought.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5bf3np/daily_card_discussion_thread_66_thieves_den/d9o4fvw",
+        "arenaTier": "Average"
       },
       "torvalcrook": {
         "name": "Torval Crook",
@@ -3440,6 +3548,8 @@
         "rarity": "Epic",
         "keyword": "Charge, Pilfer",
         "text": "Charge. Pilfer: Gain 2 magicka.",
+        "lore": "'Torval is the capital city of Elsweyr, homeland of the Khajiit. Khajiit have a reputation for, shall we say, a loose concept of ownership, and this lady shows that off in spades. I personally would not want to store anything valuable in Torval for any length of time.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5aq4dc/daily_card_discussion_thread_62_torval_crook/d9ijird",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3467,6 +3577,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Charge",
         "text": "Summon: Summon a 2/2 Wood Elf Scout with Charge in each lane with a wounded enemy creature.",
+        "lore": "'The Camoran Dynasty has ruled Valenwood for most of its history. In fact, year 0 of the First Era is marked by the start of it, when King Eplear united the Bosmer into one kingdom. How much actual power they've had over the province has waxed and waned, mostly waned.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cee6l/daily_card_discussion_thread_71_camoran_scout/d9w078p",
         "arenaTier": "Poor",
         "tokens": "woodelfscout"
       },
@@ -3540,6 +3652,8 @@
         "rarity": "Legendary",
         "keyword": "Summon, Last Gasp",
         "text": "Summon: Trigger the Last Gasp of each friendly creature.",
+        "lore": "'Necrom is a city on Morrowind's eastern edge. It wasn't present in the game, since it's on the mainland. It's a holding of House Indoril, the House most aligned with religion, and appropriately it's a major center of spirituality and ancestor veneration for the Dunmer.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5pqi8n/daily_card_discussion_thread_144_necrom/dctpy78",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Last Gasp"
@@ -3555,6 +3669,8 @@
         "rarity": "Epic",
         "keyword": "Slay",
         "text": "Slay: Draw a card.",
+        "lore": "'The Pahmar Raht are tiger like, but still somewhat humanoid, unlike the Senches, who are literally sapient tigers. When a breed of Khajiit ends with Raht, it usually means that it is stronger and bigger version of the original breed. Pahmar-Raht are born when Secunda is waning and Masser is full.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5y6rma/daily_card_discussion_thread_188_pahmarraht/denycpj",
         "arenaTier": "Good"
       },
       "snowysabrecat": {
@@ -3591,6 +3707,8 @@
         "rarity": "Legendary",
         "keyword": "Drain, Pilfer",
         "text": "Drain. Pilfer: +4/+4",
+        "lore": "'The Quin'rawl Peninsula is located in the southern portion of the province of Elsweyr which juts out east into the Topal Sea. The city of Senchal and the Halls of Colossus are the main landmarks here.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Quin%27rawl_Peninsula",
         "arenaTier": "Good"
       },
       "quinrawlskulker": {
@@ -3652,6 +3770,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Summon a random Animal.",
+        "lore": "'Spriggans often called Nature's Guardians, are tree spirits that take the form of female humanoids. They possess moderate intelligence, but despite being revered they are usually hostile towards travelers. A complete list of Spriggan cards found in Legends can be found in the Legends-Cards-Creature-Spriggan category.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Legends:Spriggan",
         "arenaTier": "Good"
       },
       "wildspriggan": {
@@ -3702,6 +3822,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Fill your lanes with 2/1 Spiderlings. Last Gasp: Destroy all friendly Spiderlings.",
+        "lore": "'Spider Daedra are a powerful, all-female race of Daedra. They're found in the dryer northwestern areas of Tamriel: Cyrodiil, High Rock, and Hammerfell. They're skilled with shock magic, and spawn Spiderlings to harass intruders into their lair.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5nrwff/daily_card_discussion_thread_134_spider_daedra/dce4mf2",
         "arenaTier": "Poor",
         "tokens": "spiderling"
       },
@@ -3716,6 +3838,8 @@
         "unique": true,
         "keyword": "Breakthrough, Charge, Last Gasp",
         "text": "Breakthrough, Charge. Last Gasp: Summon a 4/4 Durzog.",
+        "lore": "'Tazkad the Packmaster is a goblin found in Fungal Grotto I, of which he is a minor boss. His unique loot is the Huntmaster's Leash.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Tazkad_the_Packmaster",
         "arenaTier": "Excellent",
         "tokens": "durzog"
       },
@@ -3758,6 +3882,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Heal a creature, then give it +1/+1.",
+        "lore": "'The foremost specialists in Restoration were known as the Council of Healers in the Imperial City. As part of learning to heal better, they underwent studies of the various races of Tamriel, studying anatomy and their common ancestors. ' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5xmsms/daily_card_discussion_thread_185_healing_hands/dejzjav",
         "arenaTier": "Average"
       },
       "suppress": {
@@ -3782,6 +3908,8 @@
         "rarity": "Common",
         "keyword": "Lethal",
         "text": "Lethal",
+        "lore": "'Draugr are a type of Nordic undead found in Skyrim and Solstheim's many tombs and crypts. They don't have the souls of their former selves, but their bodies retain their old skills and they are equipped with the weapons and armor they were good with.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5eax4x/daily_card_discussion_thread_82_deadly_draugr/dabd901",
         "arenaTier": "Average"
       },
       "deathlessdraugr": {
@@ -3807,6 +3935,8 @@
         "rarity": "Epic",
         "keyword": "Ward",
         "text": "Ward. After Iliac Sorcerer's Ward is broken, double his power.",
+        "lore": "'The Iliac Bay region is the area around west High Rock and north Hammerfell. It's the setting of the game Daggerfall, and still one of the largest game areas ever made.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ulq8z/daily_card_discussion_thread_169_iliac_sorcerer/ddwktgm",
         "arenaTier": "Good"
       },
       "rottingdraugr": {
@@ -3921,6 +4051,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Siege Catapult can't attack unless your side of its lane is full.",
+        "lore": "'Siege weapons are a staple of warfare on Tamriel, having been in use since at least the First Era. When Cyrodiil was being fought over in the Second Era's Alliance War, weapons like catapults were instrumental in capturing and holding keeps.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5dswul/daily_card_discussion_thread_79_siege_catapult/da78cpt",
         "arenaTier": "Poor"
       },
       "stormholdhenchman": {
@@ -3945,6 +4077,8 @@
         "rarity": "Common",
         "keyword": "Ward",
         "text": "Ward",
+        "lore": "'Wind Keep is a small town in eastern Stormhaven, northeast of Wayrest. Nowadays, House Manteau holds the County of Windkeep. The unmarried Ilise is the current Countess, ruling its demesne from its Manor. The now abandoned Aphren's Hold used to be called Windkeep until the fortress was conquered by King Aphren and left in ruins.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Wind_Keep",
         "arenaTier": "Insane"
       },
       "wrothgarkingpin": {
@@ -3984,6 +4118,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, heal another random friendly creature.",
+        "lore": "'Blackrose is a city in Black Marsh. It wasn't founded by Argonians, but by an extinct race of fox people known as the Lilmothiit. Herbalism has a long history in Tamriel, especially as a component of alchemy.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kprqx/daily_card_discussion_thread_118_blackrose/dbq9isa",
         "arenaTier": "Average"
       },
       "brumaarmorer": {
@@ -4035,6 +4171,8 @@
         "rarity": "Epic",
         "keyword": "Regenerate",
         "text": "Regenerate, +1/+3",
+        "lore": "'Hackwings are huge predatory birds native to Black Marsh, the Argonians' home province. They have massive, saw-like bills, almost the full length of the rest of their body. They're opportunistic predators; they'll swoop down to inflict a gaping wound, then wait for the prey to die of blood loss.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5fb6mq/daily_card_discussion_thread_88_hackwing_feather/daj0seb",
         "arenaTier": "Average"
       },
       "hauntingspirit": {
@@ -4085,6 +4223,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy",
         "text": "Prophecy. Transform a creature into a 2/2 Shriveled Mummy.",
+        "lore": "'Mummification is a specialty of the priests of Tu'whacca, Redguard god of death. Honoring the dead is very important to Redguards, and preserving the bodies of the dead this way is a special veneration.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5r8lsp/daily_card_discussion_thread_152_mummify_january/dd5swou",
         "arenaTier": "Good",
         "tokens": "shriveledmummy"
       },
@@ -4110,10 +4250,9 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Heal all friendly creatures in a lane, then give them all +1/+1.",
-        "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "lore": "'Kynareth is the Divine associated with the wind, sky, and the elements. Some believe she was the first Divine to help create the world, when Lorkhan proposed the idea. Different cultures worship her in different aspects: the Nords see her as Kyne, the wife of Shor (aka Lorkhan), and the chief sky god.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5pa15p/daily_card_discussion_thread_142_plea_to_kynareth/dcqk5l2",
+        "arenaTier": "Average"
       },
       "stalwartally": {
         "name": "Stalwart Ally",
@@ -4176,6 +4315,8 @@
         "rarity": "Epic",
         "keyword": "Regenerate, Summon",
         "text": "Regenerate. Summon: +2/+2 if your opponent has more cards in hands.",
+        "lore": "'Grahl are a type of ice troll, found in the island of Solstheim. They live in ice caverns below the earth, and regenerate quickly from wounds. Fire damage will prevent them from healing, so bringing a source of fire is highly recommended.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5c7k09/daily_card_discussion_thread_70_angry_grahl/d9uce02",
         "arenaTier": "Poor"
       },
       "archeinelite": {
@@ -4227,6 +4368,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "At the end of your turn, summon a 1/1 Argonian Recruit. If you have 7 or more max magicka, summon a 3/3 Argonian Veteran instead.",
+        "lore": "'Black Marsh! Likely the least-known province in Tamriel, it's a land of thick, dense swamp. The tropical climate is perfect for deadly plants and predators of all kinds, and any attempts by man or mer to establish a foothold in the region have failed.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5d2ker/daily_card_discussion_thread_75_black_marsh/da1qq6p",
         "arenaTier": "Average",
         "tokens": "argonianrecruit, argonianveteran"
       },
@@ -4252,6 +4395,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon, Silence",
         "text": "Prophecy. Summon: Silence another creature.",
+        "lore": "'Ghosts are a staple enemy in the Elder Scrolls games. Being incorporeal, they resist or are outright immune to normal weapons, so make sure to pack something silver or enchanted or you'll spend a lot of time whiffing and getting cursed.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5axcg6/daily_card_discussion_thread_63_cursed_spectre/d9k4nin",
         "arenaTier": "Average"
       },
       "gloomwraith": {
@@ -4279,6 +4424,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When a creature in this lane is destroyed, Grim Champion gains +1/+1.",
+        "lore": "'Grim champion is an undead human and probably a former legionare, judging from the armor, sword and the legion shield in the background. Since there isnt much lore on him, ill cover the biggest undead army to ever invade Tamriel.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5wmpvi/daily_card_discussion_thread_180_grim_champion/debmewl/",
         "arenaTier": "Poor"
       },
       "imprisoneddeathlord": {
@@ -4303,6 +4450,8 @@
         "rarity": "Epic",
         "keyword": "Ward",
         "text": "When you summon another creature in this lane, give it a Ward.",
+        "lore": "'Lion guard are elite, knightly order of Daggerfall covenant. They serve High King Emeric and their troops are operating all over High Rock. Lion guard members value bravery and loyalty over nobility and wealth, and anyone they find worthy may join they ranks.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5wf8ku/daily_card_discussion_thread_179_lion_guard/de9tavp/",
         "arenaTier": "Good"
       },
       "lucienlachance": {
@@ -4316,6 +4465,8 @@
         "unique": true,
         "keyword": "Lethal",
         "text": "Lethal, When another friendly creature Slays, give it +2/+2.",
+        "lore": "'Lucien Lachance, an Imperial assassin, was killed in 3E 433. In his youth, Lachance traveled to Skyrim and visited the city of Riften. He was once in possession of the Blade of Woe. He became the Speaker for the Cheydinhal Dark Brotherhood sanctuary when the previous Speaker was killed while fulfilling a contract.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Lucien_Lachance",
         "arenaTier": "Good"
       },
       "midnightsweep": {
@@ -4341,6 +4492,8 @@
         "rarity": "Rare",
         "keyword": "Summon, Guard",
         "text": "Summon: Summon a 0/4 Northpoint Herald with Guard.",
+        "lore": "'Northpoint is a port city of High Rock, on the northern coast. It's a trading post for the region of Rivenspire, up the road a few miles from Shornhelm. It was first settled by one Captain Yric Flowdys, a Breton who saw the deep waters around the point, and knew it could accommodate huge merchant ships.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5nbnzi/daily_card_discussion_thread_132_northpoint/dcakl8i",
         "arenaTier": "Average",
         "tokens": "northpointherald"
       },
@@ -4366,6 +4519,8 @@
         "rarity": "Epic",
         "keyword": "Guard",
         "text": "While you have 7 or more magicka, Preserver of the Root has +2/+2 and Guard.",
+        "lore": "'Argonians believe that their souls were given to them by the Hist – according to the Lizard Folk, there was nothing before the Hist. Because of this the souls of the Saxhleel contain unique qualities that sets them apart from the souls of men and mer. Most Argonians are able to feel the presence of the Hist in their minds at all times.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Argonian",
         "arenaTier": "Excellent"
       },
       "restlesstemplar": {
@@ -4378,7 +4533,9 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Gain 5 health.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "lore": "'Templar are a class in ESO, focusing on healing and protection, as well as smiting enemies. In a ghoulish twist, this templar has been reanimated, turned into one of the things Stendarr opposes the most. Some necromancer out there has a sense of irony!' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kc7ba/daily_card_discussion_thread_116_restless_templar/dbnnbl4"
       },
       "stonetoothscrapper": {
         "name": "Stonetooth Scrapper",
@@ -4392,20 +4549,6 @@
         "text": "",
         "arenaTier": "Good"
       },
-      "blackwormnecromancer": {
-        "name": "Black Worm Necromancer",
-        "cost": "06",
-        "type": "Creature",
-        "race": "Imperial",
-        "attack": "4",
-        "health": "4",
-        "rarity": "Rare",
-        "keyword": "Summon",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
-      },
       "discipleofnamira": {
         "name": "Disciple of Namira",
         "cost": "05",
@@ -4416,6 +4559,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When another friendly creature in this lane is destroyed, draw a card.",
+        "lore": "'Namira is the Daedric Prince of Darkness. She's associated with anything people find repulsive or gross, like spiders, insects, vermin, and slugs. She's also known as the Lady of Decay or the Great Darkness, both of which look pretty metal on a business card.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5qg3h4/daily_card_discussion_thread_148_disciple_of/dczr7zy",
         "arenaTier": "Average"
       },
       "lurkingmummy": {
@@ -4428,6 +4573,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard",
         "text": "Prophecy, Guard",
+        "lore": "'A mummy is a type of undead that has been embalmed with linen wrappings. In Daggerfall, mummies could be found in most dungeons, but in ESO, they're concentrated in Hammerfell, Elsweyr, and Black Marsh.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5grvpx/daily_card_discussion_thread_96_lurking_mummy/dav1702",
         "arenaTier": "Good"
       },
       "shadowfenpriest": {
@@ -4452,7 +4599,7 @@
         "rarity": "Epic",
         "keyword": "Breakthrough",
         "text": "Breakthrough. Stampeding Mammoth has +2/+0 for each other friendly creature with breakthrough.",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "watchcommander": {
         "name": "Watch Commander",
@@ -4464,6 +4611,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Give all friendly Guards +1/+2.",
+        "lore": "'Here's to the guards of Tamriel, those thankless wet blankets who try to keep players in line! Without them, heroes might act like total sociopaths. Many guards around Tamriel are Imperials, since many guards are members of the Legion.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5mcx2b/daily_card_discussion_thread_127_watch_commander/dc34lm5",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Guard"
@@ -4479,10 +4628,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: If you have more health than your opponent, summon a random creature card from your discard pile.",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Excellent"
       },
       "doomcragvampire": {
         "name": "Doomcrag Vampire",
@@ -4494,6 +4640,8 @@
         "rarity": "Legendary",
         "keyword": "Lethal",
         "text": "Friendly creatures in this lane have Lethal.",
+        "lore": "'Erokii is an ancient ruin in Rivenspire, said to have once been the greatest Ayleid city in northwest Tamriel.[1] The great spire above Erokii, now known as the Doomcrag, has been likened to the Adamantine Tower in construction, and it has been speculated that it may, at one point, have been built as one of the Towers.' - uesp.net",
+        "loreLink": "http://uesp.net/wiki/Lore:Erokii",
         "arenaTier": "Average"
       },
       "fleshatronach": {
@@ -4506,7 +4654,9 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: +1/+1 for each creature in your discard pile.",
-        "arenaTier": "Good"
+        "lore": "'This flesh enchanted golem is a powerful foe which damages opponents if they get too close. A Flesh Atronach supposedly serves as an animated flesh shell for the spirits/souls of other Daedra, and appears as a sewn-together conglomeration of skin and muscle adorned with mystical symbols, wearing an iron collar.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Flesh_Atronach#Flesh_Atronach",
+        "arenaTier": "Average"
       },
       "mountaintyrant": {
         "name": "Mountain Tyrant",
@@ -4518,7 +4668,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "nightpatrol": {
         "name": "Night Patrol",
@@ -4554,6 +4704,8 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Drain",
         "text": "Breakthrough, Drain",
+        "lore": "'If you get infected with vampirism and want to get rid of it, you may have to turn to a witch's coven. These nice ladies will give you a potion that cures vampirism and lycanthropy with just a drop...but makes you a target for werewolves and vampires until you get rid of the rest of it!' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5t83v3/daily_card_discussion_thread_162_night_shadow/ddlfd7u",
         "arenaTier": "Excellent"
       },
       "bonecolossus": {
@@ -4566,6 +4718,8 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Summon 1/1 Skeletons to fill this lane. Other friendly Undead have +1/+1.",
+        "lore": "'Bone Colossi are massive golems made from bones. They're animated by necromancy, not with the spirit of a Daedra, so they're just Skeletons. They were common creations during the Second Era, when Mannimarco was running around openly, so he probably spread how to create them to necromancers around Tamriel.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5qnjig/daily_card_discussion_thread_149_bone_colossus/dd194e5",
         "arenaTier": "Excellent",
         "tokens": "skeleton"
       },
@@ -4592,6 +4746,8 @@
         "unique": true,
         "keyword": "Guard",
         "text": "Guard. Your opponent can't target Nahagliiv with actions.",
+        "lore": "'Nahagliiv was resurrected by Alduin from a dragon mound outside of the farming village of Rorikstead, and he swoops down and attacks when the Dovahkiin arrives after meeting with the Blades for the first time. His name means 'Fury Burn Wither'' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jctum/daily_card_discussion_thread_110_nahagliiv/dbfdw94",
         "arenaTier": "Insane"
       },
       "swampleviathan": {
@@ -4616,6 +4772,8 @@
         "rarity": "Legendary",
         "keyword": "Summon, Slay",
         "text": "Summon and Slay: Put a Blood Magic Spell into your hand.",
+        "lore": "'As a Vampire Lord, you will be able to use blood magic and other dark powers, and can either levitate and use spells or remain on the ground and fight with deadly claws. In Skyrim, only the more pure-blooded vampires such as those of Lord Harkon's court have this ability and the family's vampirism was a gift directly from Molag Bal himself.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Skyrim:Vampire_Lord",
         "arenaTier": "Excellent",
         "tokens": "corpsecurse, drainlife, gargoyle, raisedead"
       },
@@ -4629,6 +4787,8 @@
         "rarity": "Legendary",
         "keyword": "Drain, Slay",
         "text": "Drain, Slay: Summon the slain creature.",
+        "lore": "'This card depicts a Vampire Lord of the Volkihar clan. This form is a special gift of the Volkihar, letting the vampire turn into a batlike shape and gain access to powerful blood magic spells and supernatural melee abilities.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5gemkv/daily_card_discussion_thread_94_night_talon_lord/dasxkj0",
         "arenaTier": "Good"
       },
       "volkiharlord": {
@@ -4653,6 +4813,8 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Guard, Regenerate",
         "text": "Breakthrough, Guard, Regenerate. Your opponent can't target Iron Atronach with actions.",
+        "lore": "'Iron Atronachs are massive metal golems, animated by the spirit of a Daedra. They are extremely rare, only being found in the first two games. And in the first game they looked like a Cylon! But then, considering how Khajiit looked in Arena, I guess the lore team was still finding their feet.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5mqiqg/daily_card_discussion_thread_129_iron_atronach/dc62ewy",
         "arenaTier": "Poor"
       }
     },
@@ -4667,12 +4829,11 @@
         "rarity": "Epic",
         "keyword": "Summon, Breakthrough",
         "text": "Summon: If you have less health than your opponent, +0/+2 and Guard. Otherwise, +2/+0 and Breakthrough.",
+        "lore": "'The Rift is the southeastern hold of Skyrim, bordering Morrowind and Cyrodiil. A Thane is an honorary position, given to someone considered a friend of a hold. A Jarl might appoint a Thane for a heroic deed, or for performing a valuable service to the community.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5vciy4/daily_card_discussion_thread_173_rift_thane/de0z3ev",
         "attr1": "strength",
         "attr2": "willpower",
-        "arenaTier": "Excellent",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Excellent"
       },
       "edictofazura": {
         "name": "Edict of Azura",
@@ -4734,9 +4895,11 @@
         "unique": true,
         "keyword": "Drain, Summon, Guard",
         "text": "Drain. Summon: Give all other friendly creatures in this lane Guard.",
+        "lore": "'Barenziah is one of the most famous and influential Dunmer to ever live. She lived through the entire Third Era, and shaped much of it herself. She was a thief, a mistress, a mother, and a queen of multiple provinces. And though being Queen was never the life she wanted, she proved to be very, very good at it.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5dysyu/daily_card_discussion_thread_80_queen_barenziah/da8ojmp",
         "attr1": "intelligence",
         "attr2": "agility",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "sadrasagent": {
         "name": "Sadras Agent",
@@ -4748,6 +4911,8 @@
         "rarity": "Epic",
         "keyword": "Guard, Last Gasp",
         "text": "Guard. Last Gasp: Summon a 2/1 Mournhold Guardian with Guard.",
+        "lore": "'House Sadras is one of the five Great Houses of Morrowind. At the beginning of the Fourth Era, House Hlaalu was stripped of its Great House status and removed from the Grand Council of Morrowind. House Sadras, whose prior status and holdings are unknown, was selected to fill the fifth seat on the Council.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Sadras",
         "attr1": "intelligence",
         "attr2": "agility",
         "arenaTier": "Good",
@@ -4793,6 +4958,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Ahnassi steals all keywords from enemy creatures.",
+        "lore": "'Ahnassi is a Khajiit monk and Toad of the Thieves Guild living in Pelagiad. If you are male, a quest can be completed concerning a relationship with her. ike all Khajiit, she can see well in the dark and can demoralize others for short periods; otherwise she knows no spells.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Morrowind:Ahnassi",
         "attr1": "willpower",
         "attr2": "agility",
         "arenaTier": "Excellent"
@@ -4808,6 +4975,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Draw a random action from your discard pile. Your actions cost 1 less.",
+        "lore": "'yrenn was the Queen of the First Aldmeri Dominion, during the Interregnum (period without an Empire) in the Second Era. At 25, she was very young when she took the throne, especially for an Elf, but assumed her role with strength and unusual open-mindedness.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5l2kcc/daily_card_discussion_thread_120_ayrenn_december/dbt4v01",
         "attr1": "intelligence",
         "attr2": "willpower",
         "arenaTier": "Excellent",
@@ -4825,6 +4994,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Draw a random Orc from your discard pile. Other friendly Orcs have +1/+1.",
+        "lore": "'Orcs! Orcs are natural warriors, and as Militant Chieftain shows, they stick together since no one else likes them much.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5dmkms/daily_card_discussion_thread_78_militant/da5si00",
         "attr1": "strength",
         "attr2": "endurance",
         "arenaTier": "Average",
@@ -4842,6 +5013,8 @@
         "rarity": "Epic",
         "keyword": "Breakthrough, Ward",
         "text": "Breakthrough, Ward. After Shornhelm Champion's Ward is broken, he gains +3/+3.",
+        "lore": "'Shornhelm is the capital of Rivenspire, a major region in the famously fractured land of the Bretons, High Rock. It's most well-known for having two nasty places nearby: a massive haunted mausoleum called the Crypt of Hearts, and the corrupted Ayleid Tower (and Nickelodeon GUTS challenge), the Doomcrag.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cw6pw/daily_card_discussion_thread_74_shornhelm/da02cwd",
         "attr1": "intelligence",
         "attr2": "endurance",
         "arenaTier": "Excellent"
@@ -4886,6 +5059,8 @@
         "unique": true,
         "keyword": "Lethal, Summon",
         "text": "Lethal. Summon: Deal 1 damage.",
+        "lore": "'Allena Benoch, also known as the Blademistress of Valenwood, was a famous Bosmer warrior of the Third Era. She led the Valenwood Fighters Guild for a time, then worked as a royal guard; first for a Redguard queen, then the Emperor himself. She was a master of both bow and blade and studied combat techniques of many cultures around the world..' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5pv93l/daily_card_discussion_thread_145_allena_benoch/dcum0ec",
         "attr1": "strength",
         "attr2": "agility",
         "arenaTier": "Excellent"
@@ -4901,9 +5076,11 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Summon a 2/2 Colovian Trooper with Guard in each lane. When a friendly creature is destroyed, General Tullius gains +1/+1.",
+        "lore": "'Tullius is the Military Governor of Skyrim, appointed by the Emperor himself. For all intents and purposes, he IS the Empire, in a land whose allegiance is holding by a thread. The General is an extreme big-picture thinker, so it's fortunate that he has a highly competent second in command, Legate Rikke, to handle the details.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5fp3fn/daily_card_discussion_thread_90_general_tullius/dam5iew",
         "attr1": "willpower",
         "attr2": "endurance",
-        "arenaTier": "Excellent",
+        "arenaTier": "Good",
         "tokens": "coloviantrooper"
       },
       "gortwoggronagorm": {
@@ -4917,6 +5094,8 @@
         "unique": true,
         "keyword": "",
         "text": "At the start of your turn, summon a random creature from your deck to a random lane.",
+        "lore": "'In the late Third Era Gortwog took the stage. He was a visionary leader, a powerful fighter and a skilled diplomat. He staked a claim on the lands that the Orcs had held, and took the case before an Imperial judge. It all came down to a duel against a Breton noble, and Gortwog won easily.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5b9kmk/daily_card_discussion_thread_65_gortwog_gronagorm/d9mtisj",
         "attr1": "strength",
         "attr2": "endurance",
         "arenaTier": "Good"
@@ -4932,6 +5111,8 @@
         "unique": true,
         "keyword": "Ward, Summon",
         "text": "Ward. Summon: Deal 2 damage for each Ward your creatures have.",
+        "lore": "'Emeric was the leader of the Daggerfall Covenant, the alliance of High Rock and Hammerfell that formed in the Second Era Interregnum. Getting up in years, Emeric never asked to be king of Wayrest, much less one of the warring alliances for the Ruby Throne.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5nyft9/daily_card_discussion_thread_135_high_king_emeric/dcfxicn",
         "attr1": "intelligence",
         "attr2": "endurance",
         "arenaTier": "Insane",
@@ -4949,6 +5130,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to an enemy creature or give a friendly creature +2/+2.",
+        "lore": "'Skywatch is one of the main cities on Auridon, the second largest island of the Summerset Isles. The city is built around an ancient ruin.For millennia the Sload, notorious for their necromantic mastery, terrorized the Altmer, conjuring sea monsters along the coasts and laying siege to Skywatch.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Skywatch",
         "attr1": "intelligence",
         "attr2": "willpower",
         "arenaTier": "Good"
@@ -4964,12 +5147,11 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Equip all friendly creatures in this lane with a random item.",
+        "lore": "'Merric-at-Aswala was a high-ranking member of the Fighters Guild during the Alliance War of the Second Era (ESO time). The 'at-Aswala' refers to where he's from: the famous Aswala Stables, known across Tamriel for the peerless Yokudan Charger breed.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ifwyl/daily_card_discussion_thread_105_merricataswala/db8bdl5",
         "attr1": "strength",
         "attr2": "intelligence",
-        "arenaTier": "Good",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        }
+        "arenaTier": "Good"
       },
       "falinestireaver": {
         "name": "Falinesti Reaver",
@@ -4981,6 +5163,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Destroy all wounded enemy creatures in this lane.",
+        "lore": "'Falinesti is the ancestral capital of Valenwood, built in one of its massive migratory trees. It can be found in one of four spots across the province, in the south in the winter and further north (as you'll see on most maps) in the summer.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5blifv/daily_card_discussion_thread_67_falinesti_reaver/d9phayu",
         "attr1": "strength",
         "attr2": "agility",
         "arenaTier": "Average"
@@ -4996,6 +5180,8 @@
         "unique": true,
         "keyword": "Summon, Silence, Shackle",
         "text": "Summon: Silence and Shackle all enemy creatures in this lane.",
+        "lore": "'Red' Bramman was an infamous Argonian pirate during the First Era. Bramman is notable not only for his legend and cruelty, but also because the efforts to defeat him made a rare contact between Black Marsh and the outside world.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5k8a8j/daily_card_discussion_thread_115_red_bramman/dbmfpkc",
         "attr1": "agility",
         "attr2": "endurance",
         "arenaTier": "Excellent"
@@ -5036,6 +5222,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
+        "lore": "'Mudcrabs are a species of crab unique to Tamriel. They have hard, mottled shells that can blend in with rocks or mud, helping to protect them from predators. They have sharp claws, but aren't very dangerous to people; killing mudcrabs is a perfect way to practice with a weapon or magic type that you don't use much.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5t08n5/daily_card_discussion_thread_161_enraged_mudcrab/ddjvkdo",
         "arenaTier": "Poor"
       },
       "lurkingcrocodile": {
@@ -5060,6 +5248,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to a friendly creature.",
+        "lore": "'Crocodiles can be found in waterways across Tamriel, especially in Black Marsh, Cyrodiil, and Elsweyr. They've got powerful jaws, and will give you a nasty bite! If you're facing one of these gorgeous creatures, remember that their jaw muscles are focused on clamping down, not opening.' - Quillypen",
+        "loreLink": "",
         "arenaTier": "Good"
       },
       "reachmanshaman": {
@@ -5109,6 +5299,8 @@
         "unique": true,
         "keyword": "Guard, Last Gasp, Prophecy",
         "text": "Prophecy, Guard. Last Gasp: Adoring Fan will return. Adoring Fan can't be Silenced.",
+        "lore": "'The Adoring Fan is a Bosmer commoner who becomes your 'groupie' once you have achieved the rank of Grand Champion in the Arena. He will only appear once you have left the Bloodworks after accepting the Raiment of Valor.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Oblivion:Adoring_Fan",
         "arenaTier": "Terrible"
       },
       "bardedguar": {
@@ -5121,6 +5313,8 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Summon: Give a creature Guard.",
+        "lore": "'Guar are large reptiles native to Morrowind. They're domesticated by the Dunmer, and are used as pack animals for carrying burdens, farming and sometimes mounts. This guar has had armor made for it, which is unusual--guar are not aggressive and aren't typically used in warfare.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5hpsbp/daily_card_discussion_thread_101_barded_guar/db2ofox",
         "arenaTier": "Average"
       },
       "crushingblow": {
@@ -5169,6 +5363,8 @@
         "rarity": "Rare",
         "keyword": "Summon, Unsummon",
         "text": "Summon: Unsummon another friendly creature to give Forsworn Guide +2/+2.",
+        "lore": "'The Forsworn are a rebellious group of Reachmen, who seek independence and their own nation in the western part of Skyrim. Reachmen are basically Bretons, but neither group likes each other, so yay, we get yet another race of white people and you can play them in any deck you want.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5bthpz/daily_card_discussion_thread_68_forsworn_guide/d9r7wr6",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Summon"
@@ -5262,6 +5458,8 @@
         "unique": true,
         "keyword": "",
         "text": "When you summon a creature, give it a random keyword.",
+        "lore": "'Mundus Stones are standing stones dedicated to the Constellations. Activating one will grant you a permanent blessing, although only one blessing can be active at a time. The Twice-Born Star set allows a character to have two blessings at the same time.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Online:Mundus_Stones",
         "arenaTier": "Insane"
       },
       "slaughterfish": {
@@ -5359,6 +5557,8 @@
         "rarity": "Epic",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put two random Dwemer into your hand.",
+        "lore": "'Stronghold Incubator appears to be a Dwarven sphere. These spheres lurk in the abandoned strongholds, and serve the function of guardians. Dwarven spiders are not exactly fighting type, and you can see them repairing and building another animaculi when exploring Dwemer strongholds.' - Rubliko",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5yr6bo/daily_card_discussion_thread_191_stronghold/desh2p3",
         "arenaTier": "Average"
       },
       "strongholdprototype": {
@@ -5384,6 +5584,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses: 3. Activate: Transform a creature into a random creature.",
+        "lore": "'Wabbajack is a Daedric artifact given to you by Sheogorath in The Mind of Madness quest. The staff applies a variety of random effects on the target it is used against. It can randomly cause fire, frost, or shock damage, absorb health, make the target invisible, heal the target, and in some cases instantly kill the target.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Skyrim:Wabbajack",
         "arenaTier": "Good"
       },
       "dwarvenarmaments": {
@@ -5420,6 +5622,8 @@
         "rarity": "Epic",
         "keyword": "Summon, Guard",
         "text": "Summon: Put a 0/3 Dwarven Spider with Guard into your hand. Friendly Dwemer have +3/+0.",
+        "lore": "'The history of the Dwemer is mostly a record of their conflicts with other races and each other. There are also few large halls in most ruins. This could be due to the fact that most if not all Dwemer ruins are underground, where large interior spaces are difficult to fashion at best.' - uesp.net",
+        "loreLink": "http://en.uesp.net/wiki/Lore:Dwemer",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Dwemer"
@@ -5437,6 +5641,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses: 3. Activate: Put a copy of a random card from your opponent's deck into your hand.",
+        "lore": "'The Orb of Vaermina is interesting because it's an Daedric artifact that was stolen, not granted by its Prince. The Altmer mage Arkved took it from Quagmire, perhaps believing it to be a powerful tool for divination. Instead, it caused his home to merge with Vaermina's realm and become a zone of his nightmares.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5gktan/daily_card_discussion_thread_95_orb_of_vaermina/datb30y",
         "arenaTier": "Poor"
       },
       "darkharvester": {
@@ -5475,6 +5681,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Activate: Deal 2 damage to a creature, then increase the damage Goldbrand deals by 2.",
+        "lore": "'Goldbrand is a magical gold katana, and a signature artifact of Boethiah, the Daedric Prince of conspiracies and plots. Legend says it was originally forged by the dragons of Skyrim, and given to a knight to act in the dragons' defense. Like the dragons, it's fire enchanted, and burns anything it touches.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ouuzs/daily_card_discussion_thread_140_goldbrand/dcmkxfk",
         "arenaTier": "Average"
       },
       "odahviing": {
@@ -5488,7 +5696,9 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Deal 4 damage to each enemy creature.",
-        "arenaTier": "Average"
+        "lore": "'Odahviing is a red dragon whose name means 'Winged Snow Hunter'. Hi was later resurrected and played a key role in the fall of Alduin--he was humiliatingly captured by the Dovahkiin in Whiterun, and agreed to bear the hero to the bridge to Sovngarde in exchange for his freedom.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/584j6m/daily_card_discussion_thread_47_odahviing_october/d8xi9vl",
+        "arenaTier": "Good"
       }
     }
   },
@@ -5521,6 +5731,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "This card belongs to the Madhouse Collection and cannot be Soul Summoned.",
+        "lore": "'The Garden of Swords wasn't a place when the Champion of Cyrodiil visited, but it's easy to imagine Sheogorath willing it into existence, and forcing some poor soul to tend to it with his bare hands.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5itsd2/daily_card_discussion_thread_107_gardener_of/dbbh754",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Item"
@@ -5552,6 +5764,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Ongoing. When you play a 0-cost card, deal 1 damage to your opponent and gain 1 health.",
+        "lore": "'Swindlers mean criminals, and criminals mean our old favorite, the Thieves Guild! The Guild interacts with mainstream merchants through fences, the people that buy stolen goods.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5kinco/daily_card_discussion_thread_117_swindlers_market/dbooubi",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "cost": "=_0"
@@ -5569,6 +5783,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "+0/+2. Summon: The wielder's power becomes equal to its health.",
+        "lore": "'It seems to be  created in the Shivering Isles, Sheogorath's domain of madness. Especially when it comes to artifacts, the Mad God has an unusual sense of humor--one of his favorite methods of inciting insanity is to give strange objects to mortals and see what they do with them.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5lewde/daily_card_discussion_thread_122_ring_of/dbvmugp",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "health": ">_4"
@@ -5601,6 +5817,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Look at the top three cards of your deck. Put one into your hand and discard the others.",
+        "lore": "'Camels are beasts native to Hammerfell. The Redguard have domesticated them (somewhat) due to their adaptations to a harsh desert climate. The Mercantile (and later Speech) skill governs how much you can buy and sell goods for at merchants.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5immai/daily_card_discussion_thread_106_merchants_camel/db9royb",
         "arenaTier": "Average"
       },
       "forsakenchampion": {
@@ -5613,6 +5831,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Choose a friendly creature. Friendly creatures of the chosen type have +1/+1.",
+        "lore": "'Reachmen are the misfit human inhabitants of the Reach, the western region of Skyrim. They're rebellious and have an axe to grind against the other races of Skyrim.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jvxz1/daily_card_discussion_thread_113_forsaken/dbjvkjo",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "strategy": "Race"
@@ -5628,6 +5848,8 @@
         "rarity": "Legendary",
         "keyword": "Activate",
         "text": "Uses: 12. Activate: Sacrifice a creature to summon a creature from your deck that costs 1, then increase the cost of creatures this summons by 1.",
+        "lore": "'The flag that the Saints and Seducers fight over is the ruined fortress Cylarne, which may have been a past capital of the Isles. It's built around the Cold Flame of Agnon, lit by the twin Altars of Rapture and Despair.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5j66as/daily_card_discussion_thread_109_altar_of_despair/dbdqc9y",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
           "keyword": "Last Gasp"
@@ -5643,6 +5865,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Illusory Mimic gains all Keywords on the top three cards of your deck.",
+        "lore": "'Illusory would suggest illusion, but being a Spirit and having spells like Conjure Familiar and Conjure Dragon Priest as Conjuration suggest it belongs there--spells in the Illusion line can't cause actual harm.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5izvlg/daily_card_discussion_thread_108_illusory_mimic/dbcrbt2",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "strategy": "keyword"
@@ -5848,7 +6072,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the start of your turn, if you have 7 or more max magicka, deal 5 damage to your opponent.",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "corsairship": {
         "name": "Corsair Ship",
@@ -5861,9 +6085,6 @@
         "keyword": "Summon",
         "text": "Summon: Summon a 1/1 Coursair. When you summon a creature, equipe it with a Steel Dagger.",
         "arenaTier": "Average",
-        "arenaTierPlus": {
-          "strategy": "Aggro"
-        },
         "tokens": "corsair, steeldagger"
       },
       "daggersinthedark": {
@@ -5989,7 +6210,9 @@
         "unique": true,
         "keyword": "Charge, Last Gasp",
         "text": "Charge. Last Gasp: Shuffle Shadowmere into your deck, give it +3/+3 and increase its cost by 3.",
-        "arenaTier": "Good"
+        "lore": "'Shadowmere is the Dark Brotherhood's steed. Her reins are given to rising stars, in recognition of exemplary service. In game, she has the maximum speed possible for a horse and is listed as essential, meaning she can't permanently die.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/63zdh2/daily_card_discussion_thread_215_shadowmere_april/dfykmur",
+        "arenaTier": "Average"
       },
       "thenightmother": {
         "name": "The Night Mother",
@@ -6205,7 +6428,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Trade a card in your hand for a random card in your opponent's hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "brynjolf": {
         "name": "Brynjolf",
@@ -6218,7 +6441,10 @@
         "unique": true,
         "keyword": "Drain",
         "text": "Drain. When a friendly creature Pilfers or Drains, gain +1 magicka this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Drain"
+        }
       },
       "caravanenforcer": {
         "name": "Caravan Enforcer",
@@ -6230,7 +6456,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When Caravan Enforcer moves, he gains +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "text": "Move a"
+        }
       },
       "chaurus": {
         "name": "Chaurus",
@@ -6242,7 +6471,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "deepwoodtrapper": {
         "name": "Deepwood Trapper",
@@ -6254,7 +6483,7 @@
         "rarity": "Epic",
         "keyword": "Guard",
         "text": "Guard. Shackle creatures damaged by Deepwood Trapper.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "dovahofthevoice": {
         "name": "Dovah of the Voice",
@@ -6266,7 +6495,7 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put a random Shout into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "drainvitality": {
         "name": "Drain Vitality ",
@@ -6279,19 +6508,10 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Give an enemy creature -1/-1.",
-        "arenaTier": "Unknown"
-      },
-      "dovahofthevoice": {
-        "name": "Dovah of the Voice",
-        "cost": "7",
-        "type": "Creature",
-        "race": "Dragon",
-        "attack": "6",
-        "health": "4",
-        "rarity": "Common",
-        "keyword": "Last Gasp",
-        "text": "Last Gasp: Put a random Shout into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "text": "Shout"
+        }
       },
       "eldergleammatron": {
         "name": "Eldergleam Matron",
@@ -6303,7 +6523,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Put a random Animal into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "embassydisguise": {
         "name": "Embassy Disguise",
@@ -6315,7 +6535,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "+0/+1. Summon: Draw a card. The weilder has Cover until it attacks.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "gloomlurker": {
         "name": "Gloomlurker",
@@ -6327,7 +6547,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Give a creature Cover.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "lockpick": {
         "name": "Lockpick",
@@ -6339,7 +6559,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Either put another Lockpick into your hand or draw a card and reduce its costs by 2. Choosen randomly.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "moveinshadows": {
         "name": "Move in Shadows",
@@ -6351,7 +6571,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Move a friendly creature. It moves again at the end of the turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "nightprowler": {
         "name": "Nightprowler",
@@ -6363,7 +6583,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Nightprowler gains Cover, draw a card.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "palaceprowler": {
         "name": "Palace Prowler",
@@ -6375,7 +6595,7 @@
         "rarity": "Common",
         "keyword": "Drain",
         "text": "Drain. Pilfer: Gain 1 magicka this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "paralyze": {
         "name": "Paralyze",
@@ -6387,7 +6607,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Shackle an enemy creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "ringofnamira": {
         "name": "Ring of Namira",
@@ -6400,7 +6620,9 @@
         "unique": true,
         "keyword": "",
         "text": "Ongoing. When you gain health, deal that much damage to your opponent.",
-        "arenaTier": "Unknown"
+        "lore": "'Namira is the Daedric Prince of Darkness. Her Daedric artifact is the Ring of Namira. In the Third Era, the ring would reflect damage back at an attacker, representing the presence of death it embraces. In Skyrim, it got a ghoulsh upgrade, letting you actually eat corpses to heal.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5qg3h4/daily_card_discussion_thread_148_disciple_of/dczr7zy",
+        "arenaTier": "Terrible"
       },
       "serpentinestalker": {
         "name": "Serpentine Stalker",
@@ -6412,7 +6634,7 @@
         "rarity": "Legendary",
         "keyword": "Slay",
         "text": "Slay: +2/+0. May move to attack creatures in the other lane.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "shadowgreenelder": {
         "name": "Shadowgreen Elder",
@@ -6424,7 +6646,10 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Give other friendly Spriggans and Animals +2/+2.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Spriggan"
+        }
       },
       "shadowmaster": {
         "name": "Shadowmaster",
@@ -6436,7 +6661,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Give a friendly creature Cover. Your opponent can't target it with actions until next turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "shadowscalepartisan": {
         "name": "Shadowscale Partisan",
@@ -6448,7 +6673,10 @@
         "rarity": "Epic",
         "keyword": "Lethal. Summon",
         "text": "Lethal. Summon: +0/+2 if you have another creature with Lethal.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Lethal"
+        }
       },
       "shearpointdragon": {
         "name": "Shearpoint Dragon",
@@ -6460,7 +6688,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Give a creature -2/-2. When you reduce a creature power or health with another effect, reduce it by an extra 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Insane"
       },
       "sightlessskulk": {
         "name": "Sightless Skulk",
@@ -6472,7 +6700,11 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Agility) creatures.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "agility",
+          "type": "creature"
+        }
       },
       "swimsatnight": {
         "name": "Swims-at-Night",
@@ -6485,7 +6717,10 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Put a random 0-cost card into your hand. After you play a 0-cost card. Swims-at-Night gains +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "cost": "=_0"
+        }
       },
       "thievesguildfence": {
         "name": "Thieves Guild Fence",
@@ -6497,7 +6732,7 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "When you draw a card on your turn, reduce its cost by 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "woodlandlookout": {
         "name": "Woodland Lookout",
@@ -6509,7 +6744,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, gain 4 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       }
     },
     "endurance": {
@@ -6523,8 +6761,11 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, summon a 1/1 Draugr Sentry with Guard.",
-        "arenaTier": "Unknown",
-        "tokens": "draugrsentry"
+        "arenaTier": "Good",
+        "tokens": "draugrsentry",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "cavebear": {
         "name": "Cave Bear",
@@ -6536,7 +6777,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "companionharbinger": {
         "name": "Companion Harbinger",
@@ -6548,7 +6789,7 @@
         "rarity": "Rare",
         "keyword": "Beast Form",
         "text": "Beast Form: Give friendly Werewolves +1/+1.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "tokens": "companionharbinger_beast"
       },
       "corruptedshade": {
@@ -6561,7 +6802,7 @@
         "rarity": "Epic",
         "keyword": "Ward",
         "text": "Ward. At the end of your turn, if Corrupted Shade doesn't have Ward, sacrifice it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "dragoncultghost": {
         "name": "Dragon Cult Ghost",
@@ -6573,7 +6814,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Spend all your available magicka to play Dragon Cult Ghost, its power and health are equals to the magicka spent.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "dragonplatearmor": {
         "name": "Dragonplate Armor",
@@ -6585,7 +6826,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "+2/+2. Summon: +2/+2 if you have a Dragon in your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "eastempirecrafter": {
         "name": "East Empire Crafter",
@@ -6597,7 +6841,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon another creature with 5 health or more, give it +1/+1 and Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "health": ">_4"
+        }
       },
       "emperortitusmedeii": {
         "name": "Emperor Titus Mede II",
@@ -6610,7 +6857,7 @@
         "unique": true,
         "keyword": "",
         "text": "At the end of your turn, give the top creature of your deck +1/+1 and Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Territorial"
       },
       "encumberedexplorer": {
         "name": "Encumbered Explorer",
@@ -6622,7 +6869,7 @@
         "rarity": "Rare",
         "keyword": "Shackle",
         "text": "Shackle Encumbered Explorer after he attacks.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "frostgiant": {
         "name": "Frost Giant",
@@ -6634,7 +6881,7 @@
         "rarity": "Legendary",
         "keyword": "Regenerate",
         "text": "Regenerate. When Frost Giant heals, you gains that much health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "frosttroll": {
         "name": "Frost Troll",
@@ -6646,7 +6893,7 @@
         "rarity": "Epic",
         "keyword": "Regenerate",
         "text": "Regenerate. When Frost Troll take damage, it gains that much power.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "grimshieldbrother": {
         "name": "Grim Shield-Brother",
@@ -6658,7 +6905,7 @@
         "rarity": "Common",
         "keyword": "Beast Form",
         "text": "Beast Form: +1/+1 and Drain.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "grimshieldbrother_beast"
       },
       "highhrothgar": {
@@ -6672,7 +6919,10 @@
         "unique": true,
         "keyword": "",
         "text": "Ongoing. When you summon a creature, its power becomes equals to its health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "health": ">_4"
+        }
       },
       "innkeeperdelphine": {
         "name": "Innkeeper Delphine",
@@ -6685,7 +6935,11 @@
         "unique": true,
         "keyword": "",
         "text": "After you play a Dragon or Schout, Innkeeper Delphine changes into Grandmaster Delphine.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Dragon",
+          "keyword": "Shout"
+        },
         "shout": 2,
         "tokens": "grandmasterdelphine"
       },
@@ -6699,7 +6953,7 @@
         "rarity": "Common",
         "keyword": "Regenerate",
         "text": "Regenerate",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "laydownarms": {
         "name": "Lay Down Arms",
@@ -6711,7 +6965,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Set a creature's power and health to 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "mentorofthewatch": {
         "name": "Mentor of the Watch",
@@ -6723,7 +6977,10 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
         "text": "Prophecy, Guard. Summon: Give a creature in your hand Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "health": ">_4"
+        }
       },
       "restorationtutor": {
         "name": "Restoration Tutor",
@@ -6735,7 +6992,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Heal a creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "health": ">_4"
+        }
       },
       "skeletaldragon": {
         "name": "Skeletal Dragon",
@@ -6747,7 +7007,7 @@
         "rarity": "Legendary",
         "keyword": "Guard, Summon, Last Gasp",
         "text": "Guard, Summon: Give all creaturesin your discard pile +2/+2. Last Gasp: Draw a random creature from your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "soultear": {
         "name": "Soultear",
@@ -6760,7 +7020,10 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Draw a creature from your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "text": "Shout"
+        }
       },
       "spineofeldersblood": {
         "name": "Spine of Eldersblood",
@@ -6772,10 +7035,13 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Gaint +1 max magicka.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       },
-      "stealheartvanquisher": {
-        "name": "Stealheart Vanquisher",
+      "steelheartvanquisher": {
+        "name": "Steelheart Vanquisher",
         "cost": "2",
         "type": "Creature",
         "race": "Orc",
@@ -6784,7 +7050,10 @@
         "rarity": "Rare",
         "keyword": "Slay",
         "text": "Slay: Give friendly Orcs +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Orc"
+        }
       },
       "stonehillmammoth": {
         "name": "Stonehill Mammoth",
@@ -6796,7 +7065,11 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Endurance) creatures.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "endurance",
+          "type": "creature"
+        }
       },
       "wavesofthefallen": {
         "name": "Waves of the Fallen",
@@ -6808,7 +7081,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Transform all enemy creatures in a lane into 2/2 Stricken Draugr or transform all friendly creatures in a lane into 5/5 Hulking Draugrs.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Poor",
         "tokens": "strickendraugr, hulkingdraugr"
       },
       "whiterunprotector": {
@@ -6821,7 +7094,7 @@
         "rarity": "Rare",
         "keyword": "Beast Form",
         "text": "Beast Form: +2/+2, Guard and Regenerate.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "whiterunprotector_beast"
       }
     },
@@ -6837,7 +7110,7 @@
         "unique": true,
         "keyword": "Breakthrough, Summon",
         "text": "Breakthrough. Summon: Deal 5 damage. Your actions have Breakthrough.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Insane"
       },
       "arcaneenchanter": {
         "name": "Arcane Enchanter",
@@ -6849,7 +7122,10 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Ongoing. When you draw an item, give it a random Keyword.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "text": "Item"
+        }
       },
       "bringerofnightmares": {
         "name": "Bringer of Nightmares",
@@ -6861,7 +7137,7 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: See a vision of a random creature, then you must choose a creature to transform into it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "collegeofwinterhold": {
         "name": "College of Winterhold",
@@ -6874,7 +7150,7 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Activate: Reveals three random 1-cost actions and draw one. Then, increase the cost of cards this reveals by 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "conjurationscholar": {
         "name": "Conjuration Scholar",
@@ -6886,7 +7162,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Summon a 5/5 Frost Atronach with Guard.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "frostatronach"
       },
       "courtwizard": {
@@ -6899,7 +7175,11 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Intelligence) creatures.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "intelligence",
+          "type": "creature"
+        }
       },
       "darkrebirth": {
         "name": "Dark Rebirth",
@@ -6911,7 +7191,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Sacrifice a creature to summon a copy of it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "dragonpriestmask": {
         "name": "Dragon Priest Mask",
@@ -6923,7 +7206,10 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "+2/+2 Summon: Trigger the wielder's summon ability.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "dragonsfury": {
         "name": "Dragon's Fury",
@@ -6935,7 +7221,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage to a creature, and 3 extra damage for each friendly Dragon.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "echoofakatosh": {
         "name": "Echo of Akatosh",
@@ -6947,7 +7236,7 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: Give each creature in your deck a random Keyword.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "embassyguard": {
         "name": "embassyguard",
@@ -6959,7 +7248,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Ward",
         "text": "Prophecy, Guard, Ward",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "firebreath": {
         "name": "Fire Breath",
@@ -6972,7 +7261,10 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Deal 2 damage to a creature",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "text": "Shout"
+        }
       },
       "ghostsealookout": {
         "name": "Ghost Sea Lookout",
@@ -6984,7 +7276,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, Ghost Sea Lookout gains a Ward.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "icewingdragon": {
         "name": "Icewing Dragon",
@@ -6996,7 +7291,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Shackle an enemy creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "insightfulscholar": {
         "name": "Insightful Scholar",
@@ -7008,7 +7303,7 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy, Summon: Draw a card for each card your opponent drew this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "jzargo": {
         "name": "J'zargo",
@@ -7021,7 +7316,7 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Put an Experimental Scroll into your hand.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "experimentalscroll"
       },
       "masterswordsmith": {
@@ -7034,7 +7329,10 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "At the start of your turn, give each item in your deck +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "mistveilenchanter": {
         "name": "mistveilenchanter",
@@ -7046,7 +7344,10 @@
         "rarity": "Common",
         "keyword": "Ward, Summon",
         "text": "Ward. Summon: +2/+0 if you have another creature with Ward.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Ward"
+        }
       },
       "mysticdragon": {
         "name": "Mystic Dragon",
@@ -7058,7 +7359,7 @@
         "rarity": "Common",
         "keyword": "Prophecy",
         "text": "Prophecy",
-        "arenaTier": "Unknown"
+        "arenaTier": "Insane"
       },
       "revealingtheunseen": {
         "name": "Revealing the Unseen",
@@ -7070,7 +7371,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Put two random actions into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "riftenpickpocket": {
         "name": "Riften Pickpocket",
@@ -7082,7 +7383,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Reveal three random cards in your opponent's deck. Choose one and draw a copy of it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "studiousgreybeard": {
         "name": "Studious Greybeard",
@@ -7094,7 +7395,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "At the start of your turn, look at the top card of your deck. You may discard it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "thalmorembassy": {
         "name": "Thalmor Embassy",
@@ -7106,7 +7407,10 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Ongoing. Your High Elves cost 1 less. You can't be damaged by actions.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "type": "High Elf"
+        }
       },
       "thiefofdreams": {
         "name": "Thief of Dreams",
@@ -7118,7 +7422,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: See a vision of two of your opponent's cards. Guess which one is in their hand. If you're right, draw a copy of it.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Insane"
       },
       "vigilantofstendarr": {
         "name": "Vigilant of Stendarr",
@@ -7130,7 +7434,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       }
     },
     "neutral": {
@@ -7145,7 +7449,10 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Costs 2 less for each Dragon in your discard pile. Summon: Destroy all other creatures. At the start of your turn, summon a random Dragon from your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "anighttoremember": {
         "name": "A Night to Remember",
@@ -7157,7 +7464,10 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "A friendly creature disappears to who knows where, then returns in the other lane Shackled.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "barbas": {
         "name": "Barbas",
@@ -7170,7 +7480,7 @@
         "unique": true,
         "keyword": "Summon, Slay, Fetch, Roll Over",
         "text": "Summon: Choose one: Slay: Gains +1/+1 and Guard. Fetch: Put a dandom Daedra into your hand. Roll Over: Gains Charge.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "blackreachrebuilder": {
         "name": "Blackreach Rebuilder",
@@ -7182,7 +7492,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
         "text": "Prophecy, Guard, Summon: Gains 2 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "dragonmound": {
         "name": "Dragon Mound",
@@ -7195,7 +7505,10 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Ongoint. Summon: Transform all cards in your deck into random Dragons. Your Dragons cost 1 less.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "dwarvendynamo": {
         "name": "Dwarven Dynamo",
@@ -7207,7 +7520,10 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Give another (Neutral) creature +3/+3 and Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       },
       "forswornlooter": {
         "name": "Forsworn Looter",
@@ -7219,7 +7535,10 @@
         "rarity": "Epic",
         "keyword": "Pilfer",
         "text": "Pilfer: Draw a random item from your deck with cost equal to Forsworn Looter's power.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "glasshelmofremedy": {
         "name": "Glass Helm of Remedy",
@@ -7231,7 +7550,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "+0/+4. Summon: You gain 4 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "greybeardmentor": {
         "name": "Greybeard Mentor",
@@ -7243,7 +7562,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a random Shout from your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Shout"
+        }
       },
       "hornedhelm": {
         "name": "Horned Helm",
@@ -7255,7 +7577,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+2/+3",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "journeytosovngarde": {
         "name": "Journey to Sovngarde",
@@ -7268,7 +7590,7 @@
         "unique": true,
         "keyword": "",
         "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5 and reduce their costs by 5.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "lute": {
         "name": "Lute",
@@ -7280,7 +7602,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "+1/+2. The wielder is immune to Silence.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "midnightsnack": {
         "name": "Midnight Snack",
@@ -7292,10 +7614,13 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Last Gasp",
         "text": "Prophecy, Guard. Last Gasp: Reduce the cost of a random Dragon in your hand by 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
-      "mudcarbanklesnapper": {
-        "name": "Mudcarb Anklesnapper",
+      "mudcrabanklesnapper": {
+        "name": "Mudcrab Anklesnapper",
         "cost": "2",
         "type": "Creature",
         "race": "Mudcarb",
@@ -7304,7 +7629,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Deal 1 damage to your opponent.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "paarthurnax": {
         "name": "Paarthurnax",
@@ -7317,7 +7642,10 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: put three random Shouts into your hand and reduce their costs to 0.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "keyword": "Shout"
+        }
       },
       "prizedchicken": {
         "name": "Prized Chicken",
@@ -7329,7 +7657,7 @@
         "rarity": "Epic",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Fill this lane with 1/1 Angry Villagers.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Terrible",
         "tokens": "angryvillager"
       },
       "raginghorker": {
@@ -7342,7 +7670,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Raging Horker takes damage, it gains +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "wordwall": {
         "name": "Word Wall",
@@ -7354,7 +7682,10 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Upgrade a Shout in your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "keyword": "Shout"
+        }
       },
       "youngdragonborn": {
         "name": "Young Dragonborn",
@@ -7366,7 +7697,10 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Young Dragonborn Slay a Dragon, put a random Shout into your hand. After you play a Shout, Young Dragonborn gains +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Shout"
+        }
       }
     },
     "strength": {
@@ -7380,7 +7714,8 @@
         "rarity": "Rare",
         "keyword": "Beast Form",
         "text": "Beast Form: +1/+1 and draw a card.",
-        "tokens": "aelashuntmate_beast"
+        "tokens": "aelashuntmate_beast",
+        "arenaTier": "Excellent"
       },
       "aelathehuntress": {
         "name": "Aela the Huntress",
@@ -7393,7 +7728,8 @@
         "unique": true,
         "keyword": "Summon, Beast Form",
         "text": "Summon: Deal 1 damage. Beast Form: +2/+2 and destroy a Wounded creature.",
-        "tokens": "aelathehuntress_beast"
+        "tokens": "aelathehuntress_beast",
+        "arenaTier": "Good"
       },
       "ancestorsbattleaxe": {
         "name": "Ancestor's Battleaxe",
@@ -7405,7 +7741,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "+4/+4. Summon: Give the top creature of your deck +4/+4.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "battlefieldscrounger": {
         "name": "Battlefield Scrounger",
@@ -7417,7 +7753,7 @@
         "rarity": "Rare",
         "keyword": "Charge, Slay",
         "text": "Charge. Slay: Put a random item into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "berserkerofthepale": {
         "name": "Berserker of the Pale",
@@ -7429,7 +7765,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon another creature with 5 power or more, give it +1/+1 and Breakthrough.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "attack": ">_4"
+        }
       },
       "bladeslookout": {
         "name": "Blades Lookout",
@@ -7441,7 +7780,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, draw a card.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "candlehearthbrawler": {
         "name": "Candlehearth Brawler",
@@ -7453,7 +7795,7 @@
         "rarity": "Rare",
         "keyword": "Charge, Guard",
         "text": "Charge. Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "circleinitiate": {
         "name": "Circle Initiate",
@@ -7465,7 +7807,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Beast Form",
         "text": "Prophecy. Beast Form: +2/+1",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "tokens": "circleinitiate_beast"
       },
       "duelatoptheworld": {
@@ -7478,7 +7820,7 @@
         "rarity": "Epic",
         "keyword": "Battle",
         "text": "Give a friendly creature +3/+3. It Battles your opponent's most powerful creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "hitandrun": {
         "name": "Hit and Run",
@@ -7490,7 +7832,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Draw five cards. discard your hand at the end of the turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "inspiringstormcloak": {
         "name": "Inspiring Stormcloak",
@@ -7502,7 +7844,7 @@
         "rarity": "Rare",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Summon a 2/2 Rallying Stormcloak in each lane.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "tokens": "rallyingstormcloak"
       },
       "shieldbreaker": {
@@ -7515,7 +7857,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "+2/+2. Summon: An enemy creature loses Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "skyborndragon": {
         "name": "Skyborn Dragon",
@@ -7527,7 +7869,7 @@
         "rarity": "Rare",
         "keyword": "Summon, Battle",
         "text": "Summon: Battle an enemy creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "skyforge": {
         "name": "Skyforge",
@@ -7540,7 +7882,7 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses 3. Activate: Equip a friendly creature with a Steel Dagger. If Skyforge has equipped 3 daggers, it changes into Underforge.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "tokens": "steeldagger, underforge"
       },
       "stormcloakavenger": {
@@ -7553,7 +7895,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "At the end of your turn, if three or more friendly creatures died this turn, summon a 2/2 Rallying Stormcloak.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "tokens": "rallyingstormcloak"
       },
       "stormcloakcamp": {
@@ -7566,7 +7908,7 @@
         "rarity": "rare",
         "keyword": "",
         "text": "Ongoing. At the end of your turn, if a creature died this turn, deal 2 damage to your opponent.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "stormcloakvanguard": {
         "name": "Stormcloak Vanguard",
@@ -7578,7 +7920,7 @@
         "rarity": "Common",
         "keyword": "Charge, Last Gasp",
         "text": "Charge. Last Gasp: Put a 5/5 Stormcloak Battalion in your hand.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "stormcloakbattalion"
       },
       "stoutheartgiant": {
@@ -7591,7 +7933,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "strongholdpatrol": {
         "name": "Stronghold Patrol",
@@ -7603,7 +7945,11 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Strength) creatures.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "strength",
+          "type": "creature"
+        }
       },
       "swiftwingdragon": {
         "name": "Swiftwing Dragon",
@@ -7615,7 +7961,7 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "ulfricstormcloak": {
         "name": "Ulfric Stormcloak",
@@ -7628,7 +7974,10 @@
         "unique": true,
         "keyword": "Breakthrough",
         "text": "When you play a Shout, draw a random Nord from your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Shout"
+        }
       },
       "ulfricszealot": {
         "name": "Ulfric's Zealot",
@@ -7640,7 +7989,7 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put a Heavy Battleaxe into your hand.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "generates": "heavybattleaxe"
       },
       "unrelentingforce": {
@@ -7654,7 +8003,10 @@
         "keyword": "Shout, Unsummon",
         "shout": 3,
         "text": "Shout - Level 1. Unsummon an enemy creature with power 3 or less",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "text": "Shout"
+        }
       },
       "wildfiredragon": {
         "name": "Wildfire Dragon",
@@ -7666,7 +8018,7 @@
         "rarity": "Legendary",
         "keyword": "Breakthrough, Summon, Slay",
         "text": "Breakthrough. Summon: Deal 1 damage to all other creatures. Slay: +1/+1",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "worldeaterseyrie": {
         "name": "World Eater's Eyrie",
@@ -7678,7 +8030,10 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Ongoing. When you summon a creature that costs 7 or more, double its power and health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "cost": ">_6"
+        }
       }
     },
     "willpower": {
@@ -7692,7 +8047,7 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Fill the left lane with Stormcloak Skirmisher or the right lane with Colovian Troopers.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Poor",
         "tokens": "coloviantrooper, stormcloakskirmisher"
       },
       "arrest": {
@@ -7705,7 +8060,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Steal an enemy creature. It loses Guard, and is permanently Shackled.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "banditringleader": {
         "name": "Bandit Ringleader",
@@ -7717,7 +8072,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Other friendly creatures in this lane have 'Pilfer: Draw a card' this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "callofvalor": {
         "name": "Call of Valor",
@@ -7730,7 +8085,10 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Summon a 3/3 Sovngarde Hero",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "text": "Shout"
+        },
         "tokens": "sovngardehero"
       },
       "cauldronkeeper": {
@@ -7743,7 +8101,10 @@
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Give yout Activated supports an extra use. You may Activate your supports an extra time each turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Support"
+        }
       },
       "clericofkyne": {
         "name": "Cleric of Kyne",
@@ -7755,7 +8116,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: give a creature +0/+2.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "cliffsidelookout": {
         "name": "Cliffside Lookout",
@@ -7767,7 +8128,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, Cliffside Lookout gains +1/+1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Dragon"
+        }
       },
       "devour": {
         "name": "Devour",
@@ -7779,7 +8143,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Destroy a creature with 4 power of less and give its Keywords to a random Dragon in your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "elixirofvitality": {
         "name": "Elixir of Vitality",
@@ -7791,7 +8155,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Uses 3. Activate: Gain 2 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible"
       },
       "grislygourmet": {
         "name": "Grisly Gourmet",
@@ -7803,7 +8167,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Transform an enemy creature with 2 power or less into a Sweet Roll.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "sweetroll"
       },
       "imperialcamp": {
@@ -7816,7 +8180,10 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Ongoing. Summon: Put a 1/2 Septim Guardsman into your hand. friendly Guards have +1/+0.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Guard"
+        },
         "generates": "septimguardsman"
       },
       "jarlbalgruuf": {
@@ -7830,7 +8197,7 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Summon a Stormcloak Skirmisher in the left lane and a Colovian Trooper in the rigth lane. At start of your turn, if your lanes are full, you win the game.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
         "tokens": "coloviantrooper, stormcloakskirmisher"
       },
       "karthspirescourge": {
@@ -7843,7 +8210,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Give all enemy creatures in this lane -1/-0.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "legaterikke": {
         "name": "Legate Rikke",
@@ -7856,7 +8223,12 @@
         "unique": true,
         "keyword": "",
         "text": "When you summon an imperial, summon a 1/1 Imperial Grunt in the other lane.",
-        "arenaTier": "Unknown",
+        "lore": "'Legate is a high rank in the Imperial Legion. The full structure hasn't been shown in lore, but it's above Tribune and below General. The most notable lore figure of this rank is Skyrim's Legate Rikke, a certified badass Nord who believed in the power of a unified Legion, even when it meant fighting against her former comrades.' - Quillypen",
+        "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5oolt6/daily_card_discussion_thread_139_renowned_legate/dclcqpe",
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Imperial"
+        },
         "tokens": "imperialgrunt"
       },
       "lydia": {
@@ -7870,7 +8242,7 @@
         "unique": true,
         "keyword": "Guard",
         "text": "Guard. Lydia guards both lanes.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "praetoriancommander": {
         "name": "Praetorian Commander",
@@ -7882,7 +8254,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Give creatures in your deck +2/+2.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "priestoftheeight": {
         "name": "Priest of the Eight",
@@ -7894,7 +8266,11 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Willpower) creatures.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "willpower",
+          "type": "creature"
+        }
       },
       "reveredguardian": {
         "name": "Revered Guardian",
@@ -7906,7 +8282,7 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "snowhawkdetachment": {
         "name": "Snowhawk Detachment",
@@ -7918,7 +8294,10 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: +1/+1 if you have another creature with Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Guard"
+        }
       },
       "solitudestalwart": {
         "name": "solitudestalwart",
@@ -7930,7 +8309,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "thalmorjusticiar": {
         "name": "Thalmor Justiciar",
@@ -7942,7 +8321,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "After you play an action, summon a 1/1 Thalmor Soldier.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Action"
+        },
         "tokens": "thalmorsoldier"
       },
       "thievesguildshadowfoot": {
@@ -7955,7 +8337,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Steal the top card of the opponent's deck and replace it with a Counterfeit Trinket.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "tokens": "counterfeittrinket"
       },
       "undyingdragon": {
@@ -7968,7 +8350,7 @@
         "rarity": "Legendary",
         "keyword": "Drain",
         "text": "Drain. +5/+5 while you have 30 or more health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "winterholdillusionist": {
         "name": "Winterhold Illusionist",
@@ -7980,7 +8362,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Another creature disappears, then returns at the end of the turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "keyword": "Summon"
+        }
       },
       "wolfcage": {
         "name": "Wolf Cage",
@@ -7992,7 +8377,10 @@
         "rarity": "Epic",
         "keyword": "Activate",
         "text": "Uses 3. Activate. Summon an Uncaged Wolf",
-        "arenaTier": "Unknown",
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Wolf"
+        },
         "tokens": "uncagedwolf"
       }
     },
@@ -8009,7 +8397,10 @@
         "text": "Move a friendly creature. Then, it deals 1 damage.",
         "attr1": "strength",
         "attr2": "agility",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Lethal"
+        }
       },
       "assassinsritual": {
         "name": "Assassin's Ritual",
@@ -8023,7 +8414,7 @@
         "text": "Give a creature Lethal and Ward.",
         "attr1": "intelligence",
         "attr2": "agility",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "battlemagesonslaught": {
         "name": "Battlemage's Onslaught",
@@ -8037,7 +8428,7 @@
         "text": "Put a random action, item, and creature into your hand.",
         "attr1": "strength",
         "attr2": "intelligence",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "crusadersassault": {
         "name": "Crusader's Assault",
@@ -8051,7 +8442,7 @@
         "text": "Give a creature +2/+0, Breakthrough and 'Slay and Pilfer: Draw a card' this turn",
         "attr1": "strength",
         "attr2": "willpower",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "magestrick": {
         "name": "Mage's Trick",
@@ -8065,7 +8456,7 @@
         "text": "Deal 1 damage, gain 1 health, and draw 1 card.",
         "attr1": "intelligence",
         "attr2": "willpower",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "monksstrike": {
         "name": "Monk's Strike",
@@ -8079,7 +8470,10 @@
         "text": "Move a friendly creature and give it +3/+0 and Drain this turn.",
         "attr1": "willpower",
         "attr2": "agility",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Pilfer"
+        }
       },
       "scoutsreport": {
         "name": "Scout's Report",
@@ -8093,7 +8487,7 @@
         "text": "Look at the top card of your deck. You may discard it. Draw a card.",
         "attr1": "agility",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "sorcerersnegation": {
         "name": "Sorcerer's Negation",
@@ -8107,7 +8501,7 @@
         "text": "Silence a creature, then deal 2 damage to it.",
         "attr1": "intelligence",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "arenaTier": "Insane"
       },
       "spellswordssummoning": {
         "name": "Spellsword's Summoning",
@@ -8121,7 +8515,7 @@
         "text": "Summon a random 1-cost creature in each lane.",
         "attr1": "willpower",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "warriorsfury": {
         "name": "warriorsfury",
@@ -8135,7 +8529,7 @@
         "text": "Give a random creature and item in your hand +2/+2.",
         "attr1": "strength",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       }
     }
   }

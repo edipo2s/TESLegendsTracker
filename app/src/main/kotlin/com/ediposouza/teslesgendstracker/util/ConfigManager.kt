@@ -16,6 +16,8 @@ object ConfigManager {
     val ADS_WHITELIST_CONFIG = "ads_whitelist"
     val SHOW_WABBATRACK_CONFIG = "show_wabbatrack"
     val VERSION_UNSUPPORTED_CONFIG = "version_unsupported"
+    val SEARCH_ANIMAL_CONFIG = "search_animals"
+    val SEARCH_UNDEAD_CONFIG = "search_undead"
 
     val remoteConfig: FirebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
 
@@ -26,8 +28,10 @@ object ConfigManager {
                     .build())
             setDefaults(mapOf(DB_UPDATE_CONFIG to false,
                     ADS_WHITELIST_CONFIG to "",
-                    VERSION_UNSUPPORTED_CONFIG to "",
-                    SHOW_WABBATRACK_CONFIG to false))
+                    SEARCH_ANIMAL_CONFIG to "beast, fish, mammoth, mudcrab, reptile, spider, wolf",
+                    SEARCH_UNDEAD_CONFIG to "mummy, skeleton, spirit, vampire",
+                    SHOW_WABBATRACK_CONFIG to false,
+                    VERSION_UNSUPPORTED_CONFIG to ""))
         }
         updateCaches {}
     }
@@ -42,6 +46,10 @@ object ConfigManager {
             }
         }
     }
+
+    fun animalRaces() = remoteConfig.getString(SEARCH_ANIMAL_CONFIG)
+
+    fun undeadRaces() = remoteConfig.getString(SEARCH_UNDEAD_CONFIG)
 
     fun isDBUpdating() = remoteConfig.getBoolean(DB_UPDATE_CONFIG)
 

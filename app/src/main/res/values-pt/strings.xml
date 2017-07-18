@@ -123,6 +123,8 @@
     <string name="card_collection_edit_success">Edição da coleção habilitada!</string>
     <string name="card_set_label">Expanção:</string>
     <string name="card_race_label">Raça:</string>
+    <string name="card_about_label">Sobre:</string>
+    <string name="card_about_more_label">Mais</string>
     <string name="card_sounds_label">Sons:</string>
     <string name="card_sounds_attack_label">Ataque</string>
     <string name="card_sounds_play_label">Jogar</string>
@@ -132,7 +134,7 @@
     <string name="card_generates_label">Gera:</string>
     <string name="card_tokens_label">Fichas:</string>
     <string name="card_patch_current">Versão Atual</string>
-    <string name="card_patch_pre">Versão pre-%s</string>
+    <string name="card_patch_pre" formatted="false">Versão pre-%s \n %s</string>
     <string name="card_full_downloaded">Imagem salva na pasta de downloads.</string>
     <string name="card_full_sound_set">Som definido como toque de chamada</string>
     <string name="card_full_wallpaper_set">Imagem definida como Wallpaper</string>
@@ -150,6 +152,7 @@
     <string name="unknown">Desconhecido</string>
 
     <string name="cards_search_hint">Nome, raça, tipo, habilidade ou texto</string>
+    <string name="cards_search_keywords_hint" formatted="false">Busque por %s \n ou tente %s</string>
     <string name="collection_statistics_total_cards">Cartas Total \nSoul para completar</string>
 
     <string name="decks_search_hint">Nome do Deck</string>
