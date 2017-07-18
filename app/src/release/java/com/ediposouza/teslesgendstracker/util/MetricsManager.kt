@@ -81,8 +81,8 @@ object MetricsManager : MetricsConstants() {
                     putString(action.PARAM_ATTR, action.attr?.name ?: MetricAction.CLEAR)
                 is MetricAction.ACTION_CARD_FILTER_RARITY ->
                     putString(action.PARAM_RARITY, action.rarity?.name ?: MetricAction.CLEAR)
-                is MetricAction.ACTION_CARD_FILTER_MAGIKA ->
-                    putString(action.PARAM_MAGIKA, if (action.magika > 0) action.magika.toString() else MetricAction.CLEAR)
+                is MetricAction.ACTION_CARD_FILTER_MAGICKA ->
+                    putString(action.PARAM_MAGICKA, if (action.magicka > 0) action.magicka.toString() else MetricAction.CLEAR)
                 is MetricAction.ACTION_NEW_DECK_SAVE -> {
                     putString(action.PARAM_TYPE, action.type)
                     putString(action.PARAM_PATCH, action.patch)

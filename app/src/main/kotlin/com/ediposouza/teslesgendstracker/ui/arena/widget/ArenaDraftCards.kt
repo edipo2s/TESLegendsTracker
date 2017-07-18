@@ -40,7 +40,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var selectDialog: AlertDialog? = null
     var selectedCard: Card? = null
     var currentAttr: CardAttribute? = CardAttribute.STRENGTH
-    var currentMagika: Int = -1
+    var currentMagicka: Int = -1
     var currentRarity: CardRarity? = null
         set(value) {
             field = value
@@ -88,7 +88,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     fun reset() {
         selectedCard = null
         currentAttr = null
-        currentMagika = -1
+        currentMagicka = -1
         currentRarity = null
         Glide.clear(arena_draft_card_iv)
         arena_draft_card_iv.setImageResource(R.drawable.card_back)
@@ -117,10 +117,10 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 updateCardList(cards, cardsAdapter)
             }
         }
-        with(dialogView.select_card_dialog_magika) {
+        with(dialogView.select_card_dialog_magicka) {
             collapseOnClick = false
             filterClick = { cost ->
-                currentMagika = cost
+                currentMagicka = cost
                 updateCardList(cards, cardsAdapter)
             }
         }
@@ -137,7 +137,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 .create().apply {
             setOnShowListener {
                 dialogView.select_card_dialog_attr.filterClick?.invoke(currentAttr ?: cls.attr1)
-                dialogView.select_card_dialog_magika.open()
+                dialogView.select_card_dialog_magicka.open()
             }
             show()
         }
@@ -152,7 +152,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     private fun updateCardList(cards: List<Card>, cardsAdapter: CardsAllFragment.CardsAllAdapter) {
         cardsAdapter.showCards(cards.filter { it.attr == currentAttr }
-                .filter { currentMagika == -1 || (if (currentMagika < 7) it.cost == currentMagika else it.cost >= currentMagika) }
+                .filter { currentMagicka == -1 || (if (currentMagicka < 7) it.cost == currentMagicka else it.cost >= currentMagicka) }
                 .filter { currentRarity == null || it.rarity == currentRarity }
                 .filter { !it.evolves }
                 .sortedBy { it.cost })

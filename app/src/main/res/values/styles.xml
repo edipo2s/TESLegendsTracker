@@ -81,7 +81,7 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="MagikaCostsText">
+    <style name="MagickaCostsText">
         <item name="android:gravity">center</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginTop">@dimen/nano_margin</item>

@@ -23,7 +23,7 @@ data class CmdShowCardsByAttr(val attr: CardAttribute)
 
 data class CmdShowDecksByClasses(val classes: List<DeckClass>?)
 
-data class CmdUpdateRarityMagikaFiltersPosition(val high: Boolean)
+data class CmdUpdateRarityMagickaFiltersPosition(val high: Boolean)
 
 data class CmdUpdateVisibility(val show: Boolean)
 

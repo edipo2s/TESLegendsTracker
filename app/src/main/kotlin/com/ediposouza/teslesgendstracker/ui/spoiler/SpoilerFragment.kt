@@ -47,7 +47,7 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
             eventBus.post(CmdFilterAttrs(spoiler_filter_attr.getSelectedAttrs()))
         }
         spoiler_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        spoiler_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        spoiler_filter_magicka.filterClick = { eventBus.post(CmdFilterMagicka(it)) }
         Handler().postDelayed({
             eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
@@ -60,12 +60,12 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(true)
     }
 
     override fun onPause() {
         super.onPause()
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

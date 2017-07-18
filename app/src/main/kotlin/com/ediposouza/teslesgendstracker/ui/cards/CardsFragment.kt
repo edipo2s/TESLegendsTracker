@@ -54,7 +54,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             } else {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
-            eventBus.post(CmdUpdateRarityMagikaFiltersPosition(position == 1))
+            eventBus.post(CmdUpdateRarityMagickaFiltersPosition(position == 1))
             MetricsManager.trackScreen(when (position) {
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 2 -> MetricScreen.SCREEN_CARDS_TOKENS()
@@ -92,7 +92,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             cards_filter_attr.selectAttr(it, true)
         }
         cards_filter_rarity.filterClick = { eventBus.post(CmdFilterRarity(it)) }
-        cards_filter_magika.filterClick = { eventBus.post(CmdFilterMagika(it)) }
+        cards_filter_magicka.filterClick = { eventBus.post(CmdFilterMagicka(it)) }
         Handler().postDelayed({
             eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
@@ -120,7 +120,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onResume() {
         super.onResume()
         cards_app_bar_layout.setExpanded(true, true)
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(true)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(true)
         context.checkLastVersion {
             Timber.d("New version $it found!")
             new_update_layout?.visibility = View.VISIBLE
@@ -141,7 +141,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onPause() {
         super.onPause()
-        (activity as BaseFilterActivity).updateRarityMagikaFiltersVisibility(false)
+        (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

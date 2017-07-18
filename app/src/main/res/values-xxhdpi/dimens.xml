@@ -14,6 +14,6 @@
     <dimen name="size_normal">36dp</dimen>
     <dimen name="size_medium">48dp</dimen>
 
-    <dimen name="filter_hide_magika_spacing">-4dp</dimen>
+    <dimen name="filter_hide_magicka_spacing">-4dp</dimen>
 
 </resources>

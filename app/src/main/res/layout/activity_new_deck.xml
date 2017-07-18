@@ -86,8 +86,8 @@
 
         </android.support.percent.PercentRelativeLayout>
 
-        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagika
-            android:id="@+id/cards_filter_magika"
+        <com.ediposouza.teslesgendstracker.ui.cards.widget.FilterMagicka
+            android:id="@+id/cards_filter_magicka"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
