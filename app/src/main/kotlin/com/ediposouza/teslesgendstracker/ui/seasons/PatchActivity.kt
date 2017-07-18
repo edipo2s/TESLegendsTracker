@@ -98,10 +98,10 @@ class PatchActivity : BaseActivity() {
 
     @SuppressLint("NewApi")
     private fun setupEnterAnimation() {
-        val transition = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion)
-        transition.duration = 300
-        window.sharedElementEnterTransition = transition
-        transition.addListener(object : Transition.TransitionListener {
+        val transitionAnim = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion)
+        transitionAnim.duration = 300
+        window.sharedElementEnterTransition = transitionAnim
+        transitionAnim.addListener(object : Transition.TransitionListener {
             override fun onTransitionEnd(transition: Transition) {
                 initViews()
             }
