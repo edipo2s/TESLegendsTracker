@@ -196,7 +196,7 @@
     <string name="card_generates_label">Generates:</string>
     <string name="card_tokens_label">Tokens:</string>
     <string name="card_patch_current">Current Version</string>
-    <string name="card_patch_pre">pre-%s Version</string>
+    <string name="card_patch_pre" formatted="false">pre-%s Version \n %s</string>
     <string name="card_transition_name" translatable="false">card_transition</string>
     <string name="card_full_transition_name" translatable="false">card_full_transition</string>
     <string name="card_full_downloaded">Image saved to download folder.</string>
@@ -217,7 +217,9 @@
     <string name="zero_percent" translatable="false">0%</string>
 
     <string name="zero_of_zero" translatable="false">0/0</string>
-    <string name="cards_search_hint">Name, race, type, keyword or text</string>
+    <string name="cards_search_hint">Name, Race, Type, Keyword or Text</string>
+    <string name="cards_search_keywords" translatable="false">\'Animal\', \'Lore\', \'Reward\', \'Undead\', \'Unique\'</string>
+    <string name="cards_search_keywords_hint" formatted="false">Search for card %s \n or try %s</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
     <string name="collection_statistics_percent" translatable="false">%1$.2f%%</string>

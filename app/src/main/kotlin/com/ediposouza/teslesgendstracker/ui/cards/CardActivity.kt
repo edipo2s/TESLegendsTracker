@@ -50,6 +50,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.FormatStyle
 import org.threeten.bp.format.TextStyle
 import timber.log.Timber
 import java.io.File
@@ -322,9 +323,9 @@ class CardActivity : BaseActivity() {
         card_race_desc.visibility = View.GONE.takeIf { card.race.desc.isEmpty() } ?: View.VISIBLE
         val hasLore = card.lore.isNotEmpty()
         card_lore_label.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
-        card_lore_more.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
         card_lore.visibility = View.VISIBLE.takeIf { hasLore } ?: View.GONE
         card_lore.text = card.lore
+        card_lore_more.visibility = View.VISIBLE.takeIf { card.loreLink.isNotEmpty() } ?: View.GONE
         card_lore_more.setOnClickListener {
             CustomTabsIntent.Builder()
                     .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
@@ -413,7 +414,8 @@ class CardActivity : BaseActivity() {
                 cardPatches.forEach {
                     val cardPatchName = "${card.shortName}_${it.uuidDate}"
                     val cardBasicInfo = CardBasicInfo(cardPatchName, card.set.name, card.attr.name, card.isToken())
-                    cardVersions.add(Pair(cardBasicInfo, getString(R.string.card_patch_pre, it.desc)))
+                    val localizedDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                    cardVersions.add(Pair(cardBasicInfo, getString(R.string.card_patch_pre, it.desc, it.date.format(localizedDate))))
                 }
                 with(card_recycler_view) {
                     adapter.notifyDataSetChanged()

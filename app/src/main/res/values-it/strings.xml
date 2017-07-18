@@ -134,7 +134,7 @@
     <string name="card_generates_label">Generare:</string>
     <string name="card_tokens_label">Token:</string>
     <string name="card_patch_current">Attuale versione</string>
-    <string name="card_patch_pre">Versione pre-%s</string>
+    <string name="card_patch_pre" formatted="false">Versione pre-%s \n %s</string>
     <string name="card_full_downloaded">Immagine salvata nella cartella dei download.</string>
     <string name="card_full_sound_set">Suono impostato come suoneria</string>
     <string name="card_full_wallpaper_set">Immagine impostata come sfondo</string>
@@ -152,6 +152,7 @@
     <string name="unknown">Sconosciuto</string>
 
     <string name="cards_search_hint">Nome, razza, tipo, parola chiave o testo</string>
+    <string name="cards_search_keywords_hint" formatted="false">Cerca il %s \n O provare %s</string>
     <string name="collection_statistics_total_cards">Carte totali\nGemme per completarlo</string>
 
     <string name="decks_search_hint">Nome del deck</string>

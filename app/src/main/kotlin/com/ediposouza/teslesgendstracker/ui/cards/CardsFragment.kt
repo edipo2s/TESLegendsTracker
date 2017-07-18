@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.longToast
 import timber.log.Timber
 
 /**
@@ -151,7 +152,20 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         inflater?.inflate(R.menu.menu_sets, menu)
         menu?.findItem(R.id.menu_import)?.isVisible = false
         menu?.findItem(R.id.menu_only_favorite)?.isVisible = false
-        searchView = MenuItemCompat.getActionView(menu?.findItem(R.id.menu_search)) as? SearchView
+        val menuItemSearch = menu?.findItem(R.id.menu_search)
+        MenuItemCompat.setOnActionExpandListener(menuItemSearch, object : MenuItemCompat.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                context.longToast(getString(R.string.cards_search_keywords_hint,
+                        getString(R.string.cards_search_hint), getString(R.string.cards_search_keywords)))
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                return true
+            }
+
+        })
+        searchView = MenuItemCompat.getActionView(menuItemSearch) as? SearchView
         searchView?.apply {
             queryHint = getString(R.string.cards_search_hint)
             setOnQueryTextListener(this@CardsFragment)
