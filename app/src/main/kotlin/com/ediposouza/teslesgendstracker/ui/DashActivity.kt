@@ -423,6 +423,10 @@ class DashActivity : BaseFilterActivity(),
                             .setData(Uri.parse(getString(R.string.playstore_url_format, packageName))))
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_RATE())
                 })
+                .setNegativeButton(R.string.about_twitter, { _, _ ->
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.about_twitter_link))))
+                    MetricsManager.trackAction(MetricAction.ACTION_ABOUT_TWITTER())
+                })
                 .setNeutralButton(R.string.title_changelog, { _, _ ->
                     showChangeLogDialog()
                     MetricsManager.trackAction(MetricAction.ACTION_ABOUT_CHANGELOG())

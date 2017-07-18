@@ -85,8 +85,8 @@ sealed class MetricAction(val name: String) {
         val PARAM_RARITY = "Rarity"
     }
 
-    class ACTION_CARD_FILTER_MAGIKA(val magika: Int) : MetricAction("FilterCardMagika") {
-        val PARAM_MAGIKA = "Magika"
+    class ACTION_CARD_FILTER_MAGICKA(val magicka: Int) : MetricAction("FilterCardMagicka") {
+        val PARAM_MAGICKA = "Magicka"
     }
 
     class ACTION_CARD_FULL_ART(val card: Card) : MetricAction("ViewCardFullArt") {
@@ -204,6 +204,7 @@ sealed class MetricAction(val name: String) {
     class ACTION_ABOUT_DIREWOLF : MetricAction("AboutDireWolf")
     class ACTION_ABOUT_CHANGELOG : MetricAction("AboutChangelog")
     class ACTION_ABOUT_RATE : MetricAction("AboutRate")
+    class ACTION_ABOUT_TWITTER : MetricAction("AboutTwitter")
     class ACTION_IMPORT_COLLECTION_CANCELLED : MetricAction("ImportCollectionCancelled")
     class ACTION_IMPORT_COLLECTION_FINISH(val cardsImported: Int) : MetricAction("ImportCollectionFinish") {
         val PARAM_CARDS_IMPORTED = "CardsImported"
@@ -244,7 +245,7 @@ sealed class MetricAction(val name: String) {
         val PARAM_PATH_PARAMS = "pathParams"
     }
 
-    class ACTION_DECK_CHANGE_LANGUAGE(val language: String) : MetricAction("DeckChangeLanguage") {
+    class ACTION_DECK_CHANGE_LANGUAGE(val language: String) : MetricAction("ChangeLanguage") {
         val PARAM_LANGUAGE = "Language"
     }
 

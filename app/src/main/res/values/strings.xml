@@ -124,6 +124,8 @@
     <string name="about_info_thanks_translation_italian_text" translatable="false">Antonio Sampere</string>
     <string name="about_info_thanks_translation_russian" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_russian_text" translatable="false">WickedTroll</string>
+    <string name="about_twitter" translatable="false">Twitter</string>
+    <string name="about_twitter_link" translatable="false">https://twitter.com/teslegendstrack</string>
     <string name="about_rate_app">Rate App</string>
 
     <string name="dialog_import_title">Import from Legends-Decks</string>
@@ -174,7 +176,10 @@
     <string name="title_tab_wabbatrack_autobuild">Deck Auto-Build</string>
 
     <string name="cards_sets_all">All</string>
+    <string name="cards_search_animal" translatable="false">animal</string>
+    <string name="cards_search_lore" translatable="false">lore</string>
     <string name="cards_search_reward" translatable="false">reward</string>
+    <string name="cards_search_undead" translatable="false">undead</string>
     <string name="cards_search_unique" translatable="false">unique</string>
 
     <string name="card_title_star_rating">Your Rating</string>
