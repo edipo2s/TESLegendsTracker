@@ -146,7 +146,7 @@
       "brilliantexperiment": {
         "set": "core",
         "attr": "intelligence",
-        "change": "Cost"
+        "change": "Cost/Text"
       },
       "dunmernightblade": {
         "set": "core",
@@ -161,7 +161,7 @@
       "nahkriindragonpriest": {
         "set": "core",
         "attr": "intelligence",
-        "change": "Text"
+        "change": "Cost/Text"
       },
       "morkulgatekeeper": {
         "set": "core",
@@ -424,5 +424,87 @@
     },
     "desc": "Heroes of Skyrim",
     "type": "set"
+  },
+  "2017_07_18": {
+    "changes": {
+      "belligerentgiant": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Text"
+      },
+      "bringerofnightmares": {
+        "set": "heroesofskyrim",
+        "attr": "intelligence",
+        "change": "Cost"
+      },
+      "dawnstarhealer": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Text"
+      },
+      "echoofakatosh": {
+        "set": "heroesofskyrim",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "praetoriancommander": {
+        "set": "heroesofskyrim",
+        "attr": "willpower",
+        "change": "Text"
+      }
+    },
+    "desc": "Echo of Akatosh Nerf",
+    "type": "balance"
+  },
+  "2017_07_26": {
+    "changes": {
+      "banditringleader": {
+        "set": "heroesofskyrim",
+        "attr": "willpower",
+        "change": "Text"
+      },
+      "barbas": {
+        "set": "heroesofskyrim",
+        "attr": "neutral",
+        "change": "Type"
+      },
+      "bretonconjurer": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "daggerfallmage": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "ghostsealookout": {
+        "set": "heroesofskyrim",
+        "attr": "intelligence",
+        "change": "Type"
+      },
+      "iliacsorcerer": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Text"
+      },
+      "nibenbaycutthroat": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "legaterikke": {
+        "set": "heroesofskyrim",
+        "attr": "willpower",
+        "change": "Type"
+      },
+      "shornhelmchampion": {
+        "set": "core",
+        "attr": "dual",
+        "change": "Text"
+      }
+    },
+    "desc": "Mobile release",
+    "type": "balance"
   }
 }
