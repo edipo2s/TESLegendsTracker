@@ -236,7 +236,8 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
 
 fun ImageView.loadFromPatch(patch: PatchChange, patchUuid: String, newImage: Boolean) {
     with(patch) {
-        loadFromCard(set.capitalize(), attr.capitalize(), shortName + "_" + patchUuid) {
+        loadFromCard(set.capitalize(), attr.capitalize(),
+                "${shortName}_$patchUuid".takeIf { patchUuid.isNotEmpty() } ?: shortName) {
             if (newImage) {
                 loadFromCard(set.capitalize(), attr.capitalize(), shortName)
             }
