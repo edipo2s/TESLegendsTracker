@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -25,10 +24,9 @@ import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
-import kotlinx.android.synthetic.main.activity_new_deck.*
-import kotlinx.android.synthetic.main.dialog_new_deck.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.util.*
@@ -186,11 +184,11 @@ class NewDeckActivity : BaseFilterActivity() {
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item, deckPatchesDesc)
-            if (deckToEdit?.patch?.isNotEmpty() ?: false) {
+            if (deckToEdit?.patch?.isNotEmpty() == true) {
                 view.new_deck_dialog_patch_spinner.setSelection(deckPatchesDesc.indexOf(deckToEdit!!.patch))
             }
         }
-        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
+        if (deckToEdit?.uuid?.isNotEmpty() == true) {
             view.new_deck_dialog_title.text = getString(R.string.new_deck_update_dialog_title)
             view.new_deck_dialog_name.setText(deckToEdit!!.name)
             val currentDeckTypeName = deckToEdit!!.type.name.toLowerCase().capitalize()
@@ -198,7 +196,7 @@ class NewDeckActivity : BaseFilterActivity() {
             view.new_deck_dialog_public.isChecked = !deckToEdit!!.private
         }
         alert {
-            customView(view)
+            customView = view
             val confirmText = R.string.new_deck_save_dialog_update.takeIf { deckToEdit?.uuid?.isNotEmpty() ?: false } ?:
                     R.string.new_deck_save_dialog_save
             positiveButton(confirmText) { saveUpdateDeck(view, allPatches) }

@@ -119,8 +119,8 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val reviews = ds.children.map {
-                        it.key to it.getValue(Int::class.java)
-                    }.toList()
+                        it.key to (it.getValue(Int::class.java) ?: -1)
+                    }.filter { it.second >= 0 }.toList()
                     onSuccess.invoke(reviews)
                 }
 

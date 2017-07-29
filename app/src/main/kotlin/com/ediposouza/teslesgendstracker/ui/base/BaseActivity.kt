@@ -36,7 +36,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.include_login_button.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.contentView
@@ -123,7 +122,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
+        setSupportActionBar(findViewById<View>(R.id.toolbar) as Toolbar?)
         supportActionBar?.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         contentView?.viewTreeObserver?.addOnGlobalLayoutListener(keyboardChangeListener)
