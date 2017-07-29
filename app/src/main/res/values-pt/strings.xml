@@ -33,6 +33,7 @@
     <string name="menu_search">Busca</string>
     <string name="menu_sets">Expanções</string>
     <string name="menu_statistics">Statísticas</string>
+    <string name="menu_statistics_warning">Cartas com arte alternativa são excluídos</string>
     <string name="menu_compact_view">Modo compacto</string>
     <string name="menu_only_favorite">Apenas Favoritos</string>
     <string name="menu_only_private">Apenas Privados</string>

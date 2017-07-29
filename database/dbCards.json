@@ -122,7 +122,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Deal 1 damage.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "alternativeArt": true
       },
       "steelscimitar": {
         "name": "Steel Scimitar",
@@ -2589,7 +2590,8 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "hivewarrior": {
         "name": "Hive Warrior",
@@ -2744,7 +2746,8 @@
         "text": "Prophecy. Destroy a creature.",
         "lore": "'Piercing Javelin deals Magic Damage to an enemy and knocks them backward, stunning them for a brief moment. Aurora Javelin increases the damage when the ability is used at a distance, while Binding Javelin converts it to a Stamina-based image, and increases the duration of the stun caused by the attack.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Online:Piercing_Javelin",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "alternativeArt": true
       },
       "pillagingtribune": {
         "name": "Pillaging Tribune",
@@ -3227,7 +3230,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
         "text": "Prophecy, Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "dunesmuggler": {
         "name": "Dune Smuggler",
@@ -4547,7 +4551,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "alternativeArt": true
       },
       "discipleofnamira": {
         "name": "Disciple of Namira",
@@ -5342,7 +5347,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "dwarvensphere": {
         "name": "Dwarven Sphere",

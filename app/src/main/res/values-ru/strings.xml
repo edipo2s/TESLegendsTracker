@@ -32,6 +32,7 @@
     <string name="menu_search">Поиск</string>
     <string name="menu_sets">Сеты</string>
     <string name="menu_statistics">Статистика</string>
+    <string name="menu_statistics_warning">Карты с альтернативным искусством исключаются</string>
     <string name="menu_compact_view">Скрыть пустые</string>
     <string name="menu_only_favorite">Только Любимый</string>
     <string name="menu_only_private">Только приватные</string>

@@ -100,7 +100,8 @@ object PublicInteractor : BaseInteractor() {
                                 it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
                             }.filterNotNull()
                             Timber.d(cards.toString())
-                            onEachSuccess.invoke(cards)
+                            val cardsAlternativeArt = cards.filter { it.hasAlternativeArt }.map { it.toAlternativeArt() }
+                            onEachSuccess.invoke(cards.plus(cardsAlternativeArt))
                         }
 
                         override fun onCancelled(de: DatabaseError) {

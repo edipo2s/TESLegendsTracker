@@ -24,6 +24,7 @@ import android.webkit.CookieSyncManager
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.ediposouza.teslesgendstracker.*
+import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
 import com.ediposouza.teslesgendstracker.ui.articles.ArticlesFragment
 import com.ediposouza.teslesgendstracker.ui.articles.WabbaTrackFragment
@@ -45,7 +46,12 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.auth.FirebaseAuth
 import com.google.inapp.util.IabHelper
 import it.gmariotti.changelibs.library.view.ChangeLogRecyclerView
+import kotlinx.android.synthetic.main.activity_dash.*
+import kotlinx.android.synthetic.main.dialog_about.view.*
+import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.itemsSequence
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import timber.log.Timber

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.text.format.DateUtils
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,8 @@ import com.ediposouza.teslesgendstracker.ui.cards.CmdFilterRarity
 import com.ediposouza.teslesgendstracker.util.MetricAction
 import com.ediposouza.teslesgendstracker.util.MetricScreen
 import com.ediposouza.teslesgendstracker.util.MetricsManager
+import kotlinx.android.synthetic.main.activity_new_deck.*
+import kotlinx.android.synthetic.main.dialog_new_deck.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
@@ -65,7 +68,7 @@ class NewDeckActivity : BaseFilterActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         new_deck_toolbar_title.text = deckToEdit?.name.takeIf { deckToEdit?.uuid?.isNotEmpty() ?: false } ?: getString(R.string.new_deck_title)
         new_deck_cardlist.editMode = true
-        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
+        if (deckToEdit?.uuid?.isNotEmpty() == true) {
             new_deck_cardlist.showDeck(deckToEdit)
         }
         configDeckFilters()

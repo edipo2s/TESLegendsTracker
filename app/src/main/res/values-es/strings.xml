@@ -32,6 +32,7 @@
     <string name="menu_search">Buscar</string>
     <string name="menu_sets">Conjuntos</string>
     <string name="menu_statistics">Estadística</string>
+    <string name="menu_statistics_warning">Se excluyen las tarjetas con arte alternativo</string>
     <string name="menu_compact_view">Vista compacta</string>
     <string name="menu_only_favorite">Solo Favorito</string>
     <string name="menu_only_private">Solo privado</string>

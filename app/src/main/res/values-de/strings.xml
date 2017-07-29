@@ -32,6 +32,7 @@
     <string name="menu_search">Suche</string>
     <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistiken</string>
+    <string name="menu_statistics_warning">Karten mit alternativer Kunst sind ausgeschlossen</string>
     <string name="menu_compact_view">Kompakte Ansicht</string>
     <string name="menu_only_favorite">Nur Favorit</string>
     <string name="menu_only_private">Nur Privat</string>

@@ -402,7 +402,8 @@ data class Card(
         val generates: List<String>,
         val tokens: List<String>,
         val lore: String,
-        val loreLink: String
+        val loreLink: String,
+        val hasAlternativeArt: Boolean
 
 ) : Comparable<Card>, Parcelable {
 
@@ -415,8 +416,9 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "")
+                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "", false)
 
+        const val ALT_SUFFIX = "_alt"
         const val ARTS_PATH = "Arts"
         const val ARTS_TOKENS_PATH = "TokensArts"
         const val SOUNDS_PATH = "Sounds"
@@ -438,7 +440,8 @@ data class Card(
             1 == source.readInt(), source.readString(), source.readInt(),
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
-            mutableListOf<String>().apply { source.readStringList(this) }, source.readString(), source.readString())
+            mutableListOf<String>().apply { source.readStringList(this) }, source.readString(),
+            source.readString(), 1 == source.readInt())
 
     override fun describeContents() = 0
 
@@ -492,6 +495,10 @@ data class Card(
         }
     }
 
+    fun isAlternativeArt(): Boolean = shortName.endsWith(ALT_SUFFIX)
+
+    fun toAlternativeArt(): Card = copy(shortName = "$shortName$ALT_SUFFIX")
+
     fun canGenerateCards(): Boolean = generates.isNotEmpty()
 
     fun canGenerateTokens(): Boolean = tokens.isNotEmpty()
@@ -499,15 +506,18 @@ data class Card(
     fun isToken(): Boolean = creators.isNotEmpty()
 
     fun hasLocalAttackSound(resources: Resources): Boolean {
-        return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_ATTACK.mp3")
+        return resources.getAssets().list(getLocalCardSoundPath())
+                .contains("${shortName.removeSuffix(ALT_SUFFIX)}_$SOUND_TYPE_ATTACK.mp3")
     }
 
     fun hasLocalPlaySound(resources: Resources): Boolean {
-        return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_PLAY.mp3")
+        return resources.getAssets().list(getLocalCardSoundPath())
+                .contains("${shortName.removeSuffix(ALT_SUFFIX)}_$SOUND_TYPE_PLAY.mp3")
     }
 
     fun hasLocalExtraSound(resources: Resources): Boolean {
-        return resources.getAssets().list(getLocalCardSoundPath()).contains("${shortName}_$SOUND_TYPE_EXTRA.mp3")
+        return resources.getAssets().list(getLocalCardSoundPath())
+                .contains("${shortName.removeSuffix(ALT_SUFFIX)}_$SOUND_TYPE_EXTRA.mp3")
     }
 
     private fun getLocalCardSoundPath(): String {
@@ -525,7 +535,7 @@ data class Card(
     private fun soundPath(type: String): String {
         val setName = set.name.toLowerCase().capitalize()
         val attrName = attr.name.toLowerCase().capitalize()
-        return "$SOUNDS_PATH/$setName/$attrName/${shortName}_$type.mp3"
+        return "$SOUNDS_PATH/$setName/$attrName/${shortName.removeSuffix(ALT_SUFFIX)}_$type.mp3"
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
@@ -554,6 +564,7 @@ data class Card(
         dest?.writeStringList(tokens)
         dest?.writeString(lore)
         dest?.writeString(loreLink)
+        dest?.writeInt((if (hasAlternativeArt) 1 else 0))
     }
 
     override fun compareTo(other: Card): Int {

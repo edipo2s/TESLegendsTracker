@@ -62,6 +62,10 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         }
     }
 
+    override fun filteredCards(): List<Card> {
+        return super.filteredCards().filter { !it.isAlternativeArt() }
+    }
+
     @Subscribe
     @Suppress("unused")
     fun onCmdUpdateCardSlot(cmdUpdateCardSlot: CmdUpdateCardSlot) {

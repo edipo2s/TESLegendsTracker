@@ -14,6 +14,7 @@ import android.support.v7.widget.SearchView
 import android.text.format.DateUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.ui.base.*
 import com.ediposouza.teslesgendstracker.ui.cards.tabs.CardsAllFragment
@@ -25,7 +26,6 @@ import kotlinx.android.synthetic.main.activity_dash.*
 import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.include_new_update.*
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.longToast
 import timber.log.Timber
 
 /**
@@ -155,8 +155,11 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val menuItemSearch = menu?.findItem(R.id.menu_search)
         MenuItemCompat.setOnActionExpandListener(menuItemSearch, object : MenuItemCompat.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
-                context.longToast(getString(R.string.cards_search_keywords_hint,
-                        getString(R.string.cards_search_hint), getString(R.string.cards_search_keywords)))
+                val toast = Toast.makeText(activity.applicationContext, getString(R.string.cards_search_keywords_hint,
+                        getString(R.string.cards_search_hint), getString(R.string.cards_search_keywords)),
+                        Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
                 return true
             }
 
