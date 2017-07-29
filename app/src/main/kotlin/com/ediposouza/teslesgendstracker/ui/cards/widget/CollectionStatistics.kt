@@ -105,6 +105,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
                         else -> {
                         }
                     }
+                    updateStatisticsTotal()
                 }
             }
         }
