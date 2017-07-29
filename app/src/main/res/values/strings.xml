@@ -36,6 +36,7 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
+    <string name="app_warning">This app don\'t connect with your game account. User data like collection and matches needs manual input.</string>
 
     <string name="title_changelog" translatable="false">ChangeLog</string>
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
@@ -94,6 +95,7 @@
     <string name="share_with">Share with…</string>
     <string name="share_text">Manage your TES Legends collection, search and create public or private decks to track your matches</string>
 
+    <string name="about_language_warning">Cards image will stay in english</string>
     <string name="about_language_english" translatable="false">English</string>
     <string name="about_language_portuguese" translatable="false">Portuguese</string>
     <string name="about_language_spanish" translatable="false">Spanish</string>

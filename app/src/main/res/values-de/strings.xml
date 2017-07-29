@@ -12,6 +12,7 @@
     <string name="app_new_version_message">Halten Sie Ihre App für neue Funktionen und Verbesserungen aktualisiert!</string>
     <string name="app_new_version_update_now">Jetzt Aktualisieren</string>
     <string name="app_new_version_update_later">Später</string>
+    <string name="app_warning">Diese App ist nicht mit deinem Spielkonto verbunden. Benutzerdaten wie Sammlung und Streichhölzer benötigen manuelle Eingabe.</string>
 
     <string name="menu_basics">Basisinformation</string>
     <string name="menu_cards">Karten</string>
@@ -60,6 +61,8 @@
 
     <string name="share_with">Teilen mit...</string>
     <string name="share_text">Verwalten Sie Ihre TES Legends Sammlung, suchen und erstellen Sie öffentliche oder private Decks, um Ihre Spiele zu verfolgen</string>
+
+    <string name="about_language_warning">Kartenbild bleibt auf Englisch</string>
 
     <string name="about_title">Über den TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker ist eine Assistentin für Kartenspiel Die Elder Scroll Legends von Dire Wolf Digital entwickelt und von Bethesda Softworks veröffentlicht.</string>

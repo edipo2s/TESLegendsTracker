@@ -12,6 +12,7 @@
     <string name="app_new_version_message">Держите ваше приложение обновляется для новых функций и улучшений!</string>
     <string name="app_new_version_update_now">Обновить сейчас</string>
     <string name="app_new_version_update_later">Позже</string>
+    <string name="app_warning">Это приложение не связано с вашей учетной записью. Данные пользователя, такие как сбор и совпадения, требуют ввода вручную.</string>
 
     <string name="menu_basics">Базовая информация</string>
     <string name="menu_cards">Карты</string>
@@ -60,6 +61,8 @@
 
     <string name="share_with">Поделитесь с…</string>
     <string name="share_text">Управление вашей коллекции TES Legends, поиск и создавать общественные или частные палубы, чтобы отслеживать ваши матчи</string>
+
+    <string name="about_language_warning">Изображение на карте останется на английском</string>
 
     <string name="about_title">Около TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker является помощник приложение для карточной игры The Elder Scroll Легенды разработанные Dire Wolf Digital и опубликованных Bethesda Softworks.</string>
