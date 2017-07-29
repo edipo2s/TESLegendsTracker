@@ -62,7 +62,18 @@ enum class CardAttribute(@DrawableRes val imageRes: Int, val isBasic: Boolean = 
     AGILITY(R.drawable.attr_agility),
     ENDURANCE(R.drawable.attr_endurance),
     NEUTRAL(R.drawable.attr_neutral, false),
-    DUAL(R.drawable.attr_dual, false)
+    DUAL(R.drawable.attr_dual, false),
+    UNKNOWN(R.drawable.attr_neutral, false);
+
+    companion object {
+
+        fun of(value: String): CardAttribute {
+            val name = value.trim().toUpperCase().replace(" ", "_")
+            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+        }
+
+    }
+
 
 }
 

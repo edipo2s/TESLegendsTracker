@@ -51,7 +51,7 @@ object PublicInteractor : BaseInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.map {
-                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                            val attr = CardAttribute.of(it.key.toUpperCase())
                             it.children.map {
                                 it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
                             }.filterNotNull()
@@ -141,7 +141,7 @@ object PublicInteractor : BaseInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.map {
-                            val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                            val attr = CardAttribute.of(it.key.toUpperCase())
                             it.children.map {
                                 it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
                             }.filterNotNull()
@@ -244,7 +244,7 @@ object PublicInteractor : BaseInteractor() {
                                 unknownSetTitle = spoilerTitle
                             }
                             val cards = ds.children.map {
-                                val attr = CardAttribute.valueOf(it.key.toUpperCase())
+                                val attr = CardAttribute.of(it.key.toUpperCase())
                                 it.children.map {
                                     it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
                                 }.filterNotNull()

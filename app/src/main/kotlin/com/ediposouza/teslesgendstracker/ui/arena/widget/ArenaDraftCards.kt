@@ -209,9 +209,9 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             CardArenaTierPlusType.COST -> getExtraPointsForIntValue(arenaTierPlus, draftedCard.cost)
             CardArenaTierPlusType.HEALTH -> getExtraPointsForIntValue(arenaTierPlus, draftedCard.health)
             CardArenaTierPlusType.ATTR -> extraPoints.takeIf {
-                !reverseCalc && (draftedCard.attr == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
-                        draftedCard.dualAttr1 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()) ||
-                        draftedCard.dualAttr2 == CardAttribute.valueOf(arenaTierPlus.value.toUpperCase()))
+                !reverseCalc && (draftedCard.attr == CardAttribute.of(arenaTierPlus.value.toUpperCase()) ||
+                        draftedCard.dualAttr1 == CardAttribute.of(arenaTierPlus.value.toUpperCase()) ||
+                        draftedCard.dualAttr2 == CardAttribute.of(arenaTierPlus.value.toUpperCase()))
             } ?: 0
             CardArenaTierPlusType.KEYWORD -> extraPoints.takeIf {
                 draftedCard.keywords.filter { it.name == arenaTierPlus.value.toUpperCase() }.isNotEmpty()

@@ -118,6 +118,7 @@ class CollectionStatistics(ctx: Context?, attrs: AttributeSet?, defStyleAttr: In
         CardAttribute.ENDURANCE -> rootView.rarity_statistics_endurance
         CardAttribute.NEUTRAL -> rootView.rarity_statistics_neutral
         CardAttribute.DUAL -> rootView.rarity_statistics_dual
+        CardAttribute.UNKNOWN -> rootView.rarity_statistics_neutral
     }
 
 }
