@@ -180,7 +180,7 @@ class PatchActivity : BaseActivity() {
                 patch_card_old_image.loadFromPatch(patchChange, patchUuid, false)
                 patch_card_new_image.loadFromPatch(patchChange, nextPatchUuid, true)
                 val set = CardSet.of(patchChange.set)
-                val attr = CardAttribute.valueOf(patchChange.attr.toUpperCase())
+                val attr = CardAttribute.of(patchChange.attr.toUpperCase())
                 PublicInteractor.getCard(set, attr, patchChange.shortName) { card ->
                     patch_card_old_image.setOnClickListener { itemClick(patch_card_old_image, card) }
                     patch_card_new_image.setOnClickListener { itemClick(patch_card_new_image, card) }

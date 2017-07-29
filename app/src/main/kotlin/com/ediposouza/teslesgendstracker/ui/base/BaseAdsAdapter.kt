@@ -3,6 +3,7 @@ package com.ediposouza.teslesgendstracker.ui.base
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -37,7 +38,7 @@ abstract class BaseAdsAdapter(val adsEachItems: Int, @LayoutRes val adsLayout: I
             return onCreateDefaultViewHolder(parent)
         } else {
             val adsItemView = parent.inflate(adsLayout)
-            val ads = adsItemView.findViewById(R.id.ads_view)
+            val ads = adsItemView.findViewById<View>(R.id.ads_view)
             when (ads) {
                 is AdView -> ads.load()
                 is NativeExpressAdView -> ads.load()

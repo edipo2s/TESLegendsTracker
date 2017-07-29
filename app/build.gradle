@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-crash'
-//apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
@@ -16,7 +16,7 @@ android {
     props.load(file("secrets.properties").newInputStream())
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
-        minSdkVersion prepareToRelease ? 16 : 21
+        minSdkVersion prepareToRelease ? 17 : 21
         targetSdkVersion 26
         versionCode appVersionCode
         versionName appVersionName
@@ -77,13 +77,13 @@ kotlin {
 }
 
 ext {
-    anko_version = "0.9.1"
+    anko_version = "0.10.1"
     coroutines_version = "0.15"
-    okIOVersion = "1.12.+"
-    okHttpVersion = "3.7.+"
-    playServicesVersion = "10.2.4"
-    supportLibraryVersion = "25.4.0"
-    threetenabpVersion = "1.0.+"
+    okIOVersion = "1.13.0"
+    okHttpVersion = "3.8.1"
+    playServicesVersion = "11.0.4"
+    supportLibraryVersion = "26.0.0"
+    threetenabpVersion = "1.0.5"
 
     testMockitoVersion = "2.7.+"
     testRoboletricVersion = "3.2.+"
@@ -91,6 +91,12 @@ ext {
 
 configurations.all {
     resolutionStrategy{
+        eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == "com.android.support" && !requested.name.startsWith("multidex")) {
+                details.useVersion "$supportLibraryVersion"
+            }
+        }
         force "com.android.support:support-annotations:$supportLibraryVersion"
         force "com.squareup.okio:okio:$okIOVersion"
         force "com.squareup.okhttp3:okhttp:$okHttpVersion"
@@ -124,10 +130,10 @@ dependencies {
     compile "com.google.firebase:firebase-config:$playServicesVersion"
     compile "com.google.firebase:firebase-database:$playServicesVersion"
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"
-//    compile "com.google.firebase:firebase-perf:$playServicesVersion"
+    compile "com.google.firebase:firebase-perf:$playServicesVersion"
     releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
-    compile "com.google.firebase:firebase-storage:10.2.1"
-    compile "com.firebaseui:firebase-ui-storage:1.2.0"
+    compile "com.google.firebase:firebase-storage:$playServicesVersion"
+    compile "com.firebaseui:firebase-ui-storage:2.1.1"
 
     //Fabric
     compile('com.crashlytics.sdk.android:answers:1.3.13') {

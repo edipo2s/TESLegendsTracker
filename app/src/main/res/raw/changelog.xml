@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.6.2"
+        changeDate="July 29, 2017">
+        <changelogtext>[b]Feature:[/b] Added Alternative Art cards with full art</changelogtext>
+        <changelogtext>[b]Feature:[/b] Search 'Altenative' for show alternative art cards
+        </changelogtext>
+        <changelogtext>Fix collection summary don't updating in first opening</changelogtext>
+        <changelogtext>Add Ulfric's Housecarl card, art and sounds</changelogtext>
+        <changelogtext>Update cards changed in 07/27/2017 patch.</changelogtext>
+        <changelogtext>Warning about no need Bethesda account.</changelogtext>
+        <changelogtext>Warning about card imagem don't change language</changelogtext>
+        <changelogtext>Fixes and improvements</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.6.1"
         changeDate="July 11, 2017">
         <changelogtext>[b]Feature:[/b] Search 'Animal and 'Undead' support</changelogtext>

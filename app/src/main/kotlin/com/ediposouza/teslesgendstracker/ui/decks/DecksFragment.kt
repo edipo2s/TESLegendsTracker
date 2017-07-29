@@ -312,7 +312,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         val deckCls = it.select(".deck_head_image_attributes").map {
                             val cardCls1 = it.child(0).attr("alt").toUpperCase()
                             val cardCls2 = it.child(1).attr("alt").toUpperCase()
-                            DeckClass.getClass(CardAttribute.valueOf(cardCls1), CardAttribute.valueOf(cardCls2))
+                            DeckClass.getClass(CardAttribute.of(cardCls1), CardAttribute.of(cardCls2))
                         }.first()
                         val deckType = DeckType.of(with(it.select(".panel-body .center").first().text()) {
                             substring(indexOfLast { it == ' ' } + 1).replace("-", "")

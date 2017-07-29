@@ -14,6 +14,7 @@ val ARENA_TIER_PLUS_VALUE_DELIMITER = "_"
 val TEXT_UNKNOWN = "unknown"
 val DECK_NAME_MIN_SIZE = 5
 
+val PREF_FIRST_RUN = "firstRun"
 val PREF_USER_DONATE = "ud"
 val PREF_USER_LANGUAGE = "language"
 val PREF_NEWS_CHECK_LAST_TIME = "newsCheckPref"

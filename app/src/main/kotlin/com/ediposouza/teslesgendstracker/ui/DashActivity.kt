@@ -52,6 +52,7 @@ import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.itemsSequence
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import timber.log.Timber
 
@@ -357,6 +358,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     private fun showLanguageDialog(): Boolean {
+        longToast(R.string.about_language_warning)
         val languages = resources.getStringArray(R.array.languages)
         AlertDialog.Builder(this, R.style.AppDialog)
                 .setAdapter(object : ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages) {
@@ -440,6 +442,15 @@ class DashActivity : BaseFilterActivity(),
         AlertDialog.Builder(this, R.style.AppDialog)
                 .setTitle(R.string.title_changelog)
                 .setPositiveButton(android.R.string.ok, null)
+                .setOnDismissListener {
+                    if (App.isFirstRun()) {
+                        AlertDialog.Builder(this, R.style.AppDialog)
+                                .setTitle(R.string.app_name_full)
+                                .setMessage(R.string.app_warning)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show()
+                    }
+                }
                 .create()
                 .apply {
                     setView(ChangeLogRecyclerView(context))
@@ -525,7 +536,7 @@ class DashActivity : BaseFilterActivity(),
     }
 
     private fun getStatisticsBottomSheetBehavior(): BottomSheetBehavior<*>? {
-        findViewById(R.id.cards_collection_statistics)?.apply {
+        findViewById<View>(R.id.cards_collection_statistics)?.apply {
             return BottomSheetBehavior.from<View>(this)
         }
         return null

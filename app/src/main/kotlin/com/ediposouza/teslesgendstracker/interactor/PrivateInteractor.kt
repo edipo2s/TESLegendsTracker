@@ -57,8 +57,12 @@ object PrivateInteractor : BaseInteractor() {
     }
 
     fun setUserCardQtd(card: Card, qtd: Int, onComplete: () -> Unit) {
+        var cardQtd = qtd.takeUnless { qtd < 0 } ?: 0
+        if (card.unique && qtd > 1) {
+            cardQtd = 1
+        }
         dbUserCards(card.set, card.attr)?.apply {
-            child(card.shortName).child(KEY_CARD_QTD).setValue(qtd).addOnCompleteListener {
+            child(card.shortName).child(KEY_CARD_QTD).setValue(cardQtd).addOnCompleteListener {
                 onComplete.invoke()
             }
         }

@@ -37,6 +37,12 @@ class App : MultiDexApplication() {
                     PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_USER_DONATE, false)
         }
 
+        fun isFirstRun(): Boolean {
+            val firstRun = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_FIRST_RUN, true)
+            PreferenceManager.getDefaultSharedPreferences(ctx).edit().putBoolean(PREF_FIRST_RUN, false).apply()
+            return firstRun
+        }
+
         fun shouldShowChangelog(): Boolean {
             return !PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(getVersion(), false)
         }

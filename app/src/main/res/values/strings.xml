@@ -36,6 +36,7 @@
     <string name="app_new_version_message">Keep your app updated for new features and improvements!</string>
     <string name="app_new_version_update_now">Update Now</string>
     <string name="app_new_version_update_later">Later</string>
+    <string name="app_warning">This app don\'t connect with your game account. User data like collection and matches needs manual input.</string>
 
     <string name="title_changelog" translatable="false">ChangeLog</string>
     <string name="playstore_url_format" translatable="false">http://play.google.com/store/apps/details?id=%s</string>
@@ -64,6 +65,7 @@
     <string name="menu_search">Search</string>
     <string name="menu_sets">Sets</string>
     <string name="menu_statistics">Statistics</string>
+    <string name="menu_statistics_warning">Cards with alternative art are excluded</string>
     <string name="menu_compact_view">Compact View</string>
     <string name="menu_only_favorite">Only Favorite</string>
     <string name="menu_only_private">Only Private</string>
@@ -94,6 +96,7 @@
     <string name="share_with">Share with…</string>
     <string name="share_text">Manage your TES Legends collection, search and create public or private decks to track your matches</string>
 
+    <string name="about_language_warning">Cards image will stay in english</string>
     <string name="about_language_english" translatable="false">English</string>
     <string name="about_language_portuguese" translatable="false">Portuguese</string>
     <string name="about_language_spanish" translatable="false">Spanish</string>
@@ -176,6 +179,7 @@
     <string name="title_tab_wabbatrack_autobuild">Deck Auto-Build</string>
 
     <string name="cards_sets_all">All</string>
+    <string name="cards_search_alternative" translatable="false">alternative</string>
     <string name="cards_search_animal" translatable="false">animal</string>
     <string name="cards_search_lore" translatable="false">lore</string>
     <string name="cards_search_reward" translatable="false">reward</string>
@@ -223,7 +227,7 @@
 
     <string name="zero_of_zero" translatable="false">0/0</string>
     <string name="cards_search_hint">Name, Race, Type, Keyword or Text</string>
-    <string name="cards_search_keywords" translatable="false">\'Animal\', \'Lore\', \'Reward\', \'Undead\', \'Unique\'</string>
+    <string name="cards_search_keywords" translatable="false">\'Alternative\', \'Animal\', \'Lore\', \'Reward\', \'Undead\', \'Unique\'</string>
     <string name="cards_search_keywords_hint" formatted="false">Search for card %s \n or try %s</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>

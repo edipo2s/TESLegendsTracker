@@ -122,7 +122,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Deal 1 damage.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "alternativeArt": true
       },
       "steelscimitar": {
         "name": "Steel Scimitar",
@@ -890,7 +891,7 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Breakthrough, Summon, Unsummon",
-        "text": "Breakthrough. Summon: Unsummon a creature or destroy an enemy support.",
+        "text": "Breakthrough. Summon: Unsummon a creature in this lane or destroy an enemy support.",
         "lore": "'Giants are a race of enormous humanoids with colossal strength. They are found in the wilderness of Skyrim, High Rock, Hammerfell, Cyrodiil and Valenwood.' - uesp.net",
         "loreLink": "http://uesp.net/wiki/Lore:Giant",
         "arenaTier": "Insane"
@@ -1051,7 +1052,7 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "",
-        "text": "+2/+0 when there are no enemy creatures in this lane.",
+        "text": "+2/+0 while there are no enemy creatures in this lane.",
         "lore": "'Niben Bay is a large body of water in the southesatern part of Cyrodiil, right next to Bravil. This particular Redguard is a long way from her homeland, but she's found a profitable spot for raiding. The Niben Bay is large, with plenty of caves and inlets to hide after a successful plunder.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5rtktb/daily_card_discussion_thread_155_niben_bay/ddasqln",
         "arenaTier": "Terrible"
@@ -1364,7 +1365,7 @@
         "health": "2",
         "rarity": "Legendary",
         "keyword": "Ward",
-        "text": "Ward. After Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
+        "text": "Ward. When Daggerfall Mage's Ward is broken, put a Tome of Alteration into your hand.",
         "lore": "'Daggerfall is the largest city in Glenumbra, located at the southwestern end of the peninsula. It is the capital of the kingdom of Daggerfall. The order Knights of the Dragon have the official duty of protecting the city and royal family of Daggerfall. The last census, in 3E 401, lists the population at over 110,000.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Lore:Daggerfall",
         "arenaTier": "Excellent",
@@ -1488,7 +1489,7 @@
         "health": "1",
         "rarity": "Epic",
         "keyword": "Ward, Guard",
-        "text": "Ward. After Breton Conjurer's Ward is broken, summon a 5/5 Frost Atronach with Guard.",
+        "text": "Ward. When Breton Conjurer's Ward is broken, summon a 5/5 Frost Atronach with Guard.",
         "arenaTier": "Excellent",
         "tokens": "frostatronach"
       },
@@ -2363,7 +2364,7 @@
         "health": "2",
         "rarity": "Epic",
         "keyword": "",
-        "text": "When an enemy rune is destroyed, gain 3 health.",
+        "text": "After an enemy rune is destroyed, gain 3 health.",
         "lore": "'Dawnstar is a hellhole. And in the generally dangerous Skyrim, that's saying something. On the surface, it seems like a sleepy fishing and mining town. But just below the surface, all sorts of things are horrible about it.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5c13of/daily_card_discussion_thread_69_dawnstar_healer/d9svldc",
         "arenaTier": "Good"
@@ -2589,7 +2590,8 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "hivewarrior": {
         "name": "Hive Warrior",
@@ -2744,7 +2746,8 @@
         "text": "Prophecy. Destroy a creature.",
         "lore": "'Piercing Javelin deals Magic Damage to an enemy and knocks them backward, stunning them for a brief moment. Aurora Javelin increases the damage when the ability is used at a distance, while Binding Javelin converts it to a Stamina-based image, and increases the duration of the stun caused by the attack.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Online:Piercing_Javelin",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "alternativeArt": true
       },
       "pillagingtribune": {
         "name": "Pillaging Tribune",
@@ -3227,7 +3230,8 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
         "text": "Prophecy, Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "dunesmuggler": {
         "name": "Dune Smuggler",
@@ -3934,7 +3938,7 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Ward",
-        "text": "Ward. After Iliac Sorcerer's Ward is broken, double his power.",
+        "text": "Ward. When Iliac Sorcerer's Ward is broken, double his power.",
         "lore": "'The Iliac Bay region is the area around west High Rock and north Hammerfell. It's the setting of the game Daggerfall, and still one of the largest game areas ever made.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ulq8z/daily_card_discussion_thread_169_iliac_sorcerer/ddwktgm",
         "arenaTier": "Good"
@@ -4547,7 +4551,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "alternativeArt": true
       },
       "discipleofnamira": {
         "name": "Disciple of Namira",
@@ -4947,6 +4952,21 @@
         "attr2": "willpower",
         "arenaTier": "Good"
       },
+      "ulfricshousecarl": {
+        "name": "Ulfric's Housecarl",
+        "cost": "04",
+        "type": "Creature",
+        "race": "Nord",
+        "attack": "3",
+        "health": "4",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "When an enemy rune is destroyed, draw a card.",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "arenaTier": "Unknown",
+        "season": "2017_07"
+      },
       "ahnassi": {
         "name": "Ahnassi",
         "cost": "05",
@@ -5012,7 +5032,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Breakthrough, Ward",
-        "text": "Breakthrough, Ward. After Shornhelm Champion's Ward is broken, he gains +3/+3.",
+        "text": "Breakthrough, Ward. When Shornhelm Champion's Ward is broken, he gains +3/+3.",
         "lore": "'Shornhelm is the capital of Rivenspire, a major region in the famously fractured land of the Bretons, High Rock. It's most well-known for having two nasty places nearby: a massive haunted mausoleum called the Crypt of Hearts, and the corrupted Ayleid Tower (and Nickelodeon GUTS challenge), the Doomcrag.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cw6pw/daily_card_discussion_thread_74_shornhelm/da02cwd",
         "attr1": "intelligence",
@@ -5327,7 +5347,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "alternativeArt": true
       },
       "dwarvensphere": {
         "name": "Dwarven Sphere",
@@ -6456,6 +6477,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When Caravan Enforcer moves, he gains +1/+1.",
+        "lore": "'Caravan enforcer Khajiiti caravans are a common sight over all of Tamriel, and can be found even in Skyrim, the least welcoming province. These humble caravans must be heaviely guarded thanks to dangerous wildlife, bandits, civil war and even return of the Dragons.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "text": "Move a"
@@ -6471,6 +6494,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
+        "lore": "'Chaurus are hideous insectoids clad in unbreakable chitin, usually residing far below the surface of Skyrim. They are tamed and bred by Falmer, for chitin and meat alike. They can sometimes be seen on surface, if they are very hungry, hunting in marshes.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average"
       },
       "deepwoodtrapper": {
@@ -6508,6 +6533,8 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Give an enemy creature -1/-1.",
+        "lore": "'Gaan Lah Haas! In Dragon language stamina, magicka, health, is a shout widely used to damage will, energy and health off your opponent, while bostering yours.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "text": "Shout"
@@ -6559,6 +6586,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Either put another Lockpick into your hand or draw a card and reduce its costs by 2. Choosen randomly.",
+        "lore": "'Lockpicks are essential tools of any good thief. They can break easiely, so one should carry few of them around. Locks can be heated by source of fire, to break more complex defences. Tricky locks can be bent, but a good thief can deal with this too, carrying special lockpicks for these occasions.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Terrible"
       },
       "moveinshadows": {
@@ -6583,6 +6612,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Nightprowler gains Cover, draw a card.",
+        "lore": "'Falmer are what remained of the ancient civilization of the Snow Elves. They roam the underground of Skyrim, which used to be known as Merith in their time. Their eyes have develoved, but the darkness surrounding them has sharpened their other sences, using the lack of light to their advantage in combat.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good"
       },
       "palaceprowler": {
@@ -6661,6 +6692,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Give a friendly creature Cover. Your opponent can't target it with actions until next turn.",
+        "lore": "'There are few remaining female Falmer, and they usually take the roles in society as shamans. They usually excel in the art of Illusion and destruction, using shadows to their advantage.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Excellent"
       },
       "shadowscalepartisan": {
@@ -6761,6 +6794,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "When you summon a Dragon, summon a 1/1 Draugr Sentry with Guard.",
+        "lore": "'Warriors of ancient times, most Draugr used to serve the Dragons, and they continue to do so even in death. They are now more active than ever before, with the return of Dovah to Skyrim.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good",
         "tokens": "draugrsentry",
         "arenaTierPlus": {
@@ -6802,6 +6837,8 @@
         "rarity": "Epic",
         "keyword": "Ward",
         "text": "Ward. At the end of your turn, if Corrupted Shade doesn't have Ward, sacrifice it.",
+        "lore": "'Horrible creatures, created from the remains of Stormcloak and Imperials alike by vile necromancer. They roam Kilkreath temple, a place dedicated to worship of Meridia, mocking her great hatred for the undead.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good"
       },
       "dragoncultghost": {
@@ -6814,6 +6851,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Spend all your available magicka to play Dragon Cult Ghost, its power and health are equals to the magicka spent.",
+        "lore": "'Draugr are members of the ancient Dragon cult, serving their masters even after death. Cultists bodies could become too disformed to serve, in which case only souls of the warriors remained,capable of service, forever exiled of rest in Sovngarde.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good"
       },
       "dragonplatearmor": {
@@ -6935,6 +6974,8 @@
         "unique": true,
         "keyword": "",
         "text": "After you play a Dragon or Schout, Innkeeper Delphine changes into Grandmaster Delphine.",
+        "lore": "'Blades, once great organization, now in ruins thanks to White-Gold Concordat. With the death of Dragonborn Emperors, the remaining members started hiding amongst normal folk, awaiting the arrival of new Dragonborn, whomst they shall serve faithfully as they did centuries ago.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Dragon",
@@ -7007,6 +7048,8 @@
         "rarity": "Legendary",
         "keyword": "Guard, Summon, Last Gasp",
         "text": "Guard, Summon: Give all creaturesin your discard pile +2/+2. Last Gasp: Draw a random creature from your discard pile.",
+        "lore": "'Unlike most Dragons who remained burried or hidden for all these years, this one got trapped in the ruins of Labyrinthian. Now he walks once more, but in death rather than life, unlike his brothers, reanimated back to service not by Alduin, but by a powerful mortal necromancer.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good"
       },
       "soultear": {
@@ -7020,6 +7063,8 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Draw a creature from your discard pile.",
+        "lore": "'Rii Vaaz Zol! Essense, tear, zombie. This shout was developed by Dragon living in Soul Cairn, who, unlike most others of his kind, studied necromancy. These three words have the power to soul trap, kill and break will of the dead, forcing them to fight for you.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "Shout"
@@ -7065,6 +7110,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Draw a card if you have two other (Endurance) creatures.",
+        "lore": "'Stonehills are a small settlement of miners living in crude conditions, bordering the swampy marshes of Hjaalmarch and high peaks of Labyrinthian. Mammoths are found very rarely in this place, and only in small numbers, for they usually prefer lush grass of Whiterun plains.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "endurance",
@@ -7110,6 +7157,8 @@
         "unique": true,
         "keyword": "Breakthrough, Summon",
         "text": "Breakthrough. Summon: Deal 5 damage. Your actions have Breakthrough.",
+        "lore": "'A Thalmor infiltrator in the College of Winterhold, Ancano seeks to abuse the newfound Eye of Magnus, bolstering his already great magical prowess to god-like power. With this artifact, Ancano seeks to unmake the world according to Thalmor plans, finally rendering the Altmer immortal.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Insane"
       },
       "arcaneenchanter": {
@@ -7162,6 +7211,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Summon a 5/5 Frost Atronach with Guard.",
+        "lore": "'Redguards are famous for their skills in magic of destruction, but conjuring and dealing with Daedra is forbidden in their culture. Many Redguards wishing to study Daedra flee their home, settling all over Tamriel - some even in the College of Winterhold.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good",
         "tokens": "frostatronach"
       },
@@ -7206,6 +7257,8 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "+2/+2 Summon: Trigger the wielder's summon ability.",
+        "lore": "'' - Rubliko",
+        "loreLink": "The highest ranking members of the Dragon cult were taught the way of the voice first, by their Dragon overlords. They were given masks by the Dragons, imbued with ancient arcane power. Those masks were named in Dragon language, and with their acceptence the priest accepted new names for themselves.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Summon"
@@ -7235,7 +7288,7 @@
         "health": "5",
         "rarity": "Legendary",
         "keyword": "Summon",
-        "text": "Summon: Give each creature in your deck a random Keyword.",
+        "text": "When you draw a creature, give it a random Keyword.",
         "arenaTier": "Excellent"
       },
       "embassyguard": {
@@ -7270,7 +7323,7 @@
         "name": "Ghost Sea Lookout",
         "cost": "3",
         "type": "Creature",
-        "race": "Nord",
+        "race": "Breton",
         "attack": "4",
         "health": "2",
         "rarity": "Common",
@@ -7316,6 +7369,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Put an Experimental Scroll into your hand.",
+        "lore": "'J'zargo is one of the few Khajiit who inhabit northern Skyrim, specificaly the College of Winterhold. He is very confident and competetive, and is capable of doing anything for his succes, icnluding thievery. J'zargo enjoys the study of magical scrolls, but for his own safety lets other people test them instead of him.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good",
         "tokens": "experimentalscroll"
       },
@@ -7449,6 +7504,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Costs 2 less for each Dragon in your discard pile. Summon: Destroy all other creatures. At the start of your turn, summon a random Dragon from your discard pile.",
+        "lore": "'The self proclaimed firstborn of Akatosh, Alduin is the fabled World Eaeter, who shall bring the end of the World. Alduin has rebelled against his fate, seeking to dominate the world, instead of ending it, attempting to rule the world once more, like he did in Merethic era.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Dragon"
@@ -7473,7 +7530,7 @@
         "name": "Barbas",
         "cost": "5",
         "type": "Creature",
-        "race": "Beast",
+        "race": "Daedra",
         "attack": "3",
         "health": "3",
         "rarity": "Legendary",
@@ -7492,6 +7549,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
         "text": "Prophecy, Guard, Summon: Gains 2 health.",
+        "lore": "'Blackreach used to be the greatest Dwemer city in Skyrim, if not in all Tamriel. Its built in natural cavern, and can be entered through three surface settlements. Dwemers are long gone, and their great halls are falling apart. Ocasionally, one might still spot mechanical spiders, trying to rebuild the place as it once was, patiently awaiting return of their masters.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Terrible"
       },
       "dragonmound": {
@@ -7505,6 +7564,8 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Ongoint. Summon: Transform all cards in your deck into random Dragons. Your Dragons cost 1 less.",
+        "lore": "'The Nords suffered from Dragons the most, and soon started rebelling. The godess Kyne taught them how to use the voice, overthrowing their overlords. Without the help of the Dragonborn Dragons couldnt really be killed, but merely defeated. Their remains were burried in the frozen soil of Skyrim, awaiting the return of World Eater Alduin.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Dragon"
@@ -7577,6 +7638,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+2/+3",
+        "lore": "'A crude iron helmet, of undoubtably Nordic origin. While its certainly not the peak of Nordic smithing, its one of the most characteristic helmets used by Nords, its great horns inspiring warriors and striking fears into cowards.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average"
       },
       "journeytosovngarde": {
@@ -7728,6 +7791,8 @@
         "unique": true,
         "keyword": "Summon, Beast Form",
         "text": "Summon: Deal 1 damage. Beast Form: +2/+2 and destroy a Wounded creature.",
+        "lore": "'Aela is one of the highest ranking members of Companions, and is member of the Circle. She enjoys hunting, both with bow and in beast form. She is the only Companion who will not give up her werewolf blood after Kodlaks death, no matter what.' - Rubliko",
+        "loreLink": "",
         "tokens": "aelathehuntress_beast",
         "arenaTier": "Good"
       },
@@ -7882,6 +7947,8 @@
         "unique": true,
         "keyword": "Activate",
         "text": "Uses 3. Activate: Equip a friendly creature with a Steel Dagger. If Skyforge has equipped 3 daggers, it changes into Underforge.",
+        "lore": "'Legendary forge of the Companions, built in times long forgotten by unknown forces. Steel weaponry forged here has no match in all of Tamriel. Under Skyforge lies the Underforge, meeting place of the highest ranking Companions with werewolf blood.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average",
         "tokens": "steeldagger, underforge"
       },
@@ -7974,6 +8041,8 @@
         "unique": true,
         "keyword": "Breakthrough",
         "text": "When you play a Shout, draw a random Nord from your deck.",
+        "lore": "'Hero to some, despicible traitor to others. Ulfric Stormcloak, Jarl of Windhelm is the leader of the Stormcloak rebellion, fighting the Empire led by General Tullius. Ulfrics cause is to restore Nordic rule over Skyrim, to legalize the worship of Talos, and to take fight to the Aldmeri Dominion.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Shout"
@@ -8030,6 +8099,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Ongoing. When you summon a creature that costs 7 or more, double its power and health.",
+        "lore": "'Alduins retreat, Skuldafn, is an ancient Nordic ruin, built atop the highest peaks of Skyrim. Its inaccessible for mere men for its height, and must be travelled to by a Dragon. Portal to Sovngarde, where Alduin feasts on souls of deceased heroes, is located here, guarded by the dragon priest Nahrkiin.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -8047,6 +8118,8 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "Fill the left lane with Stormcloak Skirmisher or the right lane with Colovian Troopers.",
+        "lore": "'Skyrim has been torn in half by the rebellion of Ulfric, with battles and hatred plaguing hers land. The Empire, weakened by the Great War tries to hold Skyrim, against rebels fighting for independence. The Aldmeri Dominion watches this war from afar, waiting for the right moment to strike both sides.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "tokens": "coloviantrooper, stormcloakskirmisher"
       },
@@ -8071,7 +8144,7 @@
         "health": "5",
         "rarity": "Epic",
         "keyword": "Summon",
-        "text": "Summon: Other friendly creatures in this lane have 'Pilfer: Draw a card' this turn.",
+        "text": "Summon: Other friendly creatures in this lane gain 'Pilfer: Draw a card' this turn.",
         "arenaTier": "Excellent"
       },
       "callofvalor": {
@@ -8085,6 +8158,8 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "Summon a 3/3 Sovngarde Hero",
+        "lore": "'Hun Kaal Zoor! Hero, Champion, Legend - With these words the Last Dragonborn can call help from Sovngarde, inviting the immortal spirits of great Nordic warriors to walk mortal realm once more.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Good",
         "arenaTierPlus": {
           "text": "Shout"
@@ -8116,6 +8191,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: give a creature +0/+2.",
+        "lore": "'Kyne is ancient godess of Nordic pantheon. Imperial pantheon slowly gained more worship in Skyrim, and with it Kynareth replaced the original Kyne. Only the most faithful still worship the Old Nordic Gods, usually living lives in solitude.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Excellent"
       },
       "cliffsidelookout": {
@@ -8180,6 +8257,8 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Ongoing. Summon: Put a 1/2 Septim Guardsman into your hand. friendly Guards have +1/+0.",
+        "lore": "'Imperial camps are setup all over Skyrim, always ready to face attack of the rebellious Stormcloak. Soldiers in these camps have to be heaviely disciplined and trained, each having their very specific role in camp.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "type": "Guard"
@@ -8216,7 +8295,7 @@
         "name": "Legate Rikke",
         "cost": "4",
         "type": "Creature",
-        "race": "Imperial",
+        "race": "Nord",
         "attack": "3",
         "health": "4",
         "rarity": "Legendary",
@@ -8253,7 +8332,7 @@
         "health": "3",
         "rarity": "Epic",
         "keyword": "Summon",
-        "text": "Summon: Give creatures in your deck +2/+2.",
+        "text": "Summon: Give creatures in your deck +1/+1.",
         "arenaTier": "Excellent"
       },
       "priestoftheeight": {
@@ -8377,6 +8456,8 @@
         "rarity": "Epic",
         "keyword": "Activate",
         "text": "Uses 3. Activate. Summon an Uncaged Wolf",
+        "lore": "'Wolves of Skyrim are the largest and fiercest in Tamriel. Unlike other breeds of wolves, they do not hunt to survive, but out of cruelty. For this reason, they are oftentimes caught and thrown into pit, against other animals and humans alike.' - Rubliko",
+        "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Wolf"

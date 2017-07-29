@@ -33,7 +33,7 @@ import org.jetbrains.anko.itemsSequence
  */
 open class CardsAllFragment : BaseFragment() {
 
-    protected val KEY_CURRENT_ATTR = "currentClassKey"
+    private val KEY_CURRENT_ATTR = "currentClassKey"
 
     open val ADS_EACH_ITEMS = 21 //after 7 lines
     open val CARDS_PER_ROW = 3
@@ -53,6 +53,7 @@ open class CardsAllFragment : BaseFragment() {
 
     val transitionName: String by lazy { getString(R.string.card_transition_name) }
     val gridLayoutManager by lazy { cards_recycler_view?.layoutManager as? GridLayoutManager }
+    val SEARCH_ALTERNATIVE by lazy { getString(R.string.cards_search_alternative) }
     val SEARCH_ANIMAL by lazy { getString(R.string.cards_search_animal) }
     val SEARCH_LORE by lazy { getString(R.string.cards_search_lore) }
     val SEARCH_REWARD by lazy { getString(R.string.cards_search_reward) }
@@ -292,6 +293,7 @@ open class CardsAllFragment : BaseFragment() {
                         else -> {
                             val search = searchFilter?.toLowerCase()?.trim() ?: ""
                             val hasValidSearchKeyword = (search == SEARCH_LORE && it.lore.isNotEmpty()) ||
+                                    (search == SEARCH_ALTERNATIVE && it.isAlternativeArt()) ||
                                     (search == SEARCH_ANIMAL && ConfigManager.animalRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
                                     (search == SEARCH_UNDEAD && ConfigManager.undeadRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
                                     (search == SEARCH_REWARD && it.season.isNotEmpty()) ||
