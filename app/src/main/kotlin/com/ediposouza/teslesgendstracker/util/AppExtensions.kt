@@ -14,7 +14,11 @@ import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.view.*
+import android.util.DisplayMetrics
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ListPopupWindow
 import android.widget.Spinner
@@ -311,9 +315,21 @@ fun Context.getCurrentVersion(): String {
 }
 
 fun Context.hasNavigationBar(): Boolean {
-    val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-    val hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
-    return (!(hasBackKey && hasHomeKey))
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val display = windowManager.getDefaultDisplay();
+
+    val realDisplayMetrics = DisplayMetrics();
+    display.getRealMetrics(realDisplayMetrics);
+    val realHeight = realDisplayMetrics.heightPixels;
+    val realWidth = realDisplayMetrics.widthPixels;
+
+    val displayMetrics = DisplayMetrics();
+    display.getMetrics(displayMetrics);
+    val displayHeight = displayMetrics.heightPixels;
+    val displayWidth = displayMetrics.widthPixels;
+
+    val hasSoftwareKeys = (realWidth > displayWidth) || (realHeight > displayHeight);
+    return hasSoftwareKeys;
 }
 
 fun Activity.hasPermission(permission: String): Boolean {
