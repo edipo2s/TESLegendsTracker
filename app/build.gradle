@@ -10,7 +10,7 @@ android {
     buildToolsVersion "26.0.1"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
-                                 'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
+                                 'META-INF/MANIFEST.MF','LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
 
     def props = new Properties()
     props.load(file("secrets.properties").newInputStream())
