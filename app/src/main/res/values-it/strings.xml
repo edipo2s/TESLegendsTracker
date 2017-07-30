@@ -120,6 +120,7 @@
     <string name="cards_sets_all">Tutto</string>
 
     <string name="card_title_star_rating">Il tuo punteggio</string>
+    <string name="card_alternative_label">Fonte</string>
     <string name="card_more_info_label">Maggiori Informazioni</string>
     <string name="card_arena_tier_label">Livello in Arena:</string>
     <string name="card_collection_qtd_label">In collezione:</string>

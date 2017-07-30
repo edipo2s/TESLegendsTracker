@@ -187,6 +187,7 @@
     <string name="cards_search_unique" translatable="false">unique</string>
 
     <string name="card_title_star_rating">Your Rating</string>
+    <string name="card_alternative_label">Source</string>
     <string name="card_more_info_label">More Info</string>
     <string name="card_arena_tier_label">Arena Tier:</string>
     <string name="card_collection_qtd_label">Collection Qtd:</string>

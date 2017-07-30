@@ -414,7 +414,8 @@ data class Card(
         val tokens: List<String>,
         val lore: String,
         val loreLink: String,
-        val hasAlternativeArt: Boolean
+        val hasAlternativeArt: Boolean,
+        val alternativeArtSource: String
 
 ) : Comparable<Card>, Parcelable {
 
@@ -427,7 +428,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "", false)
+                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "", false, "")
 
         const val ALT_SUFFIX = "_alt"
         const val ARTS_PATH = "Arts"
@@ -452,7 +453,7 @@ data class Card(
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) }, source.readString(),
-            source.readString(), 1 == source.readInt())
+            source.readString(), 1 == source.readInt(), source.readString())
 
     override fun describeContents() = 0
 
@@ -576,6 +577,7 @@ data class Card(
         dest?.writeString(lore)
         dest?.writeString(loreLink)
         dest?.writeInt((if (hasAlternativeArt) 1 else 0))
+        dest?.writeString(alternativeArtSource)
     }
 
     override fun compareTo(other: Card): Int {

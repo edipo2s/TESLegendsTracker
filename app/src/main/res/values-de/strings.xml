@@ -119,6 +119,7 @@
     <string name="cards_sets_all">Alle</string>
 
     <string name="card_title_star_rating">Deine Bewertung</string>
+    <string name="card_alternative_label">Ursprung</string>
     <string name="card_more_info_label">Mehr Informationen</string>
     <string name="card_arena_tier_label">Arena Rang:</string>
     <string name="card_collection_qtd_label">Sammlung Qtd:</string>

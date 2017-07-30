@@ -123,7 +123,8 @@
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Deal 1 damage.",
         "arenaTier": "Good",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Mad Prince Pack"
       },
       "steelscimitar": {
         "name": "Steel Scimitar",
@@ -1461,7 +1462,9 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Deal 2 damage to an creature.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "alternativeArt": true,
+        "alternativeArtSource": "Starter Pack"
       },
       "baronoftear": {
         "name": "Baron of Tear",
@@ -2591,7 +2594,8 @@
         "keyword": "Guard",
         "text": "Guard",
         "arenaTier": "Excellent",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Mad Prince Pack"
       },
       "hivewarrior": {
         "name": "Hive Warrior",
@@ -2747,7 +2751,8 @@
         "lore": "'Piercing Javelin deals Magic Damage to an enemy and knocks them backward, stunning them for a brief moment. Aurora Javelin increases the damage when the ability is used at a distance, while Binding Javelin converts it to a Stamina-based image, and increases the duration of the stun caused by the attack.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Online:Piercing_Javelin",
         "arenaTier": "Insane",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Grant Melee Gauntlet"
       },
       "pillagingtribune": {
         "name": "Pillaging Tribune",
@@ -3231,7 +3236,8 @@
         "keyword": "Prophecy, Guard",
         "text": "Prophecy, Guard",
         "arenaTier": "Excellent",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Starter Pack"
       },
       "dunesmuggler": {
         "name": "Dune Smuggler",
@@ -4552,7 +4558,8 @@
         "keyword": "",
         "text": "",
         "arenaTier": "Good",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Starter Pack"
       },
       "discipleofnamira": {
         "name": "Disciple of Namira",
@@ -5348,7 +5355,8 @@
         "keyword": "",
         "text": "Deal 3 damage.",
         "arenaTier": "Excellent",
-        "alternativeArt": true
+        "alternativeArt": true,
+        "alternativeArtSource": "Mad Prince Pack"
       },
       "dwarvensphere": {
         "name": "Dwarven Sphere",
