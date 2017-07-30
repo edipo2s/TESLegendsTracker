@@ -316,6 +316,11 @@ class CardActivity : BaseActivity() {
             card_reward.text = "$month/${yearMonth.year}"
             card_reward_label.visibility = View.VISIBLE
         }
+        if (card.isAlternativeArt()) {
+            card_reward.text = card.alternativeArtSource
+            card_reward_label.text = getString(R.string.card_alternative_label)
+            card_reward_label.visibility = View.VISIBLE
+        }
         card_race.text = card.race.name.toLowerCase().capitalize().replace("_", " ")
         card_race_label.visibility = View.VISIBLE.takeIf { card.type == CardType.CREATURE } ?: View.GONE
         card_race.visibility = View.VISIBLE.takeIf { card.type == CardType.CREATURE } ?: View.GONE

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.6.3"
+        changeDate="July 30, 2017">
+        <changelogtext>[b]Feature:[/b] Added Source of Alternative Art cards in card details
+        </changelogtext>
+        <changelogtext>Update Russian translation</changelogtext>
+        <changelogtext>Add Ash Servant alternative art card</changelogtext>
+        <changelogtext>Fix expansible card info showing behind navigation bar in some devices
+        </changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.6.2"
         changeDate="July 29, 2017">
         <changelogtext>[b]Feature:[/b] Added Alternative Art cards with full art</changelogtext>
