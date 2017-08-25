@@ -211,13 +211,17 @@ open class CardsCollectionFragment : CardsAllFragment() {
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
         if (!isEditStarted) {
-            context.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
-                positiveButton(android.R.string.yes, {
-                    isEditStarted = true
-                    Toast.makeText(context, R.string.card_collection_edit_success, Toast.LENGTH_SHORT).show()
-                })
-                negativeButton(android.R.string.no, {})
-            }.show()
+            try {
+                context.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
+                    positiveButton(android.R.string.yes, {
+                        isEditStarted = true
+                        Toast.makeText(context, R.string.card_collection_edit_success, Toast.LENGTH_SHORT).show()
+                    })
+                    negativeButton(android.R.string.no, {})
+                }.show()
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
             return
         }
         val newQtd = cardSlot.qtd.inc()
@@ -378,7 +382,6 @@ open class CardsCollectionFragment : CardsAllFragment() {
                 setOnLongClickListener {
                     itemLongClick(itemView.card_collection_image, cardSlot.card)
                 }
-                card_collection_image.loadFromCard(cardSlot.card)
                 if (cardSlot.qtd == 0) {
                     val color = ContextCompat.getColor(itemView.context, R.color.card_zero_qtd)
                     card_collection_image.setColorFilter(color)
@@ -391,6 +394,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
                     else -> R.drawable.ic_qtd_three
                 })
                 card_collection_qtd.visibility = View.GONE.takeIf { cardSlot.qtd == 1 } ?: View.VISIBLE
+                card_collection_image.loadFromCard(cardSlot.card)
             }
         }
 
