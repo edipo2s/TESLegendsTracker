@@ -95,9 +95,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_label"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
                 android:text="@string/about_info_thanks_cvh"
                 android:textSize="@dimen/font_medium" />
 
@@ -118,9 +117,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_cvh"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
                 android:text="@string/about_info_thanks_direwolf"
                 android:textSize="@dimen/font_medium" />
 
@@ -141,9 +139,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_direwolf"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
                 android:text="@string/about_info_thanks_unity_studio"
                 android:textSize="@dimen/font_medium" />
 
@@ -164,9 +161,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_unity_studio"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
                 android:text="@string/about_info_thanks_translation_german"
                 android:textSize="@dimen/font_medium" />
 
@@ -186,9 +182,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_translation_german"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
                 android:text="@string/about_info_thanks_translation_italian"
                 android:textSize="@dimen/font_medium" />
 
@@ -204,13 +199,33 @@
                 android:textSize="@dimen/font_medium" />
 
             <TextView
-                android:id="@+id/about_dialog_thanks_translation_russian"
+                android:id="@+id/about_dialog_thanks_translation_french"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_dialog_thanks_translation_italian"
-                android:layout_marginStart="@dimen/huge_margin"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:paddingStart="@dimen/huge_margin"
+                android:text="@string/about_info_thanks_translation_french"
+                android:textSize="@dimen/font_medium" />
+
+            <TextView
+                android:id="@+id/about_dialog_thanks_translation_french_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/about_dialog_thanks_translation_italian"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_toEndOf="@id/about_dialog_thanks_unity_studio"
+                android:text="@string/about_info_thanks_translation_french_text"
+                android:textSize="@dimen/font_medium" />
+
+            <TextView
+                android:id="@+id/about_dialog_thanks_translation_russian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/about_dialog_thanks_translation_french"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:text="@string/about_info_thanks_translation_russian"
                 android:textSize="@dimen/font_medium" />
 
@@ -218,7 +233,7 @@
                 android:id="@+id/about_dialog_thanks_translation_russian_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/about_dialog_thanks_translation_italian"
+                android:layout_below="@id/about_dialog_thanks_translation_french"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_toEndOf="@id/about_dialog_thanks_unity_studio"

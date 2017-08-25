@@ -7,6 +7,7 @@
         <item name="spanish">@string/about_language_spanish</item>
         <item name="german">@string/about_language_german</item>
         <item name="russian">@string/about_language_russian</item>
+        <item name="french">@string/about_language_french</item>
     </array>
 
     <array name="testing_devices">

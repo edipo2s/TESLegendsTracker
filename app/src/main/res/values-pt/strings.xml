@@ -11,8 +11,8 @@
     <string name="app_donate_dialog_payment_success">Obrigado por doar. Aproveite o app livre de anúncios.</string>
     <string name="app_new_version_available">Nova versão disponível!</string>
     <string name="app_new_version_message">Mantenha seu app atualizado para obter novas funções e melhorias!</string>
-    <string name="app_new_version_update_later">Depois</string>
     <string name="app_new_version_update_now">Atualizar Agora</string>
+    <string name="app_new_version_update_later">Depois</string>
     <string name="app_warning">Este aplicativo não se conecta a conta de jogo. Dados de usuário, como coleção e partidas, precisam de colocados manualmente.</string>
 
     <string name="menu_basics">Informações Básicas</string>

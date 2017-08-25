@@ -372,6 +372,7 @@ class DashActivity : BaseFilterActivity(),
                                 3 -> R.drawable.lang_es
                                 4 -> R.drawable.lang_de
                                 5 -> R.drawable.lang_ru
+                                6 -> R.drawable.lang_fr
                                 else -> R.drawable.ic_menu_earth
                             }, 0, 0, 0)
                             compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.default_margin)
@@ -385,6 +386,7 @@ class DashActivity : BaseFilterActivity(),
                         3 -> "es"
                         4 -> "de"
                         5 -> "ru"
+                        6 -> "fr"
                         else -> "en"
                     }
                     MetricsManager.trackAction(MetricAction.ACTION_DECK_CHANGE_LANGUAGE(language))

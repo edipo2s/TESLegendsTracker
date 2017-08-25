@@ -103,6 +103,7 @@
     <string name="about_language_german" translatable="false">German</string>
     <string name="about_language_russian" translatable="false">Russian</string>
     <string name="about_language_italian" translatable="false">Italian</string>
+    <string name="about_language_french" translatable="false">French</string>
 
     <string name="about_title">About TES Legends Tracker</string>
     <string name="about_text">TES Legends Tracker is a assistant app for card game The Elder Scroll Legends developed by Dire Wolf Digital and published by Bethesda Softworks.</string>
@@ -127,6 +128,8 @@
     <string name="about_info_thanks_translation_italian_text" translatable="false">Antonio Sampere</string>
     <string name="about_info_thanks_translation_russian" translatable="false">Russian translation - </string>
     <string name="about_info_thanks_translation_russian_text" translatable="false">Roman Chuvayev and WickedTroll</string>
+    <string name="about_info_thanks_translation_french" translatable="false">French translation - </string>
+    <string name="about_info_thanks_translation_french_text" translatable="false">Sebastien Gaud</string>
     <string name="about_twitter" translatable="false">Twitter</string>
     <string name="about_twitter_link" translatable="false">https://twitter.com/teslegendstrack</string>
     <string name="about_rate_app">Rate App</string>

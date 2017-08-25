@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_exit_confirm">Confirmer pour quitter</string>
+    <string name="app_bd_under_updating">TESL Tracker est en maintenace. Vous serez avertis quand cela est terminé.</string>
+    <string name="app_version_unsupported">Cette version de TESL Tracker est dépassée. Veuillez mettre à jour l\'application pour continuer de l\'utiliser.</string>
+    <string name="app_donate_dialog_text">L\'application est gratuite, pour supporter le projet laisser les pubs ou faites un don.</string>
+    <string name="app_donate_dialog_value">Donner %1$s</string>
+    <string name="app_donate_dialog_not_now">Pas maitenant, merci</string>
+    <string name="app_donate_dialog_payment_error">Service indisponible</string>
+    <string name="app_donate_dialog_payment_fail">Echec du don, veuillez réessayer</string>
+    <string name="app_donate_dialog_payment_success">Merci pour le don. Profiter de l\'application sans publicité.</string>
+    <string name="app_new_version_available">Nouvelle version disponible!</string>
+    <string name="app_new_version_message">Maintenez votre application à jour pour profiter des nouvelles fonctionnalités.</string>
+    <string name="app_new_version_update_now">Mettre à jour maintenant</string>
+    <string name="app_new_version_update_later">Plus tard</string>
+    <string name="app_warning">Cette application ne se connecte pas au compte du jeu. Les données utilisateur, telles que la collecte et les correspondances, doivent être placées manuellement.</string>
+
+    <string name="menu_basics">Informations de base</string>
+    <string name="menu_cards">Cartes</string>
+    <string name="menu_decks">Decks</string>
+    <string name="menu_matches">Matches</string>
+    <string name="menu_spoiler">Nouveau Set</string>
+    <string name="menu_articles">TESL Articles</string>
+    <string name="menu_seasons">TESL Saisons</string>
+    <string name="menu_season">Saison</string>
+    <string name="menu_filter">Filtre</string>
+    <string name="menu_arena">Tirage de l\'arène</string>
+    <string name="menu_donate">Version Avec Pub</string>
+    <string name="menu_donate_done">Version Sans Pub</string>
+    <string name="menu_share">Invite un ami</string>
+    <string name="menu_language">Langue</string>
+    <string name="menu_about">A propos</string>
+    <string name="menu_search">Recherche</string>
+    <string name="menu_sets">Set</string>
+    <string name="menu_statistics">Statistiques</string>
+    <string name="menu_statistics_warning">Les cartes avec l\'art alternatif sont supprimées</string>
+    <string name="menu_compact_view">Aperçu compact</string>
+    <string name="menu_only_favorite">Seulement favoris</string>
+    <string name="menu_only_private">Seulement privé</string>
+    <string name="menu_only_collection">Seulement de la collection</string>
+    <string name="menu_hide_empty">Caché le vide </string>
+    <string name="menu_favorite">Favoris</string>
+    <string name="menu_unfavorite">Défavoris</string>
+    <string name="menu_like">Aime</string>
+    <string name="menu_unlike">Pas apprécié</string>
+    <string name="menu_delete">Suprimer</string>
+    <string name="menu_edit">Modifier</string>
+    <string name="menu_done">OK</string>
+    <string name="menu_percent">Pourcent</string>
+    <string name="menu_import">Importer de Legends-Decks</string>
+    <string name="menu_start">Commencer</string>
+    <string name="menu_wallpaper">Fond</string>
+    <string name="menu_video">Regarder</string>
+    <string name="menu_download">Télécharger</string>
+
+    <string name="menu_ringtone_play">Set Play comme sonnerie</string>
+    <string name="menu_ringtone_attack">Set Attack comme sonnerie</string>
+    <string name="menu_ringtone_extra">Set Extra comme sonnerie</string>
+
+    <string name="confirm_message">Êtes-vous sûr?</string>
+    <string name="drawer_open">Ouvrir le menu</string>
+    <string name="drawer_close">Fermer le menu</string>
+
+    <string name="share_with">Partager avec…</string>
+    <string name="share_text">Gérer votre collection de cartes TES Legends, rechercher et créer des decks publics ou privés et suivez vos statistiques de parties</string>
+
+    <string name="about_language_warning">Image das Cartas continuarão em inglês</string>
+
+    <string name="about_title">Su TES Legends Tracker</string>
+    <string name="about_text">TES Legends Tracker est une application assistante pour le jeu de cartes The Elder Scroll Legends développé par Dire Wolf Digital et publié par Bethesda Softworks.</string>
+    <string name="about_text_bottom">Dire Wolf Digital posséde les droits réservés de toutes les images de cartes et autres ressources du jeu dans cette application.</string>
+    <string name="about_info_version">Version de l\'application:</string>
+    <string name="about_info_developer_label">Developpeur:</string>
+    <string name="about_info_thanks_label">Remerciements:</string>
+    <string name="about_info_thanks_direwolf_text">TES Legends</string>
+    <string name="about_info_thanks_cvh_text">Liste des niveaus d\'arènes</string>
+    <string name="about_info_thanks_unity_studio">Developpeurs d\'UnityStudio - </string>
+    <string name="about_rate_app">Notez l\'application</string>
+
+    <string name="dialog_import_title">Importer de Legends-Decks</string>
+    <string name="dialog_import_text">Veuillez vous connecter et ouvrir Modifier la collection</string>
+    <string name="dialog_import_deck_text">Veuillez vous connecter et ouvrir mes decks</string>
+    <string name="dialog_import_result_title">Importation de la collection</string>
+    <string name="dialog_import_result_imported_text">Cartes importées:</string>
+    <string name="dialog_import_result_difference_text">Différences de collection de Legends-Decks:</string>
+    <string name="dialog_import_result_added">AJOUTER</string>
+    <string name="dialog_import_result_updated">ACTUALISER</string>
+    <string name="dialog_import_result_you_have">VOUS AVEZ</string>
+    <string name="dialog_import_result_has_more">A EN PLUS</string>
+
+    <string name="tab_cards_all">Cartes</string>
+    <string name="tab_cards_collection">Collection</string>
+    <string name="tab_cards_tokens">Jeton</string>
+    <string name="tab_decks_public">Public</string>
+    <string name="tab_decks_owned">Possédé</string>
+    <string name="tab_decks_favorites">Favoris</string>
+    <string name="tab_matches_statistics">Statistiques</string>
+    <string name="tab_matches_history">Historique</string>
+    <string name="tab_mode_ranked">Classé</string>
+    <string name="tab_mode_casual">Non classé</string>
+    <string name="tab_mode_arena">Arèna</string>
+    <string name="tab_articles_news">Informations</string>
+    <string name="tab_articles_world">Monde</string>
+
+    <string name="title_tab_basics_races">Race</string>
+    <string name="title_tab_basics_ranked">Classé</string>
+    <string name="title_tab_cards_collection">Collection</string>
+    <string name="title_tab_cards_tokens">Jeton</string>
+    <string name="title_tab_decks_public">Decks Public</string>
+    <string name="title_tab_decks_owned">Decks Possédés</string>
+    <string name="title_tab_decks_favorites">Decks Favoris</string>
+    <string name="title_tab_matches_statistics">Statistiques de parties</string>
+    <string name="title_tab_matches_history">Historiques des parties</string>
+    <string name="title_tab_articles_news">TES Legends Informations</string>
+    <string name="title_tab_articles_world">TES Legends Monde</string>
+    <string name="title_tab_wabbatrack_about">A propos</string>
+    <string name="title_tab_wabbatrack_matches">Statistiques de parties</string>
+    <string name="title_tab_wabbatrack_autobuild">Créer automatiquement deck</string>
+
+    <string name="cards_sets_all">Tout</string>
+
+    <string name="card_title_star_rating">Votre évaluation</string>
+    <string name="card_alternative_label">La source</string>
+    <string name="card_more_info_label">Plus d\'info</string>
+    <string name="card_arena_tier_label">Rang d\'arène:</string>
+    <string name="card_collection_qtd_label">Collection Qtd:</string>
+    <string name="card_collection_edit_confirm">Autoriser la modiffcation de la collection?</string>
+    <string name="card_collection_edit_success">Modification de la collection autorisée!</string>
+    <string name="card_set_label">Set:</string>
+    <string name="card_race_label">Race:</string>
+    <string name="card_about_label">A propos:</string>
+    <string name="card_about_more_label">Maïs</string>
+    <string name="card_sounds_label">Sons:</string>
+    <string name="card_sounds_attack_label">Attaque</string>
+    <string name="card_sounds_play_label">Jouer</string>
+    <string name="card_sounds_extra_label">Extra</string>
+    <string name="card_levels_label">Niveau:</string>
+    <string name="card_creators_label">Créateurs:</string>
+    <string name="card_generates_label">Génère:</string>
+    <string name="card_tokens_label">Jeton:</string>
+    <string name="card_patch_current">Version actuelle</string>
+    <string name="card_patch_pre" formatted="false">Version pre-%s \n %s</string>
+    <string name="card_full_downloaded">Image suavegardée dans le dossier de téléchargement</string>
+    <string name="card_full_sound_set">Réglage du son comme sonnerie</string>
+    <string name="card_full_wallpaper_set">Image définie comme fond d\'écran</string>
+    <string name="card_full_permission_write_storage">Pour télécharger une image, la permission en écriture est requise.</string>
+    <string name="card_full_permission_write_storage_denied">Permission en écriture refusée.</string>
+    <string name="card_full_permission_write_settings_denied">Permission en configuration refusée.</string>
+
+    <string name="action_login">Connectez-vous</string>
+    <string name="action_favorited">%1$s favorisé</string>
+    <string name="action_unfavorited">%1$s défavorisé</string>
+    <string name="sign_in_with_google">Se connecter avec Google</string>
+    <string name="error_auth">Cette action requiert d\'être connecté</string>
+    <string name="error_login">Echec d\'authentification</string>
+    <string name="profile_collection">Collection</string>
+    <string name="unknown">Inconnu</string>
+
+    <string name="cards_search_hint">Nom, race, type, mot-clef ou texte</string>
+    <string name="cards_search_keywords_hint" formatted="false">Recherchez %s \n ou essayer %s</string>
+    <string name="collection_statistics_total_cards">Cartes totales\nGemmes pour compléter</string>
+
+    <string name="decks_search_hint">Nom du Deck</string>
+    <string name="deck_details">Détails</string>
+    <string name="deck_details_create_by">Créé par</string>
+    <string name="deck_details_create_at">Crée le</string>
+    <string name="deck_details_last_update">Dernière actualisation</string>
+    <string name="deck_details_last_update_format">%1$s à %2$s</string>
+    <string name="deck_details_updates">Actualisation</string>
+    <string name="deck_deleted">Deck supprimé!</string>
+    <string name="deck_exit_confirm">Appuyer deux fois sur retour pour sortir sans sauvegarder</string>
+    <string name="deck_comments_text">Commentaires</string>
+    <string name="deck_comment_new_hint">Votre commentaire!</string>
+    <string name="deck_comment_new_hint_anonymous">Votre commentaire! (Requiert d\'être connecté)</string>
+    <string name="deck_comment_size_error">Le message est trop court!</string>
+
+    <string name="new_deck_title">Nouveau Deck</string>
+    <string name="new_deck_class_title">Nouveau Deck %s</string>
+    <string name="new_deck_save_dialog_title">Infos du Deck</string>
+    <string name="new_deck_update_dialog_title">Sauvegarder les changements?</string>
+    <string name="new_deck_save_dialog_name_label">Nom</string>
+    <string name="new_deck_save_dialog_type_label">Type</string>
+    <string name="new_deck_save_dialog_public_label">Rendre le deck public</string>
+    <string name="new_deck_save_dialog_save">Sauvegarder</string>
+    <string name="new_deck_save_dialog_update">Actualiser</string>
+    <string name="new_deck_save_as_public">Deck sauvegardé en Public</string>
+    <string name="new_deck_save_as_private">Deck sauvegardé en Privé</string>
+    <string name="new_deck_updated_as_public">Derck actualisé en Public</string>
+    <string name="new_deck_updated_as_private">Derck actualisé en Privé</string>
+    <string name="new_deck_save_error_incomplete">SVP, Complétez votre deck avant de sauvegarder</string>
+
+    <string name="match_win">Victoire</string>
+    <string name="match_loss">Défaite</string>
+    <string name="match_statistics_summary_label">Sommaire des classes</string>
+    <string name="match_statistics_tree_wins_label">3 Victoires</string>
+    <string name="match_statistics_games_label">Parties</string>
+    <string name="match_statistics_wins_label">Victoires</string>
+    <string name="match_statistics_losses_label">Défaites</string>
+    <string name="match_statistics_win_rate_label">Ratio de victoire</string>
+    <string name="match_statistics_total_label">Total</string>
+    <string name="match_history_delete">Effacer macth contre %1$s</string>
+    <string name="matches_seasons_all">Toutes saisons</string>
+    <string name="matches_class_title">%1$s Statistiques</string>
+
+    <string name="new_match_dialog_title">Je joue avec</string>
+    <string name="new_match_save_dialog_name_label">Nom</string>
+    <string name="new_match_dialog_class_label">Classe</string>
+    <string name="new_match_dialog_mode_label">Mode</string>
+    <string name="new_match_dialog_deck_label">Deck</string>
+    <string name="new_match_dialog_deck_other">Autre</string>
+    <string name="new_match_dialog_name_hint">Nom du Deck</string>
+    <string name="new_match_dialog_start">Commencer</string>
+    <string name="new_match_dialog_start_error_name">Le nom doit contenir au moins 5 caractères</string>
+    <string name="new_match_opt_class_label">Classe de Deck de l\'adversaire</string>
+    <string name="new_match_opt_type_label">Type de Deck de l\'adversaire</string>
+    <string name="new_match_cards_remains_label">Cartes restantes</string>
+    <string name="new_match_first_label">Premier à jouer</string>
+    <string name="new_match_legend_label">Rang de Legend</string>
+    <string name="new_match_rank_label">Rang</string>
+    <string name="new_match_save_rank_error">Les parties classées requièrent un rang pour être sauvegardées </string>
+    <string name="new_match_saved">Nouvelle partie sauvegardée</string>
+
+    <string name="article_news_title">Informations</string>
+    <string name="article_news_category_all">Tout</string>
+    <string name="article_news_category_announcements">Announces</string>
+    <string name="article_news_category_battle">Tactiques de bataille</string>
+    <string name="article_news_category_forging">Forger les Legends</string>
+    <string name="article_news_category_imperial">Librairie impériale</string>
+    <string name="article_news_category_legendary">Les débuts de la Légende</string>
+    <string name="article_news_category_arena">District de l\'Arèna</string>
+    <string name="article_world_title">Monde</string>
+    <string name="article_world_races_title">Races</string>
+    <string name="article_world_classes_title">Classes</string>
+    <string name="article_world_attributes_title">Attributs</string>
+
+    <string name="season_reward">Récompense</string>
+    <string name="season_no_matches">Aucune info de partie</string>
+    <string name="season_matches_label">Parties classées</string>
+    <string name="season_opponent_label">Adversaire</string>
+    <string name="season_matches_best_rank">Meilleur\nRang</string>
+    <string name="season_matches_wins">Total de Victoires:</string>
+    <string name="season_matches_losses">Total de Défaites:</string>
+    <string name="season_matches_total">Total de Parties:</string>
+    <string name="season_matches_class_most_seen">Le plus vu:</string>
+    <string name="season_matches_class_most_defeated">Le plus vaincu:</string>
+    <string name="season_matches_class_less_defeated">Le moins vaincu:</string>
+
+    <string name="patch_change">%s\nChangé</string>
+
+    <string name="arena_title">Choisissez une classe pour démarrer un nouveau tirage d\arène</string>
+    <string name="new_arena_title">Tirage de l\'arène - %s</string>
+    <string name="new_arena_warning">La meilleure valeur n\'est pas toujours la meilleure sélection. Arena Tiers ne se soucient pas de votre courbe de magicka.</string>
+    <string name="new_arena_draft_tip">Appuyer longtemp sur la carte ou appuyer sur la flêche pour choisir votre séléction</string>
+    <string name="new_arena_draft_pick">Choisir une carte</string>
+    <string name="new_arena_draft_synergy">Synergie avec: \n%s</string>
+    <string name="new_arena_draft_remove_card">Retirer la Carte?</string>
+
+    <string name="basics_extras">Extras:</string>
+    <string name="basics_portrait">Basé sur la race du portrait utilisé</string>
+    <string name="basics_races">Récompenses de niveaux 24 et 32 basées sur la race du portrait utilisé</string>
+
+    <string name="spoiler_image_qlt_warning">Les spoilers sont susceptibles d\'avoir un faible qualité d\'images</string>
+
+    <string name="wabbatrack_about_desc">WabbaTrack est une application windows pour The Elder Scroll Legends afin de suivre automatiquement vos statistiques de matchs et vous aidez avec les tirages d\'arène.</string>
+    <string name="wabbatrack_arenatier_desc">Niveau d\'arène basé sur "CVH Arena Tier List et la liste" de synergie avec les cartes sélectionnées auparavant</string>
+    <string name="wabbatrack_autobuild_desc">Fonction de construction automatique pour construire automatiquement un pont importé à partir de vos ponts ou légendes</string>
+    <string name="wabbatrack_decktracker_desc">Deck Tracker with Card Hover et les cartes Attribute/Prophecy comptent avec des chances de succès</string>
+    <string name="wabbatrack_matches_desc">Historique et statstiques des parties avec ratio de victoire et filtres de modes et de saisons</string>
+
+</resources>
