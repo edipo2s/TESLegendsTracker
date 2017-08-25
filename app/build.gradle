@@ -78,11 +78,10 @@ kotlin {
 
 ext {
     anko_version = "0.10.1"
-    coroutines_version = "0.15"
     okIOVersion = "1.13.0"
     okHttpVersion = "3.8.1"
-    playServicesVersion = "11.0.4"
-    supportLibraryVersion = "26.0.0"
+    playServicesVersion = "11.2.0"
+    supportLibraryVersion = "26.0.1"
     threetenabpVersion = "1.0.5"
 
     testMockitoVersion = "2.7.+"
@@ -108,9 +107,8 @@ dependencies {
     compile(name: 'clansFAB', ext: 'aar')
     compile(name: 'googleinapputil', ext: 'aar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
+    compile "org.jetbrains.anko:anko-coroutines:$anko_version"
 
     //Support
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
