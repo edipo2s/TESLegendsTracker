@@ -55,6 +55,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
                 statisticsSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
             eventBus.post(CmdUpdateRarityMagickaFiltersPosition(position == 1))
+            eventBus.post(CmdShowCardsByAttr(cards_filter_attr.lastAttrSelected))
+            eventBus.post(CmdFilterRarity(cards_filter_rarity.raritySelect))
+            eventBus.post(CmdFilterMagicka(cards_filter_magicka.magickaSelect))
             MetricsManager.trackScreen(when (position) {
                 1 -> MetricScreen.SCREEN_CARDS_COLLECTION()
                 2 -> MetricScreen.SCREEN_CARDS_TOKENS()
@@ -180,7 +183,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         query = newText
         eventBus.post(CmdFilterSearch(newText))
         handler.removeCallbacks(trackSearch)
-        if (query?.isNotEmpty() ?: false) {
+        if (query?.isNotEmpty() == true) {
             handler.postDelayed(trackSearch, DateUtils.SECOND_IN_MILLIS * 2)
         }
         return true

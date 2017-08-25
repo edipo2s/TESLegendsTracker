@@ -24,6 +24,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     var collapseOnClick: Boolean = true
     var closeable: Boolean = true
     var showSelectedRarity: Boolean = false
+    var raritySelect: CardRarity? = null
 
     init {
         inflate(context, R.layout.widget_rarity_filter, this)
@@ -48,6 +49,7 @@ class FilterRarity(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     private fun rarityClick(rarity: CardRarity?) {
+        raritySelect = rarity
         filterClick?.invoke(rarity)
         if (collapseOnClick) {
             collapse()

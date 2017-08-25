@@ -14,6 +14,7 @@ class FilterMagicka(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     var filterClick: ((Int) -> Unit)? = null
     var collapseOnClick: Boolean = true
+    var magickaSelect: Int = -1
 
     init {
         inflate(context, R.layout.widget_magicka_filter, this)
@@ -65,6 +66,7 @@ class FilterMagicka(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     }
 
     private fun magickaClick(magicka: Int) {
+        magickaSelect = magicka
         filterClick?.invoke(magicka)
         val icon = R.drawable.ic_magicka.takeIf { magicka == -1 } ?: R.drawable.ic_magicka_clear
         rootView.magicka_filter.apply {
