@@ -274,8 +274,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_lore_more"
-            android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
             android:layout_toEndOf="@id/card_sounds_label"
             android:text="@string/card_sounds_play_label"
             tools:visibility="visible" />
@@ -285,20 +285,22 @@
             style="@style/CardSoundText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/card_sound_play"
+            android:layout_below="@id/card_lore_more"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/huge_margin"
             android:layout_toEndOf="@id/card_sound_play"
             android:text="@string/card_sounds_attack_label"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/card_sound_extra_label"
+            android:id="@+id/card_sound_extra"
             style="@style/CardSoundText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/card_sound_attack"
+            android:layout_below="@id/card_lore_more"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/huge_margin"
-            android:layout_toEndOf="@id/card_sound_attack"
+            android:layout_toEndOf="@id/card_sound_play"
             android:text="@string/card_sounds_extra_label"
             tools:visibility="visible" />
 

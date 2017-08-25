@@ -508,7 +508,7 @@ class CardActivity : BaseActivity() {
                     }
                 }
             }
-            with(card_sound_extra_label) {
+            with(card_sound_extra) {
                 val extraSoundPath = card.extraSoundPath()
                 if (card.hasLocalExtraSound(resources)) {
                     showSoundButton(this)
