@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.7.0"
+        changeDate="August 25, 2017">
+        <changelogtext>Add French translations</changelogtext>
+        <changelogtext>Update local card images with latest balanced changes</changelogtext>
+        <changelogtext>Fix keep filters while changing tabs</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.6.4"
+        changeDate="July 30, 2017">
+        <changelogtext>Fixes crash while loading Ads</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.6.3"
         changeDate="July 30, 2017">
         <changelogtext>[b]Feature:[/b] Added Source of Alternative Art cards in card details
