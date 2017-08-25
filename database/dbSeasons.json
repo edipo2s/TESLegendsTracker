@@ -58,5 +58,10 @@
     "reward": {
       "dual": "ulfricshousecarl"
     }
+  },
+  "2017_08": {
+    "reward": {
+      "unknown": true
+    }
   }
 }

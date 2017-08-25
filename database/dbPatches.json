@@ -506,5 +506,61 @@
     },
     "desc": "Mobile release",
     "type": "balance"
+  },
+  "2017_08_23": {
+    "changes": {
+      "brynjolf": {
+        "set": "heroesofskyrim",
+        "attr": "agility",
+        "change": "Health"
+      },
+      "cliffsidelookout": {
+        "set": "heroesofskyrim",
+        "attr": "willpower",
+        "change": "Health"
+      },
+      "detain": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Cost"
+      },
+      "expertatromancer": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Cost"
+      },
+      "imprison": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Cost"
+      },
+      "shieldbreaker": {
+        "set": "heroesofskyrim",
+        "attr": "strength",
+        "change": "Cost"
+      },
+      "soultear": {
+        "set": "heroesofskyrim",
+        "attr": "endurance",
+        "change": "Cost"
+      },
+      "supremeatromancer": {
+        "set": "core",
+        "attr": "intelligence",
+        "change": "Cost"
+      },
+      "thiefofdreams": {
+        "set": "heroesofskyrim",
+        "attr": "intelligence",
+        "change": "Attack/Health"
+      },
+      "youngdragonborn": {
+        "set": "heroesofskyrim",
+        "attr": "neutral",
+        "change": "Health"
+      }
+    },
+    "desc": "Supreme Atromancer Nerf",
+    "type": "balance"
   }
 }
