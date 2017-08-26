@@ -4762,6 +4762,19 @@
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5jctum/daily_card_discussion_thread_110_nahagliiv/dbfdw94",
         "arenaTier": "Insane"
       },
+      "purebloodelder": {
+        "name": "Pure-Blood Elder",
+        "cost": "7",
+        "type": "Creature",
+        "race": "Vampire",
+        "attack": "8",
+        "health": "8",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "When you gain magicka, double the amount you gain. While you have 18 or more max magicka, Pure-Blood Elder has +8/+8 and Breakthrough",
+        "arenaTier": "Unknown",
+        "season": "2017_08"
+      },
       "swampleviathan": {
         "name": "Swamp Leviathan",
         "cost": "7",
