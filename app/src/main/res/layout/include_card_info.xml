@@ -300,7 +300,7 @@
             android:layout_below="@id/card_lore_more"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/huge_margin"
-            android:layout_toEndOf="@id/card_sound_play"
+            android:layout_toEndOf="@id/card_sound_attack"
             android:text="@string/card_sounds_extra_label"
             tools:visibility="visible" />
 
