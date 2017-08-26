@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.7.1"
+        changeDate="August 26, 2017">
+        <changelogtext>Fix load decklist in new match screen</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.7.0"
         changeDate="August 25, 2017">
         <changelogtext>Add French translations</changelogtext>
