@@ -212,7 +212,7 @@ class MatchesFragment : BaseFragment() {
                     val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
                     val isNotArena = mode != MatchMode.ARENA
                     val name = dialogView.new_match_dialog_deck_name.text.toString().takeIf { isNotArena }
-                    val deck = decks[deckPosition].takeIf { isNotArena && deckPosition >= 0 }
+                    val deck = decks.getOrNull(deckPosition).takeIf { isNotArena && deckPosition >= 0 }
                     if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
                         eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
                     } else {

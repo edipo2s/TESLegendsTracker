@@ -80,12 +80,7 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
                 })
     }
 
-    constructor(ctx: Context?) : this(ctx, null, 0)
-
-    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
+    init {
         inflate(context, R.layout.widget_decklist, this)
         decklist_recycle_view.adapter = deckListAdapter
         decklist_recycle_view.itemAnimator = SlideInLeftAnimator()
@@ -99,6 +94,10 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             deckListAdapter.showDeck(cards)
         }
     }
+
+    constructor(ctx: Context?) : this(ctx, null, 0)
+
+    constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagickaCosts: Boolean = true,
                  showQtd: Boolean = true, cardViewMode: Boolean = false) {
