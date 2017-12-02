@@ -345,8 +345,8 @@ class CardActivity : BaseActivity() {
     }
 
     private fun configureTokens() {
-        if (card.canGenerateCards() || card.canGenerateTokens() || card.isToken()) {
-            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() } ?:
+        if (card.canGenerateCards() || card.canGenerateTokens() || card.isToken() || card.canBeGenerated()) {
+            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() || card.canBeGenerated() } ?:
                     R.string.card_generates_label.takeIf { card.canGenerateCards() } ?: R.string.card_tokens_label)
             card_tokens_label.visibility = View.VISIBLE
             with(card_tokens_rv) {
@@ -372,7 +372,8 @@ class CardActivity : BaseActivity() {
                     }
                 } else {
                     PublicInteractor.getCards(null) { allCards ->
-                        val related = card.generates.takeIf { card.canGenerateCards() } ?: card.creators
+                        val related = card.generates.takeIf { card.canGenerateCards() } ?:
+                                card.generators.takeIf { card.canBeGenerated() } ?: card.creators
                         relatedCards.addAll(allCards.filter { related.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }

@@ -26,7 +26,8 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "generators": "raidingparty, markarthbannerman"
       },
       "covenantmarauder": {
         "name": "Covenant Marauder",
@@ -610,7 +611,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "+4/+1",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generators": "ulfricszealot"
       },
       "lumberingogrim": {
         "name": "Lumbering Ogrim",
@@ -1042,7 +1044,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 2 damage to a creature.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generators": "cunningally"
       },
       "nibenbaycutthroat": {
         "name": "Niben Bay Cutthroat",
@@ -1157,7 +1160,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 2 damage to your opponent. Draw a card.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generators": "icewraith"
       },
       "momentofclarity": {
         "name": "Moment of Clarity",
@@ -1616,7 +1620,8 @@
         "text": "+2/+2. Summon: Draw a card.",
         "lore": "'Alteration is one of the six schools of magic. Spells in this school change the world around the caster so normal physical truths no longer hold. It is sometimes confused with Illusion magic, as both schools seek to change normal truths. Illusion magic, however, is not bound by the laws of nature but Alteration magic is.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Lore:Alteration",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generators": "daggerfallmage"
       },
       "dragonstarrider": {
         "name": "Dragonstar Rider",
@@ -2018,7 +2023,8 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "generators": "imperialcamp"
       },
       "aldmeripatriot": {
         "name": "Aldmeri Patriot",
@@ -2265,7 +2271,8 @@
         "rarity": "Common",
         "keyword": "Prophecy, Summon",
         "text": "Prophecy. Summon: Gain 2 health.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generators": "twomoonscontemplation"
       },
       "ravenoushunger": {
         "name": "Ravenous Hunger",
@@ -2941,7 +2948,8 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Give a creature -1/-1.",
-        "arenaTier": "Average"
+        "arenaTier": "Average",
+        "generators": "murkwatershaman"
       },
       "murkwatergoblin": {
         "name": "Murkwater Goblin",
@@ -2979,7 +2987,8 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Poor"
+        "arenaTier": "Poor",
+        "generators": "mournholdtraitor, sadrasagent"
       },
       "shadowshift": {
         "name": "Shadow Shift",
@@ -3534,7 +3543,8 @@
         "text": "Charge, Lethal",
         "lore": "'Snakes are oddly uncommon in the world of Tamriel. They were more common in the Second Era (ESO), along with Giant Snakes, sea serpents, and even winged adders! I guess once you hit the Third Era, legs became the hot new fashion requirement.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cknn9/daily_card_discussion_thread_72_territorial_viper/d9xd9bs",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generators": "nestofvipers"
       },
       "thievesden": {
         "name": "Thieves' Den",
@@ -3809,7 +3819,8 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Give all enemy creatures in this lane -1/-1.",
-        "arenaTier": "Good"
+        "arenaTier": "Good",
+        "generators": "chaurusbreedingpit"
       },
       "spiderlair": {
         "name": "Spider Lair",
@@ -4787,7 +4798,8 @@
         "rarity": "Common",
         "keyword": "",
         "text": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Excellent",
+        "generators": "histgrove"
       },
       "bloodmagiclord": {
         "name": "Blood Magic Lord",
@@ -5268,7 +5280,8 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Terrible"
+        "arenaTier": "Terrible",
+        "generators": "hallsofthedwemer, dwarvencenturion"
       },
       "mapleshield": {
         "name": "Maple Shield",
@@ -5544,7 +5557,8 @@
         "rarity": "Rare",
         "keyword": "Evolves",
         "text": "Slaughterfish gains +2/+0 at the start of your turn.",
-        "evolves": true
+        "evolves": true,
+        "generators": "slaughterfishspawning"
       },
       "slaughterfishspawning": {
         "name": "Slaughterfish Spawning",
@@ -9217,7 +9231,7 @@
         "unique": true,
         "keyword": "Teasure Hunt",
         "text": "Teasure Hunt - Action, Creture, Item, Support: +6/+6. When a friendly creature hunter finds something summon Skywag or give Skywag +1/+1",
-        "generates": "skywag"
+        "tokens": "skywag"
       },
       "firepotspider": {
         "name": "Firepot Spider",
@@ -9382,7 +9396,7 @@
         "keyword": "Activate",
         "text": "Uses: 5. Activate: Give a friendly creature -1/-1 and summon a 1/1 Reconstruction Spider.",
         "arenaTier": "Unknown",
-        "generates": "reconstructionspider"
+        "tokens": "reconstructionspider"
       },
       "themechanicalheart": {
         "name": "The Mechanical Heart",
