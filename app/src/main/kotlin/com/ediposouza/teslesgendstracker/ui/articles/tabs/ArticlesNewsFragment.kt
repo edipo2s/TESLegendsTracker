@@ -65,11 +65,11 @@ class ArticlesNewsFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_articles_news)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         with(articles_news_recycler_view) {
@@ -124,7 +124,7 @@ class ArticlesNewsFragment : BaseFragment() {
             menuCategory?.subMenu?.itemsSequence()?.forEach {
                 it.setIcon(if (it.itemId == item?.itemId) R.drawable.ic_checked else 0)
             }
-            activity.articles_app_bar_layout.setExpanded(true, true)
+            activity?.articles_app_bar_layout?.setExpanded(true, true)
             newsAdapter.reset()
         }
         return super.onOptionsItemSelected(item)
@@ -148,7 +148,7 @@ class ArticlesNewsFragment : BaseFragment() {
                         val category = ArticleCategory.valueOf(categoryText.toUpperCase().replace(" ", "_"))
                         Article(title, category, cover, getString(R.string.article_base_link) + link, newsDate)
                     }
-            context.runOnUiThread {
+            context?.runOnUiThread {
                 val savedNewsUuids = newsAdapter.mSnapshots.getItems().map { it.first }
                 latestNews.filter { !savedNewsUuids.contains(it.uuidDate) }.forEach {
                     PublicInteractor.saveNews(it) {

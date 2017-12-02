@@ -21,11 +21,11 @@ class BasicsRankedFragment : BaseFragment() {
 
     val rankedAdapter by lazy { RankedAdapter() }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_basics_ranked)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(basics_ranked_recycler_view) {
             layoutManager = LinearLayoutManager(context)

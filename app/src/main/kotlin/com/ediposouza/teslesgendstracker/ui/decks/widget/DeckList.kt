@@ -100,11 +100,11 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
     fun showDeck(deck: Deck?, showSoulCost: Boolean = true, showMagickaCosts: Boolean = true,
-                 showQtd: Boolean = true, cardViewMode: Boolean = false) {
+                 showQtd: Boolean = true, cardViewMode: Boolean? = false) {
         decklist_soul.visibility = View.VISIBLE.takeIf { showSoulCost } ?: View.GONE
         decklist_costs.visibility = View.VISIBLE.takeIf { showMagickaCosts } ?: View.GONE
         decklist_qtd.visibility = View.VISIBLE.takeIf { showQtd } ?: View.GONE
-        decklist_recycle_view.visibility = View.INVISIBLE.takeIf { cardViewMode } ?: View.VISIBLE
+        decklist_recycle_view.visibility = View.INVISIBLE.takeIf { cardViewMode == true } ?: View.VISIBLE
         if (deck != null) {
             doAsync {
                 PublicInteractor.getDeckCards(deck) {
@@ -140,8 +140,8 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     fun getSoulCost(): Int = getCards().sumBy { it.card.rarity.soulCost * it.qtd }
 
-    fun setCardViewMode(fragmentManager: FragmentManager, compact: Boolean) {
-        with(fragmentManager.beginTransaction()) {
+    fun setCardViewMode(fragmentManager: FragmentManager?, compact: Boolean) {
+        fragmentManager?.beginTransaction()?.apply {
             setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             if (compact) {
                 replace(R.id.decklist_cards_container, deckListCardsFragment)

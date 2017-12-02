@@ -20,11 +20,11 @@ import kotlinx.android.synthetic.main.itemlist_arena_class.view.*
  */
 class NewArenaClassFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_arena_class)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         with(activity as AppCompatActivity) {
@@ -65,11 +65,11 @@ class NewArenaClassFragment : BaseFragment() {
     }
 
     private fun startDraft(it: DeckClass) {
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+        fragmentManager?.beginTransaction()
+                ?.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
                         R.anim.slide_in_left, R.anim.slide_out_right)
-                .replace(R.id.new_arena_content, NewArenaDraftFragment.newFragment(it))
-                .commit()
+                ?.replace(R.id.new_arena_content, NewArenaDraftFragment.newFragment(it))
+                ?.commit()
     }
 
     class ClassAdapter(val onItemClick: (DeckClass) -> Unit) : RecyclerView.Adapter<ClassViewHolder>() {

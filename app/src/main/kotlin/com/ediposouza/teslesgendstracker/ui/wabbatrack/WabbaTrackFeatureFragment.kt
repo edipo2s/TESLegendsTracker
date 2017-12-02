@@ -16,11 +16,11 @@ import kotlinx.android.synthetic.main.fragment_wabbatrack_feature.*
  */
 class WabbaTrackFeatureFragment(@DrawableRes val featureImage: Int, @StringRes val featureDesc: Int) : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_wabbatrack_feature)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         wabbatrack_feature_image.setImageResource(featureImage)
         wabbatrack_feature_desc.setText(featureDesc)

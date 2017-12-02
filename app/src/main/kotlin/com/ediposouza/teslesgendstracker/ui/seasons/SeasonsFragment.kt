@@ -47,9 +47,11 @@ class SeasonsFragment : BaseFragment() {
     val onCardClick: (View, Card) -> Unit = { view, card -> showCardExpanded(card, view) }
 
     val onPatchClick: (Patch, View) -> Unit = { patch, view ->
-        val intent = PatchActivity.newIntent(context, patch, patches)
-        ActivityCompat.startActivity(context, intent, ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, view, patchTransitionName).toBundle())
+        activity?.let {
+            val intent = PatchActivity.newIntent(it, patch, patches)
+            ActivityCompat.startActivity(it, intent, ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(it, view, patchTransitionName).toBundle())
+        }
     }
 
     private val seasonsAdapter by lazy {
@@ -72,11 +74,11 @@ class SeasonsFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_seasons)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventBus.post(CmdUpdateTitle(R.string.menu_seasons))
         PublicInteractor.getPatches {
@@ -106,8 +108,11 @@ class SeasonsFragment : BaseFragment() {
     }
 
     fun showCardExpanded(card: Card, view: View) {
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        activity?.let {
+            ActivityCompat.startActivity(it, CardActivity.newIntent(it, card),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+
+        }
     }
 
     class SeasonViewHolder(view: View, val itemClick: (View, Card) -> Unit,

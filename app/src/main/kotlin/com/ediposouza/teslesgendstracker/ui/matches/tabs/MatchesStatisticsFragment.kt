@@ -46,11 +46,11 @@ class MatchesStatisticsFragment : BaseFragment() {
     var statisticsTableAdapter: StatisticsTableAdapter? = null
     var results: Map<DeckClass, MutableList<Match>> = mutableMapOf()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches_statistics)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         statisticsTableAdapter = StatisticsTableAdapter(context).apply {
@@ -107,11 +107,13 @@ class MatchesStatisticsFragment : BaseFragment() {
                         it.getTag(com.inqbarna.tablefixheaders.R.id.tag_row) == row &&
                                 it.getTag(com.inqbarna.tablefixheaders.R.id.tag_type_view) == 2
                     }.first()
-            ActivityCompat.startActivity(activity, MatchesStatisticsClassActivity.newIntent(context, currentMatchMode,
-                    currentSeason, selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                    Pair(classView.cell_class_attr1 as View, attr1TransitionName),
-                    Pair(classView.cell_class_attr2 as View, attr2TransitionName)).toBundle())
-            MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS(selectedClass!!))
+            activity?.let {
+                ActivityCompat.startActivity(it, MatchesStatisticsClassActivity.newIntent(it, currentMatchMode,
+                        currentSeason, selectedClass!!), ActivityOptionsCompat.makeSceneTransitionAnimation(it,
+                        Pair(classView.cell_class_attr1 as View, attr1TransitionName),
+                        Pair(classView.cell_class_attr2 as View, attr2TransitionName)).toBundle())
+                MetricsManager.trackAction(MetricAction.ACTION_MATCH_STATISTICS_CLASS(selectedClass!!))
+            }
         }
     }
 
@@ -261,7 +263,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     }
 
-    class StatisticsTableAdapter(val context: Context) : TableFixHeaderAdapter<String, CellTextCenter,
+    class StatisticsTableAdapter(val context: Context?) : TableFixHeaderAdapter<String, CellTextCenter,
             DeckClass, CellClass, List<BodyItem>, CellClass, CellTextCenter, CellTextCenter>(context) {
 
         override fun inflateFirstHeader() = CellTextCenter(context)
@@ -274,18 +276,18 @@ class MatchesStatisticsFragment : BaseFragment() {
 
         override fun inflateSection() = CellTextCenter(context)
 
-        override fun getHeaderHeight() = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_height)
+        override fun getHeaderHeight() = context?.resources?.getDimensionPixelSize(R.dimen.match_statistics_cell_height) ?: 0
 
         override fun getHeaderWidths(): List<Int> {
-            val headerWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_header_width)
-            val cellWidth = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_width)
+            val headerWidth = context?.resources?.getDimensionPixelSize(R.dimen.match_statistics_header_width) ?: 0
+            val cellWidth = context?.resources?.getDimensionPixelSize(R.dimen.match_statistics_cell_width) ?: 0
             val colWidths = mutableListOf(headerWidth)
             DeckClass.values().forEach { colWidths.add(cellWidth) }
             colWidths.add(headerWidth)
             return colWidths
         }
 
-        override fun getBodyHeight() = context.resources.getDimensionPixelSize(R.dimen.match_statistics_cell_height)
+        override fun getBodyHeight() = context?.resources?.getDimensionPixelSize(R.dimen.match_statistics_cell_height) ?: 0
 
         override fun isSection(items: List<List<BodyItem>>?, row: Int): Boolean = false
 
@@ -293,7 +295,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     }
 
-    class CellClass(context: Context) : FrameLayout(context),
+    class CellClass(context: Context?) : FrameLayout(context),
             TableFixHeaderAdapter.HeaderBinder<DeckClass>,
             TableFixHeaderAdapter.FirstBodyBinder<List<BodyItem>> {
 
@@ -326,7 +328,7 @@ class MatchesStatisticsFragment : BaseFragment() {
 
     }
 
-    class CellTextCenter(context: Context) : FrameLayout(context),
+    class CellTextCenter(context: Context?) : FrameLayout(context),
             TableFixHeaderAdapter.FirstHeaderBinder<String>,
             TableFixHeaderAdapter.BodyBinder<List<BodyItem>>,
             TableFixHeaderAdapter.SectionBinder<List<BodyItem>> {

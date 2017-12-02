@@ -44,16 +44,16 @@ class DeckInfoFragment : BaseFragment() {
 
     }
 
-    private val deck by lazy { arguments.getParcelable<Deck>(EXTRA_DECK) }
-    private val deckOwned by lazy { arguments.getBoolean(EXTRA_OWNED, false) }
-    private val deckCardViewMode by lazy { arguments.getBoolean(EXTRA_CARD_VIEW_MODE, false) }
+    private val deck by lazy { arguments?.getParcelable<Deck>(EXTRA_DECK) }
+    private val deckOwned by lazy { arguments?.getBoolean(EXTRA_OWNED, false) }
+    private val deckCardViewMode by lazy { arguments?.getBoolean(EXTRA_CARD_VIEW_MODE, false) }
     private val numberInstance: NumberFormat by lazy { NumberFormat.getNumberInstance() }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_deck_info)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadDeckInfo()
     }
@@ -64,18 +64,18 @@ class DeckInfoFragment : BaseFragment() {
     }
 
     private fun loadDeckInfo() {
-        if (deckOwned) {
+        if (deckOwned == true) {
             deck_details_likes.visibility = View.GONE
             deck_details_views.visibility = View.GONE
         }
         deck_details_cardlist.showDeck(deck, false, cardViewMode = deckCardViewMode)
-        deck_details_type.text = deck.type.name.toLowerCase().capitalize()
-        deck_details_views.text = numberInstance.format(deck.views)
-        deck_details_likes.text = numberInstance.format(deck.likes.size)
-        deck_details_soul_cost.text = numberInstance.format(deck.cost)
-        deck_details_create_at.text = deck.createdAt.toLocalDate().toString()
-        val updateDate = deck.updatedAt.toLocalDate()
-        val updateTime = deck.updatedAt.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
+        deck_details_type.text = deck?.type?.name?.toLowerCase()?.capitalize()
+        deck_details_views.text = numberInstance.format(deck?.views)
+        deck_details_likes.text = numberInstance.format(deck?.likes?.size)
+        deck_details_soul_cost.text = numberInstance.format(deck?.cost)
+        deck_details_create_at.text = deck?.createdAt?.toLocalDate()?.toString()
+        val updateDate = deck?.updatedAt?.toLocalDate()
+        val updateTime = deck?.updatedAt?.toLocalTime()?.format(DateTimeFormatter.ofPattern(TIME_PATTERN))
         deck_details_update_at.text = getString(R.string.deck_details_last_update_format, updateDate, updateTime)
         configDeckUpdates()
         loadDeckRemoteInfo()
@@ -86,13 +86,15 @@ class DeckInfoFragment : BaseFragment() {
             if (App.hasUserLogged()) {
                 calculateMissingSoul(deck)
             }
-            if (!deckOwned) {
-                PublicInteractor.incDeckView(deck) {
-                    deck_details_views?.text = it.toString()
+            if (deckOwned == false) {
+                deck?.let {
+                    PublicInteractor.incDeckView(it) {
+                        deck_details_views?.text = it.toString()
+                    }
                 }
             }
             PublicInteractor.getPatches {
-                val patch = it.find { it.uuidDate == deck.patch }
+                val patch = it.find { it.uuidDate == deck?.patch }
                 context?.runOnUiThread {
                     deck_details_patch?.text = patch?.desc ?: ""
                 }
@@ -100,31 +102,33 @@ class DeckInfoFragment : BaseFragment() {
         }
     }
 
-    private fun calculateMissingSoul(deck: Deck) {
+    private fun calculateMissingSoul(deck: Deck?) {
         deck_details_soul_missing?.apply {
             context.runOnUiThread {
                 visibility = View.INVISIBLE
                 deck_details_soul_missing_loading?.visibility = View.VISIBLE
             }
-            PrivateInteractor.getDeckMissingCards(deck, { deck_details_soul_missing_loading?.visibility = View.VISIBLE }) {
-                deck_details_soul_missing_loading?.visibility = View.GONE
-                val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
-                Timber.d("Missing %d", missingSoul)
-                text = NumberFormat.getNumberInstance().format(missingSoul)
-                visibility = View.VISIBLE
-                deck_details_cardlist?.showMissingCards(it)
-                if (deckCardViewMode) {
-                    eventBus.post(CmdChangeDeckViewMode(true))
+            deck?.let {
+                PrivateInteractor.getDeckMissingCards(it, { deck_details_soul_missing_loading?.visibility = View.VISIBLE }) {
+                    deck_details_soul_missing_loading?.visibility = View.GONE
+                    val missingSoul = it.map { it.qtd * it.rarity.soulCost }.sum()
+                    Timber.d("Missing %d", missingSoul)
+                    text = NumberFormat.getNumberInstance().format(missingSoul)
+                    visibility = View.VISIBLE
+                    deck_details_cardlist?.showMissingCards(it)
+                    if (deckCardViewMode == true) {
+                        eventBus.post(CmdChangeDeckViewMode(true))
+                    }
                 }
             }
         }
     }
 
     private fun configDeckUpdates() {
-        deck_details_updates_label.visibility = View.VISIBLE.takeIf { deck.updates.isNotEmpty() } ?: View.GONE
-        if (deck.updates.isNotEmpty()) {
+        deck_details_updates_label.visibility = View.VISIBLE.takeIf { deck?.updates?.isNotEmpty() == true } ?: View.GONE
+        if (deck?.updates?.isNotEmpty() == true) {
             with(deck_details_updates) {
-                adapter = DeckUpdateAdapter(deck.updates.reversed(), deck.cls)
+                adapter = DeckUpdateAdapter(deck?.updates?.reversed() ?: listOf(), deck?.cls)
                 layoutManager = object : LinearLayoutManager(context) {
                     override fun supportsPredictiveItemAnimations(): Boolean = false
                 }
@@ -141,7 +145,7 @@ class DeckInfoFragment : BaseFragment() {
                 2.5f.takeIf { cmdChangeDeckViewMode.compactMode } ?: 1f)
     }
 
-    class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
+    class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass?) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckUpdateViewHolder {
             return DeckUpdateViewHolder(parent?.inflate(R.layout.itemlist_deck_update))
@@ -157,13 +161,15 @@ class DeckInfoFragment : BaseFragment() {
 
     class DeckUpdateViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
-        fun bind(deckUpdate: DeckUpdate, cls: DeckClass) {
+        fun bind(deckUpdate: DeckUpdate, cls: DeckClass?) {
             with(itemView) {
                 val updateDate = deckUpdate.date.toLocalDate()
                 val updateTime = deckUpdate.date.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
                 deck_update_title.text = context.getString(R.string.deck_details_last_update_format, updateDate, updateTime)
-                PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
-                    configUpdateCardsChanges(cards, deckUpdate)
+                cls?.let {
+                    PublicInteractor.getCards(null, it.attr1, it.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
+                        configUpdateCardsChanges(cards, deckUpdate)
+                    }
                 }
             }
         }

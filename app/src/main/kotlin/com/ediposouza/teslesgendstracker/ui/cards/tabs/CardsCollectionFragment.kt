@@ -57,7 +57,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
     var isEditStarted: Boolean = false
 
     val view_statistics: CollectionStatistics?
-        get() = activity.findOptional<CollectionStatistics>(R.id.cards_collection_statistics)
+        get() = activity?.findOptional<CollectionStatistics>(R.id.cards_collection_statistics)
 
     val statisticsSheetBehavior: BottomSheetBehavior<CollectionStatistics>?
         get() = if (view_statistics != null) {
@@ -99,7 +99,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
 
     var importDialog: AlertDialog? = null
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(cards_recycler_view) {
             setPadding(paddingLeft, paddingTop, paddingRight, resources.getDimensionPixelSize(R.dimen.huge_margin))
@@ -143,13 +143,15 @@ open class CardsCollectionFragment : CardsAllFragment() {
 
     private fun showImportDialog() {
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
-        importDialog = AlertDialog.Builder(context, R.style.AppDialog)
-                .setView(dialogView)
-                .setNegativeButton(android.R.string.cancel, { _, _ ->
-                    dialogView.import_dialog_webview.stopLoading()
-                    MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_CANCELLED())
-                })
-                .create()
+        context?.let {
+            importDialog = AlertDialog.Builder(it, R.style.AppDialog)
+                    .setView(dialogView)
+                    .setNegativeButton(android.R.string.cancel, { _, _ ->
+                        dialogView.import_dialog_webview.stopLoading()
+                        MetricsManager.trackAction(MetricAction.ACTION_IMPORT_COLLECTION_CANCELLED())
+                    })
+                    .create()
+        }
         importDialog?.setOnShowListener {
             dialogView.import_dialog_webview?.apply {
                 settings.javaScriptEnabled = true
@@ -205,20 +207,22 @@ open class CardsCollectionFragment : CardsAllFragment() {
     }
 
     override fun showCardExpanded(card: Card, view: View) {
-        startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        activity?.let {
+            startActivityForResult(CardActivity.newIntent(it, card), EXPAND_CODE,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+        }
     }
 
     private fun changeUserCardQtd(cardSlot: CardSlot) {
         if (!isEditStarted) {
             try {
-                context.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
+                context?.alertThemed(R.string.card_collection_edit_confirm, theme = R.style.AppDialog) {
                     positiveButton(android.R.string.yes, {
                         isEditStarted = true
                         Toast.makeText(context, R.string.card_collection_edit_success, Toast.LENGTH_SHORT).show()
                     })
                     negativeButton(android.R.string.no, {})
-                }.show()
+                }?.show()
             } catch (e: Exception) {
                 Timber.e(e)
             }
@@ -286,7 +290,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
                     }
                 }
                 uiThread {
-                    context.toast("Collection imported!")
+                    context?.toast("Collection imported!")
                     importDialog?.dismiss()
                 }
             }
@@ -320,14 +324,16 @@ open class CardsCollectionFragment : CardsAllFragment() {
                 })
                 setHasFixedSize(true)
             }
-            AlertDialog.Builder(context, R.style.AppDialog)
-                    .setView(dialogView)
-                    .setPositiveButton(android.R.string.ok, { _, _ ->
-                        Handler().postDelayed({
-                            eventBus.post(CmdShowCardsByAttr(currentAttr))
-                        }, DateUtils.SECOND_IN_MILLIS / 2)
-                    })
-                    .show()
+            context?.let {
+                AlertDialog.Builder(it, R.style.AppDialog)
+                        .setView(dialogView)
+                        .setPositiveButton(android.R.string.ok, { _, _ ->
+                            Handler().postDelayed({
+                                eventBus.post(CmdShowCardsByAttr(currentAttr))
+                            }, DateUtils.SECOND_IN_MILLIS / 2)
+                        })
+                        .show()
+            }
             val newCardsImported = legendsSlots.filter { onlyInLegendsDecks.map(Card::shortName).contains(it.key) }.values.sum()
             val cardsQtdImported = legendsSlots.filter { legendsQtdGreater.map(Card::shortName).contains(it.key) }
                     .map { it.key to it.value.minus(userSlots[it.key] ?: 0) }.sumBy { it.second }

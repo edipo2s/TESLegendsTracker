@@ -63,13 +63,15 @@ open class DecksPublicFragment : BaseFragment() {
             val favorite = it?.filter { it.uuid == deck.uuid }?.isNotEmpty() ?: false
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             val like = deck.likes.contains(userId)
-            val deckIntent = DeckActivity.newIntent(context, deck, favorite, like, deck.owner == userId)
-            ActivityCompat.startActivity(activity, deckIntent, ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(activity,
-                            Pair(view.deck_name as View, nameTransitionName),
-                            Pair(view.deck_cover as View, coverTransitionName),
-                            Pair(view.deck_attr1 as View, attr1TransitionName),
-                            Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+            activity?.let {
+                val deckIntent = DeckActivity.newIntent(it, deck, favorite, like, deck.owner == userId)
+                ActivityCompat.startActivity(it, deckIntent, ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(it,
+                                Pair(view.deck_name as View, nameTransitionName),
+                                Pair(view.deck_cover as View, coverTransitionName),
+                                Pair(view.deck_attr1 as View, attr1TransitionName),
+                                Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+            }
         }
     }
 
@@ -98,11 +100,11 @@ open class DecksPublicFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(decks_recycler_view) {
             adapter = SlideInLeftAnimationAdapter(decksAdapter).apply {

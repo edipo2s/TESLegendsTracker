@@ -78,18 +78,18 @@ open class CardsAllFragment : BaseFragment() {
                 resources.getDimensionPixelSize(R.dimen.card_margin), true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards_list)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(enableMenu)
         configRecycleView()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             putInt(KEY_CURRENT_ATTR, currentAttr.ordinal)
         }
         super.onSaveInstanceState(outState)
@@ -143,7 +143,8 @@ open class CardsAllFragment : BaseFragment() {
             PublicInteractor.getSets {
                 sets = it
                 sets.forEach {
-                    add(0, it.ordinal, 0, it.title)
+                    val setName = if (it != CardSet.UNKNOWN) it.title else it.unknownSetTitle
+                    add(0, it.ordinal, 0, setName)
                 }
             }
         }
@@ -188,7 +189,7 @@ open class CardsAllFragment : BaseFragment() {
     @Suppress("unused", "UNUSED_PARAMETER")
     fun onCmdLoginSuccess(cmdLoginSuccess: CmdLoginSuccess) {
         configLoggedViews()
-        if (onlyFavorites?.isChecked ?: false) {
+        if (onlyFavorites?.isChecked == true) {
             showCards()
         } else {
             loadCardsByAttr(currentAttr)
@@ -335,12 +336,14 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCardExpanded(card: Card, view: View) {
-        if (onlyFavorites?.isChecked ?: false) {
-            startActivityForResult(CardActivity.newIntent(context, card), EXPAND_CODE,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
-        } else {
-            ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        activity?.let {
+            if (onlyFavorites?.isChecked == true) {
+                startActivityForResult(CardActivity.newIntent(it, card), EXPAND_CODE,
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+            } else {
+                ActivityCompat.startActivity(it, CardActivity.newIntent(it, card),
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+            }
         }
     }
 

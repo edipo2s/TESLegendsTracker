@@ -28,16 +28,18 @@ class BasicsRacesFragment : BaseFragment() {
     val racesAdapter by lazy {
         RacesAdapter { card, view ->
             val transitionName = getString(R.string.card_transition_name)
-            ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+            activity?.let {
+                ActivityCompat.startActivity(it, CardActivity.newIntent(it, card),
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+            }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_basics_races)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(basics_races_recycler_view) {
             layoutManager = LinearLayoutManager(context)

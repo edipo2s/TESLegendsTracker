@@ -66,14 +66,14 @@ class MatchesFragment : BaseFragment() {
         eventBus.post(CmdUpdateTitle(title))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_matches)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_matches)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_matches)
         matches_view_pager.adapter = MatchesPageAdapter(context, childFragmentManager)
         matches_view_pager.addOnPageChangeListener(pageChange)
         matches_nav_mode.setOnNavigationItemSelectedListener {
@@ -94,8 +94,8 @@ class MatchesFragment : BaseFragment() {
         matches_tab_layout.setupWithViewPager(matches_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, matches_view_pager?.currentItem ?: 0) }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply { putInt(KEY_PAGE_VIEW_POSITION, matches_view_pager?.currentItem ?: 0) }
         super.onSaveInstanceState(outState)
     }
 
@@ -203,54 +203,58 @@ class MatchesFragment : BaseFragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-        AlertDialog.Builder(context)
-                .setView(dialogView)
-                .setPositiveButton(R.string.new_match_dialog_start, { _, _ ->
-                    val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
-                    val cls = DeckClass.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
-                    val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
-                    val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
-                    val isNotArena = mode != MatchMode.ARENA
-                    val name = dialogView.new_match_dialog_deck_name.text.toString().takeIf { isNotArena }
-                    val deck = decks.getOrNull(deckPosition).takeIf { isNotArena && deckPosition >= 0 }
-                    if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
-                        eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
-                    } else {
-                        startActivityForResult(NewMatchesActivity.newIntent(context, name, cls, type, mode, deck), RC_NEW_MATCHES)
-                    }
-                    MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
-                })
-                .setNegativeButton(android.R.string.cancel, { _, _ -> })
-                .create()
-                .apply {
-                    setOnShowListener {
-                        dialogView.new_match_dialog_class_spinner.apply {
-                            adapter = ClassAdapter(context)
-                            onItemSelectedListener = classClickListener
-                            limitHeight()
-                        }
-                        dialogView.new_match_dialog_deck_spinner.apply {
-                            onItemSelectedListener = deckClickListener
-                            if (decks.size >= 5) {
-                                limitHeight()
+        context?.let {
+            AlertDialog.Builder(it)
+                    .setView(dialogView)
+                    .setPositiveButton(R.string.new_match_dialog_start, { _, _ ->
+                        val deckPosition = dialogView.new_match_dialog_deck_spinner.selectedItemPosition
+                        val cls = DeckClass.values()[dialogView.new_match_dialog_class_spinner.selectedItemPosition]
+                        val type = DeckType.values()[dialogView.new_match_dialog_deck_type_spinner.selectedItemPosition]
+                        val mode = MatchMode.values()[dialogView.new_match_dialog_mode_spinner.selectedItemPosition]
+                        val isNotArena = mode != MatchMode.ARENA
+                        val name = dialogView.new_match_dialog_deck_name.text.toString().takeIf { isNotArena }
+                        val deck = decks.getOrNull(deckPosition).takeIf { isNotArena && deckPosition >= 0 }
+                        if (isNotArena && name?.length ?: 0 < DECK_NAME_MIN_SIZE) {
+                            eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
+                        } else {
+                            context?.let {
+                                startActivityForResult(NewMatchesActivity.newIntent(it, name, cls, type, mode, deck), RC_NEW_MATCHES)
                             }
                         }
-                        dialogView.new_match_dialog_deck_type_spinner.apply {
-                            adapter = ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    DeckType.values().filter { it != DeckType.ARENA }
-                                            .map { it.name.toLowerCase().capitalize() })
-                            limitHeight(4)
+                        MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck))
+                    })
+                    .setNegativeButton(android.R.string.cancel, { _, _ -> })
+                    .create()
+                    .apply {
+                        setOnShowListener {
+                            dialogView.new_match_dialog_class_spinner.apply {
+                                adapter = ClassAdapter(context)
+                                onItemSelectedListener = classClickListener
+                                limitHeight()
+                            }
+                            dialogView.new_match_dialog_deck_spinner.apply {
+                                onItemSelectedListener = deckClickListener
+                                if (decks.size >= 5) {
+                                    limitHeight()
+                                }
+                            }
+                            dialogView.new_match_dialog_deck_type_spinner.apply {
+                                adapter = ArrayAdapter<String>(context,
+                                        android.R.layout.simple_spinner_dropdown_item,
+                                        DeckType.values().filter { it != DeckType.ARENA }
+                                                .map { it.name.toLowerCase().capitalize() })
+                                limitHeight(4)
+                            }
+                            dialogView.new_match_dialog_mode_spinner.apply {
+                                adapter = ArrayAdapter<String>(context,
+                                        android.R.layout.simple_spinner_dropdown_item,
+                                        MatchMode.values().map { it.name.toLowerCase().capitalize() })
+                                onItemSelectedListener = modeClickListener
+                            }
                         }
-                        dialogView.new_match_dialog_mode_spinner.apply {
-                            adapter = ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    MatchMode.values().map { it.name.toLowerCase().capitalize() })
-                            onItemSelectedListener = modeClickListener
-                        }
+                        show()
                     }
-                    show()
-                }
+        }
     }
 
     @Subscribe
@@ -263,9 +267,9 @@ class MatchesFragment : BaseFragment() {
         }
     }
 
-    class MatchesPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class MatchesPageAdapter(ctx: Context?, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.matches_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.matches_tabs) ?: arrayOf()
         val matchesStatisticsFragment by lazy { MatchesStatisticsFragment() }
         val matchesHistoryFragment by lazy { MatchesHistoryFragment() }
 

@@ -38,8 +38,10 @@ class SpoilerCardsFragment : CardsAllFragment() {
     }
 
     override fun showCardExpanded(card: Card, view: View) {
-        ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card, fromSpoiler = true),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+        activity?.let {
+            ActivityCompat.startActivity(it, CardActivity.newIntent(it, card, fromSpoiler = true),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+        }
     }
 
     @Subscribe

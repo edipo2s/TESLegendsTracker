@@ -32,8 +32,8 @@ open class BaseFilterActivity : BaseActivity() {
     private val filterRarityLP: CoordinatorLayout.LayoutParams?
         get() = fab_filter_rarity?.layoutParams as? CoordinatorLayout.LayoutParams
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             putBoolean(KEY_FILTERS_GREAT_MARGIN, filterGreatMargin)
             putInt(KEY_FILTERS_BOTTOM_MARGIN, filterMagickaLP?.bottomMargin ?: 0)
         }

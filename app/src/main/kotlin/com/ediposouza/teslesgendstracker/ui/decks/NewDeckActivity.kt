@@ -88,8 +88,8 @@ class NewDeckActivity : BaseFilterActivity() {
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_DECKS())
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             val cardsArrayList = ArrayList<CardSlot>(new_deck_cardlist?.getCards() ?: listOf())
             putParcelableArrayList(KEY_DECK_CARDS, cardsArrayList)
         }

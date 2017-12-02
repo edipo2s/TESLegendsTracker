@@ -76,14 +76,14 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         eventBus.post(CmdUpdateTitle(title))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cards)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_cards)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_cards)
         cards_collection_statistics.setOnClickListener {
             statisticsSheetBehavior.toggleExpanded()
         }
@@ -108,8 +108,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         cards_tab_layout.setupWithViewPager(cards_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, cards_view_pager?.currentItem ?: 0) }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply { putInt(KEY_PAGE_VIEW_POSITION, cards_view_pager?.currentItem ?: 0) }
         super.onSaveInstanceState(outState)
     }
 
@@ -124,7 +124,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onResume()
         cards_app_bar_layout.setExpanded(true, true)
         (activity as BaseFilterActivity).updateRarityMagickaFiltersVisibility(true)
-        context.checkLastVersion {
+        context?.checkLastVersion {
             Timber.d("New version $it found!")
             new_update_layout?.visibility = View.VISIBLE
             new_update_later?.rippleDuration = 200
@@ -135,7 +135,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
             new_update_now?.rippleDuration = 200
             new_update_now?.setOnRippleCompleteListener {
                 startActivity(Intent(Intent.ACTION_VIEW)
-                        .setData(Uri.parse(getString(R.string.playstore_url_format, context.packageName))))
+                        .setData(Uri.parse(getString(R.string.playstore_url_format, context?.packageName))))
                 MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_UPDATE_NOW())
             }
             MetricsManager.trackAction(MetricAction.ACTION_NEW_VERSION_DETECTED())
@@ -158,7 +158,7 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val menuItemSearch = menu?.findItem(R.id.menu_search)
         MenuItemCompat.setOnActionExpandListener(menuItemSearch, object : MenuItemCompat.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
-                val toast = Toast.makeText(activity.applicationContext, getString(R.string.cards_search_keywords_hint,
+                val toast = Toast.makeText(activity?.applicationContext, getString(R.string.cards_search_keywords_hint,
                         getString(R.string.cards_search_hint), getString(R.string.cards_search_keywords)),
                         Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0, 0)
@@ -191,8 +191,8 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         eventBus.post(CmdFilterSearch(query))
-        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
         return true
     }
 
@@ -203,9 +203,9 @@ class CardsFragment : BaseFragment(), SearchView.OnQueryTextListener {
         searchView?.setQuery(cmdInputSearch.search, true)
     }
 
-    class CardsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class CardsPageAdapter(ctx: Context?, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.cards_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.cards_tabs) ?: arrayOf()
         val cardsAllFragment by lazy { CardsAllFragment() }
         val cardsCollectionFragment by lazy { CardsCollectionFragment() }
         val cardsTokensFragment by lazy { CardsTokensFragment() }

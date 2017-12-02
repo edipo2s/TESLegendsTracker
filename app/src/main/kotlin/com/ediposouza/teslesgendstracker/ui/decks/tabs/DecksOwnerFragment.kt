@@ -21,11 +21,11 @@ class DecksOwnerFragment : DecksPublicFragment() {
         if (isDeckPrivate) PrivateInteractor.getUserPrivateDecksRef() else PrivateInteractor.getUserPublicDecksRef()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks_list_owner)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         configLoggedViews()
