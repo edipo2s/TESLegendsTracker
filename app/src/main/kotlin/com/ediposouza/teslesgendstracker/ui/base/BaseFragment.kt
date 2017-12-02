@@ -31,8 +31,8 @@ open class BaseFragment : Fragment() {
 
     protected var isFragmentSelected: Boolean = false
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             putBoolean(KEY_IS_FRAGMENT_SELECTED, isFragmentSelected)
         }
         super.onSaveInstanceState(outState)
@@ -59,12 +59,12 @@ open class BaseFragment : Fragment() {
         super.onResume()
         ConfigManager.updateCaches {
             if (ConfigManager.isDBUpdating()) {
-                context.alertThemed(R.string.app_bd_under_updating, theme = R.style.AppDialog) {
+                context?.alertThemed(R.string.app_bd_under_updating, theme = R.style.AppDialog) {
                     okButton {
                         MetricsManager.trackAction(MetricAction.ACTION_NOTIFY_UPDATE())
                         System.exit(0)
                     }
-                }.show()
+                }?.show()
             }
         }
     }

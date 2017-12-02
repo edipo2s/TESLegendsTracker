@@ -46,14 +46,14 @@ class BasicsFragment : BaseFragment() {
         eventBus.post(CmdUpdateTitle(title))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_basics)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_basics)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_basics)
         basics_view_pager.adapter = BasicsPageAdapter(context, childFragmentManager)
         basics_view_pager.addOnPageChangeListener(pageChange)
     }
@@ -64,8 +64,8 @@ class BasicsFragment : BaseFragment() {
         basics_tab_layout.setupWithViewPager(basics_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, basics_view_pager?.currentItem ?: 0) }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply { putInt(KEY_PAGE_VIEW_POSITION, basics_view_pager?.currentItem ?: 0) }
         super.onSaveInstanceState(outState)
     }
 
@@ -81,9 +81,9 @@ class BasicsFragment : BaseFragment() {
         basics_app_bar_layout.setExpanded(true, true)
     }
 
-    class BasicsPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class BasicsPageAdapter(ctx: Context?, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.basics_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.basics_tabs) ?: arrayOf()
 
         val basicsLevelUpFragment by lazy { BasicsLevelUpFragment() }
         val basicsRacesFragment by lazy { BasicsRacesFragment() }

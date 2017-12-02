@@ -55,14 +55,14 @@ class WabbaTrackFragment : BaseFragment() {
         eventBus.post(CmdUpdateTitle(title))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_wabbatrack)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_wabbatrack)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_wabbatrack)
         wabbatrack_view_pager.adapter = WabbaTrackPageAdapter(context, childFragmentManager)
         wabbatrack_view_pager.addOnPageChangeListener(pageChange)
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARTICLES_NEWS())
@@ -74,8 +74,8 @@ class WabbaTrackFragment : BaseFragment() {
         wabbatrack_tab_layout.setupWithViewPager(wabbatrack_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, wabbatrack_view_pager?.currentItem ?: 0) }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply { putInt(KEY_PAGE_VIEW_POSITION, wabbatrack_view_pager?.currentItem ?: 0) }
         super.onSaveInstanceState(outState)
     }
 
@@ -105,22 +105,24 @@ class WabbaTrackFragment : BaseFragment() {
                 return true
             }
             R.id.menu_download -> {
-                CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                        .setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
-                        .build()
-                        .launchUrl(context, Uri.parse(getString(R.string.wabbatrack_url)))
-                MetricsManager.trackAction(MetricAction.ACTION_WABBATRACK_WEBSITE())
+                context?.let {
+                    CustomTabsIntent.Builder()
+                            .setToolbarColor(ContextCompat.getColor(it, R.color.colorPrimary))
+                            .setStartAnimations(it, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .setExitAnimations(it, R.anim.slide_in_left, R.anim.slide_out_right)
+                            .build()
+                            .launchUrl(context, Uri.parse(getString(R.string.wabbatrack_url)))
+                    MetricsManager.trackAction(MetricAction.ACTION_WABBATRACK_WEBSITE())
+                }
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    class WabbaTrackPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class WabbaTrackPageAdapter(ctx: Context?, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.wabbatrack_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.wabbatrack_tabs) ?: arrayOf()
 
         val aboutFragment by lazy {
             WabbaTrackFeatureFragment(R.drawable.wabbatrack_about, R.string.wabbatrack_about_desc)

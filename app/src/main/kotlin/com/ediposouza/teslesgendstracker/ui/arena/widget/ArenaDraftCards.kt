@@ -64,7 +64,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
     constructor(ctx: Context?, attrs: AttributeSet) : this(ctx, attrs, 0)
 
-    fun config(activity: Activity, cls: DeckClass, cards: List<Card>, cardOnLongOnClick: (Card) -> Unit, arena_draft_cardlist: DeckList) {
+    fun config(activity: Activity?, cls: DeckClass, cards: List<Card>, cardOnLongOnClick: (Card) -> Unit, arena_draft_cardlist: DeckList) {
         draftCardlist = arena_draft_cardlist
         with(arena_draft_card_iv) {
             setOnClickListener {
@@ -97,7 +97,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         arena_draft_card_value_shadow.text = INVALID_TEXT_VALUE
     }
 
-    private fun showSelectCardDialog(activity: Activity, cls: DeckClass, cards: List<Card>) {
+    private fun showSelectCardDialog(activity: Activity?, cls: DeckClass, cards: List<Card>) {
         val gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }
@@ -241,9 +241,11 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         } ?: 0
     }
 
-    private fun showCardExpanded(activity: Activity, card: Card, view: View) {
-        ActivityCompat.startActivity(context, CardActivity.newIntent(context, card),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, cardTransitionName).toBundle())
+    private fun showCardExpanded(activity: Activity?, card: Card, view: View) {
+        activity?.let {
+            ActivityCompat.startActivity(it, CardActivity.newIntent(it, card),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, cardTransitionName).toBundle())
+        }
     }
 
 }

@@ -46,14 +46,14 @@ class ArticlesFragment : BaseFragment() {
         eventBus.post(CmdUpdateTitle(title))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_articles)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_articles)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_articles)
         articles_view_pager.adapter = ArticlesPageAdapter(context, childFragmentManager)
         articles_view_pager.addOnPageChangeListener(pageChange)
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARTICLES_NEWS())
@@ -65,8 +65,8 @@ class ArticlesFragment : BaseFragment() {
         articles_tab_layout.setupWithViewPager(articles_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply { putInt(KEY_PAGE_VIEW_POSITION, articles_view_pager?.currentItem ?: 0) }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply { putInt(KEY_PAGE_VIEW_POSITION, articles_view_pager?.currentItem ?: 0) }
         super.onSaveInstanceState(outState)
     }
 
@@ -82,9 +82,9 @@ class ArticlesFragment : BaseFragment() {
         articles_app_bar_layout.setExpanded(true, true)
     }
 
-    class ArticlesPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class ArticlesPageAdapter(ctx: Context?, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.articles_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.articles_tabs) ?: arrayOf()
         val articlesNewsFragment by lazy { ArticlesNewsFragment() }
         val articlesWorldFragment by lazy { ArticlesWorldFragment() }
 

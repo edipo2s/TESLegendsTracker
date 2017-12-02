@@ -34,7 +34,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
     }
 
     override val cardsCollectionAdapter by lazy {
-        val missingCards = arguments.getParcelableArrayList<CardMissing>(EXTRA_MISSING_CARDS) ?: listOf<CardMissing>()
+        val missingCards = arguments?.getParcelableArrayList<CardMissing>(EXTRA_MISSING_CARDS) ?: listOf<CardMissing>()
         CardsDeckListAdapter(ADS_EACH_ITEMS, gridLayoutManager, missingCards, { _ -> }, {
             view: View, card: Card ->
             showCardExpanded(card, view)
@@ -47,7 +47,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
         cards_recycler_view.setPadding(0, 0, 0, 0)
         cards_refresh_layout.isEnabled = false
         isFragmentSelected = true
-        arguments.getParcelableArrayList<CardSlot>(EXTRA_DECK_CARDS)?.apply {
+        arguments?.getParcelableArrayList<CardSlot>(EXTRA_DECK_CARDS)?.apply {
             cardsCollectionAdapter.showCards(this)
         }
     }

@@ -28,16 +28,18 @@ class ArenaFragment : MatchesHistoryFragment() {
     private var menuSeasons: SubMenu? = null
     private var seasons: List<Season> = listOf()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         currentMatchMode = MatchMode.ARENA
         return container?.inflate(R.layout.fragment_arena)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arena_fab_add.setOnClickListener {
-            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-            ActivityCompat.startActivity(activity, context.intentFor<NewArenaActivity>(), anim.toBundle())
+            activity?.let {
+                val anim = ActivityOptionsCompat.makeCustomAnimation(it, R.anim.slide_up, R.anim.slide_down)
+                ActivityCompat.startActivity(it, it.intentFor<NewArenaActivity>(), anim.toBundle())
+            }
         }
         eventBus.post(CmdUpdateTitle(R.string.menu_arena))
         MetricsManager.trackScreen(MetricScreen.SCREEN_ARENA())

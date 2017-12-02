@@ -27,16 +27,18 @@ class BasicsLevelUpFragment : BaseFragment() {
     val levelUpAdapter by lazy {
         LevelUpAdapter { card, view ->
             val transitionName = getString(R.string.card_transition_name)
-            ActivityCompat.startActivity(activity, CardActivity.newIntent(context, card),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, transitionName).toBundle())
+            activity?.let {
+                ActivityCompat.startActivity(it, CardActivity.newIntent(it, card),
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(it, view, transitionName).toBundle())
+            }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_basics_levelup)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(basics_levelup_recycler_view) {
             layoutManager = LinearLayoutManager(context)

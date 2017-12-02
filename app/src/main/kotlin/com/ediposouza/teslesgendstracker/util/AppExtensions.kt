@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -249,7 +248,7 @@ fun ImageView.loadFromPatch(patch: PatchChange, patchUuid: String, newImage: Boo
     }
 }
 
-private fun getLocalCardBitmap(context: Context, imagePath: String, transform: ((Bitmap) -> Bitmap)? = null): Drawable {
+private fun getLocalCardBitmap(context: Context, imagePath: String, transform: ((Bitmap) -> Bitmap)? = null): Drawable? {
     return try {
         var cardBitmap = BitmapFactory.decodeStream(context.resources.assets.open(imagePath))
         transform?.apply {
@@ -334,10 +333,6 @@ fun Context.hasNavigationBar(): Boolean {
 
 fun Activity.hasPermission(permission: String): Boolean {
     return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-}
-
-fun Fragment.hasPermission(permission: String): Boolean {
-    return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 }
 
 fun View.setBottomPaddingForNavigationBar() {

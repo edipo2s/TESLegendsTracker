@@ -154,8 +154,8 @@ class DashActivity : BaseFilterActivity(),
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             putString(KEY_TITLE, dash_toolbar_title.text.toString())
             putInt(KEY_MENU_ITEM_SELECTED, menuItemSelected)
         }

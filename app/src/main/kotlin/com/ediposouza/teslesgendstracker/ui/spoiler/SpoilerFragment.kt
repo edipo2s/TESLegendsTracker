@@ -30,14 +30,14 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private val handler = Handler()
     private val trackSearch = Runnable { MetricsManager.trackSearch(query ?: "") }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_spoiler)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_spoiler)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_spoiler)
         spoiler_filter_attr.filterClick = {
             if (spoiler_filter_attr.isAttrSelected(it)) {
                 spoiler_filter_attr.unSelectAttr(it)
@@ -52,10 +52,10 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
             eventBus.post(CmdFilterSet(null))
         }, DateUtils.SECOND_IN_MILLIS)
         MetricsManager.trackScreen(MetricScreen.SCREEN_SPOILER())
-        fragmentManager.beginTransaction()
-                .replace(R.id.spoiler_cards_container, SpoilerCardsFragment())
-                .commit()
-        context.toast(getString(R.string.spoiler_image_qlt_warning))
+        fragmentManager?.beginTransaction()
+                ?.replace(R.id.spoiler_cards_container, SpoilerCardsFragment())
+                ?.commit()
+        context?.toast(getString(R.string.spoiler_image_qlt_warning))
     }
 
     override fun onResume() {
@@ -92,8 +92,8 @@ class SpoilerFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         eventBus.post(CmdFilterSearch(query))
-        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
         return true
     }
 

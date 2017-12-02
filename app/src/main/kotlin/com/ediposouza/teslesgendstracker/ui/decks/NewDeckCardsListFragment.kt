@@ -51,7 +51,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         super.configRecycleView()
         cards_recycler_view.setPadding(0, 0, 0, 0)
         isFragmentSelected = true
-        arguments.getParcelable<Deck>(EXTRA_DECK)?.apply {
+        arguments?.getParcelable<Deck>(EXTRA_DECK)?.apply {
             PublicInteractor.getCards(null, cls.attr1, cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { clsCards ->
                 cards.forEach { (cardShortName, qtd) ->
                     clsCards.find { it.shortName == cardShortName }?.apply {

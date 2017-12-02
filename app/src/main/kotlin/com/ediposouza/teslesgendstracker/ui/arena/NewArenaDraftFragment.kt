@@ -44,7 +44,7 @@ class NewArenaDraftFragment : BaseFragment() {
 
     }
 
-    private val selectedClass by lazy { DeckClass.values()[arguments.getInt(EXTRA_SELECTED_CLASS)] }
+    private val selectedClass by lazy { DeckClass.values()[arguments?.getInt(EXTRA_SELECTED_CLASS) ?: 0] }
 
     private val cardListOnClick: (Card) -> Unit = { card ->
         when (arena_draft_cardlist.getCards().sumBy { it.qtd }) {
@@ -63,11 +63,11 @@ class NewArenaDraftFragment : BaseFragment() {
         MetricsManager.trackAction(MetricAction.ACTION_ARENA_PICK(card))
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_arena_draft)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(activity as AppCompatActivity) {
             setSupportActionBar(toolbar)
@@ -101,7 +101,7 @@ class NewArenaDraftFragment : BaseFragment() {
             arena_draft_cards3.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_NEW_ARENA_DRAFT())
-        context.toast(R.string.new_arena_warning)
+        context?.toast(R.string.new_arena_warning)
     }
 
     @Subscribe
@@ -134,9 +134,11 @@ class NewArenaDraftFragment : BaseFragment() {
         val draftCards = arena_draft_cardlist.getCards().map { it.card.shortName to it.qtd }.toMap()
         val deck = Deck("", "", "", false, DeckType.OTHER, selectedClass, 0, LocalDateTime.now(),
                 LocalDateTime.now(), "", listOf(), 0, draftCards, listOf(), listOf())
-        startActivity(NewMatchesActivity.newIntent(context, null, selectedClass, DeckType.OTHER, MatchMode.ARENA, deck))
-        ActivityCompat.finishAfterTransition(activity)
-        MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck, true))
+        activity?.let {
+            startActivity(NewMatchesActivity.newIntent(it, null, selectedClass, DeckType.OTHER, MatchMode.ARENA, deck))
+            ActivityCompat.finishAfterTransition(it)
+            MetricsManager.trackAction(MetricAction.ACTION_NEW_MATCH_START_WITH(deck, true))
+        }
     }
 
 }

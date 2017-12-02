@@ -85,15 +85,15 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         eventBus.post(title)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_decks)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         decks_view_pager.adapter = adapter
-        activity.dash_navigation_view.setCheckedItem(R.id.menu_decks)
+        activity?.dash_navigation_view?.setCheckedItem(R.id.menu_decks)
         decks_view_pager.addOnPageChangeListener(pageChange)
         decks_attr_filter.filterClick = {
             if (decks_attr_filter.isAttrSelected(it)) {
@@ -104,8 +104,10 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
             eventBus.post(CmdShowDecksByClasses(DeckClass.getClasses(decks_attr_filter.getSelectedAttrs())))
         }
         decks_fab_add.setOnClickListener {
-            val anim = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.slide_up, R.anim.slide_down)
-            startActivityForResult(context.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+            activity?.let {
+                val anim = ActivityOptionsCompat.makeCustomAnimation(it, R.anim.slide_up, R.anim.slide_down)
+                startActivityForResult(it.intentFor<NewDeckActivity>(), RC_NEW_DECK, anim.toBundle())
+            }
         }
         MetricsManager.trackScreen(MetricScreen.SCREEN_DECKS_PUBLIC())
     }
@@ -116,8 +118,8 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         decks_tab_layout.setupWithViewPager(decks_view_pager)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.apply {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.apply {
             putInt(KEY_PAGE_VIEW_POSITION, decks_view_pager?.currentItem ?: 0)
             putBoolean(KEY_FAB_NEW_DECK, decks_fab_add?.isShown ?: false)
         }
@@ -182,8 +184,8 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         eventBus.post(CmdFilterSearch(query))
-        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
         return true
     }
 
@@ -201,14 +203,16 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val htmlViewerInterface = HTMLViewerInterface()
         val dialogView = View.inflate(context, R.layout.dialog_import, null)
         dialogView.import_dialog_text.text = getString(R.string.dialog_import_deck_text)
-        importDialog = AlertDialog.Builder(context, R.style.AppDialog)
-                .setView(dialogView)
-                .setNegativeButton(android.R.string.cancel, { _, _ ->
-                    htmlViewerInterface.continueImporting = false
-                    dialogView.import_dialog_webview.stopLoading()
-                    MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_CANCELLED())
-                })
-                .create()
+        context?.let {
+            importDialog = AlertDialog.Builder(it, R.style.AppDialog)
+                    .setView(dialogView)
+                    .setNegativeButton(android.R.string.cancel, { _, _ ->
+                        htmlViewerInterface.continueImporting = false
+                        dialogView.import_dialog_webview.stopLoading()
+                        MetricsManager.trackAction(MetricAction.ACTION_IMPORT_DECKS_CANCELLED())
+                    })
+                    .create()
+        }
         importDialog?.setOnShowListener {
             dialogView.import_dialog_webview?.apply {
                 importDialogWebView = this
@@ -349,10 +353,10 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                                 uiThread {
                                     if (importingSavedDecks) {
                                         PrivateInteractor.setUserDeckFavorite(savedDeck, true) {
-                                            context.toast("$deckName Favorite Imported!")
+                                            context?.toast("$deckName Favorite Imported!")
                                         }
                                     } else {
-                                        context.toast("$deckName Saved!")
+                                        context?.toast("$deckName Saved!")
                                     }
                                     loadNextDeckPage(decksLinkRemains)
                                 }
@@ -360,7 +364,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                         } else {
                             Timber.d("$deckName is already saved")
                             uiThread {
-                                context.toast("$deckName is already saved")
+                                context?.toast("$deckName is already saved")
                                 loadNextDeckPage(decksLinkRemains)
                             }
                         }
@@ -394,7 +398,7 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
 
         private fun loadNextDeckPage(decksLink: List<String>) {
-            context.runOnUiThread {
+            context?.runOnUiThread {
                 if (decksLink.isNotEmpty() && continueImporting) {
                     val nextDeckLink = decksLink.first()
                     decksLinkRemains = decksLink.minus(nextDeckLink)
@@ -403,10 +407,10 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     importDialogWebView?.loadUrl(nextDeckLink)
                 } else {
                     if (importingSavedDecks) {
-                        context.toast("$userDecksImported Favorites imported!")
+                        context?.toast("$userDecksImported Favorites imported!")
                         importDialog?.dismiss()
                     } else {
-                        context.toast("$userDecksImported Decks imported!")
+                        context?.toast("$userDecksImported Decks imported!")
                         userDecksImported = 0
                         importingSavedDecks = true
                         if (continueImporting) {
@@ -420,9 +424,9 @@ class DecksFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    class DecksPageAdapter(ctx: Context, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class DecksPageAdapter(ctx: Context?, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
 
-        var titles: Array<String> = ctx.resources.getStringArray(R.array.decks_tabs)
+        var titles: Array<String> = ctx?.resources?.getStringArray(R.array.decks_tabs) ?: arrayOf()
         val decksPublicFragment by lazy { DecksPublicFragment() }
         val decksMyFragment by lazy { DecksOwnerFragment() }
         val decksSavedFragment by lazy { DecksFavoritedFragment() }
