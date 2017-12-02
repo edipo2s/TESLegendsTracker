@@ -63,5 +63,20 @@
     "reward": {
       "endurance": "purebloodelder"
     }
+  },
+  "2017_09": {
+    "reward": {
+      "endurance": "emperorsblade"
+    }
+  },
+  "2017_10": {
+    "reward": {
+      "endurance": "dushnikhyalarcher"
+    }
+  },
+  "2017_11": {
+    "reward": {
+      "endurance": "wormkingsagent"
+    }
   }
 }

@@ -37,7 +37,8 @@ enum class CardSet(val title: String) {
     var unknownSetName = ""
     var unknownSetTitle = ""
 
-    val db = name.toLowerCase()
+    val db: String
+        get() = name.toLowerCase().takeIf { this != UNKNOWN } ?: unknownSetName.toLowerCase()
 
     override fun toString(): String {
         return name.takeIf { this != UNKNOWN } ?: unknownSetName
@@ -47,7 +48,11 @@ enum class CardSet(val title: String) {
 
         fun of(value: String): CardSet {
             val name = value.trim().toUpperCase().replace(" ", "_")
-            return if (values().map { it.name }.contains(name)) valueOf(name) else UNKNOWN
+            return if (values().map { it.name }.contains(name)) valueOf(name) else
+                UNKNOWN.apply {
+                    unknownSetName = value.toUpperCase()
+                    unknownSetTitle = value.capitalize()
+                }
         }
 
     }
