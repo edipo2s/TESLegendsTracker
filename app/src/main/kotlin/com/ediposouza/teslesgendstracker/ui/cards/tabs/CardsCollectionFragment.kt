@@ -128,7 +128,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
     }
 
     override fun onStop() {
-        if (importDialog?.isShowing ?: false) {
+        if (importDialog?.isShowing == true) {
             importDialog?.dismiss()
         }
         super.onStop()
