@@ -416,6 +416,7 @@ data class Card(
         val shout: Int,
         val creators: List<String>,
         val generates: List<String>,
+        val generators: List<String>,
         val tokens: List<String>,
         val lore: String,
         val loreLink: String,
@@ -433,7 +434,7 @@ data class Card(
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
                 CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
                 CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
-                listOf(), false, "", 0, listOf(), listOf(), listOf(), "", "", false, "")
+                listOf(), false, "", 0, listOf(), listOf(), listOf(), listOf(), "", "", false, "")
 
         const val ALT_SUFFIX = "_alt"
         const val ARTS_PATH = "Arts"
@@ -455,6 +456,7 @@ data class Card(
             source.readString(), CardArenaTier.values()[source.readInt()],
             mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
             1 == source.readInt(), source.readString(), source.readInt(),
+            mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) },
             mutableListOf<String>().apply { source.readStringList(this) }, source.readString(),
@@ -515,6 +517,8 @@ data class Card(
     fun isAlternativeArt(): Boolean = shortName.endsWith(ALT_SUFFIX)
 
     fun toAlternativeArt(): Card = copy(shortName = "$shortName$ALT_SUFFIX")
+
+    fun canBeGenerated(): Boolean = generators.isNotEmpty()
 
     fun canGenerateCards(): Boolean = generates.isNotEmpty()
 
@@ -578,6 +582,7 @@ data class Card(
         dest?.writeInt(shout)
         dest?.writeStringList(creators)
         dest?.writeStringList(generates)
+        dest?.writeStringList(generators)
         dest?.writeStringList(tokens)
         dest?.writeString(lore)
         dest?.writeString(loreLink)
