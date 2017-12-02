@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.8.0"
+        changeDate="December 02, 2017">
+        <changelogtext>[b]Feature:[/b] Add Cards Generators info support</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add arena draft landscape mode</changelogtext>
+        <changelogtext>Add Return to Clockwork City cards</changelogtext>
+        <changelogtext>Add recent monthly card's full art</changelogtext>
+        <changelogtext>Add Lightning Bolt and Swims-at-Night alternative art.</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.7.1"
         changeDate="August 26, 2017">
         <changelogtext>Fix load decklist in new match screen</changelogtext>
@@ -8,7 +17,7 @@
     <changelogversion
         versionName="1.7.0"
         changeDate="August 25, 2017">
-        <changelogtext>Add French translations</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add French translations</changelogtext>
         <changelogtext>Update local card images with latest balanced changes</changelogtext>
         <changelogtext>Fix keep filters while changing tabs</changelogtext>
     </changelogversion>
