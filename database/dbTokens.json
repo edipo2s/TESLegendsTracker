@@ -218,6 +218,18 @@
         "rarity": "Common",
         "keyword": "",
         "text": ""
+      },
+      "wormthrall": {
+        "creators": "wormkingsagent",
+        "name": "Worm Thrall",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Skeleton",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
       }
     },
     "neutral": {

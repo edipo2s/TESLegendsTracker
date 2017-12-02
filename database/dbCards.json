@@ -561,6 +561,18 @@
         "text": "",
         "arenaTier": "Poor"
       },
+      "dushnikhyalarcher": {
+        "name": "Dushnikh Yal Archer",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Orc",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Epic",
+        "keyword": "Guard, Summon",
+        "text": "Guard. Summon: Deal 1 damage or destroy an enemy support",
+        "arenaTier": "Unknown"
+      },
       "earthbonespinner": {
         "name": "Earthbone Spinner",
         "cost": "4",
@@ -5233,7 +5245,8 @@
         "text": "Summon: Deal 2 damage to an enemy creature. Slay: Summon a 2/2 Worm Thrall with Guard.",
         "attr1": "intelligence",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "tokens": "wormthrall"
       },
       "falinestireaver": {
         "name": "Falinesti Reaver",
@@ -8924,8 +8937,8 @@
         "text": "Draw an item or support from your discard pile.",
         "arenaTier": "Unknown"
       },
-      "reverbaratingstrike": {
-        "name": "Reverbarating Strike",
+      "reverberatingstrike": {
+        "name": "Reverberating Strike",
         "cost": "3",
         "type": "Action",
         "race": "",

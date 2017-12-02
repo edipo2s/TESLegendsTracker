@@ -66,17 +66,17 @@
   },
   "2017_09": {
     "reward": {
-      "endurance": "emperorsblade"
+      "dual": "emperorsblade"
     }
   },
   "2017_10": {
     "reward": {
-      "endurance": "dushnikhyalarcher"
+      "strength": "dushnikhyalarcher"
     }
   },
   "2017_11": {
     "reward": {
-      "endurance": "wormkingsagent"
+      "dual": "wormkingsagent"
     }
   }
 }
