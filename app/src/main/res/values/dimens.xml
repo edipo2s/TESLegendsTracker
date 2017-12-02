@@ -65,6 +65,7 @@
 
     <!-- transparent status_bar_height + 115dp-->
     <dimen name="deck_header_height">115dp</dimen>
+    <dimen name="deck_header_height_land">76dp</dimen>
     <dimen name="deck_header_attr_icon_height">32dp</dimen>
     <dimen name="deck_info_bottom_margin">40dp</dimen>
     <!-- transparent navigation_bar_height + 38dp-->

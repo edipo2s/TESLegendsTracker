@@ -56,11 +56,9 @@
             android:theme="@style/AppThemeTransparentDark" />
         <activity
             android:name=".ui.cards.CardFullArtActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparent" />
         <activity
             android:name=".ui.cards.CardLevelActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparent" />
         <activity
             android:name=".ui.decks.DeckActivity"
@@ -79,11 +77,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.seasons.PatchActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparent" />
-        <activity
-            android:name=".ui.arena.NewArenaActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.arena.NewArenaActivity" />
 
         <!-- Receivers -->
 
