@@ -257,7 +257,7 @@ open class CardsAllFragment : BaseFragment() {
     }
 
     open fun showCards() {
-        if (onlyFavorites?.isChecked ?: false) {
+        if (onlyFavorites?.isChecked == true) {
             PrivateInteractor.getUserFavoriteCards(setFilter, currentAttr) { userFavorites ->
                 cardsAdapter.showCards(filteredCards().filter { userFavorites.contains(it.shortName) })
                 scrollToTop()
@@ -289,7 +289,7 @@ open class CardsAllFragment : BaseFragment() {
         return cardsLoaded
                 .filter {
                     when (searchFilter) {
-                        null -> it is Card
+                        null -> true
                         else -> {
                             val search = searchFilter?.toLowerCase()?.trim() ?: ""
                             val hasValidSearchKeyword = (search == SEARCH_LORE && it.lore.isNotEmpty()) ||
@@ -310,13 +310,13 @@ open class CardsAllFragment : BaseFragment() {
                 }
                 .filter {
                     when (rarityFilter) {
-                        null -> it.rarity is CardRarity
+                        null -> true
                         else -> it.rarity == rarityFilter
                     }
                 }
                 .filter {
                     when {
-                        magickaFilter == -1 -> it.cost is Int
+                        magickaFilter == -1 -> true
                         magickaFilter < 7 -> it.cost == magickaFilter
                         else -> it.cost >= magickaFilter
                     }
@@ -329,7 +329,7 @@ open class CardsAllFragment : BaseFragment() {
                             else
                                 (it.dualAttr1 == classFilter?.attr1 && it.dualAttr2 == classFilter?.attr2) ||
                                         (it.dualAttr1 == classFilter?.attr2 && it.dualAttr2 == classFilter?.attr1)
-                        else -> it.attr is CardAttribute
+                        else -> true
                     }
                 }
     }

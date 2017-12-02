@@ -7,7 +7,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "27.0.0"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'META-INF/MANIFEST.MF', 'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
         minSdkVersion prepareToRelease ? 17 : 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -77,11 +77,11 @@ kotlin {
 }
 
 ext {
-    anko_version = "0.10.1"
+    anko_version = "0.10.3"
     okIOVersion = "1.13.0"
-    okHttpVersion = "3.8.1"
-    playServicesVersion = "11.2.0"
-    supportLibraryVersion = "26.0.1"
+    okHttpVersion = "3.9.1"
+    playServicesVersion = "11.6.2"
+    supportLibraryVersion = "26.1.0"
     threetenabpVersion = "1.0.5"
 
     testMockitoVersion = "2.7.+"
@@ -103,73 +103,73 @@ configurations.all {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile(name: 'clansFAB', ext: 'aar')
-    compile(name: 'googleinapputil', ext: 'aar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.anko:anko-common:$anko_version"
-    compile "org.jetbrains.anko:anko-coroutines:$anko_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation(name: 'clansFAB', ext: 'aar')
+    implementation(name: 'googleinapputil', ext: 'aar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-common:$anko_version"
+    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
 
     //Support
-    compile "com.android.support:cardview-v7:$supportLibraryVersion"
-    compile "com.android.support:customtabs:$supportLibraryVersion"
-    compile "com.android.support:design:$supportLibraryVersion"
-    compile "com.android.support:percent:$supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:multidex:1.0.1'
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support:customtabs:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:percent:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:multidex:1.0.1'
 
     //Google
-    compile "com.google.android.gms:play-services-auth:$playServicesVersion"
-    compile "com.google.android.gms:play-services-gcm:$playServicesVersion"
-    compile "com.google.firebase:firebase-auth:$playServicesVersion"
-    compile "com.google.firebase:firebase-ads:$playServicesVersion"
-    compile "com.google.firebase:firebase-core:$playServicesVersion"
-    compile "com.google.firebase:firebase-config:$playServicesVersion"
-    compile "com.google.firebase:firebase-database:$playServicesVersion"
-    compile "com.google.firebase:firebase-messaging:$playServicesVersion"
-    compile "com.google.firebase:firebase-perf:$playServicesVersion"
-    releaseCompile "com.google.firebase:firebase-crash:$playServicesVersion"
-    compile "com.google.firebase:firebase-storage:$playServicesVersion"
-    compile "com.firebaseui:firebase-ui-storage:2.1.1"
+    implementation "com.google.android.gms:play-services-auth:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-gcm:$playServicesVersion"
+    implementation "com.google.firebase:firebase-auth:$playServicesVersion"
+    implementation "com.google.firebase:firebase-ads:$playServicesVersion"
+    implementation "com.google.firebase:firebase-core:$playServicesVersion"
+    implementation "com.google.firebase:firebase-config:$playServicesVersion"
+    implementation "com.google.firebase:firebase-database:$playServicesVersion"
+    implementation "com.google.firebase:firebase-messaging:$playServicesVersion"
+    implementation "com.google.firebase:firebase-perf:$playServicesVersion"
+    releaseImplementation "com.google.firebase:firebase-crash:$playServicesVersion"
+    implementation "com.google.firebase:firebase-storage:$playServicesVersion"
+    implementation "com.firebaseui:firebase-ui-storage:2.1.1"
 
     //Fabric
-    compile('com.crashlytics.sdk.android:answers:1.3.13') {
+    implementation('com.crashlytics.sdk.android:answers:1.4.1') {
         transitive = true
     }
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.8.0') {
         transitive = true
     }
 
     //Networking
-    compile "com.squareup.okio:okio:$okIOVersion"
-    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    compile "com.github.bumptech.glide:glide:3.8.0"
-    compile "com.github.bumptech.glide:okhttp3-integration:1.5.0"
+    implementation "com.squareup.okio:okio:$okIOVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.github.bumptech.glide:glide:3.8.0"
+    implementation "com.github.bumptech.glide:okhttp3-integration:1.5.0"
 
     //Others
-    compile 'com.facebook.android:facebook-android-sdk:4.23.0'
-    compile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
-    compile 'com.jakewharton.timber:timber:4.5.1'
-    compile 'com.mixpanel.android:mixpanel-android:5.1.0'
-    compile 'com.github.hotchemi:android-rate:1.0.1'
-    compile 'com.github.emanzanoaxa:RippleEffect:52ea2a0ab6'
-    compile 'com.github.gabrielemariotti.changeloglib:changelog:2.1.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+    implementation 'com.mixpanel.android:mixpanel-android:5.2.1'
+    implementation 'com.github.hotchemi:android-rate:1.0.1'
+    implementation 'com.github.emanzanoaxa:RippleEffect:52ea2a0ab6'
+    implementation 'com.github.gabrielemariotti.changeloglib:changelog:2.1.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
-    //    compile "com.github.traex.rippleeffect:library:1.3"
-    compile 'com.github.miguelbcr:TableFixHeaders-Wrapper:0.2.0'
-    compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3'
-    compile 'com.kyleduo.switchbutton:library:1.4.6'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.6'
-    compile 'org.jsoup:jsoup:1.10.2'
-    compile 'com.github.chrisbanes:PhotoView:2.0.0'
-    testCompile 'junit:junit:4.12'
-    testCompile "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
-    testCompile "org.mockito:mockito-core:$testMockitoVersion"
-    testCompile "org.robolectric:robolectric:$testRoboletricVersion"
-    testCompile "org.robolectric:shadows-multidex:$testRoboletricVersion"
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //    implementation "com.github.traex.rippleeffect:library:1.3"
+    implementation 'com.github.miguelbcr:TableFixHeaders-Wrapper:0.2.0'
+    implementation 'com.timehop.stickyheadersrecyclerview:library:0.4.3'
+    implementation 'com.kyleduo.switchbutton:library:1.4.6'
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+    implementation 'org.jsoup:jsoup:1.11.2'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
+    testImplementation "org.mockito:mockito-core:$testMockitoVersion"
+    testImplementation "org.robolectric:robolectric:$testRoboletricVersion"
+    testImplementation "org.robolectric:shadows-multidex:$testRoboletricVersion"
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
