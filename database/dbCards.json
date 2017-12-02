@@ -8947,7 +8947,9 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Draw a card of your choice from your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "alternativeArt": true,
+        "alternativeArtSource": "Return to Clockwork City bundle price"
       },
       "memorywraith": {
         "name": "Memory Wraith",

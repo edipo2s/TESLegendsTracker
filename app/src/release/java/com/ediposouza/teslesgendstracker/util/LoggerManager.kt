@@ -16,7 +16,7 @@ class LoggerManager : Timber.Tree() {
         return super.isLoggable(tag, priority)
     }
 
-    override fun log(priority: Int, tag: String?, message: String?, t: Throwable?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (!isLoggable(tag, priority)) {
             return
         }
