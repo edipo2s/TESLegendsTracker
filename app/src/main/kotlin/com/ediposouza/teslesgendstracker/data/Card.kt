@@ -31,6 +31,7 @@ enum class CardSet(val title: String) {
     HEROESOFSKYRIM("Heroes of Skyrim"),
     MADHOUSE("Madhouse Collection"),
     FALLOFTHEDARKBROTHERHOOD("The Fall of the Dark Brotherhood"),
+    RETURNTOCLOCKWORKCITY("Return to Clockwork City"),
     TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 
