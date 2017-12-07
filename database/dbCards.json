@@ -6401,7 +6401,7 @@
         "race": "Wood Elf",
         "attack": "4",
         "health": "1",
-        "rarity": "Common",
+        "rarity": "Rare",
         "keyword": "Charge, Summon",
         "text": "Charge. Summon: Enemy creatures in this lane lose Cover.",
         "arenaTier": "Excellent"
@@ -6721,7 +6721,7 @@
         "text": "When you summon a Dragon, gain 4 health.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "chaurus": {
@@ -6865,7 +6865,7 @@
         "text": "Summon: Give other friendly Spriggans and Animals +2/+2.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Spriggan"
+          "race": "Spriggan"
         }
       }
     },
@@ -6911,7 +6911,7 @@
         "arenaTier": "Good",
         "tokens": "draugrsentry",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "steelheartvanquisher": {
@@ -6926,7 +6926,7 @@
         "text": "Slay: Give friendly Orcs +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Orc"
+          "race": "Orc"
         }
       },
       "companionharbinger": {
@@ -6987,7 +6987,7 @@
         "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon",
+          "race": "Dragon",
           "keyword": "Shout"
         },
         "shout": 2,
@@ -7052,7 +7052,7 @@
         "text": "+2/+2. Summon: +2/+2 if you have a Dragon in your discard pile.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "emperortitusmedeii": {
@@ -7316,7 +7316,7 @@
         "text": "When you summon a Dragon, Ghost Sea Lookout gains a Ward.",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "masterswordsmith": {
@@ -7360,7 +7360,7 @@
         "loreLink": "",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
-          "type": "High Elf"
+          "race": "High Elf"
         }
       },
       "vigilantofstendarr": {
@@ -7387,7 +7387,7 @@
         "text": "Deal 3 damage to a creature, and 3 extra damage for each friendly Dragon.",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "jzargo": {
@@ -7668,7 +7668,7 @@
         "text": "Prophecy, Guard. Last Gasp: Reduce the cost of a random Dragon in your hand by 1.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "mudcrabanklesnapper": {
@@ -7770,7 +7770,7 @@
       },
       "prizedchicken": {
         "name": "Prized Chicken",
-        "cost": "4",
+        "cost": "5",
         "type": "Creature",
         "race": "Beast",
         "attack": "0",
@@ -7809,7 +7809,7 @@
         "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "journeytosovngarde": {
@@ -7856,7 +7856,7 @@
         "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       }
     },
@@ -7914,7 +7914,7 @@
         "text": "When you summon a Dragon, draw a card.",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "shieldbreaker": {
@@ -8291,7 +8291,7 @@
         "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "grislygourmet": {
@@ -8362,7 +8362,7 @@
         "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Guard"
+          "keyword": "Guard"
         },
         "generates": "septimguardsman"
       },
@@ -8381,7 +8381,7 @@
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5oolt6/daily_card_discussion_thread_139_renowned_legate/dclcqpe",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Imperial"
+          "race": "Imperial"
         },
         "tokens": "imperialgrunt"
       },
@@ -8517,7 +8517,7 @@
         "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Wolf"
+          "race": "Wolf"
         },
         "tokens": "uncagedwolf"
       },
@@ -9199,7 +9199,7 @@
       },
       "reflectiveautomaton": {
         "name": "Reflective Automaton",
-        "cost": "1",
+        "cost": "2",
         "type": "Creature",
         "race": "Factotum",
         "attack": "2",
