@@ -203,7 +203,7 @@
       },
       "northwindoutpost": {
         "name": "Northwind Outpost",
-        "cost": "2",
+        "cost": "3",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -1841,7 +1841,9 @@
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
-        }
+        },
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       },
       "staffofsparks": {
         "name": "Staff of Sparks",
@@ -3216,7 +3218,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
-        "text": "Summon: Draw a card. If it costs 7 or more, reduce its cost by 2.",
+        "text": "Summon: Draw a card. If it costs 7 or more, reduce its cost by 1.",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3674,7 +3676,9 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Destroy a wounded creature.",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       },
       "necrommastermind": {
         "name": "Necrom Mastermind",
@@ -4224,7 +4228,7 @@
       },
       "histgrove": {
         "name": "Hist Grove",
-        "cost": "3",
+        "cost": "4",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -5000,7 +5004,7 @@
         "type": "Creature",
         "race": "Nord",
         "attack": "3",
-        "health": "4",
+        "health": "3",
         "rarity": "Epic",
         "keyword": "",
         "text": "When an enemy rune is destroyed, draw a card.",
@@ -5120,7 +5124,7 @@
         "type": "Creature",
         "race": "Argonian",
         "attack": "2",
-        "health": "5",
+        "health": "4",
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Gain +1 max magicka. When your magicka increases Thorn Histmage gains +1/+0.",
@@ -6408,7 +6412,7 @@
       },
       "unstoppablerage": {
         "name": "Unstoppable Rage",
-        "cost": "7",
+        "cost": "8",
         "type": "Action",
         "race": "",
         "attack": "",
@@ -7857,7 +7861,9 @@
         "arenaTier": "Poor",
         "arenaTierPlus": {
           "race": "Dragon"
-        }
+        },
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       }
     },
     "strength": {
@@ -9065,7 +9071,7 @@
       },
       "assembledsentry": {
         "name": "Assembled Sentry",
-        "cost": "3",
+        "cost": "2",
         "type": "Creature",
         "race": "Factotum",
         "attack": "1",

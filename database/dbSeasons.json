@@ -78,5 +78,10 @@
     "reward": {
       "dual": "wormkingsagent"
     }
+  },
+  "2017_12": {
+    "reward": {
+      "unknown": true
+    }
   }
 }

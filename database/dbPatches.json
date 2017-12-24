@@ -562,5 +562,41 @@
     },
     "desc": "Supreme Atromancer Nerf",
     "type": "balance"
+  },
+  "2017_12_14": {
+    "changes": {
+      "unstoppablerage": {
+        "set": "fallofthedarkbrotherhood",
+        "attr": "strength",
+        "change": "Cost"
+      },
+      "histgrove": {
+        "set": "core",
+        "attr": "endurance",
+        "change": "Cost"
+      },
+      "northwindoutpost": {
+        "set": "core",
+        "attr": "strength",
+        "change": "Cost"
+      },
+      "thievesguildrecruit": {
+        "set": "core",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "thornhistmage": {
+        "set": "core",
+        "attr": "dual",
+        "change": "Health"
+      },
+      "ulfricshousecarl": {
+        "set": "core",
+        "attr": "dual",
+        "change": "Health"
+      }
+    },
+    "desc": "Unstoppable Rage Nerf",
+    "type": "balance"
   }
 }
