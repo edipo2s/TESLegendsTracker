@@ -563,6 +563,10 @@
     "desc": "Supreme Atromancer Nerf",
     "type": "balance"
   },
+  "2017_11_30": {
+    "desc": "Return to Clockwork City",
+    "type": "set"
+  },
   "2017_12_14": {
     "changes": {
       "unstoppablerage": {

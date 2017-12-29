@@ -571,7 +571,8 @@
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Deal 1 damage or destroy an enemy support",
-        "arenaTier": "Unknown"
+        "arenaTier": "Unknown",
+        "season": "2017_10"
       },
       "earthbonespinner": {
         "name": "Earthbone Spinner",
@@ -4890,6 +4891,21 @@
         "attr2": "willpower",
         "arenaTier": "Excellent"
       },
+      "blackhandmessenger": {
+        "name": "Black Hand Messenger",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "0",
+        "health": "2",
+        "rarity": "Epic",
+        "keyword": "Drain, Summon, Last Gasp",
+        "text": "Drain. Summon: Deal 2 damage to a creature. Last Gasp: Deal 2 damage to your opponent.",
+        "attr1": "intelligence",
+        "attr2": "agility",
+        "arenaTier": "Unknown",
+        "season": "2017_12"
+      },
       "edictofazura": {
         "name": "Edict of Azura",
         "cost": "4",
@@ -4916,6 +4932,7 @@
         "text": "Guard. Slay: Gain 3 health",
         "attr1": "willpower",
         "attr2": "endurance",
+        "season": "2017_09",
         "arenaTier": "Unknown"
       },
       "masterofthieves": {
@@ -5250,6 +5267,7 @@
         "attr1": "intelligence",
         "attr2": "endurance",
         "arenaTier": "Unknown",
+        "season": "2017_11",
         "tokens": "wormthrall"
       },
       "falinestireaver": {

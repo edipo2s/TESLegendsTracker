@@ -81,6 +81,11 @@
   },
   "2017_12": {
     "reward": {
+      "dual": "blackhandmessenger"
+    }
+  },
+  "2018_01": {
+    "reward": {
       "unknown": true
     }
   }
