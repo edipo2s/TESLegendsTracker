@@ -756,5 +756,62 @@
         "text": ""
       }
     }
+  },
+  "returntoclockworkcity": {
+    "endurance": {
+      "thornwellterror_beast": {
+        "creators": "thornwellterror",
+        "name": "Thornwell Terror",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Werewolf",
+        "attack": "2",
+        "health": "4",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "neutral": {
+      "powersphere": {
+        "creators": "dwarvencolossus",
+        "name": "Power Sphere",
+        "cost": "0",
+        "type": "Creature",
+        "race": "Defense",
+        "attack": "0",
+        "health": "5",
+        "rarity": "Epic",
+        "keyword": "Guard",
+        "text": "Guard. At the start of your turn, give Dwarven Colossus a random Keyword."
+      },
+      "reconstructedspider": {
+        "creators": "reconstructionengine",
+        "name": "Reconstructed Spider",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Dwemer",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "strength": {
+      "skywag": {
+        "creators": "aldorathedaring",
+        "name": "Skywag",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "",
+        "text": ""
+      }
+    }
   }
 }
