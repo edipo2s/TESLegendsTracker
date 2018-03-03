@@ -52,7 +52,6 @@
         </activity>
         <activity
             android:name=".ui.cards.CardActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppThemeTransparentDark" />
         <activity
             android:name=".ui.cards.CardFullArtActivity"

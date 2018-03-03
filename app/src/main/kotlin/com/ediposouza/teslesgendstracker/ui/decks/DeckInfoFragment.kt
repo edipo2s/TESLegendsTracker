@@ -161,14 +161,14 @@ class DeckInfoFragment : BaseFragment() {
 
     class DeckUpdateViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
-        fun bind(deckUpdate: DeckUpdate, cls: DeckClass?) {
+        fun bind(deckUpdate: DeckUpdate?, cls: DeckClass?) {
             with(itemView) {
-                val updateDate = deckUpdate.date.toLocalDate()
-                val updateTime = deckUpdate.date.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN))
+                val updateDate = deckUpdate?.date?.toLocalDate()
+                val updateTime = deckUpdate?.date?.toLocalTime()?.format(DateTimeFormatter.ofPattern(TIME_PATTERN))
                 deck_update_title.text = context.getString(R.string.deck_details_last_update_format, updateDate, updateTime)
                 cls?.let {
                     PublicInteractor.getCards(null, it.attr1, it.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) { cards ->
-                        configUpdateCardsChanges(cards, deckUpdate)
+                        deckUpdate?.let { configUpdateCardsChanges(cards, it) }
                     }
                 }
             }

@@ -32,7 +32,7 @@ enum class CardSet(val title: String) {
     MADHOUSE("Madhouse Collection"),
     FALLOFTHEDARKBROTHERHOOD("The Fall of the Dark Brotherhood"),
     RETURNTOCLOCKWORKCITY("Return to Clockwork City"),
-    FORGOTTENHEROCOLLECTION("Forgotten Hero Collection"),
+    FORGOTTENHERO("Forgotten Hero Collection"),
     TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 
