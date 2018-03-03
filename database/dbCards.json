@@ -2657,6 +2657,20 @@
         "arenaTier": "Good",
         "tokens": "imperialgrunt"
       },
+      "packleader": {
+        "name": "Pack Leader",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Epic",
+        "keyword": "Pilfer",
+        "text": "Pilfer: Summon a 1/1 Young Wolf. Other friendly Wolves have +1/+1.",
+        "arenaTier": "Unknown",
+        "tokens": "youngwolf",
+        "season": "2018_01"
+      },
       "warcry": {
         "name": "War Cry",
         "cost": "4",
@@ -5406,6 +5420,20 @@
         "text": "",
         "evolves": true
       },
+      "steamconstructor": {
+        "name": "Steam Constructor",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Dwemer",
+        "attack": "2",
+        "health": "2",
+        "keyword": "Summon",
+        "rarity": "Epic",
+        "text": "Summon: If you have a (Neutral) card in your hand, summon a 1/1 Reconstructed Spider.",
+        "tokens": "reconstructedspider",
+        "arenaTier": "Unknown",
+        "season": "2018_02"
+      },
       "adoringfan": {
         "name": "Adoring Fan",
         "cost": "3",
@@ -7844,7 +7872,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "",
-        "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5 and reduce their costs by 5.",
+        "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5.",
         "arenaTier": "Poor"
       },
       "paarthurnax": {
@@ -8329,7 +8357,9 @@
         "keyword": "Summon",
         "text": "Summon: Transform an enemy creature with 2 power or less into a Sweet Roll.",
         "arenaTier": "Good",
-        "tokens": "sweetroll"
+        "tokens": "sweetroll",
+        "alternativeArt": true,
+        "alternativeArtSource": "Heart's Day 2018"
       },
       "thalmorjusticiar": {
         "name": "Thalmor Justiciar",

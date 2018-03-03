@@ -86,6 +86,16 @@
   },
   "2018_01": {
     "reward": {
+      "willpower": "packleader"
+    }
+  },
+  "2018_02": {
+    "reward": {
+      "neutral": "steamconstructor"
+    }
+  },
+  "2018_03": {
+    "reward": {
       "unknown": true
     }
   }

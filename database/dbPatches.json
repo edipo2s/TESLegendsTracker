@@ -602,5 +602,20 @@
     },
     "desc": "Unstoppable Rage Nerf",
     "type": "balance"
+  },
+  "2018_01_31": {
+    "desc": "Forgotten Hero Collection",
+    "type": "set"
+  },
+  "2018_02_28": {
+    "changes": {
+      "journeytosovngarde": {
+        "attr": "neutral",
+        "change": "Text",
+        "set": "heroesofskyrim"
+      }
+    },
+    "desc": "Journey to Sovngarde Nerf",
+    "type": "balance"
   }
 }
