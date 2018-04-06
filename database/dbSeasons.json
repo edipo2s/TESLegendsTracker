@@ -96,6 +96,11 @@
   },
   "2018_03": {
     "reward": {
+      "dual": "frostscaledragon"
+    }
+  },
+  "2018_04": {
+    "reward": {
       "unknown": true
     }
   }

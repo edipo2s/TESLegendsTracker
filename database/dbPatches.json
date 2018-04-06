@@ -617,5 +617,9 @@
     },
     "desc": "Journey to Sovngarde Nerf",
     "type": "balance"
+  },
+  "2018_04_05": {
+    "desc": "Houses of Morrowind",
+    "type": "set"
   }
 }

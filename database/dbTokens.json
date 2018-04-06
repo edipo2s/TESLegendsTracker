@@ -813,5 +813,124 @@
         "text": ""
       }
     }
+  },
+  "housesofmorrowind": {
+    "endurance": {
+      "risendead": {
+        "creators": "ancestraldead",
+        "name": "Risen Dead",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "risenhorror": {
+        "creators": "risingofbones",
+        "name": "Risen Horror",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
+      "vvardvark": {
+        "creators": "vvardvarkexperiment",
+        "name": "Vvardvark",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "strength": {
+      "fetcherflyswarm": {
+        "creators": "fetcherflygolem",
+        "name": "Fetcherfly Swarm",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "impostrr": {
+        "creators": "impostersmission",
+        "name": "Imposter",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "0",
+        "health": "0",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      }
+    },
+    "willpower": {
+      "kwamaforager": {
+        "creators": "kwamaqueen",
+        "name": "Kwama Forager",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Kwama",
+        "attack": "1",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
+      "illusorywall": {
+        "creators": "illusorydefenses",
+        "name": "Illusory Wall",
+        "cost": "",
+        "type": "Creature",
+        "race": "",
+        "attack": "0",
+        "health": "5",
+        "rarity": "Common",
+        "keyword": "Guard",
+        "text": ""
+      }
+    },
+    "neutral": {
+      "saintjiub": {
+        "creators": "jiub",
+        "name": "Saint Jiub",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "5",
+        "health": "5",
+        "rarity": "Legendary",
+        "unique": true,
+        "keyword": "Guard",
+        "text": "Guard. Can't be damaged or targeted by Cliff Racers, Cliff Hunters, and Cliff Striders."
+      },
+      "sheepishdunmer": {
+        "creators": "stolenpants",
+        "name": "Sheepish Dunmer",
+        "cost": "0",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Common",
+        "keyword": "Summon",
+        "text": "Summon: Give Sheepish Dunmer Cover. While Sheepish Dunmer is pantsless, he dos not lose Cover at the start of your turn."
+      }
+    }
   }
 }
