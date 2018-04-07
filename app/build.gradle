@@ -25,8 +25,6 @@ android {
         buildConfigField "boolean", "ENABLE_LOGS_IN_RELEASE", "false"
         buildConfigField "boolean", "PREPARE_TO_RELEASE", "$prepareToRelease"
         resValue "string", "app_ads_card_full", props.getProperty('key_ads_card_full')
-        resValue "string", "app_ads_deck_list", props.getProperty('key_ads_deck_list')
-        resValue "string", "app_ads_new_deck_card_list", props.getProperty('key_ads_new_deck_card_list')
         resValue "string", "app_ads_match_history_list", props.getProperty('key_ads_match_history_list')
         resValue "string", "app_ads_match_statistics_class_full", props.getProperty('key_ads_match_statistics_class_full')
         resValue "string", "app_ads_new_matches_full", props.getProperty('key_ads_new_matches_full')

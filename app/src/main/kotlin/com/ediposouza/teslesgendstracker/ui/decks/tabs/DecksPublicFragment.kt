@@ -80,10 +80,9 @@ open class DecksPublicFragment : BaseFragment() {
         true
     }
 
-    open protected val decksAdapter: BaseAdsFirebaseAdapter<*, DecksAllViewHolder> by lazy {
-        object : BaseAdsFirebaseAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
-                FirebaseParsers.DeckParser::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
-                R.layout.itemlist_deck_ads, false, dataFilter) {
+    open protected val decksAdapter: BaseFirebaseRVAdapter<*, DecksAllViewHolder> by lazy {
+        object : BaseFirebaseRVAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
+                FirebaseParsers.DeckParser::class.java, dataRef, DECK_PAGE_SIZE, false, dataFilter) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
                 return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)

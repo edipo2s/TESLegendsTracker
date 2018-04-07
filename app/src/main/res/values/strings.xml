@@ -16,9 +16,6 @@
     <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
-    <string name="app_ads_card_list_size" translatable="false">280x80</string>
-    <string name="app_ads_deck_list_size" translatable="false">280x80</string>
-    <string name="app_ads_new_deck_card_list_size" translatable="false">220x50</string>
     <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
     <string name="app_ads_news_list_size" translatable="false">280x80</string>
     <string name="app_ads_season_list_size" translatable="false">280x80</string>

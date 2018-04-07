@@ -1,7 +1,6 @@
 package com.ediposouza.teslesgendstracker.ui.decks
 
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +39,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
     }
 
     override val cardsAdapter by lazy {
-        CardsNewDeckAdapter(ADS_EACH_ITEMS, gridLayoutManager, onItemClick, {
-            view: View, card: Card ->
+        CardsNewDeckAdapter(onItemClick, { view: View, card: Card ->
             showCardExpanded(card, view)
             true
         })
@@ -72,17 +70,16 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         cardsAdapter.updateCardSlot(cmdUpdateCardSlot.cardSlot)
     }
 
-    class CardsNewDeckAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?, itemClick: (View, Card) -> Unit,
-                              itemLongClick: (View, Card) -> Boolean) : CardsAllAdapter(adsEachItems,
-            layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
+    class CardsNewDeckAdapter(itemClick: (View, Card) -> Unit,
+                              itemLongClick: (View, Card) -> Boolean) : CardsAllAdapter(itemClick, itemLongClick) {
 
         var deckCardSlots = mutableListOf<CardSlot>()
 
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsNewDeckViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            return CardsNewDeckViewHolder(parent?.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             val card = items[position]
             val deckQtd = deckCardSlots.find { it.card.shortName == card.shortName }?.qtd ?: 0
             (holder as CardsNewDeckViewHolder).bind(CardSlot(card, deckQtd))
@@ -95,7 +92,7 @@ class NewDeckCardsListFragment : CardsAllFragment() {
         }
     }
 
-    class CardsNewDeckViewHolder(view: View, itemClick: (View, Card) -> Unit, itemLongClick: (View, Card) -> Boolean) :
+    class CardsNewDeckViewHolder(view: View?, itemClick: (View, Card) -> Unit, itemLongClick: (View, Card) -> Boolean) :
             CardsAllViewHolder(view, itemClick, itemLongClick) {
 
         fun bind(cardSlot: CardSlot) {
