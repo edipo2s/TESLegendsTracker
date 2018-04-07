@@ -367,7 +367,11 @@ class CardActivity : BaseActivity() {
                 setHasFixedSize(true)
                 if (card.canGenerateTokens()) {
                     PublicInteractor.getTokens(null) { allTokens ->
-                        relatedCards.addAll(allTokens.filter { card.tokens.contains(it.shortName) })
+                        var tokensNames = card.tokens
+                        if (card.isAlternativeArt()) {
+                            tokensNames = card.tokens.map { it.plus("_alt") }
+                        }
+                        relatedCards.addAll(allTokens.filter { tokensNames.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }
                 } else {

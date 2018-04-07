@@ -246,7 +246,7 @@
         "text": ""
       },
       "sweetroll": {
-        "creators": "wabbajack, altarofdespair, blackmail, chanterofakatosh",
+        "creators": "grislygourmet, wabbajack, altarofdespair, blackmail, chanterofakatosh",
         "name": "Sweet Roll",
         "cost": "1",
         "type": "Creature",
@@ -256,6 +256,20 @@
         "rarity": "Legendary",
         "keyword": "",
         "text": "When a creature eats Sweet Roll, heal that creature."
+      },
+      "sweetroll_alt": {
+        "creators": "grislygourmet_alt",
+        "name": "Sweet Roll",
+        "cost": "1",
+        "type": "Creature",
+        "race": "Pastry",
+        "attack": "0",
+        "health": "1",
+        "rarity": "Legendary",
+        "keyword": "",
+        "text": "When a creature eats Sweet Roll, heal that creature.",
+        "alternativeArt": true,
+        "alternativeArtSource": "Heart's Day 2018"
       },
       "steeldagger": {
         "creators": "alikrsurvivalist, crownquartermaster, daggersinthedark, corsairship",
