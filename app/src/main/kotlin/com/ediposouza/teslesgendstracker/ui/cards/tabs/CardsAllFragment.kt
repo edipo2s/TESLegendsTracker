@@ -3,7 +3,6 @@ package com.ediposouza.teslesgendstracker.ui.cards.tabs
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
@@ -66,8 +65,7 @@ open class CardsAllFragment : BaseFragment() {
     open protected val isCardsCollection: Boolean = false
 
     open val cardsAdapter by lazy {
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
-                { view, card -> showCardExpanded(card, view) }) {
+        CardsAllAdapter(itemClick = { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
@@ -98,9 +96,6 @@ open class CardsAllFragment : BaseFragment() {
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        if (cards_recycler_view?.layoutManager != null) {
-            cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
-        }
         currentAttr = CardAttribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
     }
 
@@ -349,21 +344,20 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,
-                               @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
-                               val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
+    open class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
+                               val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         var items: List<Card> = listOf()
 
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            return CardsAllViewHolder(parent?.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun getItemCount(): Int = items.size
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             (holder as CardsAllViewHolder).bind(items[position])
         }
-
-        override fun getDefaultItemCount(): Int = items.size
 
         fun showCards(cards: List<Card>) {
             val oldItems = items

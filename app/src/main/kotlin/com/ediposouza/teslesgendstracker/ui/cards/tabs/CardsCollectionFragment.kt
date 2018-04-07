@@ -5,14 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.util.DiffUtil
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
@@ -26,7 +24,6 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.CardSlot
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsAdapter
 import com.ediposouza.teslesgendstracker.ui.base.CmdShowCardsByAttr
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
 import com.ediposouza.teslesgendstracker.ui.cards.widget.CollectionStatistics
@@ -67,8 +64,7 @@ open class CardsCollectionFragment : CardsAllFragment() {
         }
 
     open val cardsCollectionAdapter by lazy {
-        CardsCollectionAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
-                { changeUserCardQtd(it) }) { view, card ->
+        CardsCollectionAdapter(itemClick = { changeUserCardQtd(it) }) { view, card ->
             showCardExpanded(card, view)
             true
         }
@@ -341,21 +337,20 @@ open class CardsCollectionFragment : CardsAllFragment() {
         }
     }
 
-    open class CardsCollectionAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,
-                                      @LayoutRes adsLayout: Int, val itemClick: (CardSlot) -> Unit,
-                                      val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
+    open class CardsCollectionAdapter(val itemClick: (CardSlot) -> Unit,
+                                      val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         var items: MutableList<CardSlot> = mutableListOf()
 
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            return CardsCollectionViewHolder(parent?.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
         }
 
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             (holder as CardsCollectionViewHolder).bind(items[position])
         }
 
-        override fun getDefaultItemCount(): Int = items.size
+        override fun getItemCount(): Int = items.size
 
         fun showCards(cardSlots: MutableList<CardSlot>) {
             val oldItems = items
@@ -373,13 +368,13 @@ open class CardsCollectionFragment : CardsAllFragment() {
             val slotIndex = items.indexOf(cardSlot)
             if (slotIndex > -1) {
                 items[slotIndex] = CardSlot(cardSlot.card, newQtd)
-                notifyItemChanged(slotIndex + getAdsQtdBeforeDefaultPosition(slotIndex))
+                notifyItemChanged(slotIndex)
             }
         }
 
     }
 
-    class CardsCollectionViewHolder(val view: View, val itemClick: (CardSlot) -> Unit,
+    class CardsCollectionViewHolder(val view: View?, val itemClick: (CardSlot) -> Unit,
                                     val itemLongClick: (View, Card) -> Boolean) : RecyclerView.ViewHolder(view) {
 
         fun bind(cardSlot: CardSlot) {
