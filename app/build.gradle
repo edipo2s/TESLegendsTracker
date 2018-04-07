@@ -16,14 +16,13 @@ android {
     props.load(file("secrets.properties").newInputStream())
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
-        minSdkVersion prepareToRelease ? 17 : 21
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "boolean", "ENABLE_LOGS_IN_RELEASE", "false"
-        buildConfigField "boolean", "PREPARE_TO_RELEASE", "$prepareToRelease"
         resValue "string", "app_ads_card_full", props.getProperty('key_ads_card_full')
         resValue "string", "app_ads_match_statistics_class_full", props.getProperty('key_ads_match_statistics_class_full')
         resValue "string", "app_ads_new_matches_full", props.getProperty('key_ads_new_matches_full')
@@ -49,10 +48,14 @@ android {
     buildTypes {
         debug {
             debuggable true
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
             minifyEnabled false
         }
         release {
             debuggable false
+            ext.enableCrashlytics = true
+            ext.alwaysUpdateBuildId = true
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -128,10 +131,10 @@ dependencies {
     implementation "com.firebaseui:firebase-ui-storage:2.1.1"
 
     //Fabric
-    implementation('com.crashlytics.sdk.android:answers:1.4.1') {
+    releaseImplementation('com.crashlytics.sdk.android:answers:1.4.1') {
         transitive = true
     }
-    implementation('com.crashlytics.sdk.android:crashlytics:2.8.0') {
+    releaseImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0') {
         transitive = true
     }
 
