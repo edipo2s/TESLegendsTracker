@@ -56,6 +56,7 @@ open class CardsAllFragment : BaseFragment() {
     val SEARCH_ALTERNATIVE by lazy { getString(R.string.cards_search_alternative) }
     val SEARCH_ANIMAL by lazy { getString(R.string.cards_search_animal) }
     val SEARCH_LORE by lazy { getString(R.string.cards_search_lore) }
+    val SEARCH_MONTHLY by lazy { getString(R.string.cards_search_monthly) }
     val SEARCH_REWARD by lazy { getString(R.string.cards_search_reward) }
     val SEARCH_UNDEAD by lazy { getString(R.string.cards_search_undead) }
     val SEARCH_UNIQUE by lazy { getString(R.string.cards_search_unique) }
@@ -297,6 +298,7 @@ open class CardsAllFragment : BaseFragment() {
                                     (search == SEARCH_ALTERNATIVE && it.isAlternativeArt()) ||
                                     (search == SEARCH_ANIMAL && ConfigManager.animalRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
                                     (search == SEARCH_UNDEAD && ConfigManager.undeadRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
+                                    (search == SEARCH_MONTHLY && it.season.isNotEmpty()) ||
                                     (search == SEARCH_REWARD && it.season.isNotEmpty()) ||
                                     (search == SEARCH_UNIQUE && it.unique)
                             hasValidSearchKeyword || (it.name.toLowerCase().contains(search) ||
@@ -304,7 +306,7 @@ open class CardsAllFragment : BaseFragment() {
                                     it.set.title.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
-                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||
+                                    it.keywords.any { it.name.toLowerCase().contains(search) } ||
                                     it.text.contains(search))
                         }
                     }

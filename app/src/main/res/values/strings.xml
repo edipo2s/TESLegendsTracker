@@ -185,6 +185,7 @@
     <string name="cards_search_alternative" translatable="false">alternative</string>
     <string name="cards_search_animal" translatable="false">animal</string>
     <string name="cards_search_lore" translatable="false">lore</string>
+    <string name="cards_search_monthly" translatable="false">monthly</string>
     <string name="cards_search_reward" translatable="false">reward</string>
     <string name="cards_search_undead" translatable="false">undead</string>
     <string name="cards_search_unique" translatable="false">unique</string>
@@ -231,7 +232,7 @@
 
     <string name="zero_of_zero" translatable="false">0/0</string>
     <string name="cards_search_hint">Name, Race, Type, Keyword or Text</string>
-    <string name="cards_search_keywords" translatable="false">\'Alternative\', \'Animal\', \'Lore\', \'Reward\', \'Undead\', \'Unique\'</string>
+    <string name="cards_search_keywords" translatable="false">\'Alternative\', \'Animal\', \'Lore\', \'Monthly\', \'Reward\', \'Undead\', \'Unique\'</string>
     <string name="cards_search_keywords_hint" formatted="false">Search for card %s \n or try %s</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>
