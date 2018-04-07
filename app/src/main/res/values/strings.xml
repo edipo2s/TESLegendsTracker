@@ -16,10 +16,6 @@
     <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
-    <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
-    <string name="app_ads_news_list_size" translatable="false">280x80</string>
-    <string name="app_ads_season_list_size" translatable="false">280x80</string>
-
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>

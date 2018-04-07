@@ -13,7 +13,7 @@ import com.ediposouza.teslesgendstracker.data.Season
 import com.ediposouza.teslesgendstracker.interactor.BaseInteractor
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
+import com.ediposouza.teslesgendstracker.ui.base.BaseFirebaseRVAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterMode
 import com.ediposouza.teslesgendstracker.ui.matches.CmdFilterSeason
@@ -52,10 +52,9 @@ open class MatchesHistoryFragment : BaseFragment() {
         it.season == currentSeason?.uuid || currentSeason == null
     }
 
-    protected val matchesAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
-        object : BaseAdsFirebaseAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
-                FirebaseParsers.MatchParser::class.java, dataRef,
-                MATCH_PAGE_SIZE, ADS_EACH_ITEMS, R.layout.itemlist_match_history_ads, false, dataFilter),
+    protected val matchesAdapter: BaseFirebaseRVAdapter<FirebaseParsers.MatchParser, MatchViewHolder> by lazy {
+        object : BaseFirebaseRVAdapter<FirebaseParsers.MatchParser, MatchViewHolder>(
+                FirebaseParsers.MatchParser::class.java, dataRef, MATCH_PAGE_SIZE, false, dataFilter),
                 StickyRecyclerHeadersAdapter<MatchViewHolder> {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): MatchViewHolder {
