@@ -632,6 +632,42 @@
         "keyword": "",
         "text": ""
       },
+      "brabasfetch": {
+        "creators": "barbas",
+        "name": "Basbas Fetch",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Legendary",
+        "keyword": "Summon",
+        "text": "Summon: Draw a random Daedra."
+      },
+      "brabasrollover": {
+        "creators": "barbas",
+        "name": "Basbas",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "3",
+        "health": "3",
+        "rarity": "Legendary",
+        "keyword": "Charge",
+        "text": "Charge"
+      },
+      "brabasstay": {
+        "creators": "barbas",
+        "name": "Basbas",
+        "cost": "5",
+        "type": "Creature",
+        "race": "Beast",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Legendary",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
       "counterfeittrinket": {
         "creators": "thievesguildshadowfoot",
         "name": "Counterfeit Trinket",
@@ -880,7 +916,7 @@
         "keyword": "",
         "text": ""
       },
-      "impostrr": {
+      "imposter": {
         "creators": "impostersmission",
         "name": "Imposter",
         "cost": "",

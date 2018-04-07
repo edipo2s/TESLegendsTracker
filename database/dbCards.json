@@ -3643,7 +3643,8 @@
         "rarity": "Rare",
         "keyword": "Charge",
         "text": "Charge",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "creators": "cliffraceronslaught"
       },
       "eldercentaur": {
         "name": "Elder Centaur",
@@ -7855,9 +7856,10 @@
         "health": "3",
         "rarity": "Legendary",
         "unique": true,
-        "keyword": "Summon, Slay, Fetch, Roll Over",
-        "text": "Summon: Choose one: Slay: Gains +1/+1 and Guard. Fetch: Put a dandom Daedra into your hand. Roll Over: Gains Charge.",
-        "arenaTier": "Good"
+        "keyword": "Summon",
+        "text": "Summon: Choose one: Stay: Gains +1/+1 and Guard. Fetch: Put a dandom Daedra into your hand. Roll Over: Gains Charge.",
+        "arenaTier": "Good",
+        "tokens": "barbasfetch, barbasrollover, barbasstay"
       },
       "dragonmound": {
         "name": "Dragon Mound",
@@ -9053,7 +9055,7 @@
         "text": "Summon: Draw a card of your choice from your deck.",
         "arenaTier": "Excellent",
         "alternativeArt": true,
-        "alternativeArtSource": "Return to Clockwork City bundle price"
+        "alternativeArtSource": "Return to Clockwork City bundle"
       },
       "memorywraith": {
         "name": "Memory Wraith",
