@@ -31,11 +31,7 @@ object MetricsManager : MetricsConstants() {
     var mixpanelAnalytics: MixpanelAPI? = null
 
     fun initialize(context: Context) {
-        if (BuildConfig.PREPARE_TO_RELEASE) {
-            Fabric.with(context, Answers(), Crashlytics())
-        } else {
-            Timber.w("Fabric not initialized")
-        }
+        Fabric.with(context, Answers(), Crashlytics())
         gcmSender = context.getString(R.string.gcm_defaultSenderId)
         answers = Answers.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(context)
@@ -203,7 +199,7 @@ object MetricsManager : MetricsConstants() {
 
     private fun identifyUser(user: FirebaseUser?) {
         val userId = user?.uid
-        if (Crashlytics.getInstance() != null && BuildConfig.PREPARE_TO_RELEASE) {
+        if (Crashlytics.getInstance() != null) {
             Crashlytics.setUserIdentifier(userId)
             Crashlytics.setUserName(user?.displayName)
             Crashlytics.setUserEmail(user?.email)

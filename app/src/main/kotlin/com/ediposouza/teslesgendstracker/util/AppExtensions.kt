@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ListPopupWindow
 import android.widget.Spinner
@@ -82,6 +83,13 @@ fun Context.alertThemed(
     if (title != null) title(title)
     message(message)
     if (init != null) init()
+}
+
+fun Activity.hideKeyboard() {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    currentFocus?.let {
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
+    }
 }
 
 fun String.toIntSafely(): Int {
