@@ -10848,7 +10848,8 @@
         "race": "Werewolf",
         "rarity": "Legendary",
         "text": "Summon: Choose one: Strength: +6/+6 and Guard. Speed: Gains Charge.",
-        "type": "Creature"
+        "type": "Creature",
+        "tokens": "aspectofhircine_speed, aspectofhircine_strength"
       },
       "bushwhack": {
         "arenaTier": "Unknown",

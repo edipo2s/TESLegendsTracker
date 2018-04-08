@@ -904,6 +904,30 @@
       }
     },
     "strength": {
+      "aspectofhircine_speed": {
+        "creators": "aspectofhircine",
+        "name": "Aspect of Hircine",
+        "cost": "9",
+        "type": "Creature",
+        "attack": "6",
+        "health": "6",
+        "race": "Werewolf",
+        "rarity": "Legendary",
+        "keyword": "Charge",
+        "text": "Charge"
+      },
+      "aspectofhircine_strength": {
+        "creators": "aspectofhircine",
+        "name": "Aspect of Hircine",
+        "cost": "9",
+        "type": "Creature",
+        "attack": "12",
+        "health": "12",
+        "race": "Werewolf",
+        "rarity": "Legendary",
+        "keyword": "Guard",
+        "text": "Guard"
+      },
       "fetcherflyswarm": {
         "creators": "fetcherflygolem",
         "name": "Fetcherfly Swarm",
