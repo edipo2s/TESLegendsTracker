@@ -59,11 +59,11 @@ class DeckListCardsFragment : CardsCollectionFragment() {
                                itemClick: (CardSlot) -> Unit,
                                itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(itemClick, itemLongClick) {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-            return CardsDeckListViewHolder(parent?.inflate(R.layout.itemlist_card_deck_list), itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return CardsDeckListViewHolder(parent.inflate(R.layout.itemlist_card_deck_list), itemLongClick)
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val cardSlot = items[position]
             val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
             (holder as CardsDeckListViewHolder).bind(cardSlot, cardMissing?.qtd ?: 0)

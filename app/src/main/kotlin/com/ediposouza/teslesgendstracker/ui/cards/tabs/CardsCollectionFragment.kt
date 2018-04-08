@@ -342,11 +342,11 @@ open class CardsCollectionFragment : CardsAllFragment() {
 
         var items: MutableList<CardSlot> = mutableListOf()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-            return CardsCollectionViewHolder(parent?.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return CardsCollectionViewHolder(parent.inflate(R.layout.itemlist_card_collection), itemClick, itemLongClick)
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             (holder as CardsCollectionViewHolder).bind(items[position])
         }
 
@@ -403,12 +403,12 @@ open class CardsCollectionFragment : CardsAllFragment() {
 
     class CardsImportedAdapter(val items: List<Pair<CardSlot, Int>>) : RecyclerView.Adapter<CardsImportedViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardsImportedViewHolder {
-            return CardsImportedViewHolder(parent?.inflate(R.layout.itemlist_card_imported))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsImportedViewHolder {
+            return CardsImportedViewHolder(parent.inflate(R.layout.itemlist_card_imported))
         }
 
-        override fun onBindViewHolder(holder: CardsImportedViewHolder?, position: Int) {
-            holder?.bind(items[position].first, items[position].second)
+        override fun onBindViewHolder(holder: CardsImportedViewHolder, position: Int) {
+            holder.bind(items[position].first, items[position].second)
         }
 
         override fun getItemCount() = items.size

@@ -65,8 +65,8 @@ object TestUtils {
             return MatchesHistoryFragment.MatchViewHolder(parent.inflate(R.layout.itemlist_match_history))
         }
 
-        override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
-            holder?.bind(items[position], { notifyItemRemoved(position) })
+        override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder, position: Int) {
+            holder.bind(items[position], { notifyItemRemoved(position) })
         }
 
         override fun getItemCount(): Int = items.size

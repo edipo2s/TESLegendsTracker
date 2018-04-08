@@ -203,12 +203,12 @@ class SeasonsFragment : BaseFragment() {
 
     class PatchAdapter(val items: List<Patch>, val onPatchClick: (Patch, View) -> Unit) : RecyclerView.Adapter<PatchViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PatchViewHolder {
-            return PatchViewHolder(parent?.inflate(R.layout.itemlist_season_patch))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatchViewHolder {
+            return PatchViewHolder(parent.inflate(R.layout.itemlist_season_patch))
         }
 
-        override fun onBindViewHolder(holder: PatchViewHolder?, position: Int) {
-            holder?.bind(items[position], onPatchClick)
+        override fun onBindViewHolder(holder: PatchViewHolder, position: Int) {
+            holder.bind(items[position], onPatchClick)
         }
 
         override fun getItemCount() = items.size

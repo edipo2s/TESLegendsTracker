@@ -72,8 +72,8 @@ class NewMatchesActivity : BaseActivity() {
             return MatchesHistoryFragment.MatchViewHolder(parent.inflate(R.layout.itemlist_match_history))
         }
 
-        override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder?, position: Int) {
-            holder?.bind(items[position], {
+        override fun onBindViewHolder(holder: MatchesHistoryFragment.MatchViewHolder, position: Int) {
+            holder.bind(items[position], {
                 items.removeAt(position)
                 notifyItemRemoved(position)
             })

@@ -201,14 +201,14 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
 
         var updateMode = false
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckListViewHolder {
-            return DeckListViewHolder(parent?.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckListViewHolder {
+            return DeckListViewHolder(parent.inflate(R.layout.itemlist_decklist_slot), itemClick, itemLongClick)
         }
 
-        override fun onBindViewHolder(holder: DeckListViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: DeckListViewHolder, position: Int) {
             val cardSlot = items[position]
             val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
-            holder?.bind(cardSlot, cardMissing?.qtd ?: 0, updateMode)
+            holder.bind(cardSlot, cardMissing?.qtd ?: 0, updateMode)
         }
 
         override fun getItemCount(): Int = items.size

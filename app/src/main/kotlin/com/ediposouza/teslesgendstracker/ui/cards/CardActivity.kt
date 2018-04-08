@@ -680,16 +680,16 @@ class CardActivity : BaseActivity() {
     }
 
     class CardAdapter(val items: List<Pair<CardBasicInfo, String>>, val onCardClick: () -> Unit) : RecyclerView.Adapter<CardViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardViewHolder {
-            return CardViewHolder(parent?.inflate(R.layout.itemlist_card_full))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+            return CardViewHolder(parent.inflate(R.layout.itemlist_card_full))
         }
 
-        override fun onBindViewHolder(holder: CardViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
             val pair = items[position]
             val isFirst = position == 0
             val isLast = position == items.size - 1
             val hasPatchVersion = itemCount > 1
-            holder?.bind(pair.first, pair.second, isFirst, isLast, hasPatchVersion, onCardClick)
+            holder.bind(pair.first, pair.second, isFirst, isLast, hasPatchVersion, onCardClick)
         }
 
         override fun getItemCount(): Int = items.size
@@ -717,13 +717,14 @@ class CardActivity : BaseActivity() {
 
     }
 
-    class CardLevelsAdapter(val items: List<Pair<Card, Int>>, val onCardClick: (View, Int) -> Unit) : RecyclerView.Adapter<CardLevelsViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardLevelsViewHolder {
-            return CardLevelsViewHolder(parent?.inflate(R.layout.itemlist_card_min))
+    class CardLevelsAdapter(val items: List<Pair<Card, Int>>, val onCardClick: (View, Int) -> Unit) :
+            RecyclerView.Adapter<CardLevelsViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardLevelsViewHolder {
+            return CardLevelsViewHolder(parent.inflate(R.layout.itemlist_card_min))
         }
 
-        override fun onBindViewHolder(holder: CardLevelsViewHolder?, position: Int) {
-            holder?.bind(items[position], onCardClick)
+        override fun onBindViewHolder(holder: CardLevelsViewHolder, position: Int) {
+            holder.bind(items[position], onCardClick)
         }
 
         override fun getItemCount(): Int = items.size
@@ -741,13 +742,14 @@ class CardActivity : BaseActivity() {
 
     }
 
-    class CardRelatedAdapter(val items: List<Card>, val onCardClick: (View, Card) -> Unit) : RecyclerView.Adapter<CardRelatedViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardRelatedViewHolder {
-            return CardRelatedViewHolder(parent?.inflate(R.layout.itemlist_card_min))
+    class CardRelatedAdapter(val items: List<Card>, val onCardClick: (View, Card) -> Unit) :
+            RecyclerView.Adapter<CardRelatedViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardRelatedViewHolder {
+            return CardRelatedViewHolder(parent.inflate(R.layout.itemlist_card_min))
         }
 
-        override fun onBindViewHolder(holder: CardRelatedViewHolder?, position: Int) {
-            holder?.bind(items[position], onCardClick)
+        override fun onBindViewHolder(holder: CardRelatedViewHolder, position: Int) {
+            holder.bind(items[position], onCardClick)
         }
 
         override fun getItemCount(): Int = items.size

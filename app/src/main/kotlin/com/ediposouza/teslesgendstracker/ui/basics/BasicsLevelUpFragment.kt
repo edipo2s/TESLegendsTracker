@@ -56,14 +56,14 @@ class BasicsLevelUpFragment : BaseFragment() {
 
         var cards: List<Card> = listOf()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): LevelUpViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LevelUpViewHolder {
             val isEvolveType = viewType == LevelUpType.EVOLVE.ordinal
             val layout = R.layout.itemlist_basics_levelup_evolve.takeIf { isEvolveType }
                     ?: R.layout.itemlist_basics_levelup_card
-            return LevelUpViewHolder(parent?.inflate(layout))
+            return LevelUpViewHolder(parent.inflate(layout))
         }
 
-        override fun onBindViewHolder(holder: LevelUpViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: LevelUpViewHolder, position: Int) {
             val levelUp = items[position]
             holder?.bind(levelUp)
             if (levelUp.target.isNotEmpty()) {

@@ -53,11 +53,11 @@ class ArticlesWorldFragment : BaseFragment() {
 
     class WorldAdapter(val items: List<Article>) : RecyclerView.Adapter<ArticleViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArticleViewHolder {
-            return ArticleViewHolder(parent?.inflate(R.layout.itemlist_article_world))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
+            return ArticleViewHolder(parent.inflate(R.layout.itemlist_article_world))
         }
 
-        override fun onBindViewHolder(holder: ArticleViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
             holder?.bind(items[position])
         }
 

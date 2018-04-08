@@ -57,11 +57,11 @@ class BasicsRacesFragment : BaseFragment() {
 
         var cards: List<Card> = listOf()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RacesViewHolder {
-            return RacesViewHolder(parent?.inflate(R.layout.itemlist_basics_races))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RacesViewHolder {
+            return RacesViewHolder(parent.inflate(R.layout.itemlist_basics_races))
         }
 
-        override fun onBindViewHolder(holder: RacesViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RacesViewHolder, position: Int) {
             holder?.bind(items[position], cards, onCardClick)
         }
 

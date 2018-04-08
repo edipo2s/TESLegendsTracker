@@ -38,11 +38,11 @@ class BasicsRankedFragment : BaseFragment() {
 
     class RankedAdapter(val items: MutableList<Ranked> = mutableListOf()) : RecyclerView.Adapter<RankedViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RankedViewHolder {
-            return RankedViewHolder(parent?.inflate(R.layout.itemlist_basics_ranked))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RankedViewHolder {
+            return RankedViewHolder(parent.inflate(R.layout.itemlist_basics_ranked))
         }
 
-        override fun onBindViewHolder(holder: RankedViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RankedViewHolder, position: Int) {
             holder?.bind(items[position])
         }
 

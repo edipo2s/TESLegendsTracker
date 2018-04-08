@@ -155,16 +155,16 @@ class PatchActivity : BaseActivity() {
 
         val items: List<PatchChange> = patch.changes
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PatchViewHolder {
-            return PatchViewHolder(parent?.inflate(R.layout.itemlist_patch_cards))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatchViewHolder {
+            return PatchViewHolder(parent.inflate(R.layout.itemlist_patch_cards))
         }
 
-        override fun onBindViewHolder(holder: PatchViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: PatchViewHolder, position: Int) {
             val patchChange = items[position]
             val nextPatchWithCard = nextPatches.filter {
                 it.changes.filter { it.shortName == patchChange.shortName }.isNotEmpty()
             }.minBy { it.date }
-            holder?.bind(patch.uuidDate, nextPatchWithCard?.uuidDate ?: "", patchChange, itemClick)
+            holder.bind(patch.uuidDate, nextPatchWithCard?.uuidDate ?: "", patchChange, itemClick)
         }
 
         override fun getItemCount(): Int = items.size

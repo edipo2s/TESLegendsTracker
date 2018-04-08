@@ -349,15 +349,15 @@ open class CardsAllFragment : BaseFragment() {
 
         var items: List<Card> = listOf()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-            return CardsAllViewHolder(parent?.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            (holder as CardsAllViewHolder).bind(items[position])
         }
 
         override fun getItemCount(): Int = items.size
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-            (holder as CardsAllViewHolder).bind(items[position])
-        }
 
         fun showCards(cards: List<Card>) {
             val oldItems = items

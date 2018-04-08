@@ -147,12 +147,12 @@ class DeckInfoFragment : BaseFragment() {
 
     class DeckUpdateAdapter(val items: List<DeckUpdate>, val cls: DeckClass?) : RecyclerView.Adapter<DeckUpdateViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckUpdateViewHolder {
-            return DeckUpdateViewHolder(parent?.inflate(R.layout.itemlist_deck_update))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckUpdateViewHolder {
+            return DeckUpdateViewHolder(parent.inflate(R.layout.itemlist_deck_update))
         }
 
-        override fun onBindViewHolder(holder: DeckUpdateViewHolder?, position: Int) {
-            holder?.bind(items[position], cls)
+        override fun onBindViewHolder(holder: DeckUpdateViewHolder, position: Int) {
+            holder.bind(items[position], cls)
         }
 
         override fun getItemCount(): Int = items.size

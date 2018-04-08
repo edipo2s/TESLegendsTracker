@@ -76,12 +76,12 @@ class NewArenaClassFragment : BaseFragment() {
 
         val items = DeckClass.values().filter { it.arenaImageRes != null }
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ClassViewHolder {
-            return ClassViewHolder(parent?.inflate(R.layout.itemlist_arena_class))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
+            return ClassViewHolder(parent.inflate(R.layout.itemlist_arena_class))
         }
 
-        override fun onBindViewHolder(holder: ClassViewHolder?, position: Int) {
-            holder?.bind(items[position], onItemClick)
+        override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
+            holder.bind(items[position], onItemClick)
         }
 
         override fun getItemCount(): Int = items.size

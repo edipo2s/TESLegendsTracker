@@ -27,13 +27,13 @@ data class CmdUpdateRarityMagickaFiltersPosition(val high: Boolean)
 
 data class CmdUpdateVisibility(val show: Boolean)
 
-class CmdShowSnackbarMsg private constructor(type: Long) {
+class CmdShowSnackbarMsg private constructor(@SnackbarType type: Int) {
 
     companion object {
 
-        const val TYPE_INFO = 0L
-        const val TYPE_INFO_FIXED = 1L
-        const val TYPE_ERROR = 2L
+        const val TYPE_INFO = 0
+        const val TYPE_INFO_FIXED = 1
+        const val TYPE_ERROR = 2
     }
 
     @IntDef(TYPE_INFO, TYPE_INFO_FIXED, TYPE_ERROR)
@@ -67,11 +67,11 @@ class CmdShowSnackbarMsg private constructor(type: Long) {
         }
     }
 
-    constructor(@SnackbarType type: Long, @StringRes msgRes: Int) : this(type) {
+    constructor(@SnackbarType type: Int, @StringRes msgRes: Int) : this(type) {
         this.msgRes = msgRes
     }
 
-    constructor(@SnackbarType type: Long, msg: String) : this(type) {
+    constructor(@SnackbarType type: Int, msg: String) : this(type) {
         this.msg = msg
     }
 

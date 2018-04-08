@@ -75,11 +75,11 @@ class NewDeckCardsListFragment : CardsAllFragment() {
 
         var deckCardSlots = mutableListOf<CardSlot>()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-            return CardsNewDeckViewHolder(parent?.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return CardsNewDeckViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val card = items[position]
             val deckQtd = deckCardSlots.find { it.card.shortName == card.shortName }?.qtd ?: 0
             (holder as CardsNewDeckViewHolder).bind(CardSlot(card, deckQtd))
