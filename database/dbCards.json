@@ -3644,7 +3644,7 @@
         "keyword": "Charge",
         "text": "Charge",
         "arenaTier": "Insane",
-        "creators": "cliffraceronslaught"
+        "generators": "cliffraceronslaught"
       },
       "eldercentaur": {
         "name": "Elder Centaur",
@@ -9822,7 +9822,8 @@
         "rarity": "Legendary",
         "text": "Summon a 4/4 Cliff Racer with Charge in each lane. Your opponent summons a 0/1 Target with Guard in each lane.",
         "type": "Action",
-        "generates": "cliffracer"
+        "generates": "cliffracer",
+        "tokens": "target"
       },
       "cliffstrider": {
         "arenaTier": "Unknown",
