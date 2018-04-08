@@ -632,7 +632,7 @@
         "keyword": "",
         "text": ""
       },
-      "brabasfetch": {
+      "barbasfetch": {
         "creators": "barbas",
         "name": "Basbas Fetch",
         "cost": "5",
@@ -644,7 +644,7 @@
         "keyword": "Summon",
         "text": "Summon: Draw a random Daedra."
       },
-      "brabasrollover": {
+      "barbasrollover": {
         "creators": "barbas",
         "name": "Basbas",
         "cost": "5",
@@ -656,7 +656,7 @@
         "keyword": "Charge",
         "text": "Charge"
       },
-      "brabasstay": {
+      "barbasstay": {
         "creators": "barbas",
         "name": "Basbas",
         "cost": "5",

@@ -90,7 +90,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         currentAttr = null
         currentMagicka = -1
         currentRarity = null
-        Glide.clear(arena_draft_card_iv)
+        Glide.with(this).clear(arena_draft_card_iv)
         arena_draft_card_iv.setImageResource(R.drawable.card_back)
         arena_draft_card_value.text = INVALID_TEXT_VALUE
         arena_draft_card_value.setTextColor(ContextCompat.getColor(context, android.R.color.white))

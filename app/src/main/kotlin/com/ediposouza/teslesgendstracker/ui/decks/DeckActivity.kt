@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
@@ -271,7 +272,8 @@ class DeckActivity : BaseActivity() {
             if (App.hasUserLogged()) {
                 PrivateInteractor.setUserDeckFavorite(deck, !favorite) {
                     favorite = !favorite
-                    val stringRes = R.string.action_favorited.takeIf { favorite } ?: R.string.action_unfavorited
+                    val stringRes = R.string.action_favorited.takeIf { favorite }
+                            ?: R.string.action_unfavorited
                     toast(getString(stringRes, deck.name))
                     updateFavoriteItem()
                     MetricsManager.trackAction(if (favorite)
@@ -322,8 +324,10 @@ class DeckActivity : BaseActivity() {
 
     private fun updateFavoriteItem() {
         deck_fab_favorite.setImageDrawable(ContextCompat.getDrawable(this,
-                R.drawable.ic_favorite_checked.takeIf { favorite } ?: R.drawable.ic_favorite_unchecked))
-        val contentDescription = R.string.menu_unfavorite.takeIf { favorite } ?: R.string.menu_favorite
+                R.drawable.ic_favorite_checked.takeIf { favorite }
+                        ?: R.drawable.ic_favorite_unchecked))
+        val contentDescription = R.string.menu_unfavorite.takeIf { favorite }
+                ?: R.string.menu_favorite
         deck_fab_favorite.contentDescription = getString(contentDescription)
     }
 
@@ -368,8 +372,9 @@ class DeckActivity : BaseActivity() {
                     if (!this@DeckActivity.isDestroyed) {
                         Glide.with(this@DeckActivity)
                                 .load(ownerUser.photoUrl)
-                                .placeholder(ContextCompat.getDrawable(this@DeckActivity, R.drawable.ic_user))
-                                .transform(CircleTransform(this@DeckActivity))
+                                .apply(RequestOptions()
+                                        .placeholder(ContextCompat.getDrawable(this@DeckActivity, R.drawable.ic_user))
+                                        .transform(CircleTransform()))
                                 .into(deck_details_create_by_photo)
                     }
                 }
@@ -397,12 +402,12 @@ class DeckActivity : BaseActivity() {
             sortDeckComments()
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DeckCommentViewHolder {
-            return DeckCommentViewHolder(parent?.inflate(R.layout.itemlist_deck_comment), onRemComment)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckCommentViewHolder {
+            return DeckCommentViewHolder(parent.inflate(R.layout.itemlist_deck_comment), onRemComment)
         }
 
-        override fun onBindViewHolder(holder: DeckCommentViewHolder?, position: Int) {
-            holder?.bind(items[position])
+        override fun onBindViewHolder(holder: DeckCommentViewHolder, position: Int) {
+            holder.bind(items[position])
         }
 
         override fun getItemCount() = items.size
@@ -443,8 +448,9 @@ class DeckActivity : BaseActivity() {
                         }
                         Glide.with(itemView.context)
                                 .load(ownerUser.photoUrl)
-                                .fallback(R.drawable.ic_user)
-                                .transform(CircleTransform(itemView.context))
+                                .apply(RequestOptions()
+                                        .fallback(ContextCompat.getDrawable(itemView.context, R.drawable.ic_user))
+                                        .transform(CircleTransform()))
                                 .into(itemView.deck_comment_owner_photo)
                     }
                 }

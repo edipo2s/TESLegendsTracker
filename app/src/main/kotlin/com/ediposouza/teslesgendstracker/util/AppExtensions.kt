@@ -23,12 +23,12 @@ import android.widget.ImageView
 import android.widget.ListPopupWindow
 import android.widget.Spinner
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.Resource
-import com.bumptech.glide.load.resource.bitmap.BitmapResource
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.PREF_USER_LANGUAGE
@@ -37,13 +37,11 @@ import com.ediposouza.teslesgendstracker.data.Card
 import com.ediposouza.teslesgendstracker.data.PatchChange
 import com.ediposouza.teslesgendstracker.ui.DashActivity
 import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
-import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.NativeExpressAdView
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.jetbrains.anko.*
 import org.jsoup.Jsoup
@@ -164,21 +162,20 @@ fun Spinner.limitHeight(lines: Int? = null) {
 fun ImageView.loadFromUrl(imageUrl: String, placeholder: Drawable? = null,
                           circleTransformation: Boolean = false, onImageDownload: (() -> Unit)? = null) {
     if (imageUrl.startsWith("http")) {
+        val requestOptions = RequestOptions().placeholder(placeholder)
+        if (circleTransformation) {
+            requestOptions.transform(CircleTransform())
+        }
         with(Glide.with(context).load(imageUrl)) {
-            crossFade(500)
-            if (placeholder != null) {
-                placeholder(placeholder)
-            }
-            if (circleTransformation) {
-                transform(CircleTransform(context))
-            }
-            listener(object : RequestListener<String, GlideDrawable> {
-                override fun onException(e: Exception?, model: String?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
+            apply(requestOptions)
+            transition(DrawableTransitionOptions().crossFade(500))
+            listener(object : RequestListener<Drawable> {
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    onImageDownload?.invoke()
                     return false
                 }
 
-                override fun onResourceReady(resource: GlideDrawable?, model: String?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                    onImageDownload?.invoke()
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     return false
                 }
 
@@ -217,28 +214,18 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     val remotePath = imagePath.takeIf { cardShortName.contains("_201") } ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
     Glide.with(context)
-            .using(FirebaseImageLoader())
             .load(FirebaseStorage.getInstance().reference.child(remotePath))
-            .placeholder(getLocalCardBitmap(context, imagePath, transform))
-            .crossFade()
-            .bitmapTransform(object : Transformation<Bitmap> {
-                override fun transform(resource: Resource<Bitmap>, outWidth: Int, outHeight: Int): Resource<Bitmap> {
-                    return transform?.let {
-                        BitmapResource.obtain(transform.invoke(resource.get()), Glide.get(context).getBitmapPool())
-                    } ?: resource
-                }
-
-                override fun getId(): String = imagePath
-
-            })
-            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-            .listener(object : RequestListener<StorageReference, GlideDrawable> {
-                override fun onResourceReady(resource: GlideDrawable?, model: StorageReference?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+            .apply(RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .placeholder(getLocalCardBitmap(context, imagePath, transform)))
+            .transition(DrawableTransitionOptions().crossFade(500))
+            .listener(object : RequestListener<Drawable> {
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    onNotFound?.invoke()
                     return false
                 }
 
-                override fun onException(e: java.lang.Exception?, model: StorageReference?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                    onNotFound?.invoke()
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     return false
                 }
             })

@@ -5,17 +5,19 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TEXT_UNKNOWN
 import com.ediposouza.teslesgendstracker.util.getCurrentVersion
@@ -489,28 +491,27 @@ data class Card(
         }
         FirebaseStorage.getInstance().reference.child(path).downloadUrl.addOnSuccessListener { uri ->
             Glide.with(context)
-                    .load(uri)
                     .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .listener(object : RequestListener<Uri?, Bitmap?> {
-                        override fun onException(e: Exception?, model: Uri?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
+                    .load(uri)
+                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
+                    .listener(object : RequestListener<Bitmap?> {
+                        override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap?>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            if (resource != null) {
+                                onLoaded(resource)
+                            }
+                            return true
+                        }
+
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap?>?, isFirstResource: Boolean): Boolean {
                             Timber.d(e)
                             onLoaded(null)
                             return true
                         }
 
-                        override fun onResourceReady(resource: Bitmap?, model: Uri?, target: Target<Bitmap?>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                            if (resource != null) {
-                                onLoaded(resource)
-                            }
-                            return true
-                        }
                     })
                     .into(object : SimpleTarget<Bitmap>() {
-                        override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                            if (resource != null) {
-                                onLoaded(resource)
-                            }
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            onLoaded(resource)
                         }
 
                     })
