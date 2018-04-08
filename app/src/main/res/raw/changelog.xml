@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.9.0"
+        changeDate="April 05, 2018">
+        <changelogtext>[b]Feature:[/b] Add 'Monthly' as same search key of 'Reward'</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add Houses of Morrowind Cards</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add Forgotten Hero cards full art</changelogtext>
+        <changelogtext>Add Barbas tokens</changelogtext>
+        <changelogtext>Remove all ads from lists</changelogtext>
+        <changelogtext>Fix alternative art cards not showing token. (Grisly Gourmet)</changelogtext>
+    </changelogversion>
+    <changelogversion
+        versionName="1.8.2"
+        changeDate="March 03, 2018">
+        <changelogtext>[b]Feature:[/b] Add Forgotten Hero Collection Cards</changelogtext>
+        <changelogtext>Bug Fix</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.8.1"
         changeDate="December 02, 2017">
         <changelogtext>Fix ads load</changelogtext>

@@ -346,10 +346,8 @@ class CardActivity : BaseActivity() {
 
     private fun configureTokens() {
         if (card.canGenerateCards() || card.canGenerateTokens() || card.isToken() || card.canBeGenerated()) {
-            card_tokens_label.setText(R.string.card_creators_label.takeIf { card.isToken() || card.canBeGenerated() } ?:
-                    R.string.card_generates_label.takeIf { card.canGenerateCards() } ?: R.string.card_tokens_label)
-            card_tokens_label.visibility = View.VISIBLE
-            with(card_tokens_rv) {
+            card_related_label.visibility = View.VISIBLE
+            with(card_related_rv) {
                 val relatedCards = mutableListOf<Card>()
                 visibility = View.VISIBLE
                 layoutManager = LinearLayoutManager(this@CardActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -366,17 +364,40 @@ class CardActivity : BaseActivity() {
                 }
                 setHasFixedSize(true)
                 if (card.canGenerateTokens()) {
+                    card_related_label.setText(R.string.card_tokens_label)
                     PublicInteractor.getTokens(null) { allTokens ->
-                        relatedCards.addAll(allTokens.filter { card.tokens.contains(it.shortName) })
+                        var tokensNames = card.tokens
+                        if (card.isAlternativeArt()) {
+                            tokensNames = card.tokens.map { it.plus("_alt") }
+                        }
+                        relatedCards.addAll(allTokens.filter { tokensNames.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }
-                } else {
+                }
+                if (card.canGenerateCards()) {
+                    card_related_label.setText(R.string.card_generates_label)
                     PublicInteractor.getCards(null) { allCards ->
-                        val related = card.generates.takeIf { card.canGenerateCards() } ?:
-                                card.generators.takeIf { card.canBeGenerated() } ?: card.creators
-                        relatedCards.addAll(allCards.filter { related.contains(it.shortName) })
+                        relatedCards.addAll(allCards.filter { card.generates.contains(it.shortName) })
                         adapter.notifyDataSetChanged()
                     }
+                }
+                if (card.canBeGenerated()) {
+                    card_related_label.setText(R.string.card_creators_label)
+                    PublicInteractor.getCards(null) { allCards ->
+                        relatedCards.addAll(allCards.filter { card.generators.contains(it.shortName) })
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+                if (card.isToken()) {
+                    card_related_label.setText(R.string.card_creators_label)
+                    PublicInteractor.getCards(null) { allCards ->
+                        relatedCards.addAll(allCards.filter { card.creators.contains(it.shortName) })
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+                if (card.canGenerateCards() && card.canGenerateTokens()) {
+                    val generatesText = getString(R.string.card_generates_label).substringBefore(":")
+                    card_related_label.setText("$generatesText/${getString(R.string.card_tokens_label)}")
                 }
             }
         }

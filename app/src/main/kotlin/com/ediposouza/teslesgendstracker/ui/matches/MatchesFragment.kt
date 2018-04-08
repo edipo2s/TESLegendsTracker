@@ -4,7 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.IntegerRes
+import android.support.annotation.ColorRes
+import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -290,8 +291,8 @@ class MatchesFragment : BaseFragment() {
 
     }
 
-    class ClassAdapter(ctx: Context, @IntegerRes layout: Int = R.layout.itemlist_class,
-                       @IntegerRes val textColor: Int = R.color.primary_text_dark) :
+    class ClassAdapter(ctx: Context, @LayoutRes layout: Int = R.layout.itemlist_class,
+                       @ColorRes val textColor: Int = R.color.primary_text_dark) :
             ArrayAdapter<DeckClass>(ctx, layout, R.id.class_name, DeckClass.values()) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {

@@ -7,7 +7,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "27.0.0"
+    buildToolsVersion "27.0.3"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'META-INF/MANIFEST.MF', 'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
@@ -16,23 +16,16 @@ android {
     props.load(file("secrets.properties").newInputStream())
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
-        minSdkVersion prepareToRelease ? 17 : 21
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "boolean", "ENABLE_LOGS_IN_RELEASE", "false"
-        buildConfigField "boolean", "PREPARE_TO_RELEASE", "$prepareToRelease"
         resValue "string", "app_ads_card_full", props.getProperty('key_ads_card_full')
-        resValue "string", "app_ads_card_list", props.getProperty('key_ads_card_list')
-        resValue "string", "app_ads_deck_list", props.getProperty('key_ads_deck_list')
-        resValue "string", "app_ads_new_deck_card_list", props.getProperty('key_ads_new_deck_card_list')
-        resValue "string", "app_ads_match_history_list", props.getProperty('key_ads_match_history_list')
         resValue "string", "app_ads_match_statistics_class_full", props.getProperty('key_ads_match_statistics_class_full')
         resValue "string", "app_ads_new_matches_full", props.getProperty('key_ads_new_matches_full')
-        resValue "string", "app_ads_news_list", props.getProperty('key_ads_news_list')
-        resValue "string", "app_ads_season_list", props.getProperty('key_ads_season_list')
         resValue "string", "app_ads_patch_full", props.getProperty('key_ads_patch_full')
         resValue "string", "key_ads_intersticial", props.getProperty('key_ads_intersticial')
         resValue "string", "facebook_app_id", props.getProperty('key_facebook_app_id')
@@ -55,10 +48,14 @@ android {
     buildTypes {
         debug {
             debuggable true
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
             minifyEnabled false
         }
         release {
             debuggable false
+            ext.enableCrashlytics = true
+            ext.alwaysUpdateBuildId = true
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -134,10 +131,10 @@ dependencies {
     implementation "com.firebaseui:firebase-ui-storage:2.1.1"
 
     //Fabric
-    implementation('com.crashlytics.sdk.android:answers:1.4.1') {
+    releaseImplementation('com.crashlytics.sdk.android:answers:1.4.1') {
         transitive = true
     }
-    implementation('com.crashlytics.sdk.android:crashlytics:2.8.0') {
+    releaseImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0') {
         transitive = true
     }
 

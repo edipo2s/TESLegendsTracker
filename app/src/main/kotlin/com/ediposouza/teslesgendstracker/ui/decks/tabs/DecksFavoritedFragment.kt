@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
+import com.ediposouza.teslesgendstracker.ui.base.BaseFirebaseRVAdapter
 import com.ediposouza.teslesgendstracker.util.inflate
 import kotlinx.android.synthetic.main.fragment_decks_list.*
 
@@ -26,10 +26,9 @@ class DecksFavoritedFragment : DecksPublicFragment() {
                 it.name.toLowerCase().trim().contains(searchFilter ?: "")
     }
 
-    override val decksAdapter: BaseAdsFirebaseAdapter<FirebaseParsers.DeckFavoriteParser, DecksAllViewHolder> by lazy {
-        object : BaseAdsFirebaseAdapter<FirebaseParsers.DeckFavoriteParser, DecksAllViewHolder>(
-                FirebaseParsers.DeckFavoriteParser::class.java, dataRef, DECK_PAGE_SIZE, ADS_EACH_ITEMS,
-                R.layout.itemlist_deck_ads, false, dataFilter) {
+    override val decksAdapter: BaseFirebaseRVAdapter<FirebaseParsers.DeckFavoriteParser, DecksAllViewHolder> by lazy {
+        object : BaseFirebaseRVAdapter<FirebaseParsers.DeckFavoriteParser, DecksAllViewHolder>(
+                FirebaseParsers.DeckFavoriteParser::class.java, dataRef, DECK_PAGE_SIZE, false, dataFilter) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): DecksAllViewHolder {
                 return DecksAllViewHolder(parent.inflate(R.layout.itemlist_deck), itemClick, itemLongClick)

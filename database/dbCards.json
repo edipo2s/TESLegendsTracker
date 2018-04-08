@@ -51,7 +51,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Fiery Imp attacks, deal 2 damage to your opponent.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "intimidate": {
         "name": "Intimidate",
@@ -203,7 +203,7 @@
       },
       "northwindoutpost": {
         "name": "Northwind Outpost",
-        "cost": "2",
+        "cost": "3",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -544,7 +544,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: +2/+2 if you another friendly Orc.",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "race": "Orc"
         }
@@ -571,7 +571,8 @@
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Deal 1 damage or destroy an enemy support",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "season": "2017_10"
       },
       "earthbonespinner": {
         "name": "Earthbone Spinner",
@@ -638,7 +639,7 @@
         "text": "Lumbering Ogrim can't gain Cover.",
         "lore": "'Ogrim are huge, unintelligent Daedra, similar to Ogres. They're usually found in Morrowind, as well as many planes of Oblivion. Ogrim are associated with our buddy Malacath, but will follow other Daedric Princes as well. As long as an ogrim is getting fed and squashing things, it's as happy as a clam.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5eoixw/daily_card_discussion_thread_84_lumbering_ogrim/dae1wkf",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "orcishwarhammer": {
         "name": "Orcish Warhammer",
@@ -1226,7 +1227,7 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Summon, Shackle",
         "text": "Prophecy. Summon: Shackle an enemy creature.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Insane"
       },
       "skilledblacksmith": {
         "name": "Skilled Blacksmith",
@@ -1400,7 +1401,7 @@
         "text": "Uses: 5. Activate: Deal 1 damage to your opponent. If Dark Rift has dealt 5 damage, sacrifice it to summon a Storm Atronach.",
         "lore": "'Conjuration, the art of summoning things from another plane, has been practiced for centuries, though it hasn't always been recognized as an official school of magic. If you're a squishy mage and want sweet weightless armor or an Atronach to do your fighting for you, you're well advised to study up.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5cq6mt/daily_card_discussion_thread_73_dark_rift/d9yhyi7",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "tokens": "stormatronach"
       },
       "desperateconjuring": {
@@ -1428,7 +1429,7 @@
         "text": "Summon: Reveal the top card of the opponent's deck.",
         "lore": "'Nereids are water-based humanoid creatures, that were common in the Second Era. Though they're elemental beings, they aren't Daedra like the Atronachs; they're natural to Mundus. They're known for being entrancing, like the mythical Sirens, this amusing poem tells of a woman who almost lost her husband to one.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5m63sf/daily_card_discussion_thread_126_farsight_nereid/dc1x5cm",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "keeperofwhispers": {
         "name": "Keeper of Whispers",
@@ -1764,7 +1765,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Shuffle three Lava Atronach into your deck. When you summon an Atronach, summon a copy of it in the other lane.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "arenaTierPlus": {
           "text": "Atronach"
         },
@@ -1841,7 +1842,9 @@
         "arenaTier": "Average",
         "arenaTierPlus": {
           "type": "Item"
-        }
+        },
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       },
       "staffofsparks": {
         "name": "Staff of Sparks",
@@ -1992,7 +1995,7 @@
         "text": "Summon: Summon a Flame Atronach in each lane. When you summon another creature, deal 2 damage to your opponent.",
         "lore": "'Atromancy is the art of summoning Daedra, specifically the elemental ones known as the Atronachs. 'Atronach' is kind of an imprecise term, since people use it for both the elementals and for animated golems. Elemental daedra are known to be highly intelligent, and unusually are not associated with any Daedric Prince.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5lrhbx/daily_card_discussion_thread_124_supreme/dbye9tf",
-        "arenaTier": "Insane",
+        "arenaTier": "Excellent",
         "tokens": "flameatronach"
       },
       "divaythfyr": {
@@ -2036,7 +2039,7 @@
         "keyword": "Guard",
         "text": "Guard",
         "arenaTier": "Terrible",
-        "generators": "imperialcamp"
+        "generators": "imperialcamp, phalanxexemplar"
       },
       "aldmeripatriot": {
         "name": "Aldmeri Patriot",
@@ -2259,7 +2262,7 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "legionshield": {
         "name": "Legion Shield",
@@ -2271,7 +2274,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard, +1/+3",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "priestofthemoons": {
         "name": "Priest of the Moons",
@@ -2322,7 +2325,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "+2/+0 while you have the most creatures in this lane.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "starvedhunger": {
         "name": "Starved Hunger",
@@ -2391,7 +2394,7 @@
         "text": "After an enemy rune is destroyed, gain 3 health.",
         "lore": "'Dawnstar is a hellhole. And in the generally dangerous Skyrim, that's saying something. On the surface, it seems like a sleepy fishing and mining town. But just below the surface, all sorts of things are horrible about it.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5c13of/daily_card_discussion_thread_69_dawnstar_healer/d9svldc",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "eastmarchcrusader": {
         "name": "Eastmarch Crusader",
@@ -2403,7 +2406,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Draw a card if an enemy rune has been destroyed this game.",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "elsweyrlookout": {
         "name": "Elsweyr Lookout",
@@ -2614,7 +2617,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Excellent",
+        "arenaTier": "Insane",
         "alternativeArt": true,
         "alternativeArtSource": "Mad Prince Pack"
       },
@@ -2651,8 +2654,22 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Fill a lane with 1/1 Imperial Grunts.",
-        "arenaTier": "Excellent",
+        "arenaTier": "Good",
         "tokens": "imperialgrunt"
+      },
+      "packleader": {
+        "name": "Pack Leader",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "4",
+        "health": "4",
+        "rarity": "Epic",
+        "keyword": "Pilfer",
+        "text": "Pilfer: Summon a 1/1 Young Wolf. Other friendly Wolves have +1/+1.",
+        "arenaTier": "Unknown",
+        "tokens": "youngwolf",
+        "season": "2018_01"
       },
       "warcry": {
         "name": "War Cry",
@@ -2664,7 +2681,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Give friendly creatures in one lane +2/+0 this turn.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "dagirahtmystic": {
         "name": "Dagi-raht Mystic",
@@ -3180,7 +3197,7 @@
         "text": "Last Gasp: Your opponent summons a 2/1 Mournhold Guardian with Guard.",
         "lore": "'Mournhold, the 'city of light and magic', also known as the City of Gems, was the capital city of Morrowind and the largest and oldest city in the province. Mournhold is located in the heart of the Deshaan region of Morrowind's southern mainland, and is the district seat of House Indoril.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Lore:Mournhold",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "generates": "mournholdguardian"
       },
       "murkwaterwitch": {
@@ -3216,7 +3233,7 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
-        "text": "Summon: Draw a card. If it costs 7 or more, reduce its cost by 2.",
+        "text": "Summon: Draw a card. If it costs 7 or more, reduce its cost by 1.",
         "arenaTier": "Excellent",
         "arenaTierPlus": {
           "cost": ">_6"
@@ -3626,7 +3643,8 @@
         "rarity": "Rare",
         "keyword": "Charge",
         "text": "Charge",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "creators": "cliffraceronslaught"
       },
       "eldercentaur": {
         "name": "Elder Centaur",
@@ -3674,7 +3692,9 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Destroy a wounded creature.",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       },
       "necrommastermind": {
         "name": "Necrom Mastermind",
@@ -3888,7 +3908,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Summon a Chaurus Reaper in each lane",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "season": "2017_04",
         "generates": "chaurusreaper"
       },
@@ -3919,7 +3939,7 @@
         "text": "Heal a creature, then give it +1/+1.",
         "lore": "'The foremost specialists in Restoration were known as the Council of Healers in the Imperial City. As part of learning to heal better, they underwent studies of the various races of Tamriel, studying anatomy and their common ancestors. ' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5xmsms/daily_card_discussion_thread_185_healing_hands/dejzjav",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "suppress": {
         "name": "Suppress",
@@ -3945,7 +3965,7 @@
         "text": "Lethal",
         "lore": "'Draugr are a type of Nordic undead found in Skyrim and Solstheim's many tombs and crypts. They don't have the souls of their former selves, but their bodies retain their old skills and they are equipped with the weapons and armor they were good with.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5eax4x/daily_card_discussion_thread_82_deadly_draugr/dabd901",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "deathlessdraugr": {
         "name": "Deathless Draugr",
@@ -3972,7 +3992,7 @@
         "text": "Ward. When Iliac Sorcerer's Ward is broken, double his power.",
         "lore": "'The Iliac Bay region is the area around west High Rock and north Hammerfell. It's the setting of the game Daggerfall, and still one of the largest game areas ever made.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ulq8z/daily_card_discussion_thread_169_iliac_sorcerer/ddwktgm",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "rottingdraugr": {
         "name": "Rotting Draugr",
@@ -4208,7 +4228,7 @@
         "text": "Regenerate, +1/+3",
         "lore": "'Hackwings are huge predatory birds native to Black Marsh, the Argonians' home province. They have massive, saw-like bills, almost the full length of the rest of their body. They're opportunistic predators; they'll swoop down to inflict a gaping wound, then wait for the prey to die of blood loss.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5fb6mq/daily_card_discussion_thread_88_hackwing_feather/daj0seb",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "hauntingspirit": {
         "name": "Haunting Spirit",
@@ -4224,7 +4244,7 @@
       },
       "histgrove": {
         "name": "Hist Grove",
-        "cost": "3",
+        "cost": "4",
         "type": "Support",
         "race": "",
         "attack": "",
@@ -4299,7 +4319,7 @@
         "rarity": "Common",
         "keyword": "Summon, Guard",
         "text": "Summon: +0/+2 and Guard if the top card of your deck is (Endurance).",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "attr": "endurance"
         }
@@ -4352,7 +4372,7 @@
         "text": "Regenerate. Summon: +2/+2 if your opponent has more cards in hands.",
         "lore": "'Grahl are a type of ice troll, found in the island of Solstheim. They live in ice caverns below the earth, and regenerate quickly from wounds. Fire damage will prevent them from healing, so bringing a source of fire is highly recommended.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5c7k09/daily_card_discussion_thread_70_angry_grahl/d9uce02",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "archeinelite": {
         "name": "Archein Elite",
@@ -4364,7 +4384,7 @@
         "rarity": "Rare",
         "keyword": "Lethal",
         "text": "Lethal",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "archeinguerrilla": {
         "name": "Archein Guerrilla",
@@ -4514,7 +4534,7 @@
         "rarity": "Rare",
         "keyword": "Prophecy, Guard",
         "text": "Prophecy. Summon a 2/2 Colovian Trooper with Guard in each lane.",
-        "arenaTier": "Excellent",
+        "arenaTier": "Good",
         "tokens": "coloviantrooper"
       },
       "northpointcaptain": {
@@ -4705,7 +4725,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "nightpatrol": {
         "name": "Night Patrol",
@@ -4797,7 +4817,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "When you gain magicka, double the amount you gain. While you have 18 or more max magicka, Pure-Blood Elder has +8/+8 and Breakthrough",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "season": "2017_08"
       },
       "swampleviathan": {
@@ -4886,6 +4906,21 @@
         "attr2": "willpower",
         "arenaTier": "Excellent"
       },
+      "blackhandmessenger": {
+        "name": "Black Hand Messenger",
+        "cost": "3",
+        "type": "Creature",
+        "race": "Dark Elf",
+        "attack": "0",
+        "health": "2",
+        "rarity": "Epic",
+        "keyword": "Drain, Summon, Last Gasp",
+        "text": "Drain. Summon: Deal 2 damage to a creature. Last Gasp: Deal 2 damage to your opponent.",
+        "attr1": "intelligence",
+        "attr2": "agility",
+        "arenaTier": "Unknown",
+        "season": "2017_12"
+      },
       "edictofazura": {
         "name": "Edict of Azura",
         "cost": "4",
@@ -4912,7 +4947,8 @@
         "text": "Guard. Slay: Gain 3 health",
         "attr1": "willpower",
         "attr2": "endurance",
-        "arenaTier": "Unknown"
+        "season": "2017_09",
+        "arenaTier": "Excellent"
       },
       "masterofthieves": {
         "name": "Master of Thieves",
@@ -5000,13 +5036,13 @@
         "type": "Creature",
         "race": "Nord",
         "attack": "3",
-        "health": "4",
+        "health": "3",
         "rarity": "Epic",
         "keyword": "",
         "text": "When an enemy rune is destroyed, draw a card.",
         "attr1": "strength",
         "attr2": "willpower",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "season": "2017_07"
       },
       "ahnassi": {
@@ -5120,7 +5156,7 @@
         "type": "Creature",
         "race": "Argonian",
         "attack": "2",
-        "health": "5",
+        "health": "4",
         "rarity": "Epic",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: Gain +1 max magicka. When your magicka increases Thorn Histmage gains +1/+0.",
@@ -5246,6 +5282,7 @@
         "attr1": "intelligence",
         "attr2": "endurance",
         "arenaTier": "Unknown",
+        "season": "2017_11",
         "tokens": "wormthrall"
       },
       "falinestireaver": {
@@ -5280,6 +5317,21 @@
         "attr1": "agility",
         "attr2": "endurance",
         "arenaTier": "Excellent"
+      },
+      "frostscaledragon": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "attr1": "strength",
+        "attr2": "intelligence",
+        "cost": "9",
+        "health": "6",
+        "keyword": "Summon",
+        "name": "Frostscale Dragon",
+        "race": "Dragon",
+        "rarity": "Epic",
+        "season": "2018_03",
+        "text": "Summon: Deal 4 damage to an enemy creature and 1 damage to all other enemy creatures.",
+        "type": "Creature"
       }
     },
     "neutral": {
@@ -5358,7 +5410,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "At the start of your turn, give another random friendly creature +1/+1.",
-        "arenaTier": "Poor"
+        "arenaTier": "Average"
       },
       "spiderworker": {
         "name": "Spider Worker",
@@ -5383,6 +5435,20 @@
         "keyword": "Evolves",
         "text": "",
         "evolves": true
+      },
+      "steamconstructor": {
+        "name": "Steam Constructor",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Dwemer",
+        "attack": "2",
+        "health": "2",
+        "keyword": "Summon",
+        "rarity": "Epic",
+        "text": "Summon: If you have a (Neutral) card in your hand, summon a 1/1 Reconstructed Spider.",
+        "tokens": "reconstructedspider",
+        "arenaTier": "Unknown",
+        "season": "2018_02"
       },
       "adoringfan": {
         "name": "Adoring Fan",
@@ -5558,7 +5624,7 @@
         "text": "When you summon a creature, give it a random keyword.",
         "lore": "'Mundus Stones are standing stones dedicated to the Constellations. Activating one will grant you a permanent blessing, although only one blessing can be active at a time. The Twice-Born Star set allows a character to have two blessings at the same time.' - uesp.net",
         "loreLink": "http://en.uesp.net/wiki/Online:Mundus_Stones",
-        "arenaTier": "Insane"
+        "arenaTier": "Excellent"
       },
       "slaughterfish": {
         "name": "Slaughterfish",
@@ -5697,7 +5763,7 @@
         "rarity": "Epic",
         "keyword": "+5/+5",
         "text": "",
-        "arenaTier": "Average"
+        "arenaTier": "Good"
       },
       "dwarvenballista": {
         "name": "Dwarven Ballista",
@@ -5797,7 +5863,7 @@
         "text": "Summon: Deal 4 damage to each enemy creature.",
         "lore": "'Odahviing is a red dragon whose name means 'Winged Snow Hunter'. Hi was later resurrected and played a key role in the fall of Alduin--he was humiliatingly captured by the Dovahkiin in Whiterun, and agreed to bear the hero to the bridge to Sovngarde in exchange for his freedom.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/584j6m/daily_card_discussion_thread_47_odahviing_october/d8xi9vl",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       }
     }
   },
@@ -5849,7 +5915,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Summon a random elixir.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       }
     },
     "agility": {
@@ -6107,7 +6173,7 @@
         "rarity": "Rare",
         "keyword": "Slay",
         "text": "Slay: Summon a creature from your discard pile.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "littlegirl": {
         "name": "Little Girl",
@@ -6211,7 +6277,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Summon a 1/1 Coursair. When you summon a creature, equipe it with a Steel Dagger.",
-        "arenaTier": "Average",
+        "arenaTier": "Good",
         "tokens": "corsair, steeldagger"
       },
       "spearofembers": {
@@ -6313,7 +6379,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Silence a creature. Draw a card",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "gristlehidedreugh": {
         "name": "Gristlehide Dreugh",
@@ -6351,7 +6417,7 @@
         "rarity": "Common",
         "text": "Summon",
         "keyword": "Summon: The wielder deals 1 damage",
-        "arenaTier": "Poor",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "lethal"
         }
@@ -6401,14 +6467,14 @@
         "race": "Wood Elf",
         "attack": "4",
         "health": "1",
-        "rarity": "Common",
+        "rarity": "Rare",
         "keyword": "Charge, Summon",
         "text": "Charge. Summon: Enemy creatures in this lane lose Cover.",
         "arenaTier": "Excellent"
       },
       "unstoppablerage": {
         "name": "Unstoppable Rage",
-        "cost": "7",
+        "cost": "8",
         "type": "Action",
         "race": "",
         "attack": "",
@@ -6416,7 +6482,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "A friendly creature deals damage equal to its power to all other creatures in its lane.",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "arenaTierPlus": {
           "attack": ">_4",
           "keyword": "Lethal"
@@ -6553,7 +6619,7 @@
         "text": "Guard. Shackle creatures damaged by Deepwood Trapper.",
         "lore": "'Many Dark Elves had to flee to Skyrim, due to multiple disasters happening to their homeland. Some happily settled in Solstheim, but most had to flee to eastern Skyrim. Nordic inhabitants are very racist towards the Dunmer, so they oftentimes have fend for themselves doing illegal activities, like stealing and pouching.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "drainvitality": {
         "name": "Drain Vitality ",
@@ -6628,7 +6694,7 @@
         "text": "+0/+1. Summon: Draw a card. The weilder has Cover until it attacks.",
         "lore": "'Infiltrating the Thalmor Embassy is no simple task. The Aldmeri Dominions governing force is very cautious of inviting new members to their ranks. High ranking Thalmor wear their expensive, highly decorated blackened robes with pride, for only the most trusthworthy of them can get their hands on such clothing.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "gloomlurker": {
         "name": "Gloomlurker",
@@ -6680,7 +6746,7 @@
         "text": "Summon: Give a friendly creature Cover. Your opponent can't target it with actions until next turn.",
         "lore": "'There are few remaining female Falmer, and they usually take the roles in society as shamans. They usually excel in the art of Illusion and destruction, using shadows to their advantage.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "shadowscalepartisan": {
         "name": "Shadowscale Partisan",
@@ -6721,7 +6787,7 @@
         "text": "When you summon a Dragon, gain 4 health.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "chaurus": {
@@ -6748,7 +6814,7 @@
         "rarity": "Legendary",
         "keyword": "Slay",
         "text": "Slay: +2/+0. May move to attack creatures in the other lane.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Average"
       },
       "sightlessskulk": {
         "name": "Sightless Skulk",
@@ -6812,7 +6878,7 @@
         "text": "When Nightprowler gains Cover, draw a card.",
         "lore": "'Falmer are what remained of the ancient civilization of the Snow Elves. They roam the underground of Skyrim, which used to be known as Merith in their time. Their eyes have develoved, but the darkness surrounding them has sharpened their other sences, using the lack of light to their advantage in combat.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "shearpointdragon": {
         "name": "Shearpoint Dragon",
@@ -6865,7 +6931,7 @@
         "text": "Summon: Give other friendly Spriggans and Animals +2/+2.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Spriggan"
+          "race": "Spriggan"
         }
       }
     },
@@ -6911,7 +6977,7 @@
         "arenaTier": "Good",
         "tokens": "draugrsentry",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "steelheartvanquisher": {
@@ -6926,7 +6992,7 @@
         "text": "Slay: Give friendly Orcs +1/+1.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Orc"
+          "race": "Orc"
         }
       },
       "companionharbinger": {
@@ -6954,7 +7020,7 @@
         "text": "When you summon another creature with 5 health or more, give it +1/+1 and Guard.",
         "lore": "'East Empire Tradin Company is a group commisioned by the Emperor. Its focused on sea trade, wtih its trade routes spanning all over Tamriel seas. Ships can carry exotic goods of other provinces right to the Imperial city, through the Topal Bay going through southern parts of Cyrodiil.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Average",
+        "arenaTier": "Excellent",
         "arenaTierPlus": {
           "health": ">_4"
         }
@@ -6987,7 +7053,7 @@
         "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon",
+          "race": "Dragon",
           "keyword": "Shout"
         },
         "shout": 2,
@@ -7052,7 +7118,7 @@
         "text": "+2/+2. Summon: +2/+2 if you have a Dragon in your discard pile.",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "emperortitusmedeii": {
@@ -7066,7 +7132,7 @@
         "unique": true,
         "keyword": "",
         "text": "At the end of your turn, give the top creature of your deck +1/+1 and Guard.",
-        "arenaTier": "Territorial"
+        "arenaTier": "average"
       },
       "frosttroll": {
         "name": "Frost Troll",
@@ -7145,7 +7211,7 @@
         "rarity": "Rare",
         "keyword": "Beast Form",
         "text": "Beast Form: +2/+2, Guard and Regenerate.",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "tokens": "whiterunprotector_beast"
       },
       "spineofeldersblood": {
@@ -7175,7 +7241,7 @@
         "text": "Summon: Draw a card if you have two other (Endurance) creatures.",
         "lore": "'Stonehills are a small settlement of miners living in crude conditions, bordering the swampy marshes of Hjaalmarch and high peaks of Labyrinthian. Mammoths are found very rarely in this place, and only in small numbers, for they usually prefer lush grass of Whiterun plains.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Average",
+        "arenaTier": "Good",
         "arenaTierPlus": {
           "attr": "endurance",
           "type": "creature"
@@ -7191,7 +7257,7 @@
         "rarity": "Common",
         "keyword": "Regenerate",
         "text": "Regenerate",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "frostgiant": {
         "name": "Frost Giant",
@@ -7316,7 +7382,7 @@
         "text": "When you summon a Dragon, Ghost Sea Lookout gains a Ward.",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "masterswordsmith": {
@@ -7360,7 +7426,7 @@
         "loreLink": "",
         "arenaTier": "Terrible",
         "arenaTierPlus": {
-          "type": "High Elf"
+          "race": "High Elf"
         }
       },
       "vigilantofstendarr": {
@@ -7385,9 +7451,9 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage to a creature, and 3 extra damage for each friendly Dragon.",
-        "arenaTier": "Average",
+        "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "jzargo": {
@@ -7403,7 +7469,7 @@
         "text": "Summon: Put an Experimental Scroll into your hand.",
         "lore": "'J'zargo is one of the few Khajiit who inhabit northern Skyrim, specificaly the College of Winterhold. He is very confident and competetive, and is capable of doing anything for his succes, icnluding thievery. J'zargo enjoys the study of magical scrolls, but for his own safety lets other people test them instead of him.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "tokens": "experimentalscroll"
       },
       "mistveilenchanter": {
@@ -7416,7 +7482,7 @@
         "rarity": "Common",
         "keyword": "Ward, Summon",
         "text": "Ward. Summon: +2/+0 if you have another creature with Ward.",
-        "arenaTier": "Average",
+        "arenaTier": "Poor",
         "arenaTierPlus": {
           "keyword": "Ward"
         }
@@ -7496,7 +7562,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: See a vision of two of your opponent's cards. Guess which one is in their hand. If you're right, draw a copy of it.",
-        "arenaTier": "Insane"
+        "arenaTier": "Good"
       },
       "bringerofnightmares": {
         "name": "Bringer of Nightmares",
@@ -7508,7 +7574,7 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "Summon: See a vision of a random creature, then you must choose a creature to transform into it.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "conjurationscholar": {
         "name": "Conjuration Scholar",
@@ -7552,7 +7618,7 @@
         "rarity": "Legendary",
         "keyword": "Summon",
         "text": "When you draw a creature, give it a random Keyword.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Poor"
       },
       "icewingdragon": {
         "name": "Icewing Dragon",
@@ -7668,7 +7734,7 @@
         "text": "Prophecy, Guard. Last Gasp: Reduce the cost of a random Dragon in your hand by 1.",
         "arenaTier": "Good",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "mudcrabanklesnapper": {
@@ -7721,7 +7787,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Young Dragonborn Slay a Dragon, put a random Shout into your hand. After you play a Shout, Young Dragonborn gains +1/+1.",
-        "arenaTier": "Poor",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Shout"
         }
@@ -7751,7 +7817,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "+0/+4. Summon: You gain 4 health.",
-        "arenaTier": "Average"
+        "arenaTier": "Poor"
       },
       "greybeardmentor": {
         "name": "Greybeard Mentor",
@@ -7770,7 +7836,7 @@
       },
       "prizedchicken": {
         "name": "Prized Chicken",
-        "cost": "4",
+        "cost": "5",
         "type": "Creature",
         "race": "Beast",
         "attack": "0",
@@ -7790,9 +7856,10 @@
         "health": "3",
         "rarity": "Legendary",
         "unique": true,
-        "keyword": "Summon, Slay, Fetch, Roll Over",
-        "text": "Summon: Choose one: Slay: Gains +1/+1 and Guard. Fetch: Put a dandom Daedra into your hand. Roll Over: Gains Charge.",
-        "arenaTier": "Good"
+        "keyword": "Summon",
+        "text": "Summon: Choose one: Stay: Gains +1/+1 and Guard. Fetch: Put a dandom Daedra into your hand. Roll Over: Gains Charge.",
+        "arenaTier": "Good",
+        "tokens": "barbasfetch, barbasrollover, barbasstay"
       },
       "dragonmound": {
         "name": "Dragon Mound",
@@ -7809,7 +7876,7 @@
         "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "journeytosovngarde": {
@@ -7822,7 +7889,7 @@
         "rarity": "Legendary",
         "unique": true,
         "keyword": "",
-        "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5 and reduce their costs by 5.",
+        "text": "Shuffle all creatures from your discard pile into your deck. Give them +5/+5.",
         "arenaTier": "Poor"
       },
       "paarthurnax": {
@@ -7854,10 +7921,12 @@
         "text": "Costs 2 less for each Dragon in your discard pile. Summon: Destroy all other creatures. At the start of your turn, summon a random Dragon from your discard pile.",
         "lore": "'The self proclaimed firstborn of Akatosh, Alduin is the fabled World Eaeter, who shall bring the end of the World. Alduin has rebelled against his fate, seeking to dominate the world, instead of ending it, attempting to rule the world once more, like he did in Merethic era.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Poor",
+        "arenaTier": "Terrible",
         "arenaTierPlus": {
-          "type": "Dragon"
-        }
+          "race": "Dragon"
+        },
+        "alternativeArt": true,
+        "alternativeArtSource": "New Life Festival Pack"
       }
     },
     "strength": {
@@ -7884,7 +7953,7 @@
         "rarity": "Common",
         "keyword": "Charge, Last Gasp",
         "text": "Charge. Last Gasp: Put a 5/5 Stormcloak Battalion in your hand.",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "tokens": "stormcloakbattalion"
       },
       "berserkerofthepale": {
@@ -7914,7 +7983,7 @@
         "text": "When you summon a Dragon, draw a card.",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "shieldbreaker": {
@@ -7929,7 +7998,7 @@
         "text": "+2/+2. Summon: An enemy creature loses Guard.",
         "lore": "'Hammers are heavy weapons, only rarely wielded in battle because of the immense strenght that the wielder has to posses. Hammers are slow to swing, but landing a blow with one can be very fatal. There are few things that are capable of stopping such force, and shield is not one of them.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "skyforge": {
         "name": "Skyforge",
@@ -8026,7 +8095,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Draw five cards. discard your hand at the end of the turn.",
-        "arenaTier": "Poor"
+        "arenaTier": "Terrible"
       },
       "inspiringstormcloak": {
         "name": "Inspiring Stormcloak",
@@ -8064,7 +8133,7 @@
         "rarity": "Common",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Put a Heavy Battleaxe into your hand.",
-        "arenaTier": "Average",
+        "arenaTier": "Good",
         "generates": "heavybattleaxe"
       },
       "battlefieldscrounger": {
@@ -8152,7 +8221,7 @@
         "lore": "'Aela is one of the highest ranking members of Companions, and is member of the Circle. She enjoys hunting, both with bow and in beast form. She is the only Companion who will not give up her werewolf blood after Kodlaks death, no matter what.' - Rubliko",
         "loreLink": "",
         "tokens": "aelathehuntress_beast",
-        "arenaTier": "Good"
+        "arenaTier": "Excellent"
       },
       "ancestorsbattleaxe": {
         "name": "Ancestor's Battleaxe",
@@ -8200,7 +8269,7 @@
         "rarity": "Common",
         "keyword": "Charge",
         "text": "Charge.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       }
     },
     "willpower": {
@@ -8271,7 +8340,7 @@
         "text": "Summon a 3/3 Sovngarde Hero",
         "lore": "'Hun Kaal Zoor! Hero, Champion, Legend - With these words the Last Dragonborn can call help from Sovngarde, inviting the immortal spirits of great Nordic warriors to walk mortal realm once more.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "text": "Shout"
         },
@@ -8289,9 +8358,9 @@
         "text": "When you summon a Dragon, Cliffside Lookout gains +1/+1.",
         "lore": "'The lush forest of Falkreath are perfect spot for colonisation. Climate is temperate, and woods are relatively safe. Dragons rarely venture so far south, but when they do,they cause a lot of problems in small settlements of this hold. Mountains surrounding this region are a perfect vantage spot for lookouts, always ready to warn the settlers of incoming danger.' - Rubliko",
         "loreLink": "",
-        "arenaTier": "Average",
+        "arenaTier": "Good",
         "arenaTierPlus": {
-          "type": "Dragon"
+          "race": "Dragon"
         }
       },
       "grislygourmet": {
@@ -8305,7 +8374,9 @@
         "keyword": "Summon",
         "text": "Summon: Transform an enemy creature with 2 power or less into a Sweet Roll.",
         "arenaTier": "Good",
-        "tokens": "sweetroll"
+        "tokens": "sweetroll",
+        "alternativeArt": true,
+        "alternativeArtSource": "Heart's Day 2018"
       },
       "thalmorjusticiar": {
         "name": "Thalmor Justiciar",
@@ -8362,7 +8433,7 @@
         "loreLink": "",
         "arenaTier": "Poor",
         "arenaTierPlus": {
-          "type": "Guard"
+          "keyword": "Guard"
         },
         "generates": "septimguardsman"
       },
@@ -8381,7 +8452,7 @@
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5oolt6/daily_card_discussion_thread_139_renowned_legate/dclcqpe",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Imperial"
+          "race": "Imperial"
         },
         "tokens": "imperialgrunt"
       },
@@ -8395,7 +8466,7 @@
         "rarity": "Common",
         "keyword": "Guard",
         "text": "Guard.",
-        "arenaTier": "Good"
+        "arenaTier": "Average"
       },
       "cauldronkeeper": {
         "name": "Cauldron Keeper",
@@ -8447,7 +8518,7 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: +1/+1 if you have another creature with Guard.",
-        "arenaTier": "Good",
+        "arenaTier": "Average",
         "arenaTierPlus": {
           "keyword": "Guard"
         }
@@ -8462,7 +8533,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Another creature disappears, then returns at the end of the turn.",
-        "arenaTier": "Poor",
+        "arenaTier": "Good",
         "arenaTierPlus": {
           "keyword": "Summon"
         }
@@ -8489,7 +8560,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Give creatures in your deck +1/+1.",
-        "arenaTier": "Excellent"
+        "arenaTier": "Average"
       },
       "undyingdragon": {
         "name": "Undying Dragon",
@@ -8517,7 +8588,7 @@
         "loreLink": "",
         "arenaTier": "Average",
         "arenaTierPlus": {
-          "type": "Wolf"
+          "race": "Wolf"
         },
         "tokens": "uncagedwolf"
       },
@@ -8576,7 +8647,7 @@
         "text": "Look at the top card of your deck. You may discard it. Draw a card.",
         "attr1": "agility",
         "attr2": "endurance",
-        "arenaTier": "Excellent"
+        "arenaTier": "Good"
       },
       "archersgambit": {
         "name": "Archer's Gambit",
@@ -8705,7 +8776,7 @@
         "text": "Move a friendly creature and give it +3/+0 and Drain this turn.",
         "attr1": "willpower",
         "attr2": "agility",
-        "arenaTier": "Good",
+        "arenaTier": "Excellent",
         "arenaTierPlus": {
           "keyword": "Pilfer"
         }
@@ -8724,7 +8795,7 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: Steal Cover from another crature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "daringheist": {
         "name": "Daring Heist",
@@ -8736,7 +8807,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Draw two cards. Daring Heist can't be played unless a creature in each lane damaged your opponent this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "clockworkscorpion": {
         "name": "Clockwork Scorpion",
@@ -8748,7 +8819,7 @@
         "rarity": "Common",
         "keyword": "Drain, Lethal",
         "text": "Drain, Lethal.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "cogcollector": {
         "name": "Cog Collector",
@@ -8760,7 +8831,7 @@
         "rarity": "Epic",
         "keyword": "Pilfer, Last Gasp",
         "text": "Pilfer: Add a gear to Cog Collector. Last Gasp: Summon a random (neutral) creature with cost equal to the number of gears on Cog Collector.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "nixhoundfabricant": {
         "name": "Nix-Hound Fabricant",
@@ -8772,7 +8843,10 @@
         "rarity": "Common",
         "keyword": "Drain, Summon",
         "text": "Summon: If you hava a (Neutral) card in play, Shackle an enemy creature.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       },
       "murkwaterguide": {
         "name": "Murkwater Guide",
@@ -8784,7 +8858,10 @@
         "rarity": "Common",
         "keyword": "Treasure Hunt",
         "text": "Treasure Hunt - 0-cost card: Put a copy of the 'treasure' into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "cost": "=_0"
+        }
       },
       "ruthlessfreebooter": {
         "name": "Ruthless Freebooter",
@@ -8796,7 +8873,10 @@
         "rarity": "Common",
         "keyword": "Treasure Hunt",
         "text": "Treasure Hunt - Drain: +1/+1 and Drain. Treasure Hunt - Lethal: +1/+1 and Lethal.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "drain, lethal"
+        }
       },
       "sailsthroughstorms": {
         "name": "Sails-Through-Storms",
@@ -8809,7 +8889,7 @@
         "unique": true,
         "keyword": "Pilfer",
         "text": "Pilfer: Summon the top creature of your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       }
     },
     "endurance": {
@@ -8823,7 +8903,7 @@
         "rarity": "Rare",
         "keyword": "Drain, Guard",
         "text": "Drain, Guard",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "brassilisk": {
         "name": "Brassilisk",
@@ -8835,7 +8915,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "When Brassilisk takes damage and survives, summon a copy of it in the other lane.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "galyntheshelterer": {
         "name": "Galyn The Shelterer",
@@ -8848,7 +8928,7 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Choose a creature or item in your hand. Shuffle three copies of it with +3/+3 into your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "halloweddeathpriest": {
         "name": "Hallowed Deathpriest",
@@ -8860,7 +8940,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Transform the highest cost creature in your opponent's hand into a Shriveled Mummy.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Good",
         "tokens": "shriveledmummy"
       },
       "hulkingfabricant": {
@@ -8873,7 +8953,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: If you hava a (Neutral) card in play, +3/+3",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       },
       "mistveilwarden": {
         "name": "Mistveil Warden",
@@ -8885,7 +8968,10 @@
         "rarity": "Common",
         "keyword": "Treasure Hunt",
         "text": "Treasure Hunt - Guard: Give the Guard +1/+2",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "keyword": "Guard"
+        }
       },
       "thornwellterror": {
         "name": "Thornwell Terror",
@@ -8897,7 +8983,8 @@
         "rarity": "Common",
         "keyword": "Beast Form",
         "text": "Beast Form: +1/+1",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "tokens": "thornwellterror_beast"
       },
       "weakness": {
         "name": "Weakness",
@@ -8909,7 +8996,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Set a creature's health to 1.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       }
     },
     "intelligence": {
@@ -8923,7 +9010,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Gains +1/+0 when you draw a card during your turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "text": "draw"
+        }
       },
       "excavate": {
         "name": "Excavate",
@@ -8935,7 +9025,10 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Draw an item or support from your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Item, Support"
+        }
       },
       "reverberatingstrike": {
         "name": "Reverberating Strike",
@@ -8947,7 +9040,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Deal 3 damage to a creature and all enemy creatures with the same name.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "laaneth": {
         "name": "Laaneth",
@@ -8960,9 +9053,9 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Draw a card of your choice from your deck.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Excellent",
         "alternativeArt": true,
-        "alternativeArtSource": "Return to Clockwork City bundle price"
+        "alternativeArtSource": "Return to Clockwork City bundle"
       },
       "memorywraith": {
         "name": "Memory Wraith",
@@ -8974,7 +9067,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Banish your opponent's discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "scrollseeker": {
         "name": "Scroll Seeker",
@@ -8984,9 +9077,12 @@
         "attack": "1",
         "health": "2",
         "rarity": "Common",
-        "keyword": "Ward, Teasure Hunt",
-        "text": "Ward. Teasure Hunt - Two actions: +1/+0.",
-        "arenaTier": "Unknown"
+        "keyword": "Ward, Treasure Hunt",
+        "text": "Ward. Treasure Hunt - Two actions: +1/+0.",
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "shalkfabricant": {
         "name": "Shalk Fabricant",
@@ -8998,7 +9094,10 @@
         "rarity": "Common",
         "keyword": "Guard, Summon",
         "text": "Guard. Summon: If you have a (Neutral) card in play, put a random action into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       },
       "thronealigned": {
         "name": "Throne Aligned",
@@ -9010,7 +9109,7 @@
         "rarity": "Rare",
         "keyword": "Guard, Summon",
         "text": "Guard. +3/+3 Summon: Shackle the wielder",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       }
     },
     "neutral": {
@@ -9025,7 +9124,10 @@
         "unique": true,
         "keyword": "Assemble",
         "text": "Assemble: Choose two: +2/+0, +0/+2, deal 2 damage to your opponent, or gain 2 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "race": "Factotum"
+        }
       },
       "abandonedimperfect": {
         "name": "Abandoned Imperfect",
@@ -9037,7 +9139,11 @@
         "rarity": "Rare",
         "keyword": "Treasure Hunt",
         "text": "Treasure Hunt - Three (Neutral) cards: Sacrifice Abandoned Imperfect to summon an 8/8 Awakened Imperfect with Breakthrough and Guard to the lane of your choice.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        },
+        "generates": "awakenedimperfect"
       },
       "assembledconduit": {
         "name": "Assembled Conduit",
@@ -9049,7 +9155,10 @@
         "rarity": "Common",
         "keyword": "Assemble",
         "text": "Assemble: +1/+0 and Breakthrough or +0/+1 and Regenerate.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "race": "Factotum"
+        }
       },
       "assembledsanitizer": {
         "name": "Assembled Sanitizer",
@@ -9061,11 +9170,14 @@
         "rarity": "Common",
         "keyword": "Assemble",
         "text": "Assemble: +2/+0 or Lethal.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "race": "Factotum"
+        }
       },
       "assembledsentry": {
         "name": "Assembled Sentry",
-        "cost": "3",
+        "cost": "2",
         "type": "Creature",
         "race": "Factotum",
         "attack": "1",
@@ -9073,7 +9185,10 @@
         "rarity": "Common",
         "keyword": "Assemble",
         "text": "Assemble: +0/+2 or Guard",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "race": "Factotum"
+        }
       },
       "awakenedimperfect": {
         "name": "Awakened Imperfect",
@@ -9085,7 +9200,8 @@
         "rarity": "Rare",
         "keyword": "Breakthrough, Guard",
         "text": "Breakthrough, Guard",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "generators": "abandonedimperfect"
       },
       "brassarquebus": {
         "name": "Brass Arquebus",
@@ -9097,7 +9213,11 @@
         "rarity": "Epic",
         "keyword": "Last Gasp",
         "text": "Last Gasp: Draw three different randon 1-cost creatures from your deck.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "cost": "=_1",
+          "type": "creature"
+        }
       },
       "clockworkdragon": {
         "name": "Clockwork Dragon",
@@ -9109,7 +9229,7 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: If Clockwork Dragon is in the left lane, +2/+0 and Drain. Otherwise, +0/+2 and Guard.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "dormantcenturion": {
         "name": "Dormant Centurion",
@@ -9121,7 +9241,10 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Dormant Centurion can't attack unless you've played an action this turn.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "type": "Action"
+        }
       },
       "dragonaspect": {
         "name": "Dragon Aspect",
@@ -9134,7 +9257,7 @@
         "keyword": "Shout",
         "shout": 3,
         "text": "You gain 3 health and Battle an enemy creature as if you had 3 power.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "dwarvencolossus": {
         "name": "Dwarven Colossus",
@@ -9146,7 +9269,8 @@
         "rarity": "Epic",
         "keyword": "Summon",
         "text": "Summon: Summon a Power Sphere in each lane.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good",
+        "tokens": "powersphere"
       },
       "fabricate": {
         "name": "Fabricate",
@@ -9158,7 +9282,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Build a custom creature and put it into your hand.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "gearworkspider": {
         "name": "Gearwork Spider",
@@ -9170,7 +9294,7 @@
         "rarity": "Common",
         "keyword": "Prophecy, Guard, Summon",
         "text": "Prophecy, Guard. Summon: Summon all Gearwork Spiders in your discard pile.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "starsungbard": {
         "name": "Star-Sung Bard",
@@ -9182,7 +9306,7 @@
         "rarity": "Epic",
         "keyword": "",
         "text": "Immune to Silence. Your unique cards cost 1 less.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor"
       },
       "mecinar": {
         "name": "Mecinar",
@@ -9195,11 +9319,11 @@
         "unique": true,
         "keyword": "Summon",
         "text": "Summon: Stitch together the top creature from both decks to create an Abomination and put it into your hand",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "reflectiveautomaton": {
         "name": "Reflective Automaton",
-        "cost": "1",
+        "cost": "2",
         "type": "Creature",
         "race": "Factotum",
         "attack": "2",
@@ -9207,7 +9331,7 @@
         "rarity": "Common",
         "keyword": "",
         "text": "Reflective Automaton has all creature types.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "skeevaton": {
         "name": "Skeevaton",
@@ -9219,7 +9343,10 @@
         "rarity": "Rare",
         "keyword": "Summon",
         "text": "Summon: +1/+1 for each other Skeever you've summoned this game.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Terrible",
+        "arenaTierPlus": {
+          "race": "Skeever"
+        }
       },
       "treasuremap": {
         "name": "Treasure Map",
@@ -9230,8 +9357,11 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "Summon",
-        "text": "+1/+1. Summon: Draw a card. If the wielder has Teasure Hunt, draw something they are hunting for instead",
-        "arenaTier": "Unknown"
+        "text": "+1/+1. Summon: Draw a card. If the wielder has Treasure Hunt, draw something they are hunting for instead",
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Treasure Hunt"
+        }
       }
     },
     "strength": {
@@ -9244,9 +9374,14 @@
         "health": "3",
         "rarity": "Legendary",
         "unique": true,
-        "keyword": "Teasure Hunt",
-        "text": "Teasure Hunt - Action, Creture, Item, Support: +6/+6. When a friendly creature hunter finds something summon Skywag or give Skywag +1/+1",
-        "tokens": "skywag"
+        "keyword": "Treasure Hunt",
+        "text": "Treasure Hunt - Action, Creature, Item, Support: +6/+6. When a friendly creature hunter finds something summon Skywag or give Skywag +1/+1",
+        "tokens": "skywag",
+        "arenaTier": "Good",
+        "arenaTierPlus": {
+          "keyword": "Treasure Hunt",
+          "type": "Action, Creature, Item, Support"
+        }
       },
       "firepotspider": {
         "name": "Firepot Spider",
@@ -9257,7 +9392,8 @@
         "health": "1",
         "rarity": "Common",
         "keyword": "Last Gasp",
-        "text": "Last Gasp: Deal 1 damage to all creatures in this lane."
+        "text": "Last Gasp: Deal 1 damage to all creatures in this lane.",
+        "arenaTier": "Poor"
       },
       "grapplinghook": {
         "name": "Grappling Hook",
@@ -9268,7 +9404,11 @@
         "health": "",
         "rarity": "Common",
         "keyword": "Summon",
-        "text": "+3/+2. Summon: Move an enemy creature into this lane. It loses Cover."
+        "text": "+3/+2. Summon: Move an enemy creature into this lane. It loses Cover.",
+        "arenaTier": "Excellent",
+        "arenaTierPlus": {
+          "keyword": "Slay"
+        }
       },
       "hunterkillers": {
         "name": "Hunter-Killers",
@@ -9279,7 +9419,8 @@
         "health": "4",
         "rarity": "Epic",
         "keyword": "Summon, Battle",
-        "text": "Summon: Battle an enemy creature, then Battle another enemy creature."
+        "text": "Summon: Battle an enemy creature, then Battle another enemy creature.",
+        "arenaTier": "Poor"
       },
       "ratwayprospector": {
         "name": "Ratway Prospector",
@@ -9290,7 +9431,11 @@
         "health": "2",
         "rarity": "Rare",
         "keyword": "Treasure Hunt",
-        "text": "Treasure Hunt - Support, item, action: +5/+5. After Ratway Prospector attacks, it gains Cover."
+        "text": "Treasure Hunt - Support, Item, Action: +5/+5. After Ratway Prospector attacks, it gains Cover.",
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Support, Item, Action"
+        }
       },
       "relichunter": {
         "name": "Relic Hunter",
@@ -9301,7 +9446,11 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Treasure Hunt",
-        "text": "Treasure Hunt - Item: Give the item +1/+1."
+        "text": "Treasure Hunt - Item: Give the item +1/+1.",
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Item"
+        }
       },
       "trialofflame": {
         "name": "Trial of Flame",
@@ -9312,7 +9461,8 @@
         "health": "",
         "rarity": "Rare",
         "keyword": "",
-        "text": "Choose a lane. Destroy all creatures except for the most powerful creature on noth sides of that lane."
+        "text": "Choose a lane. Destroy all creatures except for the most powerful creature on noth sides of that lane.",
+        "arenaTier": "Poor"
       },
       "verminousfabricant": {
         "name": "Verminous Fabricant",
@@ -9323,7 +9473,11 @@
         "health": "2",
         "rarity": "Common",
         "keyword": "Summon",
-        "text": "Summon: If you have a (Neutral) card in play, Silence another creature."
+        "text": "Summon: If you have a (Neutral) card in play, Silence another creature.",
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       }
     },
     "willpower": {
@@ -9337,7 +9491,7 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: Give another friendly creature +4/+4, it becomes (Neutral).",
-        "arenaTier": "Unknown"
+        "arenaTier": "Excellent"
       },
       "kagoutifabricant": {
         "name": "Kagouti Fabricant",
@@ -9349,7 +9503,10 @@
         "rarity": "Common",
         "keyword": "Summon",
         "text": "Summon: If you hava a (Neutral) card in play, summon a copy of Kagouti Fabricant in the other lane.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Poor",
+        "arenaTierPlus": {
+          "attr": "neutral"
+        }
       },
       "mecinarswill": {
         "name": "Mecinar's Will",
@@ -9361,7 +9518,7 @@
         "rarity": "Rare",
         "keyword": "",
         "text": "Steal an enemy creature with 3 power or less until the end of the turn. It gains Charge.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
       },
       "riftenlawkeeper": {
         "name": "Riften Lawkeeper",
@@ -9373,7 +9530,7 @@
         "rarity": "Common",
         "keyword": "Breakthrough, Summon",
         "text": "Breakthrough. Summon: You gain 4 health.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Good"
       },
       "ruinarchaeologist": {
         "name": "Ruin Archaeologist",
@@ -9385,7 +9542,10 @@
         "rarity": "Common",
         "keyword": "Treasure Hunt",
         "text": "Treasure Hunt - Support: Draw a card.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average",
+        "arenaTierPlus": {
+          "type": "Support"
+        }
       },
       "phalanxexemplar": {
         "name": "Phalanx Exemplar",
@@ -9397,7 +9557,7 @@
         "rarity": "Rare",
         "keyword": "Guard",
         "text": "Guard. When your opponent draws a Prophecy from a rune being destroyed, put a 1/2 Septim Guardsman with Guard into your hand.",
-        "arenaTier": "Unknown",
+        "arenaTier": "Insane",
         "generates": "septimguardsman"
       },
       "reconstructionengine": {
@@ -9409,9 +9569,9 @@
         "health": "",
         "rarity": "Epic",
         "keyword": "Activate",
-        "text": "Uses: 5. Activate: Give a friendly creature -1/-1 and summon a 1/1 Reconstruction Spider.",
-        "arenaTier": "Unknown",
-        "tokens": "reconstructionspider"
+        "text": "Uses: 5. Activate: Give a friendly creature -1/-1 and summon a 1/1 Reconstructed Spider.",
+        "arenaTier": "Poor",
+        "tokens": "reconstructedspider"
       },
       "themechanicalheart": {
         "name": "The Mechanical Heart",
@@ -9424,7 +9584,2068 @@
         "unique": true,
         "keyword": "Ongoing",
         "text": "Ongoing. When you have 0 or less health, sacrifice The Mechanical Heart, set your health to 10, and restore a rune.",
-        "arenaTier": "Unknown"
+        "arenaTier": "Average"
+      }
+    }
+  },
+  "forgottenhero": {
+    "agility": {
+      "slymarshblade": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Last Gasp",
+        "name": "Sly Marshblade",
+        "race": "Argonian",
+        "rarity": "Rare",
+        "text": "Last Gasp: Draw a card if you have 7 or more max magicka.",
+        "type": "Creature"
+      }
+    },
+    "endurance": {
+      "bleakcoasttroll": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "4",
+        "health": "5",
+        "keyword": "Slay",
+        "name": "Bleakcoast Troll",
+        "race": "Troll",
+        "rarity": "Rare",
+        "text": "Slay: +1/+1",
+        "type": "Creature"
+      }
+    },
+    "intelligence": {
+      "doppelganger": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "5",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Doppelganger",
+        "race": "Daedra",
+        "rarity": "Rare",
+        "text": "Summon: Transform Doppelganger into a copy of another friendly creature.",
+        "type": "Creature"
+      }
+    },
+    "neutral": {
+      "morokeithedeathless": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Summon",
+        "name": "Morokei, the Deathless",
+        "race": "Skeleton",
+        "rarity": "Legendary",
+        "text": "Summon: If you started the game with no duplicate cards in your deck, you gain 5 health and restore a rune.",
+        "type": "Creature",
+        "unique": true
+      },
+      "namirasshrine": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "4",
+        "health": "",
+        "keyword": "Ongoing",
+        "name": "Namira's Shrine",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Ongoing. At the end of your turn, if you played three cards this turn, draw a card.",
+        "type": "Support"
+      },
+      "sehtsmasterwork": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Ongoing",
+        "name": "Seht's Masterwork",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Ongoing. If you started the game with no duplicate in your deck, your cards cost 1 less.",
+        "type": "Support",
+        "unique": true
+      },
+      "siegeofstrosmkai": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "10",
+        "health": "",
+        "keyword": "",
+        "name": "Siege of Stros M'Kai",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "If you started the game with no duplicate cards in your deck, play a random creature, item, support and action from your deck.",
+        "type": "Action",
+        "unique": true
+      },
+      "tulliusconscription": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "11",
+        "health": "",
+        "keyword": "",
+        "name": "Tullius'Conscription",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Summon one of each creature from your deck that costs 2 or less.",
+        "type": "Action"
+      },
+      "ulfricsuprising": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "6",
+        "health": "",
+        "keyword": "",
+        "name": "Ulfric's Uprising",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Trigger the Summon of each friendly creature.",
+        "type": "Action"
+      },
+      "voiceofbalance": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Voice of Balance",
+        "race": "Nord",
+        "rarity": "Epic",
+        "text": "Summon: +4/+4 and Guard if you have an action, item, and support in your discard pile or in play.",
+        "type": "Creature"
+      }
+    },
+    "strength": {
+      "cradlecrushgiant": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "6",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Cradlecrush Giant",
+        "race": "Giant",
+        "rarity": "Rare",
+        "text": "Summon: Deal 2 damage to all other cratures in this lane.",
+        "type": "Creature"
+      }
+    },
+    "willpower": {
+      "castintotime": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "5",
+        "health": "",
+        "keyword": "",
+        "name": "Cast Into Time",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Banish a creature and all creatures from its owner's deck with same name as that creature.",
+        "type": "Action"
+      }
+    }
+  },
+  "housesofmorrowind": {
+    "agility": {
+      "ashoppressor": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Ash Oppressor",
+        "race": "Ash Creature",
+        "rarity": "Common",
+        "text": "Summon: If you have a creature with 5 power or more, Shackle an enemy creature.",
+        "type": "Creature"
+      },
+      "awakeneddreamer": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Awakened Dreamer",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "At the end of your turn, if you have a creature with 5 power or more, Awakened Dreamer gains +1/+1.",
+        "type": "Creature"
+      },
+      "berneclannightstalker": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "3",
+        "keyword": "Guard, Summon, Last Gasp",
+        "name": "Berne Clan Nightstalker",
+        "race": "Vampire",
+        "rarity": "Legendary",
+        "text": "Guard. Summon: Secretly choose an enemy creature. Last Gasp: Destroy the chosen creature.",
+        "type": "Creature"
+      },
+      "blightedwerebat": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Drain",
+        "name": "Blighted Werebat",
+        "race": "Beast",
+        "rarity": "Epic",
+        "text": "Drain. At the end of your turn, if you have a creature with 5 power or more, deal 2 damage to your opponent.",
+        "type": "Creature"
+      },
+      "bloodsacrament": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Betray",
+        "name": "Blood Sacrament",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Betray. Deal 2 damage to your opponent and gain 2 health.",
+        "type": "Action"
+      },
+      "cliffraceronslaught": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "9",
+        "health": "",
+        "keyword": "",
+        "name": "Cliff Racer Onslaught",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Summon a 4/4 Cliff Racer with Charge in each lane. Your opponent summons a 0/1 Target with Guard in each lane.",
+        "type": "Action",
+        "generates": "cliffracer"
+      },
+      "cliffstrider": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Charge",
+        "name": "Cliff Strider",
+        "race": "Reptile",
+        "rarity": "Epic",
+        "text": "Charge. Can't attack your opponent. At the end of your turn, if there are no enemy creatures in this lane, move Cliff Strider.",
+        "type": "Creature"
+      },
+      "cornerclubgambler": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Cornerclub Gambler",
+        "race": "Wood Elf",
+        "rarity": "Epic",
+        "text": "Summon: you must discard a card. At the start of your turn, draw two cards and Cornerclub Gambler loses this ability.",
+        "type": "Creature"
+      },
+      "derangedcorprus": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "2",
+        "health": "1",
+        "keyword": "",
+        "name": "Deranged Corprus",
+        "race": "Ash Creature",
+        "rarity": "Common",
+        "text": "Deranged Ccorprus has +5/+0 on your turn.",
+        "type": "Creature"
+      },
+      "drainblood": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "4",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Drain Blood",
+        "race": "",
+        "rarity": "Common",
+        "text": "Betray. Give a creature -2/-2",
+        "type": "Action"
+      },
+      "derangedcorprus": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "2",
+        "health": "1",
+        "keyword": "",
+        "name": "Deranged Corprus",
+        "race": "Ash Creature",
+        "rarity": "Common",
+        "text": "Deranged Ccorprus has +5/+0 on your turn.",
+        "type": "Creature"
+      },
+      "dresspy": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "0",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Dres Spy",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: Look at the top card of your deck. You may discard it.",
+        "type": "Creature"
+      },
+      "fleetingapparition": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "5",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Fleeting Apparition",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Betray. Summon a random creature from your deck that cost 3 or less to random lane. Unsummon it at the end of your turn.",
+        "type": "Action"
+      },
+      "gentlemanjimstacey": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "7",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Gentleman Jim Stacey",
+        "race": "Redguard",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Summon: Your opponent chooses a card in their hand and gives it to you.",
+        "type": "Creature"
+      },
+      "glassgreaves": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "1",
+        "health": "",
+        "keyword": "Plot",
+        "name": "Glass Greaves",
+        "race": "",
+        "rarity": "Common",
+        "text": "+1/+1. Plot: Reduce the cost of a random card in your hand by 1.",
+        "type": "Item"
+      },
+      "guarstablemaster": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Guar Stablemaster",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: +1/+1 and Guard if you have an Animal.",
+        "type": "Creature"
+      },
+      "moonsugarsmuggler": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Last Gasp",
+        "name": "Moon Sugar Smuggler",
+        "race": "Khajiit",
+        "rarity": "Rare",
+        "text": "Last Gasp: Gain 2 magicka this turn.",
+        "type": "Creature"
+      },
+      "moragtongaspirant": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Slay",
+        "name": "Morag Tong Aspirant",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "text": "Slay: Summon a copy of Morag Tong Aspirant.",
+        "type": "Creature"
+      },
+      "moragtongassassin": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Summon, Slay",
+        "name": "Morag Tong Assassin",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Summon: Summon a 0/1 Traget with Guard for your opponent. Slay: +1/+1",
+        "type": "Creature",
+        "tokens": "target"
+      },
+      "naryuvirian": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "6",
+        "health": "6",
+        "keyword": "Summon",
+        "name": "Naryu Virian",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Summon: Summon a 0/1 Target with Guard for your opponent in each lane. Friendly creatures have 'Slay: +1/+1 and Lethal.'",
+        "type": "Creature",
+        "tokens": "target"
+      },
+      "nixhound": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "2",
+        "keyword": "Prophecy, Summon",
+        "name": "Nix-Hound",
+        "race": "Beast",
+        "rarity": "Common",
+        "text": "Prophecy. Summon: Shackle each enemy creature with power less than Nix-Hound.",
+        "type": "Creature"
+      },
+      "nixox": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "7",
+        "health": "5",
+        "keyword": "Summon",
+        "name": "Nix-Ox",
+        "race": "Beast",
+        "rarity": "Common",
+        "text": "Summon: Gain 6 magicka this turn.",
+        "type": "Creature"
+      },
+      "slitstrider": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "2",
+        "health": "4",
+        "keyword": "Prophecy, Guard, Summon",
+        "name": "Slit Strider",
+        "race": "Beast",
+        "rarity": "Rare",
+        "text": "Prophecy. Guard. Summon: Move a friendly creature to this lane.",
+        "type": "Creature"
+      },
+      "suranpawnbroker": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "3",
+        "keyword": "Plot",
+        "name": "Suran Pawnbroker",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Plot: Put a random 0-cost card into your hand.",
+        "type": "Creature"
+      },
+      "telvannioathman": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Telvanni Oathman",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: If you have a... (Intelligence) card in play, draw a random action from your deck. (Endurance) card in play, summon a Riden Dead in each lane.",
+        "type": "Creature",
+        "tokens": "risendead"
+      },
+      "twinlampsconsul": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Plot",
+        "name": "Twin Lamps Consul",
+        "race": "Argonian",
+        "rarity": "Common",
+        "text": "Plot: Lethal and Guard.",
+        "type": "Creature"
+      }
+    },
+    "endurance": {
+      "aldveolthiassassin": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Lethal, Rally",
+        "name": "Ald Veolthi Assassin",
+        "race": "Breton",
+        "rarity": "Rare",
+        "text": "Lethal, Rally",
+        "type": "Creature"
+      },
+      "almalexia": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "7",
+        "health": "6",
+        "keyword": "Exalt",
+        "name": "Almalexia",
+        "race": "God",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Exalt 3: +6/+6. Friendly Exalted creatures are immune to damage.",
+        "type": "Creature"
+      },
+      "almalexiasdisciple": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "3",
+        "keyword": "Exalt",
+        "name": "Almalexia's Disciple",
+        "race": "God",
+        "rarity": "Rare",
+        "text": "Exalt 2: Heal all freiendly creatures.",
+        "type": "Creature"
+      },
+      "ancestraldead": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Slay",
+        "name": "Ancestral Dead",
+        "race": "Skeleton",
+        "rarity": "Common",
+        "text": "Slay: Summon a Risen Dead.",
+        "type": "Creature",
+        "tokens": "risendead"
+      },
+      "aundaeclansorcerer": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "3",
+        "health": "3",
+        "keyword": "",
+        "name": "Aundae Clan Sorcerer",
+        "race": "Vampire",
+        "rarity": "Legendary",
+        "text": "At the end of your turn, if three or more creatures died this turn, put a random Blood Magic Spell into your hand.",
+        "type": "Creature",
+        "tokens": "corpsecurse, drainlife, gargoyle, raisedead"
+      },
+      "balisrawarrider": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "5",
+        "health": "6",
+        "keyword": "Rally",
+        "name": "Bal Isra Warrider",
+        "race": "Redguard",
+        "rarity": "Common",
+        "text": "Rally",
+        "type": "Creature"
+      },
+      "bettynetch": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "5",
+        "health": "5",
+        "keyword": "",
+        "name": "Betty Netch",
+        "race": "Netch",
+        "rarity": "Rare",
+        "text": "While Betty Netch is in play, your magicka is increased by 2.",
+        "type": "Creature"
+      },
+      "bloodlineoutcast": {
+        "arenaTier": "Unknown",
+        "attack": "7",
+        "cost": "7",
+        "health": "7",
+        "keyword": "",
+        "name": "Bloodline Outcast",
+        "race": "Vampire",
+        "rarity": "Common",
+        "text": "When a creature dies, Bloodline Outcast gains Drain this turn.",
+        "type": "Creature"
+      },
+      "bonewalker": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "4",
+        "health": "2",
+        "keyword": "Prophecy, Guard, Summon",
+        "name": "Bonewalker",
+        "race": "Skeleton",
+        "rarity": "Common",
+        "text": "Prophecy, Guard, Summon: +1/+1 for each enemy creature in this lane.",
+        "type": "Creature"
+      },
+      "caiuscosades": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Caius Cosades",
+        "race": "Imperial",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Summon: Look at two of your opponent's cards. Guess the one in their hand. If you're right, give all creatures in your hand +1/+1.",
+        "type": "Creature"
+      },
+      "caiusmachinations": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Caius' Machinations",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Betra. Give the top three creatures of your deck +1/+1.",
+        "type": "Action"
+      },
+      "daedriccrescent": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Slay",
+        "name": "Daedric Crescent",
+        "race": "",
+        "rarity": "Common",
+        "text": "+2/+2. Slay: +1/+1.",
+        "type": "Item"
+      },
+      "indomitableordinator": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Guard, Exalt",
+        "name": "Indomitable Ordinator",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Guard. Exalt 1: Your opponent can't target Indomitable Ordinator with actions.",
+        "type": "Creature"
+      },
+      "indorilmastermind": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Indoril Mastermind",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Summon: Look at the top two cards of your deck. Draw one, and discard the other.",
+        "type": "Creature"
+      },
+      "knightofgnisis": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Rally, Summon",
+        "name": "Knight of Gnisis",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Rally. Summon: put a 2/2 Colovian Trooper with Guard into your hand.",
+        "type": "Creature",
+        "tokens": "coloviantrooper"
+      },
+      "lichsascension": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "7",
+        "health": "",
+        "keyword": "",
+        "name": "Lich's Ascension",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Your cards cost 0. You may play only once card per turn.",
+        "type": "Action"
+      },
+      "mournholdpilgrim": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Regenerate, Exalt",
+        "name": "Mournhold Pilgrim",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Regenerate. Exalt 3: +2/+2.",
+        "type": "Creature"
+      },
+      "mushroomtower": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "9",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Mushroom Tower",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Ongoing. Your actions have Betray.",
+        "type": "Support"
+      },
+      "odirnirannecromancer": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "6",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Odirniran Necromancer",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "text": "Summon: Summon a creature from your discard pile with power less than Odirniran Necromancer.",
+        "type": "Creature"
+      },
+      "quarraclanbloodkin": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "2",
+        "health": "5",
+        "keyword": "Drain",
+        "name": "Quarra Clan Bloodkin",
+        "race": "Vampire",
+        "rarity": "Common",
+        "text": "Drain.",
+        "type": "Creature"
+      },
+      "redoranoathman": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Redoran Oathman",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: If you have a... (Willpower) card in play, double Redoran Oathman's health. (Strength) card in play, double Redoran Oathman's power.",
+        "type": "Creature"
+      },
+      "risingofbones": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "4",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Rising of Bones",
+        "race": "",
+        "rarity": "Common",
+        "text": "Betray. Summon a 3/3 Risen Horror with Guard",
+        "type": "Creature",
+        "tokens": "risenhorror"
+      },
+      "skeletonchampion": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Guard. Summon",
+        "name": "Skeleton Champion",
+        "race": "Skeleton",
+        "rarity": "Epic",
+        "text": "Guard. Summon: Give other friendly Skeletons +1/+1.",
+        "type": "Creature"
+      },
+      "trespassersbane": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "",
+        "name": "Trespasser's Bane",
+        "race": "",
+        "rarity": "Common",
+        "text": "Set a creatures's power to 1.",
+        "type": "Action"
+      },
+      "vvardvarkexperiment": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "0",
+        "health": "",
+        "keyword": "",
+        "name": "Vvardvark Experiment",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Summon a 0/1 Vvardvark in each lane.",
+        "type": "Action"
+      }
+    },
+    "intelligence": {
+      "ashpiercer": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Ash Piercer",
+        "race": "Ash Creature",
+        "rarity": "Rare",
+        "text": "Summon: Deal 3 damage to a creature if you have a creature with 5 power or more.",
+        "type": "Creature"
+      },
+      "barilzarstinkering": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Barilzar's Tinkering",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Betray. Transform a creature into a random creature that cost 1 more.",
+        "type": "Action"
+      },
+      "burningtouch": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Prophecy",
+        "name": "Burning Touch",
+        "race": "",
+        "rarity": "Common",
+        "text": "Prophecy. Deal 2 damage to a creature",
+        "type": "Action"
+      },
+      "clockworkcitypilgrim": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Guard, Exalt",
+        "name": "Clockwork City Pilgrim",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Guard. Exalt 3: +2/+2",
+        "type": "Creature"
+      },
+      "enamorskeeper": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Exalt",
+        "name": "Enamor's Keeper",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "text": "Exalt 5: Equipe a +5/+0 Heirloom Greatsword to Enamor's Keeper.",
+        "type": "Creature",
+        "generates": "heirloomgreatsword"
+      },
+      "fallingwizard": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "2",
+        "health": "5",
+        "keyword": "Summon, Last Gasp",
+        "name": "Falling Wizard",
+        "race": "Wood Elf",
+        "rarity": "Epic",
+        "text": "Summon: Falling Wizard deals 5 damage to himself. Last Gasp: Draw an Experimental Scroll.",
+        "type": "Creature",
+        "tokens": "experimentalscroll"
+      },
+      "geniuspathmage": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "6",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Genius Pathmage",
+        "race": "Breton",
+        "rarity": "Legendary",
+        "text": "Summon: Summon a random creature from your deck with cost equal to your current magicka.",
+        "type": "Creature"
+      },
+      "ghostgatedefender": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "3",
+        "keyword": "Guard, Exalt",
+        "name": "Ghostgate Defender",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Guard. Exalt 3: Deal 2 damage to a creature.",
+        "type": "Creature"
+      },
+      "hatcherymeddler": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Hatchery Meddler",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Summon: Swap a creature's power and health.",
+        "type": "Creature"
+      },
+      "lamecorprus": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "6",
+        "health": "6",
+        "keyword": "",
+        "name": "Lame Corprus",
+        "race": "Ash Creature",
+        "rarity": "Common",
+        "text": "",
+        "type": "Creature"
+      },
+      "magesguildrecruit": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Summon",
+        "name": "Mages Guild Recruit",
+        "race": "Argonian",
+        "rarity": "Common",
+        "text": "Summon: Reduce the cost of an action in your hand by 2.",
+        "type": "Creature"
+      },
+      "mightyconjuring": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "7",
+        "health": "7",
+        "keyword": "",
+        "name": "Mighty Conjuring",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Summon a random Atronach. If yuo have a creature with 5 power or more, summon a Lava Atronach instead.",
+        "type": "Creature",
+        "tokens": "lavaatronach"
+      },
+      "poeticarmiger": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "3",
+        "keyword": "Exalt",
+        "name": "Poetic Armiger",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Exalt 1: Gain a random Keyword.",
+        "type": "Creature"
+      },
+      "seydaneencourier": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "2",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Seyda Neen Courier",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: Equipe a +3/+0 Steel Sword to a friendly creature.",
+        "type": "Creature",
+        "generates": "steelsword"
+      },
+      "sixthhouseamulet": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "1",
+        "health": "",
+        "keyword": "Summon",
+        "name": "Sixth House Amulet",
+        "race": "",
+        "rarity": "Common",
+        "text": "+1/+1. Summon: If the wielder has 5 power or more, it gains a Ward.",
+        "type": "Item"
+      },
+      "sothasil": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "9",
+        "health": "4",
+        "keyword": "Exalt",
+        "name": "Sotha Sil",
+        "race": "God",
+        "rarity": "Legendary",
+        "text": "Exalt 3: +4/+4. At the end of your turn, if you have an Exalted creature in play, summon an Awakened Imperfect",
+        "type": "Creature",
+        "generates": "awakenedimperfect"
+      },
+      "spiritknife": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "7",
+        "health": "",
+        "keyword": "",
+        "name": "Spirit Knife",
+        "race": "",
+        "rarity": "Common",
+        "text": "Deal 7 damage to a creature. Draw a card.",
+        "type": "Action"
+      },
+      "telvosmagister": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "6",
+        "health": "4",
+        "keyword": "Ward",
+        "name": "Telvos Magister",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Ward. At the end of your turn, you gain a Ward",
+        "type": "Creature"
+      },
+      "templeconjurer": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Exalt",
+        "name": "Temple Conjurer",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Exalt 4: Summon a 5/3 Flame Atronach with Breakthrough.",
+        "type": "Creature",
+        "tokens": "flameatronach"
+      },
+      "therana": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "5",
+        "health": "8",
+        "keyword": "",
+        "name": "Therana",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "After you play an action, shuffle three 0-cost copies of that action into your deck.",
+        "type": "Creature"
+      },
+      "theranaslawman": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "8",
+        "health": "5",
+        "keyword": "Guard. Ward",
+        "name": "Therana's Lawman",
+        "race": "High Elf",
+        "rarity": "Common",
+        "text": "Guard. Ward",
+        "type": "Creature"
+      },
+      "traitorsflames": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "7",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Traitor's Flames",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Betray. Deal 2 damage to all enemy creatures in a lane.",
+        "type": "Action"
+      },
+      "tribunaloathman": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Tribunal Oathman",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: If you have a... (Willpower) card in play, you gain 4 health. (Endurance) card in play,  gain +1 max magicka.",
+        "type": "Creature"
+      },
+      "vigilantancestor": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Guard",
+        "name": "Vigilant Ancestor",
+        "race": "Spirit",
+        "rarity": "Epic",
+        "text": "Vigilant Ancestor is Permanently Shackled.",
+        "type": "Creature"
+      },
+      "wildclumsiness": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Wild Clumsiness",
+        "race": "",
+        "rarity": "Common",
+        "text": "Betray. Shackle a random enemy creature in each lane.",
+        "type": "Creature"
+      }
+    },
+    "neutral": {
+      "blueclawmatron": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "7",
+        "health": "8",
+        "keyword": "",
+        "name": "Blueclaw Matron",
+        "race": "Dreugh",
+        "rarity": "Common",
+        "text": "",
+        "type": "Creature"
+      },
+      "dismantle": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "",
+        "name": "Dismantle",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Destroy an enemy support or (Neutral) creature.",
+        "type": "Action"
+      },
+      "dwemerpuzzlebox": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Activate, Last Gasp",
+        "name": "Dwemer Puzzle Box",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Uses: 3. Activate: Discard the top card of your deck. Last Gasp: Draw a card.",
+        "type": "Support"
+      },
+      "jiub": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Slay",
+        "name": "Juib",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Slay: Change into Saint Jiub, Eradicator of the Winged Menace.",
+        "type": "Creature",
+        "tokens": "saintjiub"
+      },
+      "mudcrabmerchant": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Mudcrab Merchant",
+        "race": "Mudcrab",
+        "rarity": "Epic",
+        "text": "Summon: The Merchant shows you two cards he has to sale. Choose one to put into your hand. He puts the other into your opponent's hand.",
+        "type": "Creature"
+      },
+      "silentpilgrim": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "3",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Silent Pilgrim",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Summon: Draw a random multi-attribute card from your deck.",
+        "type": "Creature"
+      },
+      "stolenpants": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Summon, Last Gasp",
+        "name": "Stolen Pants",
+        "race": "",
+        "rarity": "Epic",
+        "text": "+1/+1. Summon: Summons a 0/1 Sheepish Dunmer in the other lane. Last Gasp: Give Sheepish Dunmer his pants.",
+        "type": "Item",
+        "tokens": "sheepishdunmer"
+      },
+      "unitethehouses": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "",
+        "name": "Unite the Houses",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "If you haveat least one card of each attribute in play, you win the game.",
+        "type": "Action"
+      },
+      "yagrumbagarn": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Yagrum Bagarn",
+        "race": "Dwemer",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Summon: Draw a Dewmer from your discard pile and give it +2/+2.",
+        "type": "Creature"
+      }
+    },
+    "strength": {
+      "aldruhnarmsmaster": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Charge, Rally",
+        "name": "Ald'ruhn Arms Master",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Guarge, Rally",
+        "type": "Creature"
+      },
+      "ashberserker": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "3",
+        "keyword": "",
+        "name": "Ash Berserker",
+        "race": "Ash Creature",
+        "rarity": "Rare",
+        "text": "At the end of your turn, if you have a creature with 5 power or more, draw a card.",
+        "type": "Creature"
+      },
+      "ashlanderzealot": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "2",
+        "keyword": "Summon",
+        "name": "Ashlander Zealot",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: Battle an enemy creature.",
+        "type": "Creature"
+      },
+      "aspectofhircine": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "9",
+        "health": "6",
+        "keyword": "Summon",
+        "name": "Aspect of Hircine",
+        "race": "Werewolf",
+        "rarity": "Legendary",
+        "text": "Summon: Choose one: Strength: +6/+6 and Guard. Speed: Gains Charge.",
+        "type": "Creature",
+        "tokens": "aspectofhircine_speed, aspectofhircine_strength"
+      },
+      "bushwhack": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "0",
+        "health": "",
+        "keyword": "",
+        "name": "Bushwhack",
+        "race": "",
+        "rarity": "Common",
+        "text": "A friendly creature ignores Guards and can attack creatures in any lane this turn.",
+        "type": "Action"
+      },
+      "camonnatongheavy": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "3",
+        "keyword": "Plot",
+        "name": "Camonna Tong Heavy",
+        "race": "Orc",
+        "rarity": "Rare",
+        "text": "Plot: Unsummon a creature in this lane with power less than Camonna Tong Heavy.",
+        "type": "Creature"
+      },
+      "cliffhunter": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "6",
+        "health": "3",
+        "keyword": "Prophecy, Summon",
+        "name": "Cliff Hunter",
+        "race": "Reptile",
+        "rarity": "Common",
+        "text": "Prophecy. Summon: Battle an enemy creature.",
+        "type": "Creature"
+      },
+      "corprusdisease": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "1",
+        "health": "",
+        "keyword": "",
+        "name": "Corprus Disease",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Silence a creature, then give it +2/+0.",
+        "type": "Action"
+      },
+      "dagothdagger": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "1",
+        "health": "",
+        "keyword": "Breakthrough",
+        "name": "Dagoth Dagger",
+        "race": "",
+        "rarity": "Common",
+        "text": "Breakthrough. +2/+1",
+        "type": "Item"
+      },
+      "dagothoathman": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Dagoth Oathman",
+        "race": "Ash creature",
+        "rarity": "Common",
+        "text": "Summon: If you have a... (Agility) card in play, +1/+1. (Intelligence) card in play, +1/+1.",
+        "type": "Creature"
+      },
+      "falseincarnate": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "4",
+        "health": "4",
+        "keyword": "",
+        "name": "False Incarnate",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Your opponent can't gain health.",
+        "type": "Creature"
+      },
+      "fetcherflygolem": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "",
+        "name": "Fetcherfly Golem",
+        "race": "Daedra",
+        "rarity": "Epic",
+        "text": "When Fetcherfly Golem takes damage and survive, summon a 2/2 Fetcherfly Swarm.",
+        "type": "Creature",
+        "tokens": "fetcherflyswarm"
+      },
+      "fightersguildhall": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "",
+        "name": "Fighters Guild Hall",
+        "race": "",
+        "rarity": "Rare",
+        "text": "When a friendly creature takes damage on your turn, give it +2/+0.",
+        "type": "Support"
+      },
+      "fightersguildsteward": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Summon",
+        "name": "Fighters Guild Steward",
+        "race": "Nord",
+        "rarity": "Rare",
+        "text": "Summon: A friendly creature with 5 power or more Battle an enemy creature.",
+        "type": "Creature"
+      },
+      "hlaalusharpshooter": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Plot, Summon",
+        "name": "Hlaalu Sharpshooter",
+        "race": "Nord",
+        "rarity": "Epic",
+        "text": "Plot. Summon: Silence a creature, then deal 1 damage to it.",
+        "type": "Creature"
+      },
+      "impostersmission": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "4",
+        "health": "",
+        "keyword": "",
+        "name": "Imposter's Mission",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Summon an Iposter with power and health equal to power of your most powerful creature.",
+        "type": "Action",
+        "tokens": "imposter"
+      },
+      "lowercantonsmith": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "2",
+        "keyword": "Plot",
+        "name": "Lower Canton Smith",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Plot: Equip a friendly creature with a +2/+2 Steel Scimitar.",
+        "type": "Creature",
+        "generates": "steelscimitar"
+      },
+      "ornerykagouti": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Breakthrough",
+        "name": "Ornery Kagouti",
+        "race": "Beast",
+        "rarity": "Common",
+        "text": "Breakthrough",
+        "type": "Creature"
+      },
+      "redoranbattlespear": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Rally",
+        "name": "Redoran Battlespear",
+        "race": "",
+        "rarity": "Common",
+        "text": "Rally. +1/+3",
+        "type": "Item"
+      },
+      "sarethiscion": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Rally",
+        "name": "Sarethi Scion",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Rally",
+        "type": "Creature"
+      },
+      "servantofdagoth": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Servant of Dagoth",
+        "race": "Ash Creature",
+        "rarity": "Common",
+        "text": "Summon: If you have a creature with 5 power or more, +2/+2 and Guard.",
+        "type": "Creature"
+      },
+      "sharpeyedashkhan": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "6",
+        "health": "6",
+        "keyword": "Plot",
+        "name": "Sharp-Eyed Ashkhan",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "text": "Plot: Discard you hand, then draw three cards.",
+        "type": "Creature"
+      },
+      "skardrillmaster": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "6",
+        "health": "5",
+        "keyword": "Rally",
+        "name": "Skar Drillmaster",
+        "race": "Redguard",
+        "rarity": "Legendary",
+        "text": "Rally. When Skar Drillmaster Rallies a creature, put a copy of the rallied creature into your hand with +1/+1.",
+        "type": "Creature"
+      },
+      "stendarrshammer": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "5",
+        "health": "",
+        "keyword": "Summon",
+        "name": "Stendarr's Hammer",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Summon: Double the wielder's power and health. The wielder can onle attack creatures.",
+        "type": "Item"
+      },
+      "theredyear": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "10",
+        "health": "",
+        "keyword": "",
+        "name": "The Red Year",
+        "race": "",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Deal 10 damage to each creature.",
+        "type": "Action"
+      }
+    },
+    "dual": {
+      "archcanonsaryoni": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Summon, Exalt",
+        "name": "Archcanon Saryoni",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Summon: Choose a blessing from one of Tribunal gods. Exalt 3: Gain all three blessings instead.",
+        "type": "Creature",
+        "attr1": "intelligence",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      },
+      "ascendedsleeper": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "6",
+        "health": "6",
+        "keyword": "Guard",
+        "name": "Ascended Sleeper",
+        "race": "Ash Creature",
+        "rarity": "Rare",
+        "text": "At the end of your turn, if you have a creature with 5 power or more, reduce the cost of all creature in your hand by 1.",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "intelligence",
+        "attr3": "agility"
+      },
+      "balmorapuppeteer": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Plot",
+        "name": "Balmora Puppeteer",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Plot: +1/+1 for each other card you're played this turn.",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "agility"
+      },
+      "bolvynvenim": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Rally",
+        "name": "Bolvyn Venim",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Rally. When you Rally with no creatures in your hand, firts draw Bolvyn Venim from your deck.",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      },
+      "dagothur": {
+        "arenaTier": "Unknown",
+        "attack": "8",
+        "cost": "12",
+        "health": "8",
+        "keyword": "Breakthrough, Charge, Drain, Guard, Lethal, Ward",
+        "name": "Dagoth Ur",
+        "race": "God",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Breakthrough, Charge, Drain, Guard, Lethal, Ward",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "intelligence",
+        "attr3": "agility"
+      },
+      "divaythsexperiments": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "9",
+        "health": "",
+        "keyword": "Betray",
+        "name": "Divayth's Experiments",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Betray. Summon a copy of a friendly creature.",
+        "type": "Creature",
+        "attr1": "intelligence",
+        "attr2": "agility",
+        "attr3": "endurance"
+      },
+      "dukevedamdren": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "",
+        "name": "Duke Vedam Dren",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "The first time you play a card each turn, draw a random card from your deck with cost equals to your remaining magicka.",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "agility"
+      },
+      "handofdagoth": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Breakthrough, Drain, Ward",
+        "name": "Hand of Dagoth",
+        "race": "Ash Creture",
+        "rarity": "Epic",
+        "text": "Breakthrough, Drain, Ward",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "intelligence",
+        "attr3": "agility"
+      },
+      "hauntedmanor": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "Ongoing",
+        "name": "Haunted Manor",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Ongoing. Give the second creature you summon each turn +2/+2.",
+        "type": "Support",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "agility"
+      },
+      "inspiringkinsman": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Rally, Last Gasp",
+        "name": "Inspiring Kinsman",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Rally. Last Gasp: Give a random creature in your hand +2/+2.",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      },
+      "powerofthealmsivi": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "8",
+        "health": "",
+        "keyword": "",
+        "name": "Power of the Almsivi",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Set each creature's power and health to 1.",
+        "type": "Action",
+        "attr1": "intelligence",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      },
+      "redoranforerunner": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "2",
+        "health": "1",
+        "keyword": "Charge, Drain, Ward",
+        "name": "Redoran Forerunner",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Charge, Drain, Ward",
+        "type": "Creature",
+        "attr1": "strength",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      },
+      "suninshadow": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "6",
+        "keyword": "Summon",
+        "name": "Sun-in-Shadow",
+        "race": "Argonian",
+        "rarity": "Legendary",
+        "text": "Summon: Permanently Shackle another friendly creature to draw an action of your choise from your deck.",
+        "type": "Creature",
+        "attr1": "intelligence",
+        "attr2": "agility",
+        "attr3": "endurance"
+      },
+      "telvannicatspaw": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "2",
+        "keyword": "Last Gasp",
+        "name": "Telvanni Catspaw",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Last Gasp: Draw a card. If Telvanni Catspaw was sacrificed, draw two cards instead.",
+        "type": "Creature",
+        "attr1": "intelligence",
+        "attr2": "agility",
+        "attr3": "endurance"
+      },
+      "templepatriarch": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "7",
+        "health": "5",
+        "keyword": "Summon",
+        "name": "Temple Patriarch",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Summon: Trigger the Exalt of each friendly creature.",
+        "type": "Creature",
+        "attr1": "intelligence",
+        "attr2": "willpower",
+        "attr3": "endurance"
+      }
+    },
+    "willpower": {
+      "ambitioushireling": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "2",
+        "health": "1",
+        "keyword": "Summon",
+        "name": "Ambitious Hireling",
+        "race": "Wood Elf",
+        "rarity": "Common",
+        "text": "Summon: Give another friendly creature power and health equal to Ambitious Hireling's power.",
+        "type": "Creature"
+      },
+      "balmoracaptain": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Rally",
+        "name": "Balmora Captain",
+        "race": "Dark Elf",
+        "rarity": "Legendary",
+        "text": "Rally 2. Your other Rallies give an extra +1/+1.",
+        "type": "Creature"
+      },
+      "chodalastreachery": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "9",
+        "health": "",
+        "keyword": "Plot",
+        "name": "Chodala's Treachery",
+        "race": "",
+        "rarity": "Legendary",
+        "text": "Destroy a creature. Plot: Steal the creature instead.",
+        "type": "Action"
+      },
+      "crassiusfavor": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Plot",
+        "name": "Crassiu's Favor",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Summon two 1/1 Imperial Grunts to a lane. Plot: Gain 1 health for each friendly creature in that lane.",
+        "type": "Action",
+        "tokens": "imperialgrunts"
+      },
+      "drenbodyguard": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Guard",
+        "name": "Dren Bodyguard",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Guard",
+        "type": "Creature"
+      },
+      "ebonheartoracle": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Drain",
+        "name": "Ebonheart Oracle",
+        "race": "Imperial",
+        "rarity": "Legendary",
+        "text": "Drain. Double the amount of health you gain.",
+        "type": "Creature"
+      },
+      "feastinghunger": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "3",
+        "health": "3",
+        "keyword": "Guard, Summon",
+        "name": "Feasting Hunger",
+        "race": "Daedra",
+        "rarity": "Rare",
+        "text": "Guard. Summon: You gain 1 health for each enemy creature.",
+        "type": "Creature"
+      },
+      "gaveloftheordinator": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Summon",
+        "name": "Gavel of the Ordinator",
+        "race": "",
+        "rarity": "Common",
+        "text": "+2/+0. Summon: The wielder is immune to damage this turn.",
+        "type": "Item"
+      },
+      "grandinquisitor": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Exalt, Summon",
+        "name": "Grand Inquisitor",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Exalt 4: +3/+3. Summon: Destroy a creature with less power than Grand Inquisitor.",
+        "type": "Creature"
+      },
+      "hlaaluoathman": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "2",
+        "keyword": "Summon",
+        "name": "Hlaalu Oathman",
+        "race": "Dark Elf",
+        "rarity": "Common",
+        "text": "Summon: If you have a... (Agility) card in play, gain 3 magicka this turn. (Strength) card in play, draw a card.",
+        "type": "Creature"
+      },
+      "illusorydefenses": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "1",
+        "health": "",
+        "keyword": "Prophecy",
+        "name": "Illusory Defenses",
+        "race": "",
+        "rarity": "Common",
+        "text": "Prophecy. Summon a 0/5 Illusory Wall with Guard in each lane. Sacrifice them at the start of your turn.",
+        "type": "Action"
+      },
+      "khuullawkeeper": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "3",
+        "health": "6",
+        "keyword": "Guard, Rally",
+        "name": "Khuul Lawkeeper",
+        "race": "Dark Elf",
+        "rarity": "Rare",
+        "text": "Guard. Rally",
+        "type": "Creature"
+      },
+      "kwamaqueen": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Plot",
+        "name": "Kwama Queen",
+        "race": "Kwama",
+        "rarity": "Epic",
+        "text": "Plot: Summon a 1/1 Kwama Forager in each lane. Other friendly Kwama have +1/+0.",
+        "type": "Creature",
+        "tokens": "kwamaforager"
+      },
+      "lightofthethree": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "5",
+        "health": "4",
+        "keyword": "Exalt",
+        "name": "Light of the Three",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Exalt 2: Give other friendly creatures in this lane +2/+2.",
+        "type": "Creature"
+      },
+      "moonmothcastellan": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "3",
+        "keyword": "Gaurd, Plot",
+        "name": "Moonmoth Castellan",
+        "race": "Imperial",
+        "rarity": "Common",
+        "text": "Guard. Plot: Put a random Guard into your hand.",
+        "type": "Creature"
+      },
+      "moragtongnightblade": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Summon, Slay",
+        "name": "Morag Tong Nightblade",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "unique": true,
+        "text": "Summon: Summon a 0/1 Target with Guard for your opponent. Slay: Draw a card. If it's an action, reduce its cost to 0.",
+        "type": "Creature",
+        "tokens": "target"
+      },
+      "orvasbargain": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "0",
+        "health": "",
+        "keyword": "",
+        "name": "Orvas' Bargain",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Give an enemy creature -1/-0 and a friendly creature +1/+0 this turn.",
+        "type": "Action"
+      },
+      "prisonship": {
+        "arenaTier": "Unknown",
+        "attack": "0",
+        "cost": "3",
+        "health": "4",
+        "keyword": "Summon",
+        "name": "Prison Dhip",
+        "race": "Defensor",
+        "rarity": "Rare",
+        "text": "Summon: Shackle an enemy creature while you have Prison Ship.",
+        "type": "Creature"
+      },
+      "shrineguardian": {
+        "arenaTier": "Unknown",
+        "attack": "8",
+        "cost": "8",
+        "health": "8",
+        "keyword": "Guard",
+        "name": "Shrine Guardian",
+        "race": "Daedra",
+        "rarity": "Eipc",
+        "text": "Guard. When your opponent summons a creature, reduce its power to 0 until the start of your turn.",
+        "type": "Creature"
+      },
+      "standwatch": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Prophecy",
+        "name": "Stand Watch",
+        "race": "",
+        "rarity": "Common",
+        "text": "Prophecy. Give a creature Guard. Draw a card.",
+        "type": "Action"
+      },
+      "umbra": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "6",
+        "health": "",
+        "keyword": "",
+        "name": "Umbra",
+        "race": "",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "+3/+5. At the start og your turn, the wielder Battles an enemy creature of Umbra's choosing.",
+        "type": "Item"
+      },
+      "vivec": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Exalt",
+        "name": "Vivec",
+        "race": "God",
+        "rarity": "Legendary",
+        "unique": true,
+        "text": "Exalt 3: +5/+5. While you have an Exalted creature in play you can't lose the game.",
+        "type": "Creature"
+      },
+      "viveccitypilgrim": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "3",
+        "health": "2",
+        "keyword": "Drain, Exalt",
+        "name": "Vivec City Pilgrim",
+        "race": "Nord",
+        "rarity": "Common",
+        "text": "Drain. Exalt 3: +2/+2.",
+        "type": "Creature"
+      },
+      "warclawmercenary": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "2",
+        "health": "2",
+        "keyword": "Rally",
+        "name": "Warclaw Mercenary",
+        "race": "Khajiit",
+        "rarity": "Common",
+        "text": "Rally",
+        "type": "Creature"
+      },
+      "writofexecution": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "4",
+        "health": "",
+        "keyword": "",
+        "name": "Writ of Execution",
+        "race": "",
+        "rarity": "Common",
+        "text": "Choose an enemy creature. At the start of your turn, destroy it and put a Completed Contract into your hand.",
+        "type": "Action",
+        "tokens": "completedcontract"
       }
     }
   }

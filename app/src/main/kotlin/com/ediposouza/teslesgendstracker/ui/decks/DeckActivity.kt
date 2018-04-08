@@ -37,7 +37,6 @@ import com.ediposouza.teslesgendstracker.ui.util.CircleTransform
 import com.ediposouza.teslesgendstracker.ui.util.KeyboardUtil
 import com.ediposouza.teslesgendstracker.util.*
 import com.google.firebase.auth.FirebaseAuth
-import io.fabric.sdk.android.services.common.CommonUtils
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.activity_deck.*
 import kotlinx.android.synthetic.main.itemlist_deck_comment.view.*
@@ -121,7 +120,7 @@ class DeckActivity : BaseActivity() {
                                 addView(View.inflate(this@DeckActivity, R.layout.fragment_deck_info, this))
                             }
                             deck_comment_new.postDelayed({
-                                CommonUtils.hideKeyboard(this@DeckActivity, deck_comment_new)
+                                hideKeyboard()
                             }, DateUtils.SECOND_IN_MILLIS / 2)
                         }
                         onTransitionEnds()

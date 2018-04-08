@@ -2,11 +2,10 @@
 
 buildscript {
     ext {
-        appVersionName = "1.8.1"
-        appVersionCode = 51
-        prepareToRelease = false
+        appVersionName = "1.9.0"
+        appVersionCode = 53
 
-        kotlin_version = "1.2.0"
+        kotlin_version = "1.2.31"
     }
 
     repositories {
@@ -20,10 +19,11 @@ buildscript {
         maven {
             url "http://dl.bintray.com/kotlin/kotlin-eap-1.1"
         }
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'com.google.gms:google-services:3.1.0'
         classpath ('com.google.firebase:firebase-plugins:1.1.5') {
             exclude group: 'com.google.guava', module: 'guava-jdk5'

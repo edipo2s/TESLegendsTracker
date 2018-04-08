@@ -1,6 +1,5 @@
 package com.ediposouza.teslesgendstracker.ui.decks
 
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +34,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
     override val cardsCollectionAdapter by lazy {
         val missingCards = arguments?.getParcelableArrayList<CardMissing>(EXTRA_MISSING_CARDS) ?: listOf<CardMissing>()
-        CardsDeckListAdapter(ADS_EACH_ITEMS, gridLayoutManager, missingCards, { _ -> }, {
-            view: View, card: Card ->
+        CardsDeckListAdapter(missingCards, { _ -> }, { view: View, card: Card ->
             showCardExpanded(card, view)
             true
         })
@@ -57,15 +55,15 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
     fun getListView(): View = cards_recycler_view
 
-    class CardsDeckListAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?, val missingCards: List<CardMissing>,
-                               itemClick: (CardSlot) -> Unit, itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(adsEachItems,
-            layoutManager, R.layout.itemlist_new_deck_card_ads, itemClick, itemLongClick) {
+    class CardsDeckListAdapter(val missingCards: List<CardMissing>,
+                               itemClick: (CardSlot) -> Unit,
+                               itemLongClick: (View, Card) -> Boolean) : CardsCollectionAdapter(itemClick, itemLongClick) {
 
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsDeckListViewHolder(parent.inflate(R.layout.itemlist_card_deck_list), itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            return CardsDeckListViewHolder(parent?.inflate(R.layout.itemlist_card_deck_list), itemLongClick)
         }
 
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             val cardSlot = items[position]
             val cardMissing = missingCards.find { it.shortName == cardSlot.card.shortName }
             (holder as CardsDeckListViewHolder).bind(cardSlot, cardMissing?.qtd ?: 0)
@@ -73,7 +71,7 @@ class DeckListCardsFragment : CardsCollectionFragment() {
 
     }
 
-    class CardsDeckListViewHolder(view: View, val itemLongClick: (View, Card) -> Boolean) :
+    class CardsDeckListViewHolder(view: View?, val itemLongClick: (View, Card) -> Boolean) :
             RecyclerView.ViewHolder(view) {
 
         fun bind(cardSlot: CardSlot, missingQtd: Int) {

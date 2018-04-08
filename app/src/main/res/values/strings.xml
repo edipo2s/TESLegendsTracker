@@ -16,13 +16,6 @@
     <string name="app_deeplink_path_update" translatable="false">update</string>
     <string name="app_deeplink_path_wabbatrack" translatable="false">wabbatrack</string>
 
-    <string name="app_ads_card_list_size" translatable="false">280x80</string>
-    <string name="app_ads_deck_list_size" translatable="false">280x80</string>
-    <string name="app_ads_new_deck_card_list_size" translatable="false">220x50</string>
-    <string name="app_ads_match_history_list_size" translatable="false">280x80</string>
-    <string name="app_ads_news_list_size" translatable="false">280x80</string>
-    <string name="app_ads_season_list_size" translatable="false">280x80</string>
-
     <string name="app_exit_confirm">Press again to exit</string>
     <string name="app_bd_under_updating">TESL Tracker database is under update. You will be notified when it is completed.</string>
     <string name="app_version_unsupported">This TESL Tracker version became unsupported. Please update to continue using the app.</string>
@@ -185,6 +178,7 @@
     <string name="cards_search_alternative" translatable="false">alternative</string>
     <string name="cards_search_animal" translatable="false">animal</string>
     <string name="cards_search_lore" translatable="false">lore</string>
+    <string name="cards_search_monthly" translatable="false">monthly</string>
     <string name="cards_search_reward" translatable="false">reward</string>
     <string name="cards_search_undead" translatable="false">undead</string>
     <string name="cards_search_unique" translatable="false">unique</string>
@@ -231,7 +225,7 @@
 
     <string name="zero_of_zero" translatable="false">0/0</string>
     <string name="cards_search_hint">Name, Race, Type, Keyword or Text</string>
-    <string name="cards_search_keywords" translatable="false">\'Alternative\', \'Animal\', \'Lore\', \'Reward\', \'Undead\', \'Unique\'</string>
+    <string name="cards_search_keywords" translatable="false">\'Alternative\', \'Animal\', \'Lore\', \'Monthly\', \'Reward\', \'Undead\', \'Unique\'</string>
     <string name="cards_search_keywords_hint" formatted="false">Search for card %s \n or try %s</string>
     <string name="collection_statistics_rarity" translatable="false">%1$02d/%2$02d</string>
     <string name="collection_statistics_total" translatable="false">%1$03d/%2$03d</string>

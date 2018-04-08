@@ -101,8 +101,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         val gridLayoutManager: GridLayoutManager = object : GridLayoutManager(context, CARDS_PER_ROW) {
             override fun supportsPredictiveItemAnimations(): Boolean = false
         }
-        val cardsAdapter = CardsAllFragment.CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager,
-                R.layout.itemlist_card_ads, { _, card -> onSelect(card) }) {
+        val cardsAdapter = CardsAllFragment.CardsAllAdapter(itemClick = { _, card -> onSelect(card) }) {
             view: View, card: Card ->
             showCardExpanded(activity, card, view)
             true

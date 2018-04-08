@@ -3,7 +3,6 @@ package com.ediposouza.teslesgendstracker.ui.cards.tabs
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.util.DiffUtil
@@ -56,6 +55,7 @@ open class CardsAllFragment : BaseFragment() {
     val SEARCH_ALTERNATIVE by lazy { getString(R.string.cards_search_alternative) }
     val SEARCH_ANIMAL by lazy { getString(R.string.cards_search_animal) }
     val SEARCH_LORE by lazy { getString(R.string.cards_search_lore) }
+    val SEARCH_MONTHLY by lazy { getString(R.string.cards_search_monthly) }
     val SEARCH_REWARD by lazy { getString(R.string.cards_search_reward) }
     val SEARCH_UNDEAD by lazy { getString(R.string.cards_search_undead) }
     val SEARCH_UNIQUE by lazy { getString(R.string.cards_search_unique) }
@@ -65,8 +65,7 @@ open class CardsAllFragment : BaseFragment() {
     open protected val isCardsCollection: Boolean = false
 
     open val cardsAdapter by lazy {
-        CardsAllAdapter(ADS_EACH_ITEMS, gridLayoutManager, R.layout.itemlist_card_ads,
-                { view, card -> showCardExpanded(card, view) }) {
+        CardsAllAdapter(itemClick = { view, card -> showCardExpanded(card, view) }) {
             view: View, card: Card ->
             showCardExpanded(card, view)
             true
@@ -97,9 +96,6 @@ open class CardsAllFragment : BaseFragment() {
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        if (cards_recycler_view?.layoutManager != null) {
-            cardsAdapter.onRestoreState(cards_recycler_view.layoutManager as GridLayoutManager)
-        }
         currentAttr = CardAttribute.values()[savedInstanceState?.getInt(KEY_CURRENT_ATTR) ?: 0]
     }
 
@@ -297,6 +293,7 @@ open class CardsAllFragment : BaseFragment() {
                                     (search == SEARCH_ALTERNATIVE && it.isAlternativeArt()) ||
                                     (search == SEARCH_ANIMAL && ConfigManager.animalRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
                                     (search == SEARCH_UNDEAD && ConfigManager.undeadRaces().split(", ").map { CardRace.of(it) }.contains(it.race)) ||
+                                    (search == SEARCH_MONTHLY && it.season.isNotEmpty()) ||
                                     (search == SEARCH_REWARD && it.season.isNotEmpty()) ||
                                     (search == SEARCH_UNIQUE && it.unique)
                             hasValidSearchKeyword || (it.name.toLowerCase().contains(search) ||
@@ -304,7 +301,7 @@ open class CardsAllFragment : BaseFragment() {
                                     it.set.title.toLowerCase().contains(search) ||
                                     it.rarity.name.toLowerCase().contains(search) ||
                                     it.type.name.toLowerCase().contains(search) ||
-                                    it.keywords.filter { it.name.toLowerCase().contains(search) }.isNotEmpty() ||
+                                    it.keywords.any { it.name.toLowerCase().contains(search) } ||
                                     it.text.contains(search))
                         }
                     }
@@ -347,21 +344,20 @@ open class CardsAllFragment : BaseFragment() {
         }
     }
 
-    open class CardsAllAdapter(adsEachItems: Int, layoutManager: GridLayoutManager?,
-                               @LayoutRes adsLayout: Int, val itemClick: (View, Card) -> Unit,
-                               val itemLongClick: (View, Card) -> Boolean) : BaseAdsAdapter(adsEachItems, adsLayout, layoutManager) {
+    open class CardsAllAdapter(val itemClick: (View, Card) -> Unit,
+                               val itemLongClick: (View, Card) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         var items: List<Card> = listOf()
 
-        override fun onCreateDefaultViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return CardsAllViewHolder(parent.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            return CardsAllViewHolder(parent?.inflate(R.layout.itemlist_card), itemClick, itemLongClick)
         }
 
-        override fun onBindDefaultViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun getItemCount(): Int = items.size
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             (holder as CardsAllViewHolder).bind(items[position])
         }
-
-        override fun getDefaultItemCount(): Int = items.size
 
         fun showCards(cards: List<Card>) {
             val oldItems = items

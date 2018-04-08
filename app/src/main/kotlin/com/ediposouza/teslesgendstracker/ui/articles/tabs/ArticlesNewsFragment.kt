@@ -11,7 +11,7 @@ import com.ediposouza.teslesgendstracker.data.Article
 import com.ediposouza.teslesgendstracker.data.ArticleCategory
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
+import com.ediposouza.teslesgendstracker.ui.base.BaseFirebaseRVAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.util.firebase.OnLinearLayoutItemScrolled
 import com.ediposouza.teslesgendstracker.util.inflate
@@ -46,9 +46,8 @@ class ArticlesNewsFragment : BaseFragment() {
     }
 
     private val newsAdapter by lazy {
-        object : BaseAdsFirebaseAdapter<FirebaseParsers.NewsParser, ArticleViewHolder>(
-                FirebaseParsers.NewsParser::class.java, newsRef, NEWS_PAGE_SIZE,
-                ADS_EACH_ITEMS, R.layout.itemlist_news_ads, filter = dataFilter) {
+        object : BaseFirebaseRVAdapter<FirebaseParsers.NewsParser, ArticleViewHolder>(
+                FirebaseParsers.NewsParser::class.java, newsRef, NEWS_PAGE_SIZE, filter = dataFilter) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): ArticleViewHolder {
                 return ArticleViewHolder(parent.inflate(R.layout.itemlist_article_news))

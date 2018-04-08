@@ -125,19 +125,19 @@ class WabbaTrackFragment : BaseFragment() {
         var titles: Array<String> = ctx?.resources?.getStringArray(R.array.wabbatrack_tabs) ?: arrayOf()
 
         val aboutFragment by lazy {
-            WabbaTrackFeatureFragment(R.drawable.wabbatrack_about, R.string.wabbatrack_about_desc)
+            WabbaTrackFeatureFragment.instance(R.drawable.wabbatrack_about, R.string.wabbatrack_about_desc)
         }
         val arenaTierFragment by lazy {
-            WabbaTrackFeatureFragment(R.drawable.wabbatrack_arenatier, R.string.wabbatrack_arenatier_desc)
+            WabbaTrackFeatureFragment.instance(R.drawable.wabbatrack_arenatier, R.string.wabbatrack_arenatier_desc)
         }
         val autoBuildFragment by lazy {
-            WabbaTrackFeatureFragment(R.drawable.wabbatrack_autobuild, R.string.wabbatrack_autobuild_desc)
+            WabbaTrackFeatureFragment.instance(R.drawable.wabbatrack_autobuild, R.string.wabbatrack_autobuild_desc)
         }
         val deckTrackerFragment by lazy {
-            WabbaTrackFeatureFragment(R.drawable.wabbatrack_decktracker, R.string.wabbatrack_decktracker_desc)
+            WabbaTrackFeatureFragment.instance(R.drawable.wabbatrack_decktracker, R.string.wabbatrack_decktracker_desc)
         }
         val matchesFragment by lazy {
-            WabbaTrackFeatureFragment(R.drawable.wabbatrack_matches, R.string.wabbatrack_matches_desc)
+            WabbaTrackFeatureFragment.instance(R.drawable.wabbatrack_matches, R.string.wabbatrack_matches_desc)
         }
 
         override fun getItem(position: Int): Fragment {

@@ -14,7 +14,7 @@ import com.ediposouza.teslesgendstracker.data.*
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
 import com.ediposouza.teslesgendstracker.interactor.PublicInteractor
-import com.ediposouza.teslesgendstracker.ui.base.BaseAdsFirebaseAdapter
+import com.ediposouza.teslesgendstracker.ui.base.BaseFirebaseRVAdapter
 import com.ediposouza.teslesgendstracker.ui.base.BaseFragment
 import com.ediposouza.teslesgendstracker.ui.base.CmdUpdateTitle
 import com.ediposouza.teslesgendstracker.ui.cards.CardActivity
@@ -55,9 +55,8 @@ class SeasonsFragment : BaseFragment() {
     }
 
     private val seasonsAdapter by lazy {
-        object : BaseAdsFirebaseAdapter<FirebaseParsers.SeasonParser, SeasonViewHolder>(
-                FirebaseParsers.SeasonParser::class.java, seasonRef, SEASON_PAGE_SIZE,
-                ADS_EACH_ITEMS, R.layout.itemlist_season_ads) {
+        object : BaseFirebaseRVAdapter<FirebaseParsers.SeasonParser, SeasonViewHolder>(
+                FirebaseParsers.SeasonParser::class.java, seasonRef, SEASON_PAGE_SIZE) {
 
             override fun onCreateDefaultViewHolder(parent: ViewGroup): SeasonViewHolder {
                 return SeasonViewHolder(parent.inflate(R.layout.itemlist_season), onCardClick, onPatchClick)
