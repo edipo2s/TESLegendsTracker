@@ -2,11 +2,10 @@
 
 buildscript {
     ext {
-        appVersionName = "1.8.2"
-        appVersionCode = 52
-        prepareToRelease = false
+        appVersionName = "1.9.0"
+        appVersionCode = 53
 
-        kotlin_version = "1.2.21"
+        kotlin_version = "1.2.31"
     }
 
     repositories {
@@ -24,7 +23,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-beta4'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'com.google.gms:google-services:3.1.0'
         classpath ('com.google.firebase:firebase-plugins:1.1.5') {
             exclude group: 'com.google.guava', module: 'guava-jdk5'
