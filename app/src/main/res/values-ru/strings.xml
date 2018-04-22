@@ -186,7 +186,7 @@
     <string name="new_deck_save_as_private">Колода сохранена как личная</string>
     <string name="new_deck_updated_as_public">Колода обновлена как публичная</string>
     <string name="new_deck_updated_as_private">Колода обновлена как личная</string>
-    <string name="new_deck_save_error_incomplete">Пожалуйста, завершите колоду прежде, чем сохранить</string>
+    <string name="new_deck_save_error_incomplete" formatted="true">Пожалуйста, завершите колоду прежде, чем сохранить. (%d карт)</string>
 
     <string name="match_win">Побед</string>
     <string name="match_loss">Поражений</string>

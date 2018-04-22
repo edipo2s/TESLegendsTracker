@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:src="@drawable/attr_dual" />
+            android:src="@drawable/attr_triple" />
 
         <ImageView
             android:id="@+id/attr_filter_neutral"

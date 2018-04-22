@@ -38,17 +38,18 @@ class NewDeckActivity : BaseFilterActivity() {
 
     companion object {
 
-        val DECK_EXTRA = "deckExtra"
-        val DECK_PRIVATE_EXTRA = "privateExtra"
+        const val DECK_EXTRA = "deckExtra"
+        const val DECK_PRIVATE_EXTRA = "privateExtra"
+
+        private const val ANIM_DURATION = 250L
+        private const val DECK_MIN_CARDS_QTD = 50
+        private const val DECK_TRIAL_MIN_CARDS_QTD = 75
+        private const val EXIT_CONFIRM_MIN_CARDS = 3
+        private const val KEY_DECK_CARDS = "deckCardsKey"
 
     }
 
-    private val ANIM_DURATION = 250L
-    private val DECK_MIN_CARDS_QTD = 50
-    private val EXIT_CONFIRM_MIN_CARDS = 3
-    private val KEY_DECK_CARDS = "deckCardsKey"
-
-    private val deckToEdit: Deck? by lazy { intent.getParcelableExtra<Deck>(DECK_EXTRA) ?: Deck.DUMMY }
+    private val deckToEdit: Deck? by lazy { intent.getParcelableExtra<Deck>(DECK_EXTRA) }
 
     private val attrFilterClick: (CardAttribute) -> Unit = {
         eventBus.post(CmdShowCardsByAttr(it))
@@ -75,8 +76,10 @@ class NewDeckActivity : BaseFilterActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.new_deck_fragment_cards, NewDeckCardsListFragment().apply {
-                        arguments = Bundle().apply {
-                            putParcelable(NewDeckCardsListFragment.EXTRA_DECK, deckToEdit)
+                        if (deckToEdit != null) {
+                            arguments = Bundle().apply {
+                                putParcelable(NewDeckCardsListFragment.EXTRA_DECK, deckToEdit)
+                            }
                         }
                     })
                     .commit()
@@ -104,7 +107,8 @@ class NewDeckActivity : BaseFilterActivity() {
             handler.postDelayed({
                 deckCardSlots.forEach {
                     eventBus.post(CmdUpdateCardSlot(it))
-                    new_deck_attr_filter.lockAttrs(it.card.dualAttr1, it.card.dualAttr2, false)
+                    new_deck_attr_filter.lockAttrs(it.card.dualAttr1, it.card.dualAttr2,
+                            it.card.dualAttr3, false)
                 }
             }, DateUtils.SECOND_IN_MILLIS / 2)
             updateDualFilter()
@@ -136,10 +140,13 @@ class NewDeckActivity : BaseFilterActivity() {
                     showErrorUserNotLogged()
                     return false
                 }
-                if (new_deck_cardlist.getCards().sumBy { it.qtd } >= DECK_MIN_CARDS_QTD) {
+                val minCardsRequired = DECK_TRIAL_MIN_CARDS_QTD.takeIf { new_deck_attr_filter.isTrialLocked() }
+                        ?: DECK_MIN_CARDS_QTD
+                if (new_deck_cardlist.getCards().sumBy { it.qtd } >= minCardsRequired) {
                     showDeckInfoDialog()
                 } else {
-                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_deck_save_error_incomplete)
+                    val msg = getString(R.string.new_deck_save_error_incomplete, minCardsRequired)
+                    eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, msg)
                             .withAction(android.R.string.ok, {}))
                 }
                 return true
@@ -151,8 +158,8 @@ class NewDeckActivity : BaseFilterActivity() {
     private fun configDeckFilters() {
         with(new_deck_attr_filter) {
             filterClick = attrFilterClick
-            onAttrLock = { attr1: CardAttribute, attr2: CardAttribute ->
-                val deckCls = DeckClass.getClasses(listOf(attr1, attr2)).first()
+            onAttrLock = { attr1: CardAttribute, attr2: CardAttribute, attr3: CardAttribute ->
+                val deckCls = DeckClass.getClasses(listOf(attr1, attr2, attr3)).first()
                 new_deck_class_cover.setImageResource(deckCls.imageRes)
                 if (deckToEdit == null) {
                     new_deck_toolbar_title.text = getString(R.string.new_deck_class_title, deckCls.name.toLowerCase().capitalize())
@@ -168,7 +175,7 @@ class NewDeckActivity : BaseFilterActivity() {
                 new_deck_class_cover.animate().alpha(0f).setDuration(ANIM_DURATION).start()
             }
             deckToEdit?.let {
-                lockAttrs(it.cls.attr1, it.cls.attr2)
+                lockAttrs(it.cls.attr1, it.cls.attr2, it.cls.attr3)
                 attrFilterClick.invoke(it.cls.attr1.takeIf { deckToEdit != Deck.DUMMY } ?: CardAttribute.STRENGTH)
             }
         }
@@ -187,16 +194,18 @@ class NewDeckActivity : BaseFilterActivity() {
             val deckPatchesDesc = deckPatches.map { it.desc }.reversed()
             view.new_deck_dialog_patch_spinner.adapter = ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item, deckPatchesDesc)
-            if (deckToEdit?.patch?.isNotEmpty() == true) {
-                view.new_deck_dialog_patch_spinner.setSelection(deckPatchesDesc.indexOf(deckToEdit!!.patch))
+            deckToEdit?.patch?.let { patch ->
+                if (patch.isNotEmpty()) {
+                    view.new_deck_dialog_patch_spinner.setSelection(deckPatchesDesc.indexOf(patch))
+                }
             }
         }
-        if (deckToEdit?.uuid?.isNotEmpty() == true) {
+        deckToEdit?.let { deckToEdit ->
             view.new_deck_dialog_title.text = getString(R.string.new_deck_update_dialog_title)
-            view.new_deck_dialog_name.setText(deckToEdit!!.name)
-            val currentDeckTypeName = deckToEdit!!.type.name.toLowerCase().capitalize()
+            view.new_deck_dialog_name.setText(deckToEdit.name)
+            val currentDeckTypeName = deckToEdit.type.name.toLowerCase().capitalize()
             view.new_deck_dialog_type_spinner.setSelection(deckTypes.indexOf(currentDeckTypeName))
-            view.new_deck_dialog_public.isChecked = !deckToEdit!!.private
+            view.new_deck_dialog_public.isChecked = !deckToEdit.private
         }
         alert {
             customView = view
@@ -210,7 +219,8 @@ class NewDeckActivity : BaseFilterActivity() {
     private fun saveUpdateDeck(view: View, deckPatches: List<Patch>) {
         val deckName = view.new_deck_dialog_name.text.toString()
         val deckCls = DeckClass.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: CardAttribute.NEUTRAL,
-                new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL)).first()
+                new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL,
+                new_deck_attr_filter.lockAttr3 ?: CardAttribute.NEUTRAL)).first()
         val deckTypeText = view.new_deck_dialog_type_spinner.selectedItem as String
         val deckTypeSelected = DeckType.valueOf(deckTypeText.toUpperCase())
         val deckPatchDesc = view.new_deck_dialog_patch_spinner.selectedItem as String
@@ -222,7 +232,7 @@ class NewDeckActivity : BaseFilterActivity() {
             eventBus.post(CmdShowSnackbarMsg(CmdShowSnackbarMsg.TYPE_ERROR, R.string.new_match_dialog_start_error_name))
             return
         }
-        if (deckToEdit?.uuid?.isNotEmpty() ?: false) {
+        if (deckToEdit != null) {
             val deck = deckToEdit!!.update(deckName, deckPrivate, deckTypeSelected, deckCls,
                     deckSoulCost, deckPatchSelected.uuidDate, deckCards)
             PrivateInteractor.updateDeckCards(deck, deckToEdit!!.cards, deckSoulCost) {
@@ -248,8 +258,11 @@ class NewDeckActivity : BaseFilterActivity() {
 
     private fun updateDualFilter() {
         if (new_deck_attr_filter.lastAttrSelected == CardAttribute.DUAL) {
-            val cls = DeckClass.getClasses(listOf(new_deck_attr_filter.lockAttr1 ?: CardAttribute.NEUTRAL,
-                    new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL)).filter { it != DeckClass.NEUTRAL }
+            val cls = DeckClass.getClasses(
+                    listOf(new_deck_attr_filter.lockAttr1 ?: CardAttribute.NEUTRAL,
+                            new_deck_attr_filter.lockAttr2 ?: CardAttribute.NEUTRAL,
+                            new_deck_attr_filter.lockAttr3 ?: CardAttribute.NEUTRAL))
+                    .filter { it != DeckClass.NEUTRAL }
             eventBus.post(CmdFilterClass(cls.firstOrNull()))
         }
     }
@@ -258,7 +271,8 @@ class NewDeckActivity : BaseFilterActivity() {
     @Suppress("unused")
     fun onCmdCardAdd(cmdCardAdd: CmdAddCard) {
         new_deck_cardlist.addCard(cmdCardAdd.card)
-        new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2)
+        new_deck_attr_filter.lockAttrs(cmdCardAdd.card.dualAttr1, cmdCardAdd.card.dualAttr2,
+                cmdCardAdd.card.dualAttr3)
         updateDualFilter()
     }
 

@@ -7,24 +7,51 @@ import com.ediposouza.teslesgendstracker.R
 import org.threeten.bp.LocalDateTime
 
 enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAttribute.NEUTRAL,
+                     val attr3: CardAttribute = CardAttribute.NEUTRAL,
                      @DrawableRes val imageRes: Int, @DrawableRes val arenaImageRes: Int? = null) {
 
-    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY, R.drawable.deck_class_archer, R.drawable.arena_archer),
-    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, R.drawable.deck_class_assassin, R.drawable.arena_assassin),
-    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, R.drawable.deck_class_battlemage, R.drawable.arena_battlemage),
-    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, R.drawable.deck_class_crusader, R.drawable.arena_crusader),
-    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, R.drawable.deck_class_mage, R.drawable.arena_mage),
-    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY, R.drawable.deck_class_monk, R.drawable.arena_monk),
-    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE, R.drawable.deck_class_scout, R.drawable.arena_scout),
-    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE, R.drawable.deck_class_sorcerer, R.drawable.arena_sorcerer),
-    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE, R.drawable.deck_class_spellsword, R.drawable.arena_spellsword),
-    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE, R.drawable.deck_class_warrior, R.drawable.arena_warrior),
+    ARCHER(CardAttribute.STRENGTH, CardAttribute.AGILITY,
+            imageRes = R.drawable.deck_class_archer, arenaImageRes = R.drawable.arena_archer),
+    ASSASSIN(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY,
+            imageRes = R.drawable.deck_class_assassin, arenaImageRes = R.drawable.arena_assassin),
+    BATTLEMAGE(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE,
+            imageRes = R.drawable.deck_class_battlemage, arenaImageRes = R.drawable.arena_battlemage),
+    CRUSADER(CardAttribute.STRENGTH, CardAttribute.WILLPOWER,
+            imageRes = R.drawable.deck_class_crusader, arenaImageRes = R.drawable.arena_crusader),
+    MAGE(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER,
+            imageRes = R.drawable.deck_class_mage, arenaImageRes = R.drawable.arena_mage),
+    MONK(CardAttribute.WILLPOWER, CardAttribute.AGILITY,
+            imageRes = R.drawable.deck_class_monk, arenaImageRes = R.drawable.arena_monk),
+    SCOUT(CardAttribute.AGILITY, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_class_scout, arenaImageRes = R.drawable.arena_scout),
+    SORCERER(CardAttribute.INTELLIGENCE, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_class_sorcerer, arenaImageRes = R.drawable.arena_sorcerer),
+    SPELLSWORD(CardAttribute.WILLPOWER, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_class_spellsword, arenaImageRes = R.drawable.arena_spellsword),
+    WARRIOR(CardAttribute.STRENGTH, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_class_warrior, arenaImageRes = R.drawable.arena_warrior),
     STRENGTH(CardAttribute.STRENGTH, imageRes = R.drawable.deck_attr_strength),
     INTELLIGENCE(CardAttribute.INTELLIGENCE, imageRes = R.drawable.deck_attr_intelligence),
     AGILITY(CardAttribute.AGILITY, imageRes = R.drawable.deck_attr_agility),
     WILLPOWER(CardAttribute.WILLPOWER, imageRes = R.drawable.deck_attr_willpower),
     ENDURANCE(CardAttribute.ENDURANCE, imageRes = R.drawable.deck_attr_endurance),
-    NEUTRAL(CardAttribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral);
+    NEUTRAL(CardAttribute.NEUTRAL, imageRes = R.drawable.deck_attr_neutral),
+    DAGOTH(CardAttribute.STRENGTH, CardAttribute.INTELLIGENCE, CardAttribute.AGILITY,
+            imageRes = R.drawable.deck_house_dagoth),
+    HLAALU(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, CardAttribute.AGILITY,
+            imageRes = R.drawable.deck_house_hlaalu),
+    REDORAN(CardAttribute.STRENGTH, CardAttribute.WILLPOWER, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_house_redoran),
+    TELVANNI(CardAttribute.INTELLIGENCE, CardAttribute.AGILITY, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_house_telvanni),
+    TRIBUNAL(CardAttribute.INTELLIGENCE, CardAttribute.WILLPOWER, CardAttribute.ENDURANCE,
+            imageRes = R.drawable.deck_house_tribunal);
+
+    fun isSingleColor() = attr2 == CardAttribute.NEUTRAL && attr3 == CardAttribute.NEUTRAL
+
+    fun isDualColor() = attr2 != CardAttribute.NEUTRAL && attr3 == CardAttribute.NEUTRAL
+
+    fun isTripleColor() = attr2 != CardAttribute.NEUTRAL && attr3 != CardAttribute.NEUTRAL
 
     companion object {
 
@@ -33,7 +60,14 @@ enum class DeckClass(val attr1: CardAttribute, val attr2: CardAttribute = CardAt
         }
 
         fun getClasses(attr: List<CardAttribute>): List<DeckClass> {
-            return values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
+            return if (attr.size == 3) {
+                values().filter {
+                    attr.contains(it.attr1) && attr.contains(it.attr2)
+                            && attr.contains(it.attr3)
+                }
+            } else {
+                values().filter { attr.contains(it.attr1) && attr.contains(it.attr2) }
+            }
         }
 
     }

@@ -28,6 +28,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
 import com.ediposouza.teslesgendstracker.TIME_PATTERN
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.DeckComment
 import com.ediposouza.teslesgendstracker.interactor.PrivateInteractor
@@ -51,10 +52,10 @@ class DeckActivity : BaseActivity() {
 
     companion object {
 
-        private val EXTRA_DECK = "deckExtra"
-        private val EXTRA_FAVORITE = "favoriteExtra"
-        private val EXTRA_LIKE = "likeExtra"
-        private val EXTRA_OWNED = "ownedExtra"
+        private const val EXTRA_DECK = "deckExtra"
+        private const val EXTRA_FAVORITE = "favoriteExtra"
+        private const val EXTRA_LIKE = "likeExtra"
+        private const val EXTRA_OWNED = "ownedExtra"
 
         fun newIntent(context: Context, deck: Deck, favorite: Boolean, like: Boolean, owned: Boolean): Intent {
             return context.intentFor<DeckActivity>(EXTRA_DECK to deck, EXTRA_FAVORITE to favorite,
@@ -336,6 +337,8 @@ class DeckActivity : BaseActivity() {
         deck_class_cover.setImageResource(deck.cls.imageRes)
         deck_class_attr1.setImageResource(deck.cls.attr1.imageRes)
         deck_class_attr2.setImageResource(deck.cls.attr2.imageRes)
+        deck_class_attr3.setImageResource(deck.cls.attr3.imageRes)
+        deck_class_attr3.visibility = View.VISIBLE.takeIf { deck.cls.attr3 != CardAttribute.NEUTRAL } ?: View.GONE
     }
 
     private fun configDeckComments() {

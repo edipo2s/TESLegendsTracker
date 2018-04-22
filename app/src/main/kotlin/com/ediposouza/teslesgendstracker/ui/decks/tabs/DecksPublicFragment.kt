@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.ediposouza.teslesgendstracker.App
 import com.ediposouza.teslesgendstracker.R
+import com.ediposouza.teslesgendstracker.data.CardAttribute
 import com.ediposouza.teslesgendstracker.data.Deck
 import com.ediposouza.teslesgendstracker.data.DeckClass
 import com.ediposouza.teslesgendstracker.interactor.FirebaseParsers
@@ -45,6 +46,7 @@ open class DecksPublicFragment : BaseFragment() {
     private val coverTransitionName: String by lazy { getString(R.string.deck_cover_transition_name) }
     private val attr1TransitionName: String by lazy { getString(R.string.deck_attr1_transition_name) }
     private val attr2TransitionName: String by lazy { getString(R.string.deck_attr2_transition_name) }
+    private val attr3TransitionName: String by lazy { getString(R.string.deck_attr3_transition_name) }
 
     open protected val isDeckPrivate: Boolean = false
 
@@ -70,7 +72,8 @@ open class DecksPublicFragment : BaseFragment() {
                                 Pair(view.deck_name as View, nameTransitionName),
                                 Pair(view.deck_cover as View, coverTransitionName),
                                 Pair(view.deck_attr1 as View, attr1TransitionName),
-                                Pair(view.deck_attr2 as View, attr2TransitionName)).toBundle())
+                                Pair(view.deck_attr2 as View, attr2TransitionName),
+                                Pair(view.deck_attr3 as View, attr3TransitionName)).toBundle())
             }
         }
     }
@@ -80,7 +83,7 @@ open class DecksPublicFragment : BaseFragment() {
         true
     }
 
-    open protected val decksAdapter: BaseFirebaseRVAdapter<*, DecksAllViewHolder> by lazy {
+    protected open val decksAdapter: BaseFirebaseRVAdapter<*, DecksAllViewHolder> by lazy {
         object : BaseFirebaseRVAdapter<FirebaseParsers.DeckParser, DecksAllViewHolder>(
                 FirebaseParsers.DeckParser::class.java, dataRef, DECK_PAGE_SIZE, false, dataFilter) {
 
@@ -187,6 +190,9 @@ open class DecksPublicFragment : BaseFragment() {
                 deck_name.text = deck.name
                 deck_attr1.setImageResource(deck.cls.attr1.imageRes)
                 deck_attr2.setImageResource(deck.cls.attr2.imageRes)
+                deck_attr3.setImageResource(deck.cls.attr3.imageRes)
+                deck_attr3.visibility = View.VISIBLE
+                        .takeIf { deck.cls.attr3 != CardAttribute.NEUTRAL } ?: View.GONE
                 deck_type.text = deck.type.name.toLowerCase().capitalize()
                 deck_date.text = deck.updatedAt.toLocalDate().toString()
                 (deck_date.layoutParams as RelativeLayout.LayoutParams).apply {

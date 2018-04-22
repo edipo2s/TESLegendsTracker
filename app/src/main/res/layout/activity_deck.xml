@@ -85,20 +85,30 @@
                         android:layout_width="@dimen/deck_header_attr_icon_height"
                         android:layout_height="@dimen/deck_header_attr_icon_height"
                         android:layout_alignBottom="@id/deck_class_attr1"
-                        android:layout_marginEnd="@dimen/large_margin"
                         android:layout_marginStart="@dimen/default_margin"
                         android:layout_toEndOf="@id/deck_class_attr1"
                         android:transitionName="@string/deck_attr2_transition_name"
                         tools:src="@drawable/attr_agility" />
 
                     <ImageView
+                        android:id="@+id/deck_class_attr3"
+                        android:layout_width="@dimen/deck_header_attr_icon_height"
+                        android:layout_height="@dimen/deck_header_attr_icon_height"
+                        android:layout_alignBottom="@id/deck_class_attr1"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_toEndOf="@id/deck_class_attr2"
+                        android:transitionName="@string/deck_attr3_transition_name"
+                        tools:src="@drawable/attr_willpower" />
+
+                    <ImageView
                         android:id="@+id/deck_details_create_by_photo"
                         android:layout_width="@dimen/size_small"
                         android:layout_height="@dimen/size_small"
-                        android:layout_alignBottom="@id/deck_class_attr2"
+                        android:layout_alignBottom="@id/deck_class_attr1"
                         android:layout_marginBottom="@dimen/nano_margin"
                         android:layout_marginStart="@dimen/large_margin"
-                        android:layout_toEndOf="@id/deck_class_attr2"
+                        android:layout_toEndOf="@id/deck_class_attr3"
                         android:src="@drawable/ic_user" />
 
                     <TextView

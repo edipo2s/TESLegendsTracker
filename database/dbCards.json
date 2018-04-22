@@ -10597,7 +10597,7 @@
         "cost": "6",
         "health": "4",
         "keyword": "Ward",
-        "name": "Telvos Magister",
+        "name": "Tel Vos Magister",
         "race": "Dark Elf",
         "rarity": "Epic",
         "text": "Ward. At the end of your turn, you gain a Ward",
@@ -11573,7 +11573,7 @@
         "keyword": "Guard",
         "name": "Shrine Guardian",
         "race": "Daedra",
-        "rarity": "Eipc",
+        "rarity": "Epic",
         "text": "Guard. When your opponent summons a creature, reduce its power to 0 until the start of your turn.",
         "type": "Creature"
       },

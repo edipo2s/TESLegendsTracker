@@ -30,7 +30,6 @@ import org.jetbrains.anko.bundleOf
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import java.util.*
-import kotlin.collections.HashMap
 
 /**
  * Created by EdipoSouza on 11/2/16.
@@ -158,32 +157,43 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun onCardListChange() {
         val cards = getCards()
         decklist_costs.updateCosts(cards)
-        val qtdFormat = R.string.new_deck_card_list_arena_qtd.takeIf { arenaMode } ?: R.string.new_deck_card_list_qtd
+        val attrGroup = cards
+                .flatMap {
+                    when (it.qtd) {
+                        1 -> listOf(it.card)
+                        2 -> listOf(it.card, it.card)
+                        3 -> listOf(it.card, it.card, it.card)
+                        else -> listOf()
+                    }
+                }
+                .flatMap { listOf(it.dualAttr1, it.dualAttr2, it.dualAttr3) }
+                .filter { it.isBasic }
+                .groupBy { it }
+                .map { it.key to it.value.size }
+                .sortedBy { it.first.ordinal }
+        val isTriple = attrGroup.size == 3
+        val qtdFormat = R.string.new_deck_card_list_arena_qtd.takeIf { arenaMode }
+                ?: R.string.new_deck_card_list_triple_qtd.takeIf { isTriple }
+                ?: R.string.new_deck_card_list_qtd
         decklist_qtd.text = context.getString(qtdFormat, cards.sumBy { it.qtd })
         decklist_soul.text = getSoulCost().toString()
-        var attrGroup = HashMap<CardAttribute, List<CardSlot>>()
-        attrGroup.putAll(cards.filter { it.card.attr.isBasic }.groupBy { it.card.attr }.toMutableMap())
-        cards.filter { it.card.attr == CardAttribute.DUAL }.forEach {
-            val attr1List = attrGroup[it.card.dualAttr1] ?: listOf<CardSlot>()
-            val attr2List = attrGroup[it.card.dualAttr2] ?: listOf<CardSlot>()
-            attrGroup.put(it.card.dualAttr1, attr1List.plus(it))
-            attrGroup.put(it.card.dualAttr2, attr2List.plus(it))
-        }
         decklist_class_attr1.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
         decklist_class_attr1_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 0 } ?: View.GONE
         decklist_class_attr2.visibility = View.VISIBLE.takeIf { attrGroup.size > 1 } ?: View.GONE
         decklist_class_attr2_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 1 } ?: View.GONE
-        when (attrGroup.size) {
-            1 -> {
-                decklist_class_attr1.setImageResource(attrGroup.keys.first().imageRes)
-                decklist_class_attr1_qtd.text = "${attrGroup.values.first().sumBy { it.qtd }}"
-            }
-            2 -> {
-                decklist_class_attr1.setImageResource(attrGroup.keys.first().imageRes)
-                decklist_class_attr1_qtd.text = "${attrGroup.values.first().sumBy { it.qtd }}"
-                decklist_class_attr2.setImageResource(attrGroup.keys.last().imageRes)
-                decklist_class_attr2_qtd.text = "${attrGroup.values.last().sumBy { it.qtd }}"
-            }
+        decklist_class_attr3.visibility = View.VISIBLE.takeIf { attrGroup.size > 2 } ?: View.GONE
+        decklist_class_attr3_qtd.visibility = View.VISIBLE.takeIf { attrGroup.size > 2 } ?: View.GONE
+        if (attrGroup.size > 0) {
+            decklist_class_attr1.setImageResource(attrGroup[0].first.imageRes)
+            decklist_class_attr1_qtd.text = "${attrGroup[0].second}"
+        }
+        if (attrGroup.size > 1) {
+            decklist_class_attr2.setImageResource(attrGroup[1].first.imageRes)
+            decklist_class_attr2_qtd.text = "${attrGroup[1].second}"
+        }
+        if (attrGroup.size > 2) {
+            decklist_class_attr3.setImageResource(attrGroup[2].first.imageRes)
+            decklist_class_attr3_qtd.text = "${attrGroup[2].second}"
         }
         val prophecyCardSlots = cards.filter { it.card.keywords.contains(CardKeyword.PROPHECY) }
         decklist_class_prophecy.visibility = View.VISIBLE.takeIf { prophecyCardSlots.size > 0 } ?: View.GONE
@@ -269,21 +279,12 @@ class DeckList(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
 
         private fun notifyCardRemoved(card: Card) {
-            when {
-                card.attr == CardAttribute.DUAL && items.filter { it.card.attr == card.dualAttr1 }.isEmpty() -> {
-                    eventBus.post(CmdRemAttr(card.dualAttr1))
-                    if (items.isEmpty()) {
-                        eventBus.post(CmdRemAttr(card.dualAttr2))
-                    }
-                }
-                card.attr == CardAttribute.DUAL && items.filter { it.card.attr == card.dualAttr2 }.isEmpty() -> {
-                    eventBus.post(CmdRemAttr(card.dualAttr2))
-                    if (items.isEmpty()) {
-                        eventBus.post(CmdRemAttr(card.dualAttr1))
-                    }
-                }
-                items.filter { it.card.dualAttr1 == card.attr || it.card.dualAttr2 == card.attr }.isEmpty() -> {
-                    eventBus.post(CmdRemAttr(card.attr))
+            val cardAttrs = listOf(card.dualAttr1, card.dualAttr2, card.dualAttr3).filter { it.isBasic }
+            cardAttrs.forEach { cardAttr ->
+                if (items.none { it.card.dualAttr1 == cardAttr } &&
+                        items.none { it.card.dualAttr2 == cardAttr } &&
+                        items.none { it.card.dualAttr3 == cardAttr }) {
+                    eventBus.post(CmdRemAttr(cardAttr))
                 }
             }
         }

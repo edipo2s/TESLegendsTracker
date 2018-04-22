@@ -78,13 +78,23 @@
             android:transitionName="@string/deck_attr2_transition_name"
             tools:src="@drawable/attr_intelligence" />
 
+        <ImageView
+            android:id="@+id/deck_attr3"
+            android:layout_width="@dimen/deck_icon_height"
+            android:layout_height="@dimen/deck_icon_height"
+            android:layout_alignTop="@id/deck_attr1"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_toEndOf="@id/deck_attr2"
+            android:transitionName="@string/deck_attr3_transition_name"
+            tools:src="@drawable/attr_agility" />
+
         <TextView
             android:id="@+id/deck_type"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/deck_icon_height"
-            android:layout_alignTop="@id/deck_attr2"
+            android:layout_alignTop="@id/deck_attr1"
             android:layout_marginStart="@dimen/medium_margin"
-            android:layout_toEndOf="@id/deck_attr2"
+            android:layout_toEndOf="@id/deck_attr3"
             android:gravity="center_vertical"
             android:textSize="@dimen/font_medium"
             tools:text="Midrange" />

@@ -374,7 +374,8 @@ object PublicInteractor : BaseInteractor() {
 
     fun getDeckCards(deck: Deck, onError: ((e: Exception?) -> Unit)? = null, onSuccess: (List<CardSlot>) -> Unit) {
         with(database.child(NODE_CARDS)) {
-            getCards(null, deck.cls.attr1, deck.cls.attr2, CardAttribute.DUAL, CardAttribute.NEUTRAL) {
+            getCards(null, deck.cls.attr1, deck.cls.attr2, deck.cls.attr3, CardAttribute.DUAL,
+                    CardAttribute.NEUTRAL) {
                 val deckCards = it.map { CardSlot(it, deck.cards[it.shortName] ?: 0) }
                         .filter { it.qtd > 0 }
                 Timber.d(deckCards.toString())
