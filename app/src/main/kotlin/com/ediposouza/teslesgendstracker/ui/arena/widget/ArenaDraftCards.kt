@@ -108,7 +108,7 @@ class ArenaDraftCards(ctx: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
         }
         val dialogView = View.inflate(context, R.layout.dialog_select_card, null)
         with(dialogView.select_card_dialog_attr) {
-            lockAttrs(cls.attr1, cls.attr2)
+            lockAttrs(cls.attr1, cls.attr2, cls.attr3)
             filterClick = { attr ->
                 currentAttr = attr
                 EventBus.getDefault().post(CmdFilterAttr(attr))

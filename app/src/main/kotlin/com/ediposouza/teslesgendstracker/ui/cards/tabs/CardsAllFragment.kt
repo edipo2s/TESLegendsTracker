@@ -320,14 +320,31 @@ open class CardsAllFragment : BaseFragment() {
                     }
                 }
                 .filter {
-                    when {
-                        classFilter != null && currentAttr == CardAttribute.DUAL ->
-                            if (classFilter?.attr2 == CardAttribute.NEUTRAL)
-                                it.dualAttr1 == classFilter?.attr1 || it.dualAttr2 == classFilter?.attr1
-                            else
-                                (it.dualAttr1 == classFilter?.attr1 && it.dualAttr2 == classFilter?.attr2) ||
-                                        (it.dualAttr1 == classFilter?.attr2 && it.dualAttr2 == classFilter?.attr1)
-                        else -> true
+                    if (it.attr != CardAttribute.DUAL) {
+                        true
+                    } else {
+                        val cardColors = listOf(it.dualAttr1, it.dualAttr2, it.dualAttr3)
+                        when {
+                            classFilter?.isSingleColor() == true -> cardColors.contains(classFilter?.attr1)
+                            classFilter?.isDualColor() == true -> cardColors.contains(classFilter?.attr1)
+                                    && cardColors.contains(classFilter?.attr2)
+                            classFilter?.isTripleColor() == true -> {
+                                if (it.dualAttr3 != CardAttribute.NEUTRAL) {
+                                    cardColors.contains(classFilter?.attr1)
+                                            && cardColors.contains(classFilter?.attr2)
+                                            && cardColors.contains(classFilter?.attr3)
+                                } else {
+                                    val dual1 = (cardColors.contains(classFilter?.attr1)
+                                            && cardColors.contains(classFilter?.attr2))
+                                    val dual2 = (cardColors.contains(classFilter?.attr1)
+                                            && cardColors.contains(classFilter?.attr3))
+                                    val dual3 = (cardColors.contains(classFilter?.attr2)
+                                            && cardColors.contains(classFilter?.attr3))
+                                    dual1 || dual2 || dual3
+                                }
+                            }
+                            else -> true
+                        }
                     }
                 }
     }

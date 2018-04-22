@@ -72,7 +72,7 @@ enum class CardAttribute(@DrawableRes val imageRes: Int, val isBasic: Boolean = 
     AGILITY(R.drawable.attr_agility),
     ENDURANCE(R.drawable.attr_endurance),
     NEUTRAL(R.drawable.attr_neutral, false),
-    DUAL(R.drawable.attr_dual, false),
+    DUAL(R.drawable.attr_triple, false),
     UNKNOWN(R.drawable.attr_neutral, false);
 
     companion object {
@@ -155,6 +155,7 @@ enum class CardRace(val desc: String) {
     FISH(""),
     GIANT(""),
     GOBLIN(""),
+    GOD(""),
     HARPY(""),
     IMP(""),
     KWAMA(""),
@@ -166,6 +167,7 @@ enum class CardRace(val desc: String) {
     MUDCRAB(""),
     MUMMY(""),
     NEREID(""),
+    NETCH(""),
     OGRE(""),
     PASTRY(""),
     REPTILE(""),
@@ -178,6 +180,7 @@ enum class CardRace(val desc: String) {
     VAMPIRE(""),
     WOLF(""),
     WAMASU(""),
+    WEREWOLF(""),
     WRAITH(""),
     UNKNOWN(""),
     NONE("");
@@ -198,18 +201,22 @@ enum class CardKeyword {
     ACTIVATE,
     BATTLE,
     BEAST_FORM,
+    BETRAY,
     BREAKTHROUGH,
     CHANGE,
     CHARGE,
     COVER,
     DRAIN,
+    EXALT,
     EVOLVES,
     FETCH,
     GUARD,
     LAST_GASP,
     LETHAL,
     PILFER,
+    PLOT,
     PROPHECY,
+    RALLY,
     REGENERATE,
     ROLL_OVER,
     SHACKLE,
@@ -405,6 +412,7 @@ data class Card(
         val attr: CardAttribute,
         val dualAttr1: CardAttribute,
         val dualAttr2: CardAttribute,
+        val dualAttr3: CardAttribute,
         val rarity: CardRarity,
         val unique: Boolean,
         val cost: Int,
@@ -437,8 +445,8 @@ data class Card(
         }
 
         val DUMMY = Card("", "", CardSet.CORE, CardAttribute.DUAL, CardAttribute.STRENGTH,
-                CardAttribute.WILLPOWER, CardRarity.EPIC, false, 0, 0, 0, CardType.ACTION,
-                CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
+                CardAttribute.WILLPOWER, CardAttribute.NEUTRAL, CardRarity.EPIC, false, 0, 0, 0,
+                CardType.ACTION, CardRace.ARGONIAN, emptyList<CardKeyword>(), "", CardArenaTier.AVERAGE,
                 listOf(), false, "", 0, listOf(), listOf(), listOf(), listOf(), "", "", false, "")
 
         const val ALT_SUFFIX = "_alt"
@@ -454,9 +462,9 @@ data class Card(
     constructor(source: Parcel) : this(source.readString(), source.readString(),
             CardSet.values()[source.readInt()],
             CardAttribute.values()[source.readInt()], CardAttribute.values()[source.readInt()],
-            CardAttribute.values()[source.readInt()], CardRarity.values()[source.readInt()],
-            1 == source.readInt(), source.readInt(), source.readInt(), source.readInt(),
-            CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
+            CardAttribute.values()[source.readInt()], CardAttribute.values()[source.readInt()],
+            CardRarity.values()[source.readInt()], 1 == source.readInt(), source.readInt(),
+            source.readInt(), source.readInt(), CardType.values()[source.readInt()], CardRace.values()[source.readInt()],
             mutableListOf<CardKeyword>().apply { source.readList(this, CardKeyword::class.java.classLoader) },
             source.readString(), CardArenaTier.values()[source.readInt()],
             mutableListOf<CardArenaTierPlus>().apply { source.readList(this, CardArenaTierPlus::class.java.classLoader) },
@@ -570,6 +578,7 @@ data class Card(
         dest?.writeInt(attr.ordinal)
         dest?.writeInt(dualAttr1.ordinal)
         dest?.writeInt(dualAttr2.ordinal)
+        dest?.writeInt(dualAttr3.ordinal)
         dest?.writeInt(rarity.ordinal)
         dest?.writeInt((if (unique) 1 else 0))
         dest?.writeInt(cost)

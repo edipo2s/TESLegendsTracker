@@ -186,7 +186,7 @@
     <string name="new_deck_save_as_private">Barajo salvo como privado</string>
     <string name="new_deck_updated_as_public">Barajo actualizado como público</string>
     <string name="new_deck_updated_as_private">Barajo actualizado como privado</string>
-    <string name="new_deck_save_error_incomplete">Completa tu cubierta antes de guardarla</string>
+    <string name="new_deck_save_error_incomplete" translatable="true">Completa tu cubierta antes de guardarla. (%d cartas)</string>
 
     <string name="match_win">Venceu</string>
     <string name="match_loss">Perdido</string>

@@ -186,7 +186,7 @@
     <string name="new_deck_save_as_private">Deck als privat gespeichert</string>
     <string name="new_deck_updated_as_public">Deck als öffentlich aktualisiert</string>
     <string name="new_deck_updated_as_private">Deck als privat aktualisiert</string>
-    <string name="new_deck_save_error_incomplete">Vervollständige das Deck vor dem Speichern</string>
+    <string name="new_deck_save_error_incomplete" formatted="true">Vervollständige das Deck vor dem Speichern. (%d karten)</string>
 
     <string name="match_win">Sieg</string>
     <string name="match_loss">Niederlage</string>

@@ -187,7 +187,7 @@
     <string name="new_deck_save_as_private">Deck sauvegardé en Privé</string>
     <string name="new_deck_updated_as_public">Derck actualisé en Public</string>
     <string name="new_deck_updated_as_private">Derck actualisé en Privé</string>
-    <string name="new_deck_save_error_incomplete">SVP, Complétez votre deck avant de sauvegarder</string>
+    <string name="new_deck_save_error_incomplete" translatable="true">SVP, Complétez votre deck avant de sauvegarder. (%d cartes)</string>
 
     <string name="match_win">Victoire</string>
     <string name="match_loss">Défaite</string>

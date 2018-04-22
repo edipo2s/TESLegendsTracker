@@ -3,7 +3,10 @@ package com.ediposouza.teslesgendstracker.ui.articles.tabs
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import com.ediposouza.teslesgendstracker.NEWS_DATE_PATTERN
 import com.ediposouza.teslesgendstracker.PREF_NEWS_CHECK_LAST_TIME
 import com.ediposouza.teslesgendstracker.R
@@ -81,7 +84,7 @@ class ArticlesNewsFragment : BaseFragment() {
             }
             setHasFixedSize(true)
             addOnScrollListener(OnLinearLayoutItemScrolled(newsAdapter.getContentCount() - 3) {
-                view?.post { newsAdapter.more() }
+                view.post { newsAdapter.more() }
             })
         }
         articles_news_refresh_layout.setOnRefreshListener {
@@ -103,11 +106,11 @@ class ArticlesNewsFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_news_category, menu)
-        menuCategory = menu?.findItem(R.id.menu_news_category)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+//        inflater?.inflate(R.menu.menu_news_category, menu)
+//        menuCategory = menu?.findItem(R.id.menu_news_category)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId != R.id.menu_news_category) {
@@ -131,21 +134,22 @@ class ArticlesNewsFragment : BaseFragment() {
 
     private fun checkLatestNews() {
         doAsync {
+            val baseLink = getString(R.string.article_base_link)
             val latestNews = Jsoup.connect(getString(R.string.article_news_link))
                     .timeout(resources.getInteger(R.integer.jsoup_timeout))
                     .userAgent(getString(R.string.jsoup_user_agent))
                     .referrer(getString(R.string.jsoup_referrer))
                     .get()
-                    .select("ul li.zz-abstract__item")
+                    .select("#news-feeds .grid-item")
                     .map {
-                        val cover = it.select(".zz-abstract__image").first().attr("src")
-                        val title = it.select(".zz-abstract__title").first().ownText()
-                        val categoryText = it.select(".zz-abstract__category").first().ownText()
-                        val date = it.select(".zz-abstract__date").first().ownText()
-                        val link = it.select("a[href]").first().attr("href")
+                        val cover = it.select(".card-inner").first().attr("style")
+                                .replace("background-image: url('", "https:")
+                                .removeSuffix("');")
+                        val title = it.select(".grid-content h1 a").first().ownText()
+                        val date = it.select(".grid-content .datestamp").first().ownText()
+                        val link = it.select(".grid-content a").first().attr("href")
                         val newsDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(NEWS_DATE_PATTERN, Locale.US))
-                        val category = ArticleCategory.valueOf(categoryText.toUpperCase().replace(" ", "_"))
-                        Article(title, category, cover, getString(R.string.article_base_link) + link, newsDate)
+                        Article(title, ArticleCategory.ANNOUNCEMENTS, cover, baseLink + link, newsDate)
                     }
             context?.runOnUiThread {
                 val savedNewsUuids = newsAdapter.mSnapshots.getItems().map { it.first }

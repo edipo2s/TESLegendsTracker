@@ -490,7 +490,7 @@
         "text": "Guard"
       },
       "target": {
-        "creators": "thenightmother",
+        "creators": "thenightmother, cliffraceronslaught, moragtongassassin, naryuvirian, moragtongnightblade",
         "name": "Target",
         "cost": "1",
         "type": "Creature",
@@ -869,9 +869,9 @@
       "risendead": {
         "creators": "ancestraldead",
         "name": "Risen Dead",
-        "cost": "",
+        "cost": "1",
         "type": "Creature",
-        "race": "",
+        "race": "Skeleton",
         "attack": "1",
         "health": "1",
         "rarity": "Common",
@@ -881,9 +881,9 @@
       "risenhorror": {
         "creators": "risingofbones",
         "name": "Risen Horror",
-        "cost": "",
+        "cost": "3",
         "type": "Creature",
-        "race": "",
+        "race": "Skeleton",
         "attack": "3",
         "health": "3",
         "rarity": "Common",
@@ -893,9 +893,9 @@
       "vvardvark": {
         "creators": "vvardvarkexperiment",
         "name": "Vvardvark",
-        "cost": "",
+        "cost": "0",
         "type": "Creature",
-        "race": "",
+        "race": "Beast",
         "attack": "0",
         "health": "1",
         "rarity": "Common",
@@ -931,9 +931,9 @@
       "fetcherflyswarm": {
         "creators": "fetcherflygolem",
         "name": "Fetcherfly Swarm",
-        "cost": "",
+        "cost": "2",
         "type": "Creature",
-        "race": "",
+        "race": "Insect",
         "attack": "2",
         "health": "2",
         "rarity": "Common",
@@ -943,12 +943,12 @@
       "imposter": {
         "creators": "impostersmission",
         "name": "Imposter",
-        "cost": "",
+        "cost": "1",
         "type": "Creature",
-        "race": "",
+        "race": "Dark Elf",
         "attack": "0",
         "health": "0",
-        "rarity": "Common",
+        "rarity": "Epic",
         "keyword": "",
         "text": ""
       }
@@ -969,14 +969,14 @@
       "illusorywall": {
         "creators": "illusorydefenses",
         "name": "Illusory Wall",
-        "cost": "",
+        "cost": "1",
         "type": "Creature",
-        "race": "",
+        "race": "Defensor",
         "attack": "0",
         "health": "5",
         "rarity": "Common",
         "keyword": "Guard",
-        "text": ""
+        "text": "Sacrifice Illusory Wall at the start of your turn."
       }
     },
     "neutral": {

@@ -149,7 +149,7 @@ fun Spinner.limitHeight(lines: Int? = null) {
     val itemHeight = context.resources.getDimensionPixelSize(R.dimen.material_design_default_height)
     Spinner::class.java.getDeclaredField("mPopup")
             ?.apply { isAccessible = true }?.get(this)
-            ?.apply popup@ {
+            ?.apply popup@{
                 IntArray(2).apply {
                     getLocationOnScreen(this)
                     val listPopupWindow = this@popup as ListPopupWindow
@@ -210,8 +210,10 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
     }
     val setName = cardSet.toLowerCase().capitalize()
     val attrName = cardAttr.toLowerCase().capitalize()
-    val imagePath = "${"Cards".takeUnless { isToken } ?: "Tokens"}/$setName/$attrName/$cardShortName.webp"
-    val remotePath = imagePath.takeIf { cardShortName.contains("_201") } ?: "v${context.getCurrentVersion()}/$imagePath"
+    val imagePath = "${"Cards".takeUnless { isToken }
+            ?: "Tokens"}/$setName/$attrName/$cardShortName.webp"
+    val remotePath = imagePath.takeIf { cardShortName.contains("_201") }
+            ?: "v${context.getCurrentVersion()}/$imagePath"
     Timber.d("Local: $imagePath - Remote: $remotePath")
     Glide.with(context)
             .load(FirebaseStorage.getInstance().reference.child(remotePath))
@@ -221,11 +223,15 @@ fun ImageView.loadFromCard(cardSet: String, cardAttr: String, cardShortName: Str
             .transition(DrawableTransitionOptions().crossFade(500))
             .listener(object : RequestListener<Drawable> {
                 override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                    onNotFound?.invoke()
+                    if (resource != null) {
+                        setImageDrawable(resource)
+                        return true
+                    }
                     return false
                 }
 
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                    onNotFound?.invoke()
                     return false
                 }
             })

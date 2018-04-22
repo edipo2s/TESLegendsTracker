@@ -31,6 +31,7 @@ abstract class FirebaseParsers {
         val evolves: Boolean = false
         val attr1: String = ""
         val attr2: String = ""
+        val attr3: String = ""
         val season: String = ""
         val shout: Int = 0
         val creators: String = ""
@@ -44,13 +45,17 @@ abstract class FirebaseParsers {
 
         fun toCard(shortName: String, set: CardSet, attr: CardAttribute): Card {
             var clsAttr1 = attr
-            var clsAttr2 = attr
+            var clsAttr2 = CardAttribute.NEUTRAL
+            var clsAttr3 = CardAttribute.NEUTRAL
             if (attr == CardAttribute.DUAL) {
                 clsAttr1 = CardAttribute.of(attr1.trim().toUpperCase())
                 clsAttr2 = CardAttribute.of(attr2.trim().toUpperCase())
+                if (attr3.isNotBlank()) {
+                    clsAttr3 = CardAttribute.of(attr3.trim().toUpperCase())
+                }
             }
-            return Card(name, shortName, set, attr, clsAttr1, clsAttr2, CardRarity.of(rarity), unique,
-                    cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
+            return Card(name, shortName, set, attr, clsAttr1, clsAttr2, clsAttr3, CardRarity.of(rarity),
+                    unique, cost.toIntSafely(), attack.toIntSafely(), health.toIntSafely(),
                     CardType.of(type), CardRace.of(race),
                     keyword.split(",")
                             .filter { it.trim().isNotEmpty() }

@@ -250,10 +250,12 @@
     <string name="deck_cover_transition_name" translatable="false">deck_cover_transition</string>
     <string name="deck_attr1_transition_name" translatable="false">deck_attr1_transition</string>
     <string name="deck_attr2_transition_name" translatable="false">deck_attr2_transition</string>
+    <string name="deck_attr3_transition_name" translatable="false">deck_attr3_transition</string>
 
     <string name="new_deck_title">New Deck</string>
     <string name="new_deck_class_title">New %s Deck</string>
     <string name="new_deck_card_list_qtd" translatable="false">%1$02d/50</string>
+    <string name="new_deck_card_list_triple_qtd" translatable="false">%1$02d/75</string>
     <string name="new_deck_card_list_arena_qtd" translatable="false">%1$02d/30</string>
     <string name="new_deck_save_dialog_title">Deck Info</string>
     <string name="new_deck_update_dialog_title">Save Deck Changes?</string>
@@ -267,7 +269,7 @@
     <string name="new_deck_save_as_private">Deck saved as Private</string>
     <string name="new_deck_updated_as_public">Deck updated as Public</string>
     <string name="new_deck_updated_as_private">Deck updated as Private</string>
-    <string name="new_deck_save_error_incomplete">Please complete your deck before save it</string>
+    <string name="new_deck_save_error_incomplete" formatted="true">Please complete your deck before save it. (%d cards)</string>
 
     <string name="match_vs" translatable="false">Vs</string>
     <string name="match_rank_normal" translatable="false"> %1$d</string>
@@ -305,7 +307,7 @@
     <string name="new_match_saved">New Match Saved!</string>
 
     <string name="article_base_link" translatable="false">https://legends.bethesda.net</string>
-    <string name="article_news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
+    <string name="article_news_link" translatable="false">https://legends.bethesda.net/en/news</string>
     <string name="article_news_title">News</string>
     <string name="article_news_category_all">All</string>
     <string name="article_news_category_announcements">Announcements</string>

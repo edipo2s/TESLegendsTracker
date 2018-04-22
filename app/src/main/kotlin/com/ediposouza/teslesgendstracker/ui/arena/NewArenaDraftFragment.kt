@@ -44,7 +44,9 @@ class NewArenaDraftFragment : BaseFragment() {
 
     }
 
-    private val selectedClass by lazy { DeckClass.values()[arguments?.getInt(EXTRA_SELECTED_CLASS) ?: 0] }
+    private val selectedClass by lazy {
+        DeckClass.values()[arguments?.getInt(EXTRA_SELECTED_CLASS) ?: 0]
+    }
 
     private val cardListOnClick: (Card) -> Unit = { card ->
         when (arena_draft_cardlist.getCards().sumBy { it.qtd }) {
@@ -93,8 +95,8 @@ class NewArenaDraftFragment : BaseFragment() {
             val cards = it.filter {
                 it.attr == CardAttribute.NEUTRAL
                         || (it.attr == selectedClass.attr1 || it.attr == selectedClass.attr2)
-                        || (it.dualAttr1 == selectedClass.attr1 && it.dualAttr2 == selectedClass.attr2)
-                        || (it.dualAttr1 == selectedClass.attr2 && it.dualAttr2 == selectedClass.attr1)
+                        || (listOf(it.dualAttr1, it.dualAttr2, it.dualAttr3)
+                        .containsAll(listOf(selectedClass.attr1, selectedClass.attr2)))
             }
             arena_draft_cards1.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)
             arena_draft_cards2.config(activity, selectedClass, cards, cardListOnClick, arena_draft_cardlist)

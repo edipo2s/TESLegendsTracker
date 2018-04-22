@@ -51,6 +51,21 @@
             android:textColor="@android:color/white"
             tools:text="7" />
 
+        <ImageView
+            android:id="@+id/decklist_class_attr3"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginStart="@dimen/small_margin"
+            tools:src="@drawable/attr_willpower" />
+
+        <TextView
+            android:id="@+id/decklist_class_attr3_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/nano_margin"
+            android:textColor="@android:color/white"
+            tools:text="5" />
+
         <TextView
             android:id="@+id/decklist_class_prophecy"
             android:layout_width="wrap_content"

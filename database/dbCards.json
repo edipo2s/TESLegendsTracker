@@ -3644,7 +3644,7 @@
         "keyword": "Charge",
         "text": "Charge",
         "arenaTier": "Insane",
-        "creators": "cliffraceronslaught"
+        "generators": "cliffraceronslaught"
       },
       "eldercentaur": {
         "name": "Elder Centaur",
@@ -9822,7 +9822,8 @@
         "rarity": "Legendary",
         "text": "Summon a 4/4 Cliff Racer with Charge in each lane. Your opponent summons a 0/1 Target with Guard in each lane.",
         "type": "Action",
-        "generates": "cliffracer"
+        "generates": "cliffracer",
+        "tokens": "target"
       },
       "cliffstrider": {
         "arenaTier": "Unknown",
@@ -10375,7 +10376,8 @@
         "race": "",
         "rarity": "Rare",
         "text": "Summon a 0/1 Vvardvark in each lane.",
-        "type": "Action"
+        "type": "Action",
+        "tokens": "vvardvark"
       }
     },
     "intelligence": {
@@ -10572,6 +10574,7 @@
         "name": "Sotha Sil",
         "race": "God",
         "rarity": "Legendary",
+        "unique": true,
         "text": "Exalt 3: +4/+4. At the end of your turn, if you have an Exalted creature in play, summon an Awakened Imperfect",
         "type": "Creature",
         "generates": "awakenedimperfect"
@@ -10594,7 +10597,7 @@
         "cost": "6",
         "health": "4",
         "keyword": "Ward",
-        "name": "Telvos Magister",
+        "name": "Tel Vos Magister",
         "race": "Dark Elf",
         "rarity": "Epic",
         "text": "Ward. At the end of your turn, you gain a Ward",
@@ -11091,6 +11094,7 @@
         "name": "Stendarr's Hammer",
         "race": "",
         "rarity": "Legendary",
+        "unique": true,
         "text": "Summon: Double the wielder's power and health. The wielder can onle attack creatures.",
         "type": "Item"
       },
@@ -11302,6 +11306,7 @@
         "name": "Sun-in-Shadow",
         "race": "Argonian",
         "rarity": "Legendary",
+        "unique": true,
         "text": "Summon: Permanently Shackle another friendly creature to draw an action of your choise from your deck.",
         "type": "Creature",
         "attr1": "intelligence",
@@ -11471,7 +11476,8 @@
         "race": "",
         "rarity": "Common",
         "text": "Prophecy. Summon a 0/5 Illusory Wall with Guard in each lane. Sacrifice them at the start of your turn.",
-        "type": "Action"
+        "type": "Action",
+        "tokens": "illusorywall"
       },
       "khuullawkeeper": {
         "arenaTier": "Unknown",
@@ -11531,7 +11537,6 @@
         "name": "Morag Tong Nightblade",
         "race": "Dark Elf",
         "rarity": "Epic",
-        "unique": true,
         "text": "Summon: Summon a 0/1 Target with Guard for your opponent. Slay: Draw a card. If it's an action, reduce its cost to 0.",
         "type": "Creature",
         "tokens": "target"
@@ -11568,7 +11573,7 @@
         "keyword": "Guard",
         "name": "Shrine Guardian",
         "race": "Daedra",
-        "rarity": "Eipc",
+        "rarity": "Epic",
         "text": "Guard. When your opponent summons a creature, reduce its power to 0 until the start of your turn.",
         "type": "Creature"
       },
