@@ -63,6 +63,7 @@ class ArticlesFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         eventBus.post(CmdUpdateTitle(R.string.title_tab_articles_news))
         articles_tab_layout.setupWithViewPager(articles_view_pager)
+        articles_tab_layout.visibility = View.GONE
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -96,7 +97,7 @@ class ArticlesFragment : BaseFragment() {
         }
 
         override fun getCount(): Int {
-            return titles.size
+            return 1//titles.size
         }
 
         override fun getPageTitle(position: Int): CharSequence {

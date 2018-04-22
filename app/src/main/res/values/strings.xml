@@ -307,7 +307,7 @@
     <string name="new_match_saved">New Match Saved!</string>
 
     <string name="article_base_link" translatable="false">https://legends.bethesda.net</string>
-    <string name="article_news_link" translatable="false">https://legends.bethesda.net/articles?subcategory=all</string>
+    <string name="article_news_link" translatable="false">https://legends.bethesda.net/en/news</string>
     <string name="article_news_title">News</string>
     <string name="article_news_category_all">All</string>
     <string name="article_news_category_announcements">Announcements</string>
