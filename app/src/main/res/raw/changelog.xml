@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.9.1"
+        changeDate="April 22, 2018">
+        <changelogtext>[b]Feature:[/b] Add support for triple color decks</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add support for triple color cards in arena</changelogtext>
+        <changelogtext>[b]Feature:[/b] Add all tokens of Houses of Morrowind</changelogtext>
+        <changelogtext>Fix articles news list</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.9.0"
-        changeDate="April 05, 2018">
+        changeDate="April 07, 2018">
         <changelogtext>[b]Feature:[/b] Add 'Monthly' as same search key of 'Reward'</changelogtext>
         <changelogtext>[b]Feature:[/b] Add Houses of Morrowind Cards</changelogtext>
         <changelogtext>[b]Feature:[/b] Add Forgotten Hero cards full art</changelogtext>
         <changelogtext>Add Barbas tokens</changelogtext>
         <changelogtext>Remove all ads from lists</changelogtext>
         <changelogtext>Fix alternative art cards not showing token. (Grisly Gourmet)</changelogtext>
+        <changelogtext>Fix remote image load background</changelogtext>
     </changelogversion>
     <changelogversion
         versionName="1.8.2"
