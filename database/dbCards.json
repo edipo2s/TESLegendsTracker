@@ -2070,6 +2070,19 @@
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5b4037/daily_card_discussion_thread_64_cursed_spectre/d9ltnsh",
         "arenaTier": "Poor"
       },
+      "conjurersspirit": {
+        "name": "Conjurer's Spirit",
+        "cost": "3",
+        "type": "Support",
+        "race": "",
+        "attack": "",
+        "health": "",
+        "rarity": "Epic",
+        "keyword": "",
+        "text": "Ongoing. At the end of your turn, if you gained health, summon a 2/2 Familiar.",
+        "arenaTier": "Unknown",
+        "tokens": "familiar"
+      },
       "cheydinhalsapper": {
         "name": "Cheydinhal Sapper",
         "cost": "1",
@@ -2944,8 +2957,8 @@
         "attack": "6",
         "health": "6",
         "rarity": "Epic",
-        "keyword": "Guard, Summon",
-        "text": "Guard. Summon: Destroy an enemy creature in this lane.",
+        "keyword": "Summon",
+        "text": "Summon: Destroy an enemy creature in this lane.",
         "lore": "'Mantikoras are artifically created creatures - they combine the dealdiest traits of many predators, such as scorpions and wamasus. They also posses the intelligence and cunning of mer and man. The first Mantikora ever created was called Hruzizolk.' - Rubliko",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5xb212/daily_card_discussion_thread_183_mantikora_march/degvdsp",
         "arenaTier": "Excellent"
@@ -10018,7 +10031,7 @@
         "name": "Nix-Ox",
         "race": "Beast",
         "rarity": "Common",
-        "text": "Summon: Gain 6 magicka this turn.",
+        "text": "Summon: Gain 5 magicka this turn.",
         "type": "Creature"
       },
       "slitstrider": {

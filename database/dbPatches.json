@@ -621,5 +621,21 @@
   "2018_04_05": {
     "desc": "Houses of Morrowind",
     "type": "set"
+  },
+  "2018_04_25": {
+    "changes": {
+      "mantikora": {
+        "set": "core",
+        "attr": "willpower",
+        "change": "Text"
+      },
+      "nixox": {
+        "set": "housesofmorrowind",
+        "attr": "agility",
+        "change": "Text"
+      }
+    },
+    "desc": "Mantikora Nerf Again",
+    "type": "balance"
   }
 }

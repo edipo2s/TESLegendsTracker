@@ -101,6 +101,11 @@
   },
   "2018_04": {
     "reward": {
+      "willpower": "conjurersspirit"
+    }
+  },
+  "2018_05": {
+    "reward": {
       "unknown": true
     }
   }

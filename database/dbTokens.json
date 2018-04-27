@@ -407,6 +407,18 @@
       }
     },
     "willpower": {
+      "familiar": {
+        "creators": "conjurersspirit",
+        "name": "Familiar",
+        "cost": "2",
+        "type": "Creature",
+        "race": "Wolf",
+        "attack": "2",
+        "health": "2",
+        "rarity": "Common",
+        "keyword": "",
+        "text": ""
+      },
       "imperialgrunt": {
         "creators": "scoutingpatrol, imperialreinforcements, imperialmight, renownedlegate, risinglegate",
         "name": "Imperial Grunt",
