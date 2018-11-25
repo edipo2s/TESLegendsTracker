@@ -36,6 +36,7 @@ enum class CardSet(val title: String) {
     RETURNTOCLOCKWORKCITY("Return to Clockwork City"),
     FORGOTTENHERO("Forgotten Hero Collection"),
     HOUSESOFMORROWIND("Houses of Morrowind"),
+    FROSTSPARKCOLLECTION("FrostSpark Collection"),
     TOKENS("Tokens"),
     UNKNOWN(TEXT_UNKNOWN);
 

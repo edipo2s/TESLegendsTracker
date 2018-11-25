@@ -396,7 +396,9 @@
         "text": "Prophecy, Guard. Summon: Give a creature +2/+0.",
         "lore": "'The Morkul clan of Orcs was prominent during the Second Era. They maintained a stronghold in Wrothgar, and prided themselves on being the best smiths of the Orsimer. Wrothgar Forge probably depicts the Morkuldin forge, found deep below the earth.' - Quillypen",
         "loreLink": "https://www.reddit.com/r/elderscrollslegends/comments/5ezb0p/daily_card_discussion_thread_86_morkul_gatekeeper/dagk9s1",
-        "arenaTier": "Insane"
+        "arenaTier": "Insane",
+        "alternativeArt": true,
+        "alternativeArtSource": "Grand Melee Gauntlet - 05/05"
       },
       "raidingparty": {
         "name": "Raiding Party",
@@ -4109,6 +4111,19 @@
         "text": "Guard, Regenerate",
         "arenaTier": "Poor"
       },
+      "prophetofbones": {
+        "arenaTier": "Unknown",
+        "attack": "2",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Exalt",
+        "name": "Prophet of Bones",
+        "race": "Dark Elf",
+        "rarity": "Epic",
+        "text": "Exalt 5: Fill this lane with 1/1 Risen Dead with Guard/",
+        "type": "Creature",
+        "tokens": "risendead"
+      },
       "siegecatapult": {
         "name": "Siege Catapult",
         "cost": "2",
@@ -4934,6 +4949,20 @@
         "arenaTier": "Unknown",
         "season": "2017_12"
       },
+      "blackwooddistiller": {
+        "name": "Blackwood Distiller",
+        "cost": "4",
+        "type": "Creature",
+        "race": "Argonian",
+        "attack": "3",
+        "health": "4",
+        "rarity": "Epic",
+        "keyword": "Pilfer, Slay",
+        "text": "Pilfer: Gain 3 magicka this turn. Slay: Gain +1 max magicka;",
+        "attr1": "agility",
+        "attr2": "endurance",
+        "arenaTier": "Unknown"
+      },
       "edictofazura": {
         "name": "Edict of Azura",
         "cost": "4",
@@ -5074,6 +5103,21 @@
         "attr1": "willpower",
         "attr2": "agility",
         "arenaTier": "Excellent"
+      },
+      "altmerdragonknight": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "attr1": "intelligence",
+        "attr2": "willpower",
+        "cost": "3",
+        "health": "2",
+        "keyword": "",
+        "name": "Altmer Dragonknight",
+        "race": "High Elf",
+        "rarity": "Epic",
+        "text": "At the end of your turn, if you played an action, Altmer Dragonknight gains +2/+2.",
+        "type": "Creature",
+        "season": "2018_10"
       },
       "ayrenn": {
         "name": "Ayrenn",
@@ -9711,7 +9755,7 @@
       "ulfricsuprising": {
         "arenaTier": "Unknown",
         "attack": "",
-        "cost": "6",
+        "cost": "7",
         "health": "",
         "keyword": "",
         "name": "Ulfric's Uprising",
@@ -10613,7 +10657,7 @@
         "name": "Tel Vos Magister",
         "race": "Dark Elf",
         "rarity": "Epic",
-        "text": "Ward. At the end of your turn, you gain a Ward",
+        "text": "Ward. At the end of your turn, if Tel Vos Magister has ward, you gain a Ward",
         "type": "Creature"
       },
       "templeconjurer": {
@@ -10758,7 +10802,7 @@
         "arenaTier": "Unknown",
         "attack": "1",
         "cost": "1",
-        "health": "3",
+        "health": "2",
         "keyword": "Summon",
         "name": "Mudcrab Merchant",
         "race": "Mudcrab",
@@ -11223,7 +11267,7 @@
         "arenaTier": "Unknown",
         "attack": "4",
         "cost": "5",
-        "health": "4",
+        "health": "5",
         "keyword": "",
         "name": "Duke Vedam Dren",
         "race": "Dark Elf",
@@ -11239,7 +11283,7 @@
         "arenaTier": "Unknown",
         "attack": "5",
         "cost": "5",
-        "health": "5",
+        "health": "4",
         "keyword": "Breakthrough, Drain, Ward",
         "name": "Hand of Dagoth",
         "race": "Ash Creture",
@@ -11253,7 +11297,7 @@
       "hauntedmanor": {
         "arenaTier": "Unknown",
         "attack": "",
-        "cost": "3",
+        "cost": "4",
         "health": "",
         "keyword": "Ongoing",
         "name": "Haunted Manor",
@@ -11664,6 +11708,152 @@
         "text": "Choose an enemy creature. At the start of your turn, destroy it and put a Completed Contract into your hand.",
         "type": "Action",
         "tokens": "completedcontract"
+      }
+    }
+  },
+  "frostsparkcollection": {
+    "agility": {
+      "shadowmarking": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "3",
+        "health": "",
+        "keyword": "",
+        "name": "Shadowmarking",
+        "race": "",
+        "rarity": "Epic",
+        "text": "Look at the top three cards of your deck. Choose one to put into opponent's hand and draw the other two.",
+        "type": "Action"
+      },
+      "torvalextortionist": {
+        "arenaTier": "Unknown",
+        "attack": "7",
+        "cost": "5",
+        "health": "5",
+        "keyword": "Slay",
+        "name": "Torval Extortionist",
+        "race": "Khajit",
+        "rarity": "Rare",
+        "text": "Slay: Gain magicka this turn equals to the slain creature's cost.",
+        "type": "Action"
+      }
+    },
+    "endurance": {
+      "deathhound": {
+        "arenaTier": "Unknown",
+        "attack": "6",
+        "cost": "5",
+        "health": "6",
+        "keyword": "Guard",
+        "name": "Death Hound",
+        "race": "Beast",
+        "rarity": "Epic",
+        "text": "Guard. Death Hound's power is equal to its health.",
+        "type": "Creature"
+      },
+      "karthspirescout": {
+        "arenaTier": "Unknown",
+        "attack": "1",
+        "cost": "1",
+        "health": "1",
+        "keyword": "Last Gasp",
+        "name": "Karthspire Scout",
+        "race": "Orc",
+        "rarity": "Rare",
+        "text": "Last Gasp: Draw a card and increase its cost by 1.",
+        "type": "Creature"
+      }
+    },
+    "intelligence": {
+      "destructiontutor": {
+        "arenaTier": "Unknown",
+        "attack": "3",
+        "cost": "5",
+        "health": "5",
+        "keyword": "",
+        "name": "Destruction Tutor",
+        "race": "High Elf",
+        "rarity": "Rare",
+        "text": "You actions that deal damage cost 2 less.",
+        "type": "Creature"
+      },
+      "piercingtwilight": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "4",
+        "health": "4",
+        "keyword": "Guard, Summon",
+        "name": "Piercing Twilight",
+        "race": "Daedra",
+        "rarity": "Epic",
+        "text": "Guard. Summon: Choose a card in your opponent's discard pile. Banish it and all cards from your opponents's deck with the same name.",
+        "type": "Creature"
+      }
+    },
+    "strength": {
+      "greenpactambusher": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "2",
+        "health": "1",
+        "keyword": "Prophecy, Guard",
+        "name": "Green Pact Ambusher",
+        "race": "Wood Elf",
+        "rarity": "Epic",
+        "text": "Prophecy, Guard At the end of your opponent's turn, if they have a full lane and Green Pact Ambusher is in your hand, summon her to that lane.",
+        "type": "Creature"
+      },
+      "swordoftheinferno": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Summon",
+        "name": "Sword of the Inferno",
+        "race": "",
+        "rarity": "Rare",
+        "text": "+2/+0. Summon: The wielder deals 2 damage to itself and another creature.",
+        "type": "Item"
+      }
+    },
+    "willpower": {
+      "apexwolf": {
+        "arenaTier": "Unknown",
+        "attack": "4",
+        "cost": "6",
+        "health": "4",
+        "keyword": "Breakthrough, Drain, Last Gasp",
+        "name": "Apex Wolf",
+        "race": "Wolf",
+        "rarity": "Epic",
+        "text": "Breakthrough, Drain, Last Gasp: Draw the top crature of your deck and give it Breakthrough and Drain.",
+        "type": "Creature"
+      },
+      "harmony": {
+        "arenaTier": "Unknown",
+        "attack": "",
+        "cost": "2",
+        "health": "",
+        "keyword": "Prophecy",
+        "name": "Harmony",
+        "race": "",
+        "rarity": "Rare",
+        "text": "Prophecy. Give all enemy creatures -2/-0 until the start of your turn.",
+        "type": "Action"
+      }
+    },
+    "neutral": {
+      "wildsincarnate": {
+        "arenaTier": "Unknown",
+        "attack": "5",
+        "cost": "7",
+        "health": "6",
+        "keyword": "Guard, Summon",
+        "name": "Wilds Incarnate",
+        "race": "Beast",
+        "rarity": "Legendary",
+        "text": "Guard. Summon: Draw a card of you have 4 runes. Draw an additional card of you have 5 runes.",
+        "type": "Creature"
       }
     }
   }

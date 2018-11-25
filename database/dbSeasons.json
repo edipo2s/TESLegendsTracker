@@ -106,7 +106,22 @@
   },
   "2018_05": {
     "reward": {
-      "unknown": true
+      "dual": "blackwooddistiller"
+    }
+  },
+  "2018_06": {
+    "reward": {
+      "endurance": "prophetofbones"
+    }
+  },
+  "2018_10": {
+    "reward": {
+      "dual": "altmerdragonknight"
+    }
+  },
+  "2018_11": {
+    "reward": {
+      "unknown": "true"
     }
   }
 }

@@ -637,5 +637,46 @@
     },
     "desc": "Mantikora Nerf Again",
     "type": "balance"
+  },
+  "2018_07_23": {
+    "changes": {
+      "drainvitality": {
+        "set": "heroesofskyrim",
+        "attr": "agility",
+        "change": "Text"
+      },
+      "ulfricsuprising": {
+        "set": "forgottenhero",
+        "attr": "neutral",
+        "change": "Cost"
+      },
+      "hauntedmanor": {
+        "set": "housesofmorrowind",
+        "attr": "dual",
+        "change": "Cost"
+      },
+      "handofdagoth": {
+        "set": "housesofmorrowind",
+        "attr": "dual",
+        "change": "Health"
+      },
+      "telvosmagister": {
+        "set": "housesofmorrowind",
+        "attr": "intelligence",
+        "change": "Text"
+      },
+      "mudcrabmerchant": {
+        "set": "housesofmorrowind",
+        "attr": "neutral",
+        "change": "Health"
+      },
+      "dukevedamdren": {
+        "set": "housesofmorrowind",
+        "attr": "dual",
+        "change": "Health"
+      }
+    },
+    "desc": "Drain Vitality Nerf",
+    "type": "balance"
   }
 }
