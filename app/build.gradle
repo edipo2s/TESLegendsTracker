@@ -7,8 +7,8 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     packagingOptions.excludes = ['META-INF/services/javax.annotation.processing.Processor',
                                  'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/README.txt',
                                  'META-INF/MANIFEST.MF', 'LICENSE.txt', 'NOTICE.txt', 'README.txt', '.readme']
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.ediposouza.teslesgendstracker"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

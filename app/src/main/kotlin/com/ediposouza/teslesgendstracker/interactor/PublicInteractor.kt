@@ -51,9 +51,10 @@ object PublicInteractor : BaseInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.map {
-                            val attr = CardAttribute.of(it.key.toUpperCase())
+                            val attr = CardAttribute.of(it.key?.toUpperCase() ?: "")
                             it.children.map {
-                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key
+                                        ?: "", set, attr)
                             }.filterNotNull()
                         }.flatMap { it }
                         val cardsAlternativeArt = cards.filter { it.hasAlternativeArt }.map { it.toAlternativeArt() }
@@ -98,7 +99,8 @@ object PublicInteractor : BaseInteractor() {
 
                         override fun onDataChange(ds: DataSnapshot) {
                             val cards = ds.children.mapTo(arrayListOf()) {
-                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key
+                                        ?: "", set, attr)
                             }.filterNotNull()
                             Timber.d(cards.toString())
                             val cardsAlternativeArt = cards.filter { it.hasAlternativeArt }.map { it.toAlternativeArt() }
@@ -121,7 +123,7 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val reviews = ds.children.map {
-                        it.key to (it.getValue(Int::class.java) ?: -1)
+                        (it.key ?: "") to (it.getValue(Int::class.java) ?: -1)
                     }.filter { it.second >= 0 }.toList()
                     onSuccess.invoke(reviews)
                 }
@@ -142,9 +144,10 @@ object PublicInteractor : BaseInteractor() {
 
                     override fun onDataChange(ds: DataSnapshot) {
                         val cards = ds.children.map {
-                            val attr = CardAttribute.of(it.key.toUpperCase())
+                            val attr = CardAttribute.of(it.key?.toUpperCase() ?: "")
                             it.children.map {
-                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key
+                                        ?: "", set, attr)
                             }.filterNotNull()
                         }.flatMap { it }
                         onEachSuccess.invoke(cards)
@@ -168,7 +171,8 @@ object PublicInteractor : BaseInteractor() {
 
                         override fun onDataChange(ds: DataSnapshot) {
                             val cards = ds.children.mapTo(arrayListOf()) {
-                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key
+                                        ?: "", set, attr)
                             }.filterNotNull()
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -245,9 +249,10 @@ object PublicInteractor : BaseInteractor() {
                                 unknownSetTitle = spoilerTitle
                             }
                             val cards = ds.children.map {
-                                val attr = CardAttribute.of(it.key.toUpperCase())
+                                val attr = CardAttribute.of(it.key?.toUpperCase() ?: "")
                                 it.children.map {
-                                    it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key, set, attr)
+                                    it.getValue(FirebaseParsers.CardParser::class.java)?.toCard(it.key
+                                            ?: "", set, attr)
                                 }.filterNotNull()
                             }.flatMap { it }
                             onSuccess.invoke(cards)
@@ -272,7 +277,8 @@ object PublicInteractor : BaseInteractor() {
                             val cards = ds.children.flatMap { it.children }
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(FirebaseParsers.CardParser::class.java)?.toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java)?.toCardStatistic(it.key
+                                                ?: "")
                                     }.filterNotNull()
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -296,7 +302,8 @@ object PublicInteractor : BaseInteractor() {
                             val cards = ds.children
                                     .filter { !it.hasChild(KEY_CARD_EVOLVES) }
                                     .mapTo(arrayListOf()) {
-                                        it.getValue(FirebaseParsers.CardParser::class.java)?.toCardStatistic(it.key)
+                                        it.getValue(FirebaseParsers.CardParser::class.java)?.toCardStatistic(it.key
+                                                ?: "")
                                     }.filterNotNull()
                             Timber.d(cards.toString())
                             onEachSuccess.invoke(cards)
@@ -317,7 +324,7 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val value = ds.getValue(FirebaseParsers.DeckParser::class.java)
-                    val deck = value?.toDeck(ds.key, false)
+                    val deck = value?.toDeck(ds.key ?: "", false)
                     if (deck != null) {
                         Timber.d(deck.toString())
                         onSuccess.invoke(deck)
@@ -333,7 +340,7 @@ object PublicInteractor : BaseInteractor() {
     }
 
     fun getPublicDecksRef() = dbDecks.child(NODE_DECKS_PUBLIC)
-            .orderByChild(KEY_DECK_UPDATE_AT)?.apply {
+            .orderByChild(KEY_DECK_UPDATE_AT).apply {
         keepSynced()
     }
 
@@ -349,7 +356,7 @@ object PublicInteractor : BaseInteractor() {
             override fun onDataChange(ds: DataSnapshot) {
                 Timber.d(ds.value?.toString())
                 val decks = ds.children.mapTo(arrayListOf<Deck?>()) {
-                    it.getValue(FirebaseParsers.DeckParser::class.java)?.toDeck(it.key, false)
+                    it.getValue(FirebaseParsers.DeckParser::class.java)?.toDeck(it.key ?: "", false)
                 }.filterNotNull()
                 Timber.d(decks.toString())
                 onSuccess.invoke(decks)
@@ -389,7 +396,7 @@ object PublicInteractor : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val patches = ds.children.mapTo(arrayListOf()) {
-                    it.getValue(FirebaseParsers.PatchParser::class.java)?.toPatch(it.key)
+                    it.getValue(FirebaseParsers.PatchParser::class.java)?.toPatch(it.key ?: "")
                 }.filterNotNull()
                 Timber.d(patches.toString())
                 onSuccess.invoke(patches)
@@ -412,7 +419,7 @@ object PublicInteractor : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val seasons = ds.children.mapTo(arrayListOf()) {
-                    it.getValue(FirebaseParsers.SeasonParser::class.java)?.toSeason(it.key)
+                    it.getValue(FirebaseParsers.SeasonParser::class.java)?.toSeason(it.key ?: "")
                 }.filterNotNull()
                 Timber.d(seasons.toString())
                 onSuccess.invoke(seasons)
@@ -431,7 +438,7 @@ object PublicInteractor : BaseInteractor() {
 
             override fun onDataChange(ds: DataSnapshot) {
                 val seasons = ds.children.mapTo(arrayListOf()) {
-                    CardSet.of(it.key)
+                    CardSet.of(it.key ?: "")
                 }
                 Timber.d(seasons.toString())
                 onSuccess.invoke(seasons)
@@ -486,7 +493,8 @@ object PublicInteractor : BaseInteractor() {
                 override fun onDataChange(ds: DataSnapshot) {
                     val levels = ds.children.mapTo(arrayListOf()) {
                         Timber.d(it.key)
-                        it.getValue(FirebaseParsers.LevelUpParser::class.java)?.toLevelUp(it.key)
+                        it.getValue(FirebaseParsers.LevelUpParser::class.java)?.toLevelUp(it.key
+                                ?: "")
                     }.filterNotNull()
                     Timber.d(levels.toString())
                     onSuccess.invoke(levels)
@@ -508,7 +516,8 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val races = ds.children.mapTo(arrayListOf()) {
-                        FirebaseParsers.RaceParser().toRace(it.key to it.value as List<String>)
+                        FirebaseParsers.RaceParser().toRace((it.key
+                                ?: "") to it.value as List<String>)
                     }
                     Timber.d(races.toString())
                     onSuccess.invoke(races)
@@ -530,7 +539,8 @@ object PublicInteractor : BaseInteractor() {
 
                 override fun onDataChange(ds: DataSnapshot) {
                     val rankeds = ds.children.mapTo(arrayListOf()) {
-                        it.getValue(FirebaseParsers.RankedParser::class.java)?.toRanked(it.key)
+                        it.getValue(FirebaseParsers.RankedParser::class.java)?.toRanked(it.key
+                                ?: "")
                     }.filterNotNull()
                     Timber.d(rankeds.toString())
                     onSuccess.invoke(rankeds)

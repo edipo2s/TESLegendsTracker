@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     <changelogversion
+        versionName="1.9.2"
+        changeDate="November 25, 2018">
+        <changelogtext>[b]Feature:[/b] Add FrostSpark Collection</changelogtext>
+    </changelogversion>
+    <changelogversion
         versionName="1.9.1"
         changeDate="April 22, 2018">
         <changelogtext>[b]Feature:[/b] Add support for triple color decks</changelogtext>

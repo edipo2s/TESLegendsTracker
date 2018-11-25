@@ -48,23 +48,21 @@ class ArticlesNewsFragment : BaseFragment() {
         currentType == null || it.category == currentType?.ordinal
     }
 
-    private val newsAdapter by lazy {
-        object : BaseFirebaseRVAdapter<FirebaseParsers.NewsParser, ArticleViewHolder>(
-                FirebaseParsers.NewsParser::class.java, newsRef, NEWS_PAGE_SIZE, filter = dataFilter) {
+    private val newsAdapter = object : BaseFirebaseRVAdapter<FirebaseParsers.NewsParser, ArticleViewHolder>(
+            FirebaseParsers.NewsParser::class.java, newsRef, NEWS_PAGE_SIZE, filter = dataFilter) {
 
-            override fun onCreateDefaultViewHolder(parent: ViewGroup): ArticleViewHolder {
-                return ArticleViewHolder(parent.inflate(R.layout.itemlist_article_news))
-            }
-
-            override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.NewsParser, viewHolder: ArticleViewHolder) {
-                viewHolder.bind(model.toNews(itemKey))
-            }
-
-            override fun onSyncEnd() {
-                articles_news_refresh_layout?.isRefreshing = false
-            }
-
+        override fun onCreateDefaultViewHolder(parent: ViewGroup): ArticleViewHolder {
+            return ArticleViewHolder(parent.inflate(R.layout.itemlist_article_news))
         }
+
+        override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.NewsParser, viewHolder: ArticleViewHolder) {
+            viewHolder.bind(model.toNews(itemKey))
+        }
+
+        override fun onSyncEnd() {
+            articles_news_refresh_layout?.isRefreshing = false
+        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

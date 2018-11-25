@@ -54,23 +54,21 @@ class SeasonsFragment : BaseFragment() {
         }
     }
 
-    private val seasonsAdapter by lazy {
-        object : BaseFirebaseRVAdapter<FirebaseParsers.SeasonParser, SeasonViewHolder>(
-                FirebaseParsers.SeasonParser::class.java, seasonRef, SEASON_PAGE_SIZE) {
+    private val seasonsAdapter = object : BaseFirebaseRVAdapter<FirebaseParsers.SeasonParser, SeasonViewHolder>(
+            FirebaseParsers.SeasonParser::class.java, seasonRef, SEASON_PAGE_SIZE) {
 
-            override fun onCreateDefaultViewHolder(parent: ViewGroup): SeasonViewHolder {
-                return SeasonViewHolder(parent.inflate(R.layout.itemlist_season), onCardClick, onPatchClick)
-            }
-
-            override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.SeasonParser, viewHolder: SeasonViewHolder) {
-                viewHolder.bind(model.toSeason(itemKey), patches)
-            }
-
-            override fun onSyncEnd() {
-                seasons_refresh_layout?.isRefreshing = false
-            }
-
+        override fun onCreateDefaultViewHolder(parent: ViewGroup): SeasonViewHolder {
+            return SeasonViewHolder(parent.inflate(R.layout.itemlist_season), onCardClick, onPatchClick)
         }
+
+        override fun onBindContentHolder(itemKey: String, model: FirebaseParsers.SeasonParser, viewHolder: SeasonViewHolder) {
+            viewHolder.bind(model.toSeason(itemKey), patches)
+        }
+
+        override fun onSyncEnd() {
+            seasons_refresh_layout?.isRefreshing = false
+        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

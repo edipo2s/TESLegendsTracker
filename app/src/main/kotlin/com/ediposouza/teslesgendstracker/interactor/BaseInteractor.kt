@@ -101,19 +101,19 @@ open class BaseInteractor {
 
     abstract class SimpleChildEventListener : ChildEventListener {
 
-        override fun onChildMoved(snapshot: DataSnapshot?, previousChildName: String?) {
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
         }
 
-        override fun onChildChanged(snapshot: DataSnapshot?, previousChildName: String?) {
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
         }
 
-        override fun onChildAdded(snapshot: DataSnapshot?, previousChildName: String?) {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
         }
 
-        override fun onChildRemoved(snapshot: DataSnapshot?) {
+        override fun onChildRemoved(snapshot: DataSnapshot) {
         }
 
-        override fun onCancelled(error: DatabaseError?) {
+        override fun onCancelled(error: DatabaseError) {
         }
 
     }
